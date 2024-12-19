@@ -130,37 +130,38 @@ h1,
   font-family: Circular, "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 800;
   line-height: 1.2;
+  font-size: calc(1.375rem + 1.5vw); /* Scalable font size */
 }
 
-h1,
-.h1 {
-  font-size: calc(1.375rem + 1.5vw);
-  font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-}
-
+/* General styles for h2 */
 h2.masthead-subheading {
   font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: calc(1.325rem + 0.9vw); /* Scalable font size */
 }
 
+/* Specific styles for larger screens */
 @media (min-width: 768px) {
-
   h1,
   .h1 {
-    font-size: 2rem;
+    font-size: 2rem; /* Set a static font size for larger screens */
   }
-}
-
-h2,
-.h2 {
-  font-size: calc(1.325rem + 0.9vw);
-}
-
-@media (min-width: 768px) {
 
   h2,
   .h2 {
-    font-size: 2rem;
+    font-size: 2rem; /* Set a static font size for larger screens */
+  }
+}
+
+/* For smaller screens, limit the scaling to prevent overflow */
+@media (max-width: 480px) {
+  h1,
+  .h1 {
+    font-size: 1.5rem; /* Limit h1 font size on small screens */
+  }
+
+  h2,
+  .h2 {
+    font-size: 1.25rem; /* Limit h2 font size on small screens */
   }
 }
 
