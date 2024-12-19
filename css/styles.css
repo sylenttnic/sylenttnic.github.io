@@ -12701,7 +12701,7 @@ header.masthead .bg-circle-4 {
   right: 35%;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   header.masthead {
     padding-top: calc(10rem + 55px);
     padding-bottom: 10rem;
