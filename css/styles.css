@@ -113,91 +113,78 @@ hr {
   opacity: 0.25;
 }
 
-h6,
-.h6,
-h5,
-.h5,
-h4,
-.h4,
-h3,
-.h3,
-h2,
-.h2,
-h1,
-.h1 {
-  margin-top: 0;
+/* General Heading Styles */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0;
   margin-bottom: 0.5rem;
   font-family: Circular, "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 800;
   line-height: 1.2;
-  font-size: calc(1.375rem + 1.5vw); /* Scalable font size */
 }
 
-/* General styles for h2 */
-h2.masthead-subheading {
-  font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: calc(1.325rem + 0.9vw); /* Scalable font size */
+/* Heading 1 Styles */
+h1, .h1 {
+  font-size: calc(1.375rem + 1.5vw);
 }
 
-/* Specific styles for larger screens */
 @media (min-width: 768px) {
-  h1,
-  .h1 {
-    font-size: 2rem; /* Set a static font size for larger screens */
-  }
-
-  h2,
-  .h2 {
-    font-size: 2rem; /* Set a static font size for larger screens */
+  h1, .h1 {
+    font-size: 2rem;
   }
 }
 
-/* For smaller screens, limit the scaling to prevent overflow */
 @media (max-width: 480px) {
-  h1,
-  .h1 {
-    font-size: 1.5rem; /* Limit h1 font size on small screens */
-  }
-
-  h2,
-  .h2 {
-    font-size: 1.25rem; /* Limit h2 font size on small screens */
-  }
-}
-
-h3,
-.h3 {
-  font-size: calc(1.3rem + 0.6vw);
-}
-
-@media (min-width: 768px) {
-
-  h3,
-  .h3 {
-    font-size: 1.75rem;
-  }
-}
-
-h4,
-.h4 {
-  font-size: calc(1.275rem + 0.3vw);
-}
-
-@media (min-width: 768px) {
-
-  h4,
-  .h4 {
+  h1, .h1 {
     font-size: 1.5rem;
   }
 }
 
-h5,
-.h5 {
+/* Heading 2 Styles */
+h2, .h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+
+@media (min-width: 768px) {
+  h2, .h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2, .h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Heading 3 Styles */
+h3, .h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+
+@media (min-width: 768px) {
+  h3, .h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Heading 4 Styles */
+h4, .h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 768px) {
+  h4, .h4 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Heading 5 Styles */
+h5, .h5 {
   font-size: 1.25rem;
 }
 
-h6,
-.h6 {
+/* Heading 6 Styles */
+h6, .h6 {
   font-size: 1rem;
 }
 
