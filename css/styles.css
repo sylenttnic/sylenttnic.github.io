@@ -125,39 +125,68 @@ h2,
 .h2,
 h1,
 .h1 {
-  font-size: 3rem; /* Set a base size */
-  font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-family: Circular, "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 800;
   line-height: 1.2;
-  white-space: nowrap; /* Prevent wrapping */
-  text-align: center; /* Center the text */
-  transform: scale(1); /* Default size */
-  transform-origin: center; /* Scale relative to center */
 }
 
-@media (max-width: 768px) {
-  h1,
-  .h1 {
-    font-size: 3rem; /* Base size remains */
-    transform: scale(0.8); /* Shrink text on smaller screens */
-  }
+h1,
+.h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
 }
 
 h2.masthead-subheading {
-  font-size: 2rem; /* Set a base size */
   font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  white-space: nowrap; /* Prevent wrapping */
-  text-align: center; /* Center the text */
-  transform: scale(1); /* Default size */
-  transform-origin: center; /* Scale relative to center */
 }
 
-@media (max-width: 768px) {
-  h2.masthead-subheading {
-    font-size: 2rem; /* Base size remains */
-    transform: scale(0.7); /* Shrink text on smaller screens */
+@media (min-width: 768px) {
+
+  h1,
+  .h1 {
+    font-size: 2rem;
+  }
+}
+
+h2,
+.h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+
+@media (min-width: 768px) {
+
+  h2,
+  .h2 {
+    font-size: 2rem;
+  }
+}
+
+h3,
+.h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+
+@media (min-width: 768px) {
+
+  h3,
+  .h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4,
+.h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 768px) {
+
+  h4,
+  .h4 {
+    font-size: 1.5rem;
   }
 }
 
