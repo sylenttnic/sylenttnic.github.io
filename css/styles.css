@@ -12856,3 +12856,16 @@ header.masthead .bg-circle-4 {
 .text-required {
   color: red;
 }
+
+footer {
+  text-align: center;
+}
+
+.logo-container {
+  display: inline-block;
+}
+
+.logo-container img {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
