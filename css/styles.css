@@ -4789,7 +4789,7 @@ fieldset:disabled .btn {
   flex-direction: column;
   min-width: 0;
   height: auto;
-  min-height: 400px;
+  min-height: 40000px;
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
