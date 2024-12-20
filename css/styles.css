@@ -1507,7 +1507,7 @@ progress {
   }
 
   .col-lg-12 {
-    flex: 0 0 auto;
+    flex: 1 1 40%;
     width: 100%;
   }
 
@@ -4788,7 +4788,8 @@ fieldset:disabled .btn {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  height: var(--bs-card-height);
+  height: auto;
+  min-height: 200px;
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
