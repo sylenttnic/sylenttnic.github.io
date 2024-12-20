@@ -12866,6 +12866,6 @@ footer {
 }
 
 .logo-container img {
-  width: auto; /* Adjust the width as needed */
+  width: 100%; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
 }
