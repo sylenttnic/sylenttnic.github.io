@@ -4826,8 +4826,7 @@ fieldset:disabled .btn {
 .card-body {
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
   color: var(--bs-card-color);
-  max-height: 200px; /* Adjust this value as needed */
-  overflow-y: auto; 
+  min-height: 150px;
 }
 
 .card-title {
