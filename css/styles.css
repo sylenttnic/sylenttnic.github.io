@@ -12859,6 +12859,7 @@ header.masthead .bg-circle-4 {
 
 footer {
   text-align: center;
+  padding: 20px 0; /* Adjust the top and bottom padding as needed */
 }
 
 .logo-container {
@@ -12866,6 +12867,6 @@ footer {
 }
 
 .logo-container img {
-  width: 20%; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 12%;
+  height: auto;
 }
