@@ -614,6 +614,30 @@ progress {
   }
 }
 
+.display-7 {
+  font-size: calc(1.325rem + 0.9vw); /* 1.375 - 0.05 = 1.325; 1.5 - 0.6 = 0.9 */
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  .display-7 {
+    font-size: 2rem; /* 2.5 - 0.5 = 2 */
+  }
+}
+
+.display-8 {
+  font-size: calc(1.275rem + 0.3vw); /* 1.325 - 0.05 = 1.275; 0.9 - 0.6 = 0.3 */
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  .display-8 {
+    font-size: 1.5rem; /* 2 - 0.5 = 1.5 */
+  }
+}
+
 .list-unstyled {
   padding-left: 0;
   list-style: none;
@@ -7788,6 +7812,25 @@ fieldset:disabled .btn {
   bottom: 0;
   left: 0;
   z-index: 1030;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding-top: 75px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(to bottom, #c9c7c7 40%, rgba(201, 199, 199, 0.9) 90%, transparent 100%);
+}
+
+.sticky-header h2 {
+  margin-top: 0;
+}
+
+.section-content {
+  padding-top: 10px;
 }
 
 .sticky-top {
