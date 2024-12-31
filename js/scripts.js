@@ -85,7 +85,7 @@ function submitGoogleForm(event) {
 
         // Submit Google Form
         $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbzvbk8I4RAquhnUiFGfFYYzwQzDZ6WGfdd2uB2JH0ov6Y3nIcSZ5hUCrKZoR0L8-3UdXA/exec",
+            url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
             data: JSON.stringify({
                 "firstName": firstName,
                 "lastName": lastName,
