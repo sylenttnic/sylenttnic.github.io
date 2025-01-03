@@ -40,10 +40,10 @@ function resetGoogleForm() {
     $('#lastname').val("");
     $('#emailaddress').val("");
     $('#phonenumber').val("");
-    $('#age').val("");
+    $('#companyName').val("");
     $('input[name="gridRadios"]:first').prop('checked', true);
-    $('#rent').val("");
-    $('#debt').val("");
+    $('#jobTitle').val("");
+    $('#basicFeedback').val("");
     $('#comments').val("");
 }
 
@@ -72,10 +72,10 @@ function submitGoogleForm(event) {
         var lastName = $('#lastname').val();
         var emailAddress = $('#emailaddress').val();
         var phoneNumber = $('#phonenumber').val();
-        var age = $('#age').val();
-        var annualIncome = $('input[name="gridRadios"]:checked').val();
-        var rentMonthly = $('#rent').val();
-        var debtTotal = $('#debt').val();
+        var companyName = $('#companyName').val();
+        var businessFunction = $('input[name="gridRadios"]:checked').val();
+        var jobTitle = $('#jobTitle').val();
+        var basicFeedback = $('#basicFeedback').val();
         var comment = $('#comments').val().replace(/\n/g, '<br>');
 
         // Disable submit button until complete
@@ -91,10 +91,10 @@ function submitGoogleForm(event) {
                 "lastName": lastName,
                 "emailAddress": emailAddress,
                 "phoneNumber": phoneNumber,
-                "age": age,
-                "annualIncome": annualIncome,
-                "rentMonthly": rentMonthly,
-                "debtTotal": debtTotal,
+                "companyName": companyName,
+                "businessFunction": businessFunction,
+                "jobTitle": jobTitle,
+                "basicFeedback": basicFeedback,
                 "comment": comment,
             }),
             type: "POST",
