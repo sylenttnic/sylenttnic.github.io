@@ -49,76 +49,55 @@ function resetGoogleForm() {
 
 
 // Submit Google Form
-function submitGoogleForm(event) {
-    // Prevent Default Submit
-    event.preventDefault();
+$(document).ready(function() { // Ensure DOM is fully loaded
 
-    // Bootstrap Form Validation
-    var validJoinForm = false;
-    const form = document.querySelectorAll('#join-show-form')[0];
-    if (!form.checkValidity()) {
-        validJoinForm = false;
-        form.classList.add('was-validated');
+    $('#join-show-form').submit(function(event) { // Use .submit() event handler
+      event.preventDefault(); // Prevent default form submission
+  
+      var form = $(this); // Cache the form element
+      var validJoinForm = form[0].checkValidity(); // Check form validity
+  
+      if (!validJoinForm) {
+        form.addClass('was-validated');
         $("#form-message").html(formValidationMessage);
-    } else {
-        validJoinForm = true;
-        form.classList.remove('was-validated');
-    }
-
-    // If Bootstrap Form Input is Valid
-    if (validJoinForm) {
-        // Collect Inputs
-        var firstName = $('#firstname').val();
-        var lastName = $('#lastname').val();
-        var emailAddress = $('#emailaddress').val();
-        var phoneNumber = $('#phonenumber').val();
-        var companyName = $('#companyName').val();
-        var businessFunction = $('input[name="gridRadios"]:checked').val();
-        var jobTitle = $('#jobTitle').val();
-        var basicFeedback = $('#basicFeedback').val();
-        var comment = $('#comments').val().replace(/\n/g, '<br>');
-
-        // Disable submit button until complete
-        $("#send-btn").prop("disabled", true);
-        $("#send-btn").html("<div class='spinner-border text-light' style='vertical-align: middle; height: 1.5rem; width: 1.5rem;'></div>");
+        return; // Stop execution if form is invalid
+      } else {
+        form.removeClass('was-validated');
         $("#form-message").html("");
-
-        // Submit Google Form
-        $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
-            data: JSON.stringify({
-                "firstName": firstName,
-                "lastName": lastName,
-                "emailAddress": emailAddress,
-                "phoneNumber": phoneNumber,
-                "companyName": companyName,
-                "businessFunction": businessFunction,
-                "jobTitle": jobTitle,
-                "basicFeedback": basicFeedback,
-                "comment": comment,
-            }),
-            type: "POST",
-            redirect: "follow",
-            contentType: 'text/plain;charset=utf-8',
-            complete: function (e, xhr, settings) {
-                if (e.status === 200) {
-                    if (e.responseJSON.result === "success") {
-                        $("#form-message").html(successMessage);
-                        resetGoogleForm();
-                    } else {
-                        $("#form-message").html(errorMessage);
-                        // Don't reset form on failure
-                    }
-                } else {
-                    $("#form-message").html(errorMessage);
-                    // Don't reset form on failure
-                }
-                // Re-enable submit button
-                $("#send-btn").html("Send");
-                $("#send-btn").prop("disabled", false);
-            }
-        });
-    }
-
-    return false;
-}
+      }
+  
+      // Now collect the data - guaranteed to be after submit and validation
+      var formData = {
+        firstName: $('#firstname').val(),
+        lastName: $('#lastname').val(),
+        emailAddress: $('#emailaddress').val(),
+        phoneNumber: $('#phonenumber').val(),
+        companyName: $('#companyName').val(),
+        businessFunction: $('input[name="gridRadios"]:checked').val(),
+        jobTitle: $('#jobTitle').val(),
+        basicFeedback: $('#basicFeedback').val(),
+        comment: $('#comments').val().replace(/\n/g, '<br>')
+      };
+  
+      // Disable submit button and show spinner
+      $("#send-btn").prop("disabled", true).html("<div class='spinner-border text-light' style='vertical-align: middle; height: 1.5rem; width: 1.5rem;'></div>");
+  
+      // Submit Google Form using the formData object
+      $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+        data: JSON.stringify(formData), // Use the formData object
+        type: "POST",
+        redirect: "follow",
+        contentType: 'text/plain;charset=utf-8',
+        complete: function(e) {
+          $("#send-btn").html("Send").prop("disabled", false); // Re-enable button
+          if (e.status === 200 && e.responseJSON.result === "success") {
+            $("#form-message").html(successMessage);
+            form[0].reset(); // Reset the form
+          } else {
+            $("#form-message").html(errorMessage);
+          }
+        }
+      });
+    });
+  });
