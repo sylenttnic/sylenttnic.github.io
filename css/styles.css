@@ -12722,7 +12722,7 @@ header.masthead {
   background: url('/assets/img/masthead.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-attachment: scroll;
+  /* background-attachment: scroll; caused a huge render delay*/
   background-size: cover;
 }
 
