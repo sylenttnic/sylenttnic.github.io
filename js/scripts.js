@@ -34,8 +34,58 @@ const formValidationMessage = `
 `;
 
 
-// Reset Google Form Fields on Success
-function resetGoogleForm() {
+$(document).ready(function() {
+    $('#join-show-form').submit(function(event) {
+      event.preventDefault();
+  
+      var form = $(this);
+      var validJoinForm = form[0].checkValidity();
+  
+      if (!validJoinForm) {
+        form.addClass('was-validated');
+        $("#form-message").html(formValidationMessage);
+        return;
+      } else {
+        form.removeClass('was-validated');
+        $("#form-message").html("");
+      }
+  
+      // Collect form data *inside* the AJAX call to ensure it's available
+      $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+        type: "POST",
+        contentType: 'text/plain;charset=utf-8',
+        data: JSON.stringify({
+          firstName: $('#firstname').val(),
+          lastName: $('#lastname').val(),
+          emailAddress: $('#emailaddress').val(),
+          phoneNumber: $('#phonenumber').val(),
+          companyName: $('#companyName').val(),
+          businessFunction: $('input[name="gridRadios"]:checked').val(),
+          jobTitle: $('#jobTitle').val(),
+          basicFeedback: $('#basicFeedback').val(),
+          comment: $('#comments').val().replace(/\n/g, '<br>')
+        }),
+        success: function(response) {
+          if (response.result === "success") {
+            $("#form-message").html(successMessage);
+            form[0].reset();
+          } else {
+            $("#form-message").html(errorMessage);
+          }
+        },
+        error: function() {
+          $("#form-message").html(errorMessage); 
+        },
+        complete: function() {
+          $("#send-btn").html("Send").prop("disabled", false); 
+        }
+      });
+    });
+  });
+  
+  // Reset Google Form Fields on Success
+  function resetGoogleForm() {
     $('#firstname').val("");
     $('#lastname').val("");
     $('#emailaddress').val("");
@@ -45,59 +95,4 @@ function resetGoogleForm() {
     $('#jobTitle').val("");
     $('#basicFeedback').val("");
     $('#comments').val("");
-}
-
-
-// Submit Google Form
-$(document).ready(function() { // Ensure DOM is fully loaded
-
-    $('#join-show-form').submit(function(event) { // Use .submit() event handler
-      event.preventDefault(); // Prevent default form submission
-  
-      var form = $(this); // Cache the form element
-      var validJoinForm = form[0].checkValidity(); // Check form validity
-  
-      if (!validJoinForm) {
-        form.addClass('was-validated');
-        $("#form-message").html(formValidationMessage);
-        return; // Stop execution if form is invalid
-      } else {
-        form.removeClass('was-validated');
-        $("#form-message").html("");
-      }
-  
-      // Now collect the data - guaranteed to be after submit and validation
-      var formData = {
-        firstName: $('#firstname').val(),
-        lastName: $('#lastname').val(),
-        emailAddress: $('#emailaddress').val(),
-        phoneNumber: $('#phonenumber').val(),
-        companyName: $('#companyName').val(),
-        businessFunction: $('input[name="gridRadios"]:checked').val(),
-        jobTitle: $('#jobTitle').val(),
-        basicFeedback: $('#basicFeedback').val(),
-        comment: $('#comments').val().replace(/\n/g, '<br>')
-      };
-  
-      // Disable submit button and show spinner
-      $("#send-btn").prop("disabled", true).html("<div class='spinner-border text-light' style='vertical-align: middle; height: 1.5rem; width: 1.5rem;'></div>");
-  
-      // Submit Google Form using the formData object
-      $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
-        data: JSON.stringify(formData), // Use the formData object
-        type: "POST",
-        redirect: "follow",
-        contentType: 'text/plain;charset=utf-8',
-        complete: function(e) {
-          $("#send-btn").html("Send").prop("disabled", false); // Re-enable button
-          if (e.status === 200 && e.responseJSON.result === "success") {
-            $("#form-message").html(successMessage);
-            form[0].reset(); // Reset the form
-          } else {
-            $("#form-message").html(errorMessage);
-          }
-        }
-      });
-    });
-  });
+  }
