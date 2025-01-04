@@ -4570,11 +4570,11 @@ fieldset:disabled .btn {
     justify-content: flex-start;
   }
 
-  .navbar-expand-lg .container { /* Correct selector for your HTML */
+  .navbar-expand-lg .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Prevent wrapping */
+    flex-wrap: nowrap;
 }
 
   .navbar-expand-lg .navbar-nav {
@@ -4866,6 +4866,7 @@ fieldset:disabled .btn {
 }
 
 .card-body {
+  flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
   color: var(--bs-card-color);
   min-height: 150px;
