@@ -128,25 +128,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Character countdown for open text box
 document.addEventListener('DOMContentLoaded', function() {
-    const commentsInput = document.getElementById('comments');
-    const commentsCount = document.getElementById('comments-count');
+    function setupCharacterCounter(inputElementId, counterElementId) {
+        const inputElement = document.getElementById(inputElementId);
+        const counterElement = document.getElementById(counterElementId);
 
-    if (commentsInput && commentsCount) {
-        commentsInput.addEventListener('input', function() {
-            const currentLength = this.value.length;
-            const maxLength = this.maxLength;
-            commentsCount.textContent = currentLength + " / " + maxLength + " characters";
+        if (inputElement && counterElement) {
+            inputElement.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                const maxLength = this.maxLength;
+                counterElement.textContent = currentLength + " / " + maxLength + " characters";
 
-            if (currentLength > maxLength) {
-                this.value = this.value.slice(0, maxLength); // Truncate if they somehow exceed limit
-                commentsCount.classList.add("text-danger");
-            } else {
-                commentsCount.classList.remove("text-danger");
-            }
-        });
-    } else {
-        console.error("Comments input or counter element not found!");
+                if (currentLength > maxLength) {
+                    this.value = this.value.slice(0, maxLength);
+                    counterElement.classList.add("text-danger");
+                } else {
+                    counterElement.classList.remove("text-danger");
+                }
+            });
+        } else {
+            console.error(inputElementId + " input or " + counterElementId + " counter element not found!");
+        }
     }
+
+    setupCharacterCounter('comments', 'comments-count');
+    setupCharacterCounter('basicFeedback', 'basicFeedback-count');
 });
 
 $(document).ready(function() {
