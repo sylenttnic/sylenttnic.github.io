@@ -75,8 +75,14 @@ $(document).ready(function() {
     $('#join-show-form').submit(function(event) {
       event.preventDefault();
   
-      var form = $(this);
-      var validJoinForm = form[0].checkValidity();
+      const form = $(this);
+      const sendBtn = $("#send-btn"); // Get the send button reference
+  
+      // Disable the button immediately
+      sendBtn.prop("disabled", true);
+      sendBtn.html("Sending..."); // Optional: Change button text
+  
+      const validJoinForm = form[0].checkValidity();
   
       if (!validJoinForm) {
         form.addClass('was-validated');
@@ -87,8 +93,8 @@ $(document).ready(function() {
         $("#form-message").html("");
       }
   
-      // Collect form data *inside* the AJAX call to ensure it's available
-      $.ajax({
+    // Collect form data *inside* the AJAX call
+    $.ajax({
         url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
         type: "POST",
         contentType: 'text/plain;charset=utf-8',
@@ -104,22 +110,27 @@ $(document).ready(function() {
           comment: $('#comments').val().replace(/\n/g, '<br>')
         }),
         success: function(response) {
-          if (response.result === "success") {
-            $("#form-message").html(successMessage);
-            form[0].reset();
-          } else {
+            if (response.result === "success") {
+              $("#form-message").html(successMessage);
+              form[0].reset();
+            } else {
+              $("#form-message").html(errorMessage);
+            }
+    
+            // Re-enable the button on success or error
+            sendBtn.prop("disabled", false);
+            sendBtn.html("Send"); // Restore original text
+          },
+          error: function() {
             $("#form-message").html(errorMessage);
+    
+            // Re-enable the button on error
+            sendBtn.prop("disabled", false);
+            sendBtn.html("Send"); // Restore original text
           }
-        },
-        error: function() {
-          $("#form-message").html(errorMessage); 
-        },
-        complete: function() {
-          $("#send-btn").html("Send").prop("disabled", false); 
-        }
+        });
       });
     });
-  });
   
   // Reset Google Form Fields on Success
   function resetGoogleForm() {
