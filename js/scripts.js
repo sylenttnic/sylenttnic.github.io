@@ -33,6 +33,43 @@ const formValidationMessage = `
 </div>
 `;
 
+// Numbering requirements
+document.addEventListener('DOMContentLoaded', function() {
+    const phonenumberInput = document.getElementById('phonenumber');
+    const form = phonenumberInput?.closest('form');
+
+    if (phonenumberInput) {
+        phonenumberInput.addEventListener('input', function(event) {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+    } else {
+        console.error("Phone number input element not found!");
+    }
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            const phonenumberValue = phonenumberInput?.value;
+
+            if (!phonenumberValue || phonenumberValue.length !== 10) {
+                alert("Please enter a valid 10-digit phone number.");
+                event.preventDefault();
+                return;
+            } else if (isNaN(phonenumberValue)) {
+                alert("Please enter a valid phone number.");
+                event.preventDefault();
+                return;
+            }
+
+            console.log("Form submitted with phone number:", phonenumberValue);
+        });
+    } else {
+        console.error("Form element not found!");
+    }
+});
+
 
 $(document).ready(function() {
     $('#join-show-form').submit(function(event) {
