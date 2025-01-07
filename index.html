@@ -412,14 +412,12 @@ height="0" width="0" style="display:none;visibility:hidden">
                                     Please provide a some basic context around issues you or your team is facing, or goals you wish to acheive with us.
                                 </div>
                             </div>
-
                             <div class="col-md-12">
-                                <label for="comments" class="form-label">Anything else you'd like us to know about your needs? <span class=text-required>*</span></label>
-                                <textarea class="form-control" aria-label="Comments" id="comments" required="" maxlength="10000"></textarea>
+                                <label for="comments" class="form-label">Anything else you'd like us to know about your needs? <span class="text-required">*</span></label>
+                                <textarea class="form-control" aria-label="Comments" id="comments" name="comments" required maxlength="10000" rows="5"></textarea>
+                                <div id="comments-count" class="form-text text-muted">0 / 10000 characters</div>
                                 <div class="valid-feedback">Looks Good!</div>
-                                <div class="invalid-feedback">
-                                    Please provide your comments.
-                                </div>
+                                <div class="invalid-feedback">Please provide your comments.</div>
                             </div>
 
                             <div class="col-12">
