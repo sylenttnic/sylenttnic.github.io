@@ -207,67 +207,76 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function() {
     $('#join-show-form').submit(function(event) {
-      event.preventDefault();
+        event.preventDefault();
   
-      const form = $(this);
-      const sendBtn = $("#send-btn"); // Get the send button reference
+        const form = $(this);
+        const sendBtn = $("#send-btn"); // Get the send button reference
   
-      // Disable the button immediately
-      sendBtn.prop("disabled", true);
-      sendBtn.html("Sending..."); // Optional: Change button text
+        // Disable the button immediately
+        sendBtn.prop("disabled", true);
+        sendBtn.html("Sending..."); // Optional: Change button text
   
-      const validJoinForm = form[0].checkValidity();
+        const validJoinForm = form[0].checkValidity();
   
-      if (!validJoinForm) {
-        form.addClass('was-validated');
-        $("#form-message").html(formValidationMessage);
-        return;
-      } else {
-        form.removeClass('was-validated');
-        $("#form-message").html("");
-      }
-  
-    // Collect form data *inside* the AJAX call
-    $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
-        type: "POST",
-        contentType: 'text/plain;charset=utf-8',
-        data: JSON.stringify({
-          firstName: $('#firstname').val(),
-          lastName: $('#lastname').val(),
-          emailAddress: $('#emailaddress').val(),
-          phoneNumber: $('#phonenumber').val(),
-          companyName: $('#companyName').val(),
-          businessFunction: $('input[name="gridRadios"]:checked').val(),
-          jobTitle: $('#jobTitle').val(),
-          basicFeedback: $('#basicFeedback').val(),
-          comment: $('#comments').val().replace(/\n/g, '<br>')
-        }),
-        success: function(response) {
-            if (response.result === "success") {
-              $("#form-message").html(successMessage);
-              form[0].reset();
-            } else {
-              $("#form-message").html(errorMessage);
-            }
-    
-            // Re-enable the button on success or error
-            sendBtn.prop("disabled", false);
-            sendBtn.html("Send"); // Restore original text
-          },
-          error: function() {
+        if (!validJoinForm) {
+            form.addClass('was-validated');
+            $("#form-message").html(formValidationMessage);
+            return;
+        } else {
+            form.removeClass('was-validated');
+            $("#form-message").html("");
+        }
+
+        // Stop Spam
+        var hiddenField = $('#email-catch').val();
+        if (hiddenField != "") {
             $("#form-message").html(errorMessage);
-    
-            // Re-enable the button on error
             sendBtn.prop("disabled", false);
             sendBtn.html("Send"); // Restore original text
-          }
-        });
-      });
-    });
+            return;
+        }
   
-  // Reset Google Form Fields on Success
-  function resetGoogleForm() {
+        // Collect form data *inside* the AJAX call
+        $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+            type: "POST",
+            contentType: 'text/plain;charset=utf-8',
+            data: JSON.stringify({
+                firstName: $('#firstname').val(),
+                lastName: $('#lastname').val(),
+                emailAddress: $('#emailaddress').val(),
+                phoneNumber: $('#phonenumber').val(),
+                companyName: $('#companyName').val(),
+                businessFunction: $('input[name="gridRadios"]:checked').val(),
+                jobTitle: $('#jobTitle').val(),
+                basicFeedback: $('#basicFeedback').val(),
+                comment: $('#comments').val().replace(/\n/g, '<br>')
+            }),
+            success: function(response) {
+                if (response.result === "success") {
+                    $("#form-message").html(successMessage);
+                    form[0].reset();
+                } else {
+                    $("#form-message").html(errorMessage);
+                }
+    
+                // Re-enable the button on success or error
+                sendBtn.prop("disabled", false);
+                sendBtn.html("Send"); // Restore original text
+            },
+            error: function() {
+                $("#form-message").html(errorMessage);
+    
+                // Re-enable the button on error
+                sendBtn.prop("disabled", false);
+                sendBtn.html("Send"); // Restore original text
+            }
+        });
+    });
+});
+  
+// Reset Google Form Fields on Success
+function resetGoogleForm() {
     $('#firstname').val("");
     $('#lastname').val("");
     $('#emailaddress').val("");
@@ -277,4 +286,4 @@ $(document).ready(function() {
     $('#jobTitle').val("");
     $('#basicFeedback').val("");
     $('#comments').val("");
-  }
+}
