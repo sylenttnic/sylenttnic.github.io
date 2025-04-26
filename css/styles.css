@@ -12993,3 +12993,7 @@ footer {
   max-width: 12%;
   height: auto;
 }
+
+#email-catch-div {
+  display: none;
+}
