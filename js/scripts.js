@@ -238,7 +238,8 @@ $(document).ready(function() {
   
         // Collect form data *inside* the AJAX call
         $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+            //url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+            url: "https://hnet.sylentt.com/webhook/submit-ticket",
             type: "POST",
             contentType: 'text/plain;charset=utf-8',
             data: JSON.stringify({
