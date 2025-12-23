@@ -282,7 +282,7 @@ $(document).ready(function() {
     
     // 👇 Change 2: Headers must go in their own object
     headers: {
-        'website-api-key': 'asdf' // Ensure this matches your n8n Header Auth credential
+        'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U' // Ensure this matches your n8n Header Auth credential
     },
     
     data: JSON.stringify({
