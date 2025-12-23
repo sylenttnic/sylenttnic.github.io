@@ -281,12 +281,8 @@ $(document).ready(function() {
     // 👇 Change 1: Use proper JSON content type so n8n parses it automatically
     contentType: 'application/json',
     
-    // 👇 Change 2: Headers must go in their own object
-    headers: {
-        'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U' // Ensure this matches your n8n Header Auth credential
-    },
-    
     data: JSON.stringify({
+        'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U',
         // 👇 Change 3: Ensure these keys match what you mapped in your Jira Node
         // You can combine fields here to make mapping easier in n8n, 
         // or keep them separate and combine them inside the n8n Expression Editor.
