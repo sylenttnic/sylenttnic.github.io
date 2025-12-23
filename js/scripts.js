@@ -237,42 +237,97 @@ $(document).ready(function() {
         }
   
         // Collect form data *inside* the AJAX call
-        $.ajax({
-            //url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
-            url: "https://hnet.sylentt.com/webhook/submit-ticket",
-            type: "POST",
-            contentType: 'text/plain;charset=utf-8',
-            data: JSON.stringify({
-                firstName: $('#firstname').val(),
-                lastName: $('#lastname').val(),
-                emailAddress: $('#emailaddress').val(),
-                phoneNumber: $('#phonenumber').val(),
-                companyName: $('#companyName').val(),
-                businessFunction: $('input[name="gridRadios"]:checked').val(),
-                jobTitle: $('#jobTitle').val(),
-                basicFeedback: $('#basicFeedback').val(),
-                comment: $('#comments').val().replace(/\n/g, '<br>')
-            }),
-            success: function(response) {
-                if (response.result === "success") {
-                    $("#form-message").html(successMessage);
-                    form[0].reset();
-                } else {
-                    $("#form-message").html(errorMessage);
-                }
+        //$.ajax({
+        //    //url: "https://script.google.com/macros/s/AKfycbzyl_S1xVn7Y_ILf_LBDrleEhfNaxbhIl7_wATezVEihR7PnW4AmLgrAWE9l0SUMPGD4Q/exec",
+        //    url: "https://hnet.sylentt.com/webhook/submit-ticket",
+        //    type: "POST",
+        //    contentType: 'text/plain;charset=utf-8',
+        //    'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U',
+        //    data: JSON.stringify({
+        //        firstName: $('#firstname').val(),
+        //        lastName: $('#lastname').val(),
+        //        emailAddress: $('#emailaddress').val(),
+        //        phoneNumber: $('#phonenumber').val(),
+        //        companyName: $('#companyName').val(),
+        //        businessFunction: $('input[name="gridRadios"]:checked').val(),
+        //        jobTitle: $('#jobTitle').val(),
+        //        basicFeedback: $('#basicFeedback').val(),
+        //        comment: $('#comments').val().replace(/\n/g, '<br>')
+        //    }),
+        //    success: function(response) {
+        //        if (response.result === "success") {
+        //            $("#form-message").html(successMessage);
+        //            form[0].reset();
+        //        } else {
+        //            $("#form-message").html(errorMessage);
+        //        }
     
                 // Re-enable the button on success or error
-                sendBtn.prop("disabled", false);
-                sendBtn.html("Send"); // Restore original text
-            },
-            error: function() {
-                $("#form-message").html(errorMessage);
+        //        sendBtn.prop("disabled", false);
+        //        sendBtn.html("Send"); // Restore original text
+        //    },
+        //    error: function() {
+        //        $("#form-message").html(errorMessage);
     
                 // Re-enable the button on error
-                sendBtn.prop("disabled", false);
-                sendBtn.html("Send"); // Restore original text
-            }
-        });
+        //        sendBtn.prop("disabled", false);
+        //        sendBtn.html("Send"); // Restore original text
+        //    }
+        //});
+        $.ajax({
+    url: "https://hnet.sylentt.com/webhook/submit-ticket",
+    type: "POST",
+    // 👇 Change 1: Use proper JSON content type so n8n parses it automatically
+    contentType: 'application/json',
+    
+    // 👇 Change 2: Headers must go in their own object
+    headers: {
+        'website-api-key': 'asdf' // Ensure this matches your n8n Header Auth credential
+    },
+    
+    data: JSON.stringify({
+        // 👇 Change 3: Ensure these keys match what you mapped in your Jira Node
+        // You can combine fields here to make mapping easier in n8n, 
+        // or keep them separate and combine them inside the n8n Expression Editor.
+        summary: "New Ticket from " + $('#firstname').val() + " " + $('#lastname').val(),
+        
+        description: `
+User: ${$('#firstname').val()} ${$('#lastname').val()}
+Email: ${$('#emailaddress').val()}
+Phone: ${$('#phonenumber').val()}
+Company: ${$('#companyName').val()}
+Function: ${$('input[name="gridRadios"]:checked').val()}
+Job Title: ${$('#jobTitle').val()}
+Feedback: ${$('#basicFeedback').val()}
+
+Comments:
+${$('#comments').val()}
+        `,
+        
+        // You can still pass individual fields if you want to log them to specific columns in Sheets
+        emailAddress: $('#emailaddress').val(),
+        companyName: $('#companyName').val()
+    }),
+    
+    success: function(response) {
+        // ... rest of your success logic matches your previous code ...
+        if (response.status === "success") { // Note: n8n usually returns "status", check your "Respond to Webhook" node
+            $("#form-message").html(successMessage);
+            form[0].reset();
+        } else {
+            $("#form-message").html(errorMessage);
+        }
+        sendBtn.prop("disabled", false);
+        sendBtn.html("Send");
+    },
+    
+    error: function(xhr, status, error) {
+        console.error("Submission failed:", error); // Helpful for debugging
+        $("#form-message").html(errorMessage);
+        sendBtn.prop("disabled", false);
+        sendBtn.html("Send");
+    }
+});
     });
 });
   
