@@ -275,8 +275,8 @@ $(document).ready(function() {
         //    }
         //});
         $.ajax({
-    //url: "https://hnet.sylentt.com/webhook/submit-ticket",
-    url: "https://hnet.sylentt.com/webhook-test/submit-ticket",
+    url: "https://hnet.sylentt.com/webhook/submit-ticket",
+    //url: "https://hnet.sylentt.com/webhook-test/submit-ticket",
     type: "POST",
     // 👇 Change 1: Use proper JSON content type so n8n parses it automatically
     contentType: 'application/json',
