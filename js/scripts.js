@@ -68,43 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Numbering requirements
-document.addEventListener('DOMContentLoaded', function() {
-    const phonenumberInput = document.getElementById('phonenumber');
-    const form = phonenumberInput?.closest('form');
-
-    if (phonenumberInput) {
-        phonenumberInput.addEventListener('input', function(event) {
-            this.value = this.value.replace(/\D/g, '');
-            if (this.value.length > 10) {
-                this.value = this.value.slice(0, 10);
-            }
-        });
-    } else {
-        console.error("Phone number input element not found!");
-    }
-
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            const phonenumberValue = phonenumberInput?.value;
-
-            if (!phonenumberValue || phonenumberValue.length !== 10) {
-                alert("Please enter a valid 10-digit phone number.");
-                event.preventDefault();
-                return;
-            } else if (isNaN(phonenumberValue)) {
-                alert("Please enter a valid phone number.");
-                event.preventDefault();
-                return;
-            }
-
-            console.log("Form submitted with phone number:", phonenumberValue);
-        });
-    } else {
-        console.error("Form element not found!");
-    }
-});
-
 // Email checker
 document.addEventListener('DOMContentLoaded', function() {
     const emailInput = document.getElementById('emailaddress');
@@ -275,6 +238,12 @@ ${$('#comments').val()}
                 if (response.status === "success") {
                     $("#form-message").html(successMessage);
                     form[0].reset();
+
+                    // Reset character counts
+                    $('#comments-count').text("0 / 10000 characters").removeClass("text-danger");
+                    $('#basicFeedback-count').text("0 / 1000 characters").removeClass("text-danger");
+                    $('#comments-word-count').text("0 / 15 word minimum");
+                    $('#min-word-feedback').hide();
                 } else {
                     $("#form-message").html(errorMessage);
                 }
