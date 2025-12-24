@@ -73,6 +73,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailInput = document.getElementById('emailaddress');
     const form = emailInput?.closest('form');
 
+    if (emailInput) {
+        // Standard email regex pattern
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        emailInput.addEventListener('input', function() {
+            const email = this.value;
+            // Allow empty string if not required (though it is required in HTML)
+            // But we should validate if there is content.
+            // Since it is required in HTML, validity.valueMissing handles empty.
+            // We only need to check pattern if not empty.
+            if (email.length > 0) {
+                 if (emailPattern.test(email)) {
+                    this.setCustomValidity(""); // Valid
+                } else {
+                    this.setCustomValidity("Please provide a valid email address."); // Invalid
+                }
+            } else {
+                // If empty, let the required attribute handle it, or reset custom validity
+                // so we don't block it with "invalid format" when it's just "missing"
+                this.setCustomValidity("");
+            }
+        });
+    }
+
     if (form) {
         form.addEventListener('submit', function(event) {
             if (!form.checkValidity()) {
