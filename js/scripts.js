@@ -211,7 +211,7 @@ $(document).ready(function() {
 
         const form = $(this);
         const sendBtn = $("#send-btn");
-        
+
         // 1. UI Feedback: Disable button immediately to prevent double-submit
         sendBtn.prop("disabled", true);
         const originalBtnText = sendBtn.html(); // Save original text
@@ -241,7 +241,6 @@ $(document).ready(function() {
         }
 
         // 4. Prepare Data for Jira/n8n
-        // Using template literals (backticks) handles newlines automatically for Jira
         const ticketDescription = `
 User: ${$('#firstname').val()} ${$('#lastname').val()}
 Email: ${$('#emailaddress').val()}
@@ -259,15 +258,15 @@ ${$('#comments').val()}
         $.ajax({
             url: "https://hnet.sylentt.com/webhook/submit-ticket", // Production URL
             type: "POST",
-            contentType: 'application/json', // Keep this as a top-level property
-
-            // 👇 Headers restored correctly
+            contentType: 'application/json',
+            
+            // 👇 Headers correctly placed here
             headers: {
-                'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U' 
+                'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U'
             },
 
             data: JSON.stringify({
-                // Security Key removed from body (since it is now in headers)
+                // Note: Security key removed from here since it's now in the headers above
                 
                 // Mapped Fields
                 summary: "New Ticket from " + $('#firstname').val() + " " + $('#lastname').val(),
