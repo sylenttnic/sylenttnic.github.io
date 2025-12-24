@@ -13008,24 +13008,44 @@ footer {
 /* Card styling within slick slide */
 #carousel-testimonials .card {
     margin: 10px; /* Gap between cards */
-    opacity: 0.7;
+    opacity: 0.5; /* Lower base opacity for non-centered items */
     transform: scale(0.9);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    /* Slow transition for fade and scale effect */
+    transition: all 0.8s ease-in-out;
+}
+
+/* Base text styling */
+#carousel-testimonials .card-text {
+    color: #6c757d;
+    transition: color 0.8s ease-in-out;
 }
 
 /* Center Focus Effect */
 #carousel-testimonials .slick-center .card {
     opacity: 1;
     transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    background-color: #f8f9fa;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* Slightly stronger shadow */
+    background-color: #ffffff; /* Use pure white for pop */
     z-index: 2;
+    border-color: #ee0979; /* Optional: Slight border highlight using primary color? Or just stick to shadow/text */
+}
+
+/* Highlight text in center card */
+#carousel-testimonials .slick-center .card-text {
+    color: #000;
+    font-weight: 500; /* Make it pop */
 }
 
 /* Arrow Customization */
 .slick-prev:before, .slick-next:before {
     color: #342e2e; /* Dark arrow color */
     font-size: 30px;
+    opacity: 0.75;
+    transition: opacity 0.3s ease;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+    opacity: 1;
 }
 
 .slick-prev {
@@ -13041,6 +13061,7 @@ footer {
     display: flex;
     justify-content: center;
     height: auto;
+    padding: 20px 0; /* Add padding to prevent shadow clipping */
 }
 
 @media (max-width: 768px) {
@@ -13048,15 +13069,16 @@ footer {
     #carousel-testimonials .card {
         width: 100%;
         margin: 5px 0;
+        transform: none; /* Reset scale on mobile if desired, or keep it */
+        opacity: 1; /* Full opacity on mobile since only 1 is visible */
     }
 
-    .slick-prev {
-        left: -25px;
-        z-index: 10;
+    #carousel-testimonials .slick-center .card {
+        transform: none;
     }
 
-    .slick-next {
-        right: -25px;
-        z-index: 10;
+    /* Arrows hidden via JS settings, but ensure CSS hides them too just in case */
+    .slick-prev, .slick-next {
+        display: none !important;
     }
 }
