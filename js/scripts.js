@@ -259,11 +259,15 @@ ${$('#comments').val()}
         $.ajax({
             url: "https://hnet.sylentt.com/webhook/submit-ticket", // Production URL
             type: "POST",
-            contentType: 'application/json', // Critical for n8n to parse automatically
+            //contentType: 'application/json', // Critical for n8n to parse automatically
+            headers: {
+              'Content-Type': 'application/json',
+              'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U' 
+            }
             
             data: JSON.stringify({
                 // Security Key (Must match your n8n IF node)
-                "website-api-key": "3pPUzAwTUdGaUxXSTROVE10TjJWaE5U", 
+                //"website-api-key": "3pPUzAwTUdGaUxXSTROVE10TjJWaE5U", 
                 
                 // Mapped Fields
                 summary: "New Ticket from " + $('#firstname').val() + " " + $('#lastname').val(),
