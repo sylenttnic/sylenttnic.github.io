@@ -291,3 +291,31 @@ function resetGoogleForm() {
     $('#basicFeedback').val("");
     $('#comments').val("");
 }
+
+// Navbar Behavior: Auto-collapse on link click and click outside
+document.addEventListener('DOMContentLoaded', function() {
+    const navbarCollapse = document.getElementById('navbarResponsive');
+    const menuToggle = document.querySelector('.navbar-toggler');
+
+    if (navbarCollapse && menuToggle) {
+        // Collapse on link click
+        const navLinks = navbarCollapse.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbarCollapse.classList.contains('show')) {
+                    menuToggle.click();
+                }
+            });
+        });
+
+        // Collapse on click outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = navbarCollapse.contains(event.target);
+            const isClickOnToggler = menuToggle.contains(event.target);
+
+            if (navbarCollapse.classList.contains('show') && !isClickInsideMenu && !isClickOnToggler) {
+                menuToggle.click();
+            }
+        });
+    }
+});
