@@ -12954,25 +12954,28 @@ header.masthead .bg-circle-4 {
 
 @font-face {
   font-family: Circular;
-  src: url("/assets/fonts/CircularStd-Book.otf") format("opentype");
+  src: url("/assets/fonts/CircularStd-Book.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
 
 @font-face {
   font-family: Circular;
-  src: url("/assets/fonts/CircularStd-Bold.otf") format("opentype");
+  src: url("/assets/fonts/CircularStd-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
 
 @font-face {
   font-family: Circular;
-  src: url("/assets/fonts/CircularStd-BookItalic.otf") format("opentype");
+  src: url("/assets/fonts/CircularStd-BookItalic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic;
+  font-display: swap;
   text-rendering: optimizeLegibility;
 }
 
