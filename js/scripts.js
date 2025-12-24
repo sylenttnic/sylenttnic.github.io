@@ -279,18 +279,6 @@ $(document).ready(function() {
     });
 });
   
-// Reset Google Form Fields on Success
-function resetGoogleForm() {
-    $('#firstname').val("");
-    $('#lastname').val("");
-    $('#emailaddress').val("");
-    $('#phonenumber').val("");
-    $('#companyName').val("");
-    $('input[name="gridRadios"]:first').prop('checked', true);
-    $('#jobTitle').val("");
-    $('#basicFeedback').val("");
-    $('#comments').val("");
-}
 
 // Navbar Behavior: Auto-collapse on link click and click outside
 document.addEventListener('DOMContentLoaded', function() {
