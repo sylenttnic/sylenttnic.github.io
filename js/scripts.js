@@ -215,22 +215,14 @@ $(document).ready(function() {
             },
 
             data: JSON.stringify({
-                summary: "New Ticket from " + $('#firstname').val() + " " + $('#lastname').val(),
-                
-                description: `
-User: ${$('#firstname').val()} ${$('#lastname').val()}
-Email: ${$('#emailaddress').val()}
-Phone: ${$('#phonenumber').val()}
-Company: ${$('#companyName').val()}
-Function: ${$('input[name="gridRadios"]:checked').val()}
-Job Title: ${$('#jobTitle').val()}
-Feedback: ${$('#basicFeedback').val()}
-
-Comments:
-${$('#comments').val()}
-                `,
-                
+                summary: $('#basicFeedback').val(),
+                description: $('#comments').val(),
                 emailAddress: $('#emailaddress').val(),
+                firstname: $('#firstname').val(),
+                lastname: $('#lastname').val(),
+                phonenumber: $('#phonenumber').val(),
+                functionalrequest: $('input[name="gridRadios"]:checked').val(),
+                jobTitle: $('#jobTitle').val(),
                 companyName: $('#companyName').val()
             }),
 
