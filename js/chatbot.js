@@ -1,5 +1,3 @@
-import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-
 // Generate or retrieve a persistent session ID
 const sessionId = localStorage.getItem('n8nChatSessionId') || (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
   var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -7,7 +5,7 @@ const sessionId = localStorage.getItem('n8nChatSessionId') || (crypto.randomUUID
 }));
 localStorage.setItem('n8nChatSessionId', sessionId);
 
-createChat({
+const chatOptions = {
   webhookUrl: 'https://hnet.sylentt.com/webhook/af00e28f-7b00-4b2a-9e12-123456789abc/chat',
   mode: 'window',
   target: '#n8n-chat',
@@ -34,4 +32,65 @@ createChat({
     secondaryColor: '#342e2e',
     fontFamily: 'Circular, Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji',
   },
+};
+
+let chatInitialized = false;
+
+async function initializeChat() {
+    if (chatInitialized) return;
+    chatInitialized = true;
+
+    try {
+        const { createChat } = await import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js');
+        createChat(chatOptions);
+
+        // Attempt to open the chat window automatically
+        const checkInterval = setInterval(() => {
+            const toggleBtn = document.querySelector('.chat-window-toggle');
+            if (toggleBtn) {
+                toggleBtn.click();
+                clearInterval(checkInterval);
+            }
+        }, 100);
+        setTimeout(() => clearInterval(checkInterval), 5000);
+    } catch (error) {
+        console.error('Failed to load chat:', error);
+        chatInitialized = false;
+    }
+}
+
+// Create fake button
+const fakeButton = document.createElement('div');
+fakeButton.style.position = 'fixed';
+fakeButton.style.bottom = '1rem';
+fakeButton.style.right = '1rem';
+fakeButton.style.width = '64px';
+fakeButton.style.height = '64px';
+fakeButton.style.backgroundColor = '#A50553';
+fakeButton.style.color = '#ffffff';
+fakeButton.style.borderRadius = '50%';
+fakeButton.style.cursor = 'pointer';
+fakeButton.style.zIndex = '9999';
+fakeButton.style.display = 'flex';
+fakeButton.style.justifyContent = 'center';
+fakeButton.style.alignItems = 'center';
+fakeButton.style.transition = 'transform 0.15s ease, background 0.15s ease';
+
+// SVG Icon
+fakeButton.innerHTML = `<svg viewBox="0 0 24 24" width="32" height="32" style="fill: currentColor"><path d="M12 3c5.5 0 10 3.58 10 8s-4.5 8-10 8c-1.24 0-2.43-.18-3.53-.5C5.55 21 2 21 2 21c2.33-2.33 2.7-3.9 2.75-4.5C3.05 15.07 2 13.13 2 11c0-4.42 4.5-8 10-8"></path></svg>`;
+
+document.body.appendChild(fakeButton);
+
+fakeButton.addEventListener('mouseenter', () => {
+    fakeButton.style.transform = 'scale(1.05)';
+    fakeButton.style.backgroundColor = '#94044A';
+});
+fakeButton.addEventListener('mouseleave', () => {
+    fakeButton.style.transform = 'scale(1)';
+    fakeButton.style.backgroundColor = '#A50553';
+});
+
+fakeButton.addEventListener('click', () => {
+    fakeButton.remove();
+    initializeChat();
 });
