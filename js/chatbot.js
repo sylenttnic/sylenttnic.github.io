@@ -50,6 +50,21 @@ async function initializeChat() {
             if (toggleBtn) {
                 toggleBtn.click();
                 clearInterval(checkInterval);
+
+                // Wait for input to be visible and focus it
+                const inputCheckInterval = setInterval(() => {
+                    const input = document.querySelector('.chat-input textarea');
+                    if (input) {
+                        input.focus();
+                        clearInterval(inputCheckInterval);
+
+                        // Handle viewport adjustment for mobile keyboard
+                        setTimeout(() => {
+                           input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300);
+                    }
+                }, 100);
+                setTimeout(() => clearInterval(inputCheckInterval), 5000);
             }
         }, 100);
         setTimeout(() => clearInterval(checkInterval), 5000);
