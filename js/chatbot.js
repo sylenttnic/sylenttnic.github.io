@@ -15,8 +15,13 @@ createChat({
   ],
   i18n: {
     en: {
-      title: 'My Business Assistant',
-      subtitle: 'Ask me anything',
+      title: 'Sylentt Partners Assistant',
+      subtitle: '',
     },
+  },
+  style: {
+    primaryColor: '#A50553',
+    secondaryColor: '#342e2e',
+    fontFamily: 'Circular, Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji',
   },
 });
