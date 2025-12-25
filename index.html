@@ -457,5 +457,30 @@ height="0" width="0" style="display:none;visibility:hidden">
         <script src="js/scripts.min.js"></script>
         <!-- Carousel JS -->
         <script src="js/carousel.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+  createChat({
+    webhookUrl: 'https://hnet.sylentt.com/webhook/56f626b5-339e-48af-857f-1d4198fc8a4d/chat',
+    mode: 'window', 
+    target: '#n8n-chat',
+    chatInputKey: 'chatInput', 
+    chatSessionKey: 'sessionId', 
+    metadata: {},
+    showWelcomeScreen: true, 
+    defaultLanguage: 'en',
+    initialMessages: [
+      'Hi there! 👋',
+      'How can I help you today?'
+    ],
+    i18n: {
+      en: {
+        title: 'My Business Assistant',
+        subtitle: 'Ask me anything',
+      },
+    },
+  });
+</script>
     </body>
 </html>
