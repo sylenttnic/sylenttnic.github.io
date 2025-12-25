@@ -1,12 +1,22 @@
 import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
+// Generate or retrieve a persistent session ID
+const sessionId = localStorage.getItem('n8nChatSessionId') || (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+  return v.toString(16);
+}));
+localStorage.setItem('n8nChatSessionId', sessionId);
+
 createChat({
   webhookUrl: 'https://hnet.sylentt.com/webhook/56f626b5-339e-48af-857f-1d4198fc8a4d/chat',
   mode: 'window',
   target: '#n8n-chat',
   chatInputKey: 'chatInput',
   chatSessionKey: 'sessionId',
-  metadata: {},
+  loadPreviousSession: true,
+  metadata: {
+    sessionId: sessionId
+  },
   showWelcomeScreen: true,
   defaultLanguage: 'en',
   initialMessages: [
