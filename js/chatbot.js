@@ -8,7 +8,7 @@ const sessionId = localStorage.getItem('n8nChatSessionId') || (crypto.randomUUID
 localStorage.setItem('n8nChatSessionId', sessionId);
 
 createChat({
-  webhookUrl: 'https://hnet.sylentt.com/webhook/56f626b5-339e-48af-857f-1d4198fc8a4d/chat',
+  webhookUrl: 'https://hnet.sylentt.com/webhook/af00e28f-7b00-4b2a-9e12-123456789abc/chat',
   mode: 'window',
   target: '#n8n-chat',
   chatInputKey: 'chatInput',
