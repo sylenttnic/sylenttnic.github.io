@@ -14,9 +14,9 @@
   ExpiresByType video/mpeg "access plus 1 year"
 
   # CSS, JavaScript
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType text/javascript "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
 
   # Fonts
   ExpiresByType font/ttf "access plus 1 year"
@@ -33,7 +33,7 @@
 <IfModule mod_headers.c>
   # Cache Control for static resources
   <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf)$">
-    Header set Cache-Control "max-age=2592000, public"
+    Header set Cache-Control "max-age=31536000, public"
   </FilesMatch>
   <FilesMatch "\.(html|htm|xml|txt|xsl)$">
     Header set Cache-Control "max-age=7200, public"
