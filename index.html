@@ -52,17 +52,20 @@
         <!-- Google fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://code.jquery.com">
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
         <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
         <link rel="preload" as="image" href="assets/img/masthead-small.webp" media="(max-width: 767.98px)">
         <link rel="preload" as="image" href="assets/img/masthead-medium.webp" media="(min-width: 768px) and (max-width: 1199.98px)">
         <link rel="preload" as="image" href="assets/img/masthead.webp" media="(min-width: 1200px)">
         <!-- Slick Carousel CSS -->
-        <!-- Slick Carousel CSS -->
         <link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
         </noscript>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.min.css" rel="stylesheet" />
@@ -116,7 +119,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="assets/img/about-1.webp" alt="Collaborative team meeting discussing workflow automation" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="assets/img/about-1.webp" alt="Collaborative team meeting discussing workflow automation" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="custom-p-all">
@@ -141,7 +144,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="assets/img/about-2.webp" alt="Sylentt Partners team working on smart automation solutions" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="assets/img/about-2.webp" alt="Sylentt Partners team working on smart automation solutions" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="custom-p-all">
@@ -436,7 +439,7 @@ height="0" width="0" style="display:none;visibility:hidden">
         <!-- Footer-->
         <footer class="pt-1 pb-1">
             <div class="logo-container">
-                <img src="assets/img/logo.svg" alt="Sylentt Partners Logo">
+                <img src="assets/img/logo.svg" alt="Sylentt Partners Logo" width="500" height="500">
             </div>
             <div class="copyright">
                 <p>&copy; <span id="current-year"></span> Sylentt Partners. All Rights Reserved.</p>
@@ -448,16 +451,16 @@ height="0" width="0" style="display:none;visibility:hidden">
         <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();</script>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
         <!-- JQuery Full JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer></script>
         <!-- Slick Carousel JS -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.min.js"></script>
+        <script src="js/scripts.min.js" defer></script>
         <!-- Carousel JS -->
-        <script src="js/carousel.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
+        <script src="js/carousel.min.js" defer></script>
+
         <script type="module" src="js/chatbot.min.js"></script>
         <script type="module" src="js/web-vitals.min.js"></script>
     </body>
