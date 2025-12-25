@@ -36,6 +36,12 @@
         <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
 
+        <!-- Preconnect Hints -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        <link rel="preconnect" href="https://code.jquery.com">
+
         <!-- Font Awesome icons (free version)-->
         <script type="application/ld+json">
         {
@@ -52,7 +58,7 @@
           }
         }
         </script>
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" defer></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
@@ -141,7 +147,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/workflow_automation.jpg" alt="Automated workflow diagram on a screen" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/workflow_automation.jpg" alt="Automated workflow diagram on a screen" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="custom-p-all">
@@ -164,7 +170,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/integration_documentation.jpg" alt="Documentation and integration process visualization" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/integration_documentation.jpg" alt="Documentation and integration process visualization" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="custom-p-all">
@@ -198,7 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/collaboration_reporting.jpg" alt="Team collaborating on reporting metrics" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/collaboration_reporting.jpg" alt="Team collaborating on reporting metrics" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="custom-p-all">
@@ -238,7 +244,7 @@ height="0" width="0" style="display:none;visibility:hidden">
             <div class="container custom-p">
                 <div class="row custom-g align-items-center">
                     <div class="col-lg-6">
-                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/planning_strategy.jpg" alt="Strategic planning session with data charts" loading="lazy" /></div>
+                        <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/planning_strategy.jpg" alt="Strategic planning session with data charts" loading="lazy" width="2048" height="2048" /></div>
                     </div>
                     <div class="col-lg-6">
                         <div class="custom-p-all">
@@ -273,7 +279,7 @@ height="0" width="0" style="display:none;visibility:hidden">
                 <div class="container custom-p">
                     <div class="row custom-g align-items-center">
                         <div class="col-lg-6 order-lg-2">
-                            <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/handshake.jpg" alt="Business handshake representing partnership" loading="lazy" /></div>
+                            <div class="custom-p-all"><img class="img-fluid rounded-edges shadow-sm" src="/assets/img/services/handshake.jpg" alt="Business handshake representing partnership" loading="lazy" width="2048" height="2048" /></div>
                         </div>
                         <div class="col-lg-6 order-lg-1">
                             <div class="custom-p-all">
@@ -570,11 +576,11 @@ height="0" width="0" style="display:none;visibility:hidden">
         </main>
 
         <!-- Footer-->
-        <footer class="pt-1 pb-1" style="background-color:#342e2e;color:#e9e9e9;">
+        <footer class="pt-1 pb-1 footer-dark">
             <div class="logo-container">
-                <img src="/assets/img/logo.svg" alt="Sylentt Partners Logo" style="max-width: 65px; height: auto; display: block; margin: 0 auto; padding-top: 13px;">
+                <img src="/assets/img/logo.svg" alt="Sylentt Partners Logo" class="footer-logo" width="500" height="500">
             </div>
-            <div class="d-flex align-items-center justify-content-center" style="margin-top:10px;">
+            <div class="d-flex align-items-center justify-content-center copyright-container">
                 <p>&copy; <span id="current-year"></span> Sylentt Partners. All Rights Reserved.</p>
             </div>
             </div>
@@ -585,15 +591,15 @@ height="0" width="0" style="display:none;visibility:hidden">
         <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();</script>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
         <!-- JQuery Full JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer></script>
         <!-- Slick Carousel JS -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
         <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
+        <script src="/js/scripts.min.js" defer></script>
         <!-- Carousel JS -->
-        <script src="/js/carousel.js"></script>
+        <script src="/js/carousel.min.js" defer></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
         <script type="module" src="/js/chatbot.min.js"></script>
         <script type="module" src="/js/web-vitals.min.js"></script>
