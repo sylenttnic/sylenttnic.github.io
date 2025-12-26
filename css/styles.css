@@ -13155,3 +13155,215 @@ footer .copyright {
 .copyright-container {
     margin-top: 10px;
 }
+
+/* Quiz Styles */
+.quiz-container {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.quiz-option {
+    text-align: left;
+    white-space: normal;
+    transition: all 0.2s ease-in-out;
+    border-width: 2px;
+}
+
+.quiz-option:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Feature Icons in Problem Grid */
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+}
+
+/* Timeline Styles */
+.main-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.main-timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #A50553; /* Primary Color */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 3px;
+}
+
+.timeline {
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    margin-bottom: 50px;
+}
+
+/* Left side */
+.timeline:nth-child(odd) {
+    left: 0;
+    padding-right: 40px;
+    text-align: right;
+}
+
+/* Right side */
+.timeline:nth-child(even) {
+    left: 50%;
+    padding-left: 40px;
+    text-align: left;
+}
+
+/* Icons */
+.timeline-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 4px solid #A50553;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A50553;
+    font-size: 20px;
+    box-shadow: 0 0 0 4px #fff, inset 0 2px 0 rgba(0,0,0,0.08), 0 3px 0 4px rgba(0,0,0,0.05);
+}
+
+.timeline:nth-child(odd) .timeline-icon {
+    right: -25px;
+}
+
+.timeline:nth-child(even) .timeline-icon {
+    left: -25px;
+}
+
+/* Content Box */
+.timeline-content {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Arrows pointing to the line */
+.timeline:nth-child(odd) .timeline-content::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    right: -10px;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #fff;
+    border-style: solid;
+}
+
+.timeline:nth-child(even) .timeline-content::after {
+    content: " ";
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #fff transparent transparent;
+    border-style: solid;
+}
+
+.timeline .date {
+    display: inline-block;
+    color: #888;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.timeline .title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #342e2e;
+}
+
+.timeline .description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.timeline-outcome ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+}
+
+.timeline-outcome li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    color: #555;
+    text-align: inherit;
+}
+
+.timeline-outcome li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #198754; /* Success Green */
+    font-weight: bold;
+}
+
+/* Responsive Logic */
+@media screen and (max-width: 768px) {
+    .main-timeline::after {
+        left: 31px;
+    }
+
+    .timeline {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline:nth-child(odd),
+    .timeline:nth-child(even) {
+        left: 0;
+        text-align: left;
+    }
+
+    .timeline:nth-child(odd) .timeline-icon,
+    .timeline:nth-child(even) .timeline-icon {
+        left: 6px;
+        right: auto;
+    }
+
+    .timeline:nth-child(odd) .timeline-content::after,
+    .timeline:nth-child(even) .timeline-content::after {
+        left: -10px;
+        right: auto;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #fff transparent transparent;
+    }
+}
