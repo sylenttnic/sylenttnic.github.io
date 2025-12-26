@@ -160,9 +160,9 @@ function renderLeadForm() {
                     <input type="email" class="form-control" name="quiz-email-catch" id="quiz-email-catch" />
                 </div>
                 <div class="col-md-6">
-                    <label for="leadFirstName" class="form-label">First Name <span class="text-required">*</span></label>
-                    <input type="text" class="form-control" id="leadFirstName" required>
-                    <div class="invalid-feedback">Please provide your first name.</div>
+                    <label for="leadName" class="form-label">Name <span class="text-required">*</span></label>
+                    <input type="text" class="form-control" id="leadName" required>
+                    <div class="invalid-feedback">Please provide your name.</div>
                 </div>
                 <div class="col-md-6">
                     <label for="leadEmail" class="form-label">Work Email <span class="text-required">*</span></label>
@@ -172,10 +172,15 @@ function renderLeadForm() {
                         We do not sell your information to third parties, and you are not signing up for spam.
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                     <label for="leadJobTitle" class="form-label">Job Title <span class="text-required">*</span></label>
                     <input type="text" class="form-control" id="leadJobTitle" required>
                     <div class="invalid-feedback">Please provide your job title.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="leadCompany" class="form-label">Company Name <span class="text-required">*</span></label>
+                    <input type="text" class="form-control" id="leadCompany" required>
+                    <div class="invalid-feedback">Please provide your company name.</div>
                 </div>
                 <div class="col-12 mt-4 text-center">
                     <button type="submit" class="btn btn-primary btn-xl rounded-pill" id="btn-reveal-results">
@@ -208,9 +213,10 @@ function renderLeadForm() {
         btn.prop('disabled', true).text('Calculating...');
 
         const leadData = {
-            leadFirstName: $('#leadFirstName').val(),
+            leadName: $('#leadName').val(),
             leadEmail: $('#leadEmail').val(),
-            leadJobTitle: $('#leadJobTitle').val()
+            leadJobTitle: $('#leadJobTitle').val(),
+            leadCompany: $('#leadCompany').val()
         };
 
         processSubmission(leadData);
@@ -238,9 +244,10 @@ function processSubmission(leadData) {
         frictionTier: frictionTier,
 
         // Map to existing n8n standard fields for backward compatibility/ease of use
-        firstname: leadData.leadFirstName,
+        firstname: leadData.leadName,
         emailAddress: leadData.leadEmail,
         jobTitle: leadData.leadJobTitle,
+        company: leadData.leadCompany,
         summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`
     };
 
@@ -294,7 +301,7 @@ function showResults(tier, score) {
             <h4 class="mb-3">Stop losing time to friction.</h4>
             <p class="mb-4">Let's discuss a roadmap to fix this.</p>
 
-            <p class="text-muted small mb-4">We've emailed you the full report. Please check your spam folder if you don't see it.</p>
+            <p class="text-muted small mb-4">We've sent you an email to confirm contact information, please check your spam folder if you don't see it.</p>
 
             <a href="https://calendly.com/nic-sylentt/30min" target="_blank" class="btn btn-primary btn-xl rounded-pill">
                 Book your free discovery call
