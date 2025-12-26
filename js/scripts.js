@@ -160,8 +160,8 @@ function renderLeadForm() {
                     <input type="email" class="form-control" name="quiz-email-catch" id="quiz-email-catch" />
                 </div>
                 <div class="col-md-6">
-                    <label for="leadFirstName" class="form-label">Name <span class="text-required">*</span></label>
-                    <input type="text" class="form-control" id="leadFirstName" required>
+                    <label for="leadName" class="form-label">Name <span class="text-required">*</span></label>
+                    <input type="text" class="form-control" id="leadName" required>
                     <div class="invalid-feedback">Please provide your name.</div>
                 </div>
                 <div class="col-md-6">
@@ -213,7 +213,7 @@ function renderLeadForm() {
         btn.prop('disabled', true).text('Calculating...');
 
         const leadData = {
-            leadFirstName: $('#leadFirstName').val(),
+            leadName: $('#leadName').val(),
             leadEmail: $('#leadEmail').val(),
             leadJobTitle: $('#leadJobTitle').val(),
             leadCompany: $('#leadCompany').val()
@@ -244,7 +244,7 @@ function processSubmission(leadData) {
         frictionTier: frictionTier,
 
         // Map to existing n8n standard fields for backward compatibility/ease of use
-        firstname: leadData.leadFirstName,
+        firstname: leadData.leadName,
         emailAddress: leadData.leadEmail,
         jobTitle: leadData.leadJobTitle,
         company: leadData.leadCompany,
