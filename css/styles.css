@@ -13035,7 +13035,7 @@ footer {
 }
 
 footer .logo-container img {
-  max-width: 65px;
+  max-width: 200px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -13145,11 +13145,12 @@ footer .copyright {
 }
 
 .footer-logo {
-    max-width: 65px;
+    max-width: 200px;
     height: auto;
     display: block;
     margin: 0 auto;
     padding-top: 13px;
+    filter: invert(1);
 }
 
 .copyright-container {
