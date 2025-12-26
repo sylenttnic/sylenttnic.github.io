@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
       <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-2MLVE7PX3L"></script>
@@ -59,12 +58,25 @@
         }
         </script>
         <link href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css"></noscript>
+
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" media="print" onload="this.media='all'" /><noscript><link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" /></noscript>
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" media="print" onload="this.media='all'" /><noscript><link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" /></noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+        <link rel="preload" as="font" href="/assets/fonts/CircularStd-Book.woff2" type="font/woff2" crossorigin>
+        <link rel="preload" as="image" href="/assets/img/masthead-small.webp" media="(max-width: 767.98px)" fetchpriority="high">
+        <link rel="preload" as="image" href="/assets/img/masthead-medium.webp" media="(min-width: 768px) and (max-width: 1199.98px)" fetchpriority="high">
+        <link rel="preload" as="image" href="/assets/img/masthead.webp" media="(min-width: 1200px)" fetchpriority="high">
+
         <!-- Slick Carousel CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css">
+        </noscript>
+
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.min.css" rel="stylesheet" />
     </head>
@@ -600,7 +612,6 @@ height="0" width="0" style="display:none;visibility:hidden">
         <script src="/js/scripts.min.js" defer></script>
         <!-- Carousel JS -->
         <script src="/js/carousel.min.js" defer></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
         <script type="module" src="/js/chatbot.min.js"></script>
         <script type="module" src="/js/web-vitals.min.js"></script>
     </body>
