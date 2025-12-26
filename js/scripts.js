@@ -168,6 +168,9 @@ function renderLeadForm() {
                     <label for="leadEmail" class="form-label">Work Email <span class="text-required">*</span></label>
                     <input type="email" class="form-control" id="leadEmail" required>
                     <div class="invalid-feedback">Please provide a valid work email.</div>
+                    <div class="form-text text-muted small mt-1">
+                        We do not sell your information to third parties, and you are not signing up for spam.
+                    </div>
                 </div>
                 <div class="col-12">
                     <label for="leadJobTitle" class="form-label">Job Title <span class="text-required">*</span></label>
