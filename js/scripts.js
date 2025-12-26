@@ -291,6 +291,8 @@ function showResults(tier, score) {
             <h4 class="mb-3">Stop losing time to friction.</h4>
             <p class="mb-4">Let's discuss a roadmap to fix this.</p>
 
+            <p class="text-muted small mb-4">We've emailed you the full report. Please check your spam folder if you don't see it.</p>
+
             <a href="https://calendly.com/nic-sylentt/30min" target="_blank" class="btn btn-primary btn-xl rounded-pill">
                 Book your free discovery call
             </a>
