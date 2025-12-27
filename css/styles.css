@@ -13369,3 +13369,15 @@ footer .copyright {
         border-color: transparent #fff transparent transparent;
     }
 }
+
+.operational-roadmap-link {
+    font-size: 1.2rem;
+    color: #A50553;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.operational-roadmap-link:hover {
+    color: #be0761;
+    text-decoration: none;
+}
