@@ -13039,11 +13039,11 @@ footer .logo-container img {
   height: auto;
   display: block;
   margin: 0 auto;
-  padding-top: 13px;
+  padding-top: 6.5px;
 }
 
 footer .copyright {
-  margin-top: 10px;
+  margin-top: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13149,12 +13149,12 @@ footer .copyright {
     height: auto;
     display: block;
     margin: 0 auto;
-    padding-top: 13px;
+    padding-top: 6.5px;
     filter: invert(1);
 }
 
 .copyright-container {
-    margin-top: 10px;
+    margin-top: 4px;
 }
 
 /* Quiz Styles */
