@@ -13353,6 +13353,8 @@ footer .copyright {
     .timeline:nth-child(even) {
         left: 0;
         text-align: left;
+        padding-left: 70px;
+        padding-right: 25px;
     }
 
     .timeline:nth-child(odd) .timeline-icon,
