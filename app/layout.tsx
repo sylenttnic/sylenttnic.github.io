@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sylentt Partners" }],
   icons: {
-    icon: "/favicon.svg",
+    icon: "/logo-symbol.png",
   },
 };
 
