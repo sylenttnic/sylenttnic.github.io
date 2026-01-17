@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 flex flex-col items-center">
         <div className="mb-6 relative w-48 h-16 opacity-80 hover:opacity-100 transition-opacity">
           <Image
-            src="/assets/img/logo.svg"
+            src="/assets/img/logo-footer.png"
             alt="Sylentt Partners Logo"
             fill
             className="object-contain filter invert brightness-0"

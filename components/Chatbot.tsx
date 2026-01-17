@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
 
 export default function Chatbot() {
   const [isReady, setIsReady] = useState(false); // Script loaded and toggle ready
@@ -124,30 +124,33 @@ export default function Chatbot() {
     return () => observer.disconnect();
   }, [isReady, isOpen]);
 
-  const handleOpenChat = () => {
+  const handleToggleChat = () => {
     const toggle = document.querySelector(".chat-window-toggle") as HTMLElement;
     if (toggle) {
         toggle.click();
 
-        // Attempt to focus immediately (crucial for mobile keyboard)
-        const focusLoop = setInterval(() => {
-             const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
-                      document.querySelector("textarea[data-test-id='chat-input']") as HTMLElement | null ||
-                      document.querySelector("textarea[placeholder*='question']") as HTMLElement | null ||
-                      document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
-                      document.querySelector("input[placeholder*='message']") as HTMLElement | null;
+        // If we are opening the chat (it was closed), try to focus input
+        if (!isOpen) {
+          // Attempt to focus immediately (crucial for mobile keyboard)
+          const focusLoop = setInterval(() => {
+               const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
+                        document.querySelector("textarea[data-test-id='chat-input']") as HTMLElement | null ||
+                        document.querySelector("textarea[placeholder*='question']") as HTMLElement | null ||
+                        document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
+                        document.querySelector("input[placeholder*='message']") as HTMLElement | null;
 
-             if (input && input.offsetParent !== null) {
-                 input.focus({ preventScroll: false });
-                 // If we successfully focused, we can stop
-                 if (document.activeElement === input) {
-                    clearInterval(focusLoop);
-                 }
-             }
-        }, 50);
+               if (input && input.offsetParent !== null) {
+                   input.focus({ preventScroll: false });
+                   // If we successfully focused, we can stop
+                   if (document.activeElement === input) {
+                      clearInterval(focusLoop);
+                   }
+               }
+          }, 50);
 
-        // Stop trying after 1 second
-        setTimeout(() => clearInterval(focusLoop), 1000);
+          // Stop trying after 1 second
+          setTimeout(() => clearInterval(focusLoop), 1000);
+        }
     }
   };
 
@@ -155,14 +158,14 @@ export default function Chatbot() {
     <>
       <div id="n8n-chat"></div>
 
-      {/* Custom Button - Only visible when chat is closed */}
+      {/* Custom Toggle Button */}
       <button
-        onClick={handleOpenChat}
-        className={`fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${isOpen ? 'hidden' : ''} ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-        aria-label="Open Chat"
+        onClick={handleToggleChat}
+        className={`fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        aria-label={isOpen ? "Close Chat" : "Open Chat"}
         disabled={!isReady}
       >
-        <MessageCircle className="h-8 w-8" />
+        {isOpen ? <X className="h-8 w-8" /> : <MessageCircle className="h-8 w-8" />}
       </button>
     </>
   );
