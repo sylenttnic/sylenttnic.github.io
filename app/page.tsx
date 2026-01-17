@@ -37,10 +37,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-              Stop Running Your Business on Email, Spreadsheets, and "I Think So."
+              Stop Running Your Business on Email, Spreadsheets, and &quot;I Think So.&quot;
             </h1>
             <h2 className="text-xl md:text-3xl font-light mb-10 max-w-4xl mx-auto text-slate-300 leading-relaxed">
-              Chaos isn't a strategy. We architect the systems that replace operational noise with clarity, using the tools you probably already own.
+              Chaos isn&apos;t a strategy. We architect the systems that replace operational noise with clarity, using the tools you probably already own.
             </h2>
             <Button
               size="xl"
@@ -122,7 +122,7 @@ export default function Home() {
       <section className="py-32 bg-slate-900/30 border-y border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">We Turn "Chaos" into a "System of Work."</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">We Turn &quot;Chaos&quot; into a &quot;System of Work.&quot;</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
@@ -166,7 +166,7 @@ export default function Home() {
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
              {testimonials.map((text, i) => (
                <div key={i} className="glass-card p-10 rounded-xl italic text-slate-300 leading-relaxed relative">
-                 <span className="absolute top-4 left-6 text-6xl text-primary/20 font-serif leading-none">"</span>
+                 <span className="absolute top-4 left-6 text-6xl text-primary/20 font-serif leading-none">&quot;</span>
                  <p className="relative z-10 pt-4">{text}</p>
                </div>
              ))}

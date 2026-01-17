@@ -216,10 +216,10 @@ export default function WizardForm() {
           <div className="w-full h-px bg-white/10 my-6" />
 
           <h4 className="text-xl font-bold mb-2 text-white">Stop losing time to friction.</h4>
-          <p className="mb-6 text-slate-400">Let's discuss a roadmap to fix this.</p>
+          <p className="mb-6 text-slate-400">Let&apos;s discuss a roadmap to fix this.</p>
 
           <p className="text-sm text-slate-500 mb-6">
-            We've sent you an email to confirm contact information, please check your spam folder if you don't see it.
+            We&apos;ve sent you an email to confirm contact information, please check your spam folder if you don&apos;t see it.
           </p>
 
           <a
