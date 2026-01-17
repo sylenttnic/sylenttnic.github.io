@@ -68,7 +68,7 @@ export default function Chatbot() {
               initialMessages: ["Hi there! 👋", "How can I help you today?"],
               i18n: {
                 en: {
-                  title: "Sylentt Partners Assistant",
+                  title: "Assistant",
                   subtitle: "",
                 },
               },
@@ -132,6 +132,41 @@ export default function Chatbot() {
 
     return () => observer.disconnect();
   }, [isReady, isOpen]);
+
+  // Handle click outside to close chat on mobile
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      // Check if mobile (using 640px as breakpoint, same as CSS)
+      if (window.innerWidth >= 640) return;
+
+      const target = event.target as Node;
+
+      const chatContainer = document.getElementById("n8n-chat");
+      const toggleButton = document.querySelector("button[aria-label='Close Chat']");
+      const chatWindow = document.querySelector(".chat-window");
+
+      const isInsideChat =
+        (chatContainer && chatContainer.contains(target)) ||
+        (chatWindow && chatWindow.contains(target));
+
+      const isToggleButton = toggleButton && toggleButton.contains(target);
+
+      if (!isInsideChat && !isToggleButton) {
+        handleToggleChat();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const handleToggleChat = () => {
     const toggle = document.querySelector(".chat-window-toggle") as HTMLElement;
