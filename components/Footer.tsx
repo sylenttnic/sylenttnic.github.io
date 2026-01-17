@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/assets/img/logo.svg";
+import logo from "@/assets/img/logo.webp";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,7 +12,7 @@ export default function Footer() {
             src={logo}
             alt="Sylentt Partners Logo"
             fill
-            className="object-contain filter invert brightness-0"
+            className="object-contain"
           />
         </div>
         <div className="text-center text-slate-500 text-sm">
