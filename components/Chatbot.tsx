@@ -36,6 +36,10 @@ export default function Chatbot() {
             pointer-events: none !important;
             opacity: 0 !important;
           }
+          :root {
+            --chat--window--bottom: 5.5rem;
+            --chat--window--z-index: 9995;
+          }
         `;
         document.head.appendChild(customStyle);
 
@@ -161,7 +165,7 @@ export default function Chatbot() {
       {/* Custom Toggle Button */}
       <button
         onClick={handleToggleChat}
-        className={`fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed bottom-4 right-4 z-[10000] flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         aria-label={isOpen ? "Close Chat" : "Open Chat"}
         disabled={!isReady}
       >
