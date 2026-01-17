@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, AlertCircle, HelpCircle, EyeOff } from "lucide-react";
 import Image from "next/image";
 import WizardForm from "@/components/WizardForm";
+import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import { Button } from "@/components/ui/button";
 
 const testimonials = [
@@ -53,6 +54,7 @@ export default function Home() {
             </p>
           </motion.div>
         </div>
+        <ScrollIndicator />
       </header>
 
       {/* Invisible Drag Section */}

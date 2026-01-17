@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, Search, Map, Hammer, Handshake } from "lucide-react";
 import WizardForm from "@/components/WizardForm";
+import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import Image from "next/image";
 
 const phases = [
@@ -52,7 +53,7 @@ export default function Services() {
   return (
     <>
       {/* Masthead */}
-      <header className="relative min-h-[60vh] flex items-center justify-center text-center text-white overflow-hidden pt-20">
+      <header className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/img/masthead.webp"
@@ -79,6 +80,7 @@ export default function Services() {
             </h2>
           </motion.div>
         </div>
+        <ScrollIndicator />
       </header>
 
       {/* Timeline Section */}
