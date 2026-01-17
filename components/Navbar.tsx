@@ -15,7 +15,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -43,7 +43,7 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { name: "About", href: "/#about" }, // Assuming about is on home page
+    { name: "About", href: "/#about" },
     { name: "Services", href: "/services" },
     { name: "Connect", href: "#join" },
   ];
@@ -52,11 +52,11 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-secondary/95 backdrop-blur-sm py-2 shadow-md" : "bg-transparent py-4"
+        scrolled ? "glass shadow-lg shadow-black/5" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link href="/" className="text-white font-bold text-xl uppercase tracking-wider">
+        <Link href="/" className="text-white font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           Sylentt Partners
         </Link>
 
@@ -66,9 +66,10 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-white/80 hover:text-white font-medium text-sm uppercase tracking-wide transition-colors"
+              className="text-slate-300 hover:text-white font-medium text-sm transition-colors relative group"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -87,8 +88,8 @@ export default function Navbar() {
       <div
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute top-full left-0 w-full bg-secondary border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
-          isOpen ? "max-h-60" : "max-h-0"
+          "md:hidden absolute top-full left-0 w-full glass border-t-0 border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
+          isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <div className="flex flex-col p-4 space-y-4">
@@ -96,7 +97,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-white/80 hover:text-white font-medium text-sm uppercase tracking-wide"
+              className="text-slate-300 hover:text-white font-medium text-sm"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
