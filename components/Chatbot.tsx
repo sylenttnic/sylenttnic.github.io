@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { MessageCircle } from "lucide-react";
 
 export default function Chatbot() {
-  const [isChatLoaded, setIsChatLoaded] = useState(false);
+  const [isReady, setIsReady] = useState(false); // Script loaded and toggle ready
+  const [isOpen, setIsOpen] = useState(false); // Chat window visible
 
   useEffect(() => {
-    // We only want to run this in the browser
     if (typeof window === "undefined") return;
 
     // Generate or retrieve persistent session ID
@@ -16,25 +16,33 @@ export default function Chatbot() {
       (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2, 15));
     localStorage.setItem("n8nChatSessionId", sessionId);
 
-    // If chat is triggered, load the script
-    if (isChatLoaded) {
-      const loadChat = async () => {
-        try {
-          // Dynamic import of the n8n chat bundle
-          // Using script tag injection to bypass Next.js webpack issues with external URL imports
+    const loadChat = async () => {
+      try {
+        // Inject CSS if not already present
+        const cssUrl = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
+        if (!document.querySelector(`link[href="${cssUrl}"]`)) {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = cssUrl;
+          document.head.appendChild(link);
+        }
 
-          // Inject CSS if not already present
-          const cssUrl = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
-          if (!document.querySelector(`link[href="${cssUrl}"]`)) {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = cssUrl;
-            document.head.appendChild(link);
+        // Hide the native toggle button via CSS override
+        const customStyle = document.createElement("style");
+        customStyle.textContent = `
+          .chat-window-toggle {
+            visibility: hidden !important;
+            position: absolute !important;
+            pointer-events: none !important;
+            opacity: 0 !important;
           }
+        `;
+        document.head.appendChild(customStyle);
 
-          const script = document.createElement("script");
-          script.type = "module";
-          script.innerHTML = `
+        // Inject script
+        const script = document.createElement("script");
+        script.type = "module";
+        script.innerHTML = `
             import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
             createChat({
               webhookUrl: "https://hnet.sylentt.com/webhook/af00e28f-7b00-4b2a-9e12-123456789abc/chat",
@@ -62,88 +70,100 @@ export default function Chatbot() {
               },
             });
           `;
-          document.body.appendChild(script);
+        document.body.appendChild(script);
 
-          // Auto-open logic once loaded
-          const checkInterval = setInterval(() => {
-            const toggleBtn = document.querySelector(".chat-window-toggle");
-            if (toggleBtn) {
-              (toggleBtn as HTMLElement).click();
-              clearInterval(checkInterval);
-            }
-          }, 100);
-        } catch (error) {
-          console.error("Failed to load chat:", error);
-        }
-      };
+        // Poll for the native toggle button to confirm chat is ready
+        const checkInterval = setInterval(() => {
+          if (document.querySelector(".chat-window-toggle")) {
+            setIsReady(true);
+            clearInterval(checkInterval);
+          }
+        }, 500);
 
-      loadChat();
-    }
-  }, [isChatLoaded]);
+        // Stop checking after 30 seconds to avoid infinite loop
+        setTimeout(() => clearInterval(checkInterval), 30000);
 
-  // Focus logic when chat is opened
+      } catch (error) {
+        console.error("Failed to load chat:", error);
+      }
+    };
+
+    loadChat();
+  }, []);
+
+  // Monitor chat state (Open/Close) using MutationObserver
   useEffect(() => {
-    if (!isChatLoaded) return;
+    if (!isReady) return;
 
-    // Monitor for chat window visibility changes or toggle clicks
-    const focusInput = () => {
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts++;
-        if (attempts > 20) clearInterval(interval); // Stop after 2 seconds
+    const observer = new MutationObserver(() => {
+      // Check if input is visible to determine if chat is open
+      const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
+                    document.querySelector("textarea[data-test-id='chat-input']") as HTMLElement | null ||
+                    document.querySelector("textarea[placeholder*='question']") as HTMLElement | null ||
+                    document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
+                    document.querySelector("input[placeholder*='message']") as HTMLElement | null;
 
-        const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
+      const isInputVisible = input && input.offsetParent !== null;
+
+      if (isInputVisible) {
+        if (!isOpen) {
+            setIsOpen(true);
+            // Attempt to focus when it becomes visible
+            input?.focus({ preventScroll: false });
+        }
+      } else {
+        if (isOpen) {
+            setIsOpen(false);
+        }
+      }
+    });
+
+    const target = document.getElementById('n8n-chat') || document.body;
+    observer.observe(target, { childList: true, subtree: true, attributes: true });
+
+    return () => observer.disconnect();
+  }, [isReady, isOpen]);
+
+  const handleOpenChat = () => {
+    const toggle = document.querySelector(".chat-window-toggle") as HTMLElement;
+    if (toggle) {
+        toggle.click();
+
+        // Attempt to focus immediately (crucial for mobile keyboard)
+        const focusLoop = setInterval(() => {
+             const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
+                      document.querySelector("textarea[data-test-id='chat-input']") as HTMLElement | null ||
+                      document.querySelector("textarea[placeholder*='question']") as HTMLElement | null ||
                       document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
                       document.querySelector("input[placeholder*='message']") as HTMLElement | null;
 
-        if (input && document.activeElement !== input) {
-            // Check if the chat window is actually visible
-            const isVisible = input.offsetParent !== null;
-            if (isVisible) {
-                input.focus({ preventScroll: false });
-                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                clearInterval(interval);
-            }
-        }
-      }, 100);
-    };
+             if (input && input.offsetParent !== null) {
+                 input.focus({ preventScroll: false });
+                 // If we successfully focused, we can stop
+                 if (document.activeElement === input) {
+                    clearInterval(focusLoop);
+                 }
+             }
+        }, 50);
 
-    // Attach listener to the toggle button if it exists
-    const attachListener = () => {
-        const toggleBtn = document.querySelector(".chat-window-toggle");
-        if (toggleBtn) {
-            toggleBtn.addEventListener("click", () => {
-                // Give it a moment to expand
-                setTimeout(focusInput, 100);
-            });
-            // Also run focus once immediately in case it was auto-opened
-            focusInput();
-            return true;
-        }
-        return false;
-    };
-
-    const attachInterval = setInterval(() => {
-        if (attachListener()) {
-            clearInterval(attachInterval);
-        }
-    }, 500);
-
-    return () => clearInterval(attachInterval);
-
-  }, [isChatLoaded]);
-
-  if (isChatLoaded) {
-    return <div id="n8n-chat"></div>;
-  }
+        // Stop trying after 1 second
+        setTimeout(() => clearInterval(focusLoop), 1000);
+    }
+  };
 
   return (
-    <button
-      onClick={() => setIsChatLoaded(true)}
-      className="fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-      aria-label="Open Chat"
-    >
-      <MessageCircle className="h-8 w-8" />
-    </button>
+    <>
+      <div id="n8n-chat"></div>
+
+      {/* Custom Button - Only visible when chat is closed */}
+      <button
+        onClick={handleOpenChat}
+        className={`fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${isOpen ? 'hidden' : ''} ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        aria-label="Open Chat"
+        disabled={!isReady}
+      >
+        <MessageCircle className="h-8 w-8" />
+      </button>
+    </>
   );
 }

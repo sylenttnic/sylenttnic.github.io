@@ -1,0 +1,13 @@
+
+> sylentt-partners-rebuild@0.1.0 start
+> next start
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+
+Error: "next start" does not work with "output: export" configuration. Use "npx serve@latest out" instead.
+    at /app/node_modules/next/dist/server/next.js:208:31
+    at async NextServer.prepare (/app/node_modules/next/dist/server/next.js:152:24)
+    at async initializeImpl (/app/node_modules/next/dist/server/lib/render-server.js:91:5)
+    at async initialize (/app/node_modules/next/dist/server/lib/router-server.js:109:22)
+    at async Server.<anonymous> (/app/node_modules/next/dist/server/lib/start-server.js:246:36)
