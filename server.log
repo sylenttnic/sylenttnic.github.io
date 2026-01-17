@@ -1,0 +1,13 @@
+
+> sylentt-partners-rebuild@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 1890ms
+ ○ Compiling / ...
+ ✓ Compiled / in 10.4s (1306 modules)
+ ○ Compiling /services ...
+ ✓ Compiled /services in 780ms (1304 modules)
+[?25h

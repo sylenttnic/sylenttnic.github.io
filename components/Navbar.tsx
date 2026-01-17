@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -10,6 +10,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,26 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        mobileButtonRef.current &&
+        !mobileButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { name: "About", href: "/#about" }, // Assuming about is on home page
@@ -53,6 +75,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
+          ref={mobileButtonRef}
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -62,6 +85,7 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       <div
+        ref={mobileMenuRef}
         className={cn(
           "md:hidden absolute top-full left-0 w-full bg-secondary border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-60" : "max-h-0"

@@ -65,14 +65,13 @@ export default function Chatbot() {
           document.body.appendChild(script);
 
           // Auto-open logic once loaded
-           const checkInterval = setInterval(() => {
-            const toggleBtn = document.querySelector('.chat-window-toggle');
+          const checkInterval = setInterval(() => {
+            const toggleBtn = document.querySelector(".chat-window-toggle");
             if (toggleBtn) {
-                (toggleBtn as HTMLElement).click();
-                clearInterval(checkInterval);
+              (toggleBtn as HTMLElement).click();
+              clearInterval(checkInterval);
             }
-        }, 100);
-
+          }, 100);
         } catch (error) {
           console.error("Failed to load chat:", error);
         }
@@ -80,6 +79,70 @@ export default function Chatbot() {
 
       loadChat();
     }
+  }, [isChatLoaded]);
+
+  // Focus logic when chat is opened
+  useEffect(() => {
+    if (!isChatLoaded) return;
+
+    // Monitor for chat window visibility changes or toggle clicks
+    const focusInput = () => {
+      // Look for the textarea or input inside the n8n chat
+      // It might be inside a shadow root or iframe, but the script above seems to inject into #n8n-chat directly or shadow
+      // Based on standard n8n chat, it usually puts elements in shadow DOM or direct DOM.
+      // Since we can't easily pierce shadow DOM if it's closed, we assume open or check.
+
+      // We will try to find the input repeatedly for a short duration after toggle
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (attempts > 20) clearInterval(interval); // Stop after 2 seconds
+
+        const chatContainer = document.querySelector(".n8n-chat-window-container");
+        // Note: The class name depends on n8n implementation.
+        // Usually, the input has a specific class or tag.
+
+        // Try finding the input. n8n chat inputs are usually textareas or inputs.
+        // We'll search broadly in the document.
+        const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
+                      document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
+                      document.querySelector("input[placeholder*='message']") as HTMLElement | null;
+
+        if (input && document.activeElement !== input) {
+            // Check if the chat window is actually visible
+            const isVisible = input.offsetParent !== null;
+            if (isVisible) {
+                input.focus({ preventScroll: false });
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                clearInterval(interval);
+            }
+        }
+      }, 100);
+    };
+
+    // Attach listener to the toggle button if it exists
+    const attachListener = () => {
+        const toggleBtn = document.querySelector(".chat-window-toggle");
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => {
+                // Give it a moment to expand
+                setTimeout(focusInput, 100);
+            });
+            // Also run focus once immediately in case it was auto-opened
+            focusInput();
+            return true;
+        }
+        return false;
+    };
+
+    const attachInterval = setInterval(() => {
+        if (attachListener()) {
+            clearInterval(attachInterval);
+        }
+    }, 500);
+
+    return () => clearInterval(attachInterval);
+
   }, [isChatLoaded]);
 
   if (isChatLoaded) {
