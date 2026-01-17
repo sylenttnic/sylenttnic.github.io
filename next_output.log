@@ -1,0 +1,42 @@
+
+> sylentt-partners-rebuild@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+ ✓ Ready in 2.5s
+ ○ Compiling / ...
+ ⨯ external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+The target environment doesn't support dynamic import() syntax so it's not possible to use external type 'module' within a script
+
+Import trace for requested module:
+external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+./components/Chatbot.tsx
+ ⨯ external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+The target environment doesn't support dynamic import() syntax so it's not possible to use external type 'module' within a script
+
+Import trace for requested module:
+external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+./components/Chatbot.tsx
+ ⨯ external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+The target environment doesn't support dynamic import() syntax so it's not possible to use external type 'module' within a script
+
+Import trace for requested module:
+external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+./components/Chatbot.tsx
+ ⨯ external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+The target environment doesn't support dynamic import() syntax so it's not possible to use external type 'module' within a script
+
+Import trace for requested module:
+external "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js"
+./components/Chatbot.tsx
+ ✓ Compiled /services in 613ms (1473 modules)
+ ✓ Compiled in 1635ms (778 modules)
+ ✓ Compiled in 1174ms (826 modules)
+ ✓ Compiled in 486ms (778 modules)
