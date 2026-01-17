@@ -40,6 +40,11 @@ export default function Chatbot() {
             --chat--window--bottom: 5.5rem;
             --chat--window--z-index: 9995;
           }
+          @media (max-width: 640px) {
+            :root {
+              --chat--window--height: calc(100% - 6rem);
+            }
+          }
         `;
         document.head.appendChild(customStyle);
 
