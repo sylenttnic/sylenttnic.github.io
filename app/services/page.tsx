@@ -59,11 +59,11 @@ export default function Services() {
             src="/assets/img/masthead.webp"
             alt="Background"
             fill
-            className="object-cover"
+            className="object-cover opacity-40"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/80 to-transparent" />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-slate-950/60" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4">
@@ -72,10 +72,10 @@ export default function Services() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
               A Structured Path to Order.
             </h1>
-            <h2 className="text-xl md:text-2xl font-light mb-0 max-w-4xl mx-auto opacity-90 leading-relaxed">
+            <h2 className="text-xl md:text-2xl font-light mb-0 max-w-4xl mx-auto text-slate-300 leading-relaxed">
               We don't sell open-ended consulting hours that go nowhere. We deliver a specific operational transformation in four clear phases.
             </h2>
           </motion.div>
@@ -84,9 +84,9 @@ export default function Services() {
       </header>
 
       {/* Timeline Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-slate-950 relative">
         <div className="container mx-auto px-4 max-w-5xl">
-          <div className="relative border-l-4 border-gray-200 ml-4 md:ml-12 space-y-16">
+          <div className="relative border-l-4 border-white/10 ml-4 md:ml-12 space-y-16">
             {phases.map((phase, index) => (
               <motion.div
                 key={index}
@@ -97,22 +97,22 @@ export default function Services() {
                 className="relative pl-12 md:pl-16"
               >
                 {/* Icon */}
-                <div className="absolute -left-[1.35rem] top-0 bg-white border-4 border-primary rounded-full p-2 text-primary">
+                <div className="absolute -left-[1.35rem] top-0 bg-slate-900 border-4 border-primary rounded-full p-2 text-primary shadow-[0_0_15px_rgba(99,102,241,0.5)]">
                   <phase.icon className="w-6 h-6" />
                 </div>
 
-                <div className="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100">
-                  <h3 className="text-2xl font-bold mb-4 text-secondary">{phase.title}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-lg">
+                <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300">
+                  <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-primary transition-colors">{phase.title}</h3>
+                  <p className="text-slate-400 mb-6 leading-relaxed text-lg">
                     {phase.description}
                   </p>
 
-                  <div className="bg-white p-6 rounded-xl border border-gray-200">
+                  <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
                     <h4 className="font-bold text-primary mb-3 text-sm uppercase tracking-wider">The Outcome:</h4>
                     <ul className="space-y-3">
                       {phase.outcomes.map((outcome, i) => (
-                        <li key={i} className="flex items-start text-gray-700">
-                          <CheckCircle2 className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start text-slate-300">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-0.5" />
                           <span>{outcome}</span>
                         </li>
                       ))}
@@ -126,10 +126,11 @@ export default function Services() {
       </section>
 
       {/* Quiz Section */}
-      <section id="join" className="py-20 bg-gray-50 scroll-mt-20">
+      <section id="join" className="py-20 bg-slate-900/50 scroll-mt-20 border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Get Your Friction Score</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Get Your Friction Score</h2>
+            <p className="text-slate-400">Identify your operational bottlenecks and get a custom roadmap.</p>
           </div>
           <WizardForm />
         </div>

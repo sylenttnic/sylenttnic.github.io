@@ -56,9 +56,9 @@ export default function Chatbot() {
                 },
               },
               style: {
-                primaryColor: "#A50553",
-                secondaryColor: "#342e2e",
-                fontFamily: "var(--font-circular), sans-serif",
+                primaryColor: "#6366f1",
+                secondaryColor: "#0f172a",
+                fontFamily: "var(--font-jakarta), sans-serif",
               },
             });
           `;
@@ -87,23 +87,11 @@ export default function Chatbot() {
 
     // Monitor for chat window visibility changes or toggle clicks
     const focusInput = () => {
-      // Look for the textarea or input inside the n8n chat
-      // It might be inside a shadow root or iframe, but the script above seems to inject into #n8n-chat directly or shadow
-      // Based on standard n8n chat, it usually puts elements in shadow DOM or direct DOM.
-      // Since we can't easily pierce shadow DOM if it's closed, we assume open or check.
-
-      // We will try to find the input repeatedly for a short duration after toggle
       let attempts = 0;
       const interval = setInterval(() => {
         attempts++;
         if (attempts > 20) clearInterval(interval); // Stop after 2 seconds
 
-        const chatContainer = document.querySelector(".n8n-chat-window-container");
-        // Note: The class name depends on n8n implementation.
-        // Usually, the input has a specific class or tag.
-
-        // Try finding the input. n8n chat inputs are usually textareas or inputs.
-        // We'll search broadly in the document.
         const input = document.querySelector(".n8n-chat-input") as HTMLElement | null ||
                       document.querySelector("textarea[placeholder*='message']") as HTMLElement | null ||
                       document.querySelector("input[placeholder*='message']") as HTMLElement | null;

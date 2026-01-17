@@ -1,34 +1,12 @@
 import type { Metadata } from "next";
-import { Catamaran } from "next/font/google";
-import localFont from "next/font/local";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/Layout";
 
-const catamaran = Catamaran({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-catamaran",
-});
-
-const circular = localFont({
-  src: [
-    {
-      path: "../public/assets/fonts/CircularStd-Book.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/assets/fonts/CircularStd-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/assets/fonts/CircularStd-BookItalic.woff2",
-      weight: "400",
-      style: "italic",
-    },
-  ],
-  variable: "--font-circular",
+  variable: "--font-jakarta",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -56,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${circular.variable} ${catamaran.variable} font-sans antialiased`}
+        className={`${jakarta.variable} font-sans antialiased bg-slate-950 text-slate-300 selection:bg-primary/30 selection:text-white`}
       >
         <Layout>{children}</Layout>
       </body>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
@@ -153,7 +153,6 @@ export default function WizardForm() {
       ...leadData,
       calculatedFrictionScore: normalizedScore,
       frictionTier: frictionTier,
-      // Mapping to n8n standard fields
       firstname: leadData.leadName,
       emailAddress: leadData.leadEmail,
       jobTitle: leadData.leadJobTitle,
@@ -173,7 +172,6 @@ export default function WizardForm() {
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission failed:", error);
-      // Fallback to success view so user isn't blocked
       setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
@@ -191,7 +189,7 @@ export default function WizardForm() {
     if (resultTier === "HIGH_FRICTION") {
       headline = "Your Organization is Running on Heroics.";
       subheadline = "You are relying on individual effort to overcome systemic chaos. This is not scalable.";
-      colorClass = "text-red-600";
+      colorClass = "text-red-500";
     } else if (resultTier === "DISCONNECTED") {
       headline = "You Have Tools, But Not Flow.";
       subheadline = "Your teams are working hard, but friction in handoffs and visibility is slowing you down.";
@@ -199,11 +197,11 @@ export default function WizardForm() {
     } else {
       headline = "You Are Architected for Speed.";
       subheadline = "Your operations are mature. You are ready for advanced automation and scale.";
-      colorClass = "text-green-600";
+      colorClass = "text-emerald-500";
     }
 
     return (
-      <div className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto text-center">
+      <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto text-center glass">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -212,15 +210,15 @@ export default function WizardForm() {
           <div className={cn("text-6xl font-black mb-4", colorClass)}>
             {finalScore}/100
           </div>
-          <h3 className="text-2xl font-bold mb-4">{headline}</h3>
-          <p className="text-gray-600 mb-8 text-lg">{subheadline}</p>
+          <h3 className="text-2xl font-bold mb-4 text-white">{headline}</h3>
+          <p className="text-slate-300 mb-8 text-lg">{subheadline}</p>
 
-          <div className="w-full h-px bg-gray-200 my-6" />
+          <div className="w-full h-px bg-white/10 my-6" />
 
-          <h4 className="text-xl font-bold mb-2">Stop losing time to friction.</h4>
-          <p className="mb-6 text-gray-600">Let's discuss a roadmap to fix this.</p>
+          <h4 className="text-xl font-bold mb-2 text-white">Stop losing time to friction.</h4>
+          <p className="mb-6 text-slate-400">Let's discuss a roadmap to fix this.</p>
 
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-sm text-slate-500 mb-6">
             We've sent you an email to confirm contact information, please check your spam folder if you don't see it.
           </p>
 
@@ -228,7 +226,7 @@ export default function WizardForm() {
             href="https://calendly.com/nic-sylentt/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-primary-hover shadow-lg shadow-primary/25"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40"
           >
             Book your free discovery call
           </a>
@@ -240,58 +238,62 @@ export default function WizardForm() {
   // Render Lead Form
   if (currentStep >= questions.length) {
     return (
-      <div className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto">
+      <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto glass">
         <div className="mb-6">
-           <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+           <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
             <div className="h-full bg-primary w-full transition-all duration-500" />
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2">Your Friction Score is ready.</h3>
-        <p className="text-center text-gray-600 mb-8">Enter your details to reveal your score and get your customized report.</p>
+        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Friction Score is ready.</h3>
+        <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-gray-700">Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadName" className="text-sm font-medium text-slate-300">Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadName"
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
+                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-gray-700">Work Email <span className="text-red-500">*</span></label>
+              <label htmlFor="leadEmail" className="text-sm font-medium text-slate-300">Work Email <span className="text-red-500">*</span></label>
               <Input
                 id="leadEmail"
                 type="email"
                 required
                 value={leadData.leadEmail}
                 onChange={(e) => setLeadData({ ...leadData, leadEmail: e.target.value })}
+                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-gray-700">Job Title <span className="text-red-500">*</span></label>
+              <label htmlFor="leadJobTitle" className="text-sm font-medium text-slate-300">Job Title <span className="text-red-500">*</span></label>
               <Input
                 id="leadJobTitle"
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
+                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-gray-700">Company Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadCompany" className="text-sm font-medium text-slate-300">Company Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadCompany"
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
+                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
               />
             </div>
           </div>
 
-          <div className="text-xs text-gray-500 mt-2">
+          <div className="text-xs text-slate-500 mt-2">
             We do not sell your information to third parties, and you are not signing up for spam.
           </div>
 
@@ -300,7 +302,7 @@ export default function WizardForm() {
               type="submit"
               size="xl"
               disabled={isSubmitting}
-              className="w-full md:w-auto shadow-lg shadow-primary/25"
+              className="w-full md:w-auto shadow-lg shadow-primary/25 bg-primary hover:bg-indigo-400 text-white"
             >
               {isSubmitting ? (
                 <>
@@ -320,15 +322,15 @@ export default function WizardForm() {
   const currentQuestion = questions[currentStep];
 
   return (
-    <div className="bg-white p-6 md:p-10 rounded-2xl shadow-xl max-w-3xl mx-auto">
+    <div className="bg-slate-900 border border-white/10 p-6 md:p-10 rounded-2xl shadow-2xl max-w-3xl mx-auto glass">
       <div className="mb-8">
-        <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+        <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
           <div
-            className="h-full bg-primary transition-all duration-500 ease-out"
+            className="h-full bg-primary transition-all duration-500 ease-out shadow-[0_0_10px_rgba(99,102,241,0.5)]"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-right text-xs text-gray-400 mt-2">
+        <div className="text-right text-xs text-slate-400 mt-2">
           Question {currentStep + 1} of {questions.length}
         </div>
       </div>
@@ -341,7 +343,7 @@ export default function WizardForm() {
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-gray-900 leading-tight">
+          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white leading-tight">
             {currentQuestion.question}
           </h3>
 
@@ -349,14 +351,14 @@ export default function WizardForm() {
             {currentQuestion.options.map((option, index) => (
               <Card
                 key={option.value}
-                className="cursor-pointer transition-all hover:border-primary hover:shadow-md hover:bg-gray-50 group border-2 border-transparent bg-gray-50"
+                className="cursor-pointer transition-all border-2 border-transparent bg-slate-800/50 hover:bg-slate-800 hover:border-primary/50 group"
                 onClick={() => handleOptionSelect(currentQuestion.id, option.value, option.score)}
               >
                 <div className="p-4 md:p-6 flex items-center">
-                  <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-white border border-gray-300 flex items-center justify-center text-gray-500 font-bold group-hover:border-primary group-hover:text-primary transition-colors">
+                  <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-300 font-bold group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
                     {String.fromCharCode(65 + index)}
                   </div>
-                  <div className="flex-grow text-lg font-medium text-gray-700 group-hover:text-gray-900">
+                  <div className="flex-grow text-lg font-medium text-slate-300 group-hover:text-white transition-colors">
                     {option.text}
                   </div>
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
