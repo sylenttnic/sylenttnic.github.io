@@ -22,6 +22,16 @@ export default function Chatbot() {
         try {
           // Dynamic import of the n8n chat bundle
           // Using script tag injection to bypass Next.js webpack issues with external URL imports
+
+          // Inject CSS if not already present
+          const cssUrl = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
+          if (!document.querySelector(`link[href="${cssUrl}"]`)) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = cssUrl;
+            document.head.appendChild(link);
+          }
+
           const script = document.createElement("script");
           script.type = "module";
           script.innerHTML = `
