@@ -27,7 +27,7 @@ export default function ScrollIndicator() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/80 z-20"
+          className="absolute bottom-24 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/80 z-20"
         >
           <span className="text-sm font-medium tracking-wide uppercase">Scroll to learn more</span>
           <motion.div

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, AlertCircle, HelpCircle, EyeOff } from "lucide-react";
+import { ArrowRight, CheckCircle2, Ghost, DoorOpen, HelpCircle, EyeOff } from "lucide-react";
 import Image from "next/image";
 import WizardForm from "@/components/WizardForm";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
@@ -76,7 +76,7 @@ export default function Home() {
               className="p-8 rounded-2xl glass-card text-center group"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <ArrowRight className="w-8 h-8 rotate-45" />
+                <DoorOpen className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold mb-3">The Thousand Front Doors</h3>
               <p className="text-slate-400">Requests coming from Slack, email, texts - no central list.</p>
@@ -87,7 +87,7 @@ export default function Home() {
               className="p-8 rounded-2xl glass-card text-center group"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <AlertCircle className="w-8 h-8" />
+                <Ghost className="w-8 h-8" />
               </div>
               <h3 className="text-2xl font-bold mb-3">Zombie Projects</h3>
               <p className="text-slate-400">Initiatives that never die but never finish.</p>
