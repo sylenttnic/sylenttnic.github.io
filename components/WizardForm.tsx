@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Card } from "./ui/card";
 import { cn } from "@/lib/utils";
 
 // Types
@@ -245,7 +244,14 @@ export default function WizardForm() {
     return (
       <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto glass">
         <div className="mb-6">
-           <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+          <div
+            role="progressbar"
+            aria-valuenow={100}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label="Progress: Complete"
+            className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+          >
             <div className="h-full bg-primary w-full transition-all duration-500" />
           </div>
         </div>
@@ -329,13 +335,20 @@ export default function WizardForm() {
   return (
     <div className="bg-slate-900 border border-white/10 p-6 md:p-10 rounded-2xl shadow-2xl max-w-3xl mx-auto glass">
       <div className="mb-8">
-        <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(progress)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Question ${currentStep + 1} of ${questions.length}`}
+          className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+        >
           <div
             className="h-full bg-primary transition-all duration-500 ease-out shadow-[0_0_10px_rgba(99,102,241,0.5)]"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-right text-xs text-slate-400 mt-2">
+        <div className="text-right text-xs text-slate-400 mt-2" aria-hidden="true">
           Question {currentStep + 1} of {questions.length}
         </div>
       </div>
@@ -347,16 +360,26 @@ export default function WizardForm() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
+          role="group"
+          aria-labelledby="question-heading"
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white leading-tight">
+          <h3
+            id="question-heading"
+            className="text-2xl md:text-3xl font-bold mb-8 text-center text-white leading-tight"
+          >
             {currentQuestion.question}
           </h3>
 
           <div className="grid gap-4">
             {currentQuestion.options.map((option, index) => (
-              <Card
+              <button
                 key={option.value}
-                className="cursor-pointer transition-all border-2 border-transparent bg-slate-800/50 hover:bg-slate-800 hover:border-primary/50 group"
+                type="button"
+                className={cn(
+                  "w-full text-left rounded-xl shadow-sm",
+                  "cursor-pointer transition-all border-2 border-transparent bg-slate-800/50 hover:bg-slate-800 hover:border-primary/50 group",
+                  "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                )}
                 onClick={() => handleOptionSelect(currentQuestion.id, option.value, option.score)}
               >
                 <div className="p-4 md:p-6 flex items-center">
@@ -370,7 +393,7 @@ export default function WizardForm() {
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
-              </Card>
+              </button>
             ))}
           </div>
         </motion.div>

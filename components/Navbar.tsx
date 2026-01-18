@@ -79,13 +79,17 @@ export default function Navbar() {
           ref={mobileButtonRef}
           className="md:hidden text-white"
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
-          {isOpen ? <X /> : <Menu />}
+          {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile Nav */}
       <div
+        id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
           "md:hidden absolute top-full left-0 w-full glass border-t-0 border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
