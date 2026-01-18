@@ -184,9 +184,12 @@ export default function WizardForm() {
     console.log("Submitting payload to n8n:", payload);
 
     try {
-      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY;
-      if (!apiKey) {
-        console.warn("Missing website-api-key environment variable. Request may fail if key is required.");
+      // Use environment variable or fallback to the specific key for this deployment
+      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY || "e5362baf-c777-4d57-a609-6eaf1f9e87f6";
+
+      if (!process.env.NEXT_PUBLIC_WEBSITE_API_KEY) {
+        // Log if we are using the fallback, but don't warn as it's intended behavior now if env is missing
+        console.log("Using fallback website-api-key.");
       }
 
       const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
