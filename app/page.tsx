@@ -1,11 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Ghost, DoorOpen, HelpCircle, EyeOff } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import WizardForm from "@/components/WizardForm";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
-import { Button } from "@/components/ui/button";
+import MastheadContent from "@/components/home/MastheadContent";
+import InvisibleDragCards from "@/components/home/InvisibleDragCards";
 
 const testimonials = [
   "Sylentt Partners bring exceptional expertise and efficiency to every project. Their knowledge and skills are unmatched, making them an invaluable partner in fast-paced, high-tech environments. Truly an asset for any organization.",
@@ -31,28 +29,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 container mx-auto px-4 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-              Stop Running Your Business on Email, Spreadsheets, and &quot;I Think So.&quot;
-            </h1>
-            <h2 className="text-xl md:text-3xl font-light mb-10 max-w-4xl mx-auto text-slate-300 leading-relaxed">
-              Chaos isn&apos;t a strategy. We architect the systems that replace operational noise with clarity, using the tools you probably already own.
-            </h2>
-            <Button
-              size="xl"
-              className="rounded-full bg-primary hover:bg-primary-hover text-white shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] animate-pulse-slow border border-white/10"
-              onClick={() => document.getElementById("join")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Get Your Friction Score
-            </Button>
-            <p className="mt-6 text-slate-400 text-sm md:text-base font-medium">
-              Get your score to unlock a free 30-minute discovery call.
-            </p>
-          </motion.div>
+          <MastheadContent />
         </div>
         <ScrollIndicator />
       </header>
@@ -70,51 +47,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-2xl glass-card text-center group"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <DoorOpen className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3">The Thousand Front Doors</h3>
-              <p className="text-slate-400">Requests coming from Slack, email, texts - no central list.</p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-2xl glass-card text-center group"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <Ghost className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3">Zombie Projects</h3>
-              <p className="text-slate-400">Initiatives that never die but never finish.</p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-2xl glass-card text-center group"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <HelpCircle className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3">Decision Amnesia</h3>
-              <p className="text-slate-400">Decisions lost in chat threads, not recorded.</p>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              className="p-8 rounded-2xl glass-card text-center group"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 text-primary mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
-                <EyeOff className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3">The Visibility Gap</h3>
-              <p className="text-slate-400">No real-time view of roadmap vs. reality.</p>
-            </motion.div>
-          </div>
+          <InvisibleDragCards />
         </div>
       </section>
 
