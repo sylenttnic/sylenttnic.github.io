@@ -115,6 +115,7 @@ export default function WizardForm() {
     leadJobTitle: "",
     leadCompany: "",
   });
+  const [honeyPot, setHoneyPot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [resultTier, setResultTier] = useState<string>("");
@@ -134,6 +135,11 @@ export default function WizardForm() {
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Honeypot check
+    if (honeyPot) {
+      return;
+    }
 
     // Basic security validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -275,11 +281,26 @@ export default function WizardForm() {
         <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
+          {/* Honeypot field - hidden from users */}
+          <div className="hidden">
+            <label htmlFor="quiz-email-catch">Email Catch</label>
+            <input
+              type="email"
+              id="quiz-email-catch"
+              name="quiz-email-catch"
+              value={honeyPot}
+              onChange={(e) => setHoneyPot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="leadName" className="text-sm font-medium text-slate-300">Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadName"
+                name="leadName"
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
@@ -290,6 +311,7 @@ export default function WizardForm() {
               <label htmlFor="leadEmail" className="text-sm font-medium text-slate-300">Work Email <span className="text-red-500">*</span></label>
               <Input
                 id="leadEmail"
+                name="leadEmail"
                 type="email"
                 required
                 value={leadData.leadEmail}
@@ -301,6 +323,7 @@ export default function WizardForm() {
               <label htmlFor="leadJobTitle" className="text-sm font-medium text-slate-300">Job Title <span className="text-red-500">*</span></label>
               <Input
                 id="leadJobTitle"
+                name="leadJobTitle"
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
@@ -311,6 +334,7 @@ export default function WizardForm() {
               <label htmlFor="leadCompany" className="text-sm font-medium text-slate-300">Company Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadCompany"
+                name="leadCompany"
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
