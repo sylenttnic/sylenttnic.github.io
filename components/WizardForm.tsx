@@ -161,11 +161,16 @@ export default function WizardForm() {
     };
 
     try {
+      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY;
+      if (!apiKey) {
+        console.error("Missing website-api-key environment variable");
+      }
+
       await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "website-api-key": "3pPUzAwTUdGaUxXSTROVE10TjJWaE5U",
+          "website-api-key": apiKey || "",
         },
         body: JSON.stringify(payload),
       });
