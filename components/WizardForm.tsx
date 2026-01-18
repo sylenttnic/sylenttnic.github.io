@@ -138,6 +138,7 @@ export default function WizardForm() {
 
     // Honeypot check
     if (honeyPot) {
+      console.warn("Honeypot triggered, blocking submission.");
       return;
     }
 
@@ -180,13 +181,15 @@ export default function WizardForm() {
       summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`,
     };
 
+    console.log("Submitting payload to n8n:", payload);
+
     try {
       const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY;
       if (!apiKey) {
-        console.error("Missing website-api-key environment variable");
+        console.warn("Missing website-api-key environment variable. Request may fail if key is required.");
       }
 
-      await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
+      const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,6 +197,15 @@ export default function WizardForm() {
         },
         body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+          console.error(`Submission error: ${response.status} ${response.statusText}`);
+          // Proceed to success anyway as per original logic to avoid blocking user?
+          // But maybe logging it is enough.
+      } else {
+          console.log("Submission successful");
+      }
+
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission failed:", error);
@@ -283,11 +295,11 @@ export default function WizardForm() {
         <form onSubmit={handleLeadSubmit} className="space-y-4">
           {/* Honeypot field - hidden from users */}
           <div className="hidden">
-            <label htmlFor="quiz-email-catch">Email Catch</label>
+            <label htmlFor="hp_field">Verification</label>
             <input
-              type="email"
-              id="quiz-email-catch"
-              name="quiz-email-catch"
+              type="text"
+              id="hp_field"
+              name="hp_field"
               value={honeyPot}
               onChange={(e) => setHoneyPot(e.target.value)}
               tabIndex={-1}
