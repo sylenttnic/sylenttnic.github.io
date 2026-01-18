@@ -252,12 +252,16 @@ function processSubmission(leadData) {
     };
 
     // AJAX Submission
+    // Note: The API key should be provided in a config file or environment variable if this legacy site is deployed.
+    // For now, we default to an empty string to avoid hardcoding secrets in the repo.
+    const apiKey = (window.config && window.config.websiteApiKey) || '';
+
     $.ajax({
         url: "https://hnet.sylentt.com/webhook/submit-ticket",
         type: "POST",
         contentType: 'application/json',
         headers: {
-            'website-api-key': '3pPUzAwTUdGaUxXSTROVE10TjJWaE5U'
+            'website-api-key': apiKey
         },
         data: JSON.stringify(payload),
         success: function(response) {
