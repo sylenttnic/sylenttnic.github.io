@@ -119,6 +119,7 @@ export default function WizardForm() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [resultTier, setResultTier] = useState<string>("");
   const [finalScore, setFinalScore] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   const handleOptionSelect = (questionId: string, value: string, score: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -132,6 +133,20 @@ export default function WizardForm() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
+
+    // Basic security validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(leadData.leadEmail)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (leadData.leadName.length < 2) {
+      setError("Please enter a valid name.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const normalizedScore = Math.round((totalScore / 80) * 100);
@@ -307,6 +322,12 @@ export default function WizardForm() {
           <div className="text-xs text-slate-500 mt-2">
             We do not sell your information to third parties, and you are not signing up for spam.
           </div>
+
+          {error && (
+            <div className="text-red-500 text-sm text-center font-medium bg-red-500/10 p-2 rounded">
+              {error}
+            </div>
+          )}
 
           <div className="pt-4 flex justify-center">
             <Button
