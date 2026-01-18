@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-white/5 py-4 text-slate-400">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="mb-2 relative w-[36rem] h-48 opacity-80 hover:opacity-100 transition-opacity">
+        <div className="mb-2 relative w-full max-w-[36rem] h-48 opacity-80 hover:opacity-100 transition-opacity">
           <Image
             src={logo}
             alt="Sylentt Partners Logo"
