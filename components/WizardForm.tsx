@@ -129,7 +129,7 @@ export default function WizardForm() {
     // Add a small delay for better UX
     setTimeout(() => {
       setCurrentStep((prev) => prev + 1);
-    }, 300);
+    }, 150);
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
