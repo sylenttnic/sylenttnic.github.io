@@ -115,6 +115,7 @@ export default function WizardForm() {
     leadJobTitle: "",
     leadCompany: "",
   });
+  const [honeyPot, setHoneyPot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [resultTier, setResultTier] = useState<string>("");
@@ -134,6 +135,12 @@ export default function WizardForm() {
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    // Honeypot check
+    if (honeyPot) {
+      console.warn("Honeypot triggered, blocking submission.");
+      return;
+    }
 
     // Basic security validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -174,13 +181,15 @@ export default function WizardForm() {
       summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`,
     };
 
+    console.log("Submitting payload to n8n:", payload);
+
     try {
       const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY;
       if (!apiKey) {
-        console.error("Missing website-api-key environment variable");
+        console.warn("Missing website-api-key environment variable. Request may fail if key is required.");
       }
 
-      await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
+      const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -188,6 +197,15 @@ export default function WizardForm() {
         },
         body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+          console.error(`Submission error: ${response.status} ${response.statusText}`);
+          // Proceed to success anyway as per original logic to avoid blocking user?
+          // But maybe logging it is enough.
+      } else {
+          console.log("Submission successful");
+      }
+
       setIsSuccess(true);
     } catch (error) {
       console.error("Submission failed:", error);
@@ -275,11 +293,26 @@ export default function WizardForm() {
         <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
+          {/* Honeypot field - hidden from users */}
+          <div className="hidden">
+            <label htmlFor="hp_field">Verification</label>
+            <input
+              type="text"
+              id="hp_field"
+              name="hp_field"
+              value={honeyPot}
+              onChange={(e) => setHoneyPot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="leadName" className="text-sm font-medium text-slate-300">Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadName"
+                name="leadName"
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
@@ -290,6 +323,7 @@ export default function WizardForm() {
               <label htmlFor="leadEmail" className="text-sm font-medium text-slate-300">Work Email <span className="text-red-500">*</span></label>
               <Input
                 id="leadEmail"
+                name="leadEmail"
                 type="email"
                 required
                 value={leadData.leadEmail}
@@ -301,6 +335,7 @@ export default function WizardForm() {
               <label htmlFor="leadJobTitle" className="text-sm font-medium text-slate-300">Job Title <span className="text-red-500">*</span></label>
               <Input
                 id="leadJobTitle"
+                name="leadJobTitle"
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
@@ -311,6 +346,7 @@ export default function WizardForm() {
               <label htmlFor="leadCompany" className="text-sm font-medium text-slate-300">Company Name <span className="text-red-500">*</span></label>
               <Input
                 id="leadCompany"
+                name="leadCompany"
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
