@@ -1,15 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function MastheadContent() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
+    <div className="animate-fade-in-up">
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
         Stop Running Your Business on Email, Spreadsheets, and &quot;I Think So.&quot;
       </h1>
@@ -26,6 +21,6 @@ export default function MastheadContent() {
       <p className="mt-6 text-slate-400 text-sm md:text-base font-medium">
         Get your score to unlock a free 30-minute discovery call.
       </p>
-    </motion.div>
+    </div>
   );
 }
