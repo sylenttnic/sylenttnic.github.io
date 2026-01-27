@@ -12,9 +12,44 @@ const testimonials = [
   "Their ability to standardize deployments, debug issues, and enhance support systems has been invaluable. Their focus on creating and maintaining detailed documentation has improved clarity and collaboration across the board.",
 ];
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does Sylentt Partners improve team collaboration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use proprietary AI audits to identify communication silos in your Atlassian ecosystem, then deploy unified workflows to bridge the gap between departments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you only work with IT teams?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. While we are technical experts, our focus is on Organizational Unity. We help Operations, HR, and Sales teams align their processes with IT."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 'Knowledge Refinery'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is our proprietary process for turning static, messy documentation into active, intelligent agents that answer employee questions instantly."
+      }
+    }
+  ]
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Masthead */}
       <header className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
