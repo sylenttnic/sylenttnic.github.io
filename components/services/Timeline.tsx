@@ -1,31 +1,43 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, ScanSearch, Sparkles, Bot } from "lucide-react";
+import { CheckCircle2, Stethoscope, Map, Hammer, Users } from "lucide-react";
 
 const phases = [
   {
-    icon: ScanSearch,
-    title: "Step 1: The Intelligent Audit (Discovery)",
-    description: "Instead of manual interviews, we start by scanning your public and private documentation.",
+    icon: Stethoscope,
+    title: "Phase 1: The Diagnosis",
+    description: "You can’t fix what you can’t see. We perform a 360-Degree Health Check of your current tools and processes, combining human insight with AI analysis to identify bottlenecks and 'dark data'.",
     outcomes: [
-      "We instantly identify dead links, conflicting rules, and 'dark data' before we even start the project.",
+      "Friction Report identifying wasted time.",
+      "Prioritized roadmap to fix the issues.",
     ],
   },
   {
-    icon: Sparkles,
-    title: "Step 2: The Refinery (Clean Up)",
-    description: "We use automated agents to map legacy systems to modern standards.",
+    icon: Map,
+    title: "Phase 2: The Blueprint",
+    description: "Software fails when it doesn't match the way you work. We collaborate with your team to design workflows that map exactly how work flows from Idea to Done.",
     outcomes: [
-      "We fix the mess in your Jira/Confluence instance automatically, turning unstructured data into clean, usable knowledge.",
+      "Visual process maps clarifying ownership.",
+      "Governance policies to prevent system chaos.",
     ],
   },
   {
-    icon: Bot,
-    title: "Step 3: Implementation & Activation",
-    description: "We deploy your customized Atlassian environment.",
+    icon: Hammer,
+    title: "Phase 3: The Build",
+    description: "We turn the blueprint into reality. We configure your environment to enforce your business rules, using our custom RAG models to expedite data cleaning and migration.",
     outcomes: [
-      "We don't just leave you with static pages; we deliver secure, internal \"Expert Agents\" that your team can chat with to get answers instantly.",
+      "Automated workflows that chase approvals.",
+      "Clean, structured data from legacy chaos.",
+    ],
+  },
+  {
+    icon: Users,
+    title: "Phase 4: The Handoff",
+    description: "We ensure your team is self-sufficient. We deliver comprehensive training and secure 'Expert Agents' that your team can chat with for instant support.",
+    outcomes: [
+      "Role-based training for your team.",
+      "Custom AI assistants for ongoing support.",
     ],
   },
 ];
