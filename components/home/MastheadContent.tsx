@@ -16,10 +16,10 @@ export default function MastheadContent() {
         className="rounded-full bg-primary hover:bg-primary-hover text-white shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] animate-pulse-slow border border-white/10"
         onClick={() => document.getElementById("join")?.scrollIntoView({ behavior: "smooth" })}
       >
-        Get Your Friction Score
+        Schedule a Free 30-min Discovery & Documentation Audit
       </Button>
       <p className="mt-6 text-slate-400 text-sm md:text-base font-medium">
-        Get your score to unlock a free 30-minute discovery call.
+        Get your audit results to unlock a free 30-minute discovery call.
       </p>
     </div>
   );
