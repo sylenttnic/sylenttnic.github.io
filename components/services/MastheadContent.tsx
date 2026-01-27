@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export default function MastheadContent() {
   return (
@@ -10,11 +11,21 @@ export default function MastheadContent() {
       transition={{ duration: 0.8 }}
     >
       <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-        A Structured Path to Order.
+        Bridge the Gap Between Strategy and Execution.
       </h1>
-      <h2 className="text-xl md:text-2xl font-light mb-0 max-w-4xl mx-auto text-slate-300 leading-relaxed">
-        We don&apos;t sell open-ended consulting hours that go nowhere. We deliver a specific operational transformation in four clear phases.
+      <h2 className="text-xl md:text-2xl font-light mb-10 max-w-4xl mx-auto text-slate-300 leading-relaxed">
+        Your teams are doing great work, but they are doing it in the dark. We use intelligent agents to align your entire organization around a single source of truth.
       </h2>
+      <Button
+        size="xl"
+        className="rounded-full bg-primary hover:bg-primary-hover text-white shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] animate-pulse-slow border border-white/10"
+        onClick={() => document.getElementById("join")?.scrollIntoView({ behavior: "smooth" })}
+      >
+        Unify Your Teams
+      </Button>
+      <p className="mt-6 text-slate-400 text-sm md:text-base font-medium">
+        Includes a free 30-min Documentation Audit Session.
+      </p>
     </motion.div>
   );
 }

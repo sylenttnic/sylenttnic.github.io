@@ -1,44 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Stethoscope, Map, Hammer, Users } from "lucide-react";
+import { Stethoscope, Hammer, Users } from "lucide-react";
 
 const phases = [
   {
     icon: Stethoscope,
-    title: "Phase 1: The Diagnosis",
-    description: "You can’t fix what you can’t see. We perform a 360-Degree Health Check of your current tools and processes, combining human insight with AI analysis to identify bottlenecks and 'dark data'.",
-    outcomes: [
-      "Friction Report identifying wasted time.",
-      "Prioritized roadmap to fix the issues.",
-    ],
-  },
-  {
-    icon: Map,
-    title: "Phase 2: The Blueprint",
-    description: "Software fails when it doesn't match the way you work. We collaborate with your team to design workflows that map exactly how work flows from Idea to Done.",
-    outcomes: [
-      "Visual process maps clarifying ownership.",
-      "Governance policies to prevent system chaos.",
-    ],
+    title: "Step 1: The Silo Detective (Audit)",
+    problem: "Departments (HR, Sales, Tech) are working in disconnected bubbles. Information is trapped in private chats or lost files.",
+    solution: "We scan your entire ecosystem (Jira, Confluence, Slack) to map how your teams actually communicate versus how they should communicate. We identify the bottlenecks blocking collaboration.",
   },
   {
     icon: Hammer,
-    title: "Phase 3: The Build",
-    description: "We turn the blueprint into reality. We configure your environment to enforce your business rules, using our custom RAG models to expedite data cleaning and migration.",
-    outcomes: [
-      "Automated workflows that chase approvals.",
-      "Clean, structured data from legacy chaos.",
-    ],
+    title: "Step 2: Workflow Harmonization (Refinery)",
+    problem: "\"Why is this process so hard?\" Friction creates burnout. Inconsistent processes confuse employees and slow down delivery.",
+    solution: "We use AI to standardize your workflows. We turn messy, ad-hoc procedures into streamlined, automated pathways that guide your teams effortlessly from \"To-Do\" to \"Done.\"",
   },
   {
     icon: Users,
-    title: "Phase 4: The Handoff",
-    description: "We ensure your team is self-sufficient. We deliver comprehensive training and secure 'Expert Agents' that your team can chat with for instant support.",
-    outcomes: [
-      "Role-based training for your team.",
-      "Custom AI assistants for ongoing support.",
-    ],
+    title: "Step 3: The Unified Knowledge Base (Activation)",
+    problem: "\"I didn't know we had a policy for that.\"",
+    solution: "We create a single source of truth. We deploy intelligent agents that bridge the gap between teams, allowing a Salesperson to get an answer from Engineering instantly, without chasing people down.",
   },
 ];
 
@@ -60,21 +42,22 @@ export default function Timeline() {
           </div>
 
           <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-primary transition-colors">{phase.title}</h3>
-            <p className="text-slate-400 mb-6 leading-relaxed text-lg">
-              {phase.description}
-            </p>
+            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors">{phase.title}</h3>
 
-            <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
-              <h4 className="font-bold text-primary mb-3 text-sm uppercase tracking-wider">The Outcome:</h4>
-              <ul className="space-y-3">
-                {phase.outcomes.map((outcome, i) => (
-                  <li key={i} className="flex items-start text-slate-300">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0 mt-0.5" />
-                    <span>{outcome}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-bold text-slate-300 mb-2 text-sm uppercase tracking-wider">The Problem:</h4>
+                <p className="text-slate-400 leading-relaxed text-lg">
+                  {phase.problem}
+                </p>
+              </div>
+
+              <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
+                <h4 className="font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
+                <p className="text-slate-300 leading-relaxed">
+                  {phase.solution}
+                </p>
+              </div>
             </div>
           </div>
         </motion.div>
