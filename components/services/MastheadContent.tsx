@@ -13,7 +13,7 @@ export default function MastheadContent() {
         A Structured Path to Order.
       </h1>
       <h2 className="text-xl md:text-2xl font-light mb-0 max-w-4xl mx-auto text-slate-300 leading-relaxed">
-        We don&apos;t sell open-ended consulting hours that go nowhere. We deliver a specific operational transformation in three clear phases.
+        We don&apos;t sell open-ended consulting hours that go nowhere. We deliver a specific operational transformation in four clear phases.
       </h2>
     </motion.div>
   );
