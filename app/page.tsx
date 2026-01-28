@@ -51,7 +51,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Masthead */}
-      <header className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden pt-20">
+      <header className="relative min-h-[100dvh] flex items-center justify-center text-center text-white overflow-hidden pt-20 pb-32">
         <div className="absolute inset-0 z-0">
           {/* Using picture element for manual responsive images since next/image optimization is disabled in next.config.mjs */}
           <picture>
@@ -68,7 +68,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-slate-950/60" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-20">
+        <div className="relative z-10 container mx-auto px-4">
           <MastheadContent />
         </div>
         <ScrollIndicator />
