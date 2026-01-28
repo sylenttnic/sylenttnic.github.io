@@ -1,6 +1,5 @@
 import WizardForm from "@/components/WizardForm";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
-import Image from "next/image";
 import MastheadContent from "@/components/services/MastheadContent";
 import Timeline from "@/components/services/Timeline";
 
@@ -8,15 +7,18 @@ export default function Services() {
   return (
     <>
       {/* Masthead */}
-      <header className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden pt-20">
+      <header className="relative min-h-[100dvh] flex items-center justify-center text-center text-white overflow-hidden pt-20 pb-32">
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/assets/img/masthead.webp"
-            alt="Background"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
+          <picture>
+            <source media="(max-width: 640px)" srcSet="/assets/img/masthead-small.webp" />
+            <source media="(max-width: 1024px)" srcSet="/assets/img/masthead-medium.webp" />
+            <img
+              src="/assets/img/masthead.webp"
+              alt="Background"
+              className="absolute inset-0 w-full h-full object-cover opacity-40"
+              {...{ fetchpriority: "high" }}
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
           <div className="absolute inset-0 bg-slate-950/60" />
         </div>
