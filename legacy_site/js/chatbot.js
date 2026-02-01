@@ -6,7 +6,7 @@ const sessionId = localStorage.getItem('n8nChatSessionId') || (crypto.randomUUID
 localStorage.setItem('n8nChatSessionId', sessionId);
 
 const chatOptions = {
-  webhookUrl: 'https://hnet.sylentt.com/webhook/af00e28f-7b00-4b2a-9e12-123456789abc/chat',
+  webhookUrl: 'https://hnet.sylentt.com/webhook/61506b10-6711-4962-8025-43ccf7314403/chat',
   mode: 'window',
   target: '#n8n-chat',
   chatInputKey: 'chatInput',
