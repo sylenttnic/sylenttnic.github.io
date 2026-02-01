@@ -62,6 +62,7 @@ export default function Chatbot() {
               loadPreviousSession: true,
               metadata: {
                 sessionId: "${sessionId}",
+                sourceSite: "sylentt.com",
               },
               showWelcomeScreen: true,
               defaultLanguage: "en",
