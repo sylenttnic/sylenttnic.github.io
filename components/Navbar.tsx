@@ -52,7 +52,7 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "glass shadow-lg shadow-black/5" : "bg-transparent py-6"
+        scrolled ? "glass border-0 shadow-lg shadow-black/5" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
