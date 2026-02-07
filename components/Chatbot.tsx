@@ -66,18 +66,23 @@ export default function Chatbot() {
             /* Input Area */
             --chat--input--background: #020617;
             --chat--input--text-color: var(--chat--color-white);
-            --chat--input--border: 1px solid var(--chat--color-slate-700);
+            --chat--input--border: 1px solid var(--chat--color-blue-500);
             --chat--input--border-radius: 8px;
 
             /* Font */
             --chat--font-family: var(--font-jakarta), sans-serif;
           }
 
+          /* Header */
+          .chat-header {
+            border-bottom: 1px solid var(--chat--color-slate-700) !important;
+          }
+
           /* Header Text */
           .chat-header h1 {
-            font-family: var(--chat--font-family);
+            font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
           }
 
           /* Close Button */
@@ -86,6 +91,13 @@ export default function Chatbot() {
           }
           .chat-close-button:hover {
              color: var(--chat--color-blue-500) !important;
+          }
+
+          /* Input Field */
+          .chat-inputs textarea {
+             resize: none !important;
+             overflow: hidden !important;
+             border-radius: 8px !important;
           }
 
           /* Input Field Focus */
@@ -103,9 +115,9 @@ export default function Chatbot() {
           .chat-input-send-button {
              background-color: var(--chat--color-slate-800) !important;
              border-radius: 8px !important;
-             margin-left: 8px;
-             width: 40px !important;
-             height: 40px !important;
+             margin-left: 12px !important;
+             width: 48px !important;
+             height: 48px !important;
              color: var(--chat--color-white) !important;
           }
           .chat-input-send-button:hover {
@@ -153,7 +165,7 @@ export default function Chatbot() {
               initialMessages: ["Hi there! 👋", "How can I help you today?"],
               i18n: {
                 en: {
-                  title: "Assistant",
+                  title: "Let's chat.",
                   subtitle: "",
                 },
               },
