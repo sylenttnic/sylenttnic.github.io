@@ -39,7 +39,91 @@ export default function Chatbot() {
           :root {
             --chat--window--bottom: 5.5rem;
             --chat--window--z-index: 9995;
+
+            /* Dark Theme Overrides */
+            --chat--color-slate-900: #0f172a;
+            --chat--color-slate-800: #1e293b;
+            --chat--color-slate-700: #334155;
+            --chat--color-slate-400: #94a3b8;
+            --chat--color-blue-500: #3b82f6;
+            --chat--color-white: #ffffff;
+
+            /* Window */
+            --chat--window--border-radius: 12px;
+            --chat--body--background: var(--chat--color-slate-900);
+            --chat--footer--background: var(--chat--color-slate-900);
+
+            /* Header */
+            --chat--header--background: var(--chat--color-slate-900);
+            --chat--header--color: var(--chat--color-white);
+
+            /* Messages */
+            --chat--message--bot--background: var(--chat--color-slate-800);
+            --chat--message--bot--color: var(--chat--color-white);
+            --chat--message--user--background: var(--chat--color-blue-500);
+            --chat--message--user--color: var(--chat--color-white);
+
+            /* Input Area */
+            --chat--input--background: #020617;
+            --chat--input--text-color: var(--chat--color-white);
+            --chat--input--border: 1px solid var(--chat--color-slate-700);
+            --chat--input--border-radius: 8px;
+
+            /* Font */
+            --chat--font-family: var(--font-jakarta), sans-serif;
           }
+
+          /* Header Text */
+          .chat-header h1 {
+            font-family: var(--chat--font-family);
+            font-weight: 700;
+            font-size: 1.25rem;
+          }
+
+          /* Close Button */
+          .chat-close-button {
+             color: var(--chat--color-white) !important;
+          }
+          .chat-close-button:hover {
+             color: var(--chat--color-blue-500) !important;
+          }
+
+          /* Input Field Focus */
+          .chat-inputs textarea:focus {
+             border-color: var(--chat--color-blue-500) !important;
+             outline: none !important;
+          }
+
+          /* Placeholder */
+          .chat-inputs textarea::placeholder {
+             color: var(--chat--color-slate-400) !important;
+          }
+
+          /* Send Button */
+          .chat-input-send-button {
+             background-color: var(--chat--color-slate-800) !important;
+             border-radius: 8px !important;
+             margin-left: 8px;
+             width: 40px !important;
+             height: 40px !important;
+             color: var(--chat--color-white) !important;
+          }
+          .chat-input-send-button:hover {
+             background-color: var(--chat--color-slate-700) !important;
+          }
+
+          /* Scrollbar */
+          .chat-body::-webkit-scrollbar {
+            width: 8px;
+          }
+          .chat-body::-webkit-scrollbar-track {
+            background: var(--chat--color-slate-900);
+          }
+          .chat-body::-webkit-scrollbar-thumb {
+            background: var(--chat--color-slate-700);
+            border-radius: 4px;
+          }
+
           @media (max-width: 640px) {
             :root {
               --chat--window--height: calc(100% - 6rem);
