@@ -1,30 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Stethoscope, Hammer, Users } from "lucide-react";
+import { Search, Map, Network, BookOpen } from "lucide-react";
 
 const phases = [
   {
-    icon: Stethoscope,
-    title: "Step 1: The Silo Detective (Audit)",
-    problem: "Departments (HR, Sales, Tech) are working in disconnected bubbles. Information is trapped in private chats or lost files.",
-    solution: "We scan your entire ecosystem (Jira, Confluence, Slack) to map how your teams actually communicate versus how they should communicate. We identify the bottlenecks blocking collaboration.",
+    icon: Search,
+    title: "Phase 1: The Audit (Discovery)",
+    problem: "Data is trapped in silos. Humans are acting as \"copy-paste robots,\" moving information from one app to another manually.",
+    solution: "We identify every manual touchpoint in your operations. We find the hidden inefficiencies where your team is losing hours to repetitive tasks.",
   },
   {
-    icon: Hammer,
-    title: "Step 2: Workflow Harmonization (Refinery)",
-    problem: "\"Why is this process so hard?\" Friction creates burnout. Inconsistent processes confuse employees and slow down delivery.",
-    solution: "We use AI to standardize your workflows. We turn messy, ad-hoc procedures into streamlined, automated pathways that guide your teams effortlessly from \"To-Do\" to \"Done.\"",
+    icon: Map,
+    title: "Phase 2: The Blueprint (Logic Design)",
+    problem: "Automating a bad process just makes bad results faster. Jumping into code without a plan leads to fragile systems.",
+    solution: "We map the perfect flow before writing a single line of logic. We design a visual architecture that ensures scalability and error handling.",
   },
   {
-    icon: Users,
-    title: "Step 3: The Unified Knowledge Base (Activation)",
-    problem: "\"I didn't know we had a policy for that.\"",
-    solution: "We create a single source of truth. We deploy intelligent agents that bridge the gap between teams, allowing a Salesperson to get an answer from Engineering instantly, without chasing people down.",
+    icon: Network,
+    title: "Phase 3: The Build (Integration)",
+    problem: "Your apps (CRM, Email, PM tools) don't talk to each other. Information is lost in translation or requires manual updates.",
+    solution: "We connect your disparate apps into a unified nervous system. We build robust integrations using n8n that handle errors and edge cases automatically.",
+  },
+  {
+    icon: BookOpen,
+    title: "Phase 4: The Handoff (Independence)",
+    problem: "You don't want to be dependent on an external agency forever. \"Black box\" solutions leave you helpless when things change.",
+    solution: "We hand over a documented, visual system that you own. We provide training and documentation so your team can manage and evolve the automation.",
   },
 ];
 
-export default function Timeline() {
+export default function AutomationTimeline() {
   return (
     <div className="relative border-l-4 border-white/10 ml-4 md:ml-12 space-y-16">
       {phases.map((phase, index) => (
