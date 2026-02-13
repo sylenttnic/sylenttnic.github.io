@@ -24,7 +24,7 @@ export default function Navbar() {
 
   // Close menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (
         isOpen &&
         mobileMenuRef.current &&
@@ -37,8 +37,10 @@ export default function Navbar() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -92,7 +94,7 @@ export default function Navbar() {
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute top-full left-0 w-full glass border-t-0 border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
+          "md:hidden absolute top-full left-0 w-full bg-slate-950/95 backdrop-blur-md border-t-0 border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         )}
       >

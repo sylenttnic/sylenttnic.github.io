@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Layers, Zap } from "lucide-react";
-import ScrollIndicator from "@/components/ui/ScrollIndicator";
 
 export default function ServicesHub() {
   return (
