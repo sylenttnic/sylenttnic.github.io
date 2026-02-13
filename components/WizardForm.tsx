@@ -227,15 +227,15 @@ export default function WizardForm() {
     let colorClass = "";
 
     if (resultTier === "HIGH_FRICTION") {
-      headline = "Your Organization is Running on Heroics.";
+      headline = "Your Organization is Running on Heroics";
       subheadline = "You are relying on individual effort to overcome systemic chaos. This is not scalable.";
       colorClass = "text-red-500";
     } else if (resultTier === "DISCONNECTED") {
-      headline = "You Have Tools, But Not Flow.";
+      headline = "You Have Tools, But Not Flow";
       subheadline = "Your teams are working hard, but friction in handoffs and visibility is slowing you down.";
       colorClass = "text-amber-500";
     } else {
-      headline = "You Are Architected for Speed.";
+      headline = "You Are Architected for Speed";
       subheadline = "Your operations are mature. You are ready for advanced automation and scale.";
       colorClass = "text-emerald-500";
     }
@@ -255,7 +255,7 @@ export default function WizardForm() {
 
           <div className="w-full h-px bg-white/10 my-6" />
 
-          <h4 className="text-xl font-bold mb-2 text-white">Stop losing time to friction.</h4>
+          <h4 className="text-xl font-bold mb-2 text-white">Stop losing time to friction</h4>
           <p className="mb-6 text-slate-400">Let&apos;s discuss a roadmap to fix this.</p>
 
           <p className="text-sm text-slate-500 mb-6">
@@ -292,7 +292,7 @@ export default function WizardForm() {
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Friction Score is ready.</h3>
+        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Friction Score is ready</h3>
         <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">

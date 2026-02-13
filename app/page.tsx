@@ -98,7 +98,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">We Turn &quot;Chaos&quot; into a &quot;System of Work.&quot;</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">We Turn &quot;Chaos&quot; into a &quot;System of Work&quot;</h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg">
                 We don&apos;t just implement Jira and Confluence. We use proprietary AI agents to clean, audit, and activate them.
               </p>

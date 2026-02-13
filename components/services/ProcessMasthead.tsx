@@ -11,7 +11,7 @@ export default function ProcessMasthead() {
       transition={{ duration: 0.8 }}
     >
       <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-        Bridge the Gap Between Strategy and Execution.
+        Bridge the Gap Between Strategy and Execution
       </h1>
       <h2 className="text-lg md:text-3xl font-light mb-6 md:mb-10 max-w-4xl mx-auto text-slate-300 leading-relaxed">
         Your teams are doing great work, but they are doing it in the dark. We use intelligent agents to align your entire organization around a single source of truth.

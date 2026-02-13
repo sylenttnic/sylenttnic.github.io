@@ -201,7 +201,7 @@ export default function CostCalculator() {
           <div className="text-5xl md:text-6xl font-black mb-6 text-red-500">
             ${calculatedBurnRate.toLocaleString()}
           </div>
-          <h3 className="text-2xl font-bold mb-4 text-white">This is the cost of the &quot;Invisible Drag.&quot;</h3>
+          <h3 className="text-2xl font-bold mb-4 text-white">This is the cost of the &quot;Invisible Drag&quot;</h3>
           <p className="text-slate-300 mb-8 text-lg">
             Imagine what you could do if you reinvested that capital into growth instead of maintenance.
           </p>
@@ -241,7 +241,7 @@ export default function CostCalculator() {
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Hidden Cost Report is ready.</h3>
+        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Hidden Cost Report is ready</h3>
         <p className="text-center text-slate-400 mb-8">Enter your details to reveal your estimated operational burn rate.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
