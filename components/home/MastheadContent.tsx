@@ -6,7 +6,7 @@ export default function MastheadContent() {
   return (
     <div className="animate-fade-in-up">
       <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
-        Stop Running Your Business on Email, Spreadsheets, and &quot;I Think So.&quot;
+        Stop Running Your Business on Email, Spreadsheets, and &quot;I Think So&quot;
       </h1>
       <h2 className="text-lg md:text-3xl font-light mb-6 md:mb-10 max-w-4xl mx-auto text-slate-300 leading-relaxed">
         Chaos isn&apos;t a strategy. We architect the systems that replace operational noise with clarity, using the tools you probably already own.

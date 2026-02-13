@@ -37,7 +37,7 @@ export default function AutomatedOperations() {
       </section>
 
       {/* Calculator Section */}
-      <section id="cost-calculator" className="py-20 bg-slate-900/50 scroll-mt-20 border-t border-white/5">
+      <section id="join" className="py-20 bg-slate-900/50 scroll-mt-20 border-t border-white/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Calculate Your Operational Burn Rate</h2>
