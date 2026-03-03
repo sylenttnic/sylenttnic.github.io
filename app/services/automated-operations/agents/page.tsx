@@ -392,7 +392,7 @@ export default function AgentsPage() {
         </div>
       </div>
 
-      <div className="connector reveal"><div className="connector-line" style={{ height: '16px' }}></div></div>
+      <div className="connector reveal"><div className="connector-line" style={{ height: '32px' }}></div></div>
 
       {/* BACKGROUND OPERATIONS */}
       <div className="lane reveal">
@@ -439,7 +439,7 @@ export default function AgentsPage() {
         </div>
       </div>
 
-      <div style={{ height: '24px' }}></div>
+      <div style={{ height: '48px' }}></div>
 
       {/* FOUNDATION */}
       <div className="lane reveal">
@@ -520,7 +520,7 @@ export default function AgentsPage() {
         </div>
       </div>
 
-      <div style={{ height: '16px' }}></div>
+      <div style={{ height: '48px' }}></div>
 
       {/* AUTOMATION */}
       <div className="lane reveal">
@@ -560,7 +560,7 @@ export default function AgentsPage() {
         </div>
       </div>
 
-      <div style={{ height: '16px' }}></div>
+      <div style={{ height: '48px' }}></div>
 
       {/* SAFETY NET */}
       <div className="lane reveal">

@@ -37,7 +37,7 @@
 
 /* ── HEADER ── */
 .agents-header {
-  margin-bottom: 48px;
+  margin-bottom: 64px;
   padding-bottom: 28px;
   border-bottom: 2px solid var(--border);
   position: relative;
@@ -98,7 +98,7 @@
 /* ── LANE (horizontal grouping container) ── */
 .lane {
   position: relative;
-  margin-bottom: 0;
+  margin-bottom: 32px;
   animation: fadeUp 0.5s ease-out both;
 }
 
@@ -159,14 +159,14 @@
   background: rgba(15,18,25,0.5);
   border: 2px solid var(--border);
   border-radius: 14px;
-  padding: 24px;
+  padding: 40px;
   position: relative;
 }
 
 .lane-agents {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
   align-items: flex-start;
 }
 
@@ -342,7 +342,7 @@
 
 .connector-line {
   width: 2px;
-  height: 32px;
+  height: 64px;
   background: var(--dim);
   position: relative;
   overflow: hidden;
@@ -440,7 +440,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 1px;
-  margin-top: 36px;
+  margin-top: 48px;
 }
 
 .h-connector-line .particle {

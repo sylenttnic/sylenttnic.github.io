@@ -49,7 +49,7 @@ export default function AutomatedOperations() {
                   Take a look under the hood at our 12-step automated assembly line. See exactly how our AI team works together to build, test, and deploy software.
                 </p>
                 <Link
-                  href="/agents"
+                  href="/services/automated-operations/agents"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-white rounded-lg font-medium transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
                 >
                   <Bot className="w-5 h-5" />
