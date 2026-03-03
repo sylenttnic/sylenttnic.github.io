@@ -72,6 +72,7 @@
     bottom: -1px; left: 0;
     width: 320px; height: 2px;
     background: linear-gradient(90deg, var(--accent), transparent);
+    box-shadow: 0 0 10px var(--accent);
     animation: lineGrow 1s ease-out both;
     transform-origin: left;
   }
@@ -104,8 +105,8 @@
   @keyframes lineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes pulseOrb {
-    0%, 100% { box-shadow: 0 0 4px currentColor, 0 0 8px currentColor; opacity: 0.7; }
-    50% { box-shadow: 0 0 8px currentColor, 0 0 16px currentColor; opacity: 1; }
+    0%, 100% { box-shadow: 0 0 4px currentColor, 0 0 8px currentColor, 0 0 12px currentColor; opacity: 0.7; }
+    50% { box-shadow: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor; opacity: 1; }
   }
   @keyframes flowDown {
     0% { top: -8px; opacity: 0; }
@@ -121,6 +122,11 @@
   }
   @keyframes shimmer {
     0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes textSweep {
+    0% { background-position: -200% 0; }
+    20% { background-position: 200% 0; }
     100% { background-position: 200% 0; }
   }
 
@@ -150,21 +156,39 @@
     border-radius: 4px;
     white-space: nowrap;
     border: 2px solid;
+    position: relative;
+    overflow: hidden;
   }
-  .lane-badge.blue { color: var(--accent); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.06); }
-  .lane-badge.cyan { color: var(--accent2); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.06); }
-  .lane-badge.purple { color: var(--accent3); border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.06); }
-  .lane-badge.green { color: var(--accent4); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.06); }
-  .lane-badge.amber { color: var(--accent5); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.06); }
-  .lane-badge.red { color: var(--red); border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.06); }
-  .lane-badge.orange { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.06); }
+  .lane-badge.blue { border-color: var(--accent); background: rgba(59,130,246,0.15); box-shadow: 0 0 10px rgba(59,130,246,0.6), inset 0 0 10px rgba(59,130,246,0.3); }
+  .lane-badge.cyan { border-color: var(--accent2); background: rgba(6,182,212,0.15); box-shadow: 0 0 10px rgba(6,182,212,0.6), inset 0 0 10px rgba(6,182,212,0.3); }
+  .lane-badge.purple { border-color: var(--accent3); background: rgba(139,92,246,0.15); box-shadow: 0 0 10px rgba(139,92,246,0.6), inset 0 0 10px rgba(139,92,246,0.3); }
+  .lane-badge.green { border-color: var(--accent4); background: rgba(16,185,129,0.15); box-shadow: 0 0 10px rgba(16,185,129,0.6), inset 0 0 10px rgba(16,185,129,0.3); }
+  .lane-badge.amber { border-color: var(--accent5); background: rgba(245,158,11,0.15); box-shadow: 0 0 10px rgba(245,158,11,0.6), inset 0 0 10px rgba(245,158,11,0.3); }
+  .lane-badge.red { border-color: var(--red); background: rgba(239,68,68,0.15); box-shadow: 0 0 10px rgba(239,68,68,0.6), inset 0 0 10px rgba(239,68,68,0.3); }
+  .lane-badge.orange { border-color: var(--orange); background: rgba(249,115,22,0.15); box-shadow: 0 0 10px rgba(249,115,22,0.6), inset 0 0 10px rgba(249,115,22,0.3); }
+
+  .badge-text {
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textSweep 5s linear infinite;
+  }
+  .lane-badge.blue .badge-text { background-image: linear-gradient(90deg, var(--accent) 0%, #fff 50%, var(--accent) 100%); }
+  .lane-badge.cyan .badge-text { background-image: linear-gradient(90deg, var(--accent2) 0%, #fff 50%, var(--accent2) 100%); }
+  .lane-badge.purple .badge-text { background-image: linear-gradient(90deg, var(--accent3) 0%, #fff 50%, var(--accent3) 100%); }
+  .lane-badge.green .badge-text { background-image: linear-gradient(90deg, var(--accent4) 0%, #fff 50%, var(--accent4) 100%); }
+  .lane-badge.amber .badge-text { background-image: linear-gradient(90deg, var(--accent5) 0%, #fff 50%, var(--accent5) 100%); }
+  .lane-badge.red .badge-text { background-image: linear-gradient(90deg, var(--red) 0%, #fff 50%, var(--red) 100%); }
+  .lane-badge.orange .badge-text { background-image: linear-gradient(90deg, var(--orange) 0%, #fff 50%, var(--orange) 100%); }
 
   .lane-line { flex: 1; height: 2px; background: var(--border); }
 
   .lane-desc {
-    font-size: 15px;
-    color: var(--dim);
-    font-family: 'Space Mono', monospace;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
   }
 
   .lane-body {
@@ -207,13 +231,13 @@
     top: 0; left: 0; right: 0;
     height: 2px;
   }
-  .agent-card.blue::before { background: var(--accent); }
-  .agent-card.cyan::before { background: var(--accent2); }
-  .agent-card.purple::before { background: var(--accent3); }
-  .agent-card.green::before { background: var(--accent4); }
-  .agent-card.amber::before { background: var(--accent5); }
-  .agent-card.red::before { background: var(--red); }
-  .agent-card.orange::before { background: var(--orange); }
+  .agent-card.blue::before { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .agent-card.cyan::before { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .agent-card.purple::before { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+  .agent-card.green::before { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+  .agent-card.amber::before { background: var(--accent5); box-shadow: 0 0 8px var(--accent5); }
+  .agent-card.red::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .agent-card.orange::before { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
 
   .agent-number {
     font-family: 'Space Mono', monospace;
@@ -238,13 +262,13 @@
     display: inline-block;
     animation: pulseOrb 2.5s ease-in-out infinite;
   }
-  .orb.blue { color: var(--accent); background: var(--accent); }
-  .orb.cyan { color: var(--accent2); background: var(--accent2); }
-  .orb.purple { color: var(--accent3); background: var(--accent3); }
-  .orb.green { color: var(--accent4); background: var(--accent4); }
-  .orb.amber { color: var(--accent5); background: var(--accent5); }
-  .orb.red { color: var(--red); background: var(--red); }
-  .orb.orange { color: var(--orange); background: var(--orange); }
+  .orb.blue { color: var(--accent); background: #fff; }
+  .orb.cyan { color: var(--accent2); background: #fff; }
+  .orb.purple { color: var(--accent3); background: #fff; }
+  .orb.green { color: var(--accent4); background: #fff; }
+  .orb.amber { color: var(--accent5); background: #fff; }
+  .orb.red { color: var(--red); background: #fff; }
+  .orb.orange { color: var(--orange); background: #fff; }
 
   .agent-purpose {
     font-size: 15px;
@@ -360,12 +384,12 @@
     border-radius: 1px;
     animation: flowDown 1.8s ease-in-out infinite;
   }
-  .particle.blue { background: var(--accent); box-shadow: 0 0 8px 2px var(--accent); }
-  .particle.cyan { background: var(--accent2); box-shadow: 0 0 8px 2px var(--accent2); }
-  .particle.purple { background: var(--accent3); box-shadow: 0 0 8px 2px var(--accent3); }
-  .particle.green { background: var(--accent4); box-shadow: 0 0 8px 2px var(--accent4); }
-  .particle.amber { background: var(--accent5); box-shadow: 0 0 8px 2px var(--accent5); }
-  .particle.red { background: var(--red); box-shadow: 0 0 8px 2px var(--red); }
+  .particle.blue { background: #fff; box-shadow: 0 0 8px 2px var(--accent), 0 0 12px 2px var(--accent); }
+  .particle.cyan { background: #fff; box-shadow: 0 0 8px 2px var(--accent2), 0 0 12px 2px var(--accent2); }
+  .particle.purple { background: #fff; box-shadow: 0 0 8px 2px var(--accent3), 0 0 12px 2px var(--accent3); }
+  .particle.green { background: #fff; box-shadow: 0 0 8px 2px var(--accent4), 0 0 12px 2px var(--accent4); }
+  .particle.amber { background: #fff; box-shadow: 0 0 8px 2px var(--accent5), 0 0 12px 2px var(--accent5); }
+  .particle.red { background: #fff; box-shadow: 0 0 8px 2px var(--red), 0 0 12px 2px var(--red); }
 
   /* ── GATE NODE ── */
   .gate {
@@ -444,6 +468,12 @@
     border-radius: 1px;
     animation: flowRight 1.4s ease-in-out infinite;
   }
+  .h-connector-line .particle.blue { background: #fff; box-shadow: 0 0 8px 2px var(--accent), 0 0 12px 2px var(--accent); }
+  .h-connector-line .particle.cyan { background: #fff; box-shadow: 0 0 8px 2px var(--accent2), 0 0 12px 2px var(--accent2); }
+  .h-connector-line .particle.purple { background: #fff; box-shadow: 0 0 8px 2px var(--accent3), 0 0 12px 2px var(--accent3); }
+  .h-connector-line .particle.green { background: #fff; box-shadow: 0 0 8px 2px var(--accent4), 0 0 12px 2px var(--accent4); }
+  .h-connector-line .particle.amber { background: #fff; box-shadow: 0 0 8px 2px var(--accent5), 0 0 12px 2px var(--accent5); }
+  .h-connector-line .particle.red { background: #fff; box-shadow: 0 0 8px 2px var(--red), 0 0 12px 2px var(--red); }
 
   /* ── SHARED INFRA SECTION ── */
   .infra-grid {
@@ -469,10 +499,10 @@
     width: 2px;
     border-radius: 2px 0 0 2px;
   }
-  .infra-node.blue::before { background: var(--accent); }
-  .infra-node.cyan::before { background: var(--accent2); }
-  .infra-node.green::before { background: var(--accent4); }
-  .infra-node.amber::before { background: var(--accent5); }
+  .infra-node.blue::before { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .infra-node.cyan::before { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .infra-node.green::before { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+  .infra-node.amber::before { background: var(--accent5); box-shadow: 0 0 8px var(--accent5); }
 
   .infra-node-title {
     font-family: 'Space Mono', monospace;
@@ -511,11 +541,11 @@
     height: 2px;
   }
 
-  .cicd-step:nth-child(1)::before { background: var(--accent); }
-  .cicd-step:nth-child(2)::before { background: var(--accent2); }
-  .cicd-step:nth-child(3)::before { background: var(--accent4); }
-  .cicd-step:nth-child(4)::before { background: var(--accent3); }
-  .cicd-step:nth-child(5)::before { background: var(--red); }
+  .cicd-step:nth-child(1)::before { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .cicd-step:nth-child(2)::before { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .cicd-step:nth-child(3)::before { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+  .cicd-step:nth-child(4)::before { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+  .cicd-step:nth-child(5)::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
 
   .cicd-label {
     font-family: 'Space Mono', monospace;
@@ -565,7 +595,7 @@
 
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge blue">Phase 1</span>
+      <span class="lane-badge blue"><span class="badge-text">Phase 1</span></span>
       <span class="lane-desc">Discovery &amp; Planning</span>
       <span class="lane-line"></span>
     </div>
@@ -652,7 +682,7 @@
 
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge green">Phase 2</span>
+      <span class="lane-badge green"><span class="badge-text">Phase 2</span></span>
       <span class="lane-desc">Building &amp; Testing</span>
       <span class="lane-line"></span>
     </div>
@@ -718,7 +748,7 @@
 
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge red">Phase 3</span>
+      <span class="lane-badge red"><span class="badge-text">Phase 3</span></span>
       <span class="lane-desc">Security &amp; Quality Review</span>
       <span class="lane-line"></span>
     </div>
@@ -769,7 +799,7 @@
 
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge amber">Phase 4</span>
+      <span class="lane-badge amber"><span class="badge-text">Phase 4</span></span>
       <span class="lane-desc">Launch Preparation &amp; Live Checks</span>
       <span class="lane-line"></span>
     </div>
@@ -844,7 +874,7 @@
 
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge cyan">Phase 5</span>
+      <span class="lane-badge cyan"><span class="badge-text">Phase 5</span></span>
       <span class="lane-desc">Wrap-up &amp; Reporting</span>
       <span class="lane-line"></span>
     </div>
@@ -920,7 +950,7 @@
   <div class="connector reveal"><div class="connector-line" style="height:16px;"></div></div>
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge orange">Background</span>
+      <span class="lane-badge orange"><span class="badge-text">Background</span></span>
       <span class="lane-desc">Ongoing Operations — Works Independently of the Main Flow</span>
       <span class="lane-line"></span>
     </div>
@@ -965,7 +995,7 @@
   <div style="height:24px;"></div>
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge green">Foundation</span>
+      <span class="lane-badge green"><span class="badge-text">Foundation</span></span>
       <span class="lane-desc">Shared Toolbelt — Pre-built resources used by all Agents</span>
       <span class="lane-line"></span>
     </div>
@@ -1044,7 +1074,7 @@
   <div style="height:16px;"></div>
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge purple">Automation</span>
+      <span class="lane-badge purple"><span class="badge-text">Automation</span></span>
       <span class="lane-desc">Background Robot Checkers — Automatic Quality Control</span>
       <span class="lane-line"></span>
     </div>
@@ -1082,7 +1112,7 @@
   <div style="height:16px;"></div>
   <div class="lane reveal">
     <div class="lane-header">
-      <span class="lane-badge red">Safety Net</span>
+      <span class="lane-badge red"><span class="badge-text">Safety Net</span></span>
       <span class="lane-desc">8 Strict Checkpoints + Failure Limits — Agents Cannot Bypass Rules</span>
       <span class="lane-line"></span>
     </div>
