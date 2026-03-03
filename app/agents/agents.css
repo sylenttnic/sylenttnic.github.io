@@ -384,7 +384,8 @@
   letter-spacing: 0.06em;
   padding: 3px 14px;
   border-radius: 20px;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.4;
   position: relative;
   display: flex;
   align-items: center;
