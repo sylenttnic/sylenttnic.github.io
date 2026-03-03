@@ -397,7 +397,7 @@ export default function AgentsPage() {
       {/* BACKGROUND OPERATIONS */}
       <div className="lane reveal">
         <div className="lane-header">
-          <span className="lane-badge orange"><span className="badge-text">Background</span></span>
+          <span className="lane-badge orange"><span className="badge-text">Ongoing</span></span>
           <span className="lane-desc">Ongoing Operations — Works Independently of the Main Flow</span>
           <span className="lane-line"></span>
         </div>
@@ -444,7 +444,7 @@ export default function AgentsPage() {
       {/* FOUNDATION */}
       <div className="lane reveal">
         <div className="lane-header">
-          <span className="lane-badge green"><span className="badge-text">Foundation</span></span>
+          <span className="lane-badge green"><span className="badge-text">Core</span></span>
           <span className="lane-desc">Shared Toolbelt — Pre-built resources used by all Agents</span>
           <span className="lane-line"></span>
         </div>
@@ -525,7 +525,7 @@ export default function AgentsPage() {
       {/* AUTOMATION */}
       <div className="lane reveal">
         <div className="lane-header">
-          <span className="lane-badge purple"><span className="badge-text">Automation</span></span>
+          <span className="lane-badge purple"><span className="badge-text">Auto</span></span>
           <span className="lane-desc">Background Robot Checkers — Automatic Quality Control</span>
           <span className="lane-line"></span>
         </div>
@@ -565,7 +565,7 @@ export default function AgentsPage() {
       {/* SAFETY NET */}
       <div className="lane reveal">
         <div className="lane-header">
-          <span className="lane-badge red"><span className="badge-text">Safety Net</span></span>
+          <span className="lane-badge red"><span className="badge-text">Safety</span></span>
           <span className="lane-desc">8 Strict Checkpoints + Failure Limits — Agents Cannot Bypass Rules</span>
           <span className="lane-line"></span>
         </div>
