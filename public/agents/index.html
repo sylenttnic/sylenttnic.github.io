@@ -1,10 +1,1141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Agents</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylentt Scaffold — AI Team Workflow</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090f;
+    --surface: #0f1219;
+    --surface2: #161c28;
+    --surface3: #1c2436;
+    --border: #1e2a40;
+    --border-light: #253350;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --accent3: #8b5cf6;
+    --accent4: #10b981;
+    --accent5: #f59e0b;
+    --red: #ef4444;
+    --orange: #f97316;
+    --text: #e2e8f0;
+    --text-soft: #c8d2e0;
+    --muted: #64748b;
+    --dim: #334155;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black, transparent);
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 32px 120px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    margin-bottom: 48px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 320px; height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    animation: lineGrow 1s ease-out both;
+    transform-origin: left;
+  }
+  .logo-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 6px;
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes lineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulseOrb {
+    0%, 100% { box-shadow: 0 0 4px currentColor, 0 0 8px currentColor; opacity: 0.7; }
+    50% { box-shadow: 0 0 8px currentColor, 0 0 16px currentColor; opacity: 1; }
+  }
+  @keyframes flowDown {
+    0% { top: -8px; opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { top: calc(100% + 8px); opacity: 0; }
+  }
+  @keyframes flowRight {
+    0% { left: -6px; opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { left: calc(100% + 6px); opacity: 0; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .fade-in { animation: fadeUp 0.5s ease-out both; }
+
+  /* ── LANE (horizontal grouping container) ── */
+  .lane {
+    position: relative;
+    margin-bottom: 0;
+    animation: fadeUp 0.5s ease-out both;
+  }
+
+  .lane-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-top: 20px;
+  }
+
+  .lane-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+  .lane-badge.blue { color: var(--accent); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.06); }
+  .lane-badge.cyan { color: var(--accent2); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.06); }
+  .lane-badge.purple { color: var(--accent3); border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.06); }
+  .lane-badge.green { color: var(--accent4); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.06); }
+  .lane-badge.amber { color: var(--accent5); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.06); }
+  .lane-badge.red { color: var(--red); border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.06); }
+  .lane-badge.orange { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.06); }
+
+  .lane-line { flex: 1; height: 1px; background: var(--border); }
+
+  .lane-desc {
+    font-size: 11px;
+    color: var(--dim);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .lane-body {
+    background: rgba(15,18,25,0.5);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+  }
+
+  .lane-agents {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  /* ── AGENT NODE ── */
+  .agent-node {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+  }
+
+  .agent-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .agent-card:hover {
+    border-color: var(--border-light);
+    box-shadow: 0 0 24px rgba(59,130,246,0.04);
+  }
+  .agent-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .agent-card.blue::before { background: var(--accent); }
+  .agent-card.cyan::before { background: var(--accent2); }
+  .agent-card.purple::before { background: var(--accent3); }
+  .agent-card.green::before { background: var(--accent4); }
+  .agent-card.amber::before { background: var(--accent5); }
+  .agent-card.red::before { background: var(--red); }
+  .agent-card.orange::before { background: var(--orange); }
+
+  .agent-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    margin-bottom: 4px;
+  }
+
+  .agent-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-title .orb {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulseOrb 2.5s ease-in-out infinite;
+  }
+  .orb.blue { color: var(--accent); background: var(--accent); }
+  .orb.cyan { color: var(--accent2); background: var(--accent2); }
+  .orb.purple { color: var(--accent3); background: var(--accent3); }
+  .orb.green { color: var(--accent4); background: var(--accent4); }
+  .orb.amber { color: var(--accent5); background: var(--accent5); }
+  .orb.red { color: var(--red); background: var(--red); }
+  .orb.orange { color: var(--orange); background: var(--orange); }
+
+  .agent-purpose {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .agent-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .tag-blue { background: rgba(59,130,246,0.1); color: var(--accent); }
+  .tag-cyan { background: rgba(6,182,212,0.1); color: var(--accent2); }
+  .tag-purple { background: rgba(139,92,246,0.1); color: var(--accent3); }
+  .tag-green { background: rgba(16,185,129,0.1); color: var(--accent4); }
+  .tag-amber { background: rgba(245,158,11,0.1); color: var(--accent5); }
+  .tag-red { background: rgba(239,68,68,0.1); color: var(--red); }
+  .tag-orange { background: rgba(249,115,22,0.1); color: var(--orange); }
+  .tag-dim { background: rgba(51,65,85,0.3); color: var(--muted); }
+
+  /* ── SUB-NODES (files referenced) ── */
+  .sub-nodes {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sub-node {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 10px;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+  .sub-node:hover { border-color: var(--border-light); }
+
+  .sub-node-icon {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .sub-node-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--text-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sub-node-desc {
+    font-size: 9px;
+    color: var(--dim);
+    margin-left: auto;
+    white-space: nowrap;
+    padding-left: 6px;
+  }
+
+  .sub-node-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 0 2px;
+  }
+
+  /* ── VERTICAL CONNECTOR (between lanes) ── */
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0;
+    position: relative;
+  }
+
+  .connector-line {
+    width: 2px;
+    height: 32px;
+    background: var(--dim);
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+  }
+
+  .connector-line .particle {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    border-radius: 1px;
+    animation: flowDown 1.8s ease-in-out infinite;
+  }
+  .particle.blue { background: var(--accent); }
+  .particle.cyan { background: var(--accent2); }
+  .particle.purple { background: var(--accent3); }
+  .particle.green { background: var(--accent4); }
+  .particle.amber { background: var(--accent5); }
+  .particle.red { background: var(--red); }
+
+  /* ── GATE NODE ── */
+  .gate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 4px 0;
+  }
+
+  .gate-line-l, .gate-line-r {
+    flex: 1;
+    height: 1px;
+  }
+  .gate-line-l { background: linear-gradient(90deg, transparent, var(--dim)); }
+  .gate-line-r { background: linear-gradient(90deg, var(--dim), transparent); }
+
+  .gate-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    padding: 3px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gate-badge.hard {
+    background: rgba(239,68,68,0.06);
+    border: 1px solid rgba(239,68,68,0.35);
+    color: var(--red);
+  }
+  .gate-badge.soft {
+    background: rgba(245,158,11,0.06);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--accent5);
+  }
+  .gate-badge.human {
+    background: rgba(139,92,246,0.06);
+    border: 1px solid rgba(139,92,246,0.3);
+    color: var(--accent3);
+  }
+
+  .gate-icon {
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  /* ── HORIZONTAL CONNECTOR (between agents in same lane) ── */
+  .h-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    flex-shrink: 0;
+    position: relative;
+    align-self: stretch;
+  }
+
+  .h-connector-line {
+    width: 100%;
+    height: 2px;
+    background: var(--dim);
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    margin-top: 36px;
+  }
+
+  .h-connector-line .particle {
+    position: absolute;
+    height: 2px;
+    width: 6px;
+    border-radius: 1px;
+    animation: flowRight 1.4s ease-in-out infinite;
+  }
+
+  /* ── SHARED INFRA SECTION ── */
+  .infra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  .infra-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .infra-node:hover { border-color: var(--border-light); }
+  .infra-node::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    border-radius: 2px 0 0 2px;
+  }
+  .infra-node.blue::before { background: var(--accent); }
+  .infra-node.cyan::before { background: var(--accent2); }
+  .infra-node.green::before { background: var(--accent4); }
+  .infra-node.amber::before { background: var(--accent5); }
+
+  .infra-node-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .infra-node-desc {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ── CI/CD PIPELINE ── */
+  .cicd-flow {
+    display: flex;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .cicd-step {
+    flex: 1;
+    padding: 14px 12px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .cicd-step:last-child { border-right: none; }
+  .cicd-step::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .cicd-step:nth-child(1)::before { background: var(--accent); }
+  .cicd-step:nth-child(2)::before { background: var(--accent2); }
+  .cicd-step:nth-child(3)::before { background: var(--accent4); }
+  .cicd-step:nth-child(4)::before { background: var(--accent3); }
+  .cicd-step:nth-child(5)::before { background: var(--red); }
+
+  .cicd-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .cicd-desc {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .cicd-trigger {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    color: var(--dim);
+    margin-top: 6px;
+  }
+
+  /* ── SCROLL ANIM ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .lane-agents { flex-direction: column; }
+    .h-connector { display: none; }
+    .wrap { padding: 24px 16px 80px; }
+  }
+</style>
 </head>
 <body>
-  <h1>Hello World</h1>
+<div class="wrap">
+
+  <div class="header fade-in">
+    <div class="logo-tag">Sylentt AI Team Workflow</div>
+    <h1>How Our AI Agents Build Software</h1>
+    <p class="subtitle">A 12-step automated assembly line with 8 strict safety checkpoints. This map shows exactly what each AI assistant does, what information they look at, and what they create.</p>
+  </div>
+
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge blue">Phase 1</span>
+      <span class="lane-desc">Discovery &amp; Planning</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div class="lane-agents">
+        <div class="agent-node">
+          <div class="agent-card blue">
+            <div class="agent-number">AGENT 01</div>
+            <div class="agent-title"><span class="orb blue"></span> System Explorer</div>
+            <div class="agent-purpose">Reviews what already exists in our system. Creates a map of current setups so other agents know the landscape before they start working.</div>
+            <div class="agent-meta">
+              <span class="tag tag-blue">Triggered: By Human</span>
+              <span class="tag tag-dim">Planning Only</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Platform Rules</span><span class="sub-node-desc">Our standards</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">To-Do List</span><span class="sub-node-desc">Current requests</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">System Map</span><span class="sub-node-desc">Current layout</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Task Outline</span><span class="sub-node-desc">High-level goals</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle blue" style="animation-delay:0s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card cyan">
+            <div class="agent-number">AGENT 02</div>
+            <div class="agent-title"><span class="orb cyan"></span> Requirements Analyst</div>
+            <div class="agent-purpose">Studies the external tools we need to connect to. Figures out exactly how they work and writes a detailed blueprint of what needs to be built.</div>
+            <div class="agent-meta">
+              <span class="tag tag-cyan">Triggered: By Explorer</span>
+              <span class="tag tag-dim">Planning Only</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Past Mistakes Log</span><span class="sub-node-desc">Things to avoid</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Tool Manuals</span><span class="sub-node-desc">External instructions</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Existing Clients</span><span class="sub-node-desc">Who uses this</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">System Map</span><span class="sub-node-desc">From Agent 01</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Detailed Blueprint</span><span class="sub-node-desc">What to build</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Open Questions</span><span class="sub-node-desc">Things it doesn't know</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Corrections</span><span class="sub-node-desc">Blueprint updates</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle cyan" style="animation-delay:0.3s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card purple">
+            <div class="agent-number">AGENT 03</div>
+            <div class="agent-title"><span class="orb purple"></span> Question Resolver</div>
+            <div class="agent-purpose">Acts as a smart filter. Tries to find answers to open questions by looking at all past company projects before bothering a human manager.</div>
+            <div class="agent-meta">
+              <span class="tag tag-purple">Triggered: By Analyst</span>
+              <span class="tag tag-dim">Planning Only</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Past Project Plans</span><span class="sub-node-desc">How we did it before</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Team Decisions</span><span class="sub-node-desc">Architecture rules</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Platform Rules</span><span class="sub-node-desc">Code standards</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Current Setup</span><span class="sub-node-desc">What servers are running</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Answered Questions</span><span class="sub-node-desc">✅ Resolved status</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector reveal"><div class="connector-line"><div class="particle purple" style="animation-delay:0.1s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge human"><span class="gate-icon">🧑</span> HUMAN GATE — Project Blueprint Approved + All Questions Answered</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle green" style="animation-delay:0.2s"></div></div></div>
+
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge green">Phase 2</span>
+      <span class="lane-desc">Building &amp; Testing</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div class="lane-agents">
+        <div class="agent-node">
+          <div class="agent-card green">
+            <div class="agent-number">AGENT 04</div>
+            <div class="agent-title"><span class="orb green"></span> The Code Builder</div>
+            <div class="agent-purpose">Writes the actual software code and sets up the technical foundation based strictly on the approved project blueprint.</div>
+            <div class="agent-meta">
+              <span class="tag tag-green">Triggered: Blueprint Approved</span>
+              <span class="tag tag-dim">Up to 5 attempts to fix errors</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Past Mistakes Log</span><span class="sub-node-desc">Tricky edge cases</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Detailed Blueprint</span><span class="sub-node-desc">What to build</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Answered Questions</span><span class="sub-node-desc">Must be ✅ Resolved</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Ownership Map</span><span class="sub-node-desc">Ensures it doesn't break other areas</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Implementation Plan</span><span class="sub-node-desc">Step-by-step checklist</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Code Files</span><span class="sub-node-desc">The actual software</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Server Settings</span><span class="sub-node-desc">How to run the code</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Work Summary</span><span class="sub-node-desc">What was just built</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle green" style="animation-delay:0.15s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card green">
+            <div class="agent-number">AGENT 05</div>
+            <div class="agent-title"><span class="orb green"></span> Quality Tester</div>
+            <div class="agent-purpose">Creates practice scenarios and writes automated tests to rigorously check the new code. Ensures the code works perfectly even in unusual situations.</div>
+            <div class="agent-meta">
+              <span class="tag tag-green">Triggered: Builder Finishes</span>
+              <span class="tag tag-dim">Up to 4 attempts to fix tests</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Edge Case Scenarios</span><span class="sub-node-desc">From blueprint</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Code Files</span><span class="sub-node-desc">The new software to check</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Test Data Scenarios</span><span class="sub-node-desc">Simulated inputs</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Automated Tests</span><span class="sub-node-desc">Scripts that check the code</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Sandbox Tests</span><span class="sub-node-desc">Tests in a safe environment</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector reveal"><div class="connector-line"><div class="particle green" style="animation-delay:0.3s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge hard"><span class="gate-icon">🔒</span> HARD GATE — Code has zero syntax errors AND tests prove it works flawlessly</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle red" style="animation-delay:0.15s"></div></div></div>
+
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge red">Phase 3</span>
+      <span class="lane-desc">Security &amp; Quality Review</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div class="lane-agents">
+        <div class="agent-node" style="max-width: 480px;">
+          <div class="agent-card red">
+            <div class="agent-number">AGENT 06</div>
+            <div class="agent-title"><span class="orb red"></span> Security &amp; Compliance Reviewer</div>
+            <div class="agent-purpose">Acts as an independent auditor. Makes sure no sensitive customer data is exposed, no unnecessary security permissions were granted, and the initial blueprint was perfectly followed.</div>
+            <div class="agent-meta">
+              <span class="tag tag-red">Triggered: Tests Pass</span>
+              <span class="tag tag-dim">Keeps reviewing until perfect</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Company Rulebook</span><span class="sub-node-desc">Security standards</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Detailed Blueprint</span><span class="sub-node-desc">What was promised</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Code Changes</span><span class="sub-node-desc">Line-by-line check of new code</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Final Audit Report</span><span class="sub-node-desc">✅ Approved or 🔴 Blocked</span></div>
+          </div>
+        </div>
+
+        <div class="agent-node" style="max-width: 340px;">
+          <div style="background:var(--surface);border:1px solid rgba(239,68,68,0.15);border-radius:12px;padding:16px;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Security Checklist</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Data Privacy Checks</span><span class="sub-node-desc">No passwords or emails leaked</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Strict Permissions</span><span class="sub-node-desc">Only access what is needed</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Quality Rules Followed</span><span class="sub-node-desc">Code is neat and clean</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Matches the Plan</span><span class="sub-node-desc">No surprise "extra" features</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector reveal"><div class="connector-line"><div class="particle red" style="animation-delay:0.1s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge hard"><span class="gate-icon">🔒</span> HARD GATE — Audit approved, ready to be prepared for the live system</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle amber" style="animation-delay:0.2s"></div></div></div>
+
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge amber">Phase 4</span>
+      <span class="lane-desc">Launch Preparation &amp; Live Checks</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div class="lane-agents">
+        <div class="agent-node">
+          <div class="agent-card amber">
+            <div class="agent-number">AGENT 07</div>
+            <div class="agent-title"><span class="orb amber"></span> Deployment Manager</div>
+            <div class="agent-purpose">Orchestrates the entire launch process. Carefully moves code into a practice environment, waits for a human go-ahead, and then flips the switch to go live.</div>
+            <div class="agent-meta">
+              <span class="tag tag-amber">Triggered: Clean Audit</span>
+              <span class="tag tag-dim">Launch Director</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">System Status Notes</span><span class="sub-node-desc">Current live version</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Testing Stamp</span><span class="sub-node-desc">Confirms Tester finished</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Approval Dates</span><span class="sub-node-desc">Confirms human signed off</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Update Records</span><span class="sub-node-desc">New version number</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Practice Launch</span><span class="sub-node-desc">Puts code in safe mode</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Live Launch</span><span class="sub-node-desc">Puts code in front of real users</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle amber" style="animation-delay:0.1s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card amber">
+            <div class="agent-number">AGENT 08</div>
+            <div class="agent-title"><span class="orb amber"></span> Live Environment Checker</div>
+            <div class="agent-purpose">Runs a 6-step systematic check once the code is in the practice launch environment. It pretends to be a user to make absolutely sure the system didn't break.</div>
+            <div class="agent-meta">
+              <span class="tag tag-amber">Triggered: By Deploy Manager</span>
+              <span class="tag tag-dim">Up to 3 retries max</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Expected Outcomes</span><span class="sub-node-desc">What should happen</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Test Scenarios</span><span class="sub-node-desc">Mock user data</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">System Monitors</span><span class="sub-node-desc">Error trackers</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">System Health Report</span><span class="sub-node-desc">PASS or FAIL</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector reveal"><div class="connector-line"><div class="particle amber" style="animation-delay:0.15s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge human"><span class="gate-icon">🧑</span> HUMAN GATE — Press Button: "Promote to Live Environment"</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle green" style="animation-delay:0.25s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge hard"><span class="gate-icon">🔒</span> HARD GATE — Code is exactly what was tested + Health Report passed + Human confirmed</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle green" style="animation-delay:0.1s"></div></div></div>
+  <div class="gate reveal">
+    <span class="gate-line-l"></span>
+    <span class="gate-badge human"><span class="gate-icon">🧑</span> HUMAN GATE — Monitor Live System: "No errors, we are good"</span>
+    <span class="gate-line-r"></span>
+  </div>
+  <div class="connector reveal"><div class="connector-line"><div class="particle cyan" style="animation-delay:0.2s"></div></div></div>
+
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge cyan">Phase 5</span>
+      <span class="lane-desc">Wrap-up &amp; Reporting</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div class="lane-agents">
+        <div class="agent-node">
+          <div class="agent-card cyan">
+            <div class="agent-number">AGENT 09</div>
+            <div class="agent-title"><span class="orb cyan"></span> Manuals &amp; Docs Updater</div>
+            <div class="agent-purpose">Updates all internal company manuals and living documents to perfectly match the new changes. It appends information so we never lose historical data.</div>
+            <div class="agent-meta">
+              <span class="tag tag-cyan">Triggered: Live Launch Done</span>
+              <span class="tag tag-dim">Paperwork Only</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Documents Updated</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">System Map</span><span class="sub-node-desc">Current layout updated</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Server Setup</span><span class="sub-node-desc">Where things live now</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Ownership Log</span><span class="sub-node-desc">Who handles what</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">To-Do List</span><span class="sub-node-desc">Marks this task as "Done"</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Speed Metrics</span><span class="sub-node-desc">Records how fast the app is</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle cyan" style="animation-delay:0.1s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card blue">
+            <div class="agent-number">AGENT 10</div>
+            <div class="agent-title"><span class="orb blue"></span> Overall System Auditor</div>
+            <div class="agent-purpose">Independent reviewer. Instead of checking a specific task, it looks at the whole company's system to find big-picture problems, inefficiencies, or risks.</div>
+            <div class="agent-meta">
+              <span class="tag tag-blue">Triggered: Live Launch Done</span>
+              <span class="tag tag-dim">Full System Check</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">All Team Rules</span><span class="sub-node-desc">Looking for blindspots</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">All Shared Tooling</span><span class="sub-node-desc">Looking for messy code</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Error Patterns</span><span class="sub-node-desc">Why do things fail?</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">System Advice Report</span><span class="sub-node-desc">🔴/🟡/🟢 Findings</span></div>
+          </div>
+        </div>
+
+        <div class="h-connector"><div class="h-connector-line"><div class="particle blue" style="animation-delay:0.2s"></div></div></div>
+
+        <div class="agent-node">
+          <div class="agent-card purple">
+            <div class="agent-number">AGENT 11</div>
+            <div class="agent-title"><span class="orb purple"></span> Release Reporter</div>
+            <div class="agent-purpose">The final step. Writes a simple, easy-to-read summary of what was just released. It writes three versions: one for clients, one for managers, and one for tech teams.</div>
+            <div class="agent-meta">
+              <span class="tag tag-purple">Triggered: Live Launch Done</span>
+              <span class="tag tag-dim">Final Communication</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Work Summary</span><span class="sub-node-desc">What was actually built</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Detailed Blueprint</span><span class="sub-node-desc">What was promised</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Health Reports</span><span class="sub-node-desc">System performance</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Release Announcements</span><span class="sub-node-desc">Client/Manager/Tech versions</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector reveal"><div class="connector-line" style="height:16px;"></div></div>
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge orange">Background</span>
+      <span class="lane-desc">Ongoing Operations — Works Independently of the Main Flow</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body" style="border-color:rgba(249,115,22,0.2);">
+      <div class="lane-agents">
+        <div class="agent-node" style="max-width: 480px;">
+          <div class="agent-card orange">
+            <div class="agent-number">AGENT 12</div>
+            <div class="agent-title"><span class="orb orange"></span> The Incident Responder</div>
+            <div class="agent-purpose">Monitors the live system 24/7. If an error alert rings, it investigates the issue, tries simple safe fixes automatically, and alerts a human team if something actually broke.</div>
+            <div class="agent-meta">
+              <span class="tag tag-orange">Triggered: System Error Alarm</span>
+              <span class="tag tag-dim">Never fixes repeatedly without a human</span>
+            </div>
+          </div>
+          <div class="sub-nodes">
+            <div class="sub-node-group-label">Information Reviewed</div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Error Logs</span><span class="sub-node-desc">The digital evidence</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Failed Actions</span><span class="sub-node-desc">What the user was doing</span></div>
+            <div class="sub-node"><span class="sub-node-icon">📖</span><span class="sub-node-name">Server History</span><span class="sub-node-desc">Recent changes</span></div>
+            <div class="sub-node-group-label">Created by this Agent</div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Action Retry</span><span class="sub-node-desc">If it was a temporary glitch</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Bug Report</span><span class="sub-node-desc">For humans to fix later</span></div>
+            <div class="sub-node"><span class="sub-node-icon">✏️</span><span class="sub-node-name">Chat Notification</span><span class="sub-node-desc">Alerts the human team</span></div>
+          </div>
+        </div>
+
+        <div class="agent-node" style="max-width: 340px;">
+          <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.15);border-radius:12px;padding:16px;">
+            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Emergency Safety Rules</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Stop after 3 retries</span><span class="sub-node-desc">Ask a human for help</span></div>
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Never deploy code</span><span class="sub-node-desc">Only diagnose, don't build</span></div>
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Don't hide errors</span><span class="sub-node-desc">A human must close the ticket</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:24px;"></div>
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge green">Foundation</span>
+      <span class="lane-desc">Shared Toolbelt — Pre-built resources used by all Agents</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent4);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Core Toolbelt</div>
+          <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="infra-node green">
+              <div class="infra-node-title">Activity Tracker</div>
+              <div class="infra-node-desc">Logs actions but automatically hides private customer data</div>
+            </div>
+            <div class="infra-node green">
+              <div class="infra-node-title">Secure Vault</div>
+              <div class="infra-node-desc">Safely retrieves passwords and secret keys when needed</div>
+            </div>
+            <div class="infra-node green">
+              <div class="infra-node-title">Duplicate Preventer</div>
+              <div class="infra-node-desc">Makes sure we don't accidentally charge a customer twice</div>
+            </div>
+            <div class="infra-node green">
+              <div class="infra-node-title">Security Bouncer</div>
+              <div class="infra-node-desc">Verifies that incoming data is actually from a trusted source</div>
+            </div>
+            <div class="infra-node green">
+              <div class="infra-node-title">Retry Logic</div>
+              <div class="infra-node-desc">If a connection drops, it waits a moment and tries again gently</div>
+            </div>
+            <div class="infra-node cyan">
+              <div class="infra-node-title">Shared Language</div>
+              <div class="infra-node-desc">Common definitions so all agents use the same vocabulary</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">External Connections</div>
+          <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="infra-node blue">
+              <div class="infra-node-title">Storefront Link</div>
+              <div class="infra-node-desc">Talks to the online store to get order and customer info</div>
+            </div>
+            <div class="infra-node blue">
+              <div class="infra-node-title">Subscription Link</div>
+              <div class="infra-node-desc">Talks to the billing system to manage recurring payments</div>
+            </div>
+            <div class="infra-node amber">
+              <div class="infra-node-title">Payment Gateway</div>
+              <div class="infra-node-desc">Currently paused — waiting on a partner approval to finish</div>
+            </div>
+          </div>
+
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin:14px 0 10px;">Team Knowledge Base</div>
+          <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
+            <div class="infra-node cyan">
+              <div class="infra-node-title">Team Brain</div>
+              <div class="infra-node-desc">A log of past mistakes so agents never make the same error twice</div>
+            </div>
+            <div class="infra-node cyan">
+              <div class="infra-node-title">Ownership Map</div>
+              <div class="infra-node-desc">Tracks what areas of the app interact with each other</div>
+            </div>
+            <div class="infra-node cyan">
+              <div class="infra-node-title">Failure Patterns</div>
+              <div class="infra-node-desc">A study of what usually breaks, to help us write better plans</div>
+            </div>
+            <div class="infra-node cyan">
+              <div class="infra-node-title">Speed Baseline</div>
+              <div class="infra-node-desc">Metrics to ensure new features don't slow down the software</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:16px;"></div>
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge purple">Automation</span>
+      <span class="lane-desc">Background Robot Checkers — Automatic Quality Control</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body" style="padding:0;">
+      <div class="cicd-flow">
+        <div class="cicd-step">
+          <div class="cicd-label">1. Code Scan</div>
+          <div class="cicd-desc">Checks for typos, formatting errors, and broken logic</div>
+          <div class="cicd-trigger">Happens every time code is written</div>
+        </div>
+        <div class="cicd-step">
+          <div class="cicd-label">2. Run Practice Scenarios</div>
+          <div class="cicd-desc">Runs automated tests. If code drops below 80% coverage, it's rejected</div>
+          <div class="cicd-trigger">Before any manager review</div>
+        </div>
+        <div class="cicd-step">
+          <div class="cicd-label">3. Practice Environment Launch</div>
+          <div class="cicd-desc">Automatically places approved code into a safe, hidden live space</div>
+          <div class="cicd-trigger">After manager approves code</div>
+        </div>
+        <div class="cicd-step">
+          <div class="cicd-label">4. Final Sandbox Tests</div>
+          <div class="cicd-desc">Runs tests against the safe environment to mimic real user actions</div>
+          <div class="cicd-trigger">After Practice Launch finishes</div>
+        </div>
+        <div class="cicd-step">
+          <div class="cicd-label">5. Alert the Humans</div>
+          <div class="cicd-desc">Sends a chat message to the team if ANY of these steps fail</div>
+          <div class="cicd-trigger">If a problem is found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:16px;"></div>
+  <div class="lane reveal">
+    <div class="lane-header">
+      <span class="lane-badge red">Safety Net</span>
+      <span class="lane-desc">8 Strict Checkpoints + Failure Limits — Agents Cannot Bypass Rules</span>
+      <span class="lane-line"></span>
+    </div>
+    <div class="lane-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Mandatory Checkpoints</div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">①</span><span class="sub-node-name">All open questions answered</span><span class="sub-node-desc">Before starting</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">②</span><span class="sub-node-name">Manager signed the Blueprint</span><span class="sub-node-desc">Before coding</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">③</span><span class="sub-node-name">Zero code spelling mistakes</span><span class="sub-node-desc">Before testing</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">④</span><span class="sub-node-name">No private data exposed</span><span class="sub-node-desc">Security Audit</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑤</span><span class="sub-node-name">Code proves it passed tests</span><span class="sub-node-desc">Before launching</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑥</span><span class="sub-node-name">Exact version match</span><span class="sub-node-desc">Ensures no sneaky edits</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑦</span><span class="sub-node-name">Human says "Go Live"</span><span class="sub-node-desc">Final launch button</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑧</span><span class="sub-node-name">No more than 3 error retries</span><span class="sub-node-desc">If something breaks later</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent5);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Built-in Frustration Limits</div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">5×</span><span class="sub-node-name">Coding error limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">4×</span><span class="sub-node-name">Test failure limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Practice check failures</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Blueprint revision loops</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">External tool surprises</span><span class="sub-node-desc">If stuck → ask human</span></div>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.08em;margin-top:14px;line-height:1.6;">
+            Before an agent is allowed to try fixing a problem again, it must write down its thought process. If an agent tries the exact same broken fix twice, it only counts as one attempt.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Scroll-triggered reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Stagger particle animation delays for variety
+document.querySelectorAll('.particle').forEach((p, i) => {
+  const base = parseFloat(p.style.animationDelay) || 0;
+  p.style.animationDelay = (base + (i * 0.15) % 1.2) + 's';
+});
+</script>
 </body>
 </html>
