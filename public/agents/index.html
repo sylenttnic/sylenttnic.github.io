@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/logo-symbol.png" type="image/png">
 <title>Sylentt Scaffold — AI Team Workflow</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
@@ -21,9 +22,9 @@
     --red: #ef4444;
     --orange: #f97316;
     --text: #e2e8f0;
-    --text-soft: #c8d2e0;
-    --muted: #64748b;
-    --dim: #334155;
+    --text-soft: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #64748b;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -62,28 +63,28 @@
   .header {
     margin-bottom: 48px;
     padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
     position: relative;
   }
   .header::after {
     content: '';
     position: absolute;
     bottom: -1px; left: 0;
-    width: 320px; height: 1px;
+    width: 320px; height: 2px;
     background: linear-gradient(90deg, var(--accent), transparent);
     animation: lineGrow 1s ease-out both;
     transform-origin: left;
   }
   .logo-tag {
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     color: var(--accent);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 10px;
   }
   h1 {
-    font-size: 30px;
+    font-size: 36px;
     font-weight: 700;
     letter-spacing: -0.03em;
     background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
@@ -92,7 +93,7 @@
     background-clip: text;
   }
   .subtitle {
-    font-size: 14px;
+    font-size: 18px;
     color: var(--muted);
     margin-top: 6px;
     max-width: 640px;
@@ -142,13 +143,13 @@
 
   .lane-badge {
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     padding: 4px 12px;
     border-radius: 4px;
     white-space: nowrap;
-    border: 1px solid;
+    border: 2px solid;
   }
   .lane-badge.blue { color: var(--accent); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.06); }
   .lane-badge.cyan { color: var(--accent2); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.06); }
@@ -158,17 +159,17 @@
   .lane-badge.red { color: var(--red); border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.06); }
   .lane-badge.orange { color: var(--orange); border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.06); }
 
-  .lane-line { flex: 1; height: 1px; background: var(--border); }
+  .lane-line { flex: 1; height: 2px; background: var(--border); }
 
   .lane-desc {
-    font-size: 11px;
+    font-size: 15px;
     color: var(--dim);
     font-family: 'Space Mono', monospace;
   }
 
   .lane-body {
     background: rgba(15,18,25,0.5);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 14px;
     padding: 24px;
     position: relative;
@@ -189,7 +190,7 @@
 
   .agent-card {
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 12px;
     padding: 16px 16px 14px;
     position: relative;
@@ -216,13 +217,13 @@
 
   .agent-number {
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     color: var(--dim);
     margin-bottom: 4px;
   }
 
   .agent-title {
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 600;
     color: var(--text);
     margin-bottom: 4px;
@@ -246,7 +247,7 @@
   .orb.orange { color: var(--orange); background: var(--orange); }
 
   .agent-purpose {
-    font-size: 11px;
+    font-size: 15px;
     color: var(--muted);
     line-height: 1.55;
     margin-bottom: 10px;
@@ -257,12 +258,12 @@
     flex-wrap: wrap;
     gap: 4px;
     padding-top: 8px;
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--border);
   }
 
   .tag {
     font-family: 'Space Mono', monospace;
-    font-size: 8px;
+    font-size: 12px;
     padding: 2px 6px;
     border-radius: 3px;
     letter-spacing: 0.03em;
@@ -291,9 +292,9 @@
     gap: 7px;
     padding: 5px 8px;
     background: var(--surface2);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 6px;
-    font-size: 10px;
+    font-size: 14px;
     transition: border-color 0.2s;
     position: relative;
   }
@@ -301,7 +302,7 @@
 
   .sub-node-icon {
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     width: 16px;
     text-align: center;
     flex-shrink: 0;
@@ -310,7 +311,7 @@
 
   .sub-node-name {
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     color: var(--text-soft);
     white-space: nowrap;
     overflow: hidden;
@@ -318,7 +319,7 @@
   }
 
   .sub-node-desc {
-    font-size: 9px;
+    font-size: 13px;
     color: var(--dim);
     margin-left: auto;
     white-space: nowrap;
@@ -327,7 +328,7 @@
 
   .sub-node-group-label {
     font-family: 'Space Mono', monospace;
-    font-size: 8px;
+    font-size: 12px;
     color: var(--dim);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -377,14 +378,14 @@
 
   .gate-line-l, .gate-line-r {
     flex: 1;
-    height: 1px;
+    height: 2px;
   }
   .gate-line-l { background: linear-gradient(90deg, transparent, var(--dim)); }
   .gate-line-r { background: linear-gradient(90deg, var(--dim), transparent); }
 
   .gate-badge {
     font-family: 'Space Mono', monospace;
-    font-size: 9px;
+    font-size: 13px;
     letter-spacing: 0.06em;
     padding: 3px 14px;
     border-radius: 20px;
@@ -396,22 +397,22 @@
   }
   .gate-badge.hard {
     background: rgba(239,68,68,0.06);
-    border: 1px solid rgba(239,68,68,0.35);
+    border: 2px solid rgba(239,68,68,0.35);
     color: var(--red);
   }
   .gate-badge.soft {
     background: rgba(245,158,11,0.06);
-    border: 1px solid rgba(245,158,11,0.3);
+    border: 2px solid rgba(245,158,11,0.3);
     color: var(--accent5);
   }
   .gate-badge.human {
     background: rgba(139,92,246,0.06);
-    border: 1px solid rgba(139,92,246,0.3);
+    border: 2px solid rgba(139,92,246,0.3);
     color: var(--accent3);
   }
 
   .gate-icon {
-    font-size: 10px;
+    font-size: 14px;
     line-height: 1;
   }
 
@@ -453,7 +454,7 @@
 
   .infra-node {
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 8px;
     padding: 12px;
     position: relative;
@@ -475,12 +476,12 @@
 
   .infra-node-title {
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     color: var(--text);
     margin-bottom: 3px;
   }
   .infra-node-desc {
-    font-size: 10px;
+    font-size: 14px;
     color: var(--muted);
     line-height: 1.45;
   }
@@ -490,7 +491,7 @@
     display: flex;
     gap: 0;
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
   }
@@ -498,7 +499,7 @@
   .cicd-step {
     flex: 1;
     padding: 14px 12px;
-    border-right: 1px solid var(--border);
+    border-right: 2px solid var(--border);
     position: relative;
     overflow: hidden;
   }
@@ -518,18 +519,18 @@
 
   .cicd-label {
     font-family: 'Space Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     color: var(--text);
     margin-bottom: 3px;
   }
   .cicd-desc {
-    font-size: 10px;
+    font-size: 14px;
     color: var(--muted);
     line-height: 1.45;
   }
   .cicd-trigger {
     font-family: 'Space Mono', monospace;
-    font-size: 8px;
+    font-size: 12px;
     color: var(--dim);
     margin-top: 6px;
   }
@@ -744,13 +745,13 @@
         </div>
 
         <div class="agent-node" style="max-width: 340px;">
-          <div style="background:var(--surface);border:1px solid rgba(239,68,68,0.15);border-radius:12px;padding:16px;">
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Security Checklist</div>
+          <div style="background:var(--surface);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
+            <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Security Checklist</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Data Privacy Checks</span><span class="sub-node-desc">No passwords or emails leaked</span></div>
-              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Strict Permissions</span><span class="sub-node-desc">Only access what is needed</span></div>
-              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Quality Rules Followed</span><span class="sub-node-desc">Code is neat and clean</span></div>
-              <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Matches the Plan</span><span class="sub-node-desc">No surprise "extra" features</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Data Privacy Checks</span><span class="sub-node-desc">No passwords or emails leaked</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Strict Permissions</span><span class="sub-node-desc">Only access what is needed</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Quality Rules Followed</span><span class="sub-node-desc">Code is neat and clean</span></div>
+              <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon">🔍</span><span class="sub-node-name">Matches the Plan</span><span class="sub-node-desc">No surprise "extra" features</span></div>
             </div>
           </div>
         </div>
@@ -948,12 +949,12 @@
         </div>
 
         <div class="agent-node" style="max-width: 340px;">
-          <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.15);border-radius:12px;padding:16px;">
-            <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Emergency Safety Rules</div>
+          <div style="background:var(--surface);border:1px solid rgba(249,115,22,0.3);border-radius:12px;padding:16px;">
+            <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Emergency Safety Rules</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
-              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Stop after 3 retries</span><span class="sub-node-desc">Ask a human for help</span></div>
-              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Never deploy code</span><span class="sub-node-desc">Only diagnose, don't build</span></div>
-              <div class="sub-node" style="border-color:rgba(249,115,22,0.15);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Don't hide errors</span><span class="sub-node-desc">A human must close the ticket</span></div>
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.3);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Stop after 3 retries</span><span class="sub-node-desc">Ask a human for help</span></div>
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.3);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Never deploy code</span><span class="sub-node-desc">Only diagnose, don't build</span></div>
+              <div class="sub-node" style="border-color:rgba(249,115,22,0.3);"><span class="sub-node-icon">⛔</span><span class="sub-node-name">Don't hide errors</span><span class="sub-node-desc">A human must close the ticket</span></div>
             </div>
           </div>
         </div>
@@ -971,7 +972,7 @@
     <div class="lane-body">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div>
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent4);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Core Toolbelt</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent4);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Core Toolbelt</div>
           <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
             <div class="infra-node green">
               <div class="infra-node-title">Activity Tracker</div>
@@ -1000,7 +1001,7 @@
           </div>
         </div>
         <div>
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">External Connections</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">External Connections</div>
           <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
             <div class="infra-node blue">
               <div class="infra-node-title">Storefront Link</div>
@@ -1016,7 +1017,7 @@
             </div>
           </div>
 
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin:14px 0 10px;">Team Knowledge Base</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin:14px 0 10px;">Team Knowledge Base</div>
           <div class="infra-grid" style="grid-template-columns:1fr 1fr;">
             <div class="infra-node cyan">
               <div class="infra-node-title">Team Brain</div>
@@ -1088,28 +1089,28 @@
     <div class="lane-body">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div>
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Mandatory Checkpoints</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Mandatory Checkpoints</div>
           <div style="display:flex;flex-direction:column;gap:4px;">
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">①</span><span class="sub-node-name">All open questions answered</span><span class="sub-node-desc">Before starting</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">②</span><span class="sub-node-name">Manager signed the Blueprint</span><span class="sub-node-desc">Before coding</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">③</span><span class="sub-node-name">Zero code spelling mistakes</span><span class="sub-node-desc">Before testing</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">④</span><span class="sub-node-name">No private data exposed</span><span class="sub-node-desc">Security Audit</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑤</span><span class="sub-node-name">Code proves it passed tests</span><span class="sub-node-desc">Before launching</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑥</span><span class="sub-node-name">Exact version match</span><span class="sub-node-desc">Ensures no sneaky edits</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑦</span><span class="sub-node-name">Human says "Go Live"</span><span class="sub-node-desc">Final launch button</span></div>
-            <div class="sub-node" style="border-color:rgba(239,68,68,0.15);"><span class="sub-node-icon" style="color:var(--red);">⑧</span><span class="sub-node-name">No more than 3 error retries</span><span class="sub-node-desc">If something breaks later</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">①</span><span class="sub-node-name">All open questions answered</span><span class="sub-node-desc">Before starting</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">②</span><span class="sub-node-name">Manager signed the Blueprint</span><span class="sub-node-desc">Before coding</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">③</span><span class="sub-node-name">Zero code spelling mistakes</span><span class="sub-node-desc">Before testing</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">④</span><span class="sub-node-name">No private data exposed</span><span class="sub-node-desc">Security Audit</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">⑤</span><span class="sub-node-name">Code proves it passed tests</span><span class="sub-node-desc">Before launching</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">⑥</span><span class="sub-node-name">Exact version match</span><span class="sub-node-desc">Ensures no sneaky edits</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">⑦</span><span class="sub-node-name">Human says "Go Live"</span><span class="sub-node-desc">Final launch button</span></div>
+            <div class="sub-node" style="border-color:rgba(239,68,68,0.3);"><span class="sub-node-icon" style="color:var(--red);">⑧</span><span class="sub-node-name">No more than 3 error retries</span><span class="sub-node-desc">If something breaks later</span></div>
           </div>
         </div>
         <div>
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--accent5);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Built-in Frustration Limits</div>
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--accent5);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">Built-in Frustration Limits</div>
           <div style="display:flex;flex-direction:column;gap:4px;">
-            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">5×</span><span class="sub-node-name">Coding error limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
-            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">4×</span><span class="sub-node-name">Test failure limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
-            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Practice check failures</span><span class="sub-node-desc">If stuck → ask human</span></div>
-            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Blueprint revision loops</span><span class="sub-node-desc">If stuck → ask human</span></div>
-            <div class="sub-node" style="border-color:rgba(245,158,11,0.15);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">External tool surprises</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.3);"><span class="sub-node-icon" style="color:var(--accent5);">5×</span><span class="sub-node-name">Coding error limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.3);"><span class="sub-node-icon" style="color:var(--accent5);">4×</span><span class="sub-node-name">Test failure limits</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.3);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Practice check failures</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.3);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">Blueprint revision loops</span><span class="sub-node-desc">If stuck → ask human</span></div>
+            <div class="sub-node" style="border-color:rgba(245,158,11,0.3);"><span class="sub-node-icon" style="color:var(--accent5);">3×</span><span class="sub-node-name">External tool surprises</span><span class="sub-node-desc">If stuck → ask human</span></div>
           </div>
-          <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.08em;margin-top:14px;line-height:1.6;">
+          <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);letter-spacing:0.08em;margin-top:14px;line-height:1.6;">
             Before an agent is allowed to try fixing a problem again, it must write down its thought process. If an agent tries the exact same broken fix twice, it only counts as one attempt.
           </div>
         </div>
@@ -1134,7 +1135,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 // Stagger particle animation delays for variety
 document.querySelectorAll('.particle').forEach((p, i) => {
   const base = parseFloat(p.style.animationDelay) || 0;
-  p.style.animationDelay = (base + (i * 0.15) % 1.2) + 's';
+  p.style.animationDelay = (base + (i * 0.3) % 1.2) + 's';
 });
 </script>
 </body>
