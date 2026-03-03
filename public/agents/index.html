@@ -356,16 +356,16 @@
   .connector-line .particle {
     position: absolute;
     width: 2px;
-    height: 8px;
+    height: 12px;
     border-radius: 1px;
     animation: flowDown 1.8s ease-in-out infinite;
   }
-  .particle.blue { background: var(--accent); }
-  .particle.cyan { background: var(--accent2); }
-  .particle.purple { background: var(--accent3); }
-  .particle.green { background: var(--accent4); }
-  .particle.amber { background: var(--accent5); }
-  .particle.red { background: var(--red); }
+  .particle.blue { background: var(--accent); box-shadow: 0 0 8px 2px var(--accent); }
+  .particle.cyan { background: var(--accent2); box-shadow: 0 0 8px 2px var(--accent2); }
+  .particle.purple { background: var(--accent3); box-shadow: 0 0 8px 2px var(--accent3); }
+  .particle.green { background: var(--accent4); box-shadow: 0 0 8px 2px var(--accent4); }
+  .particle.amber { background: var(--accent5); box-shadow: 0 0 8px 2px var(--accent5); }
+  .particle.red { background: var(--red); box-shadow: 0 0 8px 2px var(--red); }
 
   /* ── GATE NODE ── */
   .gate {
@@ -440,7 +440,7 @@
   .h-connector-line .particle {
     position: absolute;
     height: 2px;
-    width: 6px;
+    width: 12px;
     border-radius: 1px;
     animation: flowRight 1.4s ease-in-out infinite;
   }
@@ -724,7 +724,7 @@
     </div>
     <div class="lane-body">
       <div class="lane-agents">
-        <div class="agent-node" style="max-width: 480px;">
+        <div class="agent-node">
           <div class="agent-card red">
             <div class="agent-number">AGENT 06</div>
             <div class="agent-title"><span class="orb red"></span> Security &amp; Compliance Reviewer</div>
@@ -744,7 +744,7 @@
           </div>
         </div>
 
-        <div class="agent-node" style="max-width: 340px;">
+        <div class="agent-node">
           <div style="background:var(--surface);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
             <div style="font-family:'Space Mono',monospace;font-size:13px;color:var(--red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Security Checklist</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
