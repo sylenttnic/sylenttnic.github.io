@@ -39,7 +39,7 @@ export default function ServicesHub() {
             {/* Process Ecosystems Card */}
             <Link href="/services/process-ecosystems" className="group relative block h-full">
               <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col">
+              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-indigo-500/50 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)] transition-all duration-300 flex flex-col">
                 <div className="mb-6 w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-white/5 group-hover:bg-primary group-hover:text-white transition-colors">
                   <Layers className="w-8 h-8 text-indigo-400 group-hover:text-white" />
                 </div>
@@ -58,7 +58,7 @@ export default function ServicesHub() {
             {/* Automated Operations Card */}
             <Link href="/services/automated-operations" className="group relative block h-full">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-300 flex flex-col">
+              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] transition-all duration-300 flex flex-col">
                 <div className="mb-6 w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-white/5 group-hover:bg-blue-500 group-hover:text-white transition-colors">
                   <Zap className="w-8 h-8 text-blue-400 group-hover:text-white" />
                 </div>

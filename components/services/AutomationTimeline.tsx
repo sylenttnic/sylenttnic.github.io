@@ -6,25 +6,29 @@ import { Search, Map, Network, BookOpen } from "lucide-react";
 const phases = [
   {
     icon: Search,
-    title: "Phase 1: The Audit (Discovery)",
+    step: "Phase 1",
+    title: "The Audit (Discovery)",
     problem: "Data is trapped in silos. Humans are acting as \"copy-paste robots,\" moving information from one app to another manually.",
     solution: "We identify every manual touchpoint in your operations. We find the hidden inefficiencies where your team is losing hours to repetitive tasks.",
   },
   {
     icon: Map,
-    title: "Phase 2: The Blueprint (Logic Design)",
+    step: "Phase 2",
+    title: "The Blueprint (Logic Design)",
     problem: "Automating a bad process just makes bad results faster. Jumping into code without a plan leads to fragile systems.",
     solution: "We map the perfect flow before writing a single line of logic. We design a visual architecture that ensures scalability and error handling.",
   },
   {
     icon: Network,
-    title: "Phase 3: The Build (Integration)",
+    step: "Phase 3",
+    title: "The Build (Integration)",
     problem: "Your apps (CRM, Email, PM tools) don't talk to each other. Information is lost in translation or requires manual updates.",
     solution: "We connect your disparate apps into a unified nervous system. We build robust integrations using n8n that handle errors and edge cases automatically.",
   },
   {
     icon: BookOpen,
-    title: "Phase 4: The Handoff (Independence)",
+    step: "Phase 4",
+    title: "The Handoff (Independence)",
     problem: "You don't want to be dependent on an external agency forever. \"Black box\" solutions leave you helpless when things change.",
     solution: "We hand over a documented, visual system that you own. We provide training and documentation so your team can manage and evolve the automation.",
   },
@@ -47,19 +51,24 @@ export default function AutomationTimeline() {
             <phase.icon className="w-6 h-6" />
           </div>
 
-          <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors">{phase.title}</h3>
+          <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]">
+            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors flex items-center flex-wrap gap-3">
+              <span className="font-mono text-xs uppercase tracking-[0.18em] border-2 rounded px-3 py-1 bg-indigo-500/15 border-indigo-500 text-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.6)]">
+                {phase.step}
+              </span>
+              {phase.title}
+            </h3>
 
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-slate-300 mb-2 text-sm uppercase tracking-wider">The Problem:</h4>
+                <h4 className="font-mono font-bold text-slate-300 mb-2 text-sm uppercase tracking-wider">The Problem:</h4>
                 <p className="text-slate-400 leading-relaxed text-lg">
                   {phase.problem}
                 </p>
               </div>
 
               <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
-                <h4 className="font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
+                <h4 className="font-mono font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
                 <p className="text-slate-300 leading-relaxed">
                   {phase.solution}
                 </p>

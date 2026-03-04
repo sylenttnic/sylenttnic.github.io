@@ -6,19 +6,22 @@ import { Stethoscope, Hammer, Users } from "lucide-react";
 const phases = [
   {
     icon: Stethoscope,
-    title: "Step 1: The Silo Detective (Audit)",
+    step: "Step 1",
+    title: "The Silo Detective (Audit)",
     problem: "Departments (HR, Sales, Tech) are working in disconnected bubbles. Information is trapped in private chats or lost files.",
     solution: "We scan your entire ecosystem (Jira, Confluence, Slack) to map how your teams actually communicate versus how they should communicate. We identify the bottlenecks blocking collaboration.",
   },
   {
     icon: Hammer,
-    title: "Step 2: Workflow Harmonization (Refinery)",
+    step: "Step 2",
+    title: "Workflow Harmonization (Refinery)",
     problem: "\"Why is this process so hard?\" Friction creates burnout. Inconsistent processes confuse employees and slow down delivery.",
     solution: "We use AI to standardize your workflows. We turn messy, ad-hoc procedures into streamlined, automated pathways that guide your teams effortlessly from \"To-Do\" to \"Done.\"",
   },
   {
     icon: Users,
-    title: "Step 3: The Unified Knowledge Base (Activation)",
+    step: "Step 3",
+    title: "The Unified Knowledge Base (Activation)",
     problem: "\"I didn't know we had a policy for that.\"",
     solution: "We create a single source of truth. We deploy intelligent agents that bridge the gap between teams, allowing a Salesperson to get an answer from Engineering instantly, without chasing people down.",
   },
@@ -41,19 +44,24 @@ export default function ProcessTimeline() {
             <phase.icon className="w-6 h-6" />
           </div>
 
-          <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors">{phase.title}</h3>
+          <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]">
+            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors flex items-center flex-wrap gap-3">
+              <span className="font-mono text-xs uppercase tracking-[0.18em] border-2 rounded px-3 py-1 bg-indigo-500/15 border-indigo-500 text-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.6)]">
+                {phase.step}
+              </span>
+              {phase.title}
+            </h3>
 
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-slate-300 mb-2 text-sm uppercase tracking-wider">The Problem:</h4>
+                <h4 className="font-mono font-bold text-slate-300 mb-2 text-sm uppercase tracking-wider">The Problem:</h4>
                 <p className="text-slate-400 leading-relaxed text-lg">
                   {phase.problem}
                 </p>
               </div>
 
               <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
-                <h4 className="font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
+                <h4 className="font-mono font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
                 <p className="text-slate-300 leading-relaxed">
                   {phase.solution}
                 </p>

@@ -105,24 +105,24 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5">
+              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 group">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5 group-hover:shadow-[0_0_15px_currentColor] transition-shadow duration-300">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Centralized Intake</h3>
                 <p className="text-slate-400">One front door for all work. No ticket, no work.</p>
               </div>
 
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5">
+              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 group">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5 group-hover:shadow-[0_0_15px_currentColor] transition-shadow duration-300">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Single Source of Truth</h3>
                 <p className="text-slate-400">Dashboards, not status meetings.</p>
               </div>
 
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5">
+              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 group">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 shadow-xl shadow-black/20 text-primary mb-6 border border-white/5 group-hover:shadow-[0_0_15px_currentColor] transition-shadow duration-300">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">Automated Audits</h3>
