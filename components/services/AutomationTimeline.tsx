@@ -36,7 +36,7 @@ const phases = [
 
 export default function AutomationTimeline() {
   return (
-    <div className="relative border-l-4 border-white/10 ml-4 md:ml-12 space-y-16">
+    <div className="relative border-l-2 border-[var(--border)] ml-4 md:ml-12 space-y-16 before:content-[''] before:absolute before:left-[-2px] before:top-0 before:w-[2px] before:h-24 before:bg-accent before:animate-flow-down before:rounded-sm">
       {phases.map((phase, index) => (
         <motion.div
           key={index}
@@ -47,14 +47,14 @@ export default function AutomationTimeline() {
           className="relative pl-12 md:pl-16"
         >
           {/* Icon */}
-          <div className="absolute -left-[1.35rem] top-0 bg-slate-900 border-4 border-primary rounded-full p-2 text-primary shadow-[0_0_15px_rgba(99,102,241,0.5)]">
+          <div className="absolute -left-[1.35rem] top-0 bg-[var(--surface)] border-4 border-accent rounded-full p-2 text-accent shadow-[0_0_15px_var(--accent)]">
             <phase.icon className="w-6 h-6" />
           </div>
 
-          <div className="glass-card p-8 rounded-2xl group hover:bg-slate-900/80 transition-all duration-300 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]">
-            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-primary transition-colors flex items-center flex-wrap gap-3">
-              <span className="font-mono text-xs uppercase tracking-[0.18em] border-2 rounded px-3 py-1 bg-indigo-500/15 border-indigo-500 text-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.6)]">
-                {phase.step}
+          <div className="neon-card blue p-8 rounded-2xl group transition-all duration-300">
+            <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-accent transition-colors flex items-center flex-wrap gap-3">
+              <span className="lane-badge blue">
+                <span className="badge-text">{phase.step}</span>
               </span>
               {phase.title}
             </h3>
@@ -67,8 +67,8 @@ export default function AutomationTimeline() {
                 </p>
               </div>
 
-              <div className="bg-slate-950/50 p-6 rounded-xl border border-white/5">
-                <h4 className="font-mono font-bold text-primary mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
+              <div className="bg-[var(--surface2)] p-6 rounded-xl border border-[var(--border)]">
+                <h4 className="font-mono font-bold text-accent mb-2 text-sm uppercase tracking-wider">Our Solution:</h4>
                 <p className="text-slate-300 leading-relaxed">
                   {phase.solution}
                 </p>

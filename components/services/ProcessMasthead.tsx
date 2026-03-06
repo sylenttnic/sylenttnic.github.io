@@ -9,7 +9,9 @@ export default function ProcessMasthead() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
+      className="agents-header text-left md:text-center"
     >
+      <div className="logo-tag mx-auto justify-center flex mb-4 text-accent3">Process Ecosystems</div>
       <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight tracking-tight text-white drop-shadow-sm">
         Bridge the Gap Between Strategy and Execution
       </h1>
