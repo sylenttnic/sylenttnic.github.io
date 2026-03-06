@@ -191,7 +191,7 @@ export default function CostCalculator() {
 
   if (isSuccess) {
     return (
-      <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto text-center glass">
+      <div className="lane-body p-8 max-w-2xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -227,7 +227,7 @@ export default function CostCalculator() {
 
   if (currentStep >= questions.length) {
     return (
-      <div className="bg-slate-900 border border-white/10 p-8 rounded-2xl shadow-2xl max-w-2xl mx-auto glass">
+      <div className="lane-body p-8 max-w-2xl mx-auto">
         <div className="mb-6">
           <div
             role="progressbar"
@@ -341,7 +341,7 @@ export default function CostCalculator() {
   const currentQuestion = questions[currentStep];
 
   return (
-    <div className="bg-slate-900 border border-white/10 p-6 md:p-10 rounded-2xl shadow-2xl max-w-3xl mx-auto glass">
+    <div className="lane-body p-6 md:p-10 max-w-3xl mx-auto">
       <div className="mb-8">
         <div
           role="progressbar"
@@ -385,7 +385,7 @@ export default function CostCalculator() {
                 type="button"
                 className={cn(
                   "w-full text-left rounded-xl shadow-sm",
-                  "cursor-pointer transition-all border-2 border-transparent bg-slate-800/50 hover:bg-slate-800 hover:border-primary/50 group",
+                  "cursor-pointer transition-all border-2 border-[var(--border)] bg-[var(--surface2)] hover:border-[var(--border-light)] group",
                   "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 )}
                 onClick={() => handleOptionSelect(currentQuestion.id, option.value, option.numericValue)}

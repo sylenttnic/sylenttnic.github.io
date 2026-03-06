@@ -38,18 +38,17 @@ export default function ServicesHub() {
 
             {/* Process Ecosystems Card */}
             <Link href="/services/process-ecosystems" className="group relative block h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-indigo-500/50 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)] transition-all duration-300 flex flex-col">
-                <div className="mb-6 w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-white/5 group-hover:bg-primary group-hover:text-white transition-colors">
-                  <Layers className="w-8 h-8 text-indigo-400 group-hover:text-white" />
+              <div className="relative h-full neon-card purple p-10 rounded-3xl flex flex-col">
+                <div className="mb-6 w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20 group-hover:bg-purple-500/20 group-hover:border-purple-500/50 transition-colors">
+                  <Layers className="w-8 h-8 text-accent3 group-hover:text-white" />
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">Process Ecosystems</h2>
+                <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-accent3 transition-colors">Process Ecosystems</h2>
                 <p className="text-slate-400 mb-8 text-lg flex-grow">
                   Build the foundation. Gain clarity, structure your knowledge, and align your teams with Atlassian ecosystems.
                 </p>
 
-                <div className="flex items-center text-primary font-bold mt-auto group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center text-accent3 font-bold mt-auto group-hover:translate-x-2 transition-transform">
                   Explore Ecosystems <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
               </div>
@@ -57,18 +56,17 @@ export default function ServicesHub() {
 
             {/* Automated Operations Card */}
             <Link href="/services/automated-operations" className="group relative block h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative h-full bg-slate-900/80 border border-white/10 p-10 rounded-3xl overflow-hidden hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] transition-all duration-300 flex flex-col">
-                <div className="mb-6 w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center border border-white/5 group-hover:bg-blue-500 group-hover:text-white transition-colors">
-                  <Zap className="w-8 h-8 text-blue-400 group-hover:text-white" />
+              <div className="relative h-full neon-card blue p-10 rounded-3xl flex flex-col">
+                <div className="mb-6 w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-colors">
+                  <Zap className="w-8 h-8 text-accent group-hover:text-white" />
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">Automated Operations</h2>
+                <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-accent transition-colors">Automated Operations</h2>
                 <p className="text-slate-400 mb-8 text-lg flex-grow">
                   Scale without hiring. Eliminate manual error and increase velocity with n8n workflow automation.
                 </p>
 
-                <div className="flex items-center text-blue-400 font-bold mt-auto group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center text-accent font-bold mt-auto group-hover:translate-x-2 transition-transform">
                   Explore Automation <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
               </div>

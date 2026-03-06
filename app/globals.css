@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #07090f;
+    --surface: #0f1219;
+    --surface2: #161c28;
+    --surface3: #1c2436;
+    --border: #1e2a40;
+    --border-light: #253350;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --accent3: #8b5cf6;
+    --accent4: #10b981;
+    --accent5: #f59e0b;
+    --red: #ef4444;
+    --orange: #f97316;
+    --text: #e2e8f0;
+    --text-soft: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #64748b;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -20,7 +40,7 @@
   }
 
   .glass-card {
-    @apply bg-slate-900/60 backdrop-blur-md border border-white/5 hover:border-white/10 transition-colors duration-300;
+    @apply bg-[var(--surface)] backdrop-blur-md border-2 border-[var(--border)] hover:border-[var(--border-light)] hover:shadow-[0_0_24px_rgba(59,130,246,0.04)] transition-all duration-300 rounded-xl;
   }
 
   .text-gradient {
@@ -29,6 +49,74 @@
 
   .text-gradient-primary {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400;
+  }
+
+  /* Neon Utility Classes from agents.css */
+  .logo-tag {
+    @apply font-mono text-sm text-accent tracking-[0.2em] uppercase mb-2.5;
+  }
+
+  .lane-badge {
+    @apply font-mono text-[13px] tracking-[0.18em] uppercase py-1 px-3 rounded whitespace-nowrap border-2 relative overflow-hidden flex-shrink-0;
+  }
+  .lane-badge.blue { border-color: var(--accent); background: rgba(59,130,246,0.15); box-shadow: 0 0 10px rgba(59,130,246,0.6), inset 0 0 10px rgba(59,130,246,0.3); }
+  .lane-badge.cyan { border-color: var(--accent2); background: rgba(6,182,212,0.15); box-shadow: 0 0 10px rgba(6,182,212,0.6), inset 0 0 10px rgba(6,182,212,0.3); }
+  .lane-badge.purple { border-color: var(--accent3); background: rgba(139,92,246,0.15); box-shadow: 0 0 10px rgba(139,92,246,0.6), inset 0 0 10px rgba(139,92,246,0.3); }
+  .lane-badge.green { border-color: var(--accent4); background: rgba(16,185,129,0.15); box-shadow: 0 0 10px rgba(16,185,129,0.6), inset 0 0 10px rgba(16,185,129,0.3); }
+  .lane-badge.amber { border-color: var(--accent5); background: rgba(245,158,11,0.15); box-shadow: 0 0 10px rgba(245,158,11,0.6), inset 0 0 10px rgba(245,158,11,0.3); }
+  .lane-badge.red { border-color: var(--red); background: rgba(239,68,68,0.15); box-shadow: 0 0 10px rgba(239,68,68,0.6), inset 0 0 10px rgba(239,68,68,0.3); }
+  .lane-badge.orange { border-color: var(--orange); background: rgba(249,115,22,0.15); box-shadow: 0 0 10px rgba(249,115,22,0.6), inset 0 0 10px rgba(249,115,22,0.3); }
+
+  .badge-text {
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    @apply animate-text-sweep;
+  }
+  .lane-badge.blue .badge-text { background-image: linear-gradient(90deg, var(--accent) 0%, #fff 50%, var(--accent) 100%); }
+  .lane-badge.cyan .badge-text { background-image: linear-gradient(90deg, var(--accent2) 0%, #fff 50%, var(--accent2) 100%); }
+  .lane-badge.purple .badge-text { background-image: linear-gradient(90deg, var(--accent3) 0%, #fff 50%, var(--accent3) 100%); }
+  .lane-badge.green .badge-text { background-image: linear-gradient(90deg, var(--accent4) 0%, #fff 50%, var(--accent4) 100%); }
+  .lane-badge.amber .badge-text { background-image: linear-gradient(90deg, var(--accent5) 0%, #fff 50%, var(--accent5) 100%); }
+  .lane-badge.red .badge-text { background-image: linear-gradient(90deg, var(--red) 0%, #fff 50%, var(--red) 100%); }
+  .lane-badge.orange .badge-text { background-image: linear-gradient(90deg, var(--orange) 0%, #fff 50%, var(--orange) 100%); }
+
+  .neon-card {
+    @apply bg-[var(--surface)] border-2 border-[var(--border)] rounded-xl relative overflow-hidden transition-all duration-300;
+  }
+  .neon-card:hover {
+    @apply border-[var(--border-light)] shadow-[0_0_24px_rgba(59,130,246,0.04)];
+  }
+  .neon-card::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 h-0.5;
+  }
+  .neon-card.blue::before { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .neon-card.cyan::before { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+  .neon-card.purple::before { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+  .neon-card.green::before { background: var(--accent4); box-shadow: 0 0 8px var(--accent4); }
+  .neon-card.amber::before { background: var(--accent5); box-shadow: 0 0 8px var(--accent5); }
+  .neon-card.red::before { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .neon-card.orange::before { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+
+  .orb {
+    @apply w-[7px] h-[7px] rounded-full inline-block animate-pulse-orb;
+  }
+  .orb.blue { color: var(--accent); background: #fff; }
+  .orb.cyan { color: var(--accent2); background: #fff; }
+  .orb.purple { color: var(--accent3); background: #fff; }
+  .orb.green { color: var(--accent4); background: #fff; }
+  .orb.amber { color: var(--accent5); background: #fff; }
+  .orb.red { color: var(--red); background: #fff; }
+  .orb.orange { color: var(--orange); background: #fff; }
+
+  .lane-body {
+    background: rgba(15,18,25,0.5);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 40px;
+    position: relative;
   }
 }
 
