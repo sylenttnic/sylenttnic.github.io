@@ -2,6 +2,7 @@ import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw } from "lucide-re
 import CostCalculator from "@/components/CostCalculator";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -58,19 +59,19 @@ const problemCards = [
 ];
 
 const apps = [
-  "Shopify",
-  "QuickBooks",
-  "Stripe",
-  "Square",
-  "HubSpot",
-  "Xero",
-  "Calendly",
-  "Salesforce",
-  "ServiceTitan",
-  "Jobber",
-  "ShipStation",
-  "Recharge",
-  "FreshBooks",
+  { name: "Shopify", logo: "/assets/img/logos/shopify.svg" },
+  { name: "QuickBooks", logo: "/assets/img/logos/quickbooks.svg" },
+  { name: "Stripe", logo: "/assets/img/logos/stripe.svg" },
+  { name: "Square", logo: "/assets/img/logos/square.svg" },
+  { name: "HubSpot", logo: "/assets/img/logos/hubspot.svg" },
+  { name: "Xero", logo: "/assets/img/logos/xero.svg" },
+  { name: "Calendly", logo: "/assets/img/logos/calendly.svg" },
+  { name: "Salesforce", logo: "/assets/img/logos/salesforce.svg" },
+  { name: "ServiceTitan", logo: "/assets/img/logos/servicetitan.svg" },
+  { name: "Jobber", logo: "/assets/img/logos/jobber.svg" },
+  { name: "ShipStation", logo: "/assets/img/logos/shipstation.svg" },
+  { name: "Recharge", logo: "/assets/img/logos/recharge.svg" },
+  { name: "FreshBooks", logo: "/assets/img/logos/freshbooks.svg" },
 ];
 
 const jsonLd = {
@@ -258,18 +259,25 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
               {apps.map((app) => (
                 <div
-                  key={app}
-                  className="glass-card px-6 py-3 rounded-xl hover:border-white/20 transition-colors"
+                  key={app.name}
+                  className="glass-card px-6 py-4 rounded-xl flex items-center gap-3 hover:border-white/20 transition-colors"
                 >
+                  <Image
+                    src={app.logo}
+                    alt={app.name}
+                    width={24}
+                    height={24}
+                    className="opacity-70 invert"
+                  />
                   <span className="text-slate-300 font-medium text-sm">
-                    {app}
+                    {app.name}
                   </span>
                 </div>
               ))}
-              <div className="glass-card px-6 py-3 rounded-xl border-dashed hover:border-white/20 transition-colors">
+              <div className="glass-card px-6 py-4 rounded-xl flex items-center gap-3 border-dashed hover:border-white/20 transition-colors">
                 <span className="text-slate-400 font-medium text-sm">
                   + many more
                 </span>
