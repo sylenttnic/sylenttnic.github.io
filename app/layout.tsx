@@ -17,19 +17,28 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sylentt Partners | Smart Automation & Workplace Optimization",
+  title: "Sylentt | Your business apps don't talk to each other. We fix that.",
   description:
-    "Transform your business with Sylentt Partners. Experts in smart automation, workflow optimization, digital transformation, and technology integration.",
+    "Sylentt connects your business apps so your team stops manually copying data between systems. Reliable automation you own, with built-in monitoring.",
   keywords: [
-    "smart automation",
-    "workflow optimization",
-    "digital transformation",
-    "workplace efficiency",
-    "business process automation",
+    "business app integration",
+    "connect QuickBooks to Jobber",
+    "automate Shopify to ShipStation",
+    "stop manually entering data",
+    "small business automation",
+    "Cache Valley Utah",
   ],
-  authors: [{ name: "Sylentt Partners" }],
+  authors: [{ name: "Sylentt" }],
   icons: {
     icon: "/logo-symbol.png",
+  },
+  openGraph: {
+    title: "Sylentt - Your business apps don't talk to each other. We fix that.",
+    description:
+      "We build the connections between your business tools so data flows automatically. No monthly platform fees. You own everything.",
+    type: "website",
+    url: "https://sylentt.com",
+    siteName: "Sylentt",
   },
 };
 
