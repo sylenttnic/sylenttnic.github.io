@@ -8,6 +8,7 @@ import {
   Eye,
 } from "lucide-react";
 import CostCalculator from "@/components/CostCalculator";
+import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
 
@@ -73,7 +74,7 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <header className="relative min-h-[60dvh] flex items-center justify-center text-center text-white overflow-hidden pt-20 pb-20">
+      <header className="relative min-h-[100dvh] flex items-center justify-center text-center text-white overflow-hidden pt-20 pb-32">
         <div className="absolute inset-0 z-0">
           <picture>
             <source
@@ -104,6 +105,8 @@ export default function ServicesPage() {
             exactly what that looks like.
           </p>
         </div>
+
+        <ScrollIndicator />
       </header>
 
       {/* Service Sections */}
