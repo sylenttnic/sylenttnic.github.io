@@ -124,16 +124,17 @@ export default function ServicesPage() {
             <div className="container mx-auto px-4">
               <SectionFade>
                 <div className="max-w-4xl mx-auto">
-                  <div
-                    className={`mb-8 w-14 h-14 rounded-xl bg-${service.color}-500/10 flex items-center justify-center border border-${service.color}-500/20`}
-                  >
-                    <Icon className="w-7 h-7 text-slate-300" />
-                  </div>
-
                   {/* The Pain */}
-                  <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                    {service.pain}
-                  </h2>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div
+                      className={`flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-${service.color}-500/10 flex items-center justify-center border border-${service.color}-500/20`}
+                    >
+                      <Icon className="w-5 h-5 md:w-7 md:h-7 text-slate-300" />
+                    </div>
+                    <h2 className="text-2xl md:text-4xl font-bold text-white">
+                      {service.pain}
+                    </h2>
+                  </div>
                   <p className="text-slate-400 text-lg leading-relaxed mb-8">
                     {service.detail}
                   </p>
@@ -173,26 +174,24 @@ export default function ServicesPage() {
             <div className="max-w-4xl mx-auto">
               <Link
                 href="/services/agents"
-                className="group block neon-card blue p-10 rounded-3xl"
+                className="group block neon-card blue p-6 md:p-10 rounded-3xl"
               >
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-colors">
-                    <Eye className="w-8 h-8 text-accent group-hover:text-white" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-colors">
+                    <Eye className="w-5 h-5 md:w-8 md:h-8 text-accent group-hover:text-white" />
                   </div>
-                  <div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-                      See how we build it
-                    </h2>
-                    <p className="text-slate-400 text-lg mb-4">
-                      We use a structured, step-by-step process to design, build,
-                      test, and hand off every integration. Take a look at the
-                      full workflow.
-                    </p>
-                    <div className="flex items-center text-accent font-bold group-hover:translate-x-2 transition-transform">
-                      View the build process{" "}
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </div>
-                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">
+                    See how we build it
+                  </h2>
+                </div>
+                <p className="text-slate-400 text-lg mb-4">
+                  We use a structured, step-by-step process to design, build,
+                  test, and hand off every integration. Take a look at the
+                  full workflow.
+                </p>
+                <div className="flex items-center text-accent font-bold group-hover:translate-x-2 transition-transform">
+                  View the build process{" "}
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
               </Link>
             </div>
