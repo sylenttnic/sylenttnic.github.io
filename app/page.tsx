@@ -2,7 +2,6 @@ import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw } from "lucide-re
 import CostCalculator from "@/components/CostCalculator";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -39,14 +38,14 @@ const problemCards = [
     icon: AlertTriangle,
     title: "You find out something broke days after it happened.",
     description:
-      "A subscription did not get created. An invoice did not sync. A fulfillment was missed. Nobody knew until a customer complained. We build monitoring that catches failures in real time and alerts before anyone notices.",
+      "A subscription never got created. An invoice never synced. A fulfillment was missed. Nobody knew until a customer complained. We build monitoring that catches failures in real time and alerts before anyone notices.",
     color: "amber",
   },
   {
     icon: RotateCcw,
     title: "You are paying for Zapier or Make and things still break.",
     description:
-      "Those tools are rentals. They charge you more the busier you get. When a Zap fails at midnight, nobody knows. What we build, you own. It runs on your account. It retries automatically. It does not silently lose events.",
+      "Those tools are rentals. They charge you more the busier you get. When a Zap fails at midnight, nobody knows. What we build, you own. It runs on your account. It retries automatically. It does not silently drop the ball.",
     color: "purple",
   },
   {
@@ -59,19 +58,19 @@ const problemCards = [
 ];
 
 const apps = [
-  { name: "Shopify", logo: "/assets/img/logos/shopify.svg" },
-  { name: "QuickBooks", logo: "/assets/img/logos/quickbooks.svg" },
-  { name: "Stripe", logo: "/assets/img/logos/stripe.svg" },
-  { name: "Square", logo: "/assets/img/logos/square.svg" },
-  { name: "HubSpot", logo: "/assets/img/logos/hubspot.svg" },
-  { name: "Xero", logo: "/assets/img/logos/xero.svg" },
-  { name: "Calendly", logo: "/assets/img/logos/calendly.svg" },
-  { name: "Salesforce", logo: null },
-  { name: "ServiceTitan", logo: null },
-  { name: "Jobber", logo: null },
-  { name: "ShipStation", logo: null },
-  { name: "Recharge", logo: null },
-  { name: "FreshBooks", logo: null },
+  "Shopify",
+  "QuickBooks",
+  "Stripe",
+  "Square",
+  "HubSpot",
+  "Xero",
+  "Calendly",
+  "Salesforce",
+  "ServiceTitan",
+  "Jobber",
+  "ShipStation",
+  "Recharge",
+  "FreshBooks",
 ];
 
 const jsonLd = {
@@ -132,7 +131,7 @@ export default function Home() {
             Your team spends hours copying data between apps, checking that one
             system matches another, and finding out days later when something
             slipped through the cracks. We build the wiring between your tools
-            so that stops.
+            so your team does not have to be.
           </p>
           <a
             href="#tell-us"
@@ -255,35 +254,22 @@ export default function Home() {
                 Systems we connect
               </h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-                If your business runs on it, we can probably connect it.
+                If your business runs on it, we can connect it.
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
               {apps.map((app) => (
                 <div
-                  key={app.name}
-                  className="glass-card px-6 py-4 rounded-xl flex items-center gap-3 hover:border-white/20 transition-colors"
+                  key={app}
+                  className="glass-card px-6 py-3 rounded-xl hover:border-white/20 transition-colors"
                 >
-                  {app.logo ? (
-                    <Image
-                      src={app.logo}
-                      alt={app.name}
-                      width={24}
-                      height={24}
-                      className="opacity-70 invert"
-                    />
-                  ) : (
-                    <div className="w-6 h-6 rounded bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-300">
-                      {app.name.charAt(0)}
-                    </div>
-                  )}
                   <span className="text-slate-300 font-medium text-sm">
-                    {app.name}
+                    {app}
                   </span>
                 </div>
               ))}
-              <div className="glass-card px-6 py-4 rounded-xl flex items-center gap-3 border-dashed hover:border-white/20 transition-colors">
+              <div className="glass-card px-6 py-3 rounded-xl border-dashed hover:border-white/20 transition-colors">
                 <span className="text-slate-400 font-medium text-sm">
                   + many more
                 </span>
@@ -306,7 +292,7 @@ export default function Home() {
                 <p className="text-slate-300 text-lg leading-relaxed mb-4">
                   An education company was manually creating customer
                   subscriptions every time a specific type of order came in. A
-                  team member spent hours each week copying data between three
+                  team member spent nearly a full day each week copying data between three
                   different platforms.
                 </p>
                 <p className="text-slate-300 text-lg leading-relaxed mb-4">

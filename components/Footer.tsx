@@ -15,8 +15,14 @@ export default function Footer() {
             className="object-contain"
           />
         </div>
-        <div className="text-center text-slate-500 text-sm">
+        <div className="text-center text-slate-500 text-sm space-y-1">
           <p>&copy; {currentYear} Sylentt Partners. All Rights Reserved.</p>
+          <p>
+            Based in Cache Valley, Utah &middot;{" "}
+            <a href="mailto:contact@sylentt.com" className="hover:text-slate-300 transition-colors">
+              contact@sylentt.com
+            </a>
+          </p>
         </div>
       </div>
     </footer>
