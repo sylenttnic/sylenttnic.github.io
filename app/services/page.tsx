@@ -181,16 +181,16 @@ export default function ServicesPage() {
                     <Eye className="w-5 h-5 md:w-8 md:h-8 text-accent group-hover:text-white" />
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">
-                    See how we build it
+                    How we build it
                   </h2>
                 </div>
                 <p className="text-slate-400 text-lg mb-4">
-                  We use a structured, step-by-step process to design, build,
-                  test, and hand off every integration. Take a look at the
-                  full workflow.
+                  Every integration follows the same structured process. Six
+                  phases, multiple quality checkpoints, and nothing goes live
+                  without your approval.
                 </p>
                 <div className="flex items-center text-accent font-bold group-hover:translate-x-2 transition-transform">
-                  View the build process{" "}
+                  See the build process{" "}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
               </Link>
