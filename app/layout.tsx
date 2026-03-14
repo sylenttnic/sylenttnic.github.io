@@ -17,9 +17,10 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+  metadataBase: new URL("https://sylentt.com"),
+  title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops manually copying data between systems. Reliable automation you own, with built-in monitoring.",
+    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
   keywords: [
     "business app integration",
     "connect QuickBooks to Jobber",
@@ -29,16 +30,28 @@ export const metadata: Metadata = {
     "Cache Valley Utah",
   ],
   authors: [{ name: "Sylentt" }],
+  robots: { index: true, follow: true },
   icons: {
     icon: "/logo-symbol.png",
   },
   openGraph: {
-    title: "Sylentt - Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "We build the connections between your business tools so data flows automatically. No monthly platform fees. You own everything.",
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     type: "website",
     url: "https://sylentt.com",
     siteName: "Sylentt",
+    images: [{ url: "/logo_full.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    description:
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    images: ["/logo_full.png"],
+  },
+  alternates: {
+    canonical: "https://sylentt.com/",
   },
 };
 

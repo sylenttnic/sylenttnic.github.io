@@ -7,7 +7,25 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-User-agent: Googlebot
+User-agent: Applebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: DuckAssistBot
 Allow: /
 
 Sitemap: https://sylentt.com/sitemap.xml

@@ -181,7 +181,7 @@ export default function WizardForm() {
       summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`,
     };
 
-    console.log("Submitting payload to n8n:", payload);
+    console.log("Submitting payload:", payload);
 
     try {
       // Use environment variable or fallback to the specific key for this deployment

@@ -43,6 +43,7 @@ const config: Config = {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "fade-in-up": "fadeInUp 0.8s ease-out forwards",
         "pulse-orb": "pulseOrb 2.5s ease-in-out infinite",
+        "pulse-glow": "pulseGlow 3s ease-in-out infinite",
         "text-sweep": "textSweep 5.4s linear infinite",
         "flow-down": "flowDown 1.8s ease-in-out infinite",
         "flow-right": "flowRight 1.4s ease-in-out infinite",
@@ -71,6 +72,10 @@ const config: Config = {
           "30%": { opacity: "1" },
           "70%": { opacity: "1" },
           "100%": { left: "calc(100% + 6px)", opacity: "0" },
+        },
+        pulseGlow: {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(99,102,241,0.25), 0 0 40px rgba(99,102,241,0.1)" },
+          "50%": { boxShadow: "0 0 30px rgba(99,102,241,0.45), 0 0 60px rgba(99,102,241,0.2)" },
         },
       },
     },

@@ -13,13 +13,23 @@ import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "What We Build | Sylentt",
+  title: "Services | Sylentt \u2014 Custom Business App Integration",
   description:
-    "We connect your business apps so data flows automatically. See exactly what changes, what you own, and how ongoing support works.",
+    "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
   openGraph: {
-    title: "What We Build | Sylentt",
+    title: "Services | Sylentt \u2014 Custom Business App Integration",
     description:
-      "We connect your business apps so data flows automatically. No monthly platform fees. You own everything.",
+      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    url: "https://sylentt.com/services/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | Sylentt \u2014 Custom Business App Integration",
+    description:
+      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+  },
+  alternates: {
+    canonical: "https://sylentt.com/services/",
   },
 };
 
@@ -234,7 +244,7 @@ export default function ServicesPage() {
       >
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative pb-6">
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Tell us what&apos;s broken
               </h2>
@@ -242,6 +252,7 @@ export default function ServicesPage() {
                 Answer a few quick questions so we can see where your time is
                 going.
               </p>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" style={{ boxShadow: '0 0 12px rgba(99,102,241,0.4)' }} />
             </div>
             <CostCalculator />
           </SectionFade>

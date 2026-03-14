@@ -7,9 +7,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+  title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops manually copying data between systems. Reliable automation you own, with built-in monitoring.",
+    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+  openGraph: {
+    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    description:
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    url: "https://sylentt.com/",
+  },
+  alternates: {
+    canonical: "https://sylentt.com/",
+  },
 };
 
 const testimonials = [
@@ -74,22 +83,67 @@ const apps = [
   { name: "FreshBooks", logo: "/assets/img/logos/freshbooks.svg" },
 ];
 
-const jsonLd = {
+const jsonLdOrg = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Sylentt",
-  url: "https://sylentt.com",
+  alternateName: ["Sylentt LLC", "Sylentt Partners"],
   description:
-    "Business app integration and automation for small companies. We connect your tools so your team stops manually copying data between systems.",
-  areaServed: {
-    "@type": "Place",
-    name: "Cache Valley, Utah",
-  },
-  serviceType: [
-    "Business Automation",
-    "Software Integration",
-    "API Integration",
+    "Business app integration and workflow automation for small businesses. We build custom connections between your tools so your team stops being the copy-paste layer.",
+  url: "https://sylentt.com",
+  email: "contact@sylentt.com",
+  areaServed: [
+    { "@type": "Place", name: "Cache Valley, Utah" },
+    { "@type": "Country", name: "United States" },
   ],
+  serviceType: [
+    "Business Application Integration",
+    "Workflow Automation",
+    "API Integration",
+    "SaaS Integration",
+  ],
+  knowsAbout: [
+    "Shopify Integration",
+    "QuickBooks Integration",
+    "Stripe Integration",
+    "HubSpot Integration",
+    "Xero Integration",
+    "Business Process Automation",
+    "API Development",
+    "Serverless Architecture",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cache Valley",
+    addressRegion: "UT",
+    addressCountry: "US",
+  },
+  sameAs: [],
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Sylentt",
+  alternateName: ["Sylentt LLC", "Sylentt Partners"],
+  url: "https://sylentt.com",
+};
+
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Business Application Integration",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Sylentt",
+    url: "https://sylentt.com",
+  },
+  description:
+    "Custom integrations between business applications. We connect tools like Shopify, QuickBooks, Stripe, HubSpot, Xero, and others so data flows automatically between them.",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
 };
 
 export default function Home() {
@@ -97,7 +151,15 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
       />
 
       {/* Section 1: Hero */}
@@ -136,7 +198,7 @@ export default function Home() {
           </p>
           <a
             href="#tell-us"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40 group"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group"
           >
             Tell us what&apos;s broken
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -201,7 +263,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-y-8 md:gap-y-0 items-stretch max-w-5xl mx-auto">
               <div className="text-center p-8 rounded-2xl neon-card blue transition-all duration-300 group">
                 <div className="text-5xl font-black text-primary/30 mb-4 group-hover:text-primary/50 transition-colors">
                   01
@@ -215,6 +277,13 @@ export default function Home() {
                 </p>
               </div>
 
+              {/* Connector 1-2 */}
+              <div className="hidden md:flex items-center justify-center px-2">
+                <div className="relative w-10 h-[2px] bg-[var(--border)]">
+                  <div className="absolute top-0 w-[12px] h-[2px] bg-white rounded-full animate-flow-right" style={{ boxShadow: '0 0 8px 2px var(--accent)' }} />
+                </div>
+              </div>
+
               <div className="text-center p-8 rounded-2xl neon-card cyan transition-all duration-300 group">
                 <div className="text-5xl font-black text-cyan-500/30 mb-4 group-hover:text-cyan-500/50 transition-colors">
                   02
@@ -226,6 +295,13 @@ export default function Home() {
                   When something happens in one app, the others update
                   automatically. No copying. No checking. No hoping it worked.
                 </p>
+              </div>
+
+              {/* Connector 2-3 */}
+              <div className="hidden md:flex items-center justify-center px-2">
+                <div className="relative w-10 h-[2px] bg-[var(--border)]">
+                  <div className="absolute top-0 w-[12px] h-[2px] bg-white rounded-full animate-flow-right" style={{ boxShadow: '0 0 8px 2px var(--accent2)', animationDelay: '0.6s' }} />
+                </div>
               </div>
 
               <div className="text-center p-8 rounded-2xl neon-card purple transition-all duration-300 group">
@@ -361,7 +437,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative pb-6">
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Tell us what&apos;s broken
               </h2>
@@ -369,6 +445,7 @@ export default function Home() {
                 Answer a few quick questions so we can see where your time is
                 going.
               </p>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" style={{ boxShadow: '0 0 12px rgba(99,102,241,0.4)' }} />
             </div>
             <CostCalculator />
           </SectionFade>
