@@ -7,9 +7,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+  title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops manually copying data between systems. Reliable automation you own, with built-in monitoring.",
+    "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+  openGraph: {
+    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    description:
+      "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    url: "https://sylentt.com/",
+  },
+  alternates: {
+    canonical: "https://sylentt.com/",
+  },
 };
 
 const testimonials = [
