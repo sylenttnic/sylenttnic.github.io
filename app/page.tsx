@@ -198,7 +198,7 @@ export default function Home() {
           </p>
           <a
             href="#tell-us"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40 group"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group"
           >
             Tell us what&apos;s broken
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -263,7 +263,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-y-8 md:gap-y-0 items-stretch max-w-5xl mx-auto">
               <div className="text-center p-8 rounded-2xl neon-card blue transition-all duration-300 group">
                 <div className="text-5xl font-black text-primary/30 mb-4 group-hover:text-primary/50 transition-colors">
                   01
@@ -277,6 +277,13 @@ export default function Home() {
                 </p>
               </div>
 
+              {/* Connector 1-2 */}
+              <div className="hidden md:flex items-center justify-center px-2">
+                <div className="relative w-10 h-[2px] bg-[var(--border)]">
+                  <div className="absolute top-0 w-[12px] h-[2px] bg-white rounded-full animate-flow-right" style={{ boxShadow: '0 0 8px 2px var(--accent)' }} />
+                </div>
+              </div>
+
               <div className="text-center p-8 rounded-2xl neon-card cyan transition-all duration-300 group">
                 <div className="text-5xl font-black text-cyan-500/30 mb-4 group-hover:text-cyan-500/50 transition-colors">
                   02
@@ -288,6 +295,13 @@ export default function Home() {
                   When something happens in one app, the others update
                   automatically. No copying. No checking. No hoping it worked.
                 </p>
+              </div>
+
+              {/* Connector 2-3 */}
+              <div className="hidden md:flex items-center justify-center px-2">
+                <div className="relative w-10 h-[2px] bg-[var(--border)]">
+                  <div className="absolute top-0 w-[12px] h-[2px] bg-white rounded-full animate-flow-right" style={{ boxShadow: '0 0 8px 2px var(--accent2)', animationDelay: '0.6s' }} />
+                </div>
               </div>
 
               <div className="text-center p-8 rounded-2xl neon-card purple transition-all duration-300 group">
@@ -423,7 +437,7 @@ export default function Home() {
       >
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative pb-6">
               <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Tell us what&apos;s broken
               </h2>
@@ -431,6 +445,7 @@ export default function Home() {
                 Answer a few quick questions so we can see where your time is
                 going.
               </p>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" style={{ boxShadow: '0 0 12px rgba(99,102,241,0.4)' }} />
             </div>
             <CostCalculator />
           </SectionFade>
