@@ -23,7 +23,7 @@ const phases = [
     step: "Phase 3",
     title: "The Build (Integration)",
     problem: "Your apps (CRM, Email, PM tools) don't talk to each other. Information is lost in translation or requires manual updates.",
-    solution: "We connect your disparate apps into a unified nervous system. We build robust integrations using n8n that handle errors and edge cases automatically.",
+    solution: "We connect your disparate apps into a unified nervous system. We build integrations that handle errors and edge cases automatically.",
   },
   {
     icon: BookOpen,

@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   RotateCcw,
   Plug,
-  Eye,
 } from "lucide-react";
 import CostCalculator from "@/components/CostCalculator";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
@@ -166,38 +165,6 @@ export default function ServicesPage() {
           </section>
         );
       })}
-
-      {/* How We Build It - Agents Card */}
-      <section className="py-20 md:py-28 bg-slate-950">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-4xl mx-auto">
-              <Link
-                href="/services/agents"
-                className="group block neon-card blue p-6 md:p-10 rounded-3xl"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-colors">
-                    <Eye className="w-5 h-5 md:w-8 md:h-8 text-accent group-hover:text-white" />
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">
-                    How we build it
-                  </h2>
-                </div>
-                <p className="text-slate-400 text-lg mb-4">
-                  Every integration follows the same structured process. Six
-                  phases, multiple quality checkpoints, and nothing goes live
-                  without your approval.
-                </p>
-                <div className="flex items-center text-accent font-bold group-hover:translate-x-2 transition-transform">
-                  See the build process{" "}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </div>
-              </Link>
-            </div>
-          </SectionFade>
-        </div>
-      </section>
 
       {/* Ongoing Support */}
       <section className="py-20 md:py-28 bg-slate-900/30 border-y border-white/5">
