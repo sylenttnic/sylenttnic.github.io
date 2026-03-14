@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sylentt.com"),
   title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
   keywords: [
     "business app integration",
     "connect QuickBooks to Jobber",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     type: "website",
     url: "https://sylentt.com",
     siteName: "Sylentt",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
   },
   alternates: {

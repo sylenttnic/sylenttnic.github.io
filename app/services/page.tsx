@@ -12,20 +12,20 @@ import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services | Sylentt - Custom Business App Integration",
+  title: "Services | Sylentt \u2014 Custom Business App Integration",
   description:
-    "We build automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
   openGraph: {
-    title: "Services | Sylentt - Custom Business App Integration",
+    title: "Services | Sylentt \u2014 Custom Business App Integration",
     description:
-      "We build automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     url: "https://sylentt.com/services/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services | Sylentt - Custom Business App Integration",
+    title: "Services | Sylentt \u2014 Custom Business App Integration",
     description:
-      "We build automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
   },
   alternates: {
     canonical: "https://sylentt.com/services/",

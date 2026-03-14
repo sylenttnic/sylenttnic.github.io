@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Sylentt - Business Automation Consultancy",
+  title: "About | Sylentt \u2014 Business Automation Consultancy in Cache Valley, Utah",
   description:
     "Sylentt is a business automation consultancy based in Cache Valley, Utah. We build custom integrations that connect your business apps.",
   openGraph: {
-    title: "About | Sylentt - Business Automation Consultancy",
+    title: "About | Sylentt \u2014 Business Automation Consultancy in Cache Valley, Utah",
     description:
       "Sylentt is a business automation consultancy based in Cache Valley, Utah. We build custom integrations that connect your business apps.",
     url: "https://sylentt.com/about/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About | Sylentt - Business Automation Consultancy",
+    title: "About | Sylentt \u2014 Business Automation Consultancy in Cache Valley, Utah",
     description:
       "Sylentt is a business automation consultancy based in Cache Valley, Utah. We build custom integrations that connect your business apps.",
   },

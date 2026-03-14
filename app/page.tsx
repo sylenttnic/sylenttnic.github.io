@@ -9,11 +9,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
   openGraph: {
     title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "We connect your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     url: "https://sylentt.com/",
   },
   alternates: {
@@ -87,6 +87,7 @@ const jsonLdOrg = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Sylentt",
+  alternateName: ["Sylentt LLC", "Sylentt Partners"],
   description:
     "Business app integration and workflow automation for small businesses. We build custom connections between your tools so your team stops being the copy-paste layer.",
   url: "https://sylentt.com",
@@ -117,6 +118,15 @@ const jsonLdOrg = {
     addressRegion: "UT",
     addressCountry: "US",
   },
+  sameAs: [],
+};
+
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Sylentt",
+  alternateName: ["Sylentt LLC", "Sylentt Partners"],
+  url: "https://sylentt.com",
 };
 
 const jsonLdService = {
@@ -146,6 +156,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
       />
 
       {/* Section 1: Hero */}
