@@ -83,22 +83,57 @@ const apps = [
   { name: "FreshBooks", logo: "/assets/img/logos/freshbooks.svg" },
 ];
 
-const jsonLd = {
+const jsonLdOrg = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "Sylentt",
-  url: "https://sylentt.com",
   description:
-    "Business app integration and automation for small companies. We connect your tools so your team stops manually copying data between systems.",
-  areaServed: {
-    "@type": "Place",
-    name: "Cache Valley, Utah",
-  },
-  serviceType: [
-    "Business Automation",
-    "Software Integration",
-    "API Integration",
+    "Business app integration and workflow automation for small businesses. We build custom connections between your tools so your team stops being the copy-paste layer.",
+  url: "https://sylentt.com",
+  email: "contact@sylentt.com",
+  areaServed: [
+    { "@type": "Place", name: "Cache Valley, Utah" },
+    { "@type": "Country", name: "United States" },
   ],
+  serviceType: [
+    "Business Application Integration",
+    "Workflow Automation",
+    "API Integration",
+    "SaaS Integration",
+  ],
+  knowsAbout: [
+    "Shopify Integration",
+    "QuickBooks Integration",
+    "Stripe Integration",
+    "HubSpot Integration",
+    "Xero Integration",
+    "Business Process Automation",
+    "API Development",
+    "Serverless Architecture",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cache Valley",
+    addressRegion: "UT",
+    addressCountry: "US",
+  },
+};
+
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Business Application Integration",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Sylentt",
+    url: "https://sylentt.com",
+  },
+  description:
+    "Custom integrations between business applications. We connect tools like Shopify, QuickBooks, Stripe, HubSpot, Xero, and others so data flows automatically between them.",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
 };
 
 export default function Home() {
@@ -106,7 +141,11 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
       />
 
       {/* Section 1: Hero */}
