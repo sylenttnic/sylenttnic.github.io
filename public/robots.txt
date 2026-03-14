@@ -7,7 +7,13 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-User-agent: Googlebot
+User-agent: Applebot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
 Allow: /
 
 Sitemap: https://sylentt.com/sitemap.xml
