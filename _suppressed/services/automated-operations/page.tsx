@@ -1,4 +1,4 @@
-import CostCalculator from "@/components/CostCalculator";
+import FitAssessment from "@/components/FitAssessment";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import AutomationMasthead from "@/components/services/AutomationMasthead";
 import AutomationTimeline from "@/components/services/AutomationTimeline";
@@ -69,7 +69,7 @@ export default function AutomatedOperations() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Calculate Your Operational Burn Rate</h2>
             <p className="text-slate-400">See how much manual work is actually costing you.</p>
           </div>
-          <CostCalculator />
+          <FitAssessment />
         </div>
       </section>
     </>
