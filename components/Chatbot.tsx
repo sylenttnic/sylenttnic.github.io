@@ -69,6 +69,9 @@ export default function Chatbot() {
             --chat--input--text-color: var(--chat--color-white);
             --chat--input--border: 1px solid var(--chat--color-blue-500);
             --chat--input--border-radius: 8px;
+            --chat--input--container--background: transparent;
+            --chat--input--container--border: none;
+            --chat--footer--border-top: none;
 
             /* Font */
             --chat--font-family: var(--font-jakarta), sans-serif;
@@ -162,6 +165,7 @@ export default function Chatbot() {
             createChat({
               webhookUrl: "https://hnet.sylentt.com/webhook/fafb5729-49b2-4719-b227-a8db849677c4/chat",
               mode: "window",
+              streaming: true,
               target: "#n8n-chat",
               chatInputKey: "chatInput",
               chatSessionKey: "sessionId",
