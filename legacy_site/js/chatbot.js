@@ -8,7 +8,7 @@ localStorage.setItem('n8nChatSessionId', sessionId);
 const chatOptions = {
   webhookUrl: 'https://hnet.sylentt.com/webhook/fafb5729-49b2-4719-b227-a8db849677c4/chat',
   mode: 'window',
-  streaming: true,
+  enableStreaming: true,
   target: '#n8n-chat',
   chatInputKey: 'chatInput',
   chatSessionKey: 'sessionId',
