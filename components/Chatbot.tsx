@@ -50,6 +50,7 @@ export default function Chatbot() {
 
             /* Window */
             --chat--window--border-radius: 12px;
+            --chat--window--background: var(--chat--color-slate-900);
             --chat--body--background: var(--chat--color-slate-900);
             --chat--footer--background: var(--chat--color-slate-900);
 
@@ -71,6 +72,15 @@ export default function Chatbot() {
 
             /* Font */
             --chat--font-family: var(--font-jakarta), sans-serif;
+          }
+
+          /* Window Container */
+          .chat-window {
+            background: var(--chat--color-slate-900) !important;
+          }
+
+          #n8n-chat {
+            background: transparent !important;
           }
 
           /* Header */
