@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Chatbot from './Chatbot';
+import BackToTop from './ui/BackToTop';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
       <Footer />
       <Chatbot />
+      <BackToTop />
     </div>
   );
 }
