@@ -11,16 +11,18 @@ import { cn } from "@/lib/utils";
 type Option = {
   text: string;
   value: string;
-  numericValue: number;
+  numericValue?: number;
+  score?: number;
 };
 
 type Question = {
   id: string;
   question: string;
+  type: "single" | "multi" | "text";
   options: Option[];
 };
 
-type QuizAnswers = Record<string, string>;
+type QuizAnswers = Record<string, string | string[]>;
 type QuizValues = Record<string, number>;
 
 type LeadData = {
@@ -32,71 +34,55 @@ type LeadData = {
 
 const questions: Question[] = [
   {
-    id: "manualEntryHours",
-    question: "How many hours per week does your team spend on manual data entry?",
+    id: "tools",
+    question: "What tools does your business run on?",
+    type: "multi",
     options: [
-      { text: "0-5 hours", value: "0-5", numericValue: 2.5 },
-      { text: "5-10 hours", value: "5-10", numericValue: 7.5 },
-      { text: "10-20 hours", value: "10-20", numericValue: 15 },
-      { text: "20+ hours", value: "20+", numericValue: 25 },
+      { text: "Shopify", value: "SHOPIFY" },
+      { text: "Recharge, Bold, or another subscription platform", value: "SUBSCRIPTION" },
+      { text: "ShipStation, ShipBob, or another fulfillment tool", value: "FULFILLMENT" },
+      { text: "QuickBooks, Xero, or FreshBooks", value: "ACCOUNTING" },
+      { text: "Stripe or Square", value: "PAYMENTS" },
+      { text: "HubSpot, Salesforce, or another CRM", value: "CRM" },
+      { text: "ServiceTitan, Jobber, or another field service tool", value: "FIELD_SERVICE" },
+      { text: "Other", value: "OTHER" },
     ],
   },
   {
-    id: "emailFollowupHours",
-    question: "How many hours per week are lost to chasing status updates via email/Slack?",
+    id: "automationHistory",
+    question: "Have you tried automating this before?",
+    type: "single",
     options: [
-      { text: "0-5 hours", value: "0-5", numericValue: 2.5 },
-      { text: "5-10 hours", value: "5-10", numericValue: 7.5 },
-      { text: "10-20 hours", value: "10-20", numericValue: 15 },
-      { text: "20+ hours", value: "20+", numericValue: 25 },
+      { text: "Yes, with Zapier, Make, or a similar tool", value: "ZAPIER", score: 4 },
+      { text: "Yes, we hired a developer but it didn't work out", value: "DEVELOPER", score: 3 },
+      { text: "No, we've just been doing it manually", value: "MANUAL", score: 2 },
+      { text: "We're not sure where to start", value: "UNSURE", score: 1 },
     ],
   },
   {
-    id: "searchHours",
-    question: "How many hours per week do you spend searching for information across different apps?",
+    id: "failureResponse",
+    question: "What happens when something goes wrong between your systems?",
+    type: "single",
     options: [
-      { text: "0-2 hours", value: "0-2", numericValue: 1 },
-      { text: "2-5 hours", value: "2-5", numericValue: 3.5 },
-      { text: "5-10 hours", value: "5-10", numericValue: 7.5 },
-      { text: "10+ hours", value: "10+", numericValue: 12 },
+      { text: "We usually find out when a customer complains", value: "CUSTOMER_COMPLAINT", score: 4 },
+      { text: "Someone on the team checks manually every day", value: "MANUAL_CHECK", score: 3 },
+      { text: "We have alerts but still fix things by hand", value: "ALERTS_MANUAL_FIX", score: 2 },
+      { text: "It doesn't go wrong often enough to worry about", value: "NOT_OFTEN", score: 0 },
     ],
   },
   {
-    id: "hourlyCost",
-    question: "What is the average hourly cost of your operations staff (fully loaded)?",
-    options: [
-      { text: "$20 - $40 / hr", value: "20-40", numericValue: 30 },
-      { text: "$40 - $60 / hr", value: "40-60", numericValue: 50 },
-      { text: "$60 - $100 / hr", value: "60-100", numericValue: 80 },
-      { text: "$100+ / hr", value: "100+", numericValue: 120 },
-    ],
+    id: "manualTask",
+    question: "In one sentence, what's the thing your team does manually that should be automatic?",
+    type: "text",
+    options: [],
   },
-  {
-    id: "errorFrequency",
-    question: "How often do manual errors cause operational issues or rework?",
-    options: [
-      { text: "Rarely", value: "RARELY", numericValue: 0 },
-      { text: "Monthly", value: "MONTHLY", numericValue: 0 },
-      { text: "Weekly", value: "WEEKLY", numericValue: 0 },
-      { text: "Daily", value: "DAILY", numericValue: 0 },
-    ],
-  },
-  {
-    id: "toolCount",
-    question: "How many different software tools does your team use daily?",
-    options: [
-      { text: "1-3", value: "1-3", numericValue: 0 },
-      { text: "4-7", value: "4-7", numericValue: 0 },
-      { text: "8-12", value: "8-12", numericValue: 0 },
-      { text: "13+", value: "13+", numericValue: 0 },
-    ],
-  }
 ];
 
 export default function CostCalculator() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
-  const [values, setValues] = useState<QuizValues>({});
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [textInput, setTextInput] = useState("");
 
   const [leadData, setLeadData] = useState<LeadData>({
     leadName: "",
@@ -107,23 +93,36 @@ export default function CostCalculator() {
   const [honeyPot, setHoneyPot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [calculatedBurnRate, setCalculatedBurnRate] = useState(0);
+  const [calculatedScore, setCalculatedScore] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const handleOptionSelect = (questionId: string, value: string, numericValue: number) => {
+  const handleOptionSelect = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
-    setValues((prev) => ({ ...prev, [questionId]: numericValue }));
 
     setTimeout(() => {
       setCurrentStep((prev) => prev + 1);
     }, 150);
   };
 
-  const calculateBurnRate = () => {
-    const hours = (values["manualEntryHours"] || 0) + (values["emailFollowupHours"] || 0) + (values["searchHours"] || 0);
-    const cost = values["hourlyCost"] || 0;
-    // Annual cost = Weekly hours * 52 weeks * Hourly cost
-    return hours * 52 * cost;
+  const toggleMultiSelect = (value: string) => {
+    setSelectedOptions((prev) =>
+      prev.includes(value) ? prev.filter((o) => o !== value) : [...prev, value]
+    );
+  };
+
+  const handleNextStep = () => {
+    const currentQuestion = questions[currentStep];
+    if (currentQuestion.type === "multi") {
+      setAnswers((prev) => ({ ...prev, [currentQuestion.id]: selectedOptions }));
+    } else if (currentQuestion.type === "text") {
+      setAnswers((prev) => ({ ...prev, [currentQuestion.id]: textInput }));
+    }
+
+    setCurrentStep((prev) => prev + 1);
+  };
+
+  const handleTextChange = (value: string) => {
+    setTextInput(value);
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
@@ -148,18 +147,60 @@ export default function CostCalculator() {
 
     setIsSubmitting(true);
 
-    const burnRate = calculateBurnRate();
-    setCalculatedBurnRate(burnRate);
+    // Calculate Scoring
+    let totalScore = 0;
+
+    // Q1: Multi-select
+    const q1Selections = (answers["tools"] as string[]) || [];
+    const selectionCount = q1Selections.length;
+    if (selectionCount >= 4) {
+      totalScore += 6;
+    } else if (selectionCount === 3) {
+      totalScore += 4;
+    } else if (selectionCount === 2) {
+      totalScore += 2;
+    } else if (selectionCount === 1) {
+      totalScore += 1;
+    }
+
+    // Q2 & Q3: Single-select
+    const q2Value = answers["automationHistory"] as string;
+    const q2Score = questions.find(q => q.id === "automationHistory")?.options.find(o => o.value === q2Value)?.score || 0;
+    totalScore += q2Score;
+
+    const q3Value = answers["failureResponse"] as string;
+    const q3Score = questions.find(q => q.id === "failureResponse")?.options.find(o => o.value === q3Value)?.score || 0;
+    totalScore += q3Score;
+
+    setCalculatedScore(totalScore);
+
+    let resultTier = "";
+    let summaryMessage = "";
+
+    if (totalScore >= 10) {
+      resultTier = "Strong fit";
+      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt to solve.";
+    } else if (totalScore >= 6) {
+      resultTier = "Good fit";
+      summaryMessage = "Based on your answers, there's a good chance we can help. Let's talk through the details.";
+    } else if (totalScore >= 1) {
+      resultTier = "Worth a conversation";
+      summaryMessage = "We'd want to learn more about your setup before saying for sure, but it's worth a quick conversation.";
+    } else {
+      resultTier = "Might not be the right fit";
+      summaryMessage = "Based on your answers, Sylentt might not be what you need right now, but if you think we're wrong, reach out anyway.";
+    }
 
     const payload = {
       ...answers,
       ...leadData,
-      calculatedBurnRate: burnRate,
+      calculatedScore: totalScore,
+      resultTier: resultTier,
       firstname: leadData.leadName,
       emailAddress: leadData.leadEmail,
       jobTitle: leadData.leadJobTitle,
       company: leadData.leadCompany,
-      summary: `Hidden Cost Assessment: Estimated Annual Burn Rate $${burnRate.toLocaleString()}`,
+      summary: `Fit Assessment: ${resultTier} (${totalScore} pts). Manual Task: ${answers["manualTask"]}`,
     };
 
     try {
@@ -190,6 +231,28 @@ export default function CostCalculator() {
   const progress = (currentStep / questions.length) * 100;
 
   if (isSuccess) {
+    let resultTier = "";
+    let summaryMessage = "";
+    let colorClass = "";
+
+    if (calculatedScore >= 10) {
+      resultTier = "Strong fit";
+      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt to solve.";
+      colorClass = "text-emerald-500";
+    } else if (calculatedScore >= 6) {
+      resultTier = "Good fit";
+      summaryMessage = "Based on your answers, there's a good chance we can help. Let's talk through the details.";
+      colorClass = "text-blue-500";
+    } else if (calculatedScore >= 1) {
+      resultTier = "Worth a conversation";
+      summaryMessage = "We'd want to learn more about your setup before saying for sure, but it's worth a quick conversation.";
+      colorClass = "text-amber-500";
+    } else {
+      resultTier = "Might not be the right fit";
+      summaryMessage = "Based on your answers, Sylentt might not be what you need right now, but if you think we're wrong, reach out anyway.";
+      colorClass = "text-slate-400";
+    }
+
     return (
       <div className="lane-body p-8 max-w-2xl mx-auto text-center">
         <motion.div
@@ -197,20 +260,18 @@ export default function CostCalculator() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-xl text-slate-400 mb-2">Estimated Annual Hidden Cost</div>
-          <div className="text-5xl md:text-6xl font-black mb-6 text-red-500">
-            ${calculatedBurnRate.toLocaleString()}
+          <div className="text-xl text-slate-400 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
+          <div className={cn("text-5xl md:text-6xl font-black mb-6", colorClass)}>
+            {resultTier}
           </div>
-          <h3 className="text-2xl font-bold mb-4 text-white">This is the cost of the &quot;Invisible Drag&quot;</h3>
           <p className="text-slate-300 mb-8 text-lg">
-            Imagine what you could do if you reinvested that capital into growth instead of maintenance.
+            {summaryMessage}
           </p>
 
           <div className="w-full h-px bg-white/10 my-6" />
 
-          <p className="text-sm text-slate-500 mb-6">
-            We&apos;ve sent your full report to your email.
-          </p>
+          <h4 className="text-xl font-bold mb-2 text-white">Let&apos;s build your roadmap</h4>
+          <p className="mb-6 text-slate-400">Schedule a session to see how we can eliminate the friction in your workflows.</p>
 
           <a
             href="https://calendly.com/nic-sylentt/30min"
@@ -241,8 +302,8 @@ export default function CostCalculator() {
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Hidden Cost Report is ready</h3>
-        <p className="text-center text-slate-400 mb-8">Enter your details to reveal your estimated operational burn rate.</p>
+        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Fit Assessment is ready</h3>
+        <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
           {/* Honeypot field - hidden from users */}
@@ -329,7 +390,7 @@ export default function CostCalculator() {
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Calculating...
                 </>
               ) : (
-                "Reveal My Burn Rate"
+                "Reveal My Score"
               )}
             </Button>
           </div>
@@ -379,30 +440,93 @@ export default function CostCalculator() {
           </h3>
 
           <div className="grid gap-4">
-            {currentQuestion.options.map((option, index) => (
-              <button
-                key={option.value}
-                type="button"
-                className={cn(
-                  "w-full text-left rounded-xl shadow-sm",
-                  "cursor-pointer transition-all border-2 border-[var(--border)] bg-[var(--surface2)] hover:border-[var(--border-light)] group",
-                  "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                )}
-                onClick={() => handleOptionSelect(currentQuestion.id, option.value, option.numericValue)}
-              >
-                <div className="p-4 md:p-6 flex items-center">
-                  <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-300 font-bold group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
-                    {String.fromCharCode(65 + index)}
-                  </div>
-                  <div className="flex-grow text-lg font-medium text-slate-300 group-hover:text-white transition-colors">
-                    {option.text}
-                  </div>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
-                    <ArrowRight className="w-5 h-5" />
-                  </div>
+            {currentQuestion.type === "text" ? (
+              <div className="space-y-6">
+                <textarea
+                  autoFocus
+                  className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl p-6 text-white text-lg focus:border-primary outline-none min-h-[120px] transition-colors"
+                  placeholder="e.g. We manually copy tracking numbers from ShipStation to a Google Sheet for our weekly report."
+                  value={textInput}
+                  onChange={(e) => handleTextChange(e.target.value)}
+                />
+                <div className="flex justify-center">
+                  <Button
+                    size="xl"
+                    onClick={handleNextStep}
+                    disabled={!textInput.trim()}
+                    className="group bg-primary hover:bg-indigo-400 text-white px-10 shadow-lg shadow-primary/25"
+                  >
+                    Next Question
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
                 </div>
-              </button>
-            ))}
+              </div>
+            ) : (
+              <>
+                {currentQuestion.options.map((option, index) => {
+                  const isSelected = currentQuestion.type === "multi"
+                    ? selectedOptions.includes(option.value)
+                    : answers[currentQuestion.id] === option.value;
+
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      className={cn(
+                        "w-full text-left rounded-xl shadow-sm",
+                        "cursor-pointer transition-all border-2 group",
+                        "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary",
+                        isSelected
+                          ? "border-primary bg-primary/10"
+                          : "border-[var(--border)] bg-[var(--surface2)] hover:border-[var(--border-light)]"
+                      )}
+                      onClick={() =>
+                        currentQuestion.type === "multi"
+                          ? toggleMultiSelect(option.value)
+                          : handleOptionSelect(currentQuestion.id, option.value)
+                      }
+                    >
+                      <div className="p-4 md:p-6 flex items-center">
+                        <div className={cn(
+                          "flex-shrink-0 mr-4 w-8 h-8 rounded-full border flex items-center justify-center font-bold transition-all",
+                          isSelected
+                            ? "bg-primary border-primary text-white"
+                            : "bg-slate-700 border-slate-600 text-slate-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white"
+                        )}>
+                          {String.fromCharCode(65 + index)}
+                        </div>
+                        <div className={cn(
+                          "flex-grow text-lg font-medium transition-colors",
+                          isSelected ? "text-white" : "text-slate-300 group-hover:text-white"
+                        )}>
+                          {option.text}
+                        </div>
+                        <div className={cn(
+                          "transition-all text-primary",
+                          isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                        )}>
+                          <ArrowRight className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+
+                {currentQuestion.type === "multi" && (
+                  <div className="flex justify-center mt-6">
+                    <Button
+                      size="xl"
+                      onClick={handleNextStep}
+                      disabled={selectedOptions.length === 0}
+                      className="group bg-primary hover:bg-indigo-400 text-white px-10 shadow-lg shadow-primary/25"
+                    >
+                      Next Question
+                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </motion.div>
       </AnimatePresence>
