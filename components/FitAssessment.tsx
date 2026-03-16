@@ -1,5 +1,16 @@
 "use client";
 
+/**
+ * FitAssessment Component
+ *
+ * New Variables:
+ * - selectedOptions: string[] - Tracks multiple tool selections for Question 1 (multi-select).
+ * - textInput: string - Stores the open-ended response for the manual task description in Question 4.
+ * - answers: QuizAnswers - Map of question IDs to their selected values (single-select, multi-select, or text).
+ * - calculatedScore: number - The final fit score (0-14) calculated based on the weighting logic.
+ * - resultTier: string - The classification ("Strong fit", "Good fit", etc.) used for final display and payload.
+ * - leadData: LeadData - Object containing contact information (Name, Email, Job Title, Company).
+ */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
@@ -78,7 +89,7 @@ const questions: Question[] = [
   },
 ];
 
-export default function CostCalculator() {
+export default function FitAssessment() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);

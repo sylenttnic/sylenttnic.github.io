@@ -7,7 +7,7 @@ import {
   Plug,
   Eye,
 } from "lucide-react";
-import CostCalculator from "@/components/CostCalculator";
+import FitAssessment from "@/components/FitAssessment";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
@@ -240,7 +240,7 @@ export default function ServicesPage() {
       {/* CTA + Form */}
       <section
         id="tell-us"
-        className="py-24 md:py-32 bg-slate-950 scroll-mt-20 border-t border-white/5"
+        className="py-24 md:py-32 bg-slate-950 scroll-mt-32 border-t border-white/5"
       >
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -254,7 +254,7 @@ export default function ServicesPage() {
               </p>
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" style={{ boxShadow: '0 0 12px rgba(99,102,241,0.4)' }} />
             </div>
-            <CostCalculator />
+            <FitAssessment />
           </SectionFade>
         </div>
       </section>
