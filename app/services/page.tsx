@@ -107,7 +107,7 @@ export default function ServicesPage() {
         </div>
 
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+          <h1 className="text-4xl md:text-6xl font-bold text-white neon-line-header">
             What we build
           </h1>
           <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light">
@@ -141,7 +141,7 @@ export default function ServicesPage() {
                     >
                       <Icon className="w-5 h-5 md:w-7 md:h-7 text-slate-300" />
                     </div>
-                    <h2 className="text-2xl md:text-4xl font-bold text-white">
+                    <h2 className={`text-2xl md:text-4xl font-bold text-white neon-line-header ${service.color}`}>
                       {service.pain}
                     </h2>
                   </div>
@@ -151,7 +151,7 @@ export default function ServicesPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* The Outcome */}
-                    <div className="glass-card p-6 rounded-xl">
+                    <div className={`neon-card ${service.color} p-6 rounded-xl`}>
                       <h3 className="text-sm font-mono uppercase tracking-wider text-primary/70 mb-3">
                         What changes
                       </h3>
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* The Deliverable */}
-                    <div className="glass-card p-6 rounded-xl">
+                    <div className={`neon-card ${service.color} p-6 rounded-xl`}>
                       <h3 className="text-sm font-mono uppercase tracking-wider text-primary/70 mb-3">
                         What you own
                       </h3>
@@ -214,7 +214,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold neon-line-header blue">
                 After the build
               </h2>
               <p className="text-slate-300 text-lg leading-relaxed mb-6">
