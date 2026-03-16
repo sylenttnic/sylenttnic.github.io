@@ -198,7 +198,7 @@ export default function Home() {
           </p>
           <a
             href="#tell-us"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.8)]"
           >
             Tell us what&apos;s broken
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -215,7 +215,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <SectionFade>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold neon-line-header blue">
                 Sound familiar?
               </h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg">
@@ -255,7 +255,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold neon-line-header">
                 How it works
               </h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg">
@@ -327,7 +327,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold neon-line-header cyan">
                 Systems we connect
               </h2>
               <p className="text-slate-400 max-w-2xl mx-auto text-lg">
@@ -339,7 +339,7 @@ export default function Home() {
               {apps.map((app) => (
                 <div
                   key={app.name}
-                  className="glass-card px-6 py-4 rounded-xl flex items-center gap-3 hover:border-white/20 transition-colors"
+                  className="neon-card cyan px-6 py-4 rounded-xl flex items-center gap-3 hover:border-white/20 transition-colors"
                 >
                   <Image
                     src={app.logo}
@@ -368,11 +368,11 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-center neon-line-header purple">
                 What this looks like in practice
               </h2>
 
-              <div className="glass-card p-8 md:p-10 rounded-2xl">
+              <div className="neon-card purple p-8 md:p-10 rounded-2xl">
                 <p className="text-slate-300 text-lg leading-relaxed mb-4">
                   An education company was manually creating customer
                   subscriptions every time a specific type of order came in. A
@@ -401,7 +401,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              <h2 className="text-3xl md:text-5xl font-bold neon-line-header blue">
                 What clients say
               </h2>
             </div>
@@ -410,7 +410,7 @@ export default function Home() {
               {testimonials.map((t, i) => (
                 <div
                   key={i}
-                  className="glass-card p-10 rounded-xl text-slate-300 leading-relaxed relative flex flex-col"
+                  className="neon-card blue p-10 rounded-xl text-slate-300 leading-relaxed relative flex flex-col"
                 >
                   <span className="absolute top-4 left-6 text-6xl text-primary/20 font-serif leading-none">
                     &quot;

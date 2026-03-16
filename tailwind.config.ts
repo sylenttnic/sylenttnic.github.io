@@ -47,8 +47,13 @@ const config: Config = {
         "text-sweep": "textSweep 5.4s linear infinite",
         "flow-down": "flowDown 1.8s ease-in-out infinite",
         "flow-right": "flowRight 1.4s ease-in-out infinite",
+        "line-grow": "lineGrow 1s ease-out both",
       },
       keyframes: {
+        lineGrow: {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
         fadeInUp: {
           "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
