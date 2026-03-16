@@ -48,10 +48,10 @@ export default function BackToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 10 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-4 z-[9999] flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          className="fixed bottom-24 right-4 z-[9999] flex items-center justify-center text-primary transition-transform hover:scale-110 focus:outline-none"
           aria-label="Back to top"
         >
-          <ChevronUp className="h-8 w-8" />
+          <ChevronUp className="h-16 w-16" />
         </motion.button>
       )}
     </AnimatePresence>
