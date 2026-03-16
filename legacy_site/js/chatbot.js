@@ -8,6 +8,7 @@ localStorage.setItem('n8nChatSessionId', sessionId);
 const chatOptions = {
   webhookUrl: 'https://hnet.sylentt.com/webhook/fafb5729-49b2-4719-b227-a8db849677c4/chat',
   mode: 'window',
+  streaming: true,
   target: '#n8n-chat',
   chatInputKey: 'chatInput',
   chatSessionKey: 'sessionId',
@@ -41,6 +42,19 @@ async function initializeChat() {
     chatInitialized = true;
 
     try {
+        // Inject CSS overrides
+        const style = document.createElement('style');
+        style.textContent = `
+            :root {
+                --chat--input--container--background: var(--chat--body--background) !important;
+                --chat--input--container--border: none !important;
+                --chat--footer--border-top: none !important;
+                --chat--footer--background: var(--chat--body--background) !important;
+                --chat--input--background: var(--chat--body--background) !important;
+            }
+        `;
+        document.head.appendChild(style);
+
         const { createChat } = await import('https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js');
         createChat(chatOptions);
 
