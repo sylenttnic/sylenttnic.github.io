@@ -29,16 +29,16 @@ const BackToTop = () => {
   };
 
   // Nudge distances: Top moves most, then middle, then bottom
-  const distances = [-10, -6, -3];
+  const distances = [-12, -8, -4];
 
   const getArrowVariants = (i: number) => {
     const totalCycle = 7;
-    const nudgeDuration = 0.4;
+    const nudgeDuration = 0.5;
     const stagger = 0.2;
 
     const startTime = i * stagger;
-    const peakTime = startTime + nudgeDuration;
-    const snapTime = peakTime + 0.1;
+    const peakTime = startTime + (nudgeDuration * 0.7);
+    const snapTime = startTime + nudgeDuration;
 
     return {
       animate: {
@@ -53,29 +53,39 @@ const BackToTop = () => {
     };
   };
 
+  // Using the site's accent colors
+  const colors = [
+    'text-[#8b5cf6]', // accent3 (purple)
+    'text-[#3b82f6]', // accent (blue)
+    'text-[#06b6d4]', // accent2 (cyan)
+  ];
+
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-4 z-[9990] flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all hover:scale-110 active:scale-95 group"
+          className="fixed bottom-24 right-6 z-[9990] flex items-center justify-center transition-all hover:scale-110 active:scale-95 group"
           aria-label="Back to top"
         >
-          {/* Neon Glow Effect */}
-          <div className="absolute inset-0 rounded-full bg-indigo-500/20 blur-xl group-hover:bg-indigo-500/40 transition-colors" />
-
-          <div className="relative flex flex-col items-center justify-center -space-y-4 pt-1">
+          <div className="relative flex flex-col items-center justify-center -space-y-7">
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
                 variants={getArrowVariants(i)}
                 animate="animate"
                 initial={{ y: 0 }}
+                className="flex items-center justify-center"
               >
-                <ChevronUp className="w-8 h-8 stroke-[3]" />
+                <ChevronUp
+                  className={`w-12 h-12 stroke-[3.5] transition-colors ${colors[i]} group-hover:text-white`}
+                  style={{
+                    filter: `drop-shadow(0 0 10px currentColor)`
+                  }}
+                />
               </motion.div>
             ))}
           </div>
