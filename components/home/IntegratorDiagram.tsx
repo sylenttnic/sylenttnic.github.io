@@ -339,7 +339,7 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-28 h-28 md:w-44 md:h-44 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-primary/50 flex flex-col items-center justify-center text-center p-3 md:p-6 shadow-[0_0_30px_rgba(99,102,241,0.2)]"
+          className="w-28 h-28 md:w-44 md:h-44 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-primary/50 flex flex-col items-center justify-center text-center p-3 md:p-4 shadow-[0_0_30px_rgba(99,102,241,0.2)]"
           animate={{
             boxShadow: [
               "0 0 20px rgba(99,102,241,0.1)",
@@ -354,33 +354,11 @@ export default function IntegratorDiagram() {
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <motion.div
-            className="mb-2 md:mb-4 text-primary"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          >
-            <svg
-              className="w-8 h-8 md:w-12 md:h-12"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              />
-            </svg>
-          </motion.div>
-          <span className="text-[8px] md:text-[10px] font-mono text-primary/70 mb-1 uppercase tracking-[0.3em]">
-            Hub
-          </span>
-          <h3 className="text-sm md:text-xl font-bold text-white leading-tight">
+          <h3 className="text-sm md:text-[clamp(1rem,1.5vw,1.25rem)] font-bold text-white leading-tight">
             Sylentt<br />Integrator
           </h3>
           <div className="hidden md:block mt-2 pt-2 border-t border-white/10 w-full">
-            <p className="text-[10px] text-slate-400 font-mono uppercase leading-tight max-w-[140px] mx-auto">
+            <p className="text-[clamp(8px,0.8vw,9px)] text-slate-400 font-mono uppercase leading-tight max-w-[130px] mx-auto">
               The automated wiring for your business systems
             </p>
           </div>
