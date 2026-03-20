@@ -106,9 +106,17 @@ const ToolNode = ({
   const currentTool = category.tools[toolIndex];
   const pos = isMobile ? category.pos.mobile : category.pos.desktop;
 
+  const tooltipXClass = isMobile
+    ? pos[0] < 35
+      ? "left-0 translate-x-0 text-left"
+      : pos[0] > 65
+      ? "right-0 translate-x-0 text-right"
+      : "left-1/2 -translate-x-1/2 text-center"
+    : "left-1/2 -translate-x-1/2 text-center";
+
   return (
     <motion.div
-      className="absolute z-30 cursor-pointer"
+      className={`absolute cursor-pointer ${isActive ? "z-50" : "z-30"}`}
       style={{
         left: `${pos[0]}%`,
         top: `${pos[1]}%`,
@@ -146,7 +154,7 @@ const ToolNode = ({
               />
             </div>
             <span className="text-[9px] md:text-[10px] font-mono text-slate-400 text-center uppercase tracking-tighter">
-              {category.name}
+              {currentTool.name}
             </span>
           </motion.div>
         </AnimatePresence>
@@ -158,9 +166,12 @@ const ToolNode = ({
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-4 z-50 w-40 md:w-56 p-3 bg-slate-950 border border-white/10 rounded-lg shadow-2xl text-[10px] md:text-xs text-slate-300 pointer-events-none text-center"
+            className={`absolute top-full mt-4 z-50 w-40 md:w-56 p-3 bg-slate-950 border border-white/10 rounded-lg shadow-2xl text-[10px] md:text-xs text-slate-300 pointer-events-none ${tooltipXClass}`}
           >
             <div className="w-full h-0.5 mb-2 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <div className="font-bold text-primary mb-1 uppercase tracking-wider">
+              {currentTool.name}
+            </div>
             {category.useCase}
           </motion.div>
         )}
@@ -240,10 +251,12 @@ const DataLine = ({
 
       {/* Particle Inbound (Beam of light) */}
       <rect
-        width="3"
-        height="0.6"
+        width="4"
+        height="0.8"
+        rx="0.3"
+        ry="0.3"
         fill="white"
-        style={{ filter: `drop-shadow(0 0 2px ${particleColor})` }}
+        style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
       >
         <animateMotion
           dur="6s"
@@ -255,10 +268,12 @@ const DataLine = ({
 
       {/* Particle Outbound (Beam of light) */}
       <rect
-        width="3"
-        height="0.6"
+        width="4"
+        height="0.8"
+        rx="0.3"
+        ry="0.3"
         fill="white"
-        style={{ filter: `drop-shadow(0 0 2px ${particleColor})` }}
+        style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
       >
         <animateMotion
           dur="6s"
