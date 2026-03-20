@@ -354,28 +354,6 @@ export default function IntegratorDiagram() {
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <motion.div
-            className="mb-2 text-primary"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          >
-            <svg
-              className="w-8 h-8 md:w-10 md:h-10"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              />
-            </svg>
-          </motion.div>
-          <span className="text-[8px] md:text-[10px] font-mono text-primary/70 mb-1 uppercase tracking-[0.3em]">
-            Hub
-          </span>
           <h3 className="text-sm md:text-[clamp(1rem,1.5vw,1.25rem)] font-bold text-white leading-tight">
             Sylentt<br />Integrator
           </h3>
