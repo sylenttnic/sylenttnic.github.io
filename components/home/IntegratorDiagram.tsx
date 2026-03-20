@@ -193,12 +193,25 @@ const DataLine = ({
   const dx = x2 - x1;
   const dy = y2 - y1;
 
-  // Perpendicular vector for the curve offset
-  const offset = isMobile ? 5 : 8;
-  const controlX = midX - (dy * offset) / 100;
-  const controlY = midY + (dx * offset) / 100;
+  // Spline logic using cubic Bezier curves
+  // We'll use two control points to create an 'S' curve or more fluid shape
+  const offset = isMobile ? 8 : 12;
 
-  const path = `M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`;
+  // Perpendicular direction
+  const pdx = -dy;
+  const pdy = dx;
+
+  // Normalize p vector
+  const len = Math.sqrt(pdx * pdx + pdy * pdy);
+  const npdx = (pdx / len) * offset;
+  const npdy = (pdy / len) * offset;
+
+  const cp1x = x1 + (x2 - x1) * 0.4 + npdx;
+  const cp1y = y1 + (y2 - y1) * 0.4 + npdy;
+  const cp2x = x1 + (x2 - x1) * 0.6 + npdx;
+  const cp2y = y1 + (y2 - y1) * 0.6 + npdy;
+
+  const path = `M ${x1} ${y1} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${x2} ${y2}`;
 
   const particleColor = {
     blue: "#3b82f6",
@@ -225,13 +238,28 @@ const DataLine = ({
         </linearGradient>
       </defs>
 
-      {/* Particle Inbound */}
-      <circle r="0.8" fill={particleColor}>
-        <animateMotion dur="6s" repeatCount="indefinite" path={path} />
-      </circle>
+      {/* Particle Inbound (Beam of light) */}
+      <rect
+        width="3"
+        height="0.6"
+        fill="white"
+        style={{ filter: `drop-shadow(0 0 2px ${particleColor})` }}
+      >
+        <animateMotion
+          dur="6s"
+          repeatCount="indefinite"
+          path={path}
+          rotate="auto"
+        />
+      </rect>
 
-      {/* Particle Outbound */}
-      <circle r="0.8" fill={particleColor}>
+      {/* Particle Outbound (Beam of light) */}
+      <rect
+        width="3"
+        height="0.6"
+        fill="white"
+        style={{ filter: `drop-shadow(0 0 2px ${particleColor})` }}
+      >
         <animateMotion
           dur="6s"
           repeatCount="indefinite"
@@ -239,8 +267,9 @@ const DataLine = ({
           keyPoints="1;0"
           keyTimes="0;1"
           calcMode="linear"
+          rotate="auto"
         />
-      </circle>
+      </rect>
     </>
   );
 };
