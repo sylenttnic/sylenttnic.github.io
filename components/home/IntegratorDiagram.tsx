@@ -96,12 +96,12 @@ const ToolNode = ({
   const [toolIndex, setToolIndex] = useState(0);
 
   useEffect(() => {
-    if (category.tools.length <= 1) return;
+    if (category.tools.length <= 1 || isActive) return;
     const interval = setInterval(() => {
       setToolIndex((prev) => (prev + 1) % category.tools.length);
     }, 4000 + Math.random() * 3000);
     return () => clearInterval(interval);
-  }, [category.tools.length]);
+  }, [category.tools.length, isActive]);
 
   const currentTool = category.tools[toolIndex];
   const pos = isMobile ? category.pos.mobile : category.pos.desktop;
@@ -379,6 +379,11 @@ export default function IntegratorDiagram() {
           <h3 className="text-sm md:text-xl font-bold text-white leading-tight">
             Sylentt<br />Integrator
           </h3>
+          <div className="hidden md:block mt-2 pt-2 border-t border-white/10 w-full">
+            <p className="text-[10px] text-slate-400 font-mono uppercase leading-tight max-w-[140px] mx-auto">
+              The automated wiring for your business systems
+            </p>
+          </div>
         </motion.div>
       </div>
 
