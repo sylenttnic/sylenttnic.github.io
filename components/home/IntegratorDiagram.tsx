@@ -259,10 +259,20 @@ const DataLine = ({
         style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
       >
         <animateMotion
-          dur="6s"
+          dur="5s"
           repeatCount="indefinite"
           path={path}
+          keyPoints="0;1;1"
+          keyTimes="0;0.3;1"
+          calcMode="linear"
           rotate="auto"
+        />
+        <animate
+          attributeName="opacity"
+          values="0;1;1;0;0"
+          keyTimes="0;0.02;0.28;0.3;1"
+          dur="5s"
+          repeatCount="indefinite"
         />
       </rect>
 
@@ -276,13 +286,20 @@ const DataLine = ({
         style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
       >
         <animateMotion
-          dur="6s"
+          dur="5s"
           repeatCount="indefinite"
           path={path}
-          keyPoints="1;0"
-          keyTimes="0;1"
+          keyPoints="1;0;0"
+          keyTimes="0;0.3;1"
           calcMode="linear"
           rotate="auto"
+        />
+        <animate
+          attributeName="opacity"
+          values="0;1;1;0;0"
+          keyTimes="0;0.02;0.28;0.3;1"
+          dur="5s"
+          repeatCount="indefinite"
         />
       </rect>
     </>
