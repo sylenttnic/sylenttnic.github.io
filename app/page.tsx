@@ -1,4 +1,4 @@
-import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw } from "lucide-react";
+import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
@@ -106,6 +106,61 @@ const jsonLdOrg = {
   sameAs: [],
 };
 
+const jsonLdFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What does Sylentt do?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sylentt connects the business apps your team uses every day. When an order comes in, a payment clears, or a customer signs up, the other systems that need to know about it update automatically. No copying, no checking, no hoping it worked.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How is Sylentt different from Zapier or Make?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Zapier and Make are rentals. You pay monthly, the price goes up as volume grows, and if a Zap breaks at midnight nobody knows until a customer complains. What Sylentt builds runs on your own account. You own the code, the infrastructure, and the data. There are no per-transaction fees, no monthly platform charges, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What apps can Sylentt connect?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "If your business runs on it and it has an API, Sylentt can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, and FreshBooks.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I own everything Sylentt builds?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. The integrations run on your cloud account. The code is yours. If you part ways with Sylentt, everything keeps running. There is no lock-in and no proprietary platform you lose access to.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does a typical Sylentt integration take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most single integrations take 2 to 4 weeks from the first conversation to production. Complex projects with multiple systems or unusual APIs may take longer. Sylentt scopes every project before starting so there are no surprises.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much does Sylentt cost?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Every project is scoped individually because every business has different tools and different problems. Sylentt does not charge monthly platform fees or per-transaction costs. You pay for the build, you own the result.",
+      },
+    },
+  ],
+};
+
 const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -131,6 +186,39 @@ const jsonLdService = {
   },
 };
 
+const faqItems = [
+  {
+    question: "What does Sylentt do?",
+    answer:
+      "Sylentt connects the business apps your team uses every day. When an order comes in, a payment clears, or a customer signs up, the other systems that need to know about it update automatically. No copying, no checking, no hoping it worked.",
+  },
+  {
+    question: "How is this different from Zapier or Make?",
+    answer:
+      "Zapier and Make are rentals. You pay monthly, the price goes up as volume grows, and if a Zap breaks at midnight nobody knows until a customer complains. What Sylentt builds runs on your own account. You own the code, the infrastructure, and the data. There are no per-transaction fees, no monthly platform charges, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
+  },
+  {
+    question: "What apps can Sylentt connect?",
+    answer:
+      "If your business runs on it and it has an API, we can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, and FreshBooks. If your app is not on that list, ask. We have probably connected something like it before.",
+  },
+  {
+    question: "Do I own everything Sylentt builds?",
+    answer:
+      "Yes. The integrations run on your cloud account. The code is yours. If we part ways tomorrow, everything keeps running. There is no lock-in and no proprietary platform you lose access to.",
+  },
+  {
+    question: "How long does a typical integration take?",
+    answer:
+      "Most single integrations take 2 to 4 weeks from the first conversation to production. Complex projects with multiple systems or unusual APIs may take longer. We scope every project before starting so there are no surprises.",
+  },
+  {
+    question: "How much does it cost?",
+    answer:
+      "Every project is scoped individually because every business has different tools and different problems. We do not charge monthly platform fees or per-transaction costs. You pay for the build, you own the result. Reach out and tell us what is broken. We will tell you what it would take to fix it.",
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -145,6 +233,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
 
       {/* Section 1: Hero */}
@@ -386,6 +478,33 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
+              ))}
+            </div>
+          </SectionFade>
+        </div>
+      </section>
+
+      {/* Section 6.5: FAQ */}
+      <section id="faq" className="py-24 md:py-32 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold neon-line-header blue">
+                Common questions
+              </h2>
+            </div>
+
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faqItems.map((item, i) => (
+                <details key={i} className="group neon-card blue rounded-xl overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none text-white font-bold text-lg md:text-xl">
+                    <span>{item.question}</span>
+                    <ChevronDown className="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-300" />
+                  </summary>
+                  <div className="px-6 pb-6 pt-0 text-slate-400 leading-relaxed">
+                    <p>{item.answer}</p>
+                  </div>
+                </details>
               ))}
             </div>
           </SectionFade>
