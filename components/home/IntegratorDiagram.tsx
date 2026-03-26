@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import logo from "@/assets/img/logo.webp";
 
 interface Tool {
   name: string;
@@ -356,28 +357,24 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-28 h-28 md:w-44 md:h-44 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-primary/50 flex flex-col items-center justify-center text-center p-3 md:p-4 shadow-[0_0_30px_rgba(99,102,241,0.2)]"
+          className="w-48 h-24 md:w-72 md:h-36 flex items-center justify-center"
           animate={{
-            boxShadow: [
-              "0 0 20px rgba(99,102,241,0.1)",
-              "0 0 50px rgba(99,102,241,0.4)",
-              "0 0 20px rgba(99,102,241,0.1)",
-            ],
-            borderColor: [
-              "rgba(99,102,241,0.2)",
-              "rgba(99,102,241,0.8)",
-              "rgba(99,102,241,0.2)",
+            filter: [
+              "drop-shadow(0 0 12px rgba(99,102,241,0.3))",
+              "drop-shadow(0 0 30px rgba(99,102,241,0.6))",
+              "drop-shadow(0 0 12px rgba(99,102,241,0.3))",
             ],
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <h3 className="text-sm md:text-[clamp(1rem,1.5vw,1.25rem)] font-bold text-white leading-tight">
-            Sylentt<br />Integrator
-          </h3>
-          <div className="hidden md:block mt-2 pt-2 border-t border-white/10 w-full">
-            <p className="text-[clamp(8px,0.8vw,9px)] text-slate-400 font-mono uppercase leading-tight max-w-[130px] mx-auto">
-              The automated wiring for your business systems
-            </p>
+          <div className="relative w-full h-full">
+            <Image
+              src={logo}
+              alt="Sylentt Partners Logo"
+              fill
+              className="object-contain brightness-125"
+              priority
+            />
           </div>
         </motion.div>
       </div>
