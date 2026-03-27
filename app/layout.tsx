@@ -53,6 +53,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://sylentt.com/",
   },
+  other: {
+    "ai-content-description":
+      "Sylentt is a business app integration consultancy based in Cache Valley, Utah. We build custom connections between business tools like Shopify, QuickBooks, Stripe, and HubSpot. Clients own everything we build.",
+  },
 };
 
 export const viewport: Viewport = {

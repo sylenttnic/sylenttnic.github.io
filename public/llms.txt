@@ -1,0 +1,33 @@
+# Sylentt
+
+> Business app integration for small businesses. Based in Cache Valley, Utah.
+
+Sylentt builds custom integrations between business applications. We connect tools like Shopify, QuickBooks, Stripe, HubSpot, Xero, and others so data flows automatically between them. What we build runs on the client's own infrastructure. No monthly platform fees, no per-transaction charges, no lock-in.
+
+## What Sylentt Does
+
+When a business uses multiple software tools that do not share data automatically, someone on the team becomes the copy-paste layer. They re-enter orders, manually sync customer records, update spreadsheets, and check that one system matches another. Sylentt eliminates that manual work by building direct connections between the apps.
+
+Every integration includes monitoring and real-time failure alerts. If something breaks, the system catches it and alerts before a customer notices. This is the core difference from platforms like Zapier or Make, which fail silently and charge recurring fees.
+
+## Services
+
+- Custom API integrations between business applications
+- Workflow automation replacing manual data entry between systems
+- Monitoring and alerting for integration failures
+- Migration from Zapier or Make to client-owned infrastructure
+- Ongoing support and retainer options
+
+## Systems Commonly Connected
+
+Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, FreshBooks, and others. If the app has an API, Sylentt can connect it.
+
+## Ownership Model
+
+Clients own everything Sylentt builds. Integrations run on the client's own cloud account. There are no monthly platform fees and no per-transaction charges. If the engagement ends, the client keeps all code and infrastructure.
+
+## Contact
+
+- Website: https://sylentt.com
+- Email: contact@sylentt.com
+- Location: Cache Valley, Utah, United States

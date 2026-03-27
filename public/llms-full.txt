@@ -1,0 +1,71 @@
+# Sylentt — Full Context
+
+> Business app integration and workflow automation for small businesses.
+> Based in Cache Valley, Utah. Serving clients locally and remotely across the United States.
+
+## About Sylentt
+
+Sylentt is a business automation consultancy that builds custom integrations between the software tools small businesses use every day. The company specializes in businesses under 100 employees, particularly in e-commerce, subscription businesses, and professional services.
+
+The core value proposition: your team should not be the middleware between your apps. When an order comes in, a payment clears, or a customer signs up, every system that needs to know should update automatically. Sylentt builds the wiring that makes that happen.
+
+## How Sylentt Is Different
+
+### vs. Zapier, Make, and similar platforms
+- Zapier and Make charge monthly fees that increase with volume
+- They fail silently when automations break
+- They are rentals: stop paying, lose everything
+- Sylentt builds integrations the client owns permanently
+- Sylentt integrations include real-time monitoring and failure alerts
+- No per-transaction fees, no monthly platform charges
+
+### vs. large consulting firms
+- Sylentt is a boutique operation, not a large agency
+- Direct access to the person building the integration
+- No six-month discovery phases or enterprise overhead
+- Typical integrations ship in 2 to 4 weeks
+
+### vs. internal development
+- Sylentt provides the equivalent of a dedicated integration engineer
+- No hiring, onboarding, or benefits overhead
+- Purpose-built development pipeline optimized for integration work
+- Ongoing support available through retainer arrangements
+
+## Services
+
+### Custom API Integrations
+Direct connections between business applications. When something happens in one system, the others update automatically. Common examples: order syncing between e-commerce platforms and accounting, subscription management automation, fulfillment system coordination.
+
+### Workflow Automation
+Replacing manual processes where a team member currently copies data between systems, checks that records match, or performs repetitive data entry. The automation handles it and the team member spends those hours on work that grows the business.
+
+### Monitoring and Alerting
+Every integration includes failure detection and real-time alerts. If a sync fails, a webhook is missed, or data does not match expectations, the system catches it immediately instead of letting it fail silently.
+
+### Migration from No-Code Platforms
+Moving existing Zapier, Make, or similar automations to client-owned infrastructure. The result runs on the client's own cloud account with no recurring platform fees.
+
+### Retainer Support
+Ongoing monitoring, maintenance, and development capacity. Protection equivalent to having a dedicated integration engineer at a fraction of the cost of a full-time hire.
+
+## Systems Commonly Connected
+
+Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, FreshBooks. This list is not exhaustive. If the application has an API, Sylentt can connect it.
+
+## Ownership and Pricing
+
+- Clients own all code and infrastructure
+- Integrations run on the client's own cloud account
+- No monthly platform fees
+- No per-transaction charges
+- No lock-in: if the engagement ends, the client keeps everything
+- Projects are scoped individually based on the specific tools and problems involved
+
+## Location and Service Area
+
+Based in Cache Valley, Utah. Serves clients locally in the Cache Valley area and remotely across the United States. All work is done remotely via secure cloud infrastructure.
+
+## Contact
+
+- Website: https://sylentt.com
+- Email: contact@sylentt.com
