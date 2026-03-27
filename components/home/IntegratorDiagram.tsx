@@ -357,12 +357,17 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-48 h-24 md:w-72 md:h-36 flex items-center justify-center"
+          className="w-36 h-20 md:w-60 md:h-32 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-accent3/50 flex items-center justify-center p-4 md:p-6 shadow-[0_0_30px_rgba(139,92,246,0.2)]"
           animate={{
-            filter: [
-              "drop-shadow(0 0 12px rgba(99,102,241,0.3))",
-              "drop-shadow(0 0 30px rgba(99,102,241,0.6))",
-              "drop-shadow(0 0 12px rgba(99,102,241,0.3))",
+            boxShadow: [
+              "0 0 20px rgba(139,92,246,0.1)",
+              "0 0 50px rgba(139,92,246,0.4)",
+              "0 0 20px rgba(139,92,246,0.1)",
+            ],
+            borderColor: [
+              "rgba(139,92,246,0.2)",
+              "rgba(139,92,246,0.8)",
+              "rgba(139,92,246,0.2)",
             ],
           }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
