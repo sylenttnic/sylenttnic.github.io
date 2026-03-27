@@ -357,7 +357,7 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-48 h-28 md:w-80 md:h-48 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-accent3/50 flex items-center justify-center p-1 md:p-2 shadow-[0_0_30px_rgba(139,92,246,0.2)]"
+          className="w-44 h-24 md:w-72 md:h-44 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-accent3/50 flex items-center justify-center p-1 md:p-2 shadow-[0_0_30px_rgba(139,92,246,0.2)]"
           animate={{
             boxShadow: [
               "0 0 20px rgba(139,92,246,0.1)",
