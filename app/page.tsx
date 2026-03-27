@@ -167,6 +167,10 @@ const jsonLdWebSite = {
   name: "Sylentt",
   alternateName: ["Sylentt LLC", "Sylentt Partners"],
   url: "https://sylentt.com",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", "#faq summary", "#faq details p"],
+  },
 };
 
 const jsonLdService = {

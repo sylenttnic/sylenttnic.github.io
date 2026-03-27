@@ -29,3 +29,7 @@ User-agent: DuckAssistBot
 Allow: /
 
 Sitemap: https://sylentt.com/sitemap.xml
+
+# AI context files
+# llms.txt: https://sylentt.com/llms.txt
+# llms-full.txt: https://sylentt.com/llms-full.txt
