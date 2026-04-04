@@ -106,7 +106,7 @@ export default function PricingPage() {
       retainer: "Operational Retainer (starting at $500/mo)",
     };
     setSelectedPackage(packageMap[packageId] || "");
-    const formElement = document.getElementById("get-started");
+    const formElement = document.getElementById("tell-us");
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth" });
     }
@@ -248,7 +248,7 @@ export default function PricingPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="get-started" className="container mx-auto px-4 max-w-4xl scroll-mt-32">
+      <section id="tell-us" className="container mx-auto px-4 max-w-4xl scroll-mt-32">
         <SectionFade>
           <div className="lane-body p-8 md:p-12">
             <h2 className="text-3xl font-bold mb-8 text-center text-white">Get Started</h2>
