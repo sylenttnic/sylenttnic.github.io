@@ -9,9 +9,25 @@ import { cn } from "@/lib/utils";
 
 const packages = [
   {
+    id: "discovery",
+    name: "Discovery Call",
+    price: "FREE",
+    badge: "FREE!",
+    description: "A free 30-minute strategy session to discuss your current workflows, audit your app stack, and identify the highest-impact integration opportunities.",
+    features: [
+      "Discovery call (30 min)",
+      "App stack audit overview",
+      "Workflow bottleneck identification",
+      "No obligation to proceed",
+    ],
+    cta: "Select Discovery Call",
+    footnote: "The perfect starting point for your automation journey.",
+    color: "green",
+  },
+  {
     id: "assessment",
     name: "Integration Assessment",
-    price: "$750",
+    price: "$250",
     description: "We audit your current app stack, identify the highest-impact integration opportunity, and deliver a concrete implementation plan. You own the deliverable whether you move forward or not.",
     features: [
       "Discovery call (30 min)",
@@ -84,12 +100,13 @@ export default function PricingPage() {
 
   const scrollToForm = (packageId: string) => {
     const packageMap: Record<string, string> = {
-      assessment: "Integration Assessment ($750)",
+      discovery: "Discovery Call (FREE)",
+      assessment: "Integration Assessment ($250)",
       implementation: "Implementation (starting at $2,500)",
       retainer: "Operational Retainer (starting at $500/mo)",
     };
     setSelectedPackage(packageMap[packageId] || "");
-    const formElement = document.getElementById("get-started");
+    const formElement = document.getElementById("tell-us");
     if (formElement) {
       formElement.scrollIntoView({ behavior: "smooth" });
     }
@@ -103,21 +120,29 @@ export default function PricingPage() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
+    const payload = {
+      ...data,
+      firstname: data.name,
+      emailAddress: data.email,
+      summary: `Pricing Inquiry: ${data.package}`,
+    };
+
     try {
-      const response = await fetch("https://formspree.io/f/xbdpzqqk", {
+      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY || "e5362baf-c777-4d57-a609-6eaf1f9e87f6";
+
+      const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
+          "website-api-key": apiKey,
         },
       });
 
       if (response.ok) {
         setIsSuccess(true);
       } else {
-        const errorData = await response.json();
-        setError(errorData.error || "Something went wrong. Please try again, or email us directly at nic@sylentt.com.");
+        setError("Something went wrong. Please try again, or email us directly at nic@sylentt.com.");
       }
     } catch (err) {
       setError("Something went wrong. Please try again, or email us directly at nic@sylentt.com.");
@@ -142,7 +167,7 @@ export default function PricingPage() {
 
       {/* Packages Section */}
       <section className="container mx-auto px-4 mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
@@ -223,7 +248,7 @@ export default function PricingPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="get-started" className="container mx-auto px-4 max-w-4xl scroll-mt-32">
+      <section id="tell-us" className="container mx-auto px-4 max-w-4xl scroll-mt-32">
         <SectionFade>
           <div className="lane-body p-8 md:p-12">
             <h2 className="text-3xl font-bold mb-8 text-center text-white">Get Started</h2>
@@ -285,7 +310,8 @@ export default function PricingPage() {
                       className="flex h-11 w-full rounded-full border-2 border-slate-700 bg-slate-950 px-4 py-2 text-sm text-white focus:border-primary focus:outline-none transition-colors"
                     >
                       <option value="" disabled>Select a package</option>
-                      <option value="Integration Assessment ($750)">Integration Assessment ($750)</option>
+                      <option value="Discovery Call (FREE)">Discovery Call (FREE)</option>
+                      <option value="Integration Assessment ($250)">Integration Assessment ($250)</option>
                       <option value="Implementation (starting at $2,500)">Implementation (starting at $2,500)</option>
                       <option value="Operational Retainer (starting at $500/mo)">Operational Retainer (starting at $500/mo)</option>
                       <option value="Not sure yet, help me decide">Not sure yet, help me decide</option>
