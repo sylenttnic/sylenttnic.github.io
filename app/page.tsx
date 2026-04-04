@@ -277,13 +277,21 @@ export default function Home() {
             slipped through the cracks. We build the wiring between your tools
             so your team does not have to be.
           </p>
-          <a
-            href="#tell-us"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.8)]"
-          >
-            Tell us what&apos;s broken
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/pricing"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.8)]"
+            >
+              See Pricing
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <a
+              href="#tell-us"
+              className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-white/20 group"
+            >
+              Tell us what&apos;s broken
+            </a>
+          </div>
         </div>
 
         <ScrollIndicator />
