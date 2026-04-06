@@ -12,11 +12,11 @@ const packages = [
     id: "discovery",
     name: "Discovery Call",
     price: "FREE",
-    badge: "FREE!",
+    badge: "FREE",
     description: "A free 30-minute strategy session to discuss your current workflows, audit your app stack, and identify the highest-impact integration opportunities.",
     features: [
       "Discovery call (30 min)",
-      "App stack audit overview",
+      "App stack audit and integration mapping",
       "Workflow bottleneck identification",
       "No obligation to proceed",
     ],
@@ -25,28 +25,13 @@ const packages = [
     color: "green",
   },
   {
-    id: "assessment",
-    name: "Integration Assessment",
-    price: "$250",
-    description: "We audit your current app stack, identify the highest-impact integration opportunity, and deliver a concrete implementation plan. You own the deliverable whether you move forward or not.",
-    features: [
-      "Discovery call (30 min)",
-      "App stack audit and integration mapping",
-      "Written implementation plan with scope, timeline, and cost estimate",
-      "No obligation to proceed",
-    ],
-    cta: "Select Assessment",
-    footnote: "Assessment fee is credited toward Implementation if you proceed.",
-    color: "blue",
-  },
-  {
     id: "implementation",
     name: "Implementation",
     price: "Starting at $2,500",
     badge: "Most Popular",
-    description: "We build the integration. Your apps start talking to each other, manual work goes away, and errors stop. Includes the assessment if you haven't done one yet.",
+    description: "We build the integration. Your apps start talking to each other, manual work goes away, and errors stop.",
     features: [
-      "Full integration assessment (included, not charged separately)",
+      "Full integration assessment and implementation plan",
       "Custom integration build, tested against your live systems",
       "Deployment to your own infrastructure (you own everything)",
       "30-day post-launch support window",
@@ -78,7 +63,7 @@ const howItWorks = [
   {
     icon: MousePointerClick,
     title: "Pick a package",
-    description: "Choose what fits. Not sure? Start with the Assessment.",
+    description: "Choose what fits. Not sure? Start with the Discovery Call.",
   },
   {
     icon: MessageSquare,
@@ -101,7 +86,6 @@ export default function PricingPage() {
   const scrollToForm = (packageId: string) => {
     const packageMap: Record<string, string> = {
       discovery: "Discovery Call (FREE)",
-      assessment: "Integration Assessment ($250)",
       implementation: "Implementation (starting at $2,500)",
       retainer: "Operational Retainer (starting at $500/mo)",
     };
@@ -167,7 +151,7 @@ export default function PricingPage() {
 
       {/* Packages Section */}
       <section className="container mx-auto px-4 mb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
@@ -311,7 +295,6 @@ export default function PricingPage() {
                     >
                       <option value="" disabled>Select a package</option>
                       <option value="Discovery Call (FREE)">Discovery Call (FREE)</option>
-                      <option value="Integration Assessment ($250)">Integration Assessment ($250)</option>
                       <option value="Implementation (starting at $2,500)">Implementation (starting at $2,500)</option>
                       <option value="Operational Retainer (starting at $500/mo)">Operational Retainer (starting at $500/mo)</option>
                       <option value="Not sure yet, help me decide">Not sure yet, help me decide</option>
