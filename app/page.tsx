@@ -302,9 +302,6 @@ export default function Home() {
         <ScrollIndicator />
       </header>
 
-      {/* Social Proof: Client Logos */}
-      <ClientLogos />
-
       {/* Section 2: Problem Statements */}
       <section className="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
@@ -469,6 +466,9 @@ export default function Home() {
           </SectionFade>
         </div>
       </section>
+
+      {/* Social Proof: Client Logos */}
+      <ClientLogos />
 
       {/* Section 6: Testimonials */}
       <section className="py-24 md:py-32 bg-slate-950">
