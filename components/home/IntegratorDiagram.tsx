@@ -151,7 +151,7 @@ const ToolNode = ({
                 src={currentTool.logo}
                 alt={currentTool.name}
                 fill
-                className="opacity-80 invert object-contain"
+                className="object-contain"
               />
             </div>
             <span className="text-[9px] md:text-[10px] font-mono text-slate-400 text-center uppercase tracking-tighter">
