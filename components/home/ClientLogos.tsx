@@ -38,12 +38,12 @@ export default function ClientLogos() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="relative w-32 h-12 md:w-48 md:h-16 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="relative w-32 h-12 md:w-48 md:h-16 transition-all duration-500">
                   <Image
                     src={client.logo}
                     alt={`${client.name} logo`}
                     fill
-                    className="object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0"
+                    className="object-contain"
                   />
                 </div>
                 {/* Subtle Glow Effect on Hover */}
