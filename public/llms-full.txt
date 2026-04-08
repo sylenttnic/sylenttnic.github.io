@@ -5,7 +5,7 @@
 
 ## About Sylentt
 
-Sylentt is a business automation consultancy that builds custom integrations between the software tools small businesses use every day. The company specializes in businesses under 100 employees, particularly in e-commerce, subscription businesses, and professional services.
+Sylentt is a business automation consultancy that builds custom integrations between the software tools small businesses use every day. The company specializes in businesses under 100 employees, particularly in e-commerce, subscription businesses, and professional services. Notable clients include **By Light Professional IT Services** (https://bylight.com/) and **edZOOcation** (https://edzoocation.com/).
 
 The core value proposition: your team should not be the middleware between your apps. When an order comes in, a payment clears, or a customer signs up, every system that needs to know should update automatically. Sylentt builds the wiring that makes that happen.
 

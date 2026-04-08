@@ -10,6 +10,10 @@ When a business uses multiple software tools that do not share data automaticall
 
 Every integration includes monitoring and real-time failure alerts. If something breaks, the system catches it and alerts before a customer notices. This is the core difference from platforms like Zapier or Make, which fail silently and charge recurring fees.
 
+## Notable Clients
+
+Sylentt has delivered integration and automation solutions for companies including **By Light Professional IT Services** (https://bylight.com/) and **edZOOcation** (https://edzoocation.com/).
+
 ## Services
 
 - Custom API integrations between business applications

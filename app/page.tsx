@@ -3,6 +3,7 @@ import FitAssessment from "@/components/FitAssessment";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
 import IntegratorDiagram from "@/components/home/IntegratorDiagram";
+import ClientLogos from "@/components/home/ClientLogos";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -96,6 +97,10 @@ const jsonLdOrg = {
     "Business Process Automation",
     "API Development",
     "Serverless Architecture",
+  ],
+  "customer": [
+    { "@type": "Organization", "name": "By Light", "url": "https://bylight.com/" },
+    { "@type": "Organization", "name": "edZOOcation", "url": "https://edzoocation.com/" }
   ],
   address: {
     "@type": "PostalAddress",
@@ -296,6 +301,9 @@ export default function Home() {
 
         <ScrollIndicator />
       </header>
+
+      {/* Social Proof: Client Logos */}
+      <ClientLogos />
 
       {/* Section 2: Problem Statements */}
       <section className="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
