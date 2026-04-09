@@ -268,7 +268,7 @@ export default function WizardForm() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40"
           >
-            Book your free discovery call
+            Book your discovery call
           </a>
         </motion.div>
       </div>

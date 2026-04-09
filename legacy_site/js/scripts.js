@@ -308,7 +308,7 @@ function showResults(tier, score) {
             <p class="text-muted small mb-4">We've sent you an email to confirm contact information, please check your spam folder if you don't see it.</p>
 
             <a href="https://calendly.com/nic-sylentt/30min" target="_blank" class="btn btn-primary btn-xl rounded-pill">
-                Book your free discovery call
+                Book your discovery call
             </a>
         </div>
     `;
