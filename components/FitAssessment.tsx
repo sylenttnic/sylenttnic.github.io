@@ -290,7 +290,7 @@ export default function FitAssessment() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40"
           >
-            Book your discovery call
+            Book your free discovery call
           </a>
         </motion.div>
       </div>

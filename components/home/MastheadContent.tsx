@@ -19,7 +19,7 @@ export default function MastheadContent() {
         Get Your Friction Score
       </Button>
       <p className="mt-4 md:mt-6 text-slate-400 text-sm md:text-base font-medium px-4 md:px-0">
-        Includes a 30-min Discovery Call and Documentation Audit Session
+        Includes a free 30-min Discovery Call and Documentation Audit Session
       </p>
     </div>
   );
