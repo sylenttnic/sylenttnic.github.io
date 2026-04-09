@@ -11,9 +11,9 @@ const packages = [
   {
     id: "discovery",
     name: "Discovery Call",
-    price: "FREE",
+    price: "$0",
     badge: "FREE",
-    description: "A free 30-minute strategy session to discuss your current workflows, audit your app stack, and identify the highest-impact integration opportunities.",
+    description: "A 30-minute strategy session to discuss your current workflows, audit your app stack, and identify the highest-impact integration opportunities.",
     features: [
       "Discovery call (30 min)",
       "App stack audit and integration mapping",
@@ -85,7 +85,7 @@ export default function PricingPage() {
 
   const scrollToForm = (packageId: string) => {
     const packageMap: Record<string, string> = {
-      discovery: "Discovery Call (FREE)",
+      discovery: "Discovery Call",
       implementation: "Implementation (starting at $2,500)",
       retainer: "Operational Retainer (starting at $500/mo)",
     };
@@ -294,7 +294,7 @@ export default function PricingPage() {
                       className="flex h-11 w-full rounded-full border-2 border-slate-700 bg-slate-950 px-4 py-2 text-sm text-white focus:border-primary focus:outline-none transition-colors"
                     >
                       <option value="" disabled>Select a package</option>
-                      <option value="Discovery Call (FREE)">Discovery Call (FREE)</option>
+                      <option value="Discovery Call">Discovery Call</option>
                       <option value="Implementation (starting at $2,500)">Implementation (starting at $2,500)</option>
                       <option value="Operational Retainer (starting at $500/mo)">Operational Retainer (starting at $500/mo)</option>
                       <option value="Not sure yet, help me decide">Not sure yet, help me decide</option>
