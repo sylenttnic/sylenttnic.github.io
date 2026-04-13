@@ -106,15 +106,20 @@ export default function PricingPage() {
 
     const payload = {
       ...data,
-      firstname: data.name,
-      emailAddress: data.email,
       summary: `Pricing Inquiry: ${data.package}`,
     };
 
     try {
-      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY || "e5362baf-c777-4d57-a609-6eaf1f9e87f6";
+      const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
 
-      const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
+      if (!apiKey) {
+        console.error("Form configuration error: NEXT_PUBLIC_INTAKE_API_KEY is missing.");
+        setError("Form configuration error. Please try again later.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const response = await fetch("https://hnet.sylentt.com/intake", {
         method: "POST",
         body: JSON.stringify(payload),
         headers: {
@@ -129,6 +134,7 @@ export default function PricingPage() {
         setError("Something went wrong. Please try again, or email us directly at nic@sylentt.com.");
       }
     } catch (err) {
+      console.error("Submission failed:", err);
       setError("Something went wrong. Please try again, or email us directly at nic@sylentt.com.");
     } finally {
       setIsSubmitting(false);

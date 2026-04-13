@@ -174,45 +174,40 @@ export default function WizardForm() {
       ...leadData,
       calculatedFrictionScore: normalizedScore,
       frictionTier: frictionTier,
-      firstname: leadData.leadName,
-      emailAddress: leadData.leadEmail,
-      jobTitle: leadData.leadJobTitle,
-      company: leadData.leadCompany,
       summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`,
     };
 
     console.log("Submitting payload:", payload);
 
     try {
-      // Use environment variable or fallback to the specific key for this deployment
-      const apiKey = process.env.NEXT_PUBLIC_WEBSITE_API_KEY || "e5362baf-c777-4d57-a609-6eaf1f9e87f6";
+      const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
 
-      if (!process.env.NEXT_PUBLIC_WEBSITE_API_KEY) {
-        // Log if we are using the fallback, but don't warn as it's intended behavior now if env is missing
-        console.log("Using fallback website-api-key.");
+      if (!apiKey) {
+        console.error("Form configuration error: NEXT_PUBLIC_INTAKE_API_KEY is missing.");
+        setError("Form configuration error. Please try again later.");
+        setIsSubmitting(false);
+        return;
       }
 
-      const response = await fetch("https://hnet.sylentt.com/webhook/submit-ticket", {
+      const response = await fetch("https://hnet.sylentt.com/intake", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "website-api-key": apiKey || "",
+          "website-api-key": apiKey,
         },
         body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
-          console.error(`Submission error: ${response.status} ${response.statusText}`);
-          // Proceed to success anyway as per original logic to avoid blocking user?
-          // But maybe logging it is enough.
+        console.error(`Submission error: ${response.status} ${response.statusText}`);
+        setError("Something went wrong. Please try again later.");
       } else {
-          console.log("Submission successful");
+        console.log("Submission successful");
+        setIsSuccess(true);
       }
-
-      setIsSuccess(true);
     } catch (error) {
       console.error("Submission failed:", error);
-      setIsSuccess(true);
+      setError("Network error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
