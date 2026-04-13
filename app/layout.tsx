@@ -76,6 +76,23 @@ export default function RootLayout({
       <body
         className={`${jakarta.variable} ${spaceMono.variable} font-sans antialiased bg-slate-950 text-slate-300 selection:bg-primary/30 selection:text-white`}
       >
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-VEJHL7CN64"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-VEJHL7CN64');
+            `,
+          }}
+        />
+
+        {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
