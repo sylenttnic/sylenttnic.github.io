@@ -21,12 +21,14 @@ export const metadata: Metadata = {
     description:
       "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     url: "https://sylentt.com/services/",
+    images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Services | Sylentt \u2014 Custom Business App Integration",
     description:
       "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    images: ["/logo_full.png"],
   },
   alternates: {
     canonical: "https://sylentt.com/services/",
