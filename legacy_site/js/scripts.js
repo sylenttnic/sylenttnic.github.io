@@ -242,22 +242,23 @@ function processSubmission(leadData) {
         ...leadData,
         calculatedFrictionScore: normalizedScore,
         frictionTier: frictionTier,
-
-        // Map to existing n8n standard fields for backward compatibility/ease of use
-        firstname: leadData.leadName,
-        emailAddress: leadData.leadEmail,
-        jobTitle: leadData.leadJobTitle,
-        company: leadData.leadCompany,
         summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`
     };
 
     // AJAX Submission
     // Note: The API key should be provided in a config file or environment variable if this legacy site is deployed.
-    // For now, we default to an empty string to avoid hardcoding secrets in the repo.
-    const apiKey = (window.config && window.config.websiteApiKey) || '';
+    const apiKey = (window.config && window.config.intakeApiKey) || '';
+
+    if (!apiKey) {
+        console.error("Form configuration error: intakeApiKey is missing.");
+        alert("Form configuration error. Please try again later.");
+        const btn = $('#btn-reveal-results');
+        btn.prop('disabled', false).text('Reveal My Score');
+        return;
+    }
 
     $.ajax({
-        url: "https://hnet.sylentt.com/webhook/submit-ticket",
+        url: "https://hnet.sylentt.com/intake",
         type: "POST",
         contentType: 'application/json',
         headers: {
@@ -269,8 +270,9 @@ function processSubmission(leadData) {
         },
         error: function(xhr, status, error) {
             console.error("Submission failed:", error);
-            // Show results anyway so user isn't blocked, but maybe log internally
-            showResults(frictionTier, normalizedScore);
+            alert("Something went wrong. Please try again later.");
+            const btn = $('#btn-reveal-results');
+            btn.prop('disabled', false).text('Reveal My Score');
         }
     });
 }
