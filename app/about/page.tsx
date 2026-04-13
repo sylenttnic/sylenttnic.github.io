@@ -9,12 +9,14 @@ export const metadata: Metadata = {
     description:
       "Sylentt is a business automation consultancy based in Cache Valley, Utah. We build custom integrations that connect your business apps.",
     url: "https://sylentt.com/about/",
+    images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "About | Sylentt \u2014 Business Automation Consultancy in Cache Valley, Utah",
     description:
       "Sylentt is a business automation consultancy based in Cache Valley, Utah. We build custom integrations that connect your business apps.",
+    images: ["/logo_full.png"],
   },
   alternates: {
     canonical: "https://sylentt.com/about/",

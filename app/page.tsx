@@ -17,6 +17,14 @@ export const metadata: Metadata = {
     description:
       "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     url: "https://sylentt.com/",
+    images: [{ url: "/logo_full.png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    description:
+      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    images: ["/logo_full.png"],
   },
   alternates: {
     canonical: "https://sylentt.com/",
@@ -77,6 +85,8 @@ const jsonLdOrg = {
   description:
     "Business app integration and workflow automation for small businesses. We build custom connections between your tools so your team stops being the copy-paste layer.",
   url: "https://sylentt.com",
+  logo: "https://sylentt.com/logo-symbol.png",
+  image: "https://sylentt.com/logo_full.png",
   email: "contact@sylentt.com",
   areaServed: [
     { "@type": "Place", name: "Cache Valley, Utah" },
