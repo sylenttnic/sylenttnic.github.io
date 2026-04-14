@@ -147,7 +147,7 @@ export default function ChatAgent() {
                 <div
                   key={i}
                   className={cn(
-                    "max-w-[85%] rounded-2xl p-4 text-sm md:text-base leading-relaxed",
+                    "max-w-[85%] rounded-2xl p-4 text-sm md:text-base leading-relaxed whitespace-pre-wrap",
                     msg.role === "user"
                       ? "ml-auto bg-primary/20 text-white border border-primary/20"
                       : "mr-auto bg-white/5 text-slate-200 border border-white/5"
