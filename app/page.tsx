@@ -1,5 +1,6 @@
 import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
+import ChatAgent from "@/components/home/ChatAgent";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
 import IntegratorDiagram from "@/components/home/IntegratorDiagram";
@@ -540,6 +541,15 @@ export default function Home() {
                 </details>
               ))}
             </div>
+          </SectionFade>
+        </div>
+      </section>
+
+      {/* Section 6.75: Chat Agent */}
+      <section className="py-12 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <ChatAgent />
           </SectionFade>
         </div>
       </section>
