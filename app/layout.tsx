@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/Layout";
+import { ChatProvider } from "@/lib/context/ChatContext";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -110,7 +111,9 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <Layout>{children}</Layout>
+        <ChatProvider>
+          <Layout>{children}</Layout>
+        </ChatProvider>
       </body>
     </html>
   );
