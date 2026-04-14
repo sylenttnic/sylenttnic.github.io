@@ -21,16 +21,49 @@ export default function ChatAgent() {
   } = useChat();
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  const scrollToBottom = (behavior: ScrollBehavior = "smooth") => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior, block: "end" });
     }
-  }, [messages, isLoading, leadInfo]);
+  };
+
+  // Auto-scroll to bottom on content changes
+  useEffect(() => {
+    if (isOpen) {
+      // Use a small timeout to ensure DOM has updated and layout has shifted
+      const timer = setTimeout(() => scrollToBottom(), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [messages, isLoading, leadInfo, isOpen]);
+
+  // Handle mobile keyboard and viewport resizing
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleResize = () => {
+      // When the keyboard appears, the visual viewport height changes
+      // We want to ensure the latest message is still visible
+      scrollToBottom("auto");
+    };
+
+    const viewport = window.visualViewport;
+    if (viewport) {
+      viewport.addEventListener("resize", handleResize);
+      viewport.addEventListener("scroll", handleResize);
+    }
+
+    return () => {
+      if (viewport) {
+        viewport.removeEventListener("resize", handleResize);
+        viewport.removeEventListener("scroll", handleResize);
+      }
+    };
+  }, [isOpen]);
 
   // Focus management
   useEffect(() => {
@@ -38,7 +71,8 @@ export default function ChatAgent() {
       // Small delay to allow animation to start
       setTimeout(() => {
         inputRef.current?.focus();
-      }, 100);
+        scrollToBottom("auto");
+      }, 150);
       document.body.style.overflow = "hidden"; // Prevent background scroll on mobile
     } else {
       document.body.style.overflow = "";
@@ -52,6 +86,8 @@ export default function ChatAgent() {
   useEffect(() => {
     if (!isLoading && isOpen && !isLimitReached) {
       inputRef.current?.focus();
+      // On some mobile browsers, refocusing might trigger a viewport shift
+      setTimeout(() => scrollToBottom(), 50);
     }
   }, [isLoading, isOpen, isLimitReached]);
 
@@ -134,7 +170,7 @@ export default function ChatAgent() {
             {/* Messages Area */}
             <div
               ref={scrollRef}
-              className="flex-grow overflow-y-auto p-4 space-y-4 scroll-smooth"
+              className="flex-grow overflow-y-auto p-4 space-y-4"
               aria-live="polite"
             >
               {messages.length === 0 && (
@@ -188,6 +224,8 @@ export default function ChatAgent() {
                   We&apos;ve covered a lot! Book a discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
                 </div>
               )}
+
+              <div ref={messagesEndRef} className="h-0 w-full" />
             </div>
 
             {/* Footer Area with Calendly and Input */}
