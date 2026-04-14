@@ -48,6 +48,13 @@ export default function ChatAgent() {
     };
   }, [isOpen]);
 
+  // Refocus input when loading ends to ensure keyboard stays up
+  useEffect(() => {
+    if (!isLoading && isOpen && !isLimitReached) {
+      inputRef.current?.focus();
+    }
+  }, [isLoading, isOpen, isLimitReached]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -212,7 +219,7 @@ export default function ChatAgent() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  disabled={isLoading || isLimitReached}
+                  disabled={isLimitReached}
                   placeholder={isLimitReached ? "Conversation limit reached" : "Type your message..."}
                   className="flex-grow bg-slate-950 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600 outline-none focus:border-primary transition-all disabled:opacity-50"
                 />
