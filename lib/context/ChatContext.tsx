@@ -65,7 +65,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": apiKey,
+          "website-api-key": apiKey,
         },
         body: JSON.stringify({ messages: newMessages }),
       });
