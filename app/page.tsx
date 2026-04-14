@@ -118,7 +118,10 @@ const jsonLdOrg = {
     addressRegion: "UT",
     addressCountry: "US",
   },
-  sameAs: [],
+  sameAs: [
+    "https://www.google.com/maps/place/Sylentt+Partners/",
+    "https://www.linkedin.com/company/sylentt-partners/"
+  ],
 };
 
 const jsonLdFaq = {
