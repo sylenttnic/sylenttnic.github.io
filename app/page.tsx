@@ -1,6 +1,6 @@
 import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
-import ChatAgent from "@/components/home/ChatAgent";
+import HeroChatInput from "@/components/home/HeroChatInput";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import SectionFade from "@/components/ui/SectionFade";
 import IntegratorDiagram from "@/components/home/IntegratorDiagram";
@@ -296,7 +296,7 @@ export default function Home() {
             slipped through the cracks. We build the wiring between your tools
             so your team does not have to be.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col items-center justify-center gap-4">
             <Link
               href="/pricing"
               className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 animate-pulse-glow group shadow-[0_0_20px_rgba(99,102,241,0.5)] hover:shadow-[0_0_30px_rgba(99,102,241,0.8)]"
@@ -304,12 +304,7 @@ export default function Home() {
               See Pricing
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <a
-              href="#tell-us"
-              className="inline-flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 text-lg font-bold text-white transition-all hover:bg-white/20 group"
-            >
-              Tell us what&apos;s broken
-            </a>
+            <HeroChatInput />
           </div>
         </div>
 
@@ -541,15 +536,6 @@ export default function Home() {
                 </details>
               ))}
             </div>
-          </SectionFade>
-        </div>
-      </section>
-
-      {/* Section 6.75: Chat Agent */}
-      <section className="py-12 bg-slate-950">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <ChatAgent />
           </SectionFade>
         </div>
       </section>

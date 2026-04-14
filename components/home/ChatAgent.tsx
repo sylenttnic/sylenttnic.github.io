@@ -1,38 +1,29 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, X, Loader2, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type Message = {
-  role: "user" | "model";
-  content: string;
-};
-
-type ChatResponse = {
-  message: string;
-  leadCreated?: boolean;
-  calendlyLink?: string;
-};
+import { useChat } from "@/lib/context/ChatContext";
 
 export default function ChatAgent() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [leadInfo, setLeadInfo] = useState<{ created: boolean; link?: string }>({
-    created: false,
-  });
-  const [error, setError] = useState<string | null>(null);
+  const {
+    isOpen,
+    setIsOpen,
+    messages,
+    input,
+    setInput,
+    isLoading,
+    leadInfo,
+    error,
+    handleSend,
+    isLimitReached,
+  } = useChat();
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-
-  const MAX_MESSAGES = 40;
-  const isLimitReached = messages.length >= MAX_MESSAGES;
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -86,61 +77,11 @@ export default function ChatAgent() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
-  const handleSend = async (e?: React.FormEvent) => {
+  const onSend = async (e?: React.FormEvent) => {
     e?.preventDefault();
-
-    if (!input.trim() || isLoading || isLimitReached) return;
-
-    const userMessage = input.trim();
-    setInput("");
-    setError(null);
-
-    const newMessages: Message[] = [...messages, { role: "user", content: userMessage }];
-    setMessages(newMessages);
-
-    if (!isOpen) {
-      setIsOpen(true);
-    }
-
-    setIsLoading(true);
-
-    try {
-      const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
-      if (!apiKey) {
-        throw new Error("API key missing");
-      }
-
-      const response = await fetch("https://intake.sylentt.com/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-        },
-        body: JSON.stringify({ messages: newMessages }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch");
-      }
-
-      const data: ChatResponse = await response.json();
-
-      setMessages((prev) => [...prev, { role: "model", content: data.message }]);
-
-      if (data.leadCreated) {
-        setLeadInfo({ created: true, link: data.calendlyLink });
-      }
-    } catch (err) {
-      console.error("Chat error:", err);
-      setError("Something went wrong. You can book a call directly at the link below.");
-      if (!leadInfo.link) {
-        setLeadInfo({ created: true, link: "https://calendly.com/nic-sylentt/30min" });
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    await handleSend();
   };
 
   const handleClickOutside = (e: React.MouseEvent) => {
@@ -150,184 +91,148 @@ export default function ChatAgent() {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto px-4 py-12">
-      <AnimatePresence mode="wait">
-        {!isOpen ? (
+    <AnimatePresence mode="wait">
+      {isOpen && (
+        <motion.div
+          key="active"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[10000] flex items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-sm"
+          onClick={handleClickOutside}
+        >
           <motion.div
-            key="resting"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="flex flex-col items-center gap-4"
+            ref={chatWindowRef}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-slate-900 w-full h-full sm:h-[600px] sm:max-w-[600px] sm:rounded-2xl border border-white/10 shadow-2xl flex flex-col relative overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="chat-title"
+            onClick={(e) => e.stopPropagation()}
           >
-            <form
-              onSubmit={handleSend}
-              className="w-full max-w-2xl relative group"
-            >
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onClick={() => messages.length > 0 && setIsOpen(true)}
-                placeholder="Describe the integration challenge you're facing..."
-                className="w-full bg-slate-900/50 border-2 border-slate-800 rounded-full py-4 px-6 pr-14 text-white placeholder:text-slate-500 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-[0_0_15px_rgba(0,0,0,0.2)] group-hover:shadow-[0_0_20px_rgba(99,102,241,0.1)] cursor-text"
-                aria-label="Describe your integration challenge"
-              />
+            {/* Header */}
+            <div className="p-4 border-b border-white/5 flex items-center justify-between bg-slate-900/50">
+              <h3 id="chat-title" className="text-white font-bold">Sylentt Agent</h3>
               <button
-                type="submit"
-                disabled={!input.trim()}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-primary hover:bg-primary/10 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
-                aria-label="Send message"
+                ref={closeButtonRef}
+                onClick={() => setIsOpen(false)}
+                className="p-2 -mr-2 text-slate-400 hover:text-white transition-colors h-11 w-11 flex items-center justify-center"
+                aria-label="Close chat"
               >
-                <Send className="w-6 h-6" />
+                <X className="w-6 h-6" />
               </button>
-            </form>
-            <p className="text-slate-500 text-sm">
-              or scroll down to use the assessment form
-            </p>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="active"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10000] flex items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-sm"
-            onClick={handleClickOutside}
-          >
-            <motion.div
-              ref={chatWindowRef}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-slate-900 w-full h-full sm:h-[600px] sm:max-w-[600px] sm:rounded-2xl border border-white/10 shadow-2xl flex flex-col relative overflow-hidden"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="chat-title"
-              onClick={(e) => e.stopPropagation()}
+            </div>
+
+            {/* Messages Area */}
+            <div
+              ref={scrollRef}
+              className="flex-grow overflow-y-auto p-4 space-y-4 scroll-smooth"
+              aria-live="polite"
             >
-              {/* Header */}
-              <div className="p-4 border-b border-white/5 flex items-center justify-between bg-slate-900/50">
-                <h3 id="chat-title" className="text-white font-bold">Sylentt Agent</h3>
-                <button
-                  ref={closeButtonRef}
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 -mr-2 text-slate-400 hover:text-white transition-colors h-11 w-11 flex items-center justify-center"
-                  aria-label="Close chat"
+              {messages.length === 0 && (
+                <div className="h-full flex items-center justify-center text-slate-500 text-center px-8">
+                  Start the conversation by describing your workflow challenges.
+                </div>
+              )}
+
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "max-w-[85%] rounded-2xl p-4 text-sm md:text-base leading-relaxed",
+                    msg.role === "user"
+                      ? "ml-auto bg-primary/20 text-white border border-primary/20"
+                      : "mr-auto bg-white/5 text-slate-200 border border-white/5"
+                  )}
                 >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+                  {msg.content}
+                </div>
+              ))}
 
-              {/* Messages Area */}
-              <div
-                ref={scrollRef}
-                className="flex-grow overflow-y-auto p-4 space-y-4 scroll-smooth"
-                aria-live="polite"
-              >
-                {messages.length === 0 && (
-                  <div className="h-full flex items-center justify-center text-slate-500 text-center px-8">
-                    Start the conversation by describing your workflow challenges.
-                  </div>
-                )}
-
-                {messages.map((msg, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "max-w-[85%] rounded-2xl p-4 text-sm md:text-base leading-relaxed",
-                      msg.role === "user"
-                        ? "ml-auto bg-primary/20 text-white border border-primary/20"
-                        : "mr-auto bg-white/5 text-slate-200 border border-white/5"
-                    )}
-                  >
-                    {msg.content}
-                  </div>
-                ))}
-
-                {isLoading && (
-                  <div className="mr-auto bg-white/5 text-slate-400 border border-white/5 rounded-2xl p-4 flex gap-1 w-fit">
-                    <motion.span
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
-                      className="w-1.5 h-1.5 bg-current rounded-full"
-                    />
-                    <motion.span
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-                      className="w-1.5 h-1.5 bg-current rounded-full"
-                    />
-                    <motion.span
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
-                      className="w-1.5 h-1.5 bg-current rounded-full"
-                    />
-                  </div>
-                )}
-
-                {error && (
-                  <div className="mx-auto max-w-sm text-center p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-                    {error}
-                  </div>
-                )}
-
-                {isLimitReached && (
-                  <div className="text-center p-4 text-slate-500 text-sm">
-                    We&apos;ve covered a lot! Book a discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
-                  </div>
-                )}
-              </div>
-
-              {/* Footer Area with Calendly and Input */}
-              <div className="p-4 border-t border-white/5 bg-slate-900/50 space-y-4">
-                {leadInfo.created && leadInfo.link && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="w-full"
-                  >
-                    <a
-                      href={leadInfo.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-3 p-4 rounded-xl bg-primary text-white font-bold hover:bg-indigo-400 transition-all shadow-lg shadow-primary/25"
-                    >
-                      <Calendar className="w-5 h-5" />
-                      Book your discovery call
-                    </a>
-                  </motion.div>
-                )}
-
-                <form
-                  onSubmit={handleSend}
-                  className="relative flex gap-2"
-                >
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    disabled={isLoading || isLimitReached}
-                    placeholder={isLimitReached ? "Conversation limit reached" : "Type your message..."}
-                    className="flex-grow bg-slate-950 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600 outline-none focus:border-primary transition-all disabled:opacity-50"
+              {isLoading && (
+                <div className="mr-auto bg-white/5 text-slate-400 border border-white/5 rounded-2xl p-4 flex gap-1 w-fit">
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+                    className="w-1.5 h-1.5 bg-current rounded-full"
                   />
-                  <button
-                    type="submit"
-                    disabled={!input.trim() || isLoading || isLimitReached}
-                    className="bg-primary text-white p-3 rounded-xl hover:bg-indigo-400 disabled:opacity-30 transition-all flex items-center justify-center"
-                    aria-label="Send message"
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                    className="w-1.5 h-1.5 bg-current rounded-full"
+                  />
+                  <motion.span
+                    animate={{ opacity: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+                    className="w-1.5 h-1.5 bg-current rounded-full"
+                  />
+                </div>
+              )}
+
+              {error && (
+                <div className="mx-auto max-w-sm text-center p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                  {error}
+                </div>
+              )}
+
+              {isLimitReached && (
+                <div className="text-center p-4 text-slate-500 text-sm">
+                  We&apos;ve covered a lot! Book a discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
+                </div>
+              )}
+            </div>
+
+            {/* Footer Area with Calendly and Input */}
+            <div className="p-4 border-t border-white/5 bg-slate-900/50 space-y-4">
+              {leadInfo.created && leadInfo.link && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="w-full"
+                >
+                  <a
+                    href={leadInfo.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 p-4 rounded-xl bg-primary text-white font-bold hover:bg-indigo-400 transition-all shadow-lg shadow-primary/25"
                   >
-                    {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      <Send className="w-5 h-5" />
-                    )}
-                  </button>
-                </form>
-              </div>
-            </motion.div>
+                    <Calendar className="w-5 h-5" />
+                    Book your discovery call
+                  </a>
+                </motion.div>
+              )}
+
+              <form
+                onSubmit={onSend}
+                className="relative flex gap-2"
+              >
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={isLoading || isLimitReached}
+                  placeholder={isLimitReached ? "Conversation limit reached" : "Type your message..."}
+                  className="flex-grow bg-slate-950 border border-white/10 rounded-xl py-3 px-4 text-white placeholder:text-slate-600 outline-none focus:border-primary transition-all disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isLoading || isLimitReached}
+                  className="bg-primary text-white p-3 rounded-xl hover:bg-indigo-400 disabled:opacity-30 transition-all flex items-center justify-center"
+                  aria-label="Send message"
+                >
+                  {isLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                </button>
+              </form>
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
