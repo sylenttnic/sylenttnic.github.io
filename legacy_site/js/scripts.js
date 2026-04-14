@@ -258,7 +258,7 @@ function processSubmission(leadData) {
     }
 
     $.ajax({
-        url: "https://hnet.sylentt.com/intake",
+        url: "https://intake.sylentt.com/",
         type: "POST",
         contentType: 'application/json',
         headers: {

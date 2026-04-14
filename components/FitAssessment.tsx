@@ -220,7 +220,7 @@ export default function FitAssessment() {
         return;
       }
 
-      const response = await fetch("https://hnet.sylentt.com/intake", {
+      const response = await fetch("https://intake.sylentt.com/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
