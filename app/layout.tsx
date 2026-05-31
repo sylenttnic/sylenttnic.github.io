@@ -19,9 +19,9 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sylentt.com"),
-  title: "Sylentt | Business App Integration for Small Businesses",
+  title: "Sylentt Partners | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
   keywords: [
     "business app integration",
     "connect QuickBooks to Jobber",
@@ -30,25 +30,25 @@ export const metadata: Metadata = {
     "small business automation",
     "Cache Valley Utah",
   ],
-  authors: [{ name: "Sylentt" }],
+  authors: [{ name: "Sylentt Partners" }],
   robots: { index: true, follow: true },
   icons: {
     icon: "/logo-symbol.png",
   },
   openGraph: {
-    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Your business apps don't talk to each other. We fix that.",
     description:
-      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     type: "website",
     url: "https://sylentt.com",
-    siteName: "Sylentt",
+    siteName: "Sylentt Partners",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Your business apps don't talk to each other. We fix that.",
     description:
-      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   other: {
     "ai-content-description":
-      "Sylentt is a business app integration consultancy based in Cache Valley, Utah. We build custom connections between business tools like Shopify, QuickBooks, Stripe, and HubSpot. Clients own everything we build.",
+      "Sylentt Partners is a business app integration consultancy based in Cache Valley, Utah. We build custom connections between business tools like Shopify, QuickBooks, Stripe, and HubSpot. Clients own everything we build.",
   },
 };
 
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${jakarta.variable} ${spaceMono.variable} font-sans antialiased bg-slate-950 text-slate-300 selection:bg-primary/30 selection:text-white`}
+        className={`${jakarta.variable} ${spaceMono.variable} font-sans antialiased bg-[#FAF7F0] text-[#3A332B] selection:bg-primary/30 selection:text-[#211C17]`}
       >
         {/* Google tag (gtag.js) */}
         <script

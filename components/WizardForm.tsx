@@ -177,8 +177,6 @@ export default function WizardForm() {
       summary: `Friction Score Assessment: ${normalizedScore}/100 (${frictionTier})`,
     };
 
-    console.log("Submitting payload:", payload);
-
     try {
       const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
 
@@ -224,36 +222,36 @@ export default function WizardForm() {
     if (resultTier === "HIGH_FRICTION") {
       headline = "Your Organization is Running on Heroics";
       subheadline = "You are relying on individual effort to overcome systemic chaos. This is not scalable.";
-      colorClass = "text-red-500";
+      colorClass = "text-accent";
     } else if (resultTier === "DISCONNECTED") {
       headline = "You Have Tools, But Not Flow";
       subheadline = "Your teams are working hard, but friction in handoffs and visibility is slowing you down.";
-      colorClass = "text-amber-500";
+      colorClass = "text-accent";
     } else {
       headline = "You Are Architected for Speed";
       subheadline = "Your operations are mature. You are ready for advanced automation and scale.";
-      colorClass = "text-emerald-500";
+      colorClass = "text-accent";
     }
 
     return (
-      <div className="lane-body p-8 max-w-2xl mx-auto text-center">
+      <div className="lane-body p-8 max-w-2xl mx-auto text-center border-ink/10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className={cn("text-6xl font-black mb-4", colorClass)}>
+          <div className={cn("text-6xl font-serif font-bold mb-4", colorClass)}>
             {finalScore}/100
           </div>
-          <h3 className="text-2xl font-bold mb-4 text-white">{headline}</h3>
-          <p className="text-slate-300 mb-8 text-lg">{subheadline}</p>
+          <h3 className="text-2xl font-serif font-bold mb-4 text-ink">{headline}</h3>
+          <p className="text-ink/80 mb-8 text-lg font-sans">{subheadline}</p>
 
-          <div className="w-full h-px bg-white/10 my-6" />
+          <div className="w-full h-px bg-ink/5 my-6" />
 
-          <h4 className="text-xl font-bold mb-2 text-white">Stop losing time to friction</h4>
-          <p className="mb-6 text-slate-400">Let&apos;s discuss a roadmap to fix this.</p>
+          <h4 className="text-xl font-serif font-bold mb-2 text-ink">Stop losing time to friction</h4>
+          <p className="mb-6 text-ink/60 font-sans">Let&apos;s discuss a roadmap to fix this.</p>
 
-          <p className="text-sm text-slate-500 mb-6">
+          <p className="text-sm text-ink/40 mb-6 font-sans italic">
             We&apos;ve sent you an email to confirm contact information, please check your spam folder if you don&apos;t see it.
           </p>
 
@@ -261,9 +259,9 @@ export default function WizardForm() {
             href="https://calendly.com/nic-sylentt/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40"
+            className="inline-flex items-center justify-center rounded-sm bg-accent px-8 py-4 text-lg font-bold text-white transition-all hover:opacity-90 shadow-sm"
           >
-            Book your free discovery call
+            Book your discovery call
           </a>
         </motion.div>
       </div>
@@ -273,7 +271,7 @@ export default function WizardForm() {
   // Render Lead Form
   if (currentStep >= questions.length) {
     return (
-      <div className="lane-body p-8 max-w-2xl mx-auto">
+      <div className="lane-body p-8 max-w-2xl mx-auto border-ink/10">
         <div className="mb-6">
           <div
             role="progressbar"
@@ -281,17 +279,16 @@ export default function WizardForm() {
             aria-valuemin={0}
             aria-valuemax={100}
             aria-label="Progress: Complete"
-            className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+            className="h-2 w-full bg-surface2 rounded-full overflow-hidden"
           >
-            <div className="h-full bg-primary w-full transition-all duration-500" />
+            <div className="h-full bg-accent w-full transition-all duration-500" />
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Friction Score is ready</h3>
-        <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
+        <h3 className="text-2xl font-serif font-bold text-center mb-2 text-ink">Your Friction Score is ready</h3>
+        <p className="text-center text-ink/60 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
-          {/* Honeypot field - hidden from users */}
           <div className="hidden">
             <label htmlFor="hp_field">Verification</label>
             <input
@@ -307,18 +304,18 @@ export default function WizardForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-slate-300">Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadName" className="text-sm font-medium text-ink/70">Name <span className="text-accent">*</span></label>
               <Input
                 id="leadName"
                 name="leadName"
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-slate-300">Work Email <span className="text-red-500">*</span></label>
+              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/70">Work Email <span className="text-accent">*</span></label>
               <Input
                 id="leadEmail"
                 name="leadEmail"
@@ -326,39 +323,39 @@ export default function WizardForm() {
                 required
                 value={leadData.leadEmail}
                 onChange={(e) => setLeadData({ ...leadData, leadEmail: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-slate-300">Job Title <span className="text-red-500">*</span></label>
+              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/70">Job Title <span className="text-accent">*</span></label>
               <Input
                 id="leadJobTitle"
                 name="leadJobTitle"
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-slate-300">Company Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/70">Company Name <span className="text-accent">*</span></label>
               <Input
                 id="leadCompany"
                 name="leadCompany"
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
           </div>
 
-          <div className="text-xs text-slate-500 mt-2">
+          <div className="text-xs text-ink/40 mt-2 font-sans italic">
             We do not sell your information to third parties, and you are not signing up for spam.
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center font-medium bg-red-500/10 p-2 rounded">
+            <div className="text-red-700 text-sm text-center font-medium bg-red-50 p-2 rounded-sm border border-red-100">
               {error}
             </div>
           )}
@@ -368,7 +365,7 @@ export default function WizardForm() {
               type="submit"
               size="xl"
               disabled={isSubmitting}
-              className="w-full md:w-auto shadow-lg shadow-primary/25 bg-primary hover:bg-indigo-400 text-white"
+              className="w-full md:w-auto bg-accent hover:opacity-90 text-white rounded-sm"
             >
               {isSubmitting ? (
                 <>
@@ -388,7 +385,7 @@ export default function WizardForm() {
   const currentQuestion = questions[currentStep];
 
   return (
-    <div className="lane-body p-6 md:p-10 max-w-3xl mx-auto">
+    <div className="lane-body p-6 md:p-10 max-w-3xl mx-auto border-ink/10">
       <div className="mb-8">
         <div
           role="progressbar"
@@ -396,14 +393,14 @@ export default function WizardForm() {
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label={`Question ${currentStep + 1} of ${questions.length}`}
-          className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+          className="h-2 w-full bg-surface2 rounded-full overflow-hidden"
         >
           <div
-            className="h-full bg-primary transition-all duration-500 ease-out shadow-[0_0_10px_rgba(99,102,241,0.5)]"
+            className="h-full bg-accent transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-right text-xs text-slate-400 mt-2" aria-hidden="true">
+        <div className="text-right text-xs text-ink/40 mt-2 font-sans italic" aria-hidden="true">
           Question {currentStep + 1} of {questions.length}
         </div>
       </div>
@@ -420,7 +417,7 @@ export default function WizardForm() {
         >
           <h3
             id="question-heading"
-            className="text-2xl md:text-3xl font-bold mb-8 text-center text-white leading-tight"
+            className="text-2xl md:text-3xl font-serif font-bold mb-8 text-center text-ink leading-tight"
           >
             {currentQuestion.question}
           </h3>
@@ -431,20 +428,20 @@ export default function WizardForm() {
                 key={option.value}
                 type="button"
                 className={cn(
-                  "w-full text-left rounded-xl shadow-sm",
-                  "cursor-pointer transition-all border-2 border-[var(--border)] bg-[var(--surface2)] hover:border-[var(--border-light)] group",
-                  "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  "w-full text-left rounded-sm transition-all border group",
+                  "border-ink/10 bg-surface hover:border-ink/30",
+                  "focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
                 )}
                 onClick={() => handleOptionSelect(currentQuestion.id, option.value, option.score)}
               >
                 <div className="p-4 md:p-6 flex items-center">
-                  <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center text-slate-300 font-bold group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all">
+                  <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-surface2 border border-ink/10 flex items-center justify-center text-ink/40 font-serif font-bold group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
                     {String.fromCharCode(65 + index)}
                   </div>
-                  <div className="flex-grow text-lg font-medium text-slate-300 group-hover:text-white transition-colors">
+                  <div className="flex-grow text-lg font-sans text-ink/80 group-hover:text-ink transition-colors">
                     {option.text}
                   </div>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity text-accent">
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>

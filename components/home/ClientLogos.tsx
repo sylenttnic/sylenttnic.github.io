@@ -19,13 +19,13 @@ const clients = [
 
 export default function ClientLogos() {
   return (
-    <section className="py-12 bg-slate-950/50 border-y border-white/5">
+    <section className="py-24 bg-paper border-y border-ink/5">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
-          <p className="text-sm font-mono text-slate-500 uppercase tracking-[0.3em] mb-8">
+          <p className="text-xs font-sans text-ink/30 uppercase tracking-[0.3em] mb-12">
             Trusted by teams at
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
+          <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32">
             {clients.map((client) => (
               <motion.a
                 key={client.name}
@@ -33,12 +33,12 @@ export default function ClientLogos() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8 }}
               >
-                <div className="relative w-32 h-12 md:w-48 md:h-16 transition-all duration-500">
+                <div className="relative w-32 h-10 md:w-48 md:h-12 transition-all duration-500 opacity-40 group-hover:opacity-100">
                   <Image
                     src={client.logo}
                     alt={`${client.name} logo`}
@@ -46,8 +46,6 @@ export default function ClientLogos() {
                     className="object-contain"
                   />
                 </div>
-                {/* Subtle Glow Effect on Hover */}
-                <div className="absolute inset-0 bg-primary/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
               </motion.a>
             ))}
           </div>

@@ -40,38 +40,38 @@ export default function Chatbot() {
             --chat--window--bottom: 5.5rem;
             --chat--window--z-index: 9995;
 
-            /* Dark Theme Overrides */
-            --chat--color-slate-900: #0f172a;
-            --chat--color-slate-800: #1e293b;
-            --chat--color-slate-700: #334155;
-            --chat--color-slate-400: #94a3b8;
-            --chat--color-blue-500: #3b82f6;
-            --chat--color-white: #ffffff;
+            /* Light Theme Overrides */
+            --chat--color-slate-900: #FAF7F0;
+            --chat--color-slate-800: #F3EEE4;
+            --chat--color-slate-700: #E2DACB;
+            --chat--color-slate-400: #9A9087;
+            --chat--color-blue-500: #B5512F;
+            --chat--color-white: #211C17;
 
             /* Window */
-            --chat--window--border-radius: 12px;
-            --chat--window--background: var(--chat--color-slate-900);
-            --chat--body--background: var(--chat--color-slate-900);
-            --chat--footer--background: var(--chat--color-slate-900);
+            --chat--window--border-radius: 0px;
+            --chat--window--background: #FAF7F0;
+            --chat--body--background: #FAF7F0;
+            --chat--footer--background: #F3EEE4;
 
             /* Header */
-            --chat--header--background: var(--chat--color-slate-900);
-            --chat--header--color: var(--chat--color-white);
+            --chat--header--background: #F3EEE4;
+            --chat--header--color: #211C17;
 
             /* Messages */
-            --chat--message--bot--background: var(--chat--color-slate-800);
-            --chat--message--bot--color: var(--chat--color-white);
-            --chat--message--user--background: var(--chat--color-blue-500);
-            --chat--message--user--color: var(--chat--color-white);
+            --chat--message--bot--background: #ECE5D8;
+            --chat--message--bot--color: #211C17;
+            --chat--message--user--background: #B5512F;
+            --chat--message--user--color: #ffffff;
 
             /* Input Area */
-            --chat--input--background: #020617;
-            --chat--input--text-color: var(--chat--color-white);
-            --chat--input--border: 1px solid var(--chat--color-blue-500);
-            --chat--input--border-radius: 8px;
+            --chat--input--background: #ffffff;
+            --chat--input--text-color: #211C17;
+            --chat--input--border: 1px solid #E2DACB;
+            --chat--input--border-radius: 0px;
             --chat--input--container--background: transparent;
             --chat--input--container--border: none;
-            --chat--footer--border-top: none;
+            --chat--footer--border-top: 1px solid #E2DACB;
 
             /* Font */
             --chat--font-family: var(--font-jakarta), sans-serif;
@@ -79,7 +79,9 @@ export default function Chatbot() {
 
           /* Window Container */
           .chat-window {
-            background: var(--chat--color-slate-900) !important;
+            background: #FAF7F0 !important;
+            border: 1px solid #E2DACB !important;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1) !important;
           }
 
           #n8n-chat {
@@ -88,65 +90,64 @@ export default function Chatbot() {
 
           /* Header */
           .chat-header {
-            border-bottom: 1px solid var(--chat--color-slate-700) !important;
+            border-bottom: 1px solid #E2DACB !important;
           }
 
           /* Header Text */
           .chat-header h1 {
             font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
           }
 
           /* Close Button */
           .chat-close-button {
-             color: var(--chat--color-white) !important;
+             color: #211C17 !important;
           }
           .chat-close-button:hover {
-             color: var(--chat--color-blue-500) !important;
+             color: #B5512F !important;
           }
 
           /* Input Field */
           .chat-inputs textarea {
              resize: none !important;
              overflow: hidden !important;
-             border-radius: 8px !important;
+             border-radius: 0px !important;
           }
 
           /* Input Field Focus */
           .chat-inputs textarea:focus {
-             border-color: var(--chat--color-blue-500) !important;
+             border-color: #B5512F !important;
              outline: none !important;
           }
 
           /* Placeholder */
           .chat-inputs textarea::placeholder {
-             color: var(--chat--color-slate-400) !important;
+             color: #9A9087 !important;
           }
 
           /* Send Button */
           .chat-input-send-button {
-             background-color: var(--chat--color-slate-800) !important;
-             border-radius: 8px !important;
+             background-color: #B5512F !important;
+             border-radius: 0px !important;
              margin-left: 12px !important;
              width: 48px !important;
              height: 48px !important;
-             color: var(--chat--color-white) !important;
+             color: #ffffff !important;
           }
           .chat-input-send-button:hover {
-             background-color: var(--chat--color-slate-700) !important;
+             opacity: 0.9 !important;
           }
 
           /* Scrollbar */
           .chat-body::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
           }
           .chat-body::-webkit-scrollbar-track {
-            background: var(--chat--color-slate-900);
+            background: #FAF7F0;
           }
           .chat-body::-webkit-scrollbar-thumb {
-            background: var(--chat--color-slate-700);
-            border-radius: 4px;
+            background: #E2DACB;
           }
 
           @media (max-width: 640px) {
@@ -184,8 +185,8 @@ export default function Chatbot() {
                 },
               },
               style: {
-                primaryColor: "#6366f1",
-                secondaryColor: "#0f172a",
+                primaryColor: "#B5512F",
+                secondaryColor: "#F3EEE4",
                 fontFamily: "var(--font-jakarta), sans-serif",
               },
             });
@@ -316,7 +317,7 @@ export default function Chatbot() {
       {/* Custom Toggle Button */}
       <button
         onClick={handleToggleChat}
-        className={`fixed bottom-4 right-4 z-[10000] flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105 hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed bottom-4 right-4 z-[10000] flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white shadow-lg transition-transform hover:scale-105 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${!isReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         aria-label={isOpen ? "Close Chat" : "Open Chat"}
         disabled={!isReady}
       >
