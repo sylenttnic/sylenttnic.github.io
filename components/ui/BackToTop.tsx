@@ -53,11 +53,11 @@ const BackToTop = () => {
     };
   };
 
-  // Using the site's accent colors
+  // Using the site's accent colors with varying opacities for depth
   const colors = [
-    'text-[#8b5cf6]', // accent3 (purple)
-    'text-[#3b82f6]', // accent (blue)
-    'text-[#06b6d4]', // accent2 (cyan)
+    'text-accent',
+    'text-accent/60',
+    'text-accent/30',
   ];
 
   return (
@@ -81,10 +81,7 @@ const BackToTop = () => {
                 className="flex items-center justify-center"
               >
                 <ChevronUp
-                  className={`w-12 h-12 stroke-[3.5] transition-colors ${colors[i]} group-hover:text-white`}
-                  style={{
-                    filter: `drop-shadow(0 0 10px currentColor)`
-                  }}
+                  className={`w-12 h-12 stroke-[3.5] transition-colors ${colors[i]}`}
                 />
               </motion.div>
             ))}
