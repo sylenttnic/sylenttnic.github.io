@@ -197,7 +197,7 @@ export default function Home() {
               href="/pricing"
               className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group"
             >
-              See Pricing
+              Book a Strategy Call
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <div className="w-full max-w-xl">
