@@ -55,24 +55,24 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "glass border-0 shadow-lg shadow-black/5" : "bg-transparent py-6"
+        scrolled ? "bg-paper/95 border-b border-ink/5 shadow-sm py-4" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link href="/" className="text-white font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
+        <Link href="/" className="text-ink font-serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
           Sylentt Partners
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-12">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-slate-300 hover:text-white font-medium text-sm transition-colors relative group"
+              className="text-ink/70 hover:text-ink font-sans uppercase tracking-widest text-xs transition-colors relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -80,7 +80,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           ref={mobileButtonRef}
-          className="md:hidden text-white"
+          className="md:hidden text-ink"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
@@ -95,16 +95,16 @@ export default function Navbar() {
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute top-full left-0 w-full bg-slate-950/95 backdrop-blur-md border-t-0 border-b border-white/10 overflow-hidden transition-all duration-300 ease-in-out",
-          isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+          "md:hidden absolute top-full left-0 w-full bg-paper/98 backdrop-blur-md border-b border-ink/5 overflow-hidden transition-all duration-300 ease-in-out",
+          isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className="flex flex-col p-4 space-y-4">
+        <div className="flex flex-col p-8 space-y-6">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-slate-300 hover:text-white font-medium text-sm"
+              className="text-ink/80 hover:text-accent font-sans uppercase tracking-widest text-sm"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

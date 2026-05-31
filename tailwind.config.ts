@@ -9,31 +9,32 @@ const config: Config = {
     extend: {
       colors: {
         slate: {
-          850: "#172033", // Custom bridge between 800 and 900
-          950: "#020617", // Ensure 950 is available (standard in v3.3+)
+          850: "#ECE5D8",
+          950: "#FAF7F0",
         },
         primary: {
-          DEFAULT: "#6366f1", // Indigo 500
-          hover: "#4f46e5",   // Indigo 600
+          DEFAULT: "#B5512F",
+          hover: "#8F3E22",
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#0f172a", // Slate 900
-          foreground: "#f8fafc", // Slate 50
+          DEFAULT: "#F3EEE4",
+          foreground: "#211C17",
         },
-        // Adding semantic colors for the dark theme
-        background: "#020617", // Slate 950
-        surface: "#0f172a",    // Slate 900
-        border: "rgba(255, 255, 255, 0.1)",
+        background: "#FAF7F0",
+        paper: "#FAF7F0",
+        ink: "#211C17",
+        surface: "#F3EEE4",
+        border: "#E2DACB",
         card: {
-          DEFAULT: "rgba(15, 23, 42, 0.6)", // Slate 900 with opacity for glass effect
-          foreground: "#cbd5e1", // Slate 300
+          DEFAULT: "#F3EEE4",
+          foreground: "#3A332B",
         },
-        accent: "#3b82f6", // Blue
-        accent2: "#06b6d4", // Cyan
-        accent3: "#8b5cf6", // Purple
-        accent4: "#10b981", // Green
-        accent5: "#f59e0b", // Amber
+        accent: "#B5512F",
+        accent2: "#B5512F",
+        accent3: "#B5512F",
+        accent4: "#B5512F",
+        accent5: "#B5512F",
       },
       fontFamily: {
         sans: ["var(--font-jakarta)", "sans-serif"],
@@ -59,8 +60,8 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         pulseOrb: {
-          "0%, 100%": { boxShadow: "0 0 4px currentColor, 0 0 8px currentColor, 0 0 12px currentColor", opacity: "0.7" },
-          "50%": { boxShadow: "0 0 8px currentColor, 0 0 16px currentColor, 0 0 24px currentColor", opacity: "1" },
+          "0%, 100%": { opacity: "0.7" },
+          "50%": { opacity: "1" },
         },
         textSweep: {
           "0%": { backgroundPosition: "-200% 0" },
@@ -79,8 +80,8 @@ const config: Config = {
           "100%": { left: "calc(100% + 6px)", opacity: "0" },
         },
         pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(99,102,241,0.25), 0 0 40px rgba(99,102,241,0.1)" },
-          "50%": { boxShadow: "0 0 30px rgba(99,102,241,0.45), 0 0 60px rgba(99,102,241,0.2)" },
+          "0%, 100%": { opacity: "0.8" },
+          "50%": { opacity: "1" },
         },
       },
     },

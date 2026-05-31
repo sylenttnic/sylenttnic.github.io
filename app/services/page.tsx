@@ -13,21 +13,21 @@ import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services | Sylentt \u2014 Custom Business App Integration",
+  title: "Services | Sylentt Partners \u2014 Custom Business App Integration",
   description:
-    "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
   openGraph: {
-    title: "Services | Sylentt \u2014 Custom Business App Integration",
+    title: "Services | Sylentt Partners \u2014 Custom Business App Integration",
     description:
-      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+      "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     url: "https://sylentt.com/services/",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services | Sylentt \u2014 Custom Business App Integration",
+    title: "Services | Sylentt Partners \u2014 Custom Business App Integration",
     description:
-      "Sylentt builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+      "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -84,41 +84,18 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <>
+    <div className="bg-paper text-ink">
       {/* Hero */}
-      <header className="relative min-h-[100dvh] flex items-center justify-center text-center text-white overflow-hidden pt-20 pb-32">
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source
-              media="(max-width: 640px)"
-              srcSet="/assets/img/masthead-small.webp"
-            />
-            <source
-              media="(max-width: 1024px)"
-              srcSet="/assets/img/masthead-medium.webp"
-            />
-            <img
-              src="/assets/img/masthead.webp"
-              alt="Background"
-              className="absolute inset-0 w-full h-full object-cover opacity-40"
-              {...{ fetchpriority: "high" as const }}
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-          <div className="absolute inset-0 bg-slate-950/60" />
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 animate-fade-in-up">
-          <h1 className="text-4xl md:text-6xl font-bold text-white neon-line-header">
+      <header className="relative py-32 md:py-48 overflow-hidden border-b border-ink/5">
+        <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
+          <h1 className="text-4xl md:text-6xl font-serif mb-8">
             What we build
           </h1>
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto font-light">
+          <p className="text-xl md:text-2xl text-ink/70 max-w-3xl mx-auto font-sans leading-relaxed">
             We connect your business apps so data flows automatically. Here is
             exactly what that looks like.
           </p>
         </div>
-
-        <ScrollIndicator />
       </header>
 
       {/* Service Sections */}
@@ -129,45 +106,43 @@ export default function ServicesPage() {
         return (
           <section
             key={service.pain}
-            className={`py-20 md:py-28 ${
-              isEven ? "bg-slate-950" : "bg-slate-900/30 border-y border-white/5"
+            className={`py-24 md:py-32 ${
+              isEven ? "bg-paper" : "bg-surface border-y border-ink/5"
             }`}
           >
             <div className="container mx-auto px-4">
               <SectionFade>
                 <div className="max-w-4xl mx-auto">
                   {/* The Pain */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div
-                      className={`flex-shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-${service.color}-500/10 flex items-center justify-center border border-${service.color}-500/20`}
-                    >
-                      <Icon className="w-5 h-5 md:w-7 md:h-7 text-slate-300" />
+                  <div className="mb-12">
+                    <div className="mb-6 w-12 h-12 rounded-full bg-paper border border-ink/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-accent" />
                     </div>
-                    <h2 className={`text-2xl md:text-4xl font-bold text-white neon-line-header ${service.color}`}>
+                    <h2 className="text-3xl md:text-5xl font-serif mb-6">
                       {service.pain}
                     </h2>
+                    <p className="text-ink/70 text-lg leading-relaxed max-w-3xl">
+                      {service.detail}
+                    </p>
                   </div>
-                  <p className="text-slate-400 text-lg leading-relaxed mb-8">
-                    {service.detail}
-                  </p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* The Outcome */}
-                    <div className={`neon-card ${service.color} p-6 rounded-xl`}>
-                      <h3 className="text-sm font-mono uppercase tracking-wider text-primary/70 mb-3">
+                    <div className="bg-paper border border-ink/10 p-8 rounded-sm">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/40 mb-4">
                         What changes
                       </h3>
-                      <p className="text-slate-300 leading-relaxed">
+                      <p className="text-ink/80 leading-relaxed">
                         {service.outcome}
                       </p>
                     </div>
 
                     {/* The Deliverable */}
-                    <div className={`neon-card ${service.color} p-6 rounded-xl`}>
-                      <h3 className="text-sm font-mono uppercase tracking-wider text-primary/70 mb-3">
+                    <div className="bg-paper border border-ink/10 p-8 rounded-sm">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/40 mb-4">
                         What you own
                       </h3>
-                      <p className="text-slate-300 leading-relaxed">
+                      <p className="text-ink/80 leading-relaxed">
                         {service.deliverable}
                       </p>
                     </div>
@@ -180,30 +155,30 @@ export default function ServicesPage() {
       })}
 
       {/* How We Build It - Agents Card */}
-      <section className="py-20 md:py-28 bg-slate-950">
+      <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl mx-auto">
               <Link
                 href="/services/agents"
-                className="group block neon-card blue p-6 md:p-10 rounded-3xl"
+                className="group block bg-surface border border-ink/10 p-10 md:p-16 rounded-sm hover:border-accent/30 transition-all"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex-shrink-0 w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-colors">
-                    <Eye className="w-5 h-5 md:w-8 md:h-8 text-accent group-hover:text-white" />
+                <div className="flex items-center gap-6 mb-8">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-paper border border-ink/10 flex items-center justify-center group-hover:border-accent/20 transition-colors">
+                    <Eye className="w-8 h-8 text-accent" />
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-white group-hover:text-accent transition-colors">
+                  <h2 className="text-3xl md:text-4xl font-serif">
                     How we build it
                   </h2>
                 </div>
-                <p className="text-slate-400 text-lg mb-4">
+                <p className="text-ink/60 text-xl mb-8 leading-relaxed">
                   Every integration follows the same structured process. Six
                   phases, multiple quality checkpoints, and nothing goes live
                   without your approval.
                 </p>
-                <div className="flex items-center text-accent font-bold group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center text-accent font-bold text-lg group-hover:translate-x-2 transition-transform">
                   See the build process{" "}
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-6 h-6" />
                 </div>
               </Link>
             </div>
@@ -212,28 +187,30 @@ export default function ServicesPage() {
       </section>
 
       {/* Ongoing Support */}
-      <section className="py-20 md:py-28 bg-slate-900/30 border-y border-white/5">
+      <section className="py-24 md:py-32 bg-surface border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold neon-line-header blue">
+              <h2 className="text-4xl md:text-6xl font-serif mb-12">
                 After the build
               </h2>
-              <p className="text-slate-300 text-lg leading-relaxed mb-6">
-                After the initial build, we monitor your connections, handle any
-                changes from your software vendors, and add new integrations as
-                your business grows.
-              </p>
-              <p className="text-slate-300 text-lg leading-relaxed mb-6">
-                You are not locked in. You own everything. But most clients keep
-                us around because the system keeps saving them time, and new
-                connections keep paying for themselves.
-              </p>
-              <p className="text-slate-400 text-base">
-                Think of it like having a mechanic on retainer for the wiring
-                between your apps. When something changes or when you add a new
-                tool, we handle it.
-              </p>
+              <div className="space-y-8">
+                <p className="text-ink/70 text-lg leading-relaxed">
+                  After the initial build, we monitor your connections, handle any
+                  changes from your software vendors, and add new integrations as
+                  your business grows.
+                </p>
+                <p className="text-ink/70 text-lg leading-relaxed">
+                  You are not locked in. You own everything. But most clients keep
+                  us around because the system keeps saving them time, and new
+                  connections keep paying for themselves.
+                </p>
+                <p className="text-ink/50 text-base italic">
+                  Think of it like having a mechanic on retainer for the wiring
+                  between your apps. When something changes or when you add a new
+                  tool, we handle it.
+                </p>
+              </div>
             </div>
           </SectionFade>
         </div>
@@ -242,24 +219,25 @@ export default function ServicesPage() {
       {/* CTA + Form */}
       <section
         id="tell-us"
-        className="py-24 md:py-32 bg-slate-950 scroll-mt-32 border-t border-white/5"
+        className="py-24 md:py-32 bg-paper"
       >
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="text-center mb-16 relative pb-6">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                Tell us what&apos;s broken
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-serif mb-6">
+                Tell us what is broken
               </h2>
-              <p className="text-slate-400 text-lg">
+              <p className="text-ink/60 text-xl">
                 Answer a few quick questions so we can see where your time is
                 going.
               </p>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent" style={{ boxShadow: '0 0 12px rgba(99,102,241,0.4)' }} />
             </div>
-            <FitAssessment />
+            <div className="max-w-2xl mx-auto">
+              <FitAssessment />
+            </div>
           </SectionFade>
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -3,13 +3,10 @@
 /**
  * FitAssessment Component
  *
- * New Variables:
- * - selectedOptions: string[] - Tracks multiple tool selections for Question 1 (multi-select).
- * - textInput: string - Stores the open-ended response for the manual task description in Question 4.
- * - answers: QuizAnswers - Map of question IDs to their selected values (single-select, multi-select, or text).
- * - calculatedScore: number - The final fit score (0-14) calculated based on the weighting logic.
- * - resultTier: string - The classification ("Strong fit", "Good fit", etc.) used for final display and payload.
- * - leadData: LeadData - Object containing contact information (Name, Email, Job Title, Company).
+ * Updated for Light Theme Migration:
+ * - Replaced dark slate classes with paper/ink semantic tokens.
+ * - Removed glows and glass effects.
+ * - Standardized on accent color (#B5512F).
  */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -186,20 +183,15 @@ export default function FitAssessment() {
     setCalculatedScore(totalScore);
 
     let resultTier = "";
-    let summaryMessage = "";
 
     if (totalScore >= 10) {
       resultTier = "Strong fit";
-      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt to solve.";
     } else if (totalScore >= 6) {
       resultTier = "Good fit";
-      summaryMessage = "Based on your answers, there's a good chance we can help. Let's talk through the details.";
     } else if (totalScore >= 1) {
       resultTier = "Worth a conversation";
-      summaryMessage = "We'd want to learn more about your setup before saying for sure, but it's worth a quick conversation.";
     } else {
       resultTier = "Might not be the right fit";
-      summaryMessage = "Based on your answers, Sylentt might not be what you need right now, but if you think we're wrong, reach out anyway.";
     }
 
     const payload = {
@@ -253,49 +245,49 @@ export default function FitAssessment() {
 
     if (calculatedScore >= 10) {
       resultTier = "Strong fit";
-      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt to solve.";
-      colorClass = "text-emerald-500";
+      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt Partners to solve.";
+      colorClass = "text-accent";
     } else if (calculatedScore >= 6) {
       resultTier = "Good fit";
       summaryMessage = "Based on your answers, there's a good chance we can help. Let's talk through the details.";
-      colorClass = "text-blue-500";
+      colorClass = "text-accent";
     } else if (calculatedScore >= 1) {
       resultTier = "Worth a conversation";
       summaryMessage = "We'd want to learn more about your setup before saying for sure, but it's worth a quick conversation.";
-      colorClass = "text-amber-500";
+      colorClass = "text-accent";
     } else {
       resultTier = "Might not be the right fit";
-      summaryMessage = "Based on your answers, Sylentt might not be what you need right now, but if you think we're wrong, reach out anyway.";
-      colorClass = "text-slate-400";
+      summaryMessage = "Based on your answers, Sylentt Partners might not be what you need right now, but if you think we're wrong, reach out anyway.";
+      colorClass = "text-ink/40";
     }
 
     return (
-      <div className="lane-body p-8 max-w-2xl mx-auto text-center">
+      <div className="lane-body p-8 max-w-2xl mx-auto text-center border-ink/10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-xl text-slate-400 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
-          <div className={cn("text-5xl md:text-6xl font-black mb-6", colorClass)}>
+          <div className="text-xl text-ink/40 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
+          <div className={cn("text-5xl md:text-6xl font-serif font-bold mb-6", colorClass)}>
             {resultTier}
           </div>
-          <p className="text-slate-300 mb-8 text-lg">
+          <p className="text-ink/80 mb-8 text-lg font-sans">
             {summaryMessage}
           </p>
 
-          <div className="w-full h-px bg-white/10 my-6" />
+          <div className="w-full h-px bg-ink/5 my-6" />
 
-          <h4 className="text-xl font-bold mb-2 text-white">Let&apos;s build your roadmap</h4>
-          <p className="mb-6 text-slate-400">Schedule a session to see how we can eliminate the friction in your workflows.</p>
+          <h4 className="text-xl font-serif font-bold mb-2 text-ink">Let&apos;s build your roadmap</h4>
+          <p className="mb-6 text-ink/60 font-sans">Schedule a session to see how we can eliminate the friction in your workflows.</p>
 
           <a
             href="https://calendly.com/nic-sylentt/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-indigo-400 shadow-lg shadow-primary/25 hover:shadow-primary/40"
+            className="inline-flex items-center justify-center rounded-sm bg-accent px-8 py-4 text-lg font-bold text-white transition-all hover:opacity-90 shadow-sm"
           >
-            Book your free discovery call
+            Book your discovery call
           </a>
         </motion.div>
       </div>
@@ -304,7 +296,7 @@ export default function FitAssessment() {
 
   if (currentStep >= questions.length) {
     return (
-      <div className="lane-body p-8 max-w-2xl mx-auto">
+      <div className="lane-body p-8 max-w-2xl mx-auto border-ink/10">
         <div className="mb-6">
           <div
             role="progressbar"
@@ -312,17 +304,16 @@ export default function FitAssessment() {
             aria-valuemin={0}
             aria-valuemax={100}
             aria-label="Progress: Complete"
-            className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+            className="h-2 w-full bg-surface2 rounded-full overflow-hidden"
           >
-            <div className="h-full bg-primary w-full transition-all duration-500" />
+            <div className="h-full bg-accent w-full transition-all duration-500" />
           </div>
         </div>
 
-        <h3 className="text-2xl font-bold text-center mb-2 text-white">Your Fit Assessment is ready</h3>
-        <p className="text-center text-slate-400 mb-8">Enter your details to reveal your score and get your customized report.</p>
+        <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-2 text-ink">Your Fit Assessment is ready</h3>
+        <p className="text-center text-ink/60 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
-          {/* Honeypot field - hidden from users */}
           <div className="hidden">
             <label htmlFor="hp_field">Verification</label>
             <input
@@ -338,18 +329,18 @@ export default function FitAssessment() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-slate-300">Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadName" className="text-sm font-medium text-ink/70">Name <span className="text-accent">*</span></label>
               <Input
                 id="leadName"
                 name="leadName"
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-slate-300">Work Email <span className="text-red-500">*</span></label>
+              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/70">Work Email <span className="text-accent">*</span></label>
               <Input
                 id="leadEmail"
                 name="leadEmail"
@@ -357,39 +348,39 @@ export default function FitAssessment() {
                 required
                 value={leadData.leadEmail}
                 onChange={(e) => setLeadData({ ...leadData, leadEmail: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-slate-300">Job Title <span className="text-red-500">*</span></label>
+              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/70">Job Title <span className="text-accent">*</span></label>
               <Input
                 id="leadJobTitle"
                 name="leadJobTitle"
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-slate-300">Company Name <span className="text-red-500">*</span></label>
+              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/70">Company Name <span className="text-accent">*</span></label>
               <Input
                 id="leadCompany"
                 name="leadCompany"
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
-                className="bg-slate-950 border-slate-700 text-white focus:border-primary"
+                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
               />
             </div>
           </div>
 
-          <div className="text-xs text-slate-500 mt-2">
+          <div className="text-xs text-ink/40 mt-2 font-sans italic">
             We do not sell your information to third parties, and you are not signing up for spam.
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center font-medium bg-red-500/10 p-2 rounded">
+            <div className="text-red-700 text-sm text-center font-medium bg-red-50 p-2 rounded-sm border border-red-100">
               {error}
             </div>
           )}
@@ -399,7 +390,7 @@ export default function FitAssessment() {
               type="submit"
               size="xl"
               disabled={isSubmitting}
-              className="w-full md:w-auto shadow-lg shadow-primary/25 bg-primary hover:bg-indigo-400 text-white"
+              className="w-full md:w-auto bg-accent hover:opacity-90 text-white rounded-sm"
             >
               {isSubmitting ? (
                 <>
@@ -418,7 +409,7 @@ export default function FitAssessment() {
   const currentQuestion = questions[currentStep];
 
   return (
-    <div className="lane-body p-6 md:p-10 max-w-3xl mx-auto">
+    <div className="lane-body p-6 md:p-10 max-w-3xl mx-auto border-ink/10">
       <div className="mb-8">
         <div
           role="progressbar"
@@ -426,14 +417,14 @@ export default function FitAssessment() {
           aria-valuemin={0}
           aria-valuemax={100}
           aria-label={`Question ${currentStep + 1} of ${questions.length}`}
-          className="h-2 w-full bg-slate-800 rounded-full overflow-hidden"
+          className="h-2 w-full bg-surface2 rounded-full overflow-hidden"
         >
           <div
-            className="h-full bg-primary transition-all duration-500 ease-out shadow-[0_0_10px_rgba(99,102,241,0.5)]"
+            className="h-full bg-accent transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="text-right text-xs text-slate-400 mt-2" aria-hidden="true">
+        <div className="text-right text-xs text-ink/40 mt-2 font-sans italic" aria-hidden="true">
           Question {currentStep + 1} of {questions.length}
         </div>
       </div>
@@ -450,7 +441,7 @@ export default function FitAssessment() {
         >
           <h3
             id="question-heading"
-            className="text-2xl md:text-3xl font-bold mb-8 text-center text-white leading-tight"
+            className="text-2xl md:text-3xl font-serif font-bold mb-8 text-center text-ink leading-tight"
           >
             {currentQuestion.question}
           </h3>
@@ -460,7 +451,7 @@ export default function FitAssessment() {
               <div className="space-y-6">
                 <textarea
                   autoFocus
-                  className="w-full bg-slate-950 border-2 border-slate-800 rounded-xl p-6 text-white text-lg focus:border-primary outline-none min-h-[120px] transition-colors"
+                  className="w-full bg-paper border border-ink/10 rounded-sm p-6 text-ink text-lg focus:border-accent outline-none min-h-[120px] transition-colors font-sans placeholder:text-ink/20"
                   placeholder="e.g. We manually copy tracking numbers from ShipStation to a Google Sheet for our weekly report."
                   value={textInput}
                   onChange={(e) => handleTextChange(e.target.value)}
@@ -470,7 +461,7 @@ export default function FitAssessment() {
                     size="xl"
                     onClick={handleNextStep}
                     disabled={!textInput.trim()}
-                    className="group bg-primary hover:bg-indigo-400 text-white px-10 shadow-lg shadow-primary/25"
+                    className="group bg-accent hover:opacity-90 text-white px-10 rounded-sm"
                   >
                     Next Question
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -489,12 +480,10 @@ export default function FitAssessment() {
                       key={option.value}
                       type="button"
                       className={cn(
-                        "w-full text-left rounded-xl shadow-sm",
-                        "cursor-pointer transition-all border-2 group",
-                        "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary",
+                        "w-full text-left rounded-sm transition-all border group",
                         isSelected
-                          ? "border-primary bg-primary/10"
-                          : "border-[var(--border)] bg-[var(--surface2)] hover:border-[var(--border-light)]"
+                          ? "border-accent bg-accent/5"
+                          : "border-ink/10 bg-surface hover:border-ink/30"
                       )}
                       onClick={() =>
                         currentQuestion.type === "multi"
@@ -504,21 +493,21 @@ export default function FitAssessment() {
                     >
                       <div className="p-4 md:p-6 flex items-center">
                         <div className={cn(
-                          "flex-shrink-0 mr-4 w-8 h-8 rounded-full border flex items-center justify-center font-bold transition-all",
+                          "flex-shrink-0 mr-4 w-8 h-8 rounded-full border flex items-center justify-center font-serif font-bold transition-all",
                           isSelected
-                            ? "bg-primary border-primary text-white"
-                            : "bg-slate-700 border-slate-600 text-slate-300 group-hover:border-primary group-hover:bg-primary group-hover:text-white"
+                            ? "bg-accent border-accent text-white"
+                            : "bg-surface2 border-ink/10 text-ink/40 group-hover:border-accent group-hover:bg-accent group-hover:text-white"
                         )}>
                           {String.fromCharCode(65 + index)}
                         </div>
                         <div className={cn(
-                          "flex-grow text-lg font-medium transition-colors",
-                          isSelected ? "text-white" : "text-slate-300 group-hover:text-white"
+                          "flex-grow text-lg font-sans transition-colors",
+                          isSelected ? "text-ink" : "text-ink/80 group-hover:text-ink"
                         )}>
                           {option.text}
                         </div>
                         <div className={cn(
-                          "transition-all text-primary",
+                          "transition-all text-accent",
                           isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                         )}>
                           <ArrowRight className="w-5 h-5" />
@@ -534,7 +523,7 @@ export default function FitAssessment() {
                       size="xl"
                       onClick={handleNextStep}
                       disabled={selectedOptions.length === 0}
-                      className="group bg-primary hover:bg-indigo-400 text-white px-10 shadow-lg shadow-primary/25"
+                      className="group bg-accent hover:opacity-90 text-white px-10 rounded-sm"
                     >
                       Next Question
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

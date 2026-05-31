@@ -136,7 +136,7 @@ const ToolNode = ({
       onClick={() => isMobile && onInteract(category.id)}
     >
       <div
-        className={`neon-card ${category.color} p-4 rounded-xl flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-lg hover:scale-105 transition-transform duration-300`}
+        className="bg-paper border border-ink/10 p-4 rounded-sm flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-sm hover:border-accent/30 transition-all duration-300"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -151,10 +151,10 @@ const ToolNode = ({
                 src={currentTool.logo}
                 alt={currentTool.name}
                 fill
-                className="object-contain"
+                className="object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
               />
             </div>
-            <span className="text-[9px] md:text-[10px] font-mono text-slate-400 text-center uppercase tracking-tighter">
+            <span className="text-[9px] md:text-[10px] font-sans text-ink/40 text-center uppercase tracking-widest">
               {currentTool.name}
             </span>
           </motion.div>
@@ -167,10 +167,9 @@ const ToolNode = ({
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className={`absolute top-full mt-4 z-50 w-40 md:w-56 p-3 bg-slate-950 border border-white/10 rounded-lg shadow-2xl text-[10px] md:text-xs text-slate-300 pointer-events-none ${tooltipXClass}`}
+            className={`absolute top-full mt-4 z-50 w-40 md:w-64 p-4 bg-paper border border-ink/10 rounded-sm shadow-xl text-[10px] md:text-sm text-ink/70 pointer-events-none ${tooltipXClass}`}
           >
-            <div className="w-full h-0.5 mb-2 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-            <div className="font-bold text-primary mb-1 uppercase tracking-wider">
+            <div className="font-serif font-bold text-accent mb-2 tracking-tight">
               {currentTool.name}
             </div>
             {category.useCase}
@@ -184,12 +183,10 @@ const ToolNode = ({
 const DataLine = ({
   start,
   end,
-  color,
   isMobile,
 }: {
   start: [number, number];
   end: [number, number];
-  color: string;
   isMobile: boolean;
 }) => {
   const x1 = start[0];
@@ -197,23 +194,13 @@ const DataLine = ({
   const x2 = end[0];
   const y2 = end[1];
 
-  const midX = (x1 + x2) / 2;
-  const midY = (y1 + y2) / 2;
-
-  // Create a soft curve by offsetting the control point
-  // We use the difference to bow outwards from the center
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-
-  // Spline logic using cubic Bezier curves
-  // We'll use two control points to create an 'S' curve or more fluid shape
   const offset = isMobile ? 8 : 12;
 
-  // Perpendicular direction
+  const dx = x2 - x1;
+  const dy = y2 - y1;
   const pdx = -dy;
   const pdy = dx;
 
-  // Normalize p vector
   const len = Math.sqrt(pdx * pdx + pdy * pdy);
   const npdx = (pdx / len) * offset;
   const npdy = (pdy / len) * offset;
@@ -225,81 +212,38 @@ const DataLine = ({
 
   const path = `M ${x1} ${y1} C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${x2} ${y2}`;
 
-  const particleColor = {
-    blue: "#3b82f6",
-    cyan: "#06b6d4",
-    purple: "#8b5cf6",
-    green: "#10b981",
-    amber: "#f59e0b",
-  }[color] || "#6366f1";
-
   return (
     <>
       <path
         d={path}
         fill="none"
-        stroke={`url(#gradient-${color})`}
-        strokeWidth="1"
-        strokeOpacity="0.2"
+        stroke="#B5512F"
+        strokeWidth="0.5"
+        strokeOpacity="0.1"
       />
-      <defs>
-        <linearGradient id={`gradient-${color}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor={particleColor} stopOpacity="0.1" />
-          <stop offset="50%" stopColor={particleColor} stopOpacity="0.4" />
-          <stop offset="100%" stopColor={particleColor} stopOpacity="0.1" />
-        </linearGradient>
-      </defs>
 
-      {/* Particle Inbound (Beam of light) */}
+      {/* Particle Inbound */}
       <rect
-        width="4"
-        height="0.8"
-        rx="0.3"
-        ry="0.3"
-        fill="white"
-        style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
+        width="2"
+        height="0.4"
+        rx="0.1"
+        ry="0.1"
+        fill="#B5512F"
       >
         <animateMotion
-          dur="5s"
+          dur="4s"
           repeatCount="indefinite"
           path={path}
           keyPoints="0;1;1"
-          keyTimes="0;0.3;1"
+          keyTimes="0;0.4;1"
           calcMode="linear"
           rotate="auto"
         />
         <animate
           attributeName="opacity"
-          values="0;1;1;0;0"
-          keyTimes="0;0.02;0.28;0.3;1"
-          dur="5s"
-          repeatCount="indefinite"
-        />
-      </rect>
-
-      {/* Particle Outbound (Beam of light) */}
-      <rect
-        width="4"
-        height="0.8"
-        rx="0.3"
-        ry="0.3"
-        fill="white"
-        style={{ filter: "drop-shadow(0 0 2px #3b82f6) drop-shadow(0 0 4px #3b82f6) drop-shadow(0 0 1px #fff)" }}
-      >
-        <animateMotion
-          dur="5s"
-          repeatCount="indefinite"
-          path={path}
-          keyPoints="1;0;0"
-          keyTimes="0;0.3;1"
-          calcMode="linear"
-          rotate="auto"
-        />
-        <animate
-          attributeName="opacity"
-          values="0;1;1;0;0"
-          keyTimes="0;0.02;0.28;0.3;1"
-          dur="5s"
+          values="0;0.8;0.8;0;0"
+          keyTimes="0;0.02;0.38;0.4;1"
+          dur="4s"
           repeatCount="indefinite"
         />
       </rect>
@@ -333,7 +277,7 @@ export default function IntegratorDiagram() {
   const centerPos: [number, number] = isMobile ? [50, 45] : [50, 50];
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto h-[500px] md:h-[600px] my-12">
+    <div className="relative w-full max-w-5xl mx-auto h-[450px] md:h-[550px] my-12">
       {/* SVG Background Layer for Lines */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -345,7 +289,6 @@ export default function IntegratorDiagram() {
             key={`line-${cat.id}`}
             start={isMobile ? cat.pos.mobile : cat.pos.desktop}
             end={centerPos}
-            color={cat.color}
             isMobile={isMobile}
           />
         ))}
@@ -357,27 +300,22 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-44 h-24 md:w-72 md:h-44 rounded-3xl bg-slate-950/80 backdrop-blur-xl border-2 border-accent3/50 flex items-center justify-center p-1 md:p-2 shadow-[0_0_30px_rgba(139,92,246,0.2)]"
+          className="w-40 h-24 md:w-64 md:h-40 rounded-sm bg-paper border border-ink/5 flex items-center justify-center p-4 md:p-8 shadow-sm"
           animate={{
-            boxShadow: [
-              "0 0 20px rgba(139,92,246,0.1)",
-              "0 0 50px rgba(139,92,246,0.4)",
-              "0 0 20px rgba(139,92,246,0.1)",
-            ],
             borderColor: [
-              "rgba(139,92,246,0.2)",
-              "rgba(139,92,246,0.8)",
-              "rgba(139,92,246,0.2)",
+              "rgba(33, 28, 23, 0.05)",
+              "rgba(181, 81, 47, 0.2)",
+              "rgba(33, 28, 23, 0.05)",
             ],
           }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full opacity-80">
             <Image
               src={logo}
               alt="Sylentt Partners Logo"
               fill
-              className="object-contain brightness-125"
+              className="object-contain"
               priority
             />
           </div>

@@ -5,9 +5,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-950 border-t border-white/5 py-4 text-slate-400">
+    <footer className="bg-paper border-t border-ink/5 py-16 text-ink/40">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="mb-2 relative w-full max-w-[36rem] h-48 opacity-80 hover:opacity-100 transition-opacity">
+        <div className="mb-8 relative w-full max-w-[24rem] h-32 opacity-40 hover:opacity-60 transition-opacity">
           <Image
             src={logo}
             alt="Sylentt Partners Logo"
@@ -15,11 +15,11 @@ export default function Footer() {
             className="object-contain"
           />
         </div>
-        <div className="text-center text-slate-500 text-sm space-y-1">
+        <div className="text-center text-sm font-sans space-y-2">
           <p>&copy; {currentYear} Sylentt Partners. All Rights Reserved.</p>
           <p>
             Based in Cache Valley, Utah &middot;{" "}
-            <a href="mailto:contact@sylentt.com" className="hover:text-slate-300 transition-colors">
+            <a href="mailto:contact@sylentt.com" className="hover:text-ink transition-colors">
               contact@sylentt.com
             </a>
           </p>

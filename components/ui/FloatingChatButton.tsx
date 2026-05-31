@@ -41,7 +41,7 @@ export default function FloatingChatButton() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="fixed bottom-6 right-6 z-[9995] w-14 h-14 rounded-full bg-primary text-white shadow-lg shadow-primary/25 hover:bg-indigo-400 transition-all flex items-center justify-center group"
+          className="fixed bottom-6 right-6 z-[9995] w-14 h-14 rounded-full bg-accent text-white shadow-lg hover:opacity-90 transition-all flex items-center justify-center group"
           aria-label={isOpen ? "Close chat" : "Open chat"}
         >
           {isOpen ? (
@@ -50,7 +50,7 @@ export default function FloatingChatButton() {
             <div className="relative">
               <MessageCircle className="w-6 h-6" />
               {hasMessages && (
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full border-2 border-primary animate-pulse" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full border-2 border-accent" />
               )}
             </div>
           )}
