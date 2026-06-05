@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
+import { Instrument_Serif, Instrument_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/Layout";
 import { ChatProvider } from "@/lib/context/ChatContext";
 
-const jakarta = Plus_Jakarta_Sans({
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
   display: "swap",
 });
 
@@ -75,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${jakarta.variable} ${spaceMono.variable} font-sans antialiased bg-[#FAF7F0] text-[#3A332B] selection:bg-primary/30 selection:text-[#211C17]`}
+        className={`${instrumentSerif.variable} ${instrumentSans.variable} ${spaceMono.variable} font-sans antialiased bg-[#FAF7F0] text-[#3A332B] selection:bg-primary/30 selection:text-[#211C17]`}
       >
         {/* Google tag (gtag.js) */}
         <script
