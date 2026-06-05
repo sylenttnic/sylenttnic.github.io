@@ -37,7 +37,8 @@ const config: Config = {
         accent5: "#B5512F",
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "sans-serif"],
+        sans: ["var(--font-instrument-sans)", "sans-serif"],
+        serif: ["var(--font-instrument-serif)", "serif"],
         mono: ["var(--font-space-mono)", "monospace"],
       },
       animation: {

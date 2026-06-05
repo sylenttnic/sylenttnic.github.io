@@ -180,11 +180,11 @@ export default function Home() {
       <header className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-serif mb-8 leading-tight tracking-tight">
-              What we build
+            <h1 className="text-5xl md:text-8xl font-serif font-medium mb-8 leading-tight tracking-tight">
+              Your business apps don&apos;t talk to each other. We fix that.
             </h1>
             <p className="text-xl md:text-2xl text-ink/70 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
-              We connect your business apps so data flows automatically. Here is exactly what that looks like.
+              We connect the tools you already run, so your team stops being the copy-paste layer between them.
             </p>
           </div>
 
@@ -192,15 +192,16 @@ export default function Home() {
             <IntegratorDiagram />
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-8">
+          <div className="flex flex-col items-center justify-center gap-12">
             <Link
               href="/pricing"
-              className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group"
+              className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
             >
-              Book a Strategy Call
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Book a discovery call
+              <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <div className="w-full max-w-xl">
+            <div className="w-full max-w-xl opacity-60 hover:opacity-100 transition-opacity">
+              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink/40">Or ask a quick question</p>
               <HeroChatInput />
             </div>
           </div>
@@ -252,8 +253,8 @@ export default function Home() {
                   How it works
                 </h2>
                 <div className="space-y-16">
-                  <div className="flex gap-8">
-                    <span className="text-2xl font-serif opacity-40">01</span>
+                  <div className="flex gap-8 group">
+                    <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">01</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">Tell us what is broken</h3>
                       <p className="text-lg opacity-70 leading-relaxed">
@@ -261,8 +262,8 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-8">
-                    <span className="text-2xl font-serif opacity-40">02</span>
+                  <div className="flex gap-8 group">
+                    <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">02</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">We build the connections</h3>
                       <p className="text-lg opacity-70 leading-relaxed">
@@ -270,8 +271,8 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex gap-8">
-                    <span className="text-2xl font-serif opacity-40">03</span>
+                  <div className="flex gap-8 group">
+                    <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">03</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">You own everything</h3>
                       <p className="text-lg opacity-70 leading-relaxed">
@@ -283,7 +284,7 @@ export default function Home() {
               </div>
               <div className="hidden lg:block relative pt-20">
                 <div className="aspect-[4/5] bg-paper/5 border border-paper/10 rounded-sm flex items-center justify-center p-12">
-                   <p className="text-3xl font-serif italic text-center opacity-80">
+                   <p className="text-5xl font-serif italic text-center text-paper leading-tight">
                      &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
                    </p>
                 </div>
@@ -294,26 +295,30 @@ export default function Home() {
       </section>
 
       {/* Section 4: Real Example */}
-      <section className="py-24 md:py-32">
+      <section className="py-24 md:py-48 bg-accent/10 border-y border-accent/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl">
               <h2 className="text-4xl md:text-6xl font-serif mb-12">
                 What this looks like in practice
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <div className="text-lg text-ink/70 space-y-6 leading-relaxed">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div className="text-lg text-ink/70 space-y-8 leading-relaxed">
+                  <div className="space-y-4">
+                    <span className="text-6xl md:text-8xl font-serif text-accent block">Nearly a full day a week, back.</span>
+                    <p className="text-xl font-serif italic text-ink/40 uppercase tracking-widest">Real Results</p>
+                  </div>
                   <p>
-                    An education company was manually creating customer subscriptions every time an order came in. A team member spent nearly a full day each week copying data between three different platforms.
+                    An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.
                   </p>
                   <p>
                     We built an automated pipeline that handles the entire workflow: when an order comes in, the subscription is created, the fulfillment system is notified, and the accounting records update.
                   </p>
                 </div>
-                <div className="bg-accent/5 p-8 rounded-sm border border-accent/10">
-                  <p className="text-xl font-serif italic text-accent mb-4">The result</p>
-                  <p className="text-lg text-ink/80 leading-relaxed">
-                    The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and the owner stopped worrying if orders were being missed.
+                <div className="bg-paper p-12 rounded-sm border border-accent/20 shadow-xl shadow-accent/5">
+                  <p className="text-2xl font-serif italic text-accent mb-6">The result</p>
+                  <p className="text-xl text-ink leading-relaxed font-serif">
+                    &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
                   </p>
                 </div>
               </div>
@@ -328,6 +333,11 @@ export default function Home() {
       <section className="py-24 md:py-32 bg-paper border-y border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
+            <div className="mb-20">
+              <h2 className="text-4xl md:text-5xl font-serif text-ink/40 italic">
+                What people I&apos;ve worked with say
+              </h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {testimonials.map((t, i) => (
                 <div key={i} className="flex flex-col">
@@ -375,11 +385,26 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-serif mb-6">
-                Tell us what is broken
+              <h2 className="text-4xl md:text-6xl font-serif mb-12">
+                Ready to stop the copy-paste?
               </h2>
-              <p className="text-xl text-ink/60">
-                Answer a few quick questions so we can see where your time is going.
+              <div className="flex flex-col items-center gap-8 mb-20">
+                <Link
+                  href="/pricing"
+                  className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+                >
+                  Book a discovery call
+                  <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
+              <div className="w-full h-px bg-ink/5 mb-20" />
+
+              <h3 className="text-2xl md:text-3xl font-serif mb-6">
+                Not ready to talk?
+              </h3>
+              <p className="text-xl text-ink/60 mb-12">
+                Answer 4 questions to see where your time is going.
               </p>
             </div>
             <div className="max-w-2xl mx-auto">

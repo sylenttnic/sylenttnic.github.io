@@ -123,15 +123,6 @@ const ToolNode = ({
         top: `${pos[1]}%`,
       }}
       initial={{ x: "-50%", y: "-50%" }}
-      animate={{
-        x: isActive ? "-50%" : ["-50%", "-48%", "-52%", "-50%"],
-        y: isActive ? "-50%" : ["-50%", "-52%", "-48%", "-50%"],
-      }}
-      transition={{
-        duration: 8 + Math.random() * 4,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
       onMouseEnter={() => !isMobile && onInteract(category.id)}
       onClick={() => isMobile && onInteract(category.id)}
     >
@@ -218,35 +209,45 @@ const DataLine = ({
         d={path}
         fill="none"
         stroke="#B5512F"
-        strokeWidth="0.5"
-        strokeOpacity="0.1"
+        strokeWidth="1"
+        strokeOpacity="0.05"
       />
 
-      {/* Particle Inbound */}
-      <rect
-        width="2"
-        height="0.4"
-        rx="0.1"
-        ry="0.1"
-        fill="#B5512F"
-      >
+      {/* Primary slow pulse */}
+      <circle r="0.8" fill="#B5512F">
         <animateMotion
-          dur="4s"
+          dur="8s"
           repeatCount="indefinite"
           path={path}
-          keyPoints="0;1;1"
-          keyTimes="0;0.4;1"
           calcMode="linear"
-          rotate="auto"
         />
         <animate
           attributeName="opacity"
-          values="0;0.8;0.8;0;0"
-          keyTimes="0;0.02;0.38;0.4;1"
-          dur="4s"
+          values="0;0.4;0.4;0"
+          keyTimes="0;0.2;0.8;1"
+          dur="8s"
           repeatCount="indefinite"
         />
-      </rect>
+      </circle>
+
+      {/* Secondary staggered pulse */}
+      <circle r="0.6" fill="#B5512F">
+        <animateMotion
+          dur="8s"
+          begin="4s"
+          repeatCount="indefinite"
+          path={path}
+          calcMode="linear"
+        />
+        <animate
+          attributeName="opacity"
+          values="0;0.3;0.3;0"
+          keyTimes="0;0.2;0.8;1"
+          dur="8s"
+          begin="4s"
+          repeatCount="indefinite"
+        />
+      </circle>
     </>
   );
 };
