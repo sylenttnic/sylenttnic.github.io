@@ -65,9 +65,9 @@ const services = [
     detail:
       "Those tools charge you more the busier you get. When a Zap fails at midnight, nobody finds out until Monday. And you are renting the whole thing; if you stop paying, it disappears.",
     outcome:
-      "What we build, you own. It runs on your account. It retries failed events automatically. It does not charge per transaction. And it does not silently lose data.",
+      "What we build, you own. It runs on your own cloud account, it retries failed events automatically, and it does not silently lose data.",
     deliverable:
-      "A self-hosted integration that replaces your current Zapier or Make setup. No monthly platform fees. No per-event pricing. Lower cost, higher reliability.",
+      "A self-hosted integration that replaces your current Zapier or Make setup, running on your own cloud account. Instead of renting a platform, you pay your cloud provider directly for the usage you consume, with no markup on top. The code is yours to keep.",
   },
   {
     icon: Plug,
@@ -196,19 +196,16 @@ export default function ServicesPage() {
               </h2>
               <div className="space-y-8">
                 <p className="text-ink/70 text-lg leading-relaxed">
-                  After the initial build, we monitor your connections, handle any
-                  changes from your software vendors, and add new integrations as
-                  your business grows.
+                  After the build, the wiring between your apps is our job, not yours. When a vendor changes an API or you add a new tool, we handle it before it breaks something.
                 </p>
                 <p className="text-ink/70 text-lg leading-relaxed">
-                  You are not locked in. You own everything. But most clients keep
-                  us around because the system keeps saving them time, and new
-                  connections keep paying for themselves.
+                  That means you are not the one debugging a failed sync at 11pm, or hearing from a customer that orders stopped three days ago. Your time stays on the business.
+                </p>
+                <p className="text-ink/70 text-lg leading-relaxed">
+                  You are never locked in. You own everything and can take it in-house whenever you want. Most clients keep us on because the retainer costs a fraction of the hours it gives back.
                 </p>
                 <p className="text-ink/50 text-base italic">
-                  Think of it like having a mechanic on retainer for the wiring
-                  between your apps. When something changes or when you add a new
-                  tool, we handle it.
+                  Think of it as a mechanic on retainer for the wiring between your apps.
                 </p>
               </div>
             </div>
