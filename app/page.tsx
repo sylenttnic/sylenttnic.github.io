@@ -1,3 +1,4 @@
+import CostCalculator from "@/components/CostCalculator";
 import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import HeroChatInput from "@/components/home/HeroChatInput";
@@ -122,7 +123,7 @@ const jsonLdFaq = {
       name: "How is this different from tools like Zapier?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. There are no per-transaction fees, and failures trigger real-time alerts.",
+        text: "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts.",
       },
     },
     {
@@ -145,7 +146,7 @@ const faqItems = [
   {
     question: "How is this different from tools like Zapier?",
     answer:
-      "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. There are no per-transaction fees, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
+      "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
   },
   {
     question: "What apps can you connect?",
@@ -276,7 +277,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-2xl font-serif mb-4">You own everything</h3>
                       <p className="text-lg opacity-70 leading-relaxed">
-                        It runs on your account. No monthly platform fees. No per-transaction charges. If we part ways, you keep it all.
+                        It runs on your own cloud account, and the code is yours. You pay your provider directly for usage, with no platform markup on top. If we part ways, you keep all of it.
                       </p>
                     </div>
                   </div>
