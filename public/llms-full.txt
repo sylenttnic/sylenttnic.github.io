@@ -17,7 +17,7 @@ The core value proposition: your team should not be the middleware between your 
 - They are rentals: stop paying, lose everything
 - Sylentt builds integrations the client owns permanently
 - Sylentt integrations include real-time monitoring and failure alerts
-- No per-transaction fees, no monthly platform charges
+- Clients pay their cloud provider directly for usage, with no platform markup
 
 ### vs. large consulting firms
 - Sylentt is a boutique operation, not a large agency
@@ -43,7 +43,7 @@ Replacing manual processes where a team member currently copies data between sys
 Every integration includes failure detection and real-time alerts. If a sync fails, a webhook is missed, or data does not match expectations, the system catches it immediately instead of letting it fail silently.
 
 ### Migration from No-Code Platforms
-Moving existing Zapier, Make, or similar automations to client-owned infrastructure. The result runs on the client's own cloud account with no recurring platform fees.
+Moving existing Zapier, Make, or similar automations to client-owned infrastructure. The result runs on the client's own cloud account, with usage billed directly by the cloud provider and no platform markup.
 
 ### Retainer Support
 Ongoing monitoring, maintenance, and development capacity. Protection equivalent to having a dedicated integration engineer at a fraction of the cost of a full-time hire.
@@ -56,8 +56,7 @@ Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, Servic
 
 - Clients own all code and infrastructure
 - Integrations run on the client's own cloud account
-- No monthly platform fees
-- No per-transaction charges
+- Clients pay their cloud provider directly for usage, with no platform markup
 - No lock-in: if the engagement ends, the client keeps everything
 - Projects are scoped individually based on the specific tools and problems involved
 
