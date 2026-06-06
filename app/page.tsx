@@ -328,6 +328,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Section: Cost Calculator */}
+      <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <CostCalculator />
+          </SectionFade>
+        </div>
+      </section>
+
       <ClientLogos />
 
       {/* Section 5: Testimonials */}
