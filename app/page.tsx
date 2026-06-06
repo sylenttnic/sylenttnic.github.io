@@ -33,16 +33,28 @@ export const metadata: Metadata = {
 
 const testimonials = [
   {
-    text: "Sylentt Partners bring exceptional expertise and efficiency to every project. Their knowledge and skills are unmatched, making them an invaluable partner in fast-paced, high-tech environments. Truly an asset for any organization.",
-    context: "Technology company, deployment pipeline",
+    text: "I worked with Nic on highly complex configurations... and found him to be logical, clear thinking, hard working, and pleasant.",
+    name: "J. Scott Cannata",
+    role: "Co-Founder, Liqid",
+    avatar: "/avatars/cannata.png",
   },
   {
-    text: "Working with this team has been transformative. They quickly identified inefficiencies in our processes and implemented solutions that improved how we deliver products.",
-    context: "E-commerce company, subscription automation",
+    text: "Nic is a dedicated and hard-working system integration specialist. Time and time again I saw him do whatever it took to get our products loaded, integrated, tested and working.",
+    name: "Scott Hopkins",
+    role: "Senior Systems Engineer & Program Manager (ret.)",
+    avatar: "/avatars/hopkins.png",
   },
   {
-    text: "Their ability to standardize deployments, debug issues, and enhance support systems has been invaluable. Their focus on creating and maintaining detailed documentation has improved clarity and collaboration across the board.",
-    context: "Professional services firm, process redesign",
+    text: "Nic is a visionary that can quickly identify shortcomings in processes, procedures, and functions in the technical space.",
+    name: "Chris Gregoire",
+    role: "Solutions Architect, Liqid",
+    avatar: "/avatars/gregoire.png",
+  },
+  {
+    text: "Nic's unique blend of technical talent, optimism, charisma and no-nonsense approach to problem solving will benefit any team, department, organization or company he joins.",
+    name: "Randall Syfert",
+    role: "Project Control Analyst, By Light Professional IT Services",
+    avatar: "/avatars/syfert.png",
   },
 ];
 
@@ -51,25 +63,25 @@ const problemCards = [
     icon: RefreshCw,
     title: "Your team re-enters the same data into multiple systems.",
     description:
-      "When an order comes in, someone types it into the shipping app. When a payment clears, someone updates the books. When a new customer signs up, someone adds them to three different places. We make that happen automatically.",
+      "An order comes in, someone retypes it into the shipping app. A payment clears, someone updates the books. We make those updates happen automatically.",
   },
   {
     icon: AlertTriangle,
     title: "You find out something broke days after it happened.",
     description:
-      "A subscription never got created. An invoice never synced. A fulfillment was missed. Nobody knew until a customer complained. We build monitoring that catches failures in real time and alerts before anyone notices.",
+      "A subscription fails, an invoice never syncs, and nobody notices until a customer complains. We build monitoring that catches it in real time and alerts you first.",
   },
   {
     icon: RotateCcw,
     title: "You are paying for automation tools and things still break.",
     description:
-      "Those tools are rentals. They charge you more the busier you get. When an automation fails at midnight, nobody knows. What we build, you own. It runs on your account. It retries automatically.",
+      "Rented tools charge you more as you grow and fail silently at midnight. What we build, you own, it runs on your account, and it retries on its own.",
   },
   {
     icon: Plug,
     title: "You added a new tool and now nothing connects.",
     description:
-      "Every new app creates a new island. We integrate it with everything else so it actually fits into your workflow instead of creating more manual work.",
+      "Every new app becomes another island your team bridges by hand. We connect it to everything else so it fits in from day one.",
   },
 ];
 
@@ -215,7 +227,7 @@ export default function Home() {
           <SectionFade>
             <div className="mb-20">
               <h2 className="text-4xl md:text-6xl font-serif mb-6">
-                Your team copies the same data into multiple systems.
+                Here is where your team&apos;s hours go.
               </h2>
               <p className="text-xl text-ink/60 max-w-2xl leading-relaxed">
                 Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up quietly.
@@ -348,16 +360,23 @@ export default function Home() {
                 What people I&apos;ve worked with say
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {testimonials.map((t, i) => (
                 <div key={i} className="flex flex-col">
                   <p className="text-xl font-serif italic mb-8 leading-relaxed">
                     &ldquo;{t.text}&rdquo;
                   </p>
-                  <div className="mt-auto">
-                    <span className="text-sm font-sans uppercase tracking-widest text-ink/40">
-                      {t.context}
-                    </span>
+                  <div className="mt-auto flex items-center gap-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={t.avatar}
+                      alt={t.name}
+                      className="w-12 h-12 rounded-full object-cover border border-ink/10"
+                    />
+                    <div className="leading-tight">
+                      <p className="font-sans font-semibold text-ink">{t.name}</p>
+                      <p className="text-sm font-sans text-ink/50">{t.role}</p>
+                    </div>
                   </div>
                 </div>
               ))}
