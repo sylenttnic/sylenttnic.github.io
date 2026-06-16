@@ -86,7 +86,7 @@ export default function ServicesPage() {
   return (
     <div className="bg-paper text-ink">
       {/* Hero */}
-      <header className="relative py-16 md:py-24 overflow-hidden border-b border-ink/5">
+      <header className="relative pt-24 pb-16 md:pt-36 md:pb-24 overflow-hidden border-b border-ink/5">
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
           <h1 className="text-4xl md:text-6xl font-serif mb-8">
             What we build
@@ -128,8 +128,8 @@ export default function ServicesPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* The Outcome */}
-                    <div className="bg-paper border border-ink/10 p-8 rounded-sm">
-                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-4">
+                    <div className="bg-paper border border-ink/20 p-8 rounded-sm">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink font-bold mb-4">
                         What changes
                       </h3>
                       <p className="text-ink/90 leading-relaxed">
@@ -138,8 +138,8 @@ export default function ServicesPage() {
                     </div>
 
                     {/* The Deliverable */}
-                    <div className="bg-paper border border-ink/10 p-8 rounded-sm">
-                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-4">
+                    <div className="bg-paper border border-ink/20 p-8 rounded-sm">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink font-bold mb-4">
                         What you own
                       </h3>
                       <p className="text-ink/90 leading-relaxed">
@@ -171,7 +171,7 @@ export default function ServicesPage() {
                     How we build it
                   </h2>
                 </div>
-                <p className="text-ink/80 text-xl mb-8 leading-relaxed">
+                <p className="text-ink text-xl mb-8 leading-relaxed font-medium">
                   Every integration follows the same structured process. Six
                   phases, multiple quality checkpoints, and nothing goes live
                   without your approval.
@@ -204,7 +204,7 @@ export default function ServicesPage() {
                 <p className="text-ink/90 text-lg leading-relaxed">
                   You are never locked in. You own everything and can take it in-house whenever you want. Most clients keep us on because the retainer costs a fraction of the hours it gives back.
                 </p>
-                <p className="text-ink/70 text-base italic">
+                <p className="text-ink text-base font-medium italic">
                   Think of it as a mechanic on retainer for the wiring between your apps.
                 </p>
               </div>

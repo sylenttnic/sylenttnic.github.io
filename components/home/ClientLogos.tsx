@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const clients = [
   {
@@ -22,7 +23,7 @@ export default function ClientLogos() {
     <section className="py-16 md:py-24 bg-paper border-y border-ink/5">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
-          <p className="text-xs font-sans text-ink/80 uppercase tracking-[0.3em] mb-12">
+          <p className="text-sm font-sans text-ink font-bold uppercase tracking-[0.3em] mb-16">
             Trusted by teams at
           </p>
           <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32">
@@ -38,12 +39,18 @@ export default function ClientLogos() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="relative w-32 h-10 md:w-48 md:h-12 transition-all duration-500 opacity-100">
+                <div className={cn(
+                  "relative w-32 h-12 md:w-48 md:h-16 transition-all duration-500 flex items-center justify-center",
+                  client.name === "By Light" ? "bg-ink p-4 rounded-sm shadow-xl" : ""
+                )}>
                   <Image
                     src={client.logo}
                     alt={`${client.name} logo`}
                     fill
-                    className="object-contain"
+                    className={cn(
+                      "object-contain",
+                      client.name === "By Light" ? "p-4" : ""
+                    )}
                   />
                 </div>
               </motion.a>

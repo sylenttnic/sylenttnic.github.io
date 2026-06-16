@@ -190,7 +190,7 @@ export default function Home() {
       />
 
       {/* Section 1: Hero + Diagram */}
-      <header className="relative pt-16 pb-12 md:pt-24 md:pb-16 overflow-hidden">
+      <header className="relative pt-24 pb-12 md:pt-36 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-5xl md:text-8xl font-serif font-medium mb-8 leading-tight tracking-tight">
@@ -213,8 +213,8 @@ export default function Home() {
               Book a discovery call
               <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <div className="w-full max-w-xl opacity-70 hover:opacity-100 transition-opacity">
-              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink/80">Or ask a quick question</p>
+            <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
+              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink">Or ask a quick question</p>
               <HeroChatInput />
             </div>
           </div>
@@ -319,7 +319,7 @@ export default function Home() {
                 <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
                   <div className="space-y-4">
                     <span className="text-6xl md:text-8xl font-serif text-accent block">Nearly a full day a week, back.</span>
-                    <p className="text-xl font-serif italic text-ink/80 uppercase tracking-widest">Real Results</p>
+                    <p className="text-xl font-serif italic text-ink uppercase tracking-widest">Real Results</p>
                   </div>
                   <p>
                     An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.

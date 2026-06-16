@@ -138,12 +138,12 @@ export default function PricingPage() {
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 text-center pt-16 pb-12">
+      <section className="container mx-auto px-4 text-center pt-24 pb-12 md:pt-36">
         <SectionFade>
           <h1 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">
             Simple pricing. Real results.
           </h1>
-          <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto leading-relaxed font-sans">
+          <p className="text-xl md:text-2xl text-ink max-w-3xl mx-auto leading-relaxed font-sans">
             Every engagement starts with understanding your business. Pick the package that fits, tell us what you need, and we&apos;ll take it from there.
           </p>
         </SectionFade>
@@ -166,11 +166,11 @@ export default function PricingPage() {
               </p>
 
               <div className="space-y-6 mb-12">
-                <div className="text-xs font-sans uppercase tracking-[0.2em] text-ink/80">What&apos;s Included</div>
+                <div className="text-xs font-sans uppercase tracking-[0.2em] text-ink font-bold">What&apos;s Included</div>
                 {pkg.features.map((feature, i) => (
                   <div key={i} className="flex items-start">
                     <Check className="w-5 h-5 text-accent mr-4 shrink-0 mt-0.5" />
-                    <span className="text-ink/90 text-base leading-relaxed">{feature}</span>
+                    <span className="text-ink text-base leading-relaxed font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -184,7 +184,7 @@ export default function PricingPage() {
                   {pkg.cta}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <p className="mt-6 text-sm text-ink/70 italic text-center leading-relaxed">
+                <p className="mt-6 text-sm text-ink/90 italic text-center leading-relaxed">
                   {pkg.footnote}
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default function PricingPage() {
                   <Check className="w-10 h-10 text-accent" />
                 </div>
                 <h3 className="text-2xl font-serif mb-4">Request Sent</h3>
-                <p className="text-ink/60 text-lg">
+                <p className="text-ink text-lg">
                   Thanks! We&apos;ll review your request and get back to you within one business day.
                 </p>
               </div>
@@ -241,7 +241,7 @@ export default function PricingPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="name" className="text-sm font-sans uppercase tracking-widest text-ink/80">Name</label>
+                    <label htmlFor="name" className="text-sm font-sans uppercase tracking-widest text-ink">Name</label>
                     <Input
                       id="name"
                       name="name"
@@ -251,7 +251,7 @@ export default function PricingPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="email" className="text-sm font-sans uppercase tracking-widest text-ink/80">Work Email</label>
+                    <label htmlFor="email" className="text-sm font-sans uppercase tracking-widest text-ink">Work Email</label>
                     <Input
                       id="email"
                       name="email"
@@ -265,7 +265,7 @@ export default function PricingPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="company" className="text-sm font-sans uppercase tracking-widest text-ink/80">Company (Optional)</label>
+                    <label htmlFor="company" className="text-sm font-sans uppercase tracking-widest text-ink">Company (Optional)</label>
                     <Input
                       id="company"
                       name="company"
@@ -274,7 +274,7 @@ export default function PricingPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="package" className="text-sm font-sans uppercase tracking-widest text-ink/80">Package Interest</label>
+                    <label htmlFor="package" className="text-sm font-sans uppercase tracking-widest text-ink">Package Interest</label>
                     <select
                       id="package"
                       name="package"
@@ -293,7 +293,7 @@ export default function PricingPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="apps" className="text-sm font-sans uppercase tracking-widest text-ink/80">What apps do you need connected?</label>
+                  <label htmlFor="apps" className="text-sm font-sans uppercase tracking-widest text-ink">What apps do you need connected?</label>
                   <textarea
                     id="apps"
                     name="apps"
@@ -305,7 +305,7 @@ export default function PricingPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="notes" className="text-sm font-sans uppercase tracking-widest text-ink/80">Anything else we should know? (Optional)</label>
+                  <label htmlFor="notes" className="text-sm font-sans uppercase tracking-widest text-ink">Anything else we should know? (Optional)</label>
                   <textarea
                     id="notes"
                     name="notes"
