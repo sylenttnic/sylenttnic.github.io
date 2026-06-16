@@ -40,7 +40,7 @@ export default function ClientLogos() {
                 transition={{ duration: 0.8 }}
               >
                 <div className={cn(
-                  "relative w-32 h-12 md:w-48 md:h-16 transition-all duration-500 flex items-center justify-center",
+                  "relative w-32 h-12 md:w-60 md:h-20 transition-all duration-500 flex items-center justify-center",
                   client.name === "By Light" ? "bg-ink p-4 rounded-sm shadow-xl" : ""
                 )}>
                   <Image
