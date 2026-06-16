@@ -65,10 +65,11 @@
 
 .subtitle {
   font-size: 18px;
-  color: var(--muted);
+  color: var(--text-soft);
   margin-top: 6px;
   max-width: 640px;
   line-height: 1.6;
+  font-weight: 500;
 }
 
 /* ── ANIMATIONS ── */
@@ -253,10 +254,11 @@
 
 .you-see-text {
   font-size: 15px;
-  color: var(--muted);
+  color: var(--text-soft);
   line-height: 1.6;
   font-family: var(--font-sans), sans-serif;
   font-style: italic;
+  font-weight: 500;
 }
 
 /* ── CHECKPOINTS SECTION ── */
@@ -334,10 +336,11 @@
 
 .ownership-text {
   font-size: 17px;
-  color: var(--muted);
+  color: var(--text-soft);
   line-height: 1.7;
   max-width: 640px;
   font-family: var(--font-sans), sans-serif;
+  font-weight: 500;
 }
 
 /* ── CTA SECTION ── */

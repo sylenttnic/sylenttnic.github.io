@@ -104,7 +104,7 @@ export default function BuildProcessPage() {
   }, []);
 
   return (
-    <div className="build-page-wrap pt-16 md:pt-24">
+    <div className="build-page-wrap pt-24 md:pt-36">
       {/* HERO */}
       <div className="build-header fade-in">
         <div className="logo-tag">Our Process</div>
@@ -189,7 +189,7 @@ export default function BuildProcessPage() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             What you get at the end
           </h2>
-          <p className="ownership-text">
+          <p className="ownership-text text-ink">
             When the build is complete, you own everything: the code, the
             infrastructure, the documentation. You get a plain-language summary
             of what was built, how it works, and how to reach us if anything

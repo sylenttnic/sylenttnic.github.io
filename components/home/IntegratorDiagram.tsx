@@ -127,7 +127,7 @@ const ToolNode = ({
       onClick={() => isMobile && onInteract(category.id)}
     >
       <div
-        className="bg-paper border border-ink/10 p-4 rounded-sm flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-sm hover:border-accent/30 transition-all duration-300"
+        className="bg-paper border border-ink/30 p-4 rounded-sm flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-sm hover:border-accent/40 transition-all duration-300"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -145,7 +145,7 @@ const ToolNode = ({
                 className="object-contain transition-all"
               />
             </div>
-            <span className="text-[9px] md:text-[10px] font-sans text-ink/70 text-center uppercase tracking-widest">
+            <span className="text-[9px] md:text-[10px] font-sans text-ink/90 font-bold text-center uppercase tracking-widest">
               {currentTool.name}
             </span>
           </motion.div>
@@ -301,12 +301,12 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-40 h-24 md:w-64 md:h-40 rounded-sm bg-paper border border-ink/5 flex items-center justify-center p-4 md:p-8 shadow-sm"
+          className="w-46 h-28 md:w-74 md:h-46 rounded-sm bg-paper border border-ink/10 flex items-center justify-center p-4 md:p-8 shadow-md"
           animate={{
             borderColor: [
-              "rgba(30, 46, 61, 0.05)",
-              "rgba(200, 75, 49, 0.2)",
-              "rgba(30, 46, 61, 0.05)",
+              "rgba(30, 46, 61, 0.1)",
+              "rgba(200, 75, 49, 0.3)",
+              "rgba(30, 46, 61, 0.1)",
             ],
           }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}

@@ -81,8 +81,10 @@ export default function Navbar() {
         <button
           ref={mobileButtonRef}
           className={cn(
-            "md:hidden p-2 rounded-sm transition-colors",
-            isOpen ? "text-ink bg-surface shadow-sm" : (scrolled ? "text-ink" : "text-ink bg-paper/60 backdrop-blur-md shadow-sm")
+            "md:hidden p-2 rounded-sm transition-all duration-300",
+            isOpen
+              ? "text-paper bg-ink shadow-lg"
+              : (scrolled ? "text-ink hover:bg-ink/5" : "text-ink bg-paper/80 backdrop-blur-md shadow-sm hover:bg-paper")
           )}
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -98,16 +100,16 @@ export default function Navbar() {
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute top-full left-0 w-full bg-paper/98 backdrop-blur-md border-b border-ink/5 overflow-hidden transition-all duration-300 ease-in-out shadow-xl",
-          isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          "md:hidden absolute top-full left-0 w-full bg-ink overflow-hidden transition-all duration-500 ease-in-out shadow-2xl",
+          isOpen ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className="flex flex-col p-8 space-y-6">
+        <div className="flex flex-col p-10 space-y-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-ink font-sans font-bold uppercase tracking-widest text-sm py-3 border-b border-ink/10 hover:text-accent transition-colors"
+              className="text-paper font-sans font-bold uppercase tracking-[0.2em] text-sm py-4 border-b border-paper/10 hover:text-accent transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
