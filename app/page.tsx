@@ -222,14 +222,14 @@ export default function Home() {
       </header>
 
       {/* Section 2: Problem Statements */}
-      <section className="py-24 md:py-32 border-t border-ink/5">
+      <section className="py-24 md:py-32 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="mb-20">
-              <h2 className="text-4xl md:text-6xl font-serif mb-6">
+              <h2 className="text-4xl md:text-6xl font-serif mb-6 text-paper">
                 Here is where your team&apos;s hours go.
               </h2>
-              <p className="text-xl text-ink/60 max-w-2xl leading-relaxed">
+              <p className="text-xl text-paper/60 max-w-2xl leading-relaxed">
                 Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up quietly.
               </p>
             </div>
@@ -239,13 +239,13 @@ export default function Home() {
                 const Icon = card.icon;
                 return (
                   <div key={i} className="group">
-                    <div className="mb-6 w-12 h-12 rounded-full bg-paper border border-ink/10 flex items-center justify-center">
+                    <div className="mb-6 w-12 h-12 rounded-full bg-paper/5 border border-paper/10 flex items-center justify-center">
                       <Icon className="w-6 h-6 text-accent" />
                     </div>
-                    <h3 className="text-2xl font-serif mb-4">
+                    <h3 className="text-2xl font-serif mb-4 text-paper">
                       {card.title}
                     </h3>
-                    <p className="text-lg text-ink/70 leading-relaxed">
+                    <p className="text-lg text-paper/70 leading-relaxed">
                       {card.description}
                     </p>
                   </div>
@@ -257,7 +257,7 @@ export default function Home() {
       </section>
 
       {/* Section 3: How It Works - Asymmetric Layout */}
-      <section className="py-24 md:py-32 bg-ink text-paper overflow-hidden">
+      <section className="py-24 md:py-32 bg-paper text-ink overflow-hidden">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
@@ -270,7 +270,7 @@ export default function Home() {
                     <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">01</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">Tell us what is broken</h3>
-                      <p className="text-lg opacity-70 leading-relaxed">
+                      <p className="text-lg text-ink/70 leading-relaxed">
                         Which apps does your business use? Where is the manual work? This is a conversation, not a requirements document.
                       </p>
                     </div>
@@ -279,7 +279,7 @@ export default function Home() {
                     <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">02</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">We build the connections</h3>
-                      <p className="text-lg opacity-70 leading-relaxed">
+                      <p className="text-lg text-ink/70 leading-relaxed">
                         When something happens in one app, the others update automatically. No copying. No checking. No hoping it worked.
                       </p>
                     </div>
@@ -288,7 +288,7 @@ export default function Home() {
                     <span className="text-4xl font-serif text-accent/30 group-hover:text-accent transition-colors duration-500">03</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4">You own everything</h3>
-                      <p className="text-lg opacity-70 leading-relaxed">
+                      <p className="text-lg text-ink/70 leading-relaxed">
                         It runs on your own cloud account, and the code is yours. You pay your provider directly for usage, with no platform markup on top. If we part ways, you keep all of it.
                       </p>
                     </div>
@@ -296,8 +296,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden lg:block relative pt-20">
-                <div className="aspect-[4/5] bg-paper/5 border border-paper/10 rounded-sm flex items-center justify-center p-12">
-                   <p className="text-5xl font-serif italic text-center text-paper leading-tight">
+                <div className="aspect-[4/5] bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
+                   <p className="text-5xl font-serif italic text-center text-ink leading-tight">
                      &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
                    </p>
                 </div>
@@ -308,18 +308,18 @@ export default function Home() {
       </section>
 
       {/* Section 4: Real Example */}
-      <section className="py-24 md:py-48 bg-accent/10 border-y border-accent/5">
+      <section className="py-24 md:py-48 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl">
-              <h2 className="text-4xl md:text-6xl font-serif mb-12">
+              <h2 className="text-4xl md:text-6xl font-serif mb-12 text-paper">
                 What this looks like in practice
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div className="text-lg text-ink/70 space-y-8 leading-relaxed">
+                <div className="text-lg text-paper/70 space-y-8 leading-relaxed">
                   <div className="space-y-4">
                     <span className="text-6xl md:text-8xl font-serif text-accent block">Nearly a full day a week, back.</span>
-                    <p className="text-xl font-serif italic text-ink/40 uppercase tracking-widest">Real Results</p>
+                    <p className="text-xl font-serif italic text-paper/40 uppercase tracking-widest">Real Results</p>
                   </div>
                   <p>
                     An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.
@@ -328,9 +328,9 @@ export default function Home() {
                     We built an automated pipeline that handles the entire workflow: when an order comes in, the subscription is created, the fulfillment system is notified, and the accounting records update.
                   </p>
                 </div>
-                <div className="bg-paper p-12 rounded-sm border border-accent/20 shadow-xl shadow-accent/5">
+                <div className="bg-paper/5 p-12 rounded-sm border border-paper/20 shadow-xl shadow-paper/5">
                   <p className="text-2xl font-serif italic text-accent mb-6">The result</p>
-                  <p className="text-xl text-ink leading-relaxed font-serif">
+                  <p className="text-xl text-paper leading-relaxed font-serif">
                     &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
                   </p>
                 </div>
@@ -386,20 +386,20 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-24 md:py-32">
+      <section id="faq" className="py-24 md:py-32 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <h2 className="text-4xl md:text-6xl font-serif mb-16 text-center">
+            <h2 className="text-4xl md:text-6xl font-serif mb-16 text-center text-paper">
               Common questions
             </h2>
             <div className="max-w-3xl mx-auto space-y-8">
               {faqItems.map((item, i) => (
-                <details key={i} className="group border-b border-ink/10 pb-8 cursor-pointer">
-                  <summary className="flex items-center justify-between list-none text-2xl font-serif">
+                <details key={i} className="group border-b border-paper/10 pb-8 cursor-pointer">
+                  <summary className="flex items-center justify-between list-none text-2xl font-serif text-paper">
                     <span>{item.question}</span>
                     <ChevronDown className="w-5 h-5 opacity-40 group-open:rotate-180 transition-transform" />
                   </summary>
-                  <div className="mt-6 text-lg text-ink/70 leading-relaxed max-w-2xl">
+                  <div className="mt-6 text-lg text-paper/70 leading-relaxed max-w-2xl">
                     <p>{item.answer}</p>
                   </div>
                 </details>

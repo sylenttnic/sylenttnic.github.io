@@ -4,20 +4,21 @@
 
 @layer base {
   :root {
-    --bg: #FAF7F0;
-    --surface: #F3EEE4;
-    --surface2: #ECE5D8;
-    --surface3: #E6DECF;
-    --border: #E2DACB;
+    --bg: #F9F8F6;
+    --surface: #F1F0EC;
+    --surface2: #ECEBE6;
+    --surface3: #E7E5DF;
+    --border: #EAE7E2;
     --border-light: #D3C8B5;
-    --accent: #B5512F;
-    --accent2: #B5512F;
-    --accent3: #B5512F;
-    --accent4: #B5512F;
-    --accent5: #B5512F;
+    --accent: #C84B31;
+    --accent2: #C84B31;
+    --accent3: #C84B31;
+    --accent4: #C84B31;
+    --accent5: #C84B31;
+    --ink: #1E2E3D;
     --red: #B23B3B;
     --orange: #B5512F;
-    --text: #211C17;
+    --text: #1E2E3D;
     --text-soft: #3A332B;
     --muted: #6B635A;
     --dim: #9A9087;
@@ -27,7 +28,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-[#FAF7F0] text-[#3A332B] relative;
+    @apply bg-paper text-[#3A332B] relative;
   }
   body::before {
     content: "";
@@ -35,7 +36,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-[#211C17] tracking-tight;
+    @apply text-[#1E2E3D] tracking-tight font-bold;
   }
 }
 
