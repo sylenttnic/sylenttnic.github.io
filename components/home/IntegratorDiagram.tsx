@@ -142,7 +142,7 @@ const ToolNode = ({
                 src={currentTool.logo}
                 alt={currentTool.name}
                 fill
-                className="object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
+                className="object-contain transition-all"
               />
             </div>
             <span className="text-[9px] md:text-[10px] font-sans text-ink/40 text-center uppercase tracking-widest">
@@ -304,14 +304,14 @@ export default function IntegratorDiagram() {
           className="w-40 h-24 md:w-64 md:h-40 rounded-sm bg-paper border border-ink/5 flex items-center justify-center p-4 md:p-8 shadow-sm"
           animate={{
             borderColor: [
-              "rgba(33, 28, 23, 0.05)",
-              "rgba(181, 81, 47, 0.2)",
-              "rgba(33, 28, 23, 0.05)",
+              "rgba(30, 46, 61, 0.05)",
+              "rgba(200, 75, 49, 0.2)",
+              "rgba(30, 46, 61, 0.05)",
             ],
           }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="relative w-full h-full opacity-80">
+          <div className="relative w-full h-full">
             <Image
               src={logo}
               alt="Sylentt Partners Logo"

@@ -19,7 +19,7 @@ const clients = [
 
 export default function ClientLogos() {
   return (
-    <section className="py-24 bg-stone-500 border-y border-ink/5">
+    <section className="py-24 bg-ink border-y border-paper/5">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
           <p className="text-xs font-sans text-paper/60 uppercase tracking-[0.3em] mb-12">
