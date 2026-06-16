@@ -301,7 +301,7 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-46 h-28 md:w-74 md:h-46 rounded-sm bg-paper border border-ink/10 flex items-center justify-center p-4 md:p-8 shadow-md"
+          className="w-[11.5rem] h-[7rem] md:w-[18.5rem] md:h-[11.5rem] rounded-sm bg-paper border border-ink/10 flex items-center justify-center p-4 md:p-8 shadow-md"
           animate={{
             borderColor: [
               "rgba(30, 46, 61, 0.1)",
