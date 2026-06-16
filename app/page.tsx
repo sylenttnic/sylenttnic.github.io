@@ -295,8 +295,8 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="hidden lg:block relative pt-20">
-                <div className="aspect-[4/5] bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
+              <div className="hidden lg:block relative">
+                <div className="aspect-square bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
                    <p className="text-5xl font-serif italic text-center text-ink leading-tight">
                      &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
                    </p>
@@ -311,14 +311,14 @@ export default function Home() {
       <section className="py-12 md:py-20 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="max-w-4xl">
+            <div className="max-w-7xl">
               <h2 className="text-4xl md:text-6xl font-serif mb-12 text-ink">
                 What this looks like in practice
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
                   <div className="space-y-4">
-                    <span className="text-6xl md:text-8xl font-serif text-accent block">Nearly a full day a week, back.</span>
+                    <span className="text-5xl md:text-6xl font-serif text-accent block">Nearly a full day a week, back.</span>
                     <p className="text-xl font-serif italic text-ink uppercase tracking-widest">Real Results</p>
                   </div>
                   <p>
