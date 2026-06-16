@@ -268,18 +268,18 @@ export default function FitAssessment() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-xl text-ink/40 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
+          <div className="text-xl text-ink/60 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
           <div className={cn("text-5xl md:text-6xl font-serif font-bold mb-6", colorClass)}>
             {resultTier}
           </div>
-          <p className="text-ink/80 mb-8 text-lg font-sans">
+          <p className="text-ink/90 mb-8 text-lg font-sans">
             {summaryMessage}
           </p>
 
           <div className="w-full h-px bg-ink/5 my-6" />
 
           <h4 className="text-xl font-serif font-bold mb-2 text-ink">Let&apos;s build your roadmap</h4>
-          <p className="mb-6 text-ink/60 font-sans">Schedule a session to see how we can eliminate the friction in your workflows.</p>
+          <p className="mb-6 text-ink/80 font-sans">Schedule a session to see how we can eliminate the friction in your workflows.</p>
 
           <a
             href="https://calendly.com/nic-sylentt/30min"
@@ -311,7 +311,7 @@ export default function FitAssessment() {
         </div>
 
         <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-2 text-ink">Your Fit Assessment is ready</h3>
-        <p className="text-center text-ink/60 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
+        <p className="text-center text-ink/80 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
           <div className="hidden">
@@ -329,7 +329,7 @@ export default function FitAssessment() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-ink/70">Name <span className="text-accent">*</span></label>
+              <label htmlFor="leadName" className="text-sm font-medium text-ink/90">Name <span className="text-accent">*</span></label>
               <Input
                 id="leadName"
                 name="leadName"
@@ -340,7 +340,7 @@ export default function FitAssessment() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/70">Work Email <span className="text-accent">*</span></label>
+              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/90">Work Email <span className="text-accent">*</span></label>
               <Input
                 id="leadEmail"
                 name="leadEmail"
@@ -352,7 +352,7 @@ export default function FitAssessment() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/70">Job Title <span className="text-accent">*</span></label>
+              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/90">Job Title <span className="text-accent">*</span></label>
               <Input
                 id="leadJobTitle"
                 name="leadJobTitle"
@@ -363,7 +363,7 @@ export default function FitAssessment() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/70">Company Name <span className="text-accent">*</span></label>
+              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/90">Company Name <span className="text-accent">*</span></label>
               <Input
                 id="leadCompany"
                 name="leadCompany"
@@ -502,7 +502,7 @@ export default function FitAssessment() {
                         </div>
                         <div className={cn(
                           "flex-grow text-lg font-sans transition-colors",
-                          isSelected ? "text-ink" : "text-ink/80 group-hover:text-ink"
+                          isSelected ? "text-ink" : "text-ink/90 group-hover:text-ink"
                         )}>
                           {option.text}
                         </div>

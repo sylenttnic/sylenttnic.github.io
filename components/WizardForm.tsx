@@ -244,12 +244,12 @@ export default function WizardForm() {
             {finalScore}/100
           </div>
           <h3 className="text-2xl font-serif font-bold mb-4 text-ink">{headline}</h3>
-          <p className="text-ink/80 mb-8 text-lg font-sans">{subheadline}</p>
+          <p className="text-ink/90 mb-8 text-lg font-sans">{subheadline}</p>
 
           <div className="w-full h-px bg-ink/5 my-6" />
 
           <h4 className="text-xl font-serif font-bold mb-2 text-ink">Stop losing time to friction</h4>
-          <p className="mb-6 text-ink/60 font-sans">Let&apos;s discuss a roadmap to fix this.</p>
+          <p className="mb-6 text-ink/80 font-sans">Let&apos;s discuss a roadmap to fix this.</p>
 
           <p className="text-sm text-ink/40 mb-6 font-sans italic">
             We&apos;ve sent you an email to confirm contact information, please check your spam folder if you don&apos;t see it.
@@ -286,7 +286,7 @@ export default function WizardForm() {
         </div>
 
         <h3 className="text-2xl font-serif font-bold text-center mb-2 text-ink">Your Friction Score is ready</h3>
-        <p className="text-center text-ink/60 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
+        <p className="text-center text-ink/80 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
           <div className="hidden">
@@ -304,7 +304,7 @@ export default function WizardForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-ink/70">Name <span className="text-accent">*</span></label>
+              <label htmlFor="leadName" className="text-sm font-medium text-ink/90">Name <span className="text-accent">*</span></label>
               <Input
                 id="leadName"
                 name="leadName"
@@ -315,7 +315,7 @@ export default function WizardForm() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/70">Work Email <span className="text-accent">*</span></label>
+              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/90">Work Email <span className="text-accent">*</span></label>
               <Input
                 id="leadEmail"
                 name="leadEmail"
@@ -327,7 +327,7 @@ export default function WizardForm() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/70">Job Title <span className="text-accent">*</span></label>
+              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/90">Job Title <span className="text-accent">*</span></label>
               <Input
                 id="leadJobTitle"
                 name="leadJobTitle"
@@ -338,7 +338,7 @@ export default function WizardForm() {
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/70">Company Name <span className="text-accent">*</span></label>
+              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/90">Company Name <span className="text-accent">*</span></label>
               <Input
                 id="leadCompany"
                 name="leadCompany"
@@ -438,7 +438,7 @@ export default function WizardForm() {
                   <div className="flex-shrink-0 mr-4 w-8 h-8 rounded-full bg-surface2 border border-ink/10 flex items-center justify-center text-ink/40 font-serif font-bold group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all">
                     {String.fromCharCode(65 + index)}
                   </div>
-                  <div className="flex-grow text-lg font-sans text-ink/80 group-hover:text-ink transition-colors">
+                  <div className="flex-grow text-lg font-sans text-ink/90 group-hover:text-ink transition-colors">
                     {option.text}
                   </div>
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity text-accent">

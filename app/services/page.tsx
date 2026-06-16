@@ -86,12 +86,12 @@ export default function ServicesPage() {
   return (
     <div className="bg-paper text-ink">
       {/* Hero */}
-      <header className="relative py-32 md:py-48 overflow-hidden border-b border-ink/5">
+      <header className="relative py-16 md:py-24 overflow-hidden border-b border-ink/5">
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
           <h1 className="text-4xl md:text-6xl font-serif mb-8">
             What we build
           </h1>
-          <p className="text-xl md:text-2xl text-ink/70 max-w-3xl mx-auto font-sans leading-relaxed">
+          <p className="text-xl md:text-2xl text-ink/90 max-w-3xl mx-auto font-sans leading-relaxed">
             We connect your business apps so data flows automatically. Here is
             exactly what that looks like.
           </p>
@@ -106,7 +106,7 @@ export default function ServicesPage() {
         return (
           <section
             key={service.pain}
-            className={`py-24 md:py-32 ${
+            className={`py-12 md:py-16 ${
               isEven ? "bg-paper" : "bg-surface border-y border-ink/5"
             }`}
           >
@@ -121,7 +121,7 @@ export default function ServicesPage() {
                     <h2 className="text-3xl md:text-5xl font-serif mb-6">
                       {service.pain}
                     </h2>
-                    <p className="text-ink/70 text-lg leading-relaxed max-w-3xl">
+                    <p className="text-ink/90 text-lg leading-relaxed max-w-3xl">
                       {service.detail}
                     </p>
                   </div>
@@ -129,20 +129,20 @@ export default function ServicesPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* The Outcome */}
                     <div className="bg-paper border border-ink/10 p-8 rounded-sm">
-                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/40 mb-4">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-4">
                         What changes
                       </h3>
-                      <p className="text-ink/80 leading-relaxed">
+                      <p className="text-ink/90 leading-relaxed">
                         {service.outcome}
                       </p>
                     </div>
 
                     {/* The Deliverable */}
                     <div className="bg-paper border border-ink/10 p-8 rounded-sm">
-                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/40 mb-4">
+                      <h3 className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-4">
                         What you own
                       </h3>
-                      <p className="text-ink/80 leading-relaxed">
+                      <p className="text-ink/90 leading-relaxed">
                         {service.deliverable}
                       </p>
                     </div>
@@ -155,7 +155,7 @@ export default function ServicesPage() {
       })}
 
       {/* How We Build It - Agents Card */}
-      <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
+      <section className="py-12 md:py-16 bg-paper border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl mx-auto">
@@ -171,7 +171,7 @@ export default function ServicesPage() {
                     How we build it
                   </h2>
                 </div>
-                <p className="text-ink/60 text-xl mb-8 leading-relaxed">
+                <p className="text-ink/80 text-xl mb-8 leading-relaxed">
                   Every integration follows the same structured process. Six
                   phases, multiple quality checkpoints, and nothing goes live
                   without your approval.
@@ -187,7 +187,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Ongoing Support */}
-      <section className="py-24 md:py-32 bg-surface border-b border-ink/5">
+      <section className="py-12 md:py-16 bg-surface border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center">
@@ -195,16 +195,16 @@ export default function ServicesPage() {
                 After the build
               </h2>
               <div className="space-y-8">
-                <p className="text-ink/70 text-lg leading-relaxed">
+                <p className="text-ink/90 text-lg leading-relaxed">
                   After the build, the wiring between your apps is our job, not yours. When a vendor changes an API or you add a new tool, we handle it before it breaks something.
                 </p>
-                <p className="text-ink/70 text-lg leading-relaxed">
+                <p className="text-ink/90 text-lg leading-relaxed">
                   That means you are not the one debugging a failed sync at 11pm, or hearing from a customer that orders stopped three days ago. Your time stays on the business.
                 </p>
-                <p className="text-ink/70 text-lg leading-relaxed">
+                <p className="text-ink/90 text-lg leading-relaxed">
                   You are never locked in. You own everything and can take it in-house whenever you want. Most clients keep us on because the retainer costs a fraction of the hours it gives back.
                 </p>
-                <p className="text-ink/50 text-base italic">
+                <p className="text-ink/70 text-base italic">
                   Think of it as a mechanic on retainer for the wiring between your apps.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function ServicesPage() {
       {/* CTA + Form */}
       <section
         id="tell-us"
-        className="py-24 md:py-32 bg-paper"
+        className="py-12 md:py-16 bg-paper"
       >
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -224,7 +224,7 @@ export default function ServicesPage() {
               <h2 className="text-4xl md:text-6xl font-serif mb-6">
                 Tell us what is broken
               </h2>
-              <p className="text-ink/60 text-xl">
+              <p className="text-ink/90 text-xl">
                 Answer a few quick questions so we can see where your time is
                 going.
               </p>

@@ -69,7 +69,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-ink/70 hover:text-ink font-sans uppercase tracking-widest text-xs transition-colors relative group"
+              className="text-ink/90 hover:text-ink font-sans uppercase tracking-widest text-xs transition-colors relative group"
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all group-hover:w-full" />
@@ -80,7 +80,10 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           ref={mobileButtonRef}
-          className="md:hidden text-ink"
+          className={cn(
+            "md:hidden p-2 rounded-sm transition-colors",
+            isOpen ? "text-ink bg-surface shadow-sm" : (scrolled ? "text-ink" : "text-ink bg-paper/60 backdrop-blur-md shadow-sm")
+          )}
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
@@ -95,8 +98,8 @@ export default function Navbar() {
         id="mobile-menu"
         ref={mobileMenuRef}
         className={cn(
-          "md:hidden absolute top-full left-0 w-full bg-paper/98 backdrop-blur-md border-b border-ink/5 overflow-hidden transition-all duration-300 ease-in-out",
-          isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          "md:hidden absolute top-full left-0 w-full bg-paper/98 backdrop-blur-md border-b border-ink/5 overflow-hidden transition-all duration-300 ease-in-out shadow-xl",
+          isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
         )}
       >
         <div className="flex flex-col p-8 space-y-6">
@@ -104,7 +107,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-ink/80 hover:text-accent font-sans uppercase tracking-widest text-sm"
+              className="text-ink font-sans font-bold uppercase tracking-widest text-sm py-3 border-b border-ink/10 hover:text-accent transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

@@ -22,14 +22,14 @@ export default function CostCalculator() {
       <h3 className="text-3xl md:text-4xl font-serif mb-3">
         What is the copy-paste layer costing you?
       </h3>
-      <p className="text-ink/60 font-sans mb-10 leading-relaxed">
+      <p className="text-ink/90 font-sans mb-10 leading-relaxed">
         Set the sliders to match your team. This is the time you are spending today, before anything is automated.
       </p>
 
       <div className="space-y-8 mb-10">
         <div>
           <div className="flex justify-between items-baseline mb-3 font-sans">
-            <label htmlFor="hours" className="text-ink/80">
+            <label htmlFor="hours" className="text-ink/90">
               Hours a week your team spends moving data by hand
             </label>
             <span className="text-xl font-serif text-ink">{hoursPerWeek} hrs</span>
@@ -49,7 +49,7 @@ export default function CostCalculator() {
 
         <div>
           <div className="flex justify-between items-baseline mb-3 font-sans">
-            <label htmlFor="rate" className="text-ink/80">
+            <label htmlFor="rate" className="text-ink/90">
               Roughly what an hour of that time costs
             </label>
             <span className="text-xl font-serif text-ink">{currency.format(hourlyCost)}/hr</span>
@@ -69,13 +69,13 @@ export default function CostCalculator() {
       </div>
 
       <div className="border-t border-ink/10 pt-10 text-center">
-        <p className="text-sm font-sans uppercase tracking-widest text-ink/40 mb-2">
+        <p className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-2">
           That is roughly
         </p>
         <p className="text-6xl md:text-7xl font-serif text-accent mb-2" aria-live="polite">
           {currency.format(annualCost)}
         </p>
-        <p className="text-ink/60 font-sans mb-10">
+        <p className="text-ink/90 font-sans mb-10">
           a year, and {annualHours} hours, spent on work your software could be doing.
         </p>
         <Link

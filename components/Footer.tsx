@@ -5,9 +5,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-paper border-t border-ink/5 py-16 text-ink/40">
+    <footer className="bg-paper border-t border-ink/5 py-16 text-ink/60">
       <div className="container mx-auto px-4 flex flex-col items-center">
-        <div className="mb-8 relative w-full max-w-[24rem] h-32 opacity-40 hover:opacity-60 transition-opacity">
+        <div className="mb-8 relative w-full max-w-[24rem] h-32 opacity-50 hover:opacity-70 transition-opacity">
           <Image
             src={logo}
             alt="Sylentt Partners Logo"
