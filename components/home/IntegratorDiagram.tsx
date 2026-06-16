@@ -145,7 +145,7 @@ const ToolNode = ({
                 className="object-contain transition-all"
               />
             </div>
-            <span className="text-[9px] md:text-[10px] font-sans text-ink/40 text-center uppercase tracking-widest">
+            <span className="text-[9px] md:text-[10px] font-sans text-ink/70 text-center uppercase tracking-widest">
               {currentTool.name}
             </span>
           </motion.div>
@@ -158,7 +158,7 @@ const ToolNode = ({
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className={`absolute top-full mt-4 z-50 w-40 md:w-64 p-4 bg-paper border border-ink/10 rounded-sm shadow-xl text-[10px] md:text-sm text-ink/70 pointer-events-none ${tooltipXClass}`}
+            className={`absolute top-full mt-4 z-50 w-40 md:w-64 p-4 bg-paper border border-ink/10 rounded-sm shadow-xl text-[10px] md:text-sm text-ink/90 pointer-events-none ${tooltipXClass}`}
           >
             <div className="font-serif font-bold text-accent mb-2 tracking-tight">
               {currentTool.name}

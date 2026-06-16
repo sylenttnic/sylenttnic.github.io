@@ -190,18 +190,18 @@ export default function Home() {
       />
 
       {/* Section 1: Hero + Diagram */}
-      <header className="relative pt-32 pb-24 md:pt-48 md:pb-32 overflow-hidden">
+      <header className="relative pt-16 pb-12 md:pt-24 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h1 className="text-5xl md:text-8xl font-serif font-medium mb-8 leading-tight tracking-tight">
               Your business apps don&apos;t talk to each other. We fix that.
             </h1>
-            <p className="text-xl md:text-2xl text-ink/70 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
+            <p className="text-xl md:text-2xl text-ink/90 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
               We connect the tools you already run, so your team stops being the copy-paste layer between them.
             </p>
           </div>
 
-          <div className="mb-20">
+          <div className="mb-16">
             <IntegratorDiagram />
           </div>
 
@@ -213,8 +213,8 @@ export default function Home() {
               Book a discovery call
               <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <div className="w-full max-w-xl opacity-60 hover:opacity-100 transition-opacity">
-              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink/40">Or ask a quick question</p>
+            <div className="w-full max-w-xl opacity-70 hover:opacity-100 transition-opacity">
+              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink/80">Or ask a quick question</p>
               <HeroChatInput />
             </div>
           </div>
@@ -222,10 +222,10 @@ export default function Home() {
       </header>
 
       {/* Section 2: Problem Statements */}
-      <section className="py-24 md:py-32 bg-ink text-paper">
+      <section className="py-12 md:py-16 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="mb-20">
+            <div className="mb-16">
               <h2 className="text-4xl md:text-6xl font-serif mb-6 text-paper">
                 Here is where your team&apos;s hours go.
               </h2>
@@ -256,51 +256,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Nic */}
-      <section id="about" className="py-24 md:py-32 bg-paper border-b border-ink/5 scroll-mt-24">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/about/nic.jpg"
-                alt="Nic Aslett, founder of Sylentt Partners"
-                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
-              />
-              <div>
-                <h2 className="text-4xl md:text-5xl font-serif mb-6">Hi, I&apos;m Nic.</h2>
-                <div className="space-y-5 text-lg text-ink/70 leading-relaxed">
-                  <p>
-                    For 15 years I built the systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I did not manage tools from a distance, I built them, so I know exactly what breaks and why.
-                  </p>
-                  <p>
-                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. That is what Sylentt does for small businesses now. When you work with us, you work directly with me, a real engineer who has done this for years, not a faceless platform or a support queue.
-                  </p>
-                  <p>
-                    I run Sylentt from Cache Valley, Utah. If you are local, you get someone you can sit down with.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </SectionFade>
-        </div>
-      </section>
-
       {/* Section 3: How It Works - Asymmetric Layout */}
-      <section className="py-24 md:py-32 bg-ink text-paper overflow-hidden">
+      <section className="py-12 md:py-16 bg-surface text-ink overflow-hidden border-y border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
               <div>
-                <h2 className="text-4xl md:text-6xl font-serif mb-12 text-paper">
+                <h2 className="text-4xl md:text-6xl font-serif mb-12 text-ink">
                   How it works
                 </h2>
                 <div className="space-y-16">
                   <div className="flex gap-8 group">
                     <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">01</span>
                     <div>
-                      <h3 className="text-2xl font-serif mb-4 text-paper">Tell us what is broken</h3>
-                      <p className="text-lg text-paper/70 leading-relaxed">
+                      <h3 className="text-2xl font-serif mb-4 text-ink">Tell us what is broken</h3>
+                      <p className="text-lg text-ink/90 leading-relaxed">
                         Which apps does your business use? Where is the manual work? This is a conversation, not a requirements document.
                       </p>
                     </div>
@@ -308,8 +278,8 @@ export default function Home() {
                   <div className="flex gap-8 group">
                     <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">02</span>
                     <div>
-                      <h3 className="text-2xl font-serif mb-4 text-paper">We build the connections</h3>
-                      <p className="text-lg text-paper/70 leading-relaxed">
+                      <h3 className="text-2xl font-serif mb-4 text-ink">We build the connections</h3>
+                      <p className="text-lg text-ink/90 leading-relaxed">
                         When something happens in one app, the others update automatically. No copying. No checking. No hoping it worked.
                       </p>
                     </div>
@@ -317,8 +287,8 @@ export default function Home() {
                   <div className="flex gap-8 group">
                     <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">03</span>
                     <div>
-                      <h3 className="text-2xl font-serif mb-4 text-paper">You own everything</h3>
-                      <p className="text-lg text-paper/70 leading-relaxed">
+                      <h3 className="text-2xl font-serif mb-4 text-ink">You own everything</h3>
+                      <p className="text-lg text-ink/90 leading-relaxed">
                         It runs on your own cloud account, and the code is yours. You pay your provider directly for usage, with no platform markup on top. If we part ways, you keep all of it.
                       </p>
                     </div>
@@ -326,8 +296,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden lg:block relative pt-20">
-                <div className="aspect-[4/5] bg-paper/5 border border-paper/10 rounded-sm flex items-center justify-center p-12">
-                   <p className="text-5xl font-serif italic text-center text-paper leading-tight">
+                <div className="aspect-[4/5] bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
+                   <p className="text-5xl font-serif italic text-center text-ink leading-tight">
                      &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
                    </p>
                 </div>
@@ -338,7 +308,7 @@ export default function Home() {
       </section>
 
       {/* Section 4: Real Example */}
-      <section className="py-24 md:py-48 bg-paper text-ink">
+      <section className="py-12 md:py-20 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl">
@@ -346,10 +316,10 @@ export default function Home() {
                 What this looks like in practice
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div className="text-lg text-ink/70 space-y-8 leading-relaxed">
+                <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
                   <div className="space-y-4">
                     <span className="text-6xl md:text-8xl font-serif text-accent block">Nearly a full day a week, back.</span>
-                    <p className="text-xl font-serif italic text-ink/40 uppercase tracking-widest">Real Results</p>
+                    <p className="text-xl font-serif italic text-ink/80 uppercase tracking-widest">Real Results</p>
                   </div>
                   <p>
                     An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.
@@ -371,7 +341,7 @@ export default function Home() {
       </section>
 
       {/* Section: Cost Calculator */}
-      <section className="py-24 md:py-32 bg-ink text-paper">
+      <section className="py-12 md:py-16 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
             <CostCalculator />
@@ -382,10 +352,10 @@ export default function Home() {
       <ClientLogos />
 
       {/* Section 5: Testimonials */}
-      <section className="py-24 md:py-32 bg-ink text-paper border-y border-paper/5">
+      <section className="py-12 md:py-16 bg-ink text-paper border-y border-paper/5">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="mb-20">
+            <div className="mb-16">
               <h2 className="text-4xl md:text-5xl font-serif text-paper/40 italic">
                 What people I&apos;ve worked with say
               </h2>
@@ -415,11 +385,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="py-24 md:py-32 bg-paper text-ink">
+      <section id="about" className="py-12 md:py-16 bg-surface border-y border-ink/5 scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <h2 className="text-4xl md:text-6xl font-serif mb-16 text-center text-ink">
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/about/nic.jpg"
+                alt="Nic Aslett, founder of Sylentt Partners"
+                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
+              />
+              <div>
+                <h2 className="text-4xl md:text-5xl font-serif mb-6">Hi, I&apos;m Nic.</h2>
+                <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
+                  <p>
+                    For 15 years I built the systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I did not manage tools from a distance, I built them, so I know exactly what breaks and why.
+                  </p>
+                  <p>
+                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. That is what Sylentt does for small businesses now. When you work with us, you work directly with me, a real engineer who has done this for years, not a faceless platform or a support queue.
+                  </p>
+                  <p>
+                    I run Sylentt from Cache Valley, Utah. If you are local, you get someone you can sit down with.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SectionFade>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-12 md:py-16 bg-paper text-ink border-t border-ink/5">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <h2 className="text-4xl md:text-6xl font-serif mb-12 text-center text-ink">
               Common questions
             </h2>
             <div className="max-w-3xl mx-auto space-y-8">
@@ -429,7 +428,7 @@ export default function Home() {
                     <span>{item.question}</span>
                     <ChevronDown className="w-5 h-5 opacity-40 group-open:rotate-180 transition-transform" />
                   </summary>
-                  <div className="mt-6 text-lg text-ink/70 leading-relaxed max-w-2xl">
+                  <div className="mt-6 text-lg text-ink/90 leading-relaxed max-w-2xl">
                     <p>{item.answer}</p>
                   </div>
                 </details>
@@ -440,14 +439,14 @@ export default function Home() {
       </section>
 
       {/* CTA Form */}
-      <section id="tell-us" className="py-24 md:py-32 bg-ink text-paper scroll-mt-24">
+      <section id="tell-us" className="py-12 md:py-16 bg-ink text-paper scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-4xl md:text-6xl font-serif mb-12 text-paper">
                 Ready to stop the copy-paste?
               </h2>
-              <div className="flex flex-col items-center gap-8 mb-20">
+              <div className="flex flex-col items-center gap-8 mb-16">
                 <Link
                   href="/pricing"
                   className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
@@ -462,7 +461,7 @@ export default function Home() {
               <h3 className="text-2xl md:text-3xl font-serif mb-6">
                 Not ready to talk?
               </h3>
-              <p className="text-xl text-ink/60 mb-12">
+              <p className="text-xl text-paper/60 mb-12">
                 Answer 4 questions to see where your time is going.
               </p>
             </div>

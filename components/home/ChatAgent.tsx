@@ -160,7 +160,7 @@ export default function ChatAgent() {
               <button
                 ref={closeButtonRef}
                 onClick={() => setIsOpen(false)}
-                className="p-2 -mr-2 text-ink/40 hover:text-ink transition-colors h-11 w-11 flex items-center justify-center"
+                className="p-2 -mr-2 text-ink/60 hover:text-ink transition-colors h-11 w-11 flex items-center justify-center"
                 aria-label="Close chat"
               >
                 <X className="w-6 h-6" />
@@ -174,7 +174,7 @@ export default function ChatAgent() {
               aria-live="polite"
             >
               {messages.length === 0 && (
-                <div className="h-full flex items-center justify-center text-ink/40 text-center px-12 font-sans italic">
+                <div className="h-full flex items-center justify-center text-ink/60 text-center px-12 font-sans italic">
                   Start the conversation by describing your workflow challenges.
                 </div>
               )}
@@ -186,7 +186,7 @@ export default function ChatAgent() {
                     "max-w-[85%] p-4 text-sm md:text-base leading-relaxed whitespace-pre-wrap font-sans",
                     msg.role === "user"
                       ? "ml-auto bg-accent text-white rounded-l-2xl rounded-tr-2xl"
-                      : "mr-auto bg-surface text-ink/80 border border-ink/5 rounded-r-2xl rounded-tl-2xl"
+                      : "mr-auto bg-surface text-ink/90 border border-ink/5 rounded-r-2xl rounded-tl-2xl"
                   )}
                 >
                   {msg.content}
@@ -220,7 +220,7 @@ export default function ChatAgent() {
               )}
 
               {isLimitReached && (
-                <div className="text-center p-6 text-ink/40 text-sm italic">
+                <div className="text-center p-6 text-ink/60 text-sm italic">
                   We&apos;ve covered a lot! Book a discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
                 </div>
               )}
@@ -259,7 +259,7 @@ export default function ChatAgent() {
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isLimitReached}
                   placeholder={isLimitReached ? "Conversation limit reached" : "Type your message..."}
-                  className="flex-grow bg-paper border border-ink/10 rounded-sm py-4 px-5 text-ink placeholder:text-ink/30 outline-none focus:border-accent transition-all disabled:opacity-50"
+                  className="flex-grow bg-paper border border-ink/10 rounded-sm py-4 px-5 text-ink placeholder:text-ink/50 outline-none focus:border-accent transition-all disabled:opacity-50"
                 />
                 <button
                   type="submit"

@@ -138,19 +138,19 @@ export default function PricingPage() {
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 text-center pt-32 pb-24">
+      <section className="container mx-auto px-4 text-center pt-16 pb-12">
         <SectionFade>
           <h1 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">
             Simple pricing. Real results.
           </h1>
-          <p className="text-xl md:text-2xl text-ink/60 max-w-3xl mx-auto leading-relaxed font-sans">
+          <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto leading-relaxed font-sans">
             Every engagement starts with understanding your business. Pick the package that fits, tell us what you need, and we&apos;ll take it from there.
           </p>
         </SectionFade>
       </section>
 
       {/* Packages Section */}
-      <section className="container mx-auto px-4 pb-32">
+      <section className="container mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <div
@@ -161,16 +161,16 @@ export default function PricingPage() {
             >
               <h2 className="text-2xl font-serif mb-2">{pkg.name}</h2>
               <div className="text-3xl font-serif mb-8 text-accent">{pkg.price}</div>
-              <p className="text-ink/70 mb-12 flex-grow leading-relaxed text-lg">
+              <p className="text-ink/90 mb-12 flex-grow leading-relaxed text-lg">
                 {pkg.description}
               </p>
 
               <div className="space-y-6 mb-12">
-                <div className="text-xs font-sans uppercase tracking-[0.2em] text-ink/40">What&apos;s Included</div>
+                <div className="text-xs font-sans uppercase tracking-[0.2em] text-ink/80">What&apos;s Included</div>
                 {pkg.features.map((feature, i) => (
                   <div key={i} className="flex items-start">
                     <Check className="w-5 h-5 text-accent mr-4 shrink-0 mt-0.5" />
-                    <span className="text-ink/80 text-base leading-relaxed">{feature}</span>
+                    <span className="text-ink/90 text-base leading-relaxed">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -184,7 +184,7 @@ export default function PricingPage() {
                   {pkg.cta}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <p className="mt-6 text-sm text-ink/50 italic text-center leading-relaxed">
+                <p className="mt-6 text-sm text-ink/70 italic text-center leading-relaxed">
                   {pkg.footnote}
                 </p>
               </div>
@@ -194,7 +194,7 @@ export default function PricingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 bg-surface border-y border-ink/5 mb-32">
+      <section className="py-12 bg-surface border-y border-ink/5 mb-16">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16">
@@ -212,7 +212,7 @@ export default function PricingPage() {
                       <Icon className="w-8 h-8 text-accent" />
                     </div>
                     <h3 className="text-xl font-serif mb-4">{step.title}</h3>
-                    <p className="text-ink/60 leading-relaxed text-lg">{step.description}</p>
+                    <p className="text-ink/90 leading-relaxed text-lg">{step.description}</p>
                   </div>
                 );
               })}
@@ -222,7 +222,7 @@ export default function PricingPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="tell-us" className="container mx-auto px-4 max-w-4xl pb-32 scroll-mt-32">
+      <section id="tell-us" className="container mx-auto px-4 max-w-4xl pb-16 scroll-mt-32">
         <SectionFade>
           <div className="bg-surface border border-ink/10 p-8 md:p-16 rounded-sm">
             <h2 className="text-3xl md:text-4xl font-serif mb-12 text-center">Get Started</h2>
@@ -241,7 +241,7 @@ export default function PricingPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="name" className="text-sm font-sans uppercase tracking-widest text-ink/60">Name</label>
+                    <label htmlFor="name" className="text-sm font-sans uppercase tracking-widest text-ink/80">Name</label>
                     <Input
                       id="name"
                       name="name"
@@ -251,7 +251,7 @@ export default function PricingPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="email" className="text-sm font-sans uppercase tracking-widest text-ink/60">Work Email</label>
+                    <label htmlFor="email" className="text-sm font-sans uppercase tracking-widest text-ink/80">Work Email</label>
                     <Input
                       id="email"
                       name="email"
@@ -265,7 +265,7 @@ export default function PricingPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="company" className="text-sm font-sans uppercase tracking-widest text-ink/60">Company (Optional)</label>
+                    <label htmlFor="company" className="text-sm font-sans uppercase tracking-widest text-ink/80">Company (Optional)</label>
                     <Input
                       id="company"
                       name="company"
@@ -274,7 +274,7 @@ export default function PricingPage() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="package" className="text-sm font-sans uppercase tracking-widest text-ink/60">Package Interest</label>
+                    <label htmlFor="package" className="text-sm font-sans uppercase tracking-widest text-ink/80">Package Interest</label>
                     <select
                       id="package"
                       name="package"
@@ -293,7 +293,7 @@ export default function PricingPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="apps" className="text-sm font-sans uppercase tracking-widest text-ink/60">What apps do you need connected?</label>
+                  <label htmlFor="apps" className="text-sm font-sans uppercase tracking-widest text-ink/80">What apps do you need connected?</label>
                   <textarea
                     id="apps"
                     name="apps"
@@ -305,7 +305,7 @@ export default function PricingPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="notes" className="text-sm font-sans uppercase tracking-widest text-ink/60">Anything else we should know? (Optional)</label>
+                  <label htmlFor="notes" className="text-sm font-sans uppercase tracking-widest text-ink/80">Anything else we should know? (Optional)</label>
                   <textarea
                     id="notes"
                     name="notes"

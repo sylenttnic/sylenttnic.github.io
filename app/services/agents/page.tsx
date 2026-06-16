@@ -104,7 +104,7 @@ export default function BuildProcessPage() {
   }, []);
 
   return (
-    <div className="build-page-wrap pt-32 md:pt-48">
+    <div className="build-page-wrap pt-16 md:pt-24">
       {/* HERO */}
       <div className="build-header fade-in">
         <div className="logo-tag">Our Process</div>
