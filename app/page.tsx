@@ -189,7 +189,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
 
-      {/* Section 1: Hero + Diagram */}
+      {/* Hero + Diagram */}
       <header className="relative pt-24 pb-12 md:pt-36 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
@@ -221,7 +221,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Section 2: Problem Statements */}
+      {/* Problem Statements */}
       <section className="py-12 md:py-16 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -256,7 +256,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 3: How It Works - Asymmetric Layout */}
+      {/* How It Works */}
       <section className="py-12 md:py-16 bg-surface text-ink overflow-hidden border-y border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -307,7 +307,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section 4: Real Example */}
+      {/* Real Example */}
       <section className="py-12 md:py-20 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -351,7 +351,36 @@ export default function Home() {
 
       <ClientLogos />
 
-      {/* Section 5: Testimonials */}
+      <section id="about" className="py-12 md:py-16 bg-surface border-y border-ink/5 scroll-mt-24">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/about/nic.jpg"
+                alt="Nic Aslett, founder of Sylentt Partners"
+                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
+              />
+              <div>
+                <h2 className="text-4xl md:text-5xl font-serif mb-6">Hi, I&apos;m Nic.</h2>
+                <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
+                  <p>
+                    For 15 years I built the systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I did not manage tools from a distance, I built them, so I know exactly what breaks and why.
+                  </p>
+                  <p>
+                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. That is what Sylentt does for small businesses now. When you work with us, you work directly with me, a real engineer who has done this for years, not a faceless platform or a support queue.
+                  </p>
+                  <p>
+                    I run Sylentt from Cache Valley, Utah. If you are local, you get someone you can sit down with.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </SectionFade>
+        </div>
+      </section>
+
+      {/* Testimonials */}
       <section className="py-12 md:py-16 bg-ink text-paper border-y border-paper/5">
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -380,35 +409,6 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-            </div>
-          </SectionFade>
-        </div>
-      </section>
-
-      <section id="about" className="py-12 md:py-16 bg-surface border-y border-ink/5 scroll-mt-24">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/about/nic.jpg"
-                alt="Nic Aslett, founder of Sylentt Partners"
-                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
-              />
-              <div>
-                <h2 className="text-4xl md:text-5xl font-serif mb-6">Hi, I&apos;m Nic.</h2>
-                <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
-                  <p>
-                    For 15 years I built the systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I did not manage tools from a distance, I built them, so I know exactly what breaks and why.
-                  </p>
-                  <p>
-                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. That is what Sylentt does for small businesses now. When you work with us, you work directly with me, a real engineer who has done this for years, not a faceless platform or a support queue.
-                  </p>
-                  <p>
-                    I run Sylentt from Cache Valley, Utah. If you are local, you get someone you can sit down with.
-                  </p>
-                </div>
-              </div>
             </div>
           </SectionFade>
         </div>
