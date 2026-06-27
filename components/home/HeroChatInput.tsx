@@ -42,9 +42,6 @@ export default function HeroChatInput() {
           <Send className="w-6 h-6" />
         </button>
       </form>
-      <p className="text-ink/40 text-sm font-sans italic">
-        or scroll down to use the assessment form
-      </p>
     </motion.div>
   );
 }

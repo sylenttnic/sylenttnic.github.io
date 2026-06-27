@@ -41,9 +41,9 @@ const services = [
     color: "blue",
     pain: "Your team copies the same data into multiple systems.",
     detail:
-      "Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up quietly.",
+      "Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up.",
     outcome:
-      "After we build the connection, data moves between your apps the moment it is created. No copying, no double-checking, no lag. Your team gets those hours back.",
+      "After we build the connection, data moves between your apps instantly. No copying, no double-checking, no lag. Your team gets those hours back.",
     deliverable:
       "An automated connection between your systems that runs on your account. You get full documentation of how it works and what it does. If we part ways, it keeps running.",
   },
@@ -63,7 +63,7 @@ const services = [
     color: "purple",
     pain: "You are paying for Zapier or Make and things still break.",
     detail:
-      "Those tools charge you more the busier you get. When a Zap fails at midnight, nobody finds out until Monday. And you are renting the whole thing; if you stop paying, it disappears.",
+      "Rented tools charge you more the busier you get. When a Zap fails at midnight, nobody finds out until Monday. And because you are renting, if you stop paying, everything disappears.",
     outcome:
       "What we build, you own. It runs on your own cloud account, it retries failed events automatically, and it does not silently lose data.",
     deliverable:
@@ -92,8 +92,7 @@ export default function ServicesPage() {
             What we build
           </h1>
           <p className="text-xl md:text-2xl text-ink/90 max-w-3xl mx-auto font-sans leading-relaxed">
-            We connect your business apps so data flows automatically. Here is
-            exactly what that looks like.
+            We connect your business apps so data flows between them automatically, saving your team hours every week.
           </p>
         </div>
       </header>
@@ -154,7 +153,7 @@ export default function ServicesPage() {
         );
       })}
 
-      {/* How We Build It - Agents Card */}
+      {/* How we build your app integrations - Agents Card */}
       <section className="py-12 md:py-16 bg-paper border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
@@ -186,33 +185,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Ongoing Support */}
-      <section className="py-12 md:py-16 bg-surface border-b border-ink/5">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl md:text-6xl font-serif mb-12">
-                After the build
-              </h2>
-              <div className="space-y-8">
-                <p className="text-ink/90 text-lg leading-relaxed">
-                  After the build, the wiring between your apps is our job, not yours. When a vendor changes an API or you add a new tool, we handle it before it breaks something.
-                </p>
-                <p className="text-ink/90 text-lg leading-relaxed">
-                  That means you are not the one debugging a failed sync at 11pm, or hearing from a customer that orders stopped three days ago. Your time stays on the business.
-                </p>
-                <p className="text-ink/90 text-lg leading-relaxed">
-                  You are never locked in. You own everything and can take it in-house whenever you want. Most clients keep us on because the retainer costs a fraction of the hours it gives back.
-                </p>
-                <p className="text-ink text-base font-medium italic">
-                  Think of it as a mechanic on retainer for the wiring between your apps.
-                </p>
-              </div>
-            </div>
-          </SectionFade>
-        </div>
-      </section>
-
       {/* CTA + Form */}
       <section
         id="tell-us"
@@ -222,7 +194,7 @@ export default function ServicesPage() {
           <SectionFade>
             <div className="text-center mb-16 max-w-3xl mx-auto">
               <h2 className="text-4xl md:text-6xl font-serif mb-6">
-                Tell us what is broken
+                Tell us what&apos;s broken
               </h2>
               <p className="text-ink/90 text-xl">
                 Answer a few quick questions so we can see where your time is

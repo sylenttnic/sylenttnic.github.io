@@ -11,11 +11,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sylentt | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
   openGraph: {
     title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     url: "https://sylentt.com/",
     images: [{ url: "/logo_full.png" }],
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sylentt | Your business apps don't talk to each other. We fix that.",
     description:
-      "Sylentt connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -63,7 +63,7 @@ const problemCards = [
     icon: RefreshCw,
     title: "Your team re-enters the same data into multiple systems.",
     description:
-      "An order comes in, someone retypes it into the shipping app. A payment clears, someone updates the books. We make those updates happen automatically.",
+      "An order comes in, someone retypes it into the shipping app. A payment clears, someone updates the books. We make your tools talk to each other, so these updates happen automatically.",
   },
   {
     icon: AlertTriangle,
@@ -75,13 +75,13 @@ const problemCards = [
     icon: RotateCcw,
     title: "You are paying for automation tools and things still break.",
     description:
-      "Rented tools charge you more as you grow and fail silently at midnight. What we build, you own, it runs on your account, and it retries on its own.",
+      "Rented tools charge you more as you grow and can fail without ever alerting you that there's a problem. What we build, you own. It runs on your account, and it automatically resolves errors when they occur.",
   },
   {
     icon: Plug,
     title: "You added a new tool and now nothing connects.",
     description:
-      "Every new app becomes another island your team bridges by hand. We connect it to everything else so it fits in from day one.",
+      "Every new app becomes another island your team bridges by hand. We connect it to all your other tools so it fits in from day one.",
   },
 ];
 
@@ -197,7 +197,7 @@ export default function Home() {
               Your business apps don&apos;t talk to each other. We fix that.
             </h1>
             <p className="text-xl md:text-2xl text-ink/90 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
-              We connect the tools you already run, so your team stops being the copy-paste layer between them.
+              We connect the tools you already run, so your team stops copying and pasting data between them.
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export default function Home() {
               href="/pricing"
               className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
             >
-              Book a discovery call
+              Book a free discovery call
               <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Link>
             <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
@@ -230,7 +230,7 @@ export default function Home() {
                 Here is where your team&apos;s hours go.
               </h2>
               <p className="text-xl text-paper/60 max-w-2xl leading-relaxed">
-                Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up quietly.
+                Most small businesses use different software tools for scheduling, billing, and tracking customers, but those tools don&apos;t connect. This forces your staff to spend hours manually typing the same information into multiple systems.
               </p>
             </div>
 
@@ -269,18 +269,18 @@ export default function Home() {
                   <div className="flex gap-8 group">
                     <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">01</span>
                     <div>
-                      <h3 className="text-2xl font-serif mb-4 text-ink">Tell us what is broken</h3>
+                      <h3 className="text-2xl font-serif mb-4 text-ink">Tell us what&apos;s broken</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
-                        Which apps does your business use? Where is the manual work? This is a conversation, not a requirements document.
+                        Which apps does your business use? Where is the manual work? This conversation is the basis for us to build a detailed blueprint for the integration.
                       </p>
                     </div>
                   </div>
                   <div className="flex gap-8 group">
                     <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">02</span>
                     <div>
-                      <h3 className="text-2xl font-serif mb-4 text-ink">We build the connections</h3>
+                      <h3 className="text-2xl font-serif mb-4 text-ink">Sylentt Partners builds the connections</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
-                        When something happens in one app, the others update automatically. No copying. No checking. No hoping it worked.
+                        Sylentt Partners writes the code, puts it through a rigorous testing process, and then deploys it. Now when something happens in one app, the other tools update automatically.
                       </p>
                     </div>
                   </div>
@@ -289,7 +289,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-2xl font-serif mb-4 text-ink">You own everything</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
-                        It runs on your own cloud account, and the code is yours. You pay your provider directly for usage, with no platform markup on top. If we part ways, you keep all of it.
+                        Your integration is self-hosted and runs on your own cloud account. If we part ways, you keep all of it.
                       </p>
                     </div>
                   </div>
@@ -318,7 +318,6 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
                   <div className="space-y-4">
-                    <span className="text-5xl md:text-6xl font-serif text-accent block">Nearly a full day a week, back.</span>
                     <p className="text-xl font-serif italic text-ink uppercase tracking-widest">Real Results</p>
                   </div>
                   <p>
@@ -329,7 +328,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-ink/5 p-12 rounded-sm border border-ink/10 shadow-xl shadow-ink/5">
-                  <p className="text-2xl font-serif italic text-accent mb-6">The result</p>
+                  <p className="text-2xl font-serif italic text-accent mb-6">The result: Getting back nearly 8 hours per week</p>
                   <p className="text-xl text-ink leading-relaxed font-serif">
                     &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
                   </p>
@@ -451,7 +450,7 @@ export default function Home() {
                   href="/pricing"
                   className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
                 >
-                  Book a discovery call
+                  Book a free discovery call
                   <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
