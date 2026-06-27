@@ -64,15 +64,22 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-12">
+        <div className="hidden md:flex items-center space-x-12">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-ink/90 hover:text-ink font-sans uppercase tracking-widest text-xs transition-colors relative group"
+              className={cn(
+                "font-sans uppercase tracking-widest text-xs transition-all relative group",
+                link.name === "Connect"
+                  ? "bg-accent text-white px-6 py-3 hover:opacity-90"
+                  : "text-ink/90 hover:text-ink"
+              )}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all group-hover:w-full" />
+              {link.name !== "Connect" && (
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all group-hover:w-full" />
+              )}
             </Link>
           ))}
         </div>

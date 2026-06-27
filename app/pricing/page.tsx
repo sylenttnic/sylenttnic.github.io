@@ -176,14 +176,26 @@ export default function PricingPage() {
               </div>
 
               <div className="mt-auto">
-                <Button
-                  onClick={() => scrollToForm(pkg.id)}
-                  variant={pkg.emphasized ? "primary" : "outline"}
-                  className={`w-full py-6 text-lg group ${pkg.emphasized ? 'bg-accent hover:opacity-90' : 'border-ink/20 hover:bg-ink/5'}`}
-                >
-                  {pkg.cta}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                {pkg.id === "discovery" ? (
+                  <a
+                    href="https://calendly.com/sylentt-nic/discovery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-ink/20 text-ink hover:bg-ink/5 w-full py-6 text-lg group h-auto"
+                  >
+                    {pkg.cta}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ) : (
+                  <Button
+                    onClick={() => scrollToForm(pkg.id)}
+                    variant={pkg.emphasized ? "primary" : "outline"}
+                    className={`w-full py-6 text-lg group ${pkg.emphasized ? 'bg-accent hover:opacity-90' : 'border-ink/20 hover:bg-ink/5'}`}
+                  >
+                    {pkg.cta}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                )}
                 <p className="mt-6 text-sm text-ink/90 italic text-center leading-relaxed">
                   {pkg.footnote}
                 </p>

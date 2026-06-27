@@ -10,7 +10,11 @@ const currency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
-export default function CostCalculator() {
+interface CostCalculatorProps {
+  heading?: string;
+}
+
+export default function CostCalculator({ heading = "What is the copy-paste layer costing you?" }: CostCalculatorProps) {
   const [hoursPerWeek, setHoursPerWeek] = useState(5);
   const [hourlyCost, setHourlyCost] = useState(30);
 
@@ -18,9 +22,9 @@ export default function CostCalculator() {
   const annualHours = hoursPerWeek * 52;
 
   return (
-    <div className="max-w-3xl mx-auto bg-surface border border-ink/10 rounded-sm p-8 md:p-14">
-      <h3 className="text-3xl md:text-4xl font-serif mb-3">
-        What is the copy-paste layer costing you?
+    <div id="calculator" className="max-w-3xl mx-auto bg-surface border border-ink/10 rounded-sm p-8 md:p-14 scroll-mt-24">
+      <h3 className="text-3xl md:text-4xl font-serif mb-3 text-ink">
+        {heading}
       </h3>
       <p className="text-ink/90 font-sans mb-10 leading-relaxed">
         Set the sliders to match your team. This is the time you are spending today, before anything is automated.
@@ -78,13 +82,15 @@ export default function CostCalculator() {
         <p className="text-ink/90 font-sans mb-10">
           a year, and {annualHours} hours, spent on work your software could be doing.
         </p>
-        <Link
-          href="/pricing"
+        <a
+          href="https://calendly.com/sylentt-nic/discovery"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
         >
           Book a free discovery call
           <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </a>
       </div>
     </div>
   );
