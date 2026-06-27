@@ -199,25 +199,26 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-ink/90 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
               We connect the tools you already run, so your team stops copying and pasting data between them.
             </p>
-          </div>
 
-          <div className="mb-16">
-            <IntegratorDiagram />
-          </div>
-
-          <div className="flex flex-col items-center justify-center gap-12">
-            <Link
-              href="/pricing"
-              className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
-            >
-              Book a free discovery call
-              <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
-              <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink">Or ask a quick question</p>
-              <HeroChatInput />
+            {/* Moved CTAs above hero graphic */}
+            <div className="flex flex-col items-center justify-center gap-12 mb-16">
+              <a
+                href="https://calendly.com/sylentt-nic/discovery"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+              >
+                Book a free discovery call
+                <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </a>
+              <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
+                <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink">Or ask a quick question</p>
+                <HeroChatInput />
+              </div>
             </div>
           </div>
+
+          {/* IntegratorDiagram removed from homepage */}
         </div>
       </header>
 
@@ -294,6 +295,17 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+
+                {/* New CTA button */}
+                <div className="mt-16">
+                  <Link
+                    href="#tell-us"
+                    className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group"
+                  >
+                    Tell us what&apos;s broken
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
               <div className="hidden lg:block relative">
                 <div className="aspect-square bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
@@ -328,7 +340,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="bg-ink/5 p-12 rounded-sm border border-ink/10 shadow-xl shadow-ink/5">
-                  <p className="text-2xl font-serif italic text-accent mb-6">The result: Getting back nearly 8 hours per week</p>
+                  <p className="text-2xl font-sans font-bold text-accent mb-6">The result: Getting back nearly 8 hours per week</p>
                   <p className="text-xl text-ink leading-relaxed font-serif">
                     &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
                   </p>
@@ -339,14 +351,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Cost Calculator */}
-      <section className="py-12 md:py-16 bg-ink text-paper">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <CostCalculator />
-          </SectionFade>
-        </div>
-      </section>
+      {/* Cost Calculator removed from homepage */}
 
       <ClientLogos />
 
@@ -361,16 +366,16 @@ export default function Home() {
                 className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
               />
               <div>
-                <h2 className="text-4xl md:text-5xl font-serif mb-6">Hi, I&apos;m Nic.</h2>
+                <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6">Hi, I&apos;m Nic.</h2>
                 <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
                   <p>
-                    For 15 years I built the systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I did not manage tools from a distance, I built them, so I know exactly what breaks and why.
+                    For 15 years, I&apos;ve worked as an engineer building systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I didn&apos;t manage tools from a distance. I built them, so I know exactly what breaks and why.
                   </p>
                   <p>
-                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. That is what Sylentt does for small businesses now. When you work with us, you work directly with me, a real engineer who has done this for years, not a faceless platform or a support queue.
+                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. I saw a need for this in the small business world, and that&apos;s why I decided to launch my own business, Sylentt Partners. We work behind the scenes to make things easier for your business (like a silent partner). When you work with us, you work directly with me: a real engineer who has done this for years.
                   </p>
                   <p>
-                    I run Sylentt from Cache Valley, Utah. If you are local, you get someone you can sit down with.
+                    I run Sylentt Partners from Cache Valley, Utah. If you are local, I&apos;d love to learn more about your business and how I can save your team time!
                   </p>
                 </div>
               </div>
@@ -384,7 +389,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif text-paper/40 italic">
+              <h2 className="text-4xl md:text-6xl font-sans font-bold text-paper">
                 What people I&apos;ve worked with say
               </h2>
             </div>
@@ -446,13 +451,15 @@ export default function Home() {
                 Ready to stop the copy-paste?
               </h2>
               <div className="flex flex-col items-center gap-8 mb-16">
-                <Link
-                  href="/pricing"
+                <a
+                  href="https://calendly.com/sylentt-nic/discovery"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
                 >
                   Book a free discovery call
                   <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </div>
 
               <div className="w-full h-px bg-ink/5 mb-20" />
