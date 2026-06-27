@@ -221,7 +221,7 @@ export default function ChatAgent() {
 
               {isLimitReached && (
                 <div className="text-center p-6 text-ink/60 text-sm italic">
-                  We&apos;ve covered a lot! Book a discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
+                  We&apos;ve covered a lot! Book a free discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
                 </div>
               )}
 
@@ -243,7 +243,7 @@ export default function ChatAgent() {
                     className="flex items-center justify-center gap-3 p-4 rounded-sm bg-accent text-white font-bold hover:opacity-90 transition-all shadow-sm"
                   >
                     <Calendar className="w-5 h-5" />
-                    Book your discovery call
+                    Book your free discovery call
                   </a>
                 </motion.div>
               )}

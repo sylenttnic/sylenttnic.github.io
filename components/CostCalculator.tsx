@@ -82,7 +82,7 @@ export default function CostCalculator() {
           href="/pricing"
           className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
         >
-          Book a discovery call
+          Book a free discovery call
           <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

@@ -63,7 +63,7 @@ const phases = [
     description:
       "The integration is deployed to a staging environment first. We run live validation tests, confirm everything works as expected, and then ask for your approval before going live. Nothing reaches production without your explicit go-ahead.",
     youSee:
-      'A working preview you can verify, followed by a clear "ready to go live" conversation. You press the button, not us.',
+      "",
   },
   {
     number: 6,
@@ -107,9 +107,8 @@ export default function BuildProcessPage() {
     <div className="build-page-wrap pt-24 md:pt-36">
       {/* HERO */}
       <div className="build-header fade-in">
-        <div className="logo-tag">Our Process</div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-          How We Build It
+          How we build your app integrations
         </h1>
         <p className="subtitle">
           Every integration we deliver follows the same structured process. Six
@@ -146,10 +145,12 @@ export default function BuildProcessPage() {
                     <h2 className="phase-title">{phase.title}</h2>
                   </div>
                   <p className="phase-description">{phase.description}</p>
-                  <div className="you-see">
-                    <span className="you-see-label">What you see</span>
-                    <p className="you-see-text">{phase.youSee}</p>
-                  </div>
+                  {phase.youSee && (
+                    <div className="you-see">
+                      <span className="you-see-label">What you see</span>
+                      <p className="you-see-text">{phase.youSee}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -161,7 +162,6 @@ export default function BuildProcessPage() {
       <div className="reveal">
         <div className="checkpoints-section">
           <div className="checkpoints-header">
-            <div className="logo-tag">Quality</div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
               Built-in quality checkpoints
             </h2>
@@ -185,7 +185,6 @@ export default function BuildProcessPage() {
       {/* WHAT YOU GET */}
       <div className="reveal">
         <div className="ownership-section">
-          <div className="logo-tag">Ownership</div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             What you get at the end
           </h2>
@@ -207,7 +206,7 @@ export default function BuildProcessPage() {
               Ready to talk?
             </h3>
             <p className="cta-text">
-              Tell us what is broken and we will show you what a structured build
+              Tell us what&apos;s broken and we will show you what a structured build
               process looks like for your business.
             </p>
             <div className="cta-link">
