@@ -203,7 +203,7 @@ export default function Home() {
             {/* Moved CTAs above hero graphic */}
             <div className="flex flex-col items-center justify-center gap-12 mb-16">
               <a
-                href="https://calendly.com/sylentt-nic/discovery"
+                href="https://calendly.com/nic-sylentt/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
@@ -452,7 +452,7 @@ export default function Home() {
               </h2>
               <div className="flex flex-col items-center gap-8 mb-16">
                 <a
-                  href="https://calendly.com/sylentt-nic/discovery"
+                  href="https://calendly.com/nic-sylentt/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"

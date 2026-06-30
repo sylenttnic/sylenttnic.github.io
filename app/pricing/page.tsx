@@ -178,7 +178,7 @@ export default function PricingPage() {
               <div className="mt-auto">
                 {pkg.id === "discovery" ? (
                   <a
-                    href="https://calendly.com/sylentt-nic/discovery"
+                    href="https://calendly.com/nic-sylentt/30min"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-ink/20 text-ink hover:bg-ink/5 w-full py-6 text-lg group h-auto"
