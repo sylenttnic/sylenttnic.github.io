@@ -1,5 +1,6 @@
 import Image from "next/image";
 import logo from "@/assets/img/logo.webp";
+import { Linkedin, Instagram, Facebook } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,6 +15,35 @@ export default function Footer() {
             fill
             className="object-contain"
           />
+        </div>
+        <div className="flex items-center justify-center space-x-6 mb-8">
+          <a
+            href="https://www.linkedin.com/in/nic-aslett/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink/60 hover:text-accent transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.instagram.com/sylenttpartners/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink/60 hover:text-accent transition-colors"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.facebook.com/sylenttpartners/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink/60 hover:text-accent transition-colors"
+            aria-label="Facebook"
+          >
+            <Facebook className="w-5 h-5" />
+          </a>
         </div>
         <div className="text-center text-sm font-sans space-y-2">
           <p>&copy; {currentYear} Sylentt Partners. All Rights Reserved.</p>

@@ -83,7 +83,7 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
           a year, and {annualHours} hours, spent on work your software could be doing.
         </p>
         <a
-          href="https://calendly.com/sylentt-nic/discovery"
+          href="https://calendly.com/nic-sylentt/30min"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
