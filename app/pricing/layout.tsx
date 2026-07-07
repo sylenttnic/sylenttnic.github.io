@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing | Sylentt \u2014 Simple Pricing for Business Automation",
+  title: "Simple Pricing for Business Automation | Sylentt Partners",
   description:
     "Explore our integration packages, from discovery calls to full implementation and operational retainers. Simple pricing with real results.",
   openGraph: {
-    title: "Pricing | Sylentt \u2014 Simple Pricing for Business Automation",
+    title: "Simple Pricing for Business Automation | Sylentt Partners",
     description:
       "Explore our integration packages, from discovery calls to full implementation and operational retainers. Simple pricing with real results.",
     url: "https://sylentt.com/pricing/",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing | Sylentt \u2014 Simple Pricing for Business Automation",
+    title: "Simple Pricing for Business Automation | Sylentt Partners",
     description:
       "Explore our integration packages, from discovery calls to full implementation and operational retainers. Simple pricing with real results.",
     images: ["/logo_full.png"],

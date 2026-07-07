@@ -7,21 +7,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sylentt | Business App Integration for Small Businesses",
+  title: "Sylentt Partners | Business App Integration for Small Businesses",
   description:
-    "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
   openGraph: {
-    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Run your business, not your software.",
     description:
-      "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     url: "https://sylentt.com/",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylentt | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Run your business, not your software.",
     description:
-      "Sylentt connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -215,8 +215,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* IntegratorDiagram removed from homepage */}
         </div>
       </header>
 

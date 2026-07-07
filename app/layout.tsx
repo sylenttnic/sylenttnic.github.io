@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     icon: "/logo-symbol.png",
   },
   openGraph: {
-    title: "Sylentt Partners | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Run your business, not your software.",
     description:
       "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     type: "website",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylentt Partners | Your business apps don't talk to each other. We fix that.",
+    title: "Sylentt Partners | Run your business, not your software.",
     description:
       "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
