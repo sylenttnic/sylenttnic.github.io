@@ -3,7 +3,6 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-// import Chatbot from './Chatbot';
 import BackToTop from './ui/BackToTop';
 import FloatingChatButton from './ui/FloatingChatButton';
 import ChatAgent from './home/ChatAgent';
@@ -23,7 +22,6 @@ export default function Layout({ children }: LayoutProps) {
       <BackToTop />
       <FloatingChatButton />
       <ChatAgent />
-      {/* <Chatbot /> */}
     </div>
   );
 }

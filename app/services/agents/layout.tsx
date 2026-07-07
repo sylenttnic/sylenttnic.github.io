@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Process | Sylentt \u2014 How We Build Custom Integrations",
+  title: "How We Build Custom Integrations | Sylentt Partners",
   description:
     "Six phases of quality-controlled integration development. From discovery to continuous monitoring, see how we build reliable automation for your business.",
   openGraph: {
-    title: "Our Process | Sylentt \u2014 How We Build Custom Integrations",
+    title: "How We Build Custom Integrations | Sylentt Partners",
     description:
       "Six phases of quality-controlled integration development. From discovery to continuous monitoring, see how we build reliable automation for your business.",
     url: "https://sylentt.com/services/agents/",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Our Process | Sylentt \u2014 How We Build Custom Integrations",
+    title: "How We Build Custom Integrations | Sylentt Partners",
     description:
       "Six phases of quality-controlled integration development. From discovery to continuous monitoring, see how we build reliable automation for your business.",
     images: ["/logo_full.png"],

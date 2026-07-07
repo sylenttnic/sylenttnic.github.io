@@ -14,11 +14,11 @@ import CostCalculator from "@/components/CostCalculator";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services | Sylentt Partners — Custom Business App Integration",
+  title: "Custom Business App Integration | Sylentt Partners",
   description:
     "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
   openGraph: {
-    title: "Services | Sylentt Partners — Custom Business App Integration",
+    title: "Custom Business App Integration | Sylentt Partners",
     description:
       "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     url: "https://sylentt.com/services/",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services | Sylentt Partners — Custom Business App Integration",
+    title: "Custom Business App Integration | Sylentt Partners",
     description:
       "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
     images: ["/logo_full.png"],
