@@ -40,7 +40,7 @@ const packages = [
   {
     id: "retainer",
     name: "Operational Retainer",
-    price: "Starting at $500/month",
+    price: "Starting at $1,500/month",
     description: "Your integrations stay healthy without hiring a full-time engineer. We monitor, maintain, and evolve your automations as your business changes.",
     features: [
       "Proactive monitoring and alerting",
@@ -81,7 +81,7 @@ export default function PricingPage() {
     const packageMap: Record<string, string> = {
       discovery: "Discovery Call",
       implementation: "Implementation (starting at $2,500)",
-      retainer: "Operational Retainer (starting at $500/mo)",
+      retainer: "Operational Retainer (starting at $1,500/mo)",
     };
     setSelectedPackage(packageMap[packageId] || "");
     const formElement = document.getElementById("tell-us");
@@ -138,12 +138,12 @@ export default function PricingPage() {
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 text-center pt-24 pb-12 md:pt-36">
+      <section className="container mx-auto px-4 text-center pt-32 pb-16 md:pt-44">
         <SectionFade>
-          <h1 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 text-balance">
             Simple pricing. Real results.
           </h1>
-          <p className="text-xl md:text-2xl text-ink max-w-3xl mx-auto leading-relaxed font-sans">
+          <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto leading-relaxed font-sans text-pretty">
             Every engagement starts with understanding your business. Pick the package that fits, tell us what you need, and we&apos;ll take it from there.
           </p>
         </SectionFade>
@@ -155,18 +155,18 @@ export default function PricingPage() {
           {packages.map((pkg) => (
             <div
               key={pkg.id}
-              className={`bg-surface border border-ink/10 p-8 md:p-12 rounded-sm flex flex-col transition-all duration-300 hover:border-ink/20 ${
-                pkg.emphasized ? "border-accent/30 shadow-sm" : ""
+              className={`bg-surface border border-ink/10 p-8 md:p-12 rounded-2xl flex flex-col shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-ink/20 hover:shadow-lift ${
+                pkg.emphasized ? "border-accent/40 ring-1 ring-accent/15" : ""
               }`}
             >
-              <h2 className="text-2xl font-serif mb-2">{pkg.name}</h2>
-              <div className="text-3xl font-serif mb-8 text-accent">{pkg.price}</div>
+              <h2 className="font-display text-2xl md:text-3xl mb-2">{pkg.name}</h2>
+              <div className="font-display text-4xl mb-8 text-accent">{pkg.price}</div>
               <p className="text-ink/90 mb-12 flex-grow leading-relaxed text-lg">
                 {pkg.description}
               </p>
 
               <div className="space-y-6 mb-12">
-                <div className="text-xs font-sans uppercase tracking-[0.2em] text-ink font-bold">What&apos;s Included</div>
+                <div className="eyebrow text-ink/70">What&apos;s Included</div>
                 {pkg.features.map((feature, i) => (
                   <div key={i} className="flex items-start">
                     <Check className="w-5 h-5 text-accent mr-4 shrink-0 mt-0.5" />
@@ -181,7 +181,7 @@ export default function PricingPage() {
                     href="https://calendly.com/nic-sylentt/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-ink/20 text-ink hover:bg-ink/5 w-full py-6 text-lg group h-auto"
+                    className="inline-flex items-center justify-center rounded-lg font-semibold transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:pointer-events-none disabled:opacity-50 border border-ink/15 text-ink hover:bg-surface2 hover:border-ink/30 w-full py-6 text-lg group h-auto"
                   >
                     {pkg.cta}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -190,7 +190,7 @@ export default function PricingPage() {
                   <Button
                     onClick={() => scrollToForm(pkg.id)}
                     variant={pkg.emphasized ? "primary" : "outline"}
-                    className={`w-full py-6 text-lg group ${pkg.emphasized ? 'bg-accent hover:opacity-90' : 'border-ink/20 hover:bg-ink/5'}`}
+                    className="w-full py-6 text-lg group"
                   >
                     {pkg.cta}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -206,11 +206,11 @@ export default function PricingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-12 bg-surface border-y border-ink/5 mb-16">
+      <section className="py-20 md:py-28 bg-surface border-y border-ink/5 mb-16">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-serif">
+              <h2 className="font-display text-3xl md:text-5xl">
                 How it works
               </h2>
             </div>
@@ -234,17 +234,17 @@ export default function PricingPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section id="tell-us" className="container mx-auto px-4 max-w-4xl pb-16 scroll-mt-32">
+      <section id="tell-us" className="container mx-auto px-4 max-w-4xl pb-24 scroll-mt-32">
         <SectionFade>
-          <div className="bg-surface border border-ink/10 p-8 md:p-16 rounded-sm">
-            <h2 className="text-3xl md:text-4xl font-serif mb-12 text-center">Get Started</h2>
+          <div className="bg-surface border border-ink/10 p-8 md:p-16 rounded-2xl shadow-soft">
+            <h2 className="font-display text-3xl md:text-4xl mb-12 text-center">Get Started</h2>
 
             {isSuccess ? (
               <div className="text-center py-12">
                 <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-8">
                   <Check className="w-10 h-10 text-accent" />
                 </div>
-                <h3 className="text-2xl font-serif mb-4">Request Sent</h3>
+                <h3 className="font-display text-2xl md:text-3xl mb-4">Request Sent</h3>
                 <p className="text-ink text-lg">
                   Thanks! We&apos;ll review your request and get back to you within one business day.
                 </p>
@@ -253,81 +253,81 @@ export default function PricingPage() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="name" className="text-sm font-sans uppercase tracking-widest text-ink">Name</label>
+                    <label htmlFor="name" className="eyebrow text-ink/70">Name</label>
                     <Input
                       id="name"
                       name="name"
                       required
                       placeholder="Jane Doe"
-                      className="bg-paper border-ink/10 text-ink focus:border-accent h-12"
+                      className="bg-paper text-ink h-12"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="email" className="text-sm font-sans uppercase tracking-widest text-ink">Work Email</label>
+                    <label htmlFor="email" className="eyebrow text-ink/70">Work Email</label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       required
                       placeholder="jane@company.com"
-                      className="bg-paper border-ink/10 text-ink focus:border-accent h-12"
+                      className="bg-paper text-ink h-12"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label htmlFor="company" className="text-sm font-sans uppercase tracking-widest text-ink">Company (Optional)</label>
+                    <label htmlFor="company" className="eyebrow text-ink/70">Company (Optional)</label>
                     <Input
                       id="company"
                       name="company"
                       placeholder="Company Name"
-                      className="bg-paper border-ink/10 text-ink focus:border-accent h-12"
+                      className="bg-paper text-ink h-12"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label htmlFor="package" className="text-sm font-sans uppercase tracking-widest text-ink">Package Interest</label>
+                    <label htmlFor="package" className="eyebrow text-ink/70">Package Interest</label>
                     <select
                       id="package"
                       name="package"
                       required
                       value={selectedPackage}
                       onChange={(e) => setSelectedPackage(e.target.value)}
-                      className="flex h-12 w-full rounded-sm border border-ink/10 bg-paper px-4 py-2 text-base text-ink focus:border-accent focus:outline-none transition-colors"
+                      className="flex h-12 w-full rounded-lg border border-ink/15 bg-paper px-4 py-2 text-base text-ink transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                     >
                       <option value="" disabled>Select a package</option>
                       <option value="Discovery Call">Discovery Call</option>
                       <option value="Implementation (starting at $2,500)">Implementation (starting at $2,500)</option>
-                      <option value="Operational Retainer (starting at $500/mo)">Operational Retainer (starting at $500/mo)</option>
+                      <option value="Operational Retainer (starting at $1,500/mo)">Operational Retainer (starting at $1,500/mo)</option>
                       <option value="Not sure yet, help me decide">Not sure yet, help me decide</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="apps" className="text-sm font-sans uppercase tracking-widest text-ink">What apps do you need connected?</label>
+                  <label htmlFor="apps" className="eyebrow text-ink/70">What apps do you need connected?</label>
                   <textarea
                     id="apps"
                     name="apps"
                     required
                     rows={4}
                     placeholder="e.g., Shopify and our subscription platform, our CRM and accounting software..."
-                    className="w-full bg-paper border border-ink/10 rounded-sm p-4 text-ink text-base focus:border-accent outline-none transition-colors"
+                    className="w-full bg-paper border border-ink/15 rounded-lg p-4 text-ink text-base transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <label htmlFor="notes" className="text-sm font-sans uppercase tracking-widest text-ink">Anything else we should know? (Optional)</label>
+                  <label htmlFor="notes" className="eyebrow text-ink/70">Anything else we should know? (Optional)</label>
                   <textarea
                     id="notes"
                     name="notes"
                     rows={3}
-                    className="w-full bg-paper border border-ink/10 rounded-sm p-4 text-ink text-base focus:border-accent outline-none transition-colors"
+                    className="w-full bg-paper border border-ink/15 rounded-lg p-4 text-ink text-base transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
                 </div>
 
                 {error && (
-                  <div className="bg-red-50 text-red-700 p-4 rounded-sm text-sm border border-red-100">
+                  <div className="bg-red-50 text-red-700 p-4 rounded-lg text-sm border border-red-100">
                     {error}
                   </div>
                 )}
@@ -335,7 +335,7 @@ export default function PricingPage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-14 text-lg bg-accent hover:opacity-90"
+                  className="w-full h-14 text-lg"
                 >
                   {isSubmitting ? (
                     <>

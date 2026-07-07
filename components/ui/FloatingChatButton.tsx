@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useChat } from "@/lib/context/ChatContext";
 import { usePathname } from "next/navigation";
 
@@ -10,6 +10,7 @@ export default function FloatingChatButton() {
   const { isOpen, setIsOpen, messages } = useChat();
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,11 +38,11 @@ export default function FloatingChatButton() {
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.8, y: 20 }}
           onClick={() => setIsOpen(!isOpen)}
-          className="fixed bottom-6 right-6 z-[9995] w-14 h-14 rounded-full bg-accent text-white shadow-lg hover:opacity-90 transition-all flex items-center justify-center group"
+          className="fixed bottom-6 right-6 z-[9995] w-14 h-14 rounded-full bg-accent text-white shadow-lift transition-all hover:opacity-90 hover:-translate-y-0.5 flex items-center justify-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           aria-label={isOpen ? "Close chat" : "Open chat"}
         >
           {isOpen ? (

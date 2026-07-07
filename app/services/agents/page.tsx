@@ -107,7 +107,7 @@ export default function BuildProcessPage() {
     <div className="build-page-wrap pt-24 md:pt-36">
       {/* HERO */}
       <div className="build-header fade-in">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">
           How we build your app integrations
         </h1>
         <p className="subtitle">
