@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -19,11 +19,12 @@ const clients = [
 ];
 
 export default function ClientLogos() {
+  const shouldReduceMotion = useReducedMotion();
   return (
-    <section className="py-16 md:py-24 bg-paper border-y border-ink/5">
+    <section className="py-20 md:py-28 bg-paper border-y border-ink/5">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center">
-          <p className="text-sm font-sans text-ink font-bold uppercase tracking-[0.3em] mb-16">
+          <p className="eyebrow text-ink/60 mb-16">
             Trusted by teams at
           </p>
           <div className="flex flex-wrap justify-center items-center gap-16 md:gap-32">
@@ -34,14 +35,14 @@ export default function ClientLogos() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative"
-                initial={{ opacity: 0, y: 10 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.8 }}
               >
                 <div className={cn(
                   "relative w-32 h-12 md:w-60 md:h-20 transition-all duration-500 flex items-center justify-center",
-                  client.name === "By Light" ? "bg-ink p-4 rounded-sm shadow-xl" : ""
+                  client.name === "By Light" ? "bg-ink p-4 rounded-xl shadow-soft" : ""
                 )}>
                   <Image
                     src={client.logo}

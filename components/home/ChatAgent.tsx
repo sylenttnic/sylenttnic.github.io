@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Send, X, Loader2, Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useChat } from "@/lib/context/ChatContext";
@@ -19,6 +19,7 @@ export default function ChatAgent() {
     handleSend,
     isLimitReached,
   } = useChat();
+  const shouldReduceMotion = useReducedMotion();
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -146,9 +147,9 @@ export default function ChatAgent() {
         >
           <motion.div
             ref={chatWindowRef}
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={shouldReduceMotion ? false : { scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-paper w-full h-full sm:h-[600px] sm:max-w-[600px] sm:rounded-sm border border-ink/10 shadow-2xl flex flex-col relative overflow-hidden"
+            className="bg-paper w-full h-full sm:h-[600px] sm:max-w-[600px] sm:rounded-2xl border border-ink/10 shadow-2xl flex flex-col relative overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-labelledby="chat-title"
@@ -156,11 +157,11 @@ export default function ChatAgent() {
           >
             {/* Header */}
             <div className="p-6 border-b border-ink/5 flex items-center justify-between bg-surface/50">
-              <h3 id="chat-title" className="text-ink font-serif font-bold text-lg">Sylentt Partners Agent</h3>
+              <h3 id="chat-title" className="font-display text-ink text-xl">Sylentt Partners Agent</h3>
               <button
                 ref={closeButtonRef}
                 onClick={() => setIsOpen(false)}
-                className="p-2 -mr-2 text-ink/60 hover:text-ink transition-colors h-11 w-11 flex items-center justify-center"
+                className="p-2 -mr-2 text-ink/60 hover:text-ink transition-colors h-11 w-11 flex items-center justify-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label="Close chat"
               >
                 <X className="w-6 h-6" />
@@ -240,7 +241,7 @@ export default function ChatAgent() {
                     href={leadInfo.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 p-4 rounded-sm bg-accent text-white font-bold hover:opacity-90 transition-all shadow-sm"
+                    className="flex items-center justify-center gap-3 p-4 rounded-xl bg-accent text-white font-bold transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                   >
                     <Calendar className="w-5 h-5" />
                     Book your free discovery call
@@ -259,12 +260,12 @@ export default function ChatAgent() {
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isLimitReached}
                   placeholder={isLimitReached ? "Conversation limit reached" : "Type your message..."}
-                  className="flex-grow bg-paper border border-ink/10 rounded-sm py-4 px-5 text-ink placeholder:text-ink/50 outline-none focus:border-accent transition-all disabled:opacity-50"
+                  className="flex-grow bg-paper border border-ink/15 rounded-xl py-4 px-5 text-ink placeholder:text-ink/50 outline-none transition-all focus:border-accent focus:ring-2 focus:ring-accent/20 disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading || isLimitReached}
-                  className="bg-accent text-white px-5 rounded-sm hover:opacity-90 disabled:opacity-30 transition-all flex items-center justify-center shadow-sm"
+                  className="bg-accent text-white px-5 rounded-xl hover:opacity-90 disabled:opacity-30 transition-all flex items-center justify-center shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                   aria-label="Send message"
                 >
                   {isLoading ? (

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import logo from "@/assets/img/logo.webp";
 
@@ -95,14 +95,15 @@ const ToolNode = ({
   isMobile: boolean;
 }) => {
   const [toolIndex, setToolIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (category.tools.length <= 1 || isActive) return;
+    if (category.tools.length <= 1 || isActive || shouldReduceMotion) return;
     const interval = setInterval(() => {
       setToolIndex((prev) => (prev + 1) % category.tools.length);
     }, 4000 + Math.random() * 3000);
     return () => clearInterval(interval);
-  }, [category.tools.length, isActive]);
+  }, [category.tools.length, isActive, shouldReduceMotion]);
 
   const currentTool = category.tools[toolIndex];
   const pos = isMobile ? category.pos.mobile : category.pos.desktop;
@@ -127,7 +128,7 @@ const ToolNode = ({
       onClick={() => isMobile && onInteract(category.id)}
     >
       <div
-        className="bg-paper border border-ink/30 p-4 rounded-sm flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-sm hover:border-accent/40 transition-all duration-300"
+        className="bg-paper border border-ink/20 p-4 rounded-xl flex flex-col items-center justify-center gap-2 w-24 h-24 md:w-32 md:h-32 shadow-soft hover:border-accent/40 transition-all duration-300"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -158,7 +159,7 @@ const ToolNode = ({
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            className={`absolute top-full mt-4 z-50 w-40 md:w-64 p-4 bg-paper border border-ink/10 rounded-sm shadow-xl text-[10px] md:text-sm text-ink/90 pointer-events-none ${tooltipXClass}`}
+            className={`absolute top-full mt-4 z-50 w-40 md:w-64 p-4 bg-paper border border-ink/10 rounded-xl shadow-lift text-[10px] md:text-sm text-ink/90 pointer-events-none ${tooltipXClass}`}
           >
             <div className="font-serif font-bold text-accent mb-2 tracking-tight">
               {currentTool.name}
@@ -192,6 +193,8 @@ const DataLine = ({
   const pdx = -dy;
   const pdy = dx;
 
+  const shouldReduceMotion = useReducedMotion();
+
   const len = Math.sqrt(pdx * pdx + pdy * pdy);
   const npdx = (pdx / len) * offset;
   const npdy = (pdy / len) * offset;
@@ -213,41 +216,45 @@ const DataLine = ({
         strokeOpacity="0.05"
       />
 
-      {/* Primary slow pulse */}
-      <circle r="0.8" fill="#B5512F">
-        <animateMotion
-          dur="8s"
-          repeatCount="indefinite"
-          path={path}
-          calcMode="linear"
-        />
-        <animate
-          attributeName="opacity"
-          values="0;0.4;0.4;0"
-          keyTimes="0;0.2;0.8;1"
-          dur="8s"
-          repeatCount="indefinite"
-        />
-      </circle>
+      {!shouldReduceMotion && (
+        <>
+          {/* Primary slow pulse */}
+          <circle r="0.8" fill="#B5512F">
+            <animateMotion
+              dur="8s"
+              repeatCount="indefinite"
+              path={path}
+              calcMode="linear"
+            />
+            <animate
+              attributeName="opacity"
+              values="0;0.4;0.4;0"
+              keyTimes="0;0.2;0.8;1"
+              dur="8s"
+              repeatCount="indefinite"
+            />
+          </circle>
 
-      {/* Secondary staggered pulse */}
-      <circle r="0.6" fill="#B5512F">
-        <animateMotion
-          dur="8s"
-          begin="4s"
-          repeatCount="indefinite"
-          path={path}
-          calcMode="linear"
-        />
-        <animate
-          attributeName="opacity"
-          values="0;0.3;0.3;0"
-          keyTimes="0;0.2;0.8;1"
-          dur="8s"
-          begin="4s"
-          repeatCount="indefinite"
-        />
-      </circle>
+          {/* Secondary staggered pulse */}
+          <circle r="0.6" fill="#B5512F">
+            <animateMotion
+              dur="8s"
+              begin="4s"
+              repeatCount="indefinite"
+              path={path}
+              calcMode="linear"
+            />
+            <animate
+              attributeName="opacity"
+              values="0;0.3;0.3;0"
+              keyTimes="0;0.2;0.8;1"
+              dur="8s"
+              begin="4s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </>
+      )}
     </>
   );
 };
@@ -276,6 +283,7 @@ export default function IntegratorDiagram() {
   };
 
   const centerPos: [number, number] = isMobile ? [50, 45] : [50, 50];
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <div className="relative w-full max-w-5xl mx-auto h-[450px] md:h-[550px] my-12">
@@ -301,15 +309,15 @@ export default function IntegratorDiagram() {
         style={{ left: `${centerPos[0]}%`, top: `${centerPos[1]}%` }}
       >
         <motion.div
-          className="w-[11.5rem] h-[7rem] md:w-[18.5rem] md:h-[11.5rem] rounded-sm bg-paper border border-ink/10 flex items-center justify-center p-4 md:p-8 shadow-md"
-          animate={{
+          className="w-[11.5rem] h-[7rem] md:w-[18.5rem] md:h-[11.5rem] rounded-2xl bg-paper border border-ink/10 flex items-center justify-center p-4 md:p-8 shadow-soft"
+          animate={shouldReduceMotion ? undefined : {
             borderColor: [
               "rgba(30, 46, 61, 0.1)",
               "rgba(200, 75, 49, 0.3)",
               "rgba(30, 46, 61, 0.1)",
             ],
           }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          transition={shouldReduceMotion ? undefined : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="relative w-full h-full">
             <Image

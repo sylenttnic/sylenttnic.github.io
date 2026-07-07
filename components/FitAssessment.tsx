@@ -9,7 +9,7 @@
  * - Standardized on accent color (#B5512F).
  */
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -103,6 +103,7 @@ export default function FitAssessment() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [calculatedScore, setCalculatedScore] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const handleOptionSelect = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -264,28 +265,28 @@ export default function FitAssessment() {
     return (
       <div className="lane-body p-8 max-w-2xl mx-auto text-center border-ink/10">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
         >
-          <div className="text-xl text-ink/60 mb-2 uppercase tracking-widest font-mono">Fit Assessment Result</div>
-          <div className={cn("text-5xl md:text-6xl font-serif font-bold mb-6", colorClass)}>
+          <div className="eyebrow text-ink/60 mb-3">Fit Assessment Result</div>
+          <div className={cn("font-display text-5xl md:text-6xl mb-6", colorClass)}>
             {resultTier}
           </div>
           <p className="text-ink/90 mb-8 text-lg font-sans">
             {summaryMessage}
           </p>
 
-          <div className="w-full h-px bg-ink/5 my-6" />
+          <div className="w-full h-px bg-ink/10 my-8" />
 
-          <h4 className="text-xl font-serif font-bold mb-2 text-ink">Let&apos;s build your roadmap</h4>
+          <h4 className="font-display text-2xl mb-2 text-ink">Let&apos;s build your roadmap</h4>
           <p className="mb-6 text-ink/80 font-sans">Schedule a session to see how we can eliminate the friction in your workflows.</p>
 
           <a
             href="https://calendly.com/nic-sylentt/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-sm bg-accent px-8 py-4 text-lg font-bold text-white transition-all hover:opacity-90 shadow-sm"
+            className="btn-cta px-8 py-4 text-lg"
           >
             Book your discovery call
           </a>
@@ -310,7 +311,7 @@ export default function FitAssessment() {
           </div>
         </div>
 
-        <h3 className="text-2xl md:text-3xl font-serif font-bold text-center mb-2 text-ink">Your Fit Assessment is ready</h3>
+        <h3 className="font-display text-2xl md:text-3xl text-center mb-2 text-ink">Your Fit Assessment is ready</h3>
         <p className="text-center text-ink/80 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
 
         <form onSubmit={handleLeadSubmit} className="space-y-4">
@@ -336,7 +337,7 @@ export default function FitAssessment() {
                 required
                 value={leadData.leadName}
                 onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
-                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
+                className="bg-paper text-ink"
               />
             </div>
             <div className="space-y-2">
@@ -348,7 +349,7 @@ export default function FitAssessment() {
                 required
                 value={leadData.leadEmail}
                 onChange={(e) => setLeadData({ ...leadData, leadEmail: e.target.value })}
-                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
+                className="bg-paper text-ink"
               />
             </div>
             <div className="space-y-2">
@@ -359,7 +360,7 @@ export default function FitAssessment() {
                 required
                 value={leadData.leadJobTitle}
                 onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
-                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
+                className="bg-paper text-ink"
               />
             </div>
             <div className="space-y-2">
@@ -370,7 +371,7 @@ export default function FitAssessment() {
                 required
                 value={leadData.leadCompany}
                 onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
-                className="bg-paper border-ink/10 text-ink focus:border-accent rounded-sm"
+                className="bg-paper text-ink"
               />
             </div>
           </div>
@@ -380,7 +381,7 @@ export default function FitAssessment() {
           </div>
 
           {error && (
-            <div className="text-red-700 text-sm text-center font-medium bg-red-50 p-2 rounded-sm border border-red-100">
+            <div className="text-red-700 text-sm text-center font-medium bg-red-50 p-2 rounded-lg border border-red-100">
               {error}
             </div>
           )}
@@ -390,7 +391,7 @@ export default function FitAssessment() {
               type="submit"
               size="xl"
               disabled={isSubmitting}
-              className="w-full md:w-auto bg-accent hover:opacity-90 text-white rounded-sm"
+              className="w-full md:w-auto"
             >
               {isSubmitting ? (
                 <>
@@ -432,16 +433,16 @@ export default function FitAssessment() {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuestion.id}
-          initial={{ opacity: 0, x: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.3 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
           role="group"
           aria-labelledby="question-heading"
         >
           <h3
             id="question-heading"
-            className="text-2xl md:text-3xl font-serif font-bold mb-8 text-center text-ink leading-tight"
+            className="font-display text-2xl md:text-3xl mb-8 text-center text-ink leading-tight"
           >
             {currentQuestion.question}
           </h3>
@@ -451,7 +452,7 @@ export default function FitAssessment() {
               <div className="space-y-6">
                 <textarea
                   autoFocus
-                  className="w-full bg-paper border border-ink/10 rounded-sm p-6 text-ink text-lg focus:border-accent outline-none min-h-[120px] transition-colors font-sans placeholder:text-ink/20"
+                  className="w-full bg-paper border border-ink/15 rounded-lg p-6 text-ink text-lg transition-colors font-sans placeholder:text-ink/30 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 min-h-[120px]"
                   placeholder="e.g. We manually copy tracking numbers from ShipStation to a Google Sheet for our weekly report."
                   value={textInput}
                   onChange={(e) => handleTextChange(e.target.value)}
@@ -461,7 +462,7 @@ export default function FitAssessment() {
                     size="xl"
                     onClick={handleNextStep}
                     disabled={!textInput.trim()}
-                    className="group bg-accent hover:opacity-90 text-white px-10 rounded-sm"
+                    className="group px-10 rounded-lg"
                   >
                     Next Question
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -480,10 +481,10 @@ export default function FitAssessment() {
                       key={option.value}
                       type="button"
                       className={cn(
-                        "w-full text-left rounded-sm transition-all border group",
+                        "w-full text-left rounded-xl transition-all border group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
                         isSelected
                           ? "border-accent bg-accent/5"
-                          : "border-ink/10 bg-surface hover:border-ink/30"
+                          : "border-ink/10 bg-surface hover:border-ink/30 hover:bg-surface2"
                       )}
                       onClick={() =>
                         currentQuestion.type === "multi"
@@ -493,7 +494,7 @@ export default function FitAssessment() {
                     >
                       <div className="p-4 md:p-6 flex items-center">
                         <div className={cn(
-                          "flex-shrink-0 mr-4 w-8 h-8 rounded-full border flex items-center justify-center font-serif font-bold transition-all",
+                          "flex-shrink-0 mr-4 w-8 h-8 rounded-full border flex items-center justify-center font-display transition-all",
                           isSelected
                             ? "bg-accent border-accent text-white"
                             : "bg-surface2 border-ink/10 text-ink/40 group-hover:border-accent group-hover:bg-accent group-hover:text-white"
@@ -523,7 +524,7 @@ export default function FitAssessment() {
                       size="xl"
                       onClick={handleNextStep}
                       disabled={selectedOptions.length === 0}
-                      className="group bg-accent hover:opacity-90 text-white px-10 rounded-sm"
+                      className="group px-10 rounded-lg"
                     >
                       Next Question
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -1,9 +1,7 @@
-import CostCalculator from "@/components/CostCalculator";
 import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import HeroChatInput from "@/components/home/HeroChatInput";
 import SectionFade from "@/components/ui/SectionFade";
-import IntegratorDiagram from "@/components/home/IntegratorDiagram";
 import ClientLogos from "@/components/home/ClientLogos";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -190,14 +188,14 @@ export default function Home() {
       />
 
       {/* Hero + Diagram */}
-      <header className="relative pt-24 pb-12 md:pt-36 md:pb-16 overflow-hidden">
+      <header className="relative pt-32 pb-16 md:pt-44 md:pb-24 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h1 className="text-5xl md:text-8xl font-serif font-medium mb-8 leading-tight tracking-tight">
-              Your business apps don&apos;t talk to each other. We fix that.
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-balance">
+              Run your business, not your software.
             </h1>
-            <p className="text-xl md:text-2xl text-ink/90 max-w-2xl mx-auto mb-12 font-sans leading-relaxed">
-              We connect the tools you already run, so your team stops copying and pasting data between them.
+            <p className="text-xl md:text-2xl text-ink/80 max-w-2xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
+              We connect the tools you already use, so your team stops copying and pasting data between them.
             </p>
 
             {/* Moved CTAs above hero graphic */}
@@ -206,13 +204,13 @@ export default function Home() {
                 href="https://calendly.com/nic-sylentt/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+                className="btn-cta px-10 py-5 text-xl group"
               >
                 Book a free discovery call
                 <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </a>
               <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
-                <p className="text-center text-sm font-sans uppercase tracking-[0.2em] mb-4 text-ink">Or ask a quick question</p>
+                <p className="eyebrow text-center text-ink/60 mb-4">Or ask a quick question</p>
                 <HeroChatInput />
               </div>
             </div>
@@ -223,14 +221,14 @@ export default function Home() {
       </header>
 
       {/* Problem Statements */}
-      <section className="py-12 md:py-16 bg-ink text-paper">
+      <section className="py-24 md:py-32 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="mb-16">
-              <h2 className="text-4xl md:text-6xl font-serif mb-6 text-paper">
+              <h2 className="font-display text-4xl md:text-6xl mb-6 text-paper text-balance">
                 Here is where your team&apos;s hours go.
               </h2>
-              <p className="text-xl text-paper/60 max-w-2xl leading-relaxed">
+              <p className="text-xl text-paper/70 max-w-2xl leading-relaxed text-pretty">
                 Most small businesses use different software tools for scheduling, billing, and tracking customers, but those tools don&apos;t connect. This forces your staff to spend hours manually typing the same information into multiple systems.
               </p>
             </div>
@@ -258,17 +256,17 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-12 md:py-16 bg-surface text-ink overflow-hidden border-y border-ink/5">
+      <section className="py-24 md:py-32 bg-surface text-ink overflow-hidden border-y border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
               <div>
-                <h2 className="text-4xl md:text-6xl font-serif mb-12 text-ink">
+                <h2 className="font-display text-4xl md:text-6xl mb-12 text-ink">
                   How it works
                 </h2>
                 <div className="space-y-16">
                   <div className="flex gap-8 group">
-                    <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">01</span>
+                    <span className="font-display text-5xl text-accent">01</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4 text-ink">Tell us what&apos;s broken</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
@@ -277,7 +275,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="flex gap-8 group">
-                    <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">02</span>
+                    <span className="font-display text-5xl text-accent">02</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4 text-ink">Sylentt Partners builds the connections</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
@@ -286,7 +284,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="flex gap-8 group">
-                    <span className="text-4xl font-serif text-accent group-hover:text-accent transition-colors duration-500">03</span>
+                    <span className="font-display text-5xl text-accent">03</span>
                     <div>
                       <h3 className="text-2xl font-serif mb-4 text-ink">You own everything</h3>
                       <p className="text-lg text-ink/90 leading-relaxed">
@@ -300,7 +298,7 @@ export default function Home() {
                 <div className="mt-16">
                   <Link
                     href="#tell-us"
-                    className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group"
+                    className="btn-cta px-10 py-4 text-lg group"
                   >
                     Tell us what&apos;s broken
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -308,8 +306,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="hidden lg:block relative">
-                <div className="aspect-square bg-ink/5 border border-ink/10 rounded-sm flex items-center justify-center p-12">
-                   <p className="text-5xl font-serif italic text-center text-ink leading-tight">
+                <div className="aspect-square bg-surface border border-ink/10 rounded-2xl flex items-center justify-center p-12 shadow-soft">
+                   <p className="font-display text-4xl md:text-5xl text-center text-ink leading-[1.2] text-balance">
                      &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
                    </p>
                 </div>
@@ -323,14 +321,14 @@ export default function Home() {
       <section className="py-12 md:py-20 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="max-w-7xl">
-              <h2 className="text-4xl md:text-6xl font-serif mb-12 text-ink">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="font-display text-4xl md:text-6xl mb-12 text-ink text-balance">
                 What this looks like in practice
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
                   <div className="space-y-4">
-                    <p className="text-xl font-serif italic text-ink uppercase tracking-widest">Real Results</p>
+                    <p className="eyebrow text-accent">Real Results</p>
                   </div>
                   <p>
                     An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.
@@ -339,9 +337,9 @@ export default function Home() {
                     We built an automated pipeline that handles the entire workflow: when an order comes in, the subscription is created, the fulfillment system is notified, and the accounting records update.
                   </p>
                 </div>
-                <div className="bg-ink/5 p-12 rounded-sm border border-ink/10 shadow-xl shadow-ink/5">
+                <div className="bg-surface p-10 md:p-12 rounded-2xl border border-ink/10 shadow-soft">
                   <p className="text-2xl font-sans font-bold text-accent mb-6">The result: Getting back nearly 8 hours per week</p>
-                  <p className="text-xl text-ink leading-relaxed font-serif">
+                  <p className="font-display text-xl md:text-2xl text-ink leading-relaxed">
                     &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
                   </p>
                 </div>
@@ -355,7 +353,7 @@ export default function Home() {
 
       <ClientLogos />
 
-      <section id="about" className="py-12 md:py-16 bg-surface border-y border-ink/5 scroll-mt-24">
+      <section id="about" className="py-24 md:py-32 bg-surface border-y border-ink/5 scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
@@ -366,7 +364,7 @@ export default function Home() {
                 className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
               />
               <div>
-                <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6">Hi, I&apos;m Nic.</h2>
+                <h2 className="font-display text-4xl md:text-6xl mb-6">Hi, I&apos;m Nic.</h2>
                 <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
                   <p>
                     For 15 years, I&apos;ve worked as an engineer building systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I didn&apos;t manage tools from a distance. I built them, so I know exactly what breaks and why.
@@ -385,18 +383,18 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 md:py-16 bg-ink text-paper border-y border-paper/5">
+      <section className="py-24 md:py-32 bg-ink text-paper border-y border-paper/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="mb-16">
-              <h2 className="text-4xl md:text-6xl font-sans font-bold text-paper">
+              <h2 className="font-display text-4xl md:text-6xl text-paper text-balance">
                 What people I&apos;ve worked with say
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {testimonials.map((t, i) => (
                 <div key={i} className="flex flex-col">
-                  <p className="text-xl font-serif italic mb-8 leading-relaxed">
+                  <p className="font-display text-xl md:text-2xl mb-8 leading-relaxed">
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div className="mt-auto flex items-center gap-4">
@@ -419,10 +417,10 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="py-12 md:py-16 bg-paper text-ink border-t border-ink/5">
+      <section id="faq" className="py-24 md:py-32 bg-paper text-ink border-t border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <h2 className="text-4xl md:text-6xl font-serif mb-12 text-center text-ink">
+            <h2 className="font-display text-4xl md:text-6xl mb-12 text-center text-ink">
               Common questions
             </h2>
             <div className="max-w-3xl mx-auto space-y-8">
@@ -443,11 +441,11 @@ export default function Home() {
       </section>
 
       {/* CTA Form */}
-      <section id="tell-us" className="py-12 md:py-16 bg-ink text-paper scroll-mt-24">
+      <section id="tell-us" className="py-24 md:py-32 bg-ink text-paper scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-serif mb-12 text-paper">
+              <h2 className="font-display text-4xl md:text-6xl mb-12 text-paper text-balance">
                 Ready to stop the copy-paste?
               </h2>
               <div className="flex flex-col items-center gap-8 mb-16">
@@ -455,7 +453,7 @@ export default function Home() {
                   href="https://calendly.com/nic-sylentt/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-sm bg-accent px-12 py-5 text-xl font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+                  className="btn-cta px-10 py-5 text-xl group"
                 >
                   Book a free discovery call
                   <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -464,7 +462,7 @@ export default function Home() {
 
               <div className="w-full h-px bg-ink/5 mb-20" />
 
-              <h3 className="text-2xl md:text-3xl font-serif mb-6">
+              <h3 className="font-display text-2xl md:text-3xl mb-6">
                 Not ready to talk?
               </h3>
               <p className="text-xl text-paper/60 mb-12">

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface SectionFadeProps {
@@ -10,6 +10,13 @@ interface SectionFadeProps {
 }
 
 export default function SectionFade({ children, className = "", delay = 0 }: SectionFadeProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Reduced motion: render content immediately with no transform/opacity animation.
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

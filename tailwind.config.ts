@@ -25,7 +25,16 @@ const config: Config = {
         paper: "#F9F8F6",
         ink: "#1E2E3D",
         surface: "#F1F0EC",
+        // Warm surface steps (previously only CSS vars — restored as real tokens
+        // so bg-surface2 / bg-surface3 resolve instead of silently no-op'ing).
+        surface2: "#ECEBE6",
+        surface3: "#E7E5DF",
         border: "#EAE7E2",
+        // Warmer tan border for hover/hierarchy (was --border-light).
+        "border-strong": "#D3C8B5",
+        // Focus ring + muted text as real tokens (fix dead ring-ring / muted refs).
+        ring: "#C84B31",
+        muted: "#6B635A",
         card: {
           DEFAULT: "#F1F0EC",
           foreground: "#3A332B",
@@ -38,8 +47,14 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-instrument-sans)", "sans-serif"],
+        // Plus Jakarta Sans — geometric display sans for structural headings/UI.
         serif: ["var(--font-jakarta)", "sans-serif"],
         mono: ["var(--font-space-mono)", "monospace"],
+      },
+      boxShadow: {
+        // Warm, ink-tinted soft shadows for an editorial (not glossy-SaaS) feel.
+        soft: "0 1px 2px rgba(30,46,61,0.04), 0 10px 30px -14px rgba(30,46,61,0.14)",
+        lift: "0 2px 6px rgba(30,46,61,0.06), 0 22px 48px -20px rgba(30,46,61,0.22)",
       },
       animation: {
         "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",

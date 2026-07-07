@@ -22,8 +22,8 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
   const annualHours = hoursPerWeek * 52;
 
   return (
-    <div id="calculator" className="max-w-3xl mx-auto bg-surface border border-ink/10 rounded-sm p-8 md:p-14 scroll-mt-24">
-      <h3 className="text-3xl md:text-4xl font-serif mb-3 text-ink">
+    <div id="calculator" className="max-w-3xl mx-auto bg-surface border border-ink/10 rounded-2xl shadow-soft p-8 md:p-14 scroll-mt-24">
+      <h3 className="font-display text-3xl md:text-4xl mb-3 text-ink">
         {heading}
       </h3>
       <p className="text-ink/90 font-sans mb-10 leading-relaxed">
@@ -36,7 +36,7 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
             <label htmlFor="hours" className="text-ink/90">
               Hours a week your team spends moving data by hand
             </label>
-            <span className="text-xl font-serif text-ink">{hoursPerWeek} hrs</span>
+            <span className="font-display text-2xl text-ink">{hoursPerWeek} hrs</span>
           </div>
           <input
             id="hours"
@@ -56,7 +56,7 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
             <label htmlFor="rate" className="text-ink/90">
               Roughly what an hour of that time costs
             </label>
-            <span className="text-xl font-serif text-ink">{currency.format(hourlyCost)}/hr</span>
+            <span className="font-display text-2xl text-ink">{currency.format(hourlyCost)}/hr</span>
           </div>
           <input
             id="rate"
@@ -73,10 +73,10 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
       </div>
 
       <div className="border-t border-ink/10 pt-10 text-center">
-        <p className="text-sm font-sans uppercase tracking-widest text-ink/80 mb-2">
+        <p className="eyebrow text-ink/60 mb-3">
           That is roughly
         </p>
-        <p className="text-6xl md:text-7xl font-serif text-accent mb-2" aria-live="polite">
+        <p className="font-display text-6xl md:text-7xl text-accent mb-2" aria-live="polite">
           {currency.format(annualCost)}
         </p>
         <p className="text-ink/90 font-sans mb-10">
@@ -86,7 +86,7 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
           href="https://calendly.com/nic-sylentt/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+          className="btn-cta px-10 py-4 text-lg group"
         >
           Book a free discovery call
           <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

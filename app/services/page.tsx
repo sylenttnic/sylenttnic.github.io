@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
-import IntegratorDiagram from "@/components/home/IntegratorDiagram";
+import IntegrationFlow from "@/components/IntegrationFlow";
 import CostCalculator from "@/components/CostCalculator";
 import type { Metadata } from "next";
 
@@ -87,24 +87,24 @@ export default function ServicesPage() {
   return (
     <div className="bg-paper text-ink">
       {/* Hero */}
-      <header className="relative pt-24 pb-16 md:pt-36 md:pb-24 overflow-hidden border-b border-ink/5">
+      <header className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-ink/5">
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
-          <h1 className="text-4xl md:text-6xl font-serif mb-8">
-            App integrations for small businesses.
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 text-balance">
+            Get your team&apos;s hours back.
           </h1>
-          <p className="text-xl md:text-2xl text-ink/90 max-w-3xl mx-auto font-sans leading-relaxed mb-12">
+          <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto font-sans leading-relaxed mb-12 text-pretty">
             We connect your business apps so data flows between them automatically, saving your team hours every week.
           </p>
 
-          {/* integration-logos graphic relocated from homepage */}
+          {/* Live integration flow: an event in one app updates the others automatically */}
           <div className="mb-16">
-            <IntegratorDiagram />
+            <IntegrationFlow />
           </div>
 
           <div className="flex flex-col items-center gap-8">
             <Link
               href="#tell-us"
-              className="inline-flex items-center justify-center rounded-sm bg-accent px-10 py-4 text-lg font-bold text-white transition-all hover:opacity-90 group shadow-lg shadow-accent/20"
+              className="btn-cta px-10 py-4 text-lg group"
             >
               Find ways to save time
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -112,7 +112,7 @@ export default function ServicesPage() {
 
             <Link
               href="#calculator"
-              className="inline-flex items-center justify-center rounded-sm bg-white text-accent border border-accent/20 px-8 py-3 font-bold hover:bg-surface transition-all"
+              className="inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-3 font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               Calculate your time savings
             </Link>
@@ -131,7 +131,7 @@ export default function ServicesPage() {
         return (
           <section
             key={service.pain}
-            className={`py-12 md:py-16 ${
+            className={`py-24 md:py-32 ${
               isDark ? "bg-ink text-paper" : (isEven ? "bg-paper" : "bg-surface border-y border-ink/5")
             }`}
           >
@@ -143,7 +143,7 @@ export default function ServicesPage() {
                     <div className={`mb-6 w-12 h-12 rounded-full flex items-center justify-center ${isDark ? "bg-paper/10" : "bg-ink/5 border border-ink/10"}`}>
                       <Icon className="w-6 h-6 text-accent" />
                     </div>
-                    <h2 className={`text-3xl md:text-5xl font-serif mb-6 ${isDark ? "text-paper" : "text-ink"}`}>
+                    <h2 className={`font-display text-3xl md:text-5xl mb-6 text-balance ${isDark ? "text-paper" : "text-ink"}`}>
                       {service.pain}
                     </h2>
                     <p className={`text-lg leading-relaxed max-w-3xl ${isDark ? "text-paper/80" : "text-ink/90"}`}>
@@ -153,8 +153,8 @@ export default function ServicesPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* The Outcome */}
-                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/20"} border p-8 rounded-sm`}>
-                      <h3 className={`text-sm font-sans uppercase tracking-widest font-bold mb-4 ${isDark ? "text-paper" : "text-ink"}`}>
+                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/15 shadow-soft"} border p-8 rounded-2xl`}>
+                      <h3 className={`eyebrow mb-4 ${isDark ? "text-paper/80" : "text-accent"}`}>
                         What changes
                       </h3>
                       <p className={isDark ? "text-paper/80" : "text-ink/90 leading-relaxed"}>
@@ -163,8 +163,8 @@ export default function ServicesPage() {
                     </div>
 
                     {/* The Deliverable */}
-                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/20"} border p-8 rounded-sm`}>
-                      <h3 className={`text-sm font-sans uppercase tracking-widest font-bold mb-4 ${isDark ? "text-paper" : "text-ink"}`}>
+                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/15 shadow-soft"} border p-8 rounded-2xl`}>
+                      <h3 className={`eyebrow mb-4 ${isDark ? "text-paper/80" : "text-accent"}`}>
                         What you own
                       </h3>
                       <p className={isDark ? "text-paper/80" : "text-ink/90 leading-relaxed"}>
@@ -177,7 +177,7 @@ export default function ServicesPage() {
                     <div className="mt-12 text-center">
                       <Link
                         href="#calculator"
-                        className="inline-flex items-center justify-center rounded-sm bg-white text-accent px-8 py-3 font-bold hover:bg-opacity-90 transition-all shadow-sm"
+                        className="inline-flex items-center justify-center rounded-lg bg-white text-accent px-8 py-3 font-bold shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                       >
                         Calculate your cost savings
                       </Link>
@@ -191,7 +191,7 @@ export default function ServicesPage() {
       })}
 
       {/* Relocated Savings Calculator */}
-      <section className="py-12 md:py-24 bg-ink">
+      <section className="py-24 md:py-32 bg-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
             <CostCalculator heading="What is the manual work costing you?" />
@@ -200,19 +200,19 @@ export default function ServicesPage() {
       </section>
 
       {/* Build Process Card */}
-      <section className="py-12 md:py-16 bg-paper border-b border-ink/5">
+      <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl mx-auto">
               <Link
                 href="/services/agents"
-                className="group block bg-surface border border-ink/10 p-10 md:p-16 rounded-sm hover:border-accent/30 transition-all"
+                className="group block bg-surface border border-ink/10 p-10 md:p-16 rounded-2xl shadow-soft transition-all hover:border-accent/30 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
               >
                 <div className="flex items-center gap-6 mb-8">
                   <div className="flex-shrink-0 w-16 h-16 rounded-full bg-paper border border-ink/10 flex items-center justify-center group-hover:border-accent/20 transition-colors">
                     <Eye className="w-8 h-8 text-accent" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-serif text-ink">
+                  <h2 className="font-display text-3xl md:text-4xl text-ink">
                     How we build it
                   </h2>
                 </div>
@@ -234,12 +234,12 @@ export default function ServicesPage() {
       {/* Assessment Form */}
       <section
         id="tell-us"
-        className="py-12 md:py-16 bg-paper scroll-mt-24"
+        className="py-24 md:py-32 bg-paper scroll-mt-24"
       >
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16 max-w-3xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-serif mb-6 text-ink">
+              <h2 className="font-display text-4xl md:text-6xl mb-6 text-ink text-balance">
                 Tell us what&apos;s broken
               </h2>
               <p className="text-ink/90 text-xl">

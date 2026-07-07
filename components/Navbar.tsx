@@ -55,40 +55,46 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "bg-paper/95 border-b border-ink/5 shadow-sm py-4" : "bg-transparent py-6"
+        scrolled ? "bg-paper/90 backdrop-blur-md border-b border-ink/10 shadow-soft py-4" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link href="/" className="text-ink font-serif font-bold text-xl tracking-tight hover:opacity-80 transition-opacity">
+        <Link
+          href="/"
+          className="rounded-md font-serif font-bold text-xl tracking-tight text-ink transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+        >
           Sylentt <span className="text-accent">Partners</span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-12">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className={cn(
-                "font-sans uppercase tracking-widest text-xs transition-all relative group",
-                link.name === "Connect"
-                  ? "bg-accent text-white px-6 py-3 hover:opacity-90"
-                  : "text-ink/90 hover:text-ink"
-              )}
-            >
-              {link.name}
-              {link.name !== "Connect" && (
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all group-hover:w-full" />
-              )}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center space-x-10 lg:space-x-12">
+          {navLinks.map((link) =>
+            link.name === "Connect" ? (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="btn-cta px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="group relative rounded-sm font-sans uppercase tracking-widest text-xs text-ink/90 transition-colors hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-paper"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+              </Link>
+            )
+          )}
         </div>
 
         {/* Mobile Menu Button */}
         <button
           ref={mobileButtonRef}
           className={cn(
-            "md:hidden p-2 rounded-sm transition-all duration-300",
+            "md:hidden p-2 rounded-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
             isOpen
               ? "text-paper bg-ink shadow-lg"
               : (scrolled ? "text-ink hover:bg-ink/5" : "text-ink bg-paper/80 backdrop-blur-md shadow-sm hover:bg-paper")
@@ -116,7 +122,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-paper font-sans font-bold uppercase tracking-[0.2em] text-sm py-4 border-b border-paper/10 hover:text-accent transition-colors"
+              className="text-paper font-sans font-bold uppercase tracking-[0.2em] text-sm py-4 border-b border-paper/10 transition-colors hover:text-accent focus-visible:outline-none focus-visible:text-accent"
               onClick={() => setIsOpen(false)}
             >
               {link.name}

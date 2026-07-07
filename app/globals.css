@@ -29,6 +29,8 @@
   }
   body {
     @apply bg-paper text-[#3A332B] relative;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   body::before {
     content: "";
@@ -37,16 +39,76 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply text-[#1E2E3D] tracking-tight font-bold;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* ── Editorial display serif ──────────────────────────────────────────────
+     Instrument Serif ships weight 400 only, so weight/tracking are fixed here.
+     Placing this in the components layer lets it win over the global
+     `h1..h6 { font-bold }` rule, preventing an ugly synthesized (faux) bold. */
+  .font-display {
+    font-family: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.06;
+  }
+
+  /* ── Mono kicker / eyebrow label ─────────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--font-space-mono), ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* ── Primary terracotta CTA ────────────────────────────────────────────────
+     Per-instance sizing stays inline; this owns the quality (radius, shadow,
+     hover lift, focus ring) so every CTA on the site reads as one component. */
+  .btn-cta {
+    @apply inline-flex items-center justify-center rounded-lg bg-accent font-bold text-white;
+    @apply transition-all duration-200 ease-out shadow-soft;
+  }
+  .btn-cta:hover {
+    @apply -translate-y-0.5 shadow-lift;
+    background-color: var(--accent);
+  }
+  .btn-cta:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper;
+  }
+
+  /* ── Quiet / secondary button on light surfaces ──────────────────────────── */
+  .btn-quiet {
+    @apply inline-flex items-center justify-center rounded-lg border border-ink/15 bg-paper font-semibold text-ink;
+    @apply transition-all duration-200 ease-out;
+  }
+  .btn-quiet:hover {
+    @apply -translate-y-0.5 border-ink/30 bg-surface;
+  }
+  .btn-quiet:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper;
   }
 }
 
 @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
   .glass {
     @apply bg-[var(--surface)] border border-[var(--border)];
   }
 
   .glass-card {
-    @apply bg-[var(--surface)] border-2 border-[var(--border)] hover:border-[var(--border-light)] hover:shadow-sm transition-all duration-300 rounded-xl;
+    @apply bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--border-light)] hover:shadow-soft transition-all duration-300 rounded-xl;
   }
 
   .text-gradient {
@@ -63,7 +125,7 @@
   }
 
   .lane-badge {
-    @apply font-mono text-[13px] tracking-[0.18em] uppercase py-1 px-3 rounded whitespace-nowrap border-2 relative overflow-hidden flex-shrink-0;
+    @apply font-mono text-[13px] tracking-[0.18em] uppercase py-1 px-3 rounded whitespace-nowrap border relative overflow-hidden flex-shrink-0;
   }
   .lane-badge { border-color: var(--accent); background: var(--surface2); }
   .lane-badge.blue, .lane-badge.cyan, .lane-badge.purple, .lane-badge.green, .lane-badge.amber, .lane-badge.red, .lane-badge.orange {
@@ -75,10 +137,10 @@
   }
 
   .neon-card {
-    @apply bg-[var(--surface)] border-2 border-[var(--border)] rounded-xl relative overflow-hidden transition-all duration-300;
+    @apply bg-[var(--surface)] border border-[var(--border)] rounded-xl relative overflow-hidden transition-all duration-300;
   }
   .neon-card:hover {
-    @apply border-[var(--border-light)] shadow-sm;
+    @apply border-[var(--border-light)] shadow-soft;
   }
   .neon-card::before {
     content: '';
@@ -89,12 +151,13 @@
     @apply w-[7px] h-[7px] rounded-full inline-block bg-[var(--accent)];
   }
 
+  /* Interactive form / result panel (FitAssessment). Hairline + soft shadow. */
   .lane-body {
     background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: 14px;
-    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
     position: relative;
+    box-shadow: 0 1px 2px rgba(30, 46, 61, 0.04), 0 10px 30px -14px rgba(30, 46, 61, 0.14);
   }
 
   /* Neon Line Header Utility - Neutralized */
@@ -104,5 +167,34 @@
   .neon-line-header::after {
     content: '';
     @apply absolute bottom-0 left-0 w-full max-w-[320px] h-0.5 origin-left bg-[var(--accent)];
+  }
+}
+
+/* Flowing dashes along the integration-flow fork branches (data → both systems). */
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.animate-dash-flow {
+  animation: dashFlow 0.9s linear infinite;
+}
+
+/* ── Motion policy ───────────────────────────────────────────────────────────
+   Honor prefers-reduced-motion globally for CSS animations/transitions and
+   smooth scroll. Framer Motion (JS-driven) is gated separately with
+   useReducedMotion() in each animated component. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }

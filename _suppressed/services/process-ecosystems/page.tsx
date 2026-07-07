@@ -1,4 +1,4 @@
-import WizardForm from "@/components/WizardForm";
+import FitAssessment from "@/components/FitAssessment";
 import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import ProcessMasthead from "@/components/services/ProcessMasthead";
 import ProcessTimeline from "@/components/services/ProcessTimeline";
@@ -43,7 +43,7 @@ export default function Services() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Get Your Friction Score</h2>
             <p className="text-slate-400">Identify your operational bottlenecks and get a custom roadmap.</p>
           </div>
-          <WizardForm />
+          <FitAssessment />
         </div>
       </section>
     </>
