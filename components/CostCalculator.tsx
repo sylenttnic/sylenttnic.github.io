@@ -23,9 +23,9 @@ export default function CostCalculator({ heading = "What is the copy-paste layer
 
   return (
     <div id="calculator" className="max-w-3xl mx-auto bg-surface border border-ink/10 rounded-2xl shadow-soft p-8 md:p-14 scroll-mt-24">
-      <h3 className="font-display text-3xl md:text-4xl mb-3 text-ink">
+      <h2 className="font-display text-3xl md:text-4xl mb-3 text-ink">
         {heading}
-      </h3>
+      </h2>
       <p className="text-ink/90 font-sans mb-10 leading-relaxed">
         Set the sliders to match your team. This is the time you are spending today, before anything is automated.
       </p>

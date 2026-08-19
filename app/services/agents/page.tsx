@@ -86,6 +86,53 @@ const checkpoints = [
   "Continuous monitoring and alerting after launch",
 ];
 
+const jsonLdHowTo = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "@id": "https://sylentt.com/services/agents/#howto",
+  name: "How Sylentt Builds Custom App Integrations",
+  description:
+    "A structured 6-phase engineering process for building custom business app integrations with automated testing, independent quality checks, and client sign-off.",
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Discovery",
+      text: "We map your current setup, identify manual work, and outline a plain-language plan before writing code.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Design",
+      text: "We research technical details of all involved systems and author a detailed integration blueprint for your approval.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Build and Test",
+      text: "We write custom integration code and automated test suites covering edge cases and error scenarios.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 4,
+      name: "Security and Quality Review",
+      text: "An independent code review verifies security standards, data privacy, and permission scope.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 5,
+      name: "Deploy",
+      text: "Deployment to a staging environment for live validation testing, requiring your explicit sign-off before production release.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 6,
+      name: "Monitor",
+      text: "Continuous monitoring, automatic error retries, and instant alerting after going live.",
+    },
+  ],
+};
+
 export default function BuildProcessPage() {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -105,6 +152,10 @@ export default function BuildProcessPage() {
 
   return (
     <div className="build-page-wrap pt-24 md:pt-36">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowTo) }}
+      />
       {/* HERO */}
       <div className="build-header fade-in">
         <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">
@@ -118,7 +169,7 @@ export default function BuildProcessPage() {
       </div>
 
       {/* PHASE TIMELINE */}
-      <div className="timeline">
+      <section className="timeline" aria-label="Integration build process timeline">
         {phases.map((phase, i) => {
           const Icon = phase.icon;
           return (
@@ -156,10 +207,10 @@ export default function BuildProcessPage() {
             </div>
           );
         })}
-      </div>
+      </section>
 
       {/* QUALITY CHECKPOINTS */}
-      <div className="reveal">
+      <section className="reveal">
         <div className="checkpoints-section">
           <div className="checkpoints-header">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
@@ -180,10 +231,10 @@ export default function BuildProcessPage() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* WHAT YOU GET */}
-      <div className="reveal">
+      <section className="reveal">
         <div className="ownership-section">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
             What you get at the end
@@ -196,15 +247,15 @@ export default function BuildProcessPage() {
             code held hostage. It is yours.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* CTA */}
-      <div className="reveal">
+      <section className="reveal">
         <div className="cta-section">
           <Link href="/services#tell-us" className="cta-card group">
-            <h3 className="cta-title">
+            <h2 className="cta-title">
               Ready to talk?
-            </h3>
+            </h2>
             <p className="cta-text">
               Tell us what&apos;s broken and we will show you what a structured build
               process looks like for your business.
@@ -215,7 +266,7 @@ export default function BuildProcessPage() {
             </div>
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -9,11 +9,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Sylentt Partners | Business App Integration for Small Businesses",
   description:
-    "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+    "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
   openGraph: {
     title: "Sylentt Partners | Run your business, not your software.",
     description:
-      "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     url: "https://sylentt.com/",
     images: [{ url: "/logo_full.png" }],
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sylentt Partners | Run your business, not your software.",
     description:
-      "Sylentt Partners connects your business apps so your team stops copying and pasting data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+      "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -85,7 +85,8 @@ const problemCards = [
 
 const jsonLdOrg = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+  "@id": "https://sylentt.com/#organization",
   name: "Sylentt Partners",
   alternateName: ["Sylentt LLC", "Sylentt"],
   description:
@@ -94,10 +95,7 @@ const jsonLdOrg = {
   logo: "https://sylentt.com/logo-symbol.png",
   image: "https://sylentt.com/logo_full.png",
   email: "contact@sylentt.com",
-  areaServed: [
-    { "@type": "Place", name: "Cache Valley, Utah" },
-    { "@type": "Country", name: "United States" },
-  ],
+  priceRange: "$$",
   address: {
     "@type": "PostalAddress",
     streetAddress: "40 W Cache Valley Blvd",
@@ -106,13 +104,34 @@ const jsonLdOrg = {
     postalCode: "84341",
     addressCountry: "US",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 41.7583,
+    longitude: -111.8341,
+  },
+  areaServed: [
+    { "@type": "Place", name: "Cache Valley, Utah" },
+    { "@type": "Country", name: "United States" },
+  ],
   sameAs: [
     "https://www.google.com/maps?cid=10860538682886367500",
-    "https://www.linkedin.com/company/sylentt-partners/"
+    "https://www.linkedin.com/company/sylentt-partners/",
+    "https://www.instagram.com/sylenttpartners/",
+    "https://www.facebook.com/sylenttpartners/"
   ],
-  "customer": [
-    { "@type": "Organization", "name": "By Light", "url": "https://bylight.com/" },
-    { "@type": "Organization", "name": "edZOOcation", "url": "https://edzoocation.com/" }
+  customer: [
+    { "@type": "Organization", name: "By Light", url: "https://bylight.com/" },
+    { "@type": "Organization", name: "edZOOcation", url: "https://edzoocation.com/" }
+  ],
+  knowsAbout: [
+    "Software Integration",
+    "API Development",
+    "Workflow Automation",
+    "Shopify Integration",
+    "QuickBooks Automation",
+    "Stripe Sync",
+    "HubSpot Integration",
+    "Zapier Alternatives"
   ],
 };
 

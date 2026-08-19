@@ -83,9 +83,69 @@ const services = [
   },
 ];
 
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://sylentt.com/services/#service",
+  name: "Custom Business App Integration & Workflow Automation",
+  provider: {
+    "@type": "ProfessionalService",
+    name: "Sylentt Partners",
+    url: "https://sylentt.com",
+    logo: "https://sylentt.com/logo-symbol.png",
+  },
+  serviceType: "Software Integration & API Development",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
+  description:
+    "Automated connections between business software applications including Shopify, QuickBooks, Stripe, HubSpot, and Xero. Self-hosted custom integrations with real-time error alerts and zero platform lock-in.",
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Discovery Call & Integration Audit",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    {
+      "@type": "Offer",
+      name: "Custom Integration Implementation",
+      price: "2500",
+      priceCurrency: "USD",
+      priceValidUntil: "2026-12-31",
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Business Integration Services",
+    itemListElement: [
+      {
+        "@type": "OfferCatalog",
+        name: "Automated Data Sync",
+        description: "Eliminate manual copy-paste between CRM, ERP, accounting, and e-commerce apps.",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Proactive Monitoring & Alerting",
+        description: "Built-in error detection and automatic retries for critical business workflows.",
+      },
+      {
+        "@type": "OfferCatalog",
+        name: "Zapier & Make Migration",
+        description: "Replace rented automation platforms with client-owned infrastructure.",
+      },
+    ],
+  },
+};
+
 export default function ServicesPage() {
   return (
     <div className="bg-paper text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
+      />
       {/* Hero */}
       <header className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-ink/5">
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
@@ -119,6 +179,65 @@ export default function ServicesPage() {
           </div>
         </div>
       </header>
+
+      {/* Conversational AEO Overview Section */}
+      <section className="py-16 md:py-24 bg-surface border-b border-ink/5">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <div className="max-w-4xl mx-auto space-y-12">
+              <div>
+                <h2 className="font-display text-3xl md:text-5xl text-ink mb-6">
+                  How Custom Business App Integration Works
+                </h2>
+                <p className="text-lg text-ink/90 leading-relaxed mb-6">
+                  Custom business app integration connects separate software applications—such as your CRM, e-commerce platform, accounting tool, and inventory manager—via their Application Programming Interfaces (APIs). Instead of team members copying data manually, custom integration automates data flows in real time across systems.
+                </p>
+                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
+                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
+                    Key Advantages of Custom Integration
+                  </h3>
+                  <ul className="list-disc list-inside space-y-3 text-ink/90 text-lg">
+                    <li><strong className="text-ink">Zero Manual Data Entry:</strong> Orders, customer updates, and payments sync instantly without human intervention.</li>
+                    <li><strong className="text-ink">Client Ownership:</strong> Integrations run on your cloud account; you own the code with no per-transaction fees or platform markup.</li>
+                    <li><strong className="text-ink">Proactive Error Detection:</strong> Real-time monitoring and automatic retries prevent dropped orders or silent failures.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
+                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
+                    Platforms We Connect
+                  </h3>
+                  <p className="text-ink/90 leading-relaxed mb-4 text-base">
+                    If a software tool has an accessible API, Sylentt can connect it. Commonly integrated business tools include:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-ink/90 text-base">
+                    <li>E-Commerce: Shopify, Square, Stripe</li>
+                    <li>Accounting: QuickBooks Online, Xero, FreshBooks</li>
+                    <li>CRM & Sales: HubSpot, Salesforce</li>
+                    <li>Operations: Jobber, ServiceTitan, ShipStation</li>
+                  </ul>
+                </div>
+
+                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
+                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
+                    Difference from Zapier or Make
+                  </h3>
+                  <p className="text-ink/90 leading-relaxed mb-4 text-base">
+                    While platforms like Zapier charge monthly subscriptions that increase with task volume and often fail silently, Sylentt builds custom, self-hosted integrations:
+                  </p>
+                  <ul className="list-disc list-inside space-y-2 text-ink/90 text-base">
+                    <li>No recurring monthly task or platform fees</li>
+                    <li>Immediate notification when a sync error occurs</li>
+                    <li>Complete code ownership without vendor lock-in</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </SectionFade>
+        </div>
+      </section>
 
       {/* Service Sections */}
       {services.map((service, index) => {
