@@ -71,6 +71,43 @@ const howItWorks = [
   },
 ];
 
+const jsonLdPricing = {
+  "@context": "https://schema.org",
+  "@type": "ItemPage",
+  "@id": "https://sylentt.com/pricing/#webpage",
+  url: "https://sylentt.com/pricing/",
+  name: "Simple Pricing for Business Automation | Sylentt Partners",
+  description:
+    "Explore our integration packages, from discovery calls to full implementation and operational retainers. Simple pricing with real results.",
+  mainEntity: {
+    "@type": "OfferCatalog",
+    name: "Sylentt Integration Packages",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "Discovery Call",
+        price: "0",
+        priceCurrency: "USD",
+        description: "30-minute strategy session to audit app stack and map integrations.",
+      },
+      {
+        "@type": "Offer",
+        name: "Implementation",
+        price: "2500",
+        priceCurrency: "USD",
+        description: "Custom integration build, tested against live systems and deployed on client infrastructure.",
+      },
+      {
+        "@type": "Offer",
+        name: "Operational Retainer",
+        price: "1500",
+        priceCurrency: "USD",
+        description: "Proactive monitoring, incident response, and monthly change requests.",
+      },
+    ],
+  },
+};
+
 export default function PricingPage() {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,6 +174,10 @@ export default function PricingPage() {
 
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPricing) }}
+      />
       {/* Hero Section */}
       <section className="container mx-auto px-4 text-center pt-32 pb-16 md:pt-44">
         <SectionFade>
