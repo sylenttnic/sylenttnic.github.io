@@ -82,6 +82,23 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-content",
 };
 
+const jsonLdWebSite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://sylentt.com/#website",
+  url: "https://sylentt.com/",
+  name: "Sylentt Partners",
+  description:
+    "Business app integration and workflow automation consultancy based in Cache Valley, Utah.",
+  publisher: {
+    "@type": "Organization",
+    name: "Sylentt Partners",
+    url: "https://sylentt.com",
+    logo: "https://sylentt.com/logo-symbol.png",
+  },
+  inLanguage: "en-US",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -89,6 +106,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
+      </head>
       <body
         className={`${plusJakartaSans.variable} ${instrumentSerif.variable} ${instrumentSans.variable} ${spaceMono.variable} font-sans antialiased bg-paper text-[#3A332B] selection:bg-primary/30 selection:text-[#211C17]`}
       >

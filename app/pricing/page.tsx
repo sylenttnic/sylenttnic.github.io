@@ -200,7 +200,7 @@ export default function PricingPage() {
                 pkg.emphasized ? "border-accent/40 ring-1 ring-accent/15" : ""
               }`}
             >
-              <h2 className="font-display text-2xl md:text-3xl mb-2">{pkg.name}</h2>
+              <h3 className="font-display text-2xl md:text-3xl mb-2">{pkg.name}</h3>
               <div className="font-display text-4xl mb-8 text-accent">{pkg.price}</div>
               <p className="text-ink/90 mb-12 flex-grow leading-relaxed text-lg">
                 {pkg.description}
