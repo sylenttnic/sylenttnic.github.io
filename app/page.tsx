@@ -152,7 +152,7 @@ const jsonLdFaq = {
       name: "How is this different from tools like Zapier?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts.",
+        text: "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
       },
     },
     {
@@ -160,7 +160,23 @@ const jsonLdFaq = {
       name: "What apps can you connect?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "If your business runs on it and it has an API, we can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Jobber, ShipStation, and more.",
+        text: "If your business runs on it and it has an API, we can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Jobber, ShipStation, and more. If your app is not on that list, just ask. We have probably connected something like it before.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I own everything you build?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. The integrations run on your cloud account. The code is yours. If we part ways, everything keeps running. There is no lock-in and no proprietary platform you lose access to.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long does a typical integration take?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most initial integrations are live in 2 to 4 weeks. We start with the single most painful manual process in your business so you see immediate relief while we build out the rest of your integration map.",
       },
     },
   ],
@@ -374,10 +390,13 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/about/nic.jpg"
                 alt="Nic Aslett, founder of Sylentt Partners"
+                width={224}
+                height={224}
+                loading="lazy"
+                decoding="async"
                 className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover shadow-xl mx-auto"
               />
               <div>
@@ -415,10 +434,13 @@ export default function Home() {
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div className="mt-auto flex items-center gap-4">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={t.avatar}
                       alt={t.name}
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      decoding="async"
                       className="w-12 h-12 rounded-full object-cover border border-paper/10"
                     />
                     <div className="leading-tight">
