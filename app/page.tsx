@@ -83,6 +83,23 @@ const problemCards = [
   },
 ];
 
+const jsonLdPerson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://sylentt.com/#nic-aslett",
+  name: "Nic Aslett",
+  jobTitle: "Founder & Lead Integration Engineer",
+  worksFor: {
+    "@type": "Organization",
+    "@id": "https://sylentt.com/#organization"
+  },
+  image: "https://sylentt.com/about/nic.jpg",
+  description: "Systems integration engineer with 15 years of experience building automation scripts, resilient infrastructure, and custom business app connections.",
+  sameAs: [
+    "https://www.linkedin.com/in/nic-aslett/"
+  ]
+};
+
 const jsonLdOrg = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
@@ -96,6 +113,13 @@ const jsonLdOrg = {
   image: "https://sylentt.com/logo_full.png",
   email: "contact@sylentt.com",
   priceRange: "$$",
+  founder: {
+    "@type": "Person",
+    "@id": "https://sylentt.com/#nic-aslett",
+    name: "Nic Aslett",
+    jobTitle: "Founder & Lead Integration Engineer",
+    sameAs: "https://www.linkedin.com/in/nic-aslett/"
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "40 W Cache Valley Blvd",
@@ -213,6 +237,10 @@ const faqItems = [
 export default function Home() {
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
@@ -412,6 +440,14 @@ export default function Home() {
                     I run Sylentt Partners from Cache Valley, Utah. If you are local, I&apos;d love to learn more about your business and how I can save your team time!
                   </p>
                 </div>
+                <div className="mt-8 bg-paper p-6 rounded-xl border border-ink/10 shadow-soft">
+                  <h3 className="font-serif text-lg font-bold text-ink mb-2">
+                    What is Sylentt Partners?
+                  </h3>
+                  <p className="text-base text-ink/90 leading-relaxed font-sans">
+                    Sylentt Partners is a custom business app integration consultancy based in Cache Valley, Utah. Founded by engineer Nic Aslett, Sylentt connects software tools like Shopify, QuickBooks, Stripe, and HubSpot so small business teams stop manually re-entering data. All custom integrations are client-owned with zero platform markup.
+                  </p>
+                </div>
               </div>
             </div>
           </SectionFade>
@@ -466,7 +502,7 @@ export default function Home() {
               {faqItems.map((item, i) => (
                 <details key={i} className="group border-b border-ink/10 pb-8 cursor-pointer">
                   <summary className="flex items-center justify-between list-none text-2xl font-serif text-ink">
-                    <span>{item.question}</span>
+                    <h3 className="inline text-2xl font-serif text-ink">{item.question}</h3>
                     <ChevronDown className="w-5 h-5 opacity-40 group-open:rotate-180 transition-transform" />
                   </summary>
                   <div className="mt-6 text-lg text-ink/90 leading-relaxed max-w-2xl">

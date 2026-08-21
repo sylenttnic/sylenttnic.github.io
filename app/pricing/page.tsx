@@ -71,6 +71,25 @@ const howItWorks = [
   },
 ];
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://sylentt.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Pricing",
+      item: "https://sylentt.com/pricing/",
+    },
+  ],
+};
+
 const jsonLdPricing = {
   "@context": "https://schema.org",
   "@type": "ItemPage",
@@ -176,6 +195,10 @@ export default function PricingPage() {
     <div className="bg-paper text-ink selection:bg-accent/20">
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPricing) }}
       />
       {/* Hero Section */}
@@ -192,6 +215,7 @@ export default function PricingPage() {
 
       {/* Packages Section */}
       <section className="container mx-auto px-4 pb-16">
+        <h2 className="sr-only">Our Integration Packages</h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {packages.map((pkg) => (
             <div

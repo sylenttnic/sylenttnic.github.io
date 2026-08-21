@@ -28,6 +28,21 @@ Allow: /
 User-agent: DuckAssistBot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
 Sitemap: https://sylentt.com/sitemap.xml
 
 # AI context files
