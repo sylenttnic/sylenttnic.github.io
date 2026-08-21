@@ -92,6 +92,7 @@ const jsonLdWebSite = {
     "Business app integration and workflow automation consultancy based in Cache Valley, Utah.",
   publisher: {
     "@type": "Organization",
+    "@id": "https://sylentt.com/#organization",
     name: "Sylentt Partners",
     url: "https://sylentt.com",
     logo: "https://sylentt.com/logo-symbol.png",

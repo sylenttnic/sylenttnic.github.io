@@ -83,6 +83,25 @@ const services = [
   },
 ];
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://sylentt.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://sylentt.com/services/",
+    },
+  ],
+};
+
 const jsonLdService = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -142,6 +161,10 @@ const jsonLdService = {
 export default function ServicesPage() {
   return (
     <div className="bg-paper text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}

@@ -86,6 +86,31 @@ const checkpoints = [
   "Continuous monitoring and alerting after launch",
 ];
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://sylentt.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://sylentt.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Build Process",
+      item: "https://sylentt.com/services/agents/",
+    },
+  ],
+};
+
 const jsonLdHowTo = {
   "@context": "https://schema.org",
   "@type": "HowTo",
@@ -154,6 +179,10 @@ export default function BuildProcessPage() {
     <div className="build-page-wrap pt-24 md:pt-36">
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowTo) }}
       />
       {/* HERO */}
@@ -170,6 +199,7 @@ export default function BuildProcessPage() {
 
       {/* PHASE TIMELINE */}
       <section className="timeline" aria-label="Integration build process timeline">
+        <h2 className="sr-only">Our 6-Phase Engineering Process</h2>
         {phases.map((phase, i) => {
           const Icon = phase.icon;
           return (
@@ -193,7 +223,7 @@ export default function BuildProcessPage() {
                     <div className={`phase-icon-wrap ${phase.color}`}>
                       <Icon className="phase-icon" />
                     </div>
-                    <h2 className="phase-title">{phase.title}</h2>
+                    <h3 className="phase-title">{phase.title}</h3>
                   </div>
                   <p className="phase-description">{phase.description}</p>
                   {phase.youSee && (
