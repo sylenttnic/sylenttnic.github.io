@@ -14,7 +14,7 @@ export default function TermsOfService() {
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
-        These terms apply when you buy a website from us. Please read them before you pay &mdash; completing a purchase means you accept them.
+        These terms apply when you buy a website from us. Please read them before you pay - completing a purchase means you accept them.
       </p>
 
       <div className="prose prose-slate max-w-none text-ink/90 space-y-6">
@@ -28,7 +28,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">2. How this works, and why you&apos;re seeing a site you didn&apos;t ask for</h2>
           <p>
-            We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us &mdash; the preview comes down on its own.
+            We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us - the preview comes down on its own.
           </p>
           <p className="mt-3">
             Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody buys it, we take it offline and delete it within six months. Nothing is billed unless you choose to buy.
@@ -43,7 +43,7 @@ export default function TermsOfService() {
               <strong>The site live and working straight away</strong>, at your own web address.
             </li>
             <li>
-              <strong>Your own code repository</strong> containing everything the site is made of &mdash; not a file we email you. You own it outright, and you can hand it to any developer you like, at any time, without asking us.
+              <strong>Your own code repository</strong> containing everything the site is made of - not a file we email you. You own it outright, and you can hand it to any developer you like, at any time, without asking us.
             </li>
             <li>Reasonable help getting it live and pointed at your domain.</li>
           </ul>
@@ -61,10 +61,13 @@ export default function TermsOfService() {
             For the <strong>first fourteen days we host and run it</strong> while you satisfy yourself that it&apos;s right. This is the same fourteen days in which you can ask for a full refund for any reason. <strong>On day fifteen, the repository transfers into your name</strong> and the whole thing is unambiguously yours.
           </p>
           <p className="mt-3">
-            <strong>Would you rather have it sooner? Just ask.</strong> We&apos;ll transfer the repository to you on any day you like. The only condition is that taking ownership early ends the refund window &mdash; it wouldn&apos;t be fair to us for you to keep the site and take the money back, and it wouldn&apos;t be fair to you if we weren&apos;t clear about that up front. The choice is entirely yours, either way.
+            <strong>Would you rather have it sooner? Just ask.</strong> We&apos;ll transfer the repository to you on any day you like. The only condition is that taking ownership early ends the refund window - it wouldn&apos;t be fair to us for you to keep the site and take the money back, and it wouldn&apos;t be fair to you if we weren&apos;t clear about that up front. The choice is entirely yours, either way.
           </p>
           <p className="mt-3">
             Transferring a repository needs a free account with our code host, and we&apos;ll walk you through it. It takes a couple of minutes and you only ever do it once.
+          </p>
+          <p className="mt-3">
+            One thing to know if you plan to host it yourself: our code host offers free hosting for public repositories. If you want the code kept private, that needs either a paid plan with them or staying on our care plan, where we host it for you and the repository can stay private. Neither option changes the website your customers see - only who can read the code behind it.
           </p>
         </section>
 
@@ -78,7 +81,7 @@ export default function TermsOfService() {
             <li>Support beyond reasonable assistance with the initial handover.</li>
           </ul>
           <p className="mt-3">
-            Most of the above is available separately under our care plan &mdash; see below.
+            Most of the above is available separately under our care plan - see below.
           </p>
         </section>
 
@@ -91,14 +94,14 @@ export default function TermsOfService() {
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>Hosting, SSL certificate, backups, uptime monitoring and security updates.</li>
             <li>
-              <strong>Up to two content changes per calendar month</strong> &mdash; editing text, updating your hours or contact details, swapping an image, adding or removing a service.
+              <strong>Up to two content changes per calendar month</strong> - editing text, updating your hours or contact details, swapping an image, adding or removing a service.
             </li>
           </ul>
           <p className="mt-3">
             It does not cover redesigns, new pages, or new functionality. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
           </p>
           <p className="mt-3">
-            The plan bills monthly and <strong>you can cancel at any time</strong>, yourself, from the billing portal &mdash; no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for. If you cancel, we will help you move the site to a host of your choosing.
+            The plan bills monthly and <strong>you can cancel at any time</strong>, yourself, from the billing portal - no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for. If you cancel, we will help you move the site to a host of your choosing.
           </p>
         </section>
 
@@ -113,7 +116,7 @@ export default function TermsOfService() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">8. Imagery &mdash; please read this one</h2>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">8. Imagery - please read this one</h2>
           <p>
             <strong>Illustrative imagery on these sites is generated by AI.</strong> It is not photography of your premises, your staff, your equipment or your completed work, and it is never presented as such. It is licensed to you for use on the site you purchase.
           </p>
@@ -125,7 +128,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">9. Your business information, and reviews</h2>
           <p>
-            We assembled the details on your site &mdash; services, service area, hours, contact information &mdash; from sources your business controls or that are publicly published. We take care, but we are working from the outside. <strong>You are responsible for checking that everything on the site is accurate before you rely on it</strong>, and we will correct anything you tell us is wrong.
+            We assembled the details on your site - services, service area, hours, contact information - from sources your business controls or that are publicly published. We take care, but we are working from the outside. <strong>You are responsible for checking that everything on the site is accurate before you rely on it</strong>, and we will correct anything you tell us is wrong.
           </p>
           <p className="mt-3">
             Any customer reviews shown are real, were published publicly by the people who wrote them, and are quoted without alteration. If you would rather they were not displayed, tell us and we will remove them.
@@ -149,7 +152,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">12. What we promise, and what we don&apos;t</h2>
           <p>
-            We build the site with care and we stand behind the work. We do not promise that it will produce any particular result &mdash; we cannot promise you more customers, higher rankings, or more revenue, and you should be suspicious of anyone who does.
+            We build the site with care and we stand behind the work. We do not promise that it will produce any particular result - we cannot promise you more customers, higher rankings, or more revenue, and you should be suspicious of anyone who does.
           </p>
           <p className="mt-3">
             To the fullest extent the law allows, our total liability to you for anything arising out of this purchase is limited to the amount you paid us. We are not liable for indirect or consequential losses such as lost profits or lost business.
