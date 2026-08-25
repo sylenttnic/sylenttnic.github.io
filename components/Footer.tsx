@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "@/assets/img/logo.webp";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+  const isWebDesign = pathname?.startsWith("/webdesign");
 
   return (
     <footer className="bg-paper border-t border-ink/10 py-20 text-ink/60">
@@ -16,7 +22,7 @@ export default function Footer() {
             className="object-contain"
           />
         </div>
-        <div className="flex items-center justify-center gap-2 mb-10">
+        <div className="flex items-center justify-center gap-2 mb-8">
           {[
             { href: "https://www.linkedin.com/in/nic-aslett/", label: "LinkedIn", Icon: Linkedin },
             { href: "https://www.instagram.com/sylenttpartners/", label: "Instagram", Icon: Instagram },
@@ -34,16 +40,53 @@ export default function Footer() {
             </a>
           ))}
         </div>
+
+        {isWebDesign && (
+          <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-sm font-sans">
+            <Link
+              href="/webdesign/terms"
+              className="hover:text-ink transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="/webdesign/privacy"
+              className="hover:text-ink transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/webdesign/refunds"
+              className="hover:text-ink transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              Refund Policy
+            </Link>
+          </div>
+        )}
+
         <div className="text-center text-sm font-sans space-y-2">
           <p>&copy; {currentYear} Sylentt Partners. All Rights Reserved.</p>
           <p>
-            Based in Cache Valley, Utah &middot;{" "}
-            <a
-              href="mailto:contact@sylentt.com"
-              className="rounded-sm underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-            >
-              contact@sylentt.com
-            </a>
+            {isWebDesign ? (
+              <>
+                <a
+                  href="mailto:support@sylentt.com"
+                  className="rounded-sm underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  support@sylentt.com
+                </a>
+              </>
+            ) : (
+              <>
+                Based in Cache Valley, Utah &middot;{" "}
+                <a
+                  href="mailto:contact@sylentt.com"
+                  className="rounded-sm underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  contact@sylentt.com
+                </a>
+              </>
+            )}
           </p>
         </div>
       </div>

@@ -14,8 +14,14 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent focus:text-paper focus:font-bold focus:rounded focus:outline-none focus:ring-2 focus:ring-ink"
+      >
+        Skip to main content
+      </a>
       <Navbar />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         {children}
       </main>
       <Footer />
