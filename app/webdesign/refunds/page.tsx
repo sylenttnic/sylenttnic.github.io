@@ -1,13 +1,36 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Refund Policy | Sylentt',
   description: 'Refund Policy for Sylentt Partners LLC Web Design.',
+  alternates: {
+    canonical: 'https://sylentt.com/webdesign/refunds/',
+  },
+  openGraph: {
+    title: 'Refund Policy | Sylentt',
+    description: 'Refund Policy for Sylentt Partners LLC Web Design.',
+    url: 'https://sylentt.com/webdesign/refunds/',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Refund Policy | Sylentt',
+    description: 'Refund Policy for Sylentt Partners LLC Web Design.',
+  },
 };
 
 export default function RefundPolicy() {
   return (
     <div className="pt-24 md:pt-36 pb-16 md:pb-24 px-6 max-w-4xl mx-auto">
+      <div className="mb-6">
+        <Link
+          href="/webdesign"
+          className="text-sm font-sans text-accent hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          &larr; Back to Web Design
+        </Link>
+      </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Refund Policy</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
         Sylentt Partners LLC &middot; Effective 22 August 2026
