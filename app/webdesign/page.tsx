@@ -318,7 +318,7 @@ export default function WebDesignLandingPage() {
       </section>
 
       {/* Section 7 — Pricing */}
-      <section className="py-16 md:py-24 px-4 bg-surface border-y border-ink/5">
+      <section id="pricing" className="py-16 md:py-24 px-4 bg-surface border-y border-ink/5 scroll-mt-24">
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-8">
             {/* Card 1 — Build */}
