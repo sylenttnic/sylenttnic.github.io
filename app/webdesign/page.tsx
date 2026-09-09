@@ -169,17 +169,9 @@ export default function WebDesignLandingPage() {
             We research your trade and your city, design one site that exists only for you, write every word of it from your own material, and hand you the code when it&apos;s done.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 mb-6">
-            <a
-              href="https://buy.stripe.com/aFaeVcbBo1MIdZe8Ik1Jm00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-cta px-8 py-4 text-lg inline-flex items-center gap-2 group"
-            >
+            <a href="#tell-us" className="btn-cta px-8 py-4 text-lg inline-flex items-center gap-2 group">
               Start a build
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-            <a href="#tell-us" className="btn-quiet px-8 py-4 text-lg">
-              Get a free preview first
+              <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
             </a>
           </div>
           <p className="text-xs md:text-sm text-ink/60 font-sans">
@@ -340,15 +332,19 @@ export default function WebDesignLandingPage() {
                   Research, design, copy, imagery, build, and the code. Paid once, at the start.
                 </p>
               </div>
-              <div>
+              <div className="space-y-3">
+                <a href="#tell-us" className="btn-cta w-full py-4 text-center text-lg inline-flex justify-center items-center gap-2 group">
+                  Start a build
+                  <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+                </a>
                 <a
                   href="https://buy.stripe.com/aFaeVcbBo1MIdZe8Ik1Jm00"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-cta w-full py-4 text-center text-lg inline-flex justify-center items-center gap-2 group"
+                  className="w-full py-4 rounded-xl font-bold text-ink bg-surface hover:bg-surface2 transition-colors text-center text-base inline-flex justify-center items-center gap-2 border border-ink/10"
                 >
-                  Start a build
-                  <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  Buy the site we sent you
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
@@ -508,14 +504,8 @@ export default function WebDesignLandingPage() {
             One payment, one site, and the code is yours. Fourteen days to change your mind.
           </p>
           <div>
-            <a
-              href="https://buy.stripe.com/aFaeVcbBo1MIdZe8Ik1Jm00"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-cta px-10 py-5 text-xl inline-flex items-center gap-2 group"
-            >
+            <a href="#tell-us" className="btn-cta px-10 py-5 text-xl inline-flex items-center gap-2">
               Start a build
-              <ArrowUpRight className="w-6 h-6 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>
