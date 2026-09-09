@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ChevronDown, Check, ArrowUpRight } from 'lucide-react';
+import PreviewRequestForm from '@/components/webdesign/PreviewRequestForm';
 
 export const metadata: Metadata = {
   title: 'Custom websites for local businesses | Sylentt',
@@ -176,6 +177,9 @@ export default function WebDesignLandingPage() {
             >
               Start a build
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+            <a href="#tell-us" className="btn-quiet px-8 py-4 text-lg">
+              Get a free preview first
             </a>
           </div>
           <p className="text-xs md:text-sm text-ink/60 font-sans">
@@ -473,6 +477,24 @@ export default function WebDesignLandingPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Tell us — the preview request */}
+      <section id="tell-us" className="py-16 md:py-24 px-4 bg-surface border-y border-ink/5 scroll-mt-24">
+        <div className="container mx-auto max-w-3xl">
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <p className="eyebrow text-accent mb-4 font-semibold uppercase tracking-widest text-xs">
+              Free preview
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-ink mb-6 text-balance">
+              See yours before you pay
+            </h2>
+            <p className="text-lg text-ink/80 font-sans leading-relaxed">
+              Tell us the business and the town. We do the research and build a preview of your site at no charge, then email you the link. If you like it, it is $499 one time and the code is yours. If not, nothing happens.
+            </p>
+          </div>
+          <PreviewRequestForm />
         </div>
       </section>
 
