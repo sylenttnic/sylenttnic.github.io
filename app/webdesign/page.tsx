@@ -361,7 +361,7 @@ export default function WebDesignLandingPage() {
                 <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
               </a>
               <a
-                href="https://buy.stripe.com/dRmdR834S62Y08o9Mo1Jm01"
+                href="https://buy.stripe.com/28EfZg20O772dZeaQs1Jm02"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-4 rounded-xl font-bold text-ink bg-surface hover:bg-surface2 transition-colors text-center text-base inline-flex justify-center items-center gap-2 border border-ink/10"
