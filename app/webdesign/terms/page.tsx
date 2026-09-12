@@ -84,7 +84,7 @@ export default function TermsOfService() {
             <strong>Your site goes live immediately, and the first 30 days are free.</strong> From the moment you start, it is running, resolving at your address, and yours to use and show to customers. Nothing about it is held back or watermarked. If you cancel within those 30 days, you are charged nothing.
           </p>
           <p className="mt-3">
-            After the free month, the plan renews automatically at <strong>$9.99 per month plus any applicable tax</strong>, and it keeps renewing each month until you cancel. <strong>You can cancel any time</strong>, yourself, from your billing page, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
+            After the free month, the plan renews automatically at <strong>$9.99 per month plus any applicable tax</strong>, and it keeps renewing each month until you cancel. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
           </p>
           <p className="mt-3">
             <strong>Stay on the plan for twelve months and the code becomes yours.</strong> At that point we transfer the site&apos;s code repository into your name, to keep and host anywhere, whether or not you continue with us afterwards. <strong>If you cancel before twelve months, the site comes down and the code is not transferred</strong> - the plan is what keeps the site live, and the twelve months is what earns the handover. We say this plainly here so it is never a surprise.
@@ -127,7 +127,7 @@ export default function TermsOfService() {
             It does not cover redesigns, new pages, or new functionality. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
           </p>
           <p className="mt-3">
-            <strong>You can cancel at any time</strong>, yourself, from your billing page, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then. If you have completed twelve months on the plan, the code repository is already yours to keep (section 4).
+            <strong>You can cancel at any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then. If you have completed twelve months on the plan, the code repository is already yours to keep (section 4).
           </p>
         </section>
 

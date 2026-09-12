@@ -60,7 +60,7 @@ export default function BillingAndCancellation() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">How to cancel</h2>
           <p>
-            Cancel yourself, any time, from your billing page. No notice period, no phone call, no reason needed. You can also email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a> and we will do it for you. Cancellation takes effect at the end of the month you have already paid for, and you keep the site until then.
+            Cancel yourself, any time, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>. No notice period, no phone call, no reason needed. You can also email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a> and we will do it for you. Cancellation takes effect at the end of the month you have already paid for, and you keep the site until then.
           </p>
         </section>
 
