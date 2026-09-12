@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import BackToTop from './ui/BackToTop';
@@ -12,6 +13,12 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const pathname = usePathname();
+  // The floating chat bubble is Sylentt's integration-sales assistant. The
+  // /webdesign preview pages have their own request flow and should not offer
+  // it, so suppress it there only — it stays on every other page of the site.
+  const hideChat = pathname?.startsWith('/webdesign') ?? false;
+
   return (
     <div className="flex flex-col min-h-screen">
       <a
@@ -26,8 +33,8 @@ export default function Layout({ children }: LayoutProps) {
       </main>
       <Footer />
       <BackToTop />
-      <FloatingChatButton />
-      <ChatAgent />
+      {!hideChat && <FloatingChatButton />}
+      {!hideChat && <ChatAgent />}
     </div>
   );
 }
