@@ -33,11 +33,11 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 22 August 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 12 September 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
-        These terms apply when you buy a website from us. Please read them before you pay - completing a purchase means you accept them.
+        These terms apply when you put a website we built on our monthly plan. Please read them before you start - starting the plan means you accept them.
       </p>
 
       <div className="prose prose-slate max-w-none text-ink/90 space-y-6">
@@ -54,84 +54,87 @@ export default function TermsOfService() {
             We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us - the preview comes down on its own.
           </p>
           <p className="mt-3">
-            Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody buys it, we take it offline and delete it within six months. Nothing is billed unless you choose to buy.
+            Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody keeps it, we take it offline and delete it within six months. Nothing is billed unless you start the plan, and the first 30 days of the plan are free.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">3. What you get for the price</h2>
-          <p>A one-time payment buys you the finished website shown in your preview:</p>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">3. What the plan gives you</h2>
+          <p>The monthly plan gives you the finished website shown in your preview, live and looked after:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>
-              <strong>The site live and working straight away</strong>, at your own web address.
+              <strong>The site live and working straight away</strong>, at your own web address, hosted and run by us.
             </li>
             <li>
-              <strong>Your own code repository</strong> containing everything the site is made of - not a file we email you. You own it outright, and you can hand it to any developer you like, at any time, without asking us.
+              Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong>.
+            </li>
+            <li>
+              <strong>Your own code repository</strong> containing everything the site is made of, transferred into your name after twelve months on the plan (see section 4). You can then hand it to any developer you like, at any time, without asking us.
             </li>
             <li>Reasonable help getting it live and pointed at your domain.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">4. The first two weeks, and when ownership transfers</h2>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">4. The free month, the monthly plan, and when the code becomes yours</h2>
           <p>
-            We want to be completely straightforward about this, because it is the one part that isn&apos;t obvious.
+            We want to be completely straightforward about this, because it is the part that matters most.
           </p>
           <p className="mt-3">
-            <strong>Your site goes live immediately.</strong> From the moment you pay, it is running, resolving at your address, and yours to use and show to customers. Nothing about it is held back or watermarked.
+            <strong>Your site goes live immediately, and the first 30 days are free.</strong> From the moment you start, it is running, resolving at your address, and yours to use and show to customers. Nothing about it is held back or watermarked. If you cancel within those 30 days, you are charged nothing.
           </p>
           <p className="mt-3">
-            For the <strong>first fourteen days we host and run it</strong> while you satisfy yourself that it&apos;s right. This is the same fourteen days in which you can ask for a full refund for any reason. <strong>On day fifteen, the repository transfers into your name</strong> and the whole thing is unambiguously yours.
+            After the free month, the plan renews automatically at <strong>$9.99 per month plus any applicable tax</strong>, and it keeps renewing each month until you cancel. <strong>You can cancel any time</strong>, yourself, from your billing page, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
           </p>
           <p className="mt-3">
-            <strong>Would you rather have it sooner? Just ask.</strong> We&apos;ll transfer the repository to you on any day you like. The only condition is that taking ownership early ends the refund window - it wouldn&apos;t be fair to us for you to keep the site and take the money back, and it wouldn&apos;t be fair to you if we weren&apos;t clear about that up front. The choice is entirely yours, either way.
+            <strong>Stay on the plan for twelve months and the code becomes yours.</strong> At that point we transfer the site&apos;s code repository into your name, to keep and host anywhere, whether or not you continue with us afterwards. <strong>If you cancel before twelve months, the site comes down and the code is not transferred</strong> - the plan is what keeps the site live, and the twelve months is what earns the handover. We say this plainly here so it is never a surprise.
           </p>
           <p className="mt-3">
             Transferring a repository needs a free account with our code host, and we&apos;ll walk you through it. It takes a couple of minutes and you only ever do it once.
           </p>
           <p className="mt-3">
-            One thing to know if you plan to host it yourself: our code host offers free hosting for public repositories. If you want the code kept private, that needs either a paid plan with them or staying on our care plan, where we host it for you and the repository can stay private. Neither option changes the website your customers see - only who can read the code behind it.
+            While you are on the plan we host the site for you and the code can stay private. If you take the code after the twelve months and want to host it yourself, our code host offers free hosting for public repositories; keeping it private then needs a paid plan with them. Either way, that only affects who can read the code behind the site, never the website your customers see.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">5. What is not included</h2>
-          <p>So there is no confusion later, the price does <strong>not</strong> include:</p>
+          <p>So there is no confusion later, the plan does <strong>not</strong> include:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li>Ongoing hosting, domain registration, or email hosting.</li>
-            <li>Ongoing maintenance, content updates, or redesigns after handover.</li>
+            <li>Redesigns, new pages, or new functionality. These are quoted separately.</li>
+            <li>Email hosting.</li>
             <li>Search engine optimisation services, advertising, or marketing work.</li>
-            <li>Support beyond reasonable assistance with the initial handover.</li>
+            <li>More than two content changes in a calendar month. Unused changes do not carry over.</li>
           </ul>
           <p className="mt-3">
-            Most of the above is available separately under our care plan - see below.
+            Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a month are included; see section 3. A domain, if you need one, is registered in your name after your first month, or we point one you already own.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">6. Care plan (optional, sold separately)</h2>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">6. The monthly plan</h2>
           <p>
-            After handover you can choose to put the site on our care plan. It is entirely optional, it is never added automatically, and the website is yours whether you take it or not.
+            The monthly plan is how your site stays live and looked after. After the free first month it bills at <strong>$9.99 per month plus any applicable tax</strong> and renews automatically each month until you cancel.
           </p>
-          <p className="mt-2">The plan covers:</p>
+          <p className="mt-2">It covers:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>Hosting, SSL certificate, backups, uptime monitoring and security updates.</li>
             <li>
-              <strong>Up to two content changes per calendar month</strong> - editing text, updating your hours or contact details, swapping an image, adding or removing a service.
+              <strong>Up to two content changes per calendar month</strong>: editing text, updating your hours or contact details, swapping an image, adding or removing a service.
             </li>
           </ul>
           <p className="mt-3">
             It does not cover redesigns, new pages, or new functionality. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
           </p>
           <p className="mt-3">
-            The plan bills monthly and <strong>you can cancel at any time</strong>, yourself, from the billing portal - no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for. If you cancel, we will help you move the site to a host of your choosing.
+            <strong>You can cancel at any time</strong>, yourself, from your billing page, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then. If you have completed twelve months on the plan, the code repository is already yours to keep (section 4).
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">7. Ownership</h2>
           <p>
-            The website we built for you is yours. You own the design, layout, copy and code, and you may modify, host, sell or discard it as you see fit. We keep no claim over any of it. Section 4 sets out when the repository transfers into your name; that is a question of timing, not of who owns what. We may reference the work as an example of what we do, unless you ask us not to.
+            While you are on the plan, the website is yours to use, show to customers and rely on as your own. The design, layout and copy were made for you and for no one else. The code itself transfers into your name after twelve months on the plan (section 4); until then we host and maintain it for you. Once transferred, you may modify, host, sell or discard it as you see fit, and we keep no claim over it. We may reference the work as an example of what we do, unless you ask us not to.
           </p>
           <p className="mt-3">
             Your business name, logo, trademarks, photographs and customer reviews remain yours and always were.
@@ -159,16 +162,16 @@ export default function TermsOfService() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">10. Refunds</h2>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">10. Billing and cancellation</h2>
           <p>
-            See our <Link href="/webdesign/refunds" className="text-accent underline">refund policy</Link>. In short: full refund within 14 days of purchase, no explanation required.
+            See our <Link href="/webdesign/refunds" className="text-accent underline">billing and cancellation policy</Link>. In short: the first 30 days are free, it is then $9.99 a month plus tax, and you can cancel any time from your billing page.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">11. Payment</h2>
           <p>
-            Payments are processed by Stripe. We never see or store your card details. Prices are in US dollars. You are responsible for any taxes that apply to you.
+            Payments are processed by Stripe. We never see or store your card details. Prices are in US dollars, and the plan is a recurring monthly subscription: after the free first month it renews automatically at $9.99 per month plus any applicable tax until you cancel. You can cancel any time from your billing page, and you are responsible for any taxes that apply to you.
           </p>
         </section>
 

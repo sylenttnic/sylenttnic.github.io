@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">2. Information you give us</h2>
           <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li><strong>If you buy:</strong> your name, business name, email address and billing address, collected through Stripe.</li>
+            <li><strong>If you start the plan:</strong> your name, business name, email address and billing address, collected through Stripe.</li>
             <li><strong>If you contact us:</strong> whatever you put in a form or an email.</li>
           </ul>
         </section>
