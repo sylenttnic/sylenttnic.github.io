@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 12 September 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 13 September 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -44,7 +44,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">1. Who we are</h2>
           <p>
-            Sylentt is operated by <strong>Sylentt Partners LLC</strong>, a Colorado limited liability company, mailing address 18121 E. Hampden Ave. Unit C - 751 Aurora, CO 80013 United States. You can reach us at <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>.
+            Sylentt is operated by <strong>Sylentt Partners LLC</strong>, a Utah limited liability company, mailing address PO Box 11 Richmond, UT 84333 United States. You can reach us at <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>.
           </p>
         </section>
 
@@ -205,7 +205,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">15. Governing law</h2>
           <p>
-            These terms are governed by the laws of the State of Colorado, USA, and any dispute will be handled in the courts of that state.
+            These terms are governed by the laws of the State of Utah, USA, and any dispute will be handled in the courts of that state.
           </p>
         </section>
       </div>

@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Privacy Policy</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC &middot; Effective 22 August 2026
+        Sylentt Partners LLC &middot; Effective 13 September 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -131,7 +131,7 @@ export default function PrivacyPolicy() {
 
       <footer className="mt-14 pt-6 border-t border-border text-sm text-ink/60">
         Questions, or want your information removed? Email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>. A person reads it.<br />
-        Sylentt Partners LLC &middot; 18121 E. Hampden Ave. Unit C - 751 Aurora, CO 80013 United States
+        Sylentt Partners LLC &middot; PO Box 11 Richmond, UT 84333 United States
       </footer>
     </div>
   );
