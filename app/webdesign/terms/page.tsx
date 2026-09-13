@@ -44,7 +44,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">1. Who we are</h2>
           <p>
-            Sylentt is operated by <strong>Sylentt Partners LLC</strong>, a Utah limited liability company, mailing address PO Box 11 Richmond, UT 84333 United States. You can reach us at <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>.
+            Sylentt is operated by <strong>Sylentt Partners LLC</strong>, a Utah limited liability company, mailing address 145 E 550 N Unit 75 Richmond, UT 84333 United States. You can reach us at <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>.
           </p>
         </section>
 

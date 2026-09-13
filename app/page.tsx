@@ -120,14 +120,6 @@ const jsonLdOrg = {
     jobTitle: "Founder & Lead Integration Engineer",
     sameAs: "https://www.linkedin.com/in/nic-aslett/"
   },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "40 W Cache Valley Blvd",
-    addressLocality: "Logan",
-    addressRegion: "UT",
-    postalCode: "84341",
-    addressCountry: "US",
-  },
   geo: {
     "@type": "GeoCoordinates",
     latitude: 41.7583,

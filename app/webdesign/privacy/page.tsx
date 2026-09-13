@@ -131,7 +131,7 @@ export default function PrivacyPolicy() {
 
       <footer className="mt-14 pt-6 border-t border-border text-sm text-ink/60">
         Questions, or want your information removed? Email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>. A person reads it.<br />
-        Sylentt Partners LLC &middot; PO Box 11 Richmond, UT 84333 United States
+        Sylentt Partners LLC &middot; 145 E 550 N Unit 75 Richmond, UT 84333 United States
       </footer>
     </div>
   );
