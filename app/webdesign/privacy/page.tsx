@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Privacy Policy</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC &middot; Effective 13 September 2026
+        Sylentt Partners LLC &middot; Effective 15 September 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -75,9 +75,10 @@ export default function PrivacyPolicy() {
             <li><strong>Web3Forms</strong> - delivery of contact form submissions</li>
             <li><strong>Instantly</strong> and <strong>Google Workspace</strong> - sending and receiving email</li>
             <li><strong>HubSpot</strong> - keeping track of conversations</li>
+            <li><strong>Meta</strong> (Facebook) - measuring and improving our own ads on our web design pages</li>
           </ul>
           <p className="mt-3">
-            <strong>We do not sell your information, and we do not share it for anyone else&apos;s advertising.</strong>
+            <strong>We do not sell your information.</strong> On our web design pages at sylentt.com/webdesign we use the Meta Pixel (see section 8): it reports activity such as page views and preview requests to Meta so we can measure our own ads and reach similar people. That is the only advertising sharing we do, and you can limit it through the controls in section 8.
           </p>
         </section>
 
@@ -110,7 +111,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">8. Cookies</h2>
           <p>
-            Our website previews do not use tracking or advertising cookies. Stripe&apos;s checkout page sets cookies necessary to process a payment securely.
+            The website previews we build do not use tracking or advertising cookies. Our own web design pages at sylentt.com/webdesign use the <strong>Meta Pixel</strong>, which sets an advertising cookie (_fbp) and reports activity such as page views and preview requests to Meta, so we can measure how our ads perform. You can limit this through your browser&apos;s cookie controls and your Meta ad preferences. Stripe&apos;s checkout page sets cookies necessary to process a payment securely.
           </p>
         </section>
 

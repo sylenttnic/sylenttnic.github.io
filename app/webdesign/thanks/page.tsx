@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import PixelLead from './PixelLead';
 
 export const metadata: Metadata = {
   title: 'Got it | Sylentt',
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 export default function PreviewRequestThanks() {
   return (
     <div className="pt-24 md:pt-36 pb-16 md:pb-24 px-6 max-w-4xl mx-auto">
+      <PixelLead />
       <div className="mb-6">
         <Link
           href="/webdesign/"
