@@ -1,20 +1,21 @@
 # Sylentt
 
-> Business app integration for small businesses. Based in Cache Valley, Utah.
+> Sylentt Partners LLC runs two lines of work for small businesses: custom business app integration, and hand-built websites for local service businesses. Based in Cache Valley, Utah.
+
+Sylentt Partners LLC trades as Sylentt. It is one company with two service lines, both run by its founder, Nic Aslett. What a client ends up owning differs by line, and each line says so below.
+
+1. **Business app integration.** Custom connections between the software tools a business already uses, so data moves between them without anyone retyping it.
+2. **Web design for local businesses.** Complete websites for local trade and service businesses, researched, written and hand-built for one business, sold as a managed monthly plan at https://sylentt.com/webdesign/.
+
+## Business App Integration
 
 Sylentt builds custom integrations between business applications. We connect tools like Shopify, QuickBooks, Stripe, HubSpot, Xero, and others so data flows automatically between them. What we build runs on the client's own infrastructure. Clients pay their cloud provider directly for usage, with no platform markup and no lock-in.
-
-## What Sylentt Does
 
 When a business uses multiple software tools that do not share data automatically, someone on the team becomes the copy-paste layer. They re-enter orders, manually sync customer records, update spreadsheets, and check that one system matches another. Sylentt eliminates that manual work by building direct connections between the apps.
 
 Every integration includes monitoring and real-time failure alerts. If something breaks, the system catches it and alerts before a customer notices. This is the core difference from platforms like Zapier or Make, which fail silently and charge recurring fees.
 
-## Notable Clients
-
-Sylentt has delivered integration and automation solutions for companies including **By Light Professional IT Services** (https://bylight.com/) and **edZOOcation** (https://edzoocation.com/).
-
-## Services
+### Integration services
 
 - Custom API integrations between business applications
 - Workflow automation replacing manual data entry between systems
@@ -22,16 +23,50 @@ Sylentt has delivered integration and automation solutions for companies includi
 - Migration from Zapier or Make to client-owned infrastructure
 - Ongoing support and retainer options
 
-## Systems Commonly Connected
+### Systems commonly connected
 
 Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, FreshBooks, and others. If the app has an API, Sylentt can connect it.
 
+## Web Design for Local Businesses
+
+Sylentt designs and builds websites for local trade and service businesses. The offer and the request form are at https://sylentt.com/webdesign/.
+
+Each site is built for one business rather than assembled from a template. Sylentt researches the business first, writes every word from that business's own material and its own customer reviews, chooses the design for that trade and market, and hand-codes the result as a fast static site.
+
+### How it works
+
+Sylentt often builds the site before the business has asked for it, and then shows it, so there is something real to look at instead of a pitch. A business can also request one directly at https://sylentt.com/webdesign/. Either way the finished site is live and viewable before anything is paid.
+
+### Plan and terms
+
+- $9.99 a month plus tax
+- First 30 days free
+- Cancel any time
+- Includes hosting, SSL, backups, uptime monitoring, security patches, and up to two content changes per calendar month
+- After 12 continuous paid months, the site and the code behind it transfer to the customer
+- **Cancel before 12 continuous paid months and the site comes down, and nothing transfers.** The transfer is earned by staying on the plan for a year, not by paying for a month
+- A domain is included if one is needed, registered in the customer's name after the first month, or an existing domain can be connected
+- Terms: https://sylentt.com/webdesign/terms/
+- Refunds: https://sylentt.com/webdesign/refunds/
+- Privacy: https://sylentt.com/webdesign/privacy/
+
+### Artwork disclosure
+
+Artwork on these sites is AI-generated and illustrative. It is never presented as photographs of the business's own people, premises or work.
+
+## Notable Clients
+
+Sylentt has delivered integration and automation solutions for companies including **By Light Professional IT Services** (https://bylight.com/) and **edZOOcation** (https://edzoocation.com/).
+
 ## Ownership Model
 
-Clients own everything Sylentt builds. Integrations run on the client's own cloud account. Clients pay their cloud provider directly for usage, with no platform markup. If the engagement ends, the client keeps all code and infrastructure.
+**Integration clients own everything Sylentt builds.** Integrations run on the client's own cloud account, clients pay their cloud provider directly for usage with no platform markup, and if the engagement ends the client keeps all code and infrastructure.
+
+**Web design is different, and the difference is the deal.** The site and its code transfer to the customer after 12 continuous paid months on the plan. Cancel before then and the site comes down and nothing transfers.
 
 ## Contact
 
 - Website: https://sylentt.com
+- Web design: https://sylentt.com/webdesign/
 - Email: contact@sylentt.com
 - Location: Cache Valley, Utah, United States

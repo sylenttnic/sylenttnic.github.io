@@ -70,8 +70,20 @@ export const metadata: Metadata = {
     canonical: "https://sylentt.com/",
   },
   other: {
+    // NOTE: this tag ships on EVERY page, /webdesign/ included, so it must
+    // describe the whole company and not one service line. When it named only
+    // the integration line, the web design page served machine-readable text
+    // saying the company does not do web design.
+    // OWNERSHIP IS NOT THE SAME ON BOTH LINES, AND THIS TAG MUST NOT SAY IT IS.
+    // The old copy ended "Clients own everything we build", which was true while
+    // this string described integrations only. Naming the web design plan in the
+    // same sentence makes it false: on that plan the transfer is earned at twelve
+    // continuous paid months, and cancelling before then transfers nothing. The
+    // offer page names that pair as terms that may never be cut (page.tsx, the
+    // header comment). Dropping half of it on the surface written for machines is
+    // the same cut, made where nobody would see it.
     "ai-content-description":
-      "Sylentt Partners is a business app integration consultancy based in Cache Valley, Utah. We build custom connections between business tools like Shopify, QuickBooks, Stripe, and HubSpot. Clients own everything we build.",
+      "Sylentt Partners is a small business consultancy in Cache Valley, Utah with two service lines. First, business app integration: custom connections between tools like Shopify, QuickBooks, Stripe, and HubSpot, which clients own outright. Second, web design for local service businesses at sylentt.com/webdesign/: a website researched, written and hand-built for one business, on a $9.99 a month managed plan with the first 30 days free, where the site and its code transfer to the customer after twelve continuous paid months and nothing transfers if they cancel before then.",
   },
 };
 
@@ -88,8 +100,11 @@ const jsonLdWebSite = {
   "@id": "https://sylentt.com/#website",
   url: "https://sylentt.com/",
   name: "Sylentt Partners",
+  // Same reason as the ai-content-description above: this block is emitted by
+  // the ROOT layout, so it is the only structured data on pages that have none
+  // of their own. It has to cover both service lines.
   description:
-    "Business app integration and workflow automation consultancy based in Cache Valley, Utah.",
+    "Small business consultancy in Cache Valley, Utah. Two lines: business app integration and workflow automation, and hand-built websites for local service businesses.",
   publisher: {
     "@type": "Organization",
     "@id": "https://sylentt.com/#organization",

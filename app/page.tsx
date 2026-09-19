@@ -105,9 +105,20 @@ const jsonLdOrg = {
   "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
   "@id": "https://sylentt.com/#organization",
   name: "Sylentt Partners",
-  alternateName: ["Sylentt LLC", "Sylentt"],
+  // "Sylentt LLC" was never the legal name. The entity is Sylentt Partners LLC
+  // (Utah), as published in the /webdesign/ terms and policy pages.
+  alternateName: ["Sylentt", "Sylentt Partners LLC"],
+  // BOTH service lines, because this node is the definition of the entity. An
+  // AI asked "what does Sylentt Partners do" answers from here and from
+  // /llms.txt, and while both named only integration, both answered that the
+  // company does not do web design, while /webdesign/ was selling it.
+  //
+  // NOTE WHAT THIS DESCRIPTION DOES NOT SAY. It does not say clients own what
+  // we build, because that is true without qualification on ONE of the two
+  // lines. See the ownership FAQ below, which had to be scoped in the same
+  // change for the same reason.
   description:
-    "Business app integration and workflow automation for small businesses. We build custom connections between your tools so your team stops being the copy-paste layer.",
+    "Sylentt Partners is a small business consultancy in Cache Valley, Utah with two service lines. Business app integration: custom connections between the tools a business already uses, so the team stops being the copy-paste layer. Web design: websites researched, written and hand-built for one local service business, on a managed monthly plan.",
   url: "https://sylentt.com",
   logo: "https://sylentt.com/logo-symbol.png",
   image: "https://sylentt.com/logo_full.png",
@@ -147,8 +158,37 @@ const jsonLdOrg = {
     "QuickBooks Automation",
     "Stripe Sync",
     "HubSpot Integration",
-    "Zapier Alternatives"
+    "Zapier Alternatives",
+    "Web Design",
+    "Web Development",
+    "Small Business Websites",
+    "Local Service Business Websites",
+    "Website Hosting and Maintenance"
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Sylentt Partners services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          "@id": "https://sylentt.com/#integration-service",
+          name: "Business app integration and workflow automation",
+          serviceType: "Business app integration",
+          url: "https://sylentt.com/services/",
+          provider: { "@id": "https://sylentt.com/#organization" },
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          // Resolves to the Service node emitted by app/webdesign/layout.tsx.
+          "@id": "https://sylentt.com/webdesign/#service",
+        },
+      },
+    ],
+  },
 };
 
 const jsonLdFaq = {
@@ -184,7 +224,7 @@ const jsonLdFaq = {
       name: "Do I own everything you build?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. The integrations run on your cloud account. The code is yours. If we part ways, everything keeps running. There is no lock-in and no proprietary platform you lose access to.",
+        text: "Yes, and on the integration side there is no catch: the integrations run on your cloud account, the code is yours, and if we part ways everything keeps running. There is no lock-in and no proprietary platform you lose access to. Our web design plan works differently, because the site is included in the monthly price rather than bought: the site and its code become yours after twelve continuous paid months on the plan, and if you cancel before then the site comes down and nothing transfers.",
       },
     },
     {
@@ -217,7 +257,7 @@ const faqItems = [
   {
     question: "Do I own everything you build?",
     answer:
-      "Yes. The integrations run on your cloud account. The code is yours. If we part ways, everything keeps running. There is no lock-in and no proprietary platform you lose access to.",
+      "Yes, and on the integration side there is no catch: the integrations run on your cloud account, the code is yours, and if we part ways everything keeps running. There is no lock-in and no proprietary platform you lose access to. Our web design plan works differently, because the site is included in the monthly price rather than bought: the site and its code become yours after twelve continuous paid months on the plan, and if you cancel before then the site comes down and nothing transfers.",
   },
   {
     question: "How long does a typical integration take?",

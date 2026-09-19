@@ -39,27 +39,41 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <!-- lastmod IS A CLAIM ABOUT THE FILE, AND A STALE ONE SUPPRESSES RECRAWL.
+       Every URL below carried 2026-03-14 while /webdesign/ was rewritten
+       repeatedly through August and September, so the one signal that tells a
+       crawler "this changed, read it again" was saying the opposite. When you
+       change a page, change its lastmod in the same commit; AGENTS.md already
+       requires this file to match the site, and a date is part of matching.
+
+       Dates below are sourced, not guessed: the offer page from the site repo
+       commit that changed it (21d9c51, 2026-09-19), the three policy pages from
+       the entity and mailing-address amendments of 2026-09-13.
+
+       /webdesign/ is raised from 0.5 to 0.8, equal with /services/. It is not a
+       minor page under the integration line; it is the front door of the second
+       service line and the destination of every cold email and ad we run. -->
   <url>
     <loc>https://sylentt.com/webdesign/</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sylentt.com/webdesign/refunds/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://sylentt.com/webdesign/terms/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://sylentt.com/webdesign/privacy/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-09-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
