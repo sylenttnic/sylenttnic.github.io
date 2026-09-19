@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- /webdesign/samples/* is DELIBERATELY ABSENT, and so are /webdesign/thanks/
+       and /webdesign/request-error/. Every one of them ships
+       <meta name="robots" content="noindex, nofollow">, and listing a noindex
+       page in a sitemap asks a crawler to index what the page tells it not to.
+
+       The sample pages are demonstrations for businesses that are invented. If
+       one were indexed, a search engine or an AI crawler could surface
+       "Northfield Electric, Rockford IL" as a real company, which is the exact
+       thing those pages are built not to do. For the same reason they are not
+       described in llms.txt or llms-full.txt.
+
+       They are NOT disallowed in robots.txt either, and that is on purpose: a
+       Disallow stops a crawler fetching the page, so it never reads the noindex
+       and a stale URL can sit in the index anyway. Permissive robots.txt plus
+       a noindex tag is the combination that actually keeps them out. -->
   <url>
     <loc>https://sylentt.com/</loc>
     <lastmod>2026-03-14</lastmod>

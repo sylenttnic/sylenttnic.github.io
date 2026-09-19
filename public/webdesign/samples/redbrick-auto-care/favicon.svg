@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Typographic mark, "DAC": initials mechanically drawn from the business's
+     own name, "Redbrick Auto Care," the same convention this repo uses
+     elsewhere. No logo is reproduced: the dossier records no sampleable
+     brand asset at any tier (§4.5 — no real-world brand colour recovered).
+     Ink/bg pairing, verbatim from brief §2.2 (ink on bg, ratio 13.97:1): a
+     raw hex here is the one house-sanctioned exception (a favicon is an
+     asset, not a stylesheet), kept in step with tokens.css by hand. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Redbrick Auto Care">
+  <rect width="64" height="64" fill="#1F2624"/>
+  <text x="32" y="41" text-anchor="middle"
+        font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="22" font-weight="500"
+        fill="#F3F4F0">DAC</text>
+</svg>

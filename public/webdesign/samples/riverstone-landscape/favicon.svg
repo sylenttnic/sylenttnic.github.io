@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Riverstone Landscape and Supply favicon mark. A square block in the site's own
+  accent (quarry-rust, the accent token, #8A3F24) carrying "MLS" — initials
+  mechanically drawn from the business's own name, "Riverstone Landscape and
+  Supply" (skipping "and"), the same convention used across this repo
+  (e.g. bend-lawn-service-bend-or's "BLS"). No logo is reproduced: dossier
+  §4.5 records a logo exists in the owner's header but its form is not
+  determinable (BLOCKED), so this is a typographic mark only, never a
+  fabricated badge (design-rules §8).
+
+  The radius-none token is this site's answer everywhere but the primary CTA (brief
+  §5.4), so the mark has square corners, no exception carved out here. The
+  face is Barlow Condensed's own metrics-matched fallback stack (brief §2.6):
+  an SVG cannot load a self-hosted woff2 at icon size, and 'Arial Narrow' is
+  what the page paints during swap anyway. Literal colours, hand-kept in
+  step with tokens.css §5.4.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Riverstone Landscape and Supply">
+  <rect width="64" height="64" fill="#8A3F24"/>
+  <text x="32" y="41" text-anchor="middle"
+        font-family="'Arial Narrow', Arial, sans-serif" font-size="26" font-weight="600"
+        fill="#F7F2EA">MLS</text>
+</svg>

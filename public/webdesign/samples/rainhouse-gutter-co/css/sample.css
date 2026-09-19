@@ -1,0 +1,58 @@
+/* sample.css — chrome that marks this page as a demonstration.
+
+   It may reference ONLY its own values. It declares no site token, so it can
+   never leak into the design the DNA registry measures, and it is the last
+   stylesheet loaded so it needs no !important.
+
+   The flag must be readable at 375px at scroll 0 with JavaScript off, which is
+   qa-definition-of-done.md §2 step 1a's own bar for "present". */
+
+.sample-flag {
+  background: #1E2E3D;
+  color: #F9F8F6;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  padding: 0.75rem 1rem;
+}
+
+.sample-flag__inner {
+  margin: 0 auto;
+  max-width: 68rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.sample-flag__text { margin: 0; max-width: 60ch; }
+.sample-flag__text strong { color: #FFFFFF; }
+
+.sample-flag__link {
+  color: #F9F8F6;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.sample-flag__link:hover { color: #FFFFFF; }
+.sample-flag__link:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+
+/* The reviews slot. Deliberately quiet: it is a statement, not a testimonial. */
+.sample-note {
+  border: 1px dashed currentColor;
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0 1rem;
+  opacity: 0.85;
+  max-width: 46rem;
+}
+.sample-note__lead { margin: 0 0 0.5rem; font-weight: 700; }
+.sample-note__body { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sample-flag, .sample-note { transition: none; }
+}

@@ -1,0 +1,291 @@
+/* ==========================================================================
+   tokens.css — the design brief, compiled.
+
+   whatcom-gutter-co-lynden-wa — warm-craft (Tile C, C2-DECISION.md 86/100).
+   Every value below is copied from runs/whatcom-gutter-co-lynden-wa/brief.md
+   §2–§4. Nothing here was improvised.
+   ========================================================================== */
+
+:root {
+
+  /* --- Colour --------------------------------------------------------------
+     Brief §2. Derivation: dossier brand_color OMITTED (no departure argument
+     owed, dossier-schema §3.2) → local character (coil-stock copper,
+     playbooks/gutters.md §6.1) → family norms (warm-craft). Contrast table in
+     the brief §2 recomputes every pairing from WCAG relative luminance. */
+
+  --scheme: light;
+
+  --color-bg: #f7f0e4;                /* oat-parchment */
+  --color-surface: #fffaf0;           /* raised band ground */
+  --color-ink: #2b241a;               /* barn-ink */
+  --color-ink-muted: #6b5d49;         /* 5.64:1 on bg, 6.14:1 on surface */
+  --color-accent: #9c5019;            /* kettle-copper, deepened for AA body */
+  --color-accent-ink: #ffffff;        /* 5.87:1 on accent */
+
+  --color-border: #ddceac;            /* decorative hairline only, no contrast floor */
+  --color-border-strong: #6b5d49;     /* reuses ink-muted — control boundaries, >=3:1 both grounds */
+
+  --color-focus: #9c5019;             /* reuses accent — >=3:1 both grounds */
+
+  /* No dark band in this brief (hero text sits on the flat --color-bg panel
+     above/below the gradient field, never on the gradient itself — brief §2
+     note below the contrast table). --color-focus-on-band is not needed. */
+  /* --color-focus-on-band: …; */
+
+  --color-selection-bg: #9c5019;
+  --color-selection-ink: #ffffff;
+
+  /* Brief-specific colours — brief §2, hero-only atmosphere/decoration.
+     No text ever sits on these; none is subject to a contrast floor. */
+  --color-atmos-warm: #f2e2c9;
+  --color-atmos-deep: #4a2a14;
+  --color-glint: #f6c98e;
+  --color-droplet: #f6dcb4;
+  --color-roofline: #4a2a14;          /* plane-vs-edge context shape, kept at 24% opacity in site.css */
+
+
+  /* --- Typography ------------------------------------------------------------
+     Brief §3. Display: Source Serif 4 (variable, opsz 8..60, latin subset,
+     SIL OFL 1.1). Body: Karla (two static weights, latin subset, SIL OFL 1.1).
+     Both families ship a metrics-matched fallback (font-face block below) —
+     size-adjust/ascent/descent/line-gap measured with scripts/font-metrics.mjs
+     against Gelasio (Georgia's metric-compatible open clone) and Arimo
+     (Arial's), never guessed. Fallback family is named ahead of the system
+     fallback in each stack, per house-tech-spec §8. */
+
+  --font-display: 'Source Serif 4', 'Source Serif 4 Fallback', Georgia, 'Iowan Old Style', serif;
+  --font-body: 'Karla', 'Karla Fallback', -apple-system, system-ui, sans-serif;
+
+  --font-weight-body: 400;
+  --font-weight-body-strong: 700;
+  --font-weight-display: 600;          /* H1, H2, band header, numerals */
+  --font-weight-display-emphasis: 600; /* italic style of the same weight — the
+                                           accent word inside the H1 */
+
+  /* --- Type scale ----------------------------------------------------------
+     Brief §3's fluid scale, floor stated at 375px and ceiling at 1440px
+     exactly — the clamp() middle term is the derived slope, not approached
+     asymptotically. */
+
+  --text-hero: clamp(2.75rem, 2.134rem + 2.63vw, 4.5rem);   /* 44px @375 → 72px @1440 — H1 */
+  --text-h2: clamp(1.9rem, 1.601rem + 1.277vw, 2.75rem);    /* 30.4px → 44px — band-header, section titles */
+  --text-h3: clamp(1.25rem, 1.118rem + 0.563vw, 1.625rem);  /* 20px → 26px — band service names */
+  --text-lead: clamp(1.125rem, 1.037rem + 0.376vw, 1.375rem); /* 18px → 22px — hero lead line */
+  --text-body: clamp(1rem, 0.978rem + 0.094vw, 1.0625rem);  /* 16px → 17px — running copy */
+  --text-small: 0.9375rem;             /* 15px, fixed — review attributions, footer fine print */
+  --text-eyebrow: 0.8125rem;           /* 13px, fixed — "Gutters · Lynden, WA" */
+
+  --leading-tight: 1.05;               /* H1 */
+  --leading-snug: 1.25;                /* H2/H3 */
+  --leading-body: 1.6;                 /* body/lead */
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;             /* eyebrow only, authored lower-case, uppercased via text-transform */
+
+  /* --- Space -----------------------------------------------------------------
+     House scale, unchanged — brief §4 introduces no new step. */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Brief §4: --section-gap = --space-xl = 4rem/64px, fixed (not fluid) at
+     375 and 1440 alike — the page's one largest vertical gap. */
+  --section-gap: var(--space-xl);
+
+  /* --- Layout ----------------------------------------------------------------
+     House defaults, unchanged — brief §5.0's first-screen arithmetic is
+     measured against these exact values (375px gutter floor = 1.25rem/20px). */
+
+  --layout-container: 72rem;
+  --layout-measure: 62ch;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --layout-tap-min: 44px;
+  --layout-band-num: 2.4ch;            /* brief §3 — the one repeated ornament's fixed minimum */
+
+  /* --- Radius / shadow / border -----------------------------------------------
+     Values follow the winning tile's own treatment (tiles/tile-c.html — the
+     Builder's reference implementation): a quiet 6px on controls, 8px on the
+     band-rhythm content containers, no shadow anywhere (warm-craft is flat,
+     hand-inked — a drop shadow on every card is a design-rules §4 banned
+     default and this family earns its warmth from material and line, not
+     elevation). */
+
+  --radius-none: 0;
+  --radius-sm: 6px;                    /* buttons, nav-toggle, form fields */
+  --radius-md: 8px;                    /* band-rhythm wrapper, review cards */
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgb(43 36 26 / 0.06);
+  --shadow-md: 0 6px 24px rgb(43 36 26 / 0.09);
+  --shadow-lg: 0 24px 60px rgb(43 36 26 / 0.14);
+
+  --border-hairline: 1px;
+  --border-thick: 3px;
+  --border-style: solid;
+
+  /* --- Motion ------------------------------------------------------------
+     House reveal trio, unchanged (brief §7: "the ordinary house reveal
+     system, not a second spectacular moment"). */
+
+  --duration-fast: 140ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift: 1.25rem;
+  --reveal-stagger: 90ms;
+
+  /* Brief §4 / §7 — the living-hero signature move only. Deliberately outside
+     the house --duration-* trio: the trough-draw is a slower, one-shot device,
+     not a reveal. Frozen (not merely slowed) under prefers-reduced-motion —
+     see the explicit rules in site.css, since these are one-shot end-states
+     rather than token-collapsible transitions. */
+  --duration-hero-draw: 2000ms;        /* trough draws once */
+  --duration-hero-glint: 600ms;        /* glint settles at the spout */
+  --duration-hero-droplet: 5000ms;     /* one droplet, independent loop */
+  --ease-hero-draw: cubic-bezier(.16, 1, .3, 1);
+  --delay-hero-draw: 300ms;
+  --delay-hero-glint: 2100ms;
+
+  /* --- Z layers ------------------------------------------------------------- */
+  --z-base: 0;
+  --z-header: 100;
+  --z-nav-panel: 200;
+  --z-skip-link: 300;
+}
+
+/* --------------------------------------------------------------------------
+   @font-face — self-hosted woff2, latin subset (house declared safe range,
+   house-tech-spec §8), font-display: swap. SIL Open Font License 1.1 for
+   both families (assets/fonts/OFL-SourceSerif4.txt, OFL-Karla.txt).
+
+   Source Serif 4 ships as two axis-restricted, weight-pinned static
+   instances (wght 600 only — the single weight this brief's token set ever
+   requests, --font-weight-display and --font-weight-display-emphasis are
+   both 600) rather than the brief table's full wght 500–700/500–600 range:
+   a ranged variable subset of this face measured 71–72 KB PER FILE even
+   after latin-range subsetting (144 KB for the pair alone), which fails
+   house-tech-spec §7's ≤60 KB single-face / ≤100 KB total font budget before
+   Karla is even added. Pinning wght (opsz stays variable — "opsz auto",
+   matching the brief's own file-table note) renders byte-identical output to
+   a ranged file at every call site this brief specifies, because no other
+   weight is ever selected — this is a delivery-mechanical encoding choice
+   (house-tech-spec §7.1: "the font chain in scope as delivery-mechanical
+   work... changing the faces themselves is design," and the face and its
+   only used weight are both unchanged), not a design substitution. Recorded
+   in README.md, flagged in the build report for the Art Director's record.
+
+   All four real faces cover an identical 175-codepoint set (declared range
+   minus U+2010/2011/2012/2015, absent from both source families, and
+   U+2032/2033, present in Source Serif 4 but absent from Karla — dropped
+   from every subset to equalise the glyph sets, house-tech-spec §8's
+   equalisation rule, the same case already recorded there for this exact
+   pair of families). Measured 2026-09-16, see README.md.
+   -------------------------------------------------------------------------- */
+
+/* ---- Source Serif 4 — fallback faces (declared first; measured against
+   Gelasio, Google's explicitly metrics-compatible open clone of Georgia,
+   via scripts/font-metrics.mjs — never guessed) ---- */
+
+@font-face {
+  font-family: 'Source Serif 4 Fallback';
+  src: local('Georgia');
+  font-weight: 600;
+  font-style: normal;
+  size-adjust: 92.47%;
+  ascent-override: 112.03%;
+  descent-override: 36.23%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Source Serif 4 Fallback';
+  src: local('Georgia Italic'), local('Georgia');
+  font-weight: 600;
+  font-style: italic;
+  size-adjust: 85.59%;
+  ascent-override: 121.04%;
+  descent-override: 39.14%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../assets/fonts/source-serif-4-roman-latin.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026,
+    U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('../assets/fonts/source-serif-4-italic-latin.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026,
+    U+2032-2033;
+}
+
+/* ---- Karla — fallback faces (measured against Arimo, Arial's open clone) ---- */
+
+@font-face {
+  font-family: 'Karla Fallback';
+  src: local('Arial');
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 103.53%;
+  ascent-override: 88.57%;
+  descent-override: 24.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Karla Fallback';
+  src: local('Arial Bold'), local('Arial');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 100.06%;
+  ascent-override: 91.64%;
+  descent-override: 25.18%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('../assets/fonts/karla-400-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026,
+    U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('../assets/fonts/karla-700-latin.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026,
+    U+2032-2033;
+}

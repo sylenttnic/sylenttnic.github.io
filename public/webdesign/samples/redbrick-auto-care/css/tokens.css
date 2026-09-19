@@ -1,0 +1,322 @@
+/* tokens.css — Redbrick Auto Care, Abilene TX. Source: brief.md §2, §3, §4.1.
+   Archetype: full-bleed-immersive. Family: editorial-modern. Palette:
+   verdigris / bone-white / light (brief §2.1 — real-world colour
+   UNAVAILABLE, dossier §4.5; derived from local character + family norms,
+   pushed for distinctiveness against the market's blue/navy — dossier §4.6,
+   playbook §7). Every value traces to brief §2.2-§2.3, §3-§3.1 or §4.1. */
+
+:root {
+
+  /* --- Colour --------------------------------------------------------------
+     brief §2.2. Full contrast table computed and re-verified independently
+     twice — brief §2.3. */
+
+  --scheme: light;
+
+  --color-bg: #F3F4F0;                /* bone-white — page ground */
+  --color-surface: #FFFFFF;           /* the two review/trust panels only */
+  --color-ink: #1F2624;               /* verdigris-tinted near-black */
+  --color-ink-muted: #55605C;
+  --color-accent: #3F7267;            /* verdigris/copper-patina, hue 165.6° */
+  --color-accent-ink: #FFFFFF;
+
+  /* House-required structural colours */
+  --color-border: #D6DAD2;            /* decorative hairlines only — no contrast floor */
+
+  /* Control boundary, WCAG 1.4.11: >=3:1 against bg AND surface. */
+  --color-border-strong: #8C857A;
+
+  --color-focus: #3F7267;             /* :focus-visible on bg/surface */
+
+  /* Dark-band-safe ring — REQUIRED, the hero's scrim is a dark band (brief
+     §2.3, N3/N4). Scoped: .hero-content :focus-visible { outline-color:
+     var(--color-focus-on-scrim); }, never global. N3: --color-focus on the
+     scrim is 2.89:1 and FAILS — this token is why it exists. */
+  --color-focus-on-scrim: #7FBFA9;    /* == --color-scrim-accent below, a control token not a content one */
+
+  --color-selection-bg: #3F7267;
+  --color-selection-ink: #FFFFFF;
+
+  /* Brief-specific colours (brief §2.2) — the hero's ink scrim (full-bleed
+     text ground). Declared separately from --color-ink though identical: a
+     GROUND under light text here, not body ink on a light page, so a future
+     recolour of one must not silently recolour the other. */
+  --color-scrim: #1F2624;             /* == --color-ink */
+  --color-scrim-text: #F6F7F4;
+  --color-scrim-text-muted: #CDD6D0;
+  --color-scrim-accent: #7FBFA9;      /* h1 em, facts-strip star — same hex as --color-focus-on-scrim, a content token not a control one */
+  --color-scrim-eyebrow: #A9D3C5;
+
+  /* Non-text, decorative only — the playbook §6.1 anchor's warm-metal/shop-
+     light carriers (brief §4.3). Never used as a `color` on a text node. */
+  --color-shop-light: #FFBF8A;        /* the hero's warm glow ellipse */
+  --color-tool-warm: #E2A06C;         /* indicator light + bolt accent */
+
+  /* --- Typography ------------------------------------------------------------
+     brief §3. Literata (display) + Work Sans (body), static instances (not
+     variable), OFL, Google Fonts, self-hosted. Metrics-matched fallback faces
+     declared below (house-tech-spec §7/§8) so font-display: swap costs no
+     CLS; both are named ahead of the terminal system fallback the brief
+     states literally (Georgia / Helvetica Neue / Arial). */
+
+  --font-display: 'Literata', 'Literata Fallback', 'Literata Fallback 2', Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --font-body:    'Work Sans', 'Work Sans Fallback', 'Helvetica Neue', Arial, sans-serif;
+
+  --font-weight-body: 400;
+  --font-weight-body-strong: 600;
+  --font-weight-display: 500;         /* the ONLY display weight used anywhere — the emphasis
+                                          device is the italic, not a heavier weight (brief §3) */
+
+  /* --- Type scale ------------------------------------------------------------
+     brief §3.1, computed at 320/375/768/1024/1440px in the brief itself. */
+
+  --text-xs:   clamp(0.8rem,  0.77rem + 0.15vw, 0.875rem);
+  --text-sm:   clamp(0.9rem,  0.86rem + 0.2vw,  1rem);
+  --text-base: clamp(1rem,    0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.15rem, 1.05rem + 0.5vw,  1.375rem);
+  --text-xl:   clamp(1.4rem,  1.2rem + 1vw,     1.85rem);
+  --text-2xl:  clamp(1.85rem, 1.4rem + 2vw,     2.6rem);
+  --text-hero: clamp(2.3rem,  1.65rem + 3.2vw,  3.75rem);
+
+  /* House role-name aliases: base.css/site.css/preview.css chrome reads
+     --text-body/--text-h3/--text-small/--text-eyebrow directly. The brief's
+     scale above uses step names instead, so these map role onto the step
+     brief §3.1 already assigns it — no new value. */
+  --text-body: var(--text-base);
+  --text-h3: var(--text-lg);
+  --text-small: var(--text-sm);
+  --text-eyebrow: var(--text-xs);
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+
+  /* --- Space -------------------------------------------------------------
+     House scale, unchanged — brief §4.1 argues no override. */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Inter-section rhythm — brief §4.1: 64px (--space-xl), fixed at every
+     breakpoint. Every intra-section gap stays strictly below 2x this. */
+  --section-gap: var(--space-xl);
+
+  /* --- Layout ------------------------------------------------------------
+     House defaults — the brief argues no override. */
+
+  --layout-container: 72rem;
+  --layout-measure: 62ch;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --layout-tap-min: 44px;
+
+  /* Hero + sticky-chrome numbers, brief §4.3/§4.4. Header is sticky (brief
+     §4.2 row 0), so the preview expiry bar stacks sticky above it too
+     (preview.css's own contract) — site.css and css/preview.css carry the
+     override. Header height is set to the brief's target rather than left
+     to fall out of padding, so the 101/117px sticky-chrome sum holds by
+     construction; verified against the real render below. */
+  --hero-height-mobile: 32.5rem;   /* 520px, brief §4.4 */
+  --hero-height-desktop: 40rem;    /* ~640px, brief §4.4 */
+  --header-height-mobile: 3.5rem;  /* 56px target, brief §4.4 */
+  --header-height-desktop: 4.5rem; /* 72px target, brief §4.4 */
+
+  /* --- Radius / shadow / border -----------------------------------------
+     brief §2.2 — square by default, per editorial-modern restraint. */
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgb(31 38 36 / 0.06);
+  --shadow-md: 0 6px 24px rgb(31 38 36 / 0.09);
+  --shadow-lg: 0 24px 60px rgb(31 38 36 / 0.14);
+
+  --border-hairline: 1px;
+  --border-thick: 3px;
+  --border-style: solid;
+
+  /* --- Motion ------------------------------------------------------------
+     House reveal tokens, unchanged (brief §6 names them by value and takes
+     them as-is). base.css collapses every duration to ~0 under
+     prefers-reduced-motion: reduce. */
+
+  --duration-fast: 140ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift: 1.25rem;
+  --reveal-stagger: 90ms;
+
+  /* The hero's signature move (brief §4.3, §6): indicator + one bolt, two
+     independent unsynchronised periods. Collapsed under reduced motion below. */
+  --duration-indicator-pulse: 3.4s;
+  --duration-bolt-float: 7.5s;
+
+  /* --- Z layers ----------------------------------------------------------- */
+  --z-base: 0;
+  --z-header: 100;
+  --z-nav-panel: 200;
+  --z-skip-link: 300;
+  --z-hero-field: 0;    /* the hero's art/atmosphere layer — behind */
+  --z-hero-content: 1;  /* the hero's text content — in front (design-rules §7.2 rule 1) */
+
+  /* The process index's numeral column width at >=48em (brief §4.2 row 2,
+     ref-011's editorial index-list device) — a layout detail the section
+     plan requires but does not itself number, same precedent as
+     gibbons-electric-rockford-il's --col-proof-figure. */
+  --col-index-num: 4rem;
+}
+
+/* Brief §6: prefers-reduced-motion removes every animation and reveal, with
+   no exception (house-tech-spec §8). base.css collapses the shared duration
+   tokens; the hero's two bespoke timings above are this site's own and are
+   collapsed here at the same media query, on the same precedent. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-indicator-pulse: 0.01ms;
+    --duration-bolt-float: 0.01ms;
+  }
+}
+
+/* @font-face — brief §3. Two families, four woff2 files (§5 ≤4-file
+   ceiling), self-hosted, OFL, subset to the house declared safe range
+   (house-tech-spec §8), unicode-range identical on every face.
+   Metrics-matched fallbacks measured with scripts/font-metrics.mjs against
+   the real shipped woff2 files: Gelasio for Georgia (no distributable
+   Georgia file exists; Gelasio is its open metric twin, precedent
+   gibbons-electric-rockford-il), Liberation Sans for Arial/Helvetica Neue
+   (this build environment's own `fc-match` resolution for both). Each
+   `local()` still names the real font that renders.
+
+   LITERATA GETS A SECOND FALLBACK TIER (precedent: hky-services-hickory-nc's
+   Prata). `local('Georgia')` resolves on Windows/macOS/iOS but not this
+   build environment's Linux stack (`fc-match Georgia` → DejaVu Serif), so
+   'Literata Fallback 2' is measured directly against DejaVu Serif — without
+   it a Linux/Android swap falls past both tiers to the unmeasured generic
+   `serif`, which is what produced this build's non-zero CLS before. */
+
+@font-face {
+  font-family: 'Literata Fallback';
+  src: local('Georgia');
+  font-weight: 500;
+  font-style: normal;
+  size-adjust: 110.27%;
+  ascent-override: 106.74%;
+  descent-override: 27.93%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Literata Fallback';
+  src: local('Georgia');
+  font-weight: 500;
+  font-style: italic;
+  size-adjust: 102.36%;
+  ascent-override: 114.99%;
+  descent-override: 30.09%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Literata Fallback 2';
+  src: local('DejaVu Serif');
+  font-weight: 500;
+  font-style: normal;
+  size-adjust: 94.49%;
+  ascent-override: 124.57%;
+  descent-override: 32.6%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Literata Fallback 2';
+  src: local('DejaVu Serif');
+  font-weight: 500;
+  font-style: italic;
+  size-adjust: 89.54%;
+  ascent-override: 131.45%;
+  descent-override: 34.4%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Work Sans Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 113.41%;
+  ascent-override: 82%;
+  descent-override: 21.43%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Work Sans Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  font-weight: 600;
+  font-style: normal;
+  size-adjust: 113.25%;
+  ascent-override: 82.12%;
+  descent-override: 21.46%;
+  line-gap-override: 0%;
+}
+
+/* House declared safe range (house-tech-spec §8) — identical on every face
+   on this site, no exceptions, including the italic/emphasis-only face.
+   U+2010, U+2011, U+2012 and U+2015 are in the declared range and absent
+   from all four of this site's source faces (Literata and Work Sans alike),
+   the same documented coverage gap as the pilot site (house-tech-spec §8) —
+   not narrowed for it, since every face here lacks the same four glyphs
+   uniformly and no page can split mid-sentence across two faces. */
+@font-face {
+  font-family: 'Literata';
+  src: url('../assets/fonts/literata-500-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('../assets/fonts/literata-500italic-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../assets/fonts/work-sans-400-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../assets/fonts/work-sans-600-latin.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}

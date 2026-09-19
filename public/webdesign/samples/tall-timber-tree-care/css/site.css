@@ -1,0 +1,757 @@
+/* ==========================================================================
+   site.css — tokens only, no raw literals (spec §3). ARCHETYPE poster-hero
+   (brief §4): the huge Anton wordmark set against the generated crane/canopy
+   scene, stacked below the text at 375px, splitting into a text-left/
+   scene-right layout at the house's wider breakpoint (64rem) — the brief's
+   own "desktop split" language (§2.3). ONE GRADIENT, the hero atmosphere
+   (brief §2.3's corrected, corner-confined geometry). Breakpoints: 48rem +
+   64rem, both house-declared (base.css).
+   ========================================================================== */
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-container);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.section {
+  padding-block: var(--section-gap);
+  background-color: var(--color-bg);
+}
+
+.section--surface {
+  background-color: var(--color-surface);
+}
+
+/* The two dark, reversed panels — capability index and footer (brief §4's
+   ground alternation: the only two `--color-ink` grounds on the site). */
+.section--ink {
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.measure {
+  max-width: var(--layout-measure);
+}
+
+.section__intro {
+  max-width: var(--layout-measure);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-body);
+}
+
+/* Dark-band-safe focus ring (brief §2.1's own named selector) — the two ink
+   panels only. base.css's default ring is a dark ink and invisible there. */
+.index-block :focus-visible,
+footer :focus-visible {
+  outline-color: var(--color-focus-on-band);
+}
+
+/* --- Type roles ------------------------------------------------------------
+   base.css already routes h1-h4 through --font-display/--font-weight-display
+   (Anton, 400 — its only weight); this file adds size per level only. */
+
+h1 {
+  font-size: var(--text-hero);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  margin-block-end: var(--space-md);
+}
+
+h3 {
+  font-size: var(--text-h3);
+}
+
+/* --- Header & navigation ----------------------------------------------------
+   Sticky (brief §4 row 1). Six in-page links plus a persistent call CTA
+   (copy.md §1) need more room than the header's usual two or three, so the
+   toggle holds the list until the wider of the two house breakpoints, 64rem,
+   rather than the default 48rem. Progressive enhancement is unchanged: with
+   JS off the list is plain and always visible (the <noscript> override in
+   @shared:head-boilerplate), and the toggle button ships [hidden]. */
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--z-header);
+  padding-block: var(--space-sm);
+  border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-label);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-label);
+  color: var(--color-ink);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--space-3xs);
+}
+
+/* House pattern: closed by plain CSS default below the breakpoint (no JS
+   gate), open by default at and above it — see index.html's head comment. */
+.site-nav {
+  display: none;
+}
+
+[data-nav-ready] .site-nav[data-nav-open='true'] {
+  display: block;
+  flex-basis: 100%;
+}
+
+@media (min-width: 64rem) {
+  .site-nav {
+    display: block;
+  }
+
+  [data-nav-ready] .nav-toggle {
+    display: none;
+  }
+}
+
+/* --- Buttons ---------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--border-hairline) var(--border-style) transparent;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-none);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-label);
+  font-size: var(--text-body);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn--quiet {
+  border-color: var(--color-border);
+  color: var(--color-ink);
+}
+
+/* --- Hero — poster-hero (brief §2.3, §4). Single column below 64rem (text,
+   then the scene, stacked); a text-left/scene-right split at 64rem+, the
+   text column carrying materially more of the width. The corrected
+   atmosphere gradient is corner-confined at x=90%, verbatim from brief §2.3,
+   expressed with color-mix() against the site's own tokens rather than raw
+   rgba literals. --- */
+
+.hero {
+  position: relative;
+  padding-block: var(--space-xl) var(--section-gap);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(50% 40% at 90% 100%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 60%),
+    radial-gradient(45% 35% at 90% 0%, color-mix(in srgb, var(--color-ink) 10%, transparent), transparent 55%);
+}
+
+.hero__inner {
+  display: block;
+}
+
+@media (min-width: 64rem) {
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    column-gap: var(--space-2xl);
+    align-items: center;
+  }
+}
+
+.hero__eyebrow {
+  margin-block-end: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-label);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-accent);
+}
+
+.hero h1 {
+  max-width: var(--hero-h1-max);
+  margin-block-end: var(--space-md);
+  color: var(--color-ink);
+}
+
+.hero h1 .accent {
+  color: var(--color-accent);
+}
+
+.hero__cta {
+  margin-block-end: var(--space-md);
+}
+
+.hero__lead {
+  max-width: var(--layout-measure);
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-muted);
+}
+
+.hero__scene {
+  position: relative;
+  margin-block-start: var(--space-lg);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 64rem) {
+  .hero__scene {
+    margin-block-start: 0;
+  }
+}
+
+.hero__scene-img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- The signature — "the beacon holds" (brief §7): a decorative,
+   aria-hidden inline SVG overlay on the hero scene. Two canopy-lobe
+   silhouettes sway on independently-timed loops; a settled log-ring device
+   anchors a steady ember-glow beacon that pulses on its own, separate loop —
+   never active flame, never synced to the canopy sway. The same settled
+   log-ring mark (unanimated) is reused at the head of the two ink panels
+   below (.band-head__mark). --- */
+
+.hero__scene-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__scene-overlay .canopy-elem {
+  fill: var(--color-ink);
+  fill-opacity: 0.35;
+}
+
+.hero__scene-overlay .log-ring-outer {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  opacity: 0.8;
+}
+
+.hero__scene-overlay .log-ring-inner {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  opacity: 0.55;
+}
+
+.hero__scene-overlay .beacon-dot {
+  fill: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .canopy1-elem {
+    animation: canopy-sway var(--duration-canopy1) ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  .canopy2-elem {
+    animation: canopy-sway var(--duration-canopy2) ease-in-out infinite;
+    animation-delay: var(--delay-canopy2);
+    transform-origin: bottom center;
+  }
+
+  .beacon-dot {
+    animation: beacon-pulse var(--duration-beacon) ease-in-out infinite;
+    transform-origin: center;
+  }
+}
+
+@keyframes canopy-sway {
+  0%, 100% { transform: rotate(-2.4deg); }
+  50%      { transform: rotate(2.2deg); }
+}
+
+@keyframes beacon-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.95; }
+}
+
+/* Reduced motion: the still frame is the composed picture (brief §7's
+   reduced-motion statement) — beacon rests at mid-intensity, canopy
+   silhouettes rest at their drawn angle. Full palette and the atmosphere
+   gradient are untouched. */
+@media (prefers-reduced-motion: reduce) {
+  .canopy1-elem,
+  .canopy2-elem {
+    animation: none;
+    transform: rotate(0deg);
+  }
+
+  .beacon-dot {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+/* --- The band-head mark — the settled log-ring device, reused static and
+   unanimated at the head of the two ink panels (brief §7). --- */
+
+.band-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-block-end: var(--space-lg);
+}
+
+.band-head__mark {
+  flex: 0 0 auto;
+  inline-size: var(--mark-size);
+  block-size: var(--mark-size);
+}
+
+.band-head__mark .mark-ring-outer,
+.band-head__mark .mark-ring-inner {
+  fill: none;
+  stroke: var(--color-accent-on-dark);
+  stroke-width: 2;
+}
+
+.band-head__mark .mark-ring-inner {
+  opacity: 0.7;
+}
+
+.band-head__mark .mark-dot {
+  fill: var(--color-accent-on-dark);
+}
+
+.band-head h2 {
+  margin-block-end: 0;
+}
+
+/* --- §3 Services — three grouped columns, ground surface. The log-rings
+   texture (image slot 2, decorative) sits as a corner accent behind the
+   intro line. --- */
+
+.services__grid {
+  position: relative;
+}
+
+.services__head {
+  position: relative;
+  z-index: 1;
+  max-width: var(--layout-measure);
+  /* Reserves clear space so the heading/intro text never runs under the
+     decorative texture accent pinned to the top-right corner (below). */
+  padding-inline-end: calc(var(--texture-size-sm) + var(--space-sm));
+  margin-block-end: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+  .services__head {
+    padding-inline-end: calc(var(--texture-size-lg) + var(--space-md));
+  }
+}
+
+.services__texture {
+  position: absolute;
+  inset-block-start: calc(-1 * var(--space-lg));
+  inset-inline-end: 0;
+  z-index: 0;
+  inline-size: var(--texture-size-sm);
+  block-size: var(--texture-size-sm);
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  opacity: 0.85;
+}
+
+@media (min-width: 48rem) {
+  .services__texture {
+    inline-size: var(--texture-size-lg);
+    block-size: var(--texture-size-lg);
+  }
+}
+
+.services__texture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.services__columns {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48rem) {
+  .services__columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.services__column h3 {
+  margin-block-end: var(--space-sm);
+}
+
+.services__column ul {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.services__column li {
+  position: relative;
+  padding-inline-start: var(--space-md);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-body);
+}
+
+.services__column li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: var(--index-mark-inset);
+  inline-size: var(--space-xs);
+  block-size: var(--border-thick);
+  background-color: var(--color-accent);
+}
+
+/* --- §4 Honest Capability Index — dark ink panel, three numbered facts. The
+   `01/02/03` numerals are the page's only numeral system (brief §3's own
+   nested-counter check); the process section's steps below carry their
+   number as plain heading text, a visually distinct system (no shared
+   costume). --- */
+
+.index {
+  border-block-start: var(--border-hairline) var(--border-style) color-mix(in srgb, var(--color-bg) 16%, transparent);
+}
+
+.index__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+  border-block-end: var(--border-hairline) var(--border-style) color-mix(in srgb, var(--color-bg) 16%, transparent);
+}
+
+.index__num {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-size: var(--text-index-num);
+  color: var(--color-accent);
+}
+
+.index__body {
+  display: block;
+}
+
+.index__label {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-label);
+  font-size: var(--text-body);
+}
+
+.index__text {
+  display: block;
+  margin-block-start: var(--space-3xs);
+  max-width: var(--layout-measure);
+  line-height: var(--leading-body);
+  color: var(--color-ink-inverse-muted);
+}
+
+.index__figure {
+  max-width: var(--figure-size-sm);
+  margin-block: var(--space-lg) 0;
+  margin-inline-start: auto;
+}
+
+.index__figure img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- §5 Process — three-step walkthrough, ground bg. Step numbers live in
+   the heading text itself, never a separate numeral glyph — the distinct
+   system from the capability index's own numerals. --- */
+
+.process {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-lg);
+}
+
+.process__step h3 {
+  margin-block-end: var(--space-2xs);
+}
+
+.process__step p {
+  max-width: var(--layout-measure);
+  color: var(--color-ink-muted);
+  line-height: var(--leading-body);
+}
+
+/* --- §6 Request a Quote — secondary CTA band, ground surface, the house
+   form. --- */
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--layout-measure);
+  margin-block-start: var(--space-lg);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field__label {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-label);
+  font-size: var(--text-small);
+}
+
+.field__control {
+  width: 100%;
+  min-height: var(--layout-tap-min);
+  padding: var(--space-2xs) var(--space-xs);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+}
+
+textarea.field__control {
+  min-height: var(--space-3xl);
+  resize: vertical;
+}
+
+.form__trap {
+  position: absolute;
+  /* @allow-literal: off-canvas parking position, not a design value */
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.form__status[data-state='error'] {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* --- §7 Reviews — two verbatim quotes, ground bg, no rating anywhere. --- */
+
+.voices {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.voices__row {
+  padding-block: var(--space-md);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.voices__quote {
+  margin: 0;
+  padding-inline-start: var(--space-md);
+  max-width: var(--layout-measure);
+  border-inline-start: var(--border-thick) var(--border-style) var(--color-accent);
+}
+
+.voices__quote p {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+}
+
+.voices__cite {
+  display: block;
+  margin-block-start: var(--space-2xs);
+  font-style: normal;
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* --- §8 About — founder pull-quote (no italic — brief §3's "No emphasis
+   face": distinguished by size, colour and a left rule instead), mission
+   line, service area, ground surface. --- */
+
+.pull-quote {
+  margin: var(--space-lg) 0 var(--space-md);
+  padding-inline-start: var(--space-md);
+  max-width: var(--layout-measure);
+  border-inline-start: var(--border-thick) var(--border-style) var(--color-accent);
+}
+
+.pull-quote p {
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+.pull-quote cite {
+  display: block;
+  margin-block-start: var(--space-2xs);
+  font-style: normal;
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.about__area {
+  margin-block-start: var(--space-sm);
+  color: var(--color-ink-muted);
+}
+
+.about__figure {
+  margin-block-start: var(--space-lg);
+}
+
+.about__figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+/* --- §9 FAQ — three questions, ground bg. --- */
+
+.faq {
+  margin-block-start: var(--space-lg);
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.faq__row {
+  padding-block: var(--space-md);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.faq__q {
+  margin: 0 0 var(--space-2xs);
+  font-weight: var(--font-weight-label);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+.faq__a {
+  margin: 0;
+  max-width: var(--layout-measure);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-ink-muted);
+}
+
+/* --- Footer — the second ink panel, NAP + availability note, no license or
+   rating anywhere (brief §8). --- */
+
+.site-footer {
+  padding-block: var(--section-gap);
+  background-color: var(--color-ink);
+  color: var(--color-bg);
+  font-size: var(--text-small);
+}
+
+.site-footer__mark {
+  margin-block-end: var(--space-md);
+}
+
+.site-footer > .container > * + * {
+  margin-block-start: var(--space-sm);
+}
+
+.site-footer__nap {
+  font-style: normal;
+  line-height: var(--leading-body);
+}
+
+.site-footer__nap a {
+  color: var(--color-accent-on-dark);
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-footer__nap a[href^='tel'],
+.site-footer__nap a[href^='mailto'] {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--layout-tap-min);
+}
+
+.site-footer__hours {
+  color: var(--color-ink-inverse-muted);
+}
+
+/* --- thanks.html / buy.html: flat --color-bg, no atmosphere. The h1 stands
+   as the page's display headline; the primary action is the phone. --- */
+
+.thanks__eyebrow,
+.buy__eyebrow {
+  margin-block-end: var(--space-xs);
+  color: var(--color-ink-muted);
+  font-size: var(--text-eyebrow);
+}

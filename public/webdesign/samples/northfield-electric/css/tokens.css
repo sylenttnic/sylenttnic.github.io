@@ -1,0 +1,297 @@
+/* ==========================================================================
+   tokens.css — Northfield Electric, Rockford IL. Source: brief.md §2, §5.
+   Archetype: editorial-stack. Family: editorial-modern. Palette:
+   filament-amber / bone-ivory / light, hero-panel-only dark ground (brief
+   §2.1, playbooks/electrical.md §6.1's "genuinely open move"). Every value
+   traces to brief §2.2-§2.5 or §5; nothing improvised (house-tech-spec §3).
+   ========================================================================== */
+
+:root {
+
+  /* --- Colour --------------------------------------------------------------
+     brief §2.2. Step 1 (real-world colour) is VOID — no brand_color, no
+     reachable logo/truck/signage (dossier §4.5) — a provenance ground for
+     skipping it, not a silent skip. Step 2: suburban/small-city Midwest,
+     plain, tenure-forward (dossier §4.4). Step 3: editorial-modern restraint
+     + the playbook's recorded open move (a dark hero panel, hero-scoped only
+     — the page stays light, matching the registry's 50 /light rows). */
+
+  --scheme: light;
+
+  --color-bg: #F4F1EA;                /* page ground — bone-ivory */
+  --color-surface: #FFFFFF;           /* cards, raised panels, form fields */
+  --color-ink: #1F2023;               /* body + heading text on bg/surface */
+  --color-ink-muted: #5B584F;         /* secondary text — 6.30:1 on bg */
+  --color-accent: #E0912B;            /* filament-amber — the one colour that means "act" */
+  --color-accent-ink: #1F2023;        /* dark ink on accent — 6.40:1, the accent is mid-to-high luminance */
+
+  /* House-required structural colours */
+  --color-border: #DCD6C8;            /* decorative hairlines only — no contrast floor */
+
+  /* Control boundary, WCAG 1.4.11: >=3:1 against bg AND surface (brief §2.2
+     reuses --color-ink-muted deliberately rather than a fifth hex). */
+  --color-border-strong: #5B584F;
+
+  --color-focus: #1F2023;             /* :focus-visible on light grounds — 14.44:1 / 16.29:1 */
+
+  /* Dark-band-safe focus ring, REQUIRED: the hero panel is a full dark band.
+     A light tint of the accent is already >=3:1 against the panel's own
+     darkest point, because panel + accent were chosen as a working pair
+     (brief §2.2/§2.3: accent on panel measures 6.40:1). Scoped in site.css:
+       .panel :focus-visible { outline-color: var(--color-focus-on-band); } */
+  --color-focus-on-band: #E0912B;
+
+  --color-selection-bg: #1F2023;
+  --color-selection-ink: #F4F1EA;
+
+  /* Brief-specific colours (brief §2.2) — the hero-panel-only dark ground.
+     Reuses the page's own ink/bg hexes AS a ground/ink pair rather than
+     inventing a second dark/light relationship: one light/dark pair, read in
+     both directions (brief §2.2's own rationale). */
+  --color-panel: #1F2023;             /* identical hex to --color-ink */
+  --color-panel-ink: #F4F1EA;         /* identical hex to --color-bg */
+
+  /* Hero eyebrow on the panel — brief §2.3's contrast row, 8.92:1 on panel. */
+  --color-panel-eyebrow: #C7BFAE;
+
+  /* Hero motion-layer marks (brief §5). Every stop is DERIVED from the two
+     hexes above via color-mix() — no new literal (house precedent:
+     sites/boulder-tree-care-boulder-co/css/site.css). No contrast floor
+     needed: the field carries no text (brief §2.3). */
+  --color-field-track: color-mix(in srgb, var(--color-panel-ink) 20%, var(--color-panel) 80%);
+  --color-field-toggle-body: color-mix(in srgb, var(--color-panel-ink) 32%, var(--color-panel) 68%);
+  --color-field-glow-inner: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  --color-field-glow-outer: color-mix(in srgb, var(--color-accent) 22%, transparent);
+
+  /* --- Typography ------------------------------------------------------------
+     brief §2.4. Literata (display) + Work Sans (body), both static instances
+     (not variable), OFL, Google Fonts, self-hosted. Metrics-matched fallback
+     faces declared below (house-tech-spec §7/§8) so font-display: swap costs
+     no CLS; both are named ahead of the terminal system fallback the brief
+     states literally (Georgia / Arial). */
+
+  --font-display: 'Literata', 'Literata Fallback', Georgia, serif;
+  --font-body: 'Work Sans', 'Work Sans Fallback', Arial, sans-serif;
+
+  --font-weight-body: 400;
+  --font-weight-body-strong: 700;
+  --font-weight-display: 500;         /* the ONLY display weight used anywhere — the emphasis
+                                          device is the italic, not a heavier weight (brief §2.4) */
+
+  /* --- Type scale ------------------------------------------------------------
+     brief §2.5, computed at floor/ceiling/375px/1440px in the brief itself. */
+
+  --text-hero: clamp(2.5rem, 6.5vw, 4rem);
+  --text-h2: clamp(1.6rem, 4vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+  --text-lead: clamp(1.0625rem, 2vw, 1.1875rem);
+  --text-body: 1rem;                  /* fixed — states the same number at every width and means it */
+  --text-small: 0.875rem;
+  --text-eyebrow: 0.8125rem;
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+
+  /* --- Space -------------------------------------------------------------
+     House scale, unchanged — brief §2.5 argues no override. */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Inter-section rhythm — brief §3: 64px, fixed at every breakpoint. */
+  --section-gap: var(--space-xl);
+
+  /* --- Layout ------------------------------------------------------------
+     House defaults — the brief argues no override. */
+
+  --layout-container: 72rem;
+  --layout-measure: 62ch;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --layout-tap-min: 44px;
+
+  /* --- Radius / shadow / border -----------------------------------------
+     House defaults, matching the C2-winning tile's own mock values
+     (tiles/tile-c.html) — editorial-stack reads on rules and hairlines, not
+     shadow or heavy rounding; the brief argues no override. */
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgb(31 32 35 / 0.06);
+  --shadow-md: 0 6px 24px rgb(31 32 35 / 0.09);
+  --shadow-lg: 0 24px 60px rgb(31 32 35 / 0.14);
+
+  --border-hairline: 1px;
+  --border-thick: 3px;                /* also the hero H1 emphasis word's underline weight (brief §2.5) */
+  --border-style: solid;
+
+  /* --- Motion --------------------------------------------------------------
+     House reveal tokens, unchanged (brief §5 names them by value and takes
+     them as-is). base.css collapses every duration to ~0 under
+     prefers-reduced-motion: reduce. */
+
+  --duration-fast: 140ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift: 1.25rem;
+  --reveal-stagger: 90ms;
+
+  /* "The filament holds" — brief §5's four independent hero timings. No two
+     share a timing origin or a duration. Collapsed to a settled end-state
+     under reduced motion, in base.css and site.css below. */
+  --duration-conduit-draw: 2.4s;
+  --duration-breaker-loop: 5.6s;
+  --duration-filament-settle: 3.2s;
+  --duration-spark-1: 7s;
+  --duration-spark-2: 9s;
+
+  /* Spark drift amplitude — the loop oscillates around its rest position, so
+     stopping it leaves the composed frame intact (same shape as
+     auto-evolution-north-logan-ut's --drift-sm/--drift-md precedent). */
+  --drift-sm: var(--space-3xs);
+  --drift-md: var(--space-2xs);
+
+  /* Filament glow radius — the two box-shadow layers behind the filament
+     mark, sized off the house space scale rather than a new literal. */
+  --glow-inner: var(--space-md);
+  --glow-inner-spread: var(--space-2xs);
+  --glow-outer: var(--space-lg);
+  --glow-outer-spread: var(--space-sm);
+
+  /* Proof index figure column — the bold lead-figure's fixed width at >=48em
+     (brief §3.1's editorial-list shape; below 48em the row stacks, site.css). */
+  --col-proof-figure: 8rem;
+
+  /* --- Z layers ----------------------------------------------------------- */
+  --z-base: 0;
+  --z-header: 100;
+  --z-nav-panel: 200;
+  --z-skip-link: 300;
+}
+
+/* Brief §5: prefers-reduced-motion removes every animation and reveal, with
+   no exception (house-tech-spec §8). base.css collapses the shared duration
+   tokens; the four bespoke hero timings above are this site's own and are
+   collapsed here at the same media query, on the same precedent. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-conduit-draw: 0.01ms;
+    --duration-breaker-loop: 0.01ms;
+    --duration-filament-settle: 0.01ms;
+    --duration-spark-1: 0.01ms;
+    --duration-spark-2: 0.01ms;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   @font-face — brief §2.4. Two families, four woff2 files (§5 budget, exactly
+   met), self-hosted, OFL, subset to the house safe range (spec §8).
+
+   METRICS-MATCHED FALLBACKS FIRST, so swap costs no CLS (spec §7/§8).
+   Overrides measured with scripts/font-metrics.mjs against the real webfont
+   files and a metric-compatible stand-in for each named fallback — Gelasio
+   for Georgia (Georgia itself ships no distributable file), Liberation Sans
+   for Arial. Each `local()` still names the REAL font that renders.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Literata Fallback';
+  src: local('Georgia');
+  font-weight: 500;
+  font-style: normal;
+  size-adjust: 110.27%;
+  ascent-override: 106.74%;
+  descent-override: 27.93%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Literata Fallback';
+  src: local('Georgia');
+  font-weight: 500;
+  font-style: italic;
+  size-adjust: 102.36%;
+  ascent-override: 114.99%;
+  descent-override: 30.09%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Work Sans Fallback';
+  src: local('Arial');
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 113.41%;
+  ascent-override: 82%;
+  descent-override: 21.43%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Work Sans Fallback';
+  src: local('Arial');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 104.7%;
+  ascent-override: 88.82%;
+  descent-override: 23.21%;
+  line-gap-override: 0%;
+}
+
+/* House declared safe range (house-tech-spec §8) — identical on every face
+   on this site, no exceptions, including the italic/emphasis-only face. */
+@font-face {
+  font-family: 'Literata';
+  src: url('../assets/fonts/literata-500-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Literata';
+  src: url('../assets/fonts/literata-500italic-latin.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../assets/fonts/work-sans-400-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('../assets/fonts/work-sans-700-latin.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}

@@ -1,0 +1,716 @@
+/* ==========================================================================
+   site.css — per-site layout & components, built FROM tokens.
+
+   HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
+   font-name literals in this file. Tokens only. The Critic greps for it.
+   The two escape hatches are the house breakpoints and an explicit
+   `@allow-literal: reason` comment on the preceding line.
+
+   WHAT THE SKELETON SHIPS HERE, AND WHY IT SHIPS SO LITTLE
+   --------------------------------------------------------
+   Only the shell: header/nav, the section rhythm hook, buttons, the form, the
+   footer. That is everything a site needs structurally and nothing that
+   decides how it looks.
+
+   The skeleton deliberately ships NO hero, NO card grid, NO feature row, NO
+   testimonial block and NO section-heading pattern. Those come from the
+   approved brief's layout archetype (design-rules §7) and are written per
+   site. A skeleton that shipped them would hand every business the same page
+   with different colours — which is the exact failure the DNA registry
+   exists to prevent, and it would collide head-on with the banned-defaults
+   list (design-rules §4: three-card grids, four-stat rows, centred hero with
+   two pill buttons, every section the same padding with a centred heading).
+
+   And when a brief's archetype numbers its sections, its sub-lists take a
+   visibly different mark — different numeral system, face and colour role —
+   or no mark at all (design-rules §4, "two counters in one costume").
+
+   Builder: extend this file with the brief's components. Do not "fill in" a
+   hero here from memory — the brief is law (spec §12).
+   ========================================================================== */
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-container);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Vertical rhythm hook. --section-gap is the only inter-section spacing value
+   on a site (design-rules §7.1); the brief picks which scale step it is. */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.measure {
+  max-width: var(--layout-measure);
+}
+
+/* --- Header & navigation --------------------------------------------------
+   Progressive enhancement: with JS off the nav list is a plain, always-visible
+   list of links and the toggle stays [hidden] (it ships hidden in the HTML;
+   main.js reveals it). With JS on, narrow viewports collapse the list behind
+   the toggle. Nothing about navigation depends on JavaScript.              */
+
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+  padding-block: var(--space-sm);
+  border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--space-3xs);
+}
+
+/* QA r3 FIX perf/cls (this skeleton-level defect was confirmed present,
+   verbatim, on every site built from it -- see
+   runs/3-elements-landscaping-asheville-nc/qa/critic-round-2.md): the
+   collapsed state used to apply only once a deferred `type="module"`
+   script called `initNav()` and set `[data-nav-ready]`, so the full nav
+   list rendered open at first paint and then collapsed into the hamburger
+   AFTER first contentful paint -- a timing race with no fixed outcome that
+   shifted the whole header (and everything below it) and scored CLS
+   0.066-0.094 in the majority of Lighthouse runs. Inverting the default
+   removes the race entirely: closed is now the plain CSS default below
+   48em, with no JS gate, so there is nothing left to collapse post-paint.
+   The one visitor this would otherwise strand -- JS off, so
+   `[data-nav-ready]` never lands -- gets the nav back via the <noscript>
+   stylesheet override in `@shared:head-boilerplate` (index.html/buy.html/
+   thanks.html), which ships last in source order and wins the
+   display:block/display:none tie on cascade order alone, no
+   `!important`. The nav-toggle button already ships `hidden` in the HTML
+   and only JS ever clears that, so JS-off visitors never see a dead
+   control -- nothing to change there. */
+.site-nav {
+  display: none;
+}
+
+[data-nav-ready] .site-nav[data-nav-open='true'] {
+  display: block;
+  flex-basis: 100%;
+}
+
+@media (min-width: 48em) {
+  .site-nav {
+    display: block;
+  }
+
+  [data-nav-ready] .nav-toggle {
+    display: none;
+  }
+}
+
+/* --- Buttons --------------------------------------------------------------
+   Two roles, no more. Radius, weight and colour all come from the brief via
+   tokens — including --radius-none, which is a legitimate answer.          */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--border-hairline) var(--border-style) transparent;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  min-height: var(--cta-height);   /* 52px <1024, brief §4.3 */
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn--quiet {
+  border-color: var(--color-border);
+  color: var(--color-ink);
+}
+
+@media (min-width: 64em) {
+  .btn--primary { min-height: var(--cta-height-lg); }   /* 56px, brief §4.3 */
+}
+
+/* --- Form -----------------------------------------------------------------
+   One form per site (spec §6). POSTs to the endpoint constant in main.js;
+   works as a plain HTML POST with JS off; auto-hides when no endpoint is
+   configured so a spec site never shows a dead form.                       */
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--layout-measure);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field__label {
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.field__control {
+  width: 100%;
+  min-height: var(--layout-tap-min);
+  padding: var(--space-2xs) var(--space-xs);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+textarea.field__control {
+  min-height: var(--space-3xl);
+  resize: vertical;
+}
+
+.field__hint {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* Honeypot: present in the DOM for bots, unreachable for humans and assistive
+   tech. Not display:none — some bots skip those. */
+.form__trap {
+  position: absolute;
+  /* @allow-literal: off-canvas parking position, not a design value */
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.form__status[data-state='error'] {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* --- Footer ---------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: var(--space-xl);
+  border-top: var(--border-hairline) var(--border-style) var(--color-border);
+  font-size: var(--text-small);
+}
+
+.site-footer a {
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-footer__nap {
+  font-style: normal;
+}
+
+/* ==========================================================================
+   Riverstone Landscape and Supply — the brief's components (brief §2-§8).
+   band-rhythm archetype: alternating full-bleed bands, headed by the seam,
+   no cards, no shadows, no border-radius except the primary CTA (brief §4).
+   ========================================================================== */
+
+/* --- Generic text link, used for the phone control, directions link, and
+   header phone: brief §10 item 10, phone is the never-disappearing
+   SECONDARY everywhere, so it never takes the filled .btn--primary
+   treatment. [data-tap] (base.css) gives it the 44px tap-target floor. --- */
+
+.text-link,
+.site-header__tel {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--layout-tap-min);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-body-strong);
+  text-decoration: underline;
+  text-decoration-thickness: var(--border-hairline);
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-header__tel {
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+}
+
+/* --- The seam (brief §4.1): the site's one repeated ornament. A horizontal
+   jagged aggregate-silhouette, authored as one inline SVG data URI, fill
+   baked in at #8A3F24 — the one permitted raw hex in this codebase, because
+   it is a data-URI asset, not a site.css literal (brief §4.1, §5.4). Fixed
+   10px height at every width; only its horizontal repeat count changes. --- */
+
+.seam {
+  display: block;
+  inline-size: 100%;
+  block-size: var(--seam-height);
+  /* @allow-literal: the seam's baked SVG fill is the one permitted raw hex
+     in this codebase (brief §4.1) — a data-URI asset, not a site.css literal */
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2040%2010'%3E%3Cpath%20d%3D'M0%2C10%20L4%2C3%20L8%2C10%20L12%2C1%20L16%2C10%20L20%2C6%20L24%2C10%20L28%2C2%20L32%2C10%20L36%2C4%20L40%2C10%20Z'%20fill%3D'%238A3F24'%2F%3E%3C%2Fsvg%3E");
+  background-repeat: repeat-x;
+  background-size: var(--seam-unit) var(--seam-height);
+}
+
+/* Minimum and what yields (brief §4.1, design-rules §5): should the seam's
+   own container ever fall narrower than one 40px repeat unit — a condition
+   that does not occur at any declared breakpoint 375-1440, since every
+   band's content column is >=335px — it yields to a flat 2px accent rule,
+   never disappearing and never distorting into a squashed fraction of the
+   jagged pattern. The trigger (viewport <5rem/80px) is far below any
+   declared breakpoint and is defensive, not reachable in practice. */
+@media (max-width: 5rem) {
+  .seam {
+    background-image: none;
+    background-color: var(--color-accent);
+    block-size: var(--border-thick);
+  }
+}
+
+/* In the hero only: the seam draws in sync with the pile's settle — opacity
+   0->1 and translateY(4px->0), completing at 1400ms alongside the pile
+   reaching its resting shape (brief §4.1, §7.2). It never re-animates.
+   Everywhere else the seam renders already settled: opacity 1, no
+   transform, fully static, painted at load — furniture, not a moment. */
+.seam--hero {
+  animation: seam-draw var(--duration-signature) var(--ease-settle) forwards;
+}
+
+/* -40% of the seam's own 10px block-size is the brief's literal 4px draw
+   distance (brief §4.1) — expressed as a percentage of the element's own
+   box, per house-tech-spec §3's tokens-only rule (percentages are not a
+   raw size literal; a percentage of --seam-height IS the token). */
+@keyframes seam-draw {
+  from { opacity: 0; transform: translateY(-40%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Eyebrow (hero only — brief §1: the only band-head label anywhere on
+   this site; bands below carry no kicker). Natural case authored in
+   copy.md, uppercased here (house-tech-spec §8). ------------------------- */
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--leading-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.hero__eyebrow { margin-block-start: var(--space-2xs); }
+
+/* --- §I hero (brief §4.4, §4.5). DOM order at every width: seam -> eyebrow
+   -> h1 -> primary CTA -> secondary CTA -> living-hero field. The ask
+   precedes the field. No card, no border-radius, no shadow. ------------- */
+
+.hero {
+  padding-block-start: var(--space-md);   /* 24px <1024, brief §4.3 */
+  padding-block-end: var(--section-gap);
+}
+
+.hero__title {
+  margin-block-start: var(--space-xs);    /* 12px <1024, brief §4.3 */
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+@media (min-width: 64em) {
+  .hero { padding-block-start: var(--space-xl); }   /* 64px, brief §4.3 */
+  .hero__title { margin-block-start: var(--space-md); }   /* 24px, brief §4.3 */
+}
+
+/* Two `.h1-line` block children give the h1 its hard 2-line-box structural
+   constraint (brief §4.4) at every width — never a wrap computed by luck. */
+.h1-line { display: block; }
+
+/* The one emphasised word — carried by --color-accent, never a third face
+   (brief §2.1, §1: "refused... every reference's mood, never its words"). */
+.accent-word { color: var(--color-accent); }
+
+.hero__cta { margin-block-start: var(--space-md); }
+
+.hero__secondary { margin-block-start: var(--space-2xs); }
+
+.hero__field {
+  position: relative;
+  margin-block-start: var(--space-md);
+  overflow: hidden;
+  aspect-ratio: var(--hero-ratio-mobile);
+}
+
+@media (min-width: 40em) {
+  .hero__field { aspect-ratio: var(--hero-ratio-desktop); }
+}
+
+/* The field keeps its size, yields position (brief §4.5 rule 4): the outer
+   box's aspect-ratio reserves its layout space permanently (CLS 0), and only
+   the picture INSIDE it moves during the one-shot settle. */
+.hero__field picture,
+.hero__field img {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* The signature move, re-expressed on the generated asset itself (brief
+   §4.4: the field is a generated asset, not inline SVG or CSS shapes, so the
+   truck bed's tip and the pile's pour are the artwork; what CSS animates is
+   the whole frame settling into its resting position once, on load) — ref-
+   002's bobbing-central-object convention, re-pitched to a ONE-SHOT tip-
+   and-settle (brief §1). Plays once; after 1400ms nothing about it moves
+   again (brief §7.2). */
+.hero__field picture {
+  animation: load-settles var(--duration-signature) var(--ease-settle) forwards;
+}
+
+@keyframes load-settles {
+  0%   { opacity: 0; transform: translateY(4%) rotate(-1.2deg) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Ambient satellites (brief §7.2): three individual stones near the pile's
+   base, small translate + rotate, independent non-synchronised loops (7000
+   / 9500 / 6200ms), and one moss-tipped stone on its own 8000ms sway.
+   Nothing pulses together. Decorative, aria-hidden, transform/opacity only. */
+
+.satellites {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.stone,
+.moss {
+  position: absolute;
+  display: block;
+  inline-size: var(--space-2xs);
+  block-size: var(--space-2xs);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent-ink);
+  will-change: transform, opacity;
+}
+
+.stone--1 {
+  inset-block-end: 22%;
+  inset-inline-start: 58%;
+  animation: stone-drift-1 var(--duration-satellite-1) var(--ease-drift) infinite;
+}
+
+.stone--2 {
+  inset-block-end: 14%;
+  inset-inline-start: 74%;
+  animation: stone-drift-2 var(--duration-satellite-2) var(--ease-drift) infinite;
+}
+
+.stone--3 {
+  inset-block-end: 28%;
+  inset-inline-start: 84%;
+  animation: stone-drift-3 var(--duration-satellite-3) var(--ease-drift) infinite;
+}
+
+.moss {
+  inset-block-end: 18%;
+  inset-inline-start: 66%;
+  background-color: var(--color-accent);
+  transform-origin: bottom center;
+  animation: moss-sway var(--duration-moss) var(--ease-drift) infinite;
+}
+
+/* Percentages resolve against each dot's own small box (--space-2xs square),
+   so 100%-200% reads as a few px of drift — small translate + rotate, per
+   brief §7.2, expressed with no literal outside tokens.css. */
+@keyframes stone-drift-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
+  50%      { transform: translate(160%, -120%) rotate(6deg); opacity: 1; }
+}
+
+@keyframes stone-drift-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.6; }
+  50%      { transform: translate(-120%, -160%) rotate(-8deg); opacity: 0.95; }
+}
+
+@keyframes stone-drift-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.65; }
+  50%      { transform: translate(120%, -80%) rotate(5deg); opacity: 0.9; }
+}
+
+@keyframes moss-sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50%      { transform: rotate(1.5deg); }
+}
+
+/* --- Bands (brief §4): every section a full-bleed band. Odd content bands
+   on --color-bg; even bands and the trust strip on --color-surface — a
+   visible alternating rhythm, no shadow, no border-radius anywhere. ----- */
+
+.band { background-color: var(--color-bg); }
+
+.band--surface { background-color: var(--color-surface); }
+
+.band__title {
+  margin-block-start: var(--space-xs);
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.seam + .band__title { margin-block-start: var(--space-2xs); }
+
+.band__lead,
+.trust__facts {
+  margin-block-start: var(--space-xs);
+  font-size: var(--text-lead);
+  line-height: var(--leading-lead);
+  color: var(--color-ink-muted);
+}
+
+.band__title + .trust__facts { margin-block-start: var(--space-xs); }
+
+.band__note {
+  margin-block-start: var(--space-xs);
+  color: var(--color-ink-muted);
+}
+
+/* --- thanks.html — the form-success page. No living-hero field (brief §0). */
+
+.thanks__next { margin-block-start: var(--space-xs); }
+
+.thanks__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-md);
+}
+
+/* --- Rows (brief §1: ref-008's product-line list re-expressed as a plain
+   list, no icons, no chips — the material names carry the specificity). - */
+
+.rows {
+  margin-block-start: var(--space-xs);
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+  max-width: var(--layout-measure);
+}
+
+.row {
+  padding-block: var(--space-2xs);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.rows--towns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: none;
+}
+
+@media (min-width: 40em) {
+  .rows--towns { grid-template-columns: repeat(3, 1fr); }
+}
+
+.rows--towns .row { border-inline-end: var(--border-hairline) var(--border-style) var(--color-border); }
+
+/* --- Two-column bands (Band 2, Band 3 — brief §4 rule 2). Below 1024,
+   single column, text first (DOM order, unchanged). At >=1024, two columns;
+   Band 2 image-left/text-right via `order`, Band 3 text-left/image-right
+   (the DOM's own order, untouched). The reading order never changes. --- */
+
+@media (min-width: 64em) {
+  .band__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .band--media-reverse .band__content { order: 2; }
+  .band--media-reverse .band__media { order: 1; }
+}
+
+.band__media img {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+/* --- §VII faq — native disclosure, keyboard-standard, no JS. The UA's own
+   marker is the site's only counter (design-rules §5); no numeral, no
+   card. --------------------------------------------------------------- */
+
+.faq {
+  margin-block-start: var(--space-xs);
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+  max-width: var(--layout-measure);
+}
+
+.qa { border-block-end: var(--border-hairline) var(--border-style) var(--color-border); }
+
+.qa__q {
+  display: list-item;
+  list-style-position: inside;
+  padding-block: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-body-strong);
+  cursor: pointer;
+}
+
+.qa__a {
+  padding-block-end: var(--space-md);
+  color: var(--color-ink-muted);
+}
+
+/* --- §VIII contact --------------------------------------------------------- */
+
+.contact { margin-block-start: var(--space-md); }
+
+.contact__tel { margin-block-start: 0; }
+
+.contact .form { margin-block-start: var(--space-md); }
+
+.nap {
+  margin-block-start: var(--space-lg);
+  display: grid;
+  gap: var(--space-3xs);
+  font-style: normal;
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+  color: var(--color-ink-muted);
+}
+
+.nap__line { text-underline-offset: var(--space-3xs); }
+
+@media (min-width: 64em) {
+  .contact {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    column-gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .nap { margin-block-start: 0; }
+}
+
+/* --- Footer additions (brief §6.5's footer spec: NAP, hours, service-area
+   recap, phone, quote link, copyright — house skeleton gives the shell). - */
+
+.site-footer__name { color: var(--color-ink); font-weight: var(--font-weight-body-strong); }
+
+.site-footer__nap,
+.site-footer__area,
+.site-footer__quote,
+.site-footer__legal,
+[data-hours] { margin-block-start: var(--space-2xs); }
+
+.site-footer__quote a { color: var(--color-accent); }
+
+/* --- Section-entrance reveal (brief §7.3): opacity 0->1, translateY(8px)->0,
+   --duration-reveal, once, IntersectionObserver-driven (js/main.js), never
+   the hero. base.css's own rule runs the transition at --duration-slow; this
+   re-points it at the brief's own reveal duration (aliased through
+   --duration-base, so the reduced-motion collapse in base.css still zeroes
+   it — see README.md's derivation). No stagger: --reveal-stagger is 0 by
+   token, so every element in a group reveals together, never cascading. -- */
+
+[data-reveal-ready] [data-reveal] {
+  transition:
+    opacity var(--duration-base) var(--ease-reveal),
+    transform var(--duration-base) var(--ease-reveal);
+}
+
+/* --- Reduced motion (brief §7.4): every loop and every reveal disabled,
+   without exception. The hero's still frame reads as fully spectacular with
+   motion stopped — the artwork already depicts the truck fully tipped and
+   the pile fully mounded; only the CSS entrance and the ambient loops stop.
+   Nothing disappears; the whole composition survives. ------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .seam--hero {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__field picture {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .stone,
+  .moss {
+    animation: none;
+    transform: none;
+  }
+
+  .stone--1 { opacity: 0.7; }
+  .stone--2 { opacity: 0.6; }
+  .stone--3 { opacity: 0.65; }
+}

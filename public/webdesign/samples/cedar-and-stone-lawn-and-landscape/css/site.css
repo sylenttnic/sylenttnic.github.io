@@ -1,0 +1,708 @@
+/* ==========================================================================
+   site.css — per-site layout & components, built FROM tokens.
+
+   HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
+   font-name literals in this file. Tokens only. The Critic greps for it.
+   The two escape hatches are the house breakpoints and an explicit
+   `@allow-literal: reason` comment on the preceding line.
+
+   The skeleton's own shell (header/nav, section rhythm, buttons, form,
+   footer) is below, extended with this brief's border-course components —
+   never a hero, card grid or heading pattern invented from memory (spec §12).
+   ========================================================================== */
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-container);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Vertical rhythm hook. --section-gap is the only inter-section spacing value
+   on a site (design-rules §7.1); the brief picks which scale step it is. */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.measure {
+  max-width: var(--layout-measure);
+}
+
+/* --- Header & navigation --------------------------------------------------
+   Progressive enhancement: with JS off the nav list is a plain, always-visible
+   list of links and the toggle stays [hidden] (it ships hidden in the HTML;
+   main.js reveals it). With JS on, narrow viewports collapse the list behind
+   the toggle. Nothing about navigation depends on JavaScript.              */
+
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+  /* Tightened from --space-sm toward brief §4.4's ~57px chrome target — the
+     44px tap-target floor already sets the effective row height. */
+  padding-block: var(--space-2xs);
+  border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+  min-width: 0;
+}
+
+/* Brief §4.4: the header collapses to wordmark + hamburger only below the
+   house nav breakpoint and must stay ONE LINE down to 320px. This
+   business's full name is long enough to wrap against the 44px toggle at
+   these widths under the shared header's default flex-wrap, so the row
+   stays nowrap here and the wordmark truncates instead of pushing the
+   toggle to a second line. */
+@media (max-width: 47.9375em) {
+  .site-header__inner {
+    flex-wrap: nowrap;
+  }
+
+  .site-header__brand {
+    flex: 1 1 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .nav-toggle {
+    flex: none;
+  }
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
+     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+  border: var(--border-hairline) var(--border-style) var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--space-3xs);
+}
+
+/* QA r3 FIX perf/cls (this skeleton-level defect was confirmed present,
+   verbatim, on every site built from it -- see
+   runs/3-elements-landscaping-asheville-nc/qa/critic-round-2.md): the
+   collapsed state used to apply only once a deferred `type="module"`
+   script called `initNav()` and set `[data-nav-ready]`, so the full nav
+   list rendered open at first paint and then collapsed into the hamburger
+   AFTER first contentful paint -- a timing race with no fixed outcome that
+   shifted the whole header (and everything below it) and scored CLS
+   0.066-0.094 in the majority of Lighthouse runs. Inverting the default
+   removes the race entirely: closed is now the plain CSS default below
+   48em, with no JS gate, so there is nothing left to collapse post-paint.
+   The one visitor this would otherwise strand -- JS off, so
+   `[data-nav-ready]` never lands -- gets the nav back via the <noscript>
+   stylesheet override in `@shared:head-boilerplate` (index.html/buy.html/
+   thanks.html), which ships last in source order and wins the
+   display:block/display:none tie on cascade order alone, no
+   `!important`. The nav-toggle button already ships `hidden` in the HTML
+   and only JS ever clears that, so JS-off visitors never see a dead
+   control -- nothing to change there. */
+.site-nav {
+  display: none;
+}
+
+[data-nav-ready] .site-nav[data-nav-open='true'] {
+  display: block;
+  flex-basis: 100%;
+}
+
+@media (min-width: 48em) {
+  .site-nav {
+    display: block;
+  }
+
+  [data-nav-ready] .nav-toggle {
+    display: none;
+  }
+}
+
+/* --- Buttons --------------------------------------------------------------
+   Two roles, no more. Radius, weight and colour all come from the brief via
+   tokens — including --radius-none, which is a legitimate answer.          */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--border-hairline) var(--border-style) transparent;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  /* brief §3.1: the primary CTA label is set in the display face (Vollkorn
+     700), not the body-strong face every other button/micro-label keeps. */
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+}
+
+.btn--quiet {
+  /* Outline button: the border is the whole control, so it takes the 3:1
+     control-boundary token, not the decorative hairline (WCAG 1.4.11). */
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+/* --- Form -----------------------------------------------------------------
+   One form per site (spec §6). POSTs to the endpoint constant in main.js;
+   works as a plain HTML POST with JS off; auto-hides when no endpoint is
+   configured so a spec site never shows a dead form.                       */
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--layout-measure);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field__label {
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.field__control {
+  width: 100%;
+  min-height: var(--layout-tap-min);
+  padding: var(--space-2xs) var(--space-xs);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+textarea.field__control {
+  min-height: var(--space-3xl);
+  resize: vertical;
+}
+
+.field__hint {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* Honeypot: present in the DOM for bots, unreachable for humans and assistive
+   tech. Not display:none — some bots skip those. */
+.form__trap {
+  position: absolute;
+  /* @allow-literal: off-canvas parking position, not a design value */
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.form__status[data-state='error'] {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* --- Footer ---------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: var(--space-xl);
+  border-top: var(--border-hairline) var(--border-style) var(--color-border);
+  font-size: var(--text-small);
+}
+
+.site-footer a {
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-footer__nap {
+  font-style: normal;
+}
+
+/* ==========================================================================
+   Cedar & Stone Lawn and Landscape — brief components (border-course archetype)
+   Everything below reads from tokens.css only; the two escape hatches are
+   the house breakpoints (48em/64em) and an explicit @allow-literal comment.
+   ========================================================================== */
+
+/* Emphasis role (brief §3.1): Vollkorn 400italic, wherever a pull-quote-
+   shaped or headline emphasis needs it — the h1's "Then Fill It In." and
+   every quoted service excerpt in the "In Their Own Words" section. */
+em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--font-weight-body);
+}
+
+/* --- Border-course frame (brief §4.5) --------------------------------------
+   Two flat, full-bleed repeating-linear-gradient bands, never wrapped around
+   variable-height content. The hero band is a normal-flow element (brief
+   §4.4's arithmetic counts its 10px toward hero content height); the section
+   head-rule is an absolutely-positioned overlay sitting INSIDE each
+   section's own top padding, so it never competes with --section-gap
+   (brief §4.3). Both crop, never stretch or distort, at every viewport
+   (brief §4.5's own "crop, never distort" behaviour-at-minimum rule). */
+
+.hero__course-band {
+  width: 100%;
+  height: var(--course-band-height-hero);
+  background-image: var(--course-stripe);
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+
+.section {
+  position: relative;
+}
+
+.section-head-rule {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  height: var(--course-band-height-section);
+  background-image: var(--course-stripe);
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+
+/* --- Eyebrow / section head --- */
+
+.eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-body-strong);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-block-end: var(--space-sm);
+}
+
+.hero .eyebrow {
+  color: var(--color-ink);
+}
+
+.section-head {
+  margin-block-end: var(--space-lg);
+}
+
+.section-head h2 {
+  font-size: var(--text-h2);
+  color: var(--color-ink);
+}
+
+.section-head__intro {
+  max-width: var(--layout-measure);
+  margin-block-start: var(--space-xs);
+  color: var(--color-ink-muted);
+}
+
+/* --- Hero (brief §4.4, §6, §7). DOM order: course-band -> eyebrow -> h1 ->
+   lede -> primary CTA (+ secondary link) -> field -> facts. Background is
+   two radial atmosphere layers over bg, per brief §2.2's gradient rule —
+   both provably lighter than --color-surface at their strongest stop, so
+   grading hero text against --color-surface (brief §2.2 pairs 5-7) is the
+   conservative, worst-case measurement. */
+
+.hero {
+  padding-block-end: var(--section-gap);
+  background-image:
+    radial-gradient(ellipse at 15% 0%, color-mix(in srgb, var(--color-accent) 18%, var(--color-bg)), transparent 60%),
+    radial-gradient(ellipse at 100% 40%, color-mix(in srgb, var(--color-ink) 12%, var(--color-bg)), transparent 60%);
+  background-color: var(--color-bg);
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  padding-block-start: var(--space-md);
+}
+
+.hero h1 {
+  font-size: var(--text-hero);
+  color: var(--color-ink);
+  max-width: var(--layout-measure);
+}
+
+.hero__lead {
+  max-width: var(--layout-measure);
+  margin-block-start: var(--space-xs);
+  font-size: var(--text-lead);
+  line-height: var(--leading-lede);
+  color: var(--color-ink-muted);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-sm);
+}
+
+/* Living-hero field: fixed target height (brief §4.4 rule 4 — 240px at
+   375px), full-bleed illustrated ground plate with three independent sprigs
+   layered above it. Contained, never full-bleed-immersive. */
+.hero__field {
+  position: relative;
+  height: var(--hero-field-height);
+  margin-block-start: var(--space-md);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.hero__field-image {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__field-image picture,
+.hero__field-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/* Three botanical sprigs: inline SVG, +/- --sprig-sway-angle sway, three
+   independent, non-synced durations (brief §7) — 6.8s/8.4s/7.5s, rooted at
+   the mulch-bed edge in the lower third of the field. */
+.hero__sprig {
+  position: absolute;
+  inset-block-end: 4%;
+  /* @allow-literal: proportional to the field's own height, no space-scale match */
+  height: 42%;
+  width: auto;
+  transform-origin: 50% 100%;
+  animation-timing-function: var(--ease-in-out);
+  animation-iteration-count: infinite;
+}
+
+.hero__sprig--1 {
+  inset-inline-start: 8%;
+  animation-name: sprig-sway-a;
+  animation-duration: var(--duration-sprig-1);
+}
+
+.hero__sprig--2 {
+  inset-inline-start: 46%;
+  height: 36%;
+  animation-name: sprig-sway-b;
+  animation-duration: var(--duration-sprig-2);
+}
+
+.hero__sprig--3 {
+  inset-inline-end: 10%;
+  height: 30%;
+  animation-name: sprig-sway-a;
+  animation-duration: var(--duration-sprig-3);
+}
+
+.hero__sprig-stem {
+  stroke: var(--color-accent-ink);
+  stroke-width: 3;
+}
+
+.hero__sprig-leaf {
+  fill: var(--color-accent);
+  opacity: 0.9;
+}
+
+@keyframes sprig-sway-a {
+  0%, 100% { transform: rotate(calc(var(--sprig-sway-angle) * -1)); }
+  50% { transform: rotate(var(--sprig-sway-angle)); }
+}
+
+@keyframes sprig-sway-b {
+  0%, 100% { transform: rotate(var(--sprig-sway-angle)); }
+  50% { transform: rotate(calc(var(--sprig-sway-angle) * -1)); }
+}
+
+.hero__facts {
+  margin-block-start: var(--space-xs);
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* Reduced motion: freeze all three sprigs at rest (spec §8, brief §7). The
+   course-band, the section head-rules and the hero atmosphere are already
+   static, so nothing else in the hero needs a reduced-motion rule. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__sprig { animation: none; transform: rotate(0deg); }
+}
+
+/* --- Services (brief §5) --------------------------------------------------- */
+
+.services__body {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-md);
+}
+
+.services-list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.services-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+/* Small solid-accent chip mark (brief §4.2, ref-008's list-with-chips move
+   adapted) — not a numeral system at all, distinct from the process
+   word-ordinals and the FAQ disclosure marker. */
+.services-row__chip {
+  flex: none;
+  margin-block-start: var(--space-3xs);
+  width: var(--space-sm);
+  height: var(--space-sm);
+  background-color: var(--color-accent);
+  border-radius: var(--radius-sm);
+}
+
+.services-row__body strong {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+}
+
+.services__figure,
+.words__figure,
+.trust__figure {
+  margin: 0;
+}
+
+.services__figure img,
+.words__figure img,
+.trust__figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.services__note {
+  margin-block-start: var(--space-lg);
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+@media (min-width: 64em) {
+  .services__body {
+    grid-template-columns: 3fr 2fr;
+    align-items: start;
+  }
+
+  /* Roughly beside item 5 of 9 (Borders), per brief §6 slot 2 — not pinned
+     to a pixel box. */
+  .services__figure {
+    margin-block-start: 20%;
+  }
+}
+
+/* --- Borders & Flagstone, in Their Own Words (brief §4.1 row 4) ----------- */
+
+.words__body {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-md);
+}
+
+.words__quotes {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.words-item__label {
+  font-size: var(--text-h3);
+  color: var(--color-ink);
+  margin-block-end: var(--space-2xs);
+}
+
+.quote {
+  margin: 0;
+  padding-inline-start: var(--space-md);
+  border-inline-start: var(--border-thick) var(--border-style) var(--color-accent);
+}
+
+.quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+}
+
+@media (min-width: 64em) {
+  .words__body {
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+  }
+}
+
+/* --- Quiet Trust (brief §4.1 row 5) ---------------------------------------- */
+
+.trust__body {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-md);
+}
+
+.trust__text > * + * {
+  margin-block-start: var(--space-sm);
+}
+
+.trust__phones {
+  font-weight: var(--font-weight-body-strong);
+  color: var(--color-ink);
+}
+
+@media (min-width: 64em) {
+  .trust__body {
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+  }
+}
+
+/* --- How It Works (brief §4.1 row 6): word-ordinals in Karla 700
+   accent-ink — two dimensions apart from the services chips (glyph system
+   AND colour role, brief §4.2). --------------------------------------------- */
+
+.process-list {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-md);
+}
+
+.process-step__label {
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-body-strong);
+  color: var(--color-ink);
+  margin-block-end: var(--space-3xs);
+}
+
+.process-step__num {
+  color: var(--color-accent-ink);
+}
+
+@media (min-width: 64em) {
+  .process-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- FAQ (brief §4.1 row 8): native details/summary, a +/- disclosure
+   marker — the page's third and last counter-like system, distinct from
+   both the services chips and the process word-ordinals (brief §4.2). ----- */
+
+.faq-list {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: var(--layout-measure);
+  margin-block-start: var(--space-md);
+}
+
+.faq-item {
+  padding-block: var(--space-sm);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.faq-item__q {
+  position: relative;
+  padding-inline-end: var(--space-lg);
+  font-weight: var(--font-weight-body-strong);
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__q::after {
+  content: '+';
+  position: absolute;
+  inset-inline-end: 0;
+  color: var(--color-accent-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.faq-item[open] .faq-item__q::after {
+  /* Plain hyphen-minus (U+002D, in range) — not the Unicode minus, which no shipped face carries */
+  content: '-';
+}
+
+.faq-item__a {
+  margin-block-start: var(--space-xs);
+  color: var(--color-ink-muted);
+}
+
+/* --- Contact / final CTA band (brief §4.1 row 7) --------------------------- */
+
+.contact-cta {
+  margin-block-start: var(--space-sm);
+  margin-block-end: var(--space-md);
+}
+
+/* --- Footer additions -------------------------------------------------------
+   The office line sits under the cell line inside the same <address>, per
+   brief §4.1 row 9's explicit footer requirement (cell + office, verbatim
+   "office:" label). No extra rule needed beyond inheriting site-footer__nap;
+   this selector exists only so the line is easy to find in the cascade. */
+.site-footer__office {
+  color: var(--color-ink-muted);
+}

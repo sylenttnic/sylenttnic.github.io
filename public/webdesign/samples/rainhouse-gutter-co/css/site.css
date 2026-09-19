@@ -1,0 +1,631 @@
+/* ==========================================================================
+   site.css — per-site layout & components, built FROM tokens.
+
+   HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
+   font-name literals in this file. Tokens only. The Critic greps for it.
+   The two escape hatches are the house breakpoints and an explicit
+   `@allow-literal: reason` comment on the preceding line.
+
+   WHAT THE SKELETON SHIPS HERE, AND WHY IT SHIPS SO LITTLE
+   --------------------------------------------------------
+   Only the shell: header/nav, the section rhythm hook, buttons, the form, the
+   footer. That is everything a site needs structurally and nothing that
+   decides how it looks.
+
+   The skeleton deliberately ships NO hero, NO card grid, NO feature row, NO
+   testimonial block and NO section-heading pattern. Those come from the
+   approved brief's layout archetype (design-rules §7) and are written per
+   site. A skeleton that shipped them would hand every business the same page
+   with different colours — which is the exact failure the DNA registry
+   exists to prevent, and it would collide head-on with the banned-defaults
+   list (design-rules §4: three-card grids, four-stat rows, centred hero with
+   two pill buttons, every section the same padding with a centred heading).
+
+   And when a brief's archetype numbers its sections, its sub-lists take a
+   visibly different mark — different numeral system, face and colour role —
+   or no mark at all (design-rules §4, "two counters in one costume").
+
+   Builder: extend this file with the brief's components. Do not "fill in" a
+   hero here from memory — the brief is law (spec §12).
+   ========================================================================== */
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-container);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Vertical rhythm hook. --section-gap is the only inter-section spacing value
+   on a site (design-rules §7.1); the brief picks which scale step it is. */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.measure {
+  max-width: var(--layout-measure);
+}
+
+/* --- Header & navigation --------------------------------------------------
+   Progressive enhancement: with JS off the nav list is a plain, always-visible
+   list of links and the toggle stays [hidden] (it ships hidden in the HTML;
+   main.js reveals it). With JS on, narrow viewports collapse the list behind
+   the toggle. Nothing about navigation depends on JavaScript.              */
+
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+  padding-block: var(--space-sm);
+  border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
+     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+  border: var(--border-hairline) var(--border-style) var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--space-3xs);
+}
+
+/* QA r3 FIX perf/cls (this skeleton-level defect was confirmed present,
+   verbatim, on every site built from it -- see
+   runs/3-elements-landscaping-asheville-nc/qa/critic-round-2.md): the
+   collapsed state used to apply only once a deferred `type="module"`
+   script called `initNav()` and set `[data-nav-ready]`, so the full nav
+   list rendered open at first paint and then collapsed into the hamburger
+   AFTER first contentful paint -- a timing race with no fixed outcome that
+   shifted the whole header (and everything below it) and scored CLS
+   0.066-0.094 in the majority of Lighthouse runs. Inverting the default
+   removes the race entirely: closed is now the plain CSS default below
+   48em, with no JS gate, so there is nothing left to collapse post-paint.
+   The one visitor this would otherwise strand -- JS off, so
+   `[data-nav-ready]` never lands -- gets the nav back via the <noscript>
+   stylesheet override in `@shared:head-boilerplate` (index.html/buy.html/
+   thanks.html), which ships last in source order and wins the
+   display:block/display:none tie on cascade order alone, no
+   `!important`. The nav-toggle button already ships `hidden` in the HTML
+   and only JS ever clears that, so JS-off visitors never see a dead
+   control -- nothing to change there. */
+.site-nav {
+  display: none;
+}
+
+[data-nav-ready] .site-nav[data-nav-open='true'] {
+  display: block;
+  flex-basis: 100%;
+}
+
+@media (min-width: 48em) {
+  .site-nav {
+    display: block;
+  }
+
+  [data-nav-ready] .nav-toggle {
+    display: none;
+  }
+}
+
+/* --- Buttons --------------------------------------------------------------
+   Two roles, no more. Radius, weight and colour all come from the brief via
+   tokens — including --radius-none, which is a legitimate answer.          */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--border-hairline) var(--border-style) transparent;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn--quiet {
+  /* Outline button: the border is the whole control, so it takes the 3:1
+     control-boundary token, not the decorative hairline (WCAG 1.4.11). */
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+/* --- Form -----------------------------------------------------------------
+   One form per site (spec §6). POSTs to the endpoint constant in main.js;
+   works as a plain HTML POST with JS off; auto-hides when no endpoint is
+   configured so a spec site never shows a dead form.                       */
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--layout-measure);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field__label {
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.field__control {
+  width: 100%;
+  min-height: var(--layout-tap-min);
+  padding: var(--space-2xs) var(--space-xs);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+textarea.field__control {
+  min-height: var(--space-3xl);
+  resize: vertical;
+}
+
+.field__hint {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* Honeypot: present in the DOM for bots, unreachable for humans and assistive
+   tech. Not display:none — some bots skip those. */
+.form__trap {
+  position: absolute;
+  /* @allow-literal: off-canvas parking position, not a design value */
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.form__status[data-state='error'] {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* --- Footer ---------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: var(--space-xl);
+  border-top: var(--border-hairline) var(--border-style) var(--color-border);
+  font-size: var(--text-small);
+}
+
+.site-footer a {
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-footer__nap {
+  font-style: normal;
+}
+
+/* ==========================================================================
+   whatcom-gutter-co-lynden-wa — brief components (band-rhythm, warm-craft).
+   Every component below is built from tokens only, per the brief's section
+   plan (runs/whatcom-gutter-co-lynden-wa/brief.md §5).
+   ========================================================================== */
+
+/* --- Eyebrow ----------------------------------------------------------------
+   Authored in natural case in the HTML (house-tech-spec §8); this is what
+   uppercases it. */
+
+.eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: var(--leading-snug);
+  font-weight: var(--font-weight-body-strong);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-block-end: var(--space-2xs);
+}
+
+/* --- Hero --------------------------------------------------------------------
+   Brief §5.0/§5.1. DOM order is fixed (design-rules §7.2 rule 1): eyebrow →
+   h1 → primary CTA → field → lead → facts. At >=64em the field moves beside
+   the text via grid-template-areas ONLY — the DOM order above never changes,
+   so the same source order that satisfies the fold arithmetic is also the
+   reading and tab order at every width. */
+
+.hero {
+  background-color: var(--color-bg);
+  padding-block-start: var(--space-lg);
+  padding-block-end: var(--section-gap);
+}
+
+/* row-gap is deliberately 0: the brief's §5.0 cumulative-y arithmetic sets
+   every gap explicitly as a margin on the element that owns it (eyebrow 8px,
+   h1 16px, CTA 24px, field 0 — field-bottom and lead-top land at the same y),
+   so a grid row-gap would double up on top of those margins. column-gap
+   (desktop only, brief's stated 40px) is the one gap this grid itself owns. */
+.hero__grid {
+  display: grid;
+  grid-template-areas: 'top' 'art' 'bottom';
+  row-gap: 0;
+}
+
+.hero__top { grid-area: top; }
+.hero__art-wrap { grid-area: art; margin-block-start: var(--space-md); }
+.hero__bottom { grid-area: bottom; }
+
+.hero__title {
+  font-size: var(--text-hero);
+  margin-block-end: var(--space-sm);
+}
+
+.hero__title em {
+  font-style: italic;
+  font-weight: var(--font-weight-display-emphasis);
+  color: var(--color-accent);
+}
+
+.hero__top > p:last-child {
+  margin-block-end: 0;
+}
+
+/* Field: fixed height at mobile (brief §5.0 — 260px, 100% of it above the
+   375x667 fold). Free-flowing (aspect-ratio driven) from >=64em, where the
+   fold is no longer a binding constraint. */
+.hero__art-wrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  /* 260px exactly — brief §5.0's fixed mobile field height, 100% of it above
+     the 375x667 fold. */
+  block-size: calc(var(--space-3xl) + var(--space-xl) + var(--space-lg) + var(--space-xs));
+}
+
+/* The photograph and its trace overlay share the exact same box, so the
+   overlay's preserveAspectRatio="xMidYMid slice" crops identically to the
+   photo's object-fit: cover — the default (centered) crop on both, never
+   customised on one without the other. */
+.hero__img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero__trace {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.hero__bottom {
+  display: grid;
+  gap: var(--space-xs);
+  margin-block-start: 0;
+}
+
+.hero__lead {
+  color: var(--color-ink-muted);
+  font-size: var(--text-lead);
+}
+
+.hero__facts {
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* Between the mobile fixed-height field (brief §5.0's exact 260px) and the
+   two-column desktop column, a fluid width against a fixed 260px height
+   stretches the crop far wider than the artwork was composed for (measured:
+   the corner/downspout pushed almost entirely out of frame by 768px). An
+   aspect-ratio step here is a delivery-mechanical fix to that stretch, not a
+   brief value — the brief states no tablet number to reproduce. */
+@media (min-width: 48em) {
+  .hero__art-wrap {
+    block-size: auto;
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (min-width: 64em) {
+  .hero__grid {
+    grid-template-columns: 44fr 56fr;
+    grid-template-areas: 'top   art' 'bottom art';
+    column-gap: var(--space-lg);
+    row-gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .hero__art-wrap {
+    block-size: 100%;
+    aspect-ratio: 4 / 5;
+    margin-block-start: 0;
+  }
+}
+
+/* --- Living-hero signature: the trough draws once, a glint settles, one
+   droplet loops (brief §7). Durations are the brief's own tokens, deliberately
+   outside the house reveal trio — this is a one-shot device, not a reveal. */
+
+.trough-line {
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  animation: whatcom-draw-trough var(--duration-hero-draw) var(--ease-hero-draw) var(--delay-hero-draw) forwards;
+}
+
+@keyframes whatcom-draw-trough {
+  to { stroke-dashoffset: 0; }
+}
+
+.glint {
+  opacity: 0;
+  animation: whatcom-settle-glint var(--duration-hero-glint) var(--ease-out) var(--delay-hero-glint) forwards;
+}
+
+@keyframes whatcom-settle-glint {
+  to { opacity: 0.9; }
+}
+
+.droplet {
+  opacity: 0;
+  animation: whatcom-fall-droplet var(--duration-hero-droplet) var(--ease-in-out) var(--delay-hero-glint) infinite;
+}
+
+/* cy is animated in the SVG's own viewBox units (not CSS pixels), so the fall
+   stays proportional to the artwork at every rendered size — a transform in
+   CSS pixels would not. */
+@keyframes whatcom-fall-droplet {
+  0% { cy: 600; opacity: 0; }
+  8% { opacity: 1; }
+  86% { cy: 860; opacity: 1; }
+  100% { cy: 900; opacity: 0; }
+}
+
+/* Reduced motion: the hero freezes to its finished state, never mid-motion —
+   a frozen droplet would read as a rendering error, so it hides instead
+   (brief §7's explicit reduced-motion statement). base.css's kill switch
+   collapses the house reveal trio; these three are one-shot end-states with
+   their own tokens, so they are frozen explicitly here. */
+@media (prefers-reduced-motion: reduce) {
+  .trough-line { animation: none; stroke-dashoffset: 0; }
+  .glint { animation: none; opacity: 0.9; }
+  .droplet { animation: none; opacity: 0; }
+}
+
+/* --- Trust strip (brief §5.2) ----------------------------------------------- */
+
+.trust {
+  padding-block: var(--space-lg);
+}
+
+.trust__list {
+  display: grid;
+  gap: var(--space-sm) var(--space-lg);
+  margin-block-end: var(--space-md);
+}
+
+@media (min-width: 48em) {
+  .trust__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.trust__item {
+  padding-inline-start: var(--space-md);
+  border-inline-start: var(--border-thick) var(--border-style) var(--color-accent);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.trust__proof {
+  color: var(--color-ink-muted);
+  font-size: var(--text-lead);
+}
+
+.trust__proof strong {
+  color: var(--color-ink);
+}
+
+/* --- Services: band-rhythm, the four anchored blocks (brief §5.3) ---------- */
+
+.services__title,
+#services-title {
+  margin-block-end: var(--space-lg);
+}
+
+.bands {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.band {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-sm) var(--space-md);
+  padding: var(--space-lg);
+}
+
+.band:nth-child(odd) {
+  background-color: var(--color-surface);
+}
+
+.band:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+.band + .band {
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+/* The one repeated ornament: the band numeral. Fixed at 2.4ch, italic serif,
+   accent colour — the numeral system distinction from the body sans
+   (design-rules §5's nested-counter rule), and the page's only enumerated
+   list (brief §3). */
+.band__num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--font-weight-display-emphasis);
+  font-size: var(--text-h3);
+  color: var(--color-accent);
+  inline-size: var(--layout-band-num);
+  line-height: 1;
+}
+
+.band__body {
+  display: grid;
+  gap: var(--space-sm);
+  align-content: start;
+}
+
+.band__heading {
+  font-size: var(--text-h3);
+}
+
+.band__img {
+  --band-img-width: calc(var(--space-3xl) + var(--space-lg));
+  inline-size: 100%;
+  max-inline-size: var(--band-img-width);
+  block-size: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.services__explainer {
+  display: grid;
+  gap: var(--space-2xs);
+  padding-inline-start: var(--space-md);
+  border-inline-start: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.services__explainer-lead {
+  color: var(--color-ink-muted);
+}
+
+.services__explainer-proof {
+  font-weight: var(--font-weight-body-strong);
+  color: var(--color-accent);
+}
+
+@media (min-width: 48em) {
+  .band__body {
+    grid-template-columns: 1fr var(--band-img-width);
+    column-gap: var(--space-lg);
+  }
+
+  .band__heading,
+  .band__body > p,
+  .services__explainer {
+    grid-column: 1;
+  }
+
+  .band__img {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: start;
+    max-inline-size: none;
+  }
+}
+
+/* --- Reviews (brief §5.6) ---------------------------------------------------
+   No fixed heights, no equal-card grid, no truncation, no numbering — every
+   review is whole and verbatim. */
+
+.reviews__stat {
+  color: var(--color-ink-muted);
+  margin-block-end: var(--space-lg);
+}
+
+.reviews__list {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .reviews__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.review {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.review__quote p {
+  margin: 0;
+}
+
+.review__attrib {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* --- Service area (brief §5.7) ---------------------------------------------- */
+
+.area p {
+  color: var(--color-ink-muted);
+  font-size: var(--text-lead);
+}

@@ -1,0 +1,251 @@
+/* ==========================================================================
+   base.css — skeleton reset + primitives.
+
+   House-level, not per-site. Edit rarely; NEVER edit per site (house-tech-spec
+   §2). Everything visual here reads from tokens.css, so a brief re-themes this
+   file without touching it.
+
+   Contains: reset, document defaults, accessibility primitives (skip link,
+   focus ring, visually-hidden), the reduced-motion kill switch, and the
+   reveal system's base states. Contains NO layout and NO components — those
+   are site.css, and their composition is the brief's call.
+
+   TWO HOUSE ESCAPE HATCHES, both grep-enforced:
+
+   1. BREAKPOINTS are the one unavoidable literal — CSS custom properties do
+      not work inside media query conditions. The house set:
+        48em  ( 768px )  tablet and up
+        64em  (1024px )  desktop and up
+   2. Any other literal in this file or site.css must be preceded by an
+      `@allow-literal: reason` comment, which scripts/qa/grep-audit.mjs
+      honours for the following line. Anything else is a BLOCKER.
+
+   NOTE ON `!important`: the reduced-motion kill switch below is the one place
+   stylesheets conventionally reach for it. We don't need to. Because no
+   timing literal may exist outside tokens.css, collapsing the duration tokens
+   at :root collapses every animation on the site at the source. That keeps
+   `!important` a zero-exception grep (spec §12).
+   ========================================================================== */
+
+/* --- Reset ---------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  color-scheme: var(--scheme);
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd,
+ul, ol {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+  padding: 0;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Every <img> carries width+height attributes (spec §7, CLS ≈ 0); this keeps
+   the intrinsic ratio intact when CSS constrains one axis. */
+img {
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* [hidden] must win over any display value a component sets. It is
+   load-bearing: the nav toggle and the no-endpoint form section both ship
+   hidden from the HTML, and a component rule like `.nav-toggle { display:
+   inline-flex }` would otherwise out-order it and render a dead control.
+   Doubling the attribute lifts specificity to (0,2,0) — which is how we win
+   this without `!important` (spec §12). House rule that follows from it:
+   never set `display` on a hideable element from a selector of specificity
+   (0,2,0) or higher. */
+[hidden][hidden] {
+  display: none;
+}
+
+/* --- Document defaults ---------------------------------------------------- */
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--leading-body);
+  /* @allow-literal: full-viewport floor is structural, not a design value */
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+strong, b {
+  font-weight: var(--font-weight-body-strong);
+}
+
+a {
+  color: inherit;
+}
+
+hr {
+  border: 0;
+  border-top: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+::selection {
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection-ink);
+}
+
+/* --- Accessibility primitives --------------------------------------------- */
+
+/* Visible, token-styled focus ring on every interactive element (spec §8).
+   Never remove this without replacing it with something equally visible.
+
+   ON A DARK BAND this ring is usually invisible — --color-focus is chosen
+   against the light page ground and is typically a dark ink. Every dark band
+   must re-point the outline colour at --color-focus-on-band (tokens.css), or
+   it fails WCAG 1.4.11 while looking fine on the rest of the page. Both of
+   the pipeline's first two briefs failed exactly this way, at 1.36:1 and
+   2.09:1, which is why the token exists. */
+:focus-visible {
+  outline: var(--border-thick) var(--border-style) var(--color-focus);
+  outline-offset: var(--space-3xs);
+  border-radius: var(--radius-sm);
+}
+
+/* Skip link: first focusable thing on the page, off-screen until focused. */
+.skip-link {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--layout-tap-min);
+  z-index: var(--z-skip-link);
+  inset-inline-start: var(--space-sm);
+  inset-block-start: var(--space-sm);
+  padding: var(--space-2xs) var(--space-sm);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-weight: var(--font-weight-body-strong);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute;
+  /* @allow-literal: the standard visually-hidden clip box is not a design value */
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* WCAG touch-target floor (spec §8). Native controls get it for free; any
+   other interactive element opts in with data-tap, which site.css applies to
+   nav links, CTAs and anything else a thumb has to find. */
+button,
+select,
+summary,
+input[type='submit'],
+input[type='button'],
+[data-tap] {
+  min-height: var(--layout-tap-min);
+}
+
+/* --- Reveal system (base states) ------------------------------------------
+   Progressive-enhancement contract: with JS off, nothing is hidden. main.js
+   sets data-reveal-ready on <html>, which is the ONLY thing that arms the
+   hidden state. Reveals are for BELOW-THE-FOLD content only — never the hero,
+   which is the LCP element (spec §7).                                       */
+
+[data-reveal-ready] [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift));
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  transition-delay: calc(var(--reveal-stagger) * var(--reveal-index, 0));
+}
+
+[data-reveal-ready] [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Reduced motion: the kill switch --------------------------------------
+   spec §8: prefers-reduced-motion disables all reveals, parallax and animated
+   heroes — no exceptions. Collapsing the duration tokens kills every
+   token-driven animation at the source; the explicit rules below handle the
+   two things that aren't timing values. main.js also reads this query and
+   skips the IntersectionObserver entirely.                                  */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* @allow-literal: a duration token must resolve to a real time value */
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+    --reveal-shift: 0;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal-ready] [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0s;
+  }
+}

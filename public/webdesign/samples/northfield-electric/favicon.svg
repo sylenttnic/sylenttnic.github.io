@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Typographic mark, "GE": initials mechanically drawn from the business's
+     own name, "Northfield Electric," the same convention this repo uses
+     elsewhere. No logo is reproduced: the dossier records no sampleable
+     brand asset at any tier (§4.5; playbooks/electrical.md's own failed
+     colour probe on this domain). Panel/accent pairing, verbatim from brief
+     §2.2/§2.3 (accent-on-panel, 6.40:1): a raw hex here is the one
+     house-sanctioned exception (a favicon is an asset, not a stylesheet),
+     kept in step with tokens.css by hand. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Northfield Electric">
+  <rect width="64" height="64" fill="#1F2023"/>
+  <text x="32" y="43" text-anchor="middle"
+        font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="26" font-weight="500"
+        fill="#E0912B">GE</text>
+</svg>

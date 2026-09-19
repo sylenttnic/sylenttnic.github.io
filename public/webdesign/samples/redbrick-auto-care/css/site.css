@@ -1,0 +1,675 @@
+/* ==========================================================================
+   site.css — per-site layout & components, built FROM tokens.
+
+   HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
+   font-name literals in this file. Tokens only. The Critic greps for it.
+   The two escape hatches are the house breakpoints and an explicit
+   `@allow-literal: reason` comment on the preceding line.
+
+   WHAT THE SKELETON SHIPS HERE, AND WHY IT SHIPS SO LITTLE
+   --------------------------------------------------------
+   Only the shell: header/nav, the section rhythm hook, buttons, the form, the
+   footer. That is everything a site needs structurally and nothing that
+   decides how it looks.
+
+   The skeleton deliberately ships NO hero, NO card grid, NO feature row, NO
+   testimonial block and NO section-heading pattern. Those come from the
+   approved brief's layout archetype (design-rules §7) and are written per
+   site. A skeleton that shipped them would hand every business the same page
+   with different colours — which is the exact failure the DNA registry
+   exists to prevent, and it would collide head-on with the banned-defaults
+   list (design-rules §4: three-card grids, four-stat rows, centred hero with
+   two pill buttons, every section the same padding with a centred heading).
+
+   And when a brief's archetype numbers its sections, its sub-lists take a
+   visibly different mark — different numeral system, face and colour role —
+   or no mark at all (design-rules §4, "two counters in one costume").
+
+   Builder: extend this file with the brief's components. Do not "fill in" a
+   hero here from memory — the brief is law (spec §12).
+   ========================================================================== */
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--layout-container);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Vertical rhythm hook. --section-gap is the only inter-section spacing value
+   on a site (design-rules §7.1); the brief picks which scale step it is. */
+.section {
+  padding-block: var(--section-gap);
+}
+
+.measure {
+  max-width: var(--layout-measure);
+}
+
+/* --- Header & navigation --------------------------------------------------
+   Progressive enhancement: with JS off the nav list is a plain, always-visible
+   list of links and the toggle stays [hidden] (it ships hidden in the HTML;
+   main.js reveals it). With JS on, narrow viewports collapse the list behind
+   the toggle. Nothing about navigation depends on JavaScript.              */
+
+/* Sticky — brief §4.2 row 0, §4.4. Stacked below the also-sticky preview
+   expiry bar (--expiry-height, preview.css). min-height is the brief's §4.4
+   target (56/72px) rather than left to fall out of padding, so the
+   sticky-chrome sum the fold arithmetic assumes holds by construction. */
+.site-header {
+  position: sticky;
+  inset-block-start: var(--expiry-height);
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  min-height: var(--header-height-mobile);
+  padding-block: var(--space-2xs);
+  border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
+  background-color: var(--color-bg);
+}
+
+@media (min-width: 64em) {
+  .site-header {
+    min-height: var(--header-height-desktop);
+  }
+}
+
+/* Anchored sections (#services, #contact) must not surface under the sticky
+   stack when a visitor follows an in-page link. */
+section[id] {
+  scroll-margin-block-start: calc(var(--expiry-height) + var(--header-height-mobile) + var(--border-hairline));
+}
+
+@media (min-width: 64em) {
+  section[id] {
+    scroll-margin-block-start: calc(var(--expiry-height) + var(--header-height-desktop) + var(--border-hairline));
+  }
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.site-header__brand {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  text-decoration: none;
+  letter-spacing: var(--tracking-tight);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-xs);
+  /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
+     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+  border: var(--border-hairline) var(--border-style) var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: var(--space-3xs);
+}
+
+/* QA r3 FIX perf/cls (this skeleton-level defect was confirmed present,
+   verbatim, on every site built from it -- see
+   runs/3-elements-landscaping-asheville-nc/qa/critic-round-2.md): the
+   collapsed state used to apply only once a deferred `type="module"`
+   script called `initNav()` and set `[data-nav-ready]`, so the full nav
+   list rendered open at first paint and then collapsed into the hamburger
+   AFTER first contentful paint -- a timing race with no fixed outcome that
+   shifted the whole header (and everything below it) and scored CLS
+   0.066-0.094 in the majority of Lighthouse runs. Inverting the default
+   removes the race entirely: closed is now the plain CSS default below
+   48em, with no JS gate, so there is nothing left to collapse post-paint.
+   The one visitor this would otherwise strand -- JS off, so
+   `[data-nav-ready]` never lands -- gets the nav back via the <noscript>
+   stylesheet override in `@shared:head-boilerplate` (index.html/buy.html/
+   thanks.html), which ships last in source order and wins the
+   display:block/display:none tie on cascade order alone, no
+   `!important`. The nav-toggle button already ships `hidden` in the HTML
+   and only JS ever clears that, so JS-off visitors never see a dead
+   control -- nothing to change there. */
+.site-nav {
+  display: none;
+}
+
+[data-nav-ready] .site-nav[data-nav-open='true'] {
+  display: block;
+  flex-basis: 100%;
+}
+
+@media (min-width: 48em) {
+  .site-nav {
+    display: block;
+  }
+
+  [data-nav-ready] .nav-toggle {
+    display: none;
+  }
+}
+
+/* --- Buttons --------------------------------------------------------------
+   Two roles, no more. Radius, weight and colour all come from the brief via
+   tokens — including --radius-none, which is a legitimate answer.          */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-md);
+  border: var(--border-hairline) var(--border-style) transparent;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--leading-snug);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn--quiet {
+  /* Outline button: the border is the whole control, so it takes the 3:1
+     control-boundary token, not the decorative hairline (WCAG 1.4.11). */
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+/* --- Form -----------------------------------------------------------------
+   One form per site (spec §6). POSTs to the endpoint constant in main.js;
+   works as a plain HTML POST with JS off; auto-hides when no endpoint is
+   configured so a spec site never shows a dead form.                       */
+
+.form {
+  display: grid;
+  gap: var(--space-md);
+  max-width: var(--layout-measure);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.field__label {
+  font-size: var(--text-small);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.field__control {
+  width: 100%;
+  min-height: var(--layout-tap-min);
+  padding: var(--space-2xs) var(--space-xs);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: var(--border-hairline) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+textarea.field__control {
+  min-height: var(--space-3xl);
+  resize: vertical;
+}
+
+.field__hint {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+/* Honeypot: present in the DOM for bots, unreachable for humans and assistive
+   tech. Not display:none — some bots skip those. */
+.form__trap {
+  position: absolute;
+  /* @allow-literal: off-canvas parking position, not a design value */
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form__status {
+  font-size: var(--text-small);
+  color: var(--color-ink-muted);
+}
+
+.form__status[data-state='error'] {
+  color: var(--color-ink);
+  font-weight: var(--font-weight-body-strong);
+}
+
+/* --- Footer ---------------------------------------------------------------- */
+
+.site-footer {
+  padding-block: var(--space-xl);
+  border-top: var(--border-hairline) var(--border-style) var(--color-border);
+  font-size: var(--text-small);
+}
+
+.site-footer a {
+  text-underline-offset: var(--space-3xs);
+}
+
+.site-footer__nap {
+  font-style: normal;
+}
+
+/* --- Eyebrow (generic) ------------------------------------------------------
+   Label copy is authored in natural case and uppercased with text-transform,
+   never typed in caps (house-tech-spec §8). */
+
+.eyebrow {
+  display: block;
+  font-size: var(--text-eyebrow);
+  font-weight: var(--font-weight-body-strong);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* §0 HERO — "the diagnosis, out loud" (brief §4.3, full-bleed-immersive).
+   DOM order (design-rules §7.2 rule 1): .hero-content is FIRST in source,
+   painted IN FRONT (z-index 1); .hero-field is SECOND, absolutely
+   positioned, painted BEHIND (z-index 0) — full-bleed while the primary
+   control precedes the field in reading/AT order. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: var(--hero-height-mobile);
+}
+
+@media (min-width: 64em) {
+  .hero {
+    min-height: var(--hero-height-desktop);
+  }
+}
+
+/* Solid ink scrim, sized to its content, bottom-anchored by the parent flex
+   (brief §4.3: "solid ink scrim beneath ALL hero text… not the gradient
+   behind it"). A real `background-color`, not a gradient: the exact pairing
+   brief §2.3's F5-F8 table computes, and what any ancestor-walking contrast
+   reader can verify (a sibling's gradient/background-image is invisible to
+   that walk). `::before` adds a decorative fade into the image; it carries
+   no text and needs no contrast floor. */
+.hero-content {
+  position: relative;
+  z-index: var(--z-hero-content);
+  background-color: var(--color-scrim);
+  padding-block: var(--space-xl) var(--space-lg);
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 100%;
+  block-size: var(--space-2xl);
+  background: linear-gradient(to top, var(--color-scrim), transparent);
+  pointer-events: none;
+}
+
+@media (min-width: 64em) {
+  .hero-content {
+    padding-block: var(--space-2xl) var(--space-xl);
+  }
+}
+
+/* N3/N4: --color-focus fails on the scrim (2.89:1); scrim-safe ring here,
+   scoped, never global. */
+.hero-content :focus-visible {
+  outline-color: var(--color-focus-on-scrim);
+}
+
+.hero-eyebrow {
+  margin-block-end: var(--space-2xs);
+  color: var(--color-scrim-eyebrow);
+}
+
+.hero-h1 {
+  margin-block-end: var(--space-md);
+  font-size: var(--text-hero);
+  color: var(--color-scrim-text);
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--color-scrim-accent);
+}
+
+.hero-cta-row {
+  margin-block-end: var(--space-sm);
+}
+
+/* WCAG 1.4.11: fill-on-scrim measures only 2.80:1 (not one of brief §2.3's
+   tabulated page-ground pairs). The scrim-safe accent border (F7, 7.30:1)
+   gives the control its own boundary, same precedent as .btn--quiet. */
+.hero-cta {
+  border-color: var(--color-scrim-accent);
+}
+
+.hero-lead {
+  max-width: var(--layout-measure);
+  margin-block-end: var(--space-2xs);
+  font-size: var(--text-lg);
+  color: var(--color-scrim-text-muted);
+}
+
+.hero-facts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-body-strong);
+  color: var(--color-scrim-text);
+}
+
+.hero-facts__star {
+  color: var(--color-scrim-accent);
+}
+
+/* --- The art/atmosphere layer ----------------------------------------------
+   The whole hero box, behind the content. No text ever sits on this layer
+   directly (brief §2.3) — legibility is the scrim's job, below. */
+
+.hero-field {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-hero-field);
+}
+
+.hero-field picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-field__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 30%;
+}
+
+/* Soft radial atmosphere (ref-001's move) — additional depth over the baked
+   image, not the anchor's only carrier (the anchor is already in the frame
+   per the imagery style recipe). */
+.hero-field__atmosphere {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 62% 18%, var(--color-shop-light) 0%, transparent 55%);
+  opacity: 0.35;
+}
+
+/* Bottom-anchored ink scrim — what makes the hero-content text pairs (F5-F8)
+   the ones that actually render. Text sits on the solid portion only. */
+.hero-field__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-scrim) 0%, var(--color-scrim) 42%, transparent 100%);
+}
+
+/* --- The signature move: the indicator light + the one floating bolt ------
+   Base state is the settled/visible frame; the animation itself only adds
+   motion, so a near-zero collapsed duration (tokens.css, reduced motion)
+   still paints a correct still frame (design-rules §0). */
+
+.hero-indicator {
+  position: absolute;
+  inset-inline-start: 10%;
+  inset-block-start: 8%;
+  width: var(--space-sm);
+  height: var(--space-sm);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-tool-warm);
+  animation: hero-indicator-pulse var(--duration-indicator-pulse) ease-in-out infinite;
+}
+
+@keyframes hero-indicator-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.hero-bolt {
+  position: absolute;
+  inset-inline-start: 26%;
+  inset-block-start: 15%;
+  width: var(--space-lg);
+  height: var(--space-lg);
+  fill: var(--color-tool-warm);
+  opacity: 0.85;
+  animation: hero-bolt-float var(--duration-bolt-float) ease-in-out infinite;
+}
+
+@keyframes hero-bolt-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(calc(var(--space-2xs) * -1)) rotate(8deg); }
+}
+
+/* An `infinite` animation never finishes, so collapsing its duration token
+   alone does not stop it (spec §8) — cancelled here, settled frame fixed
+   (precedent: gibbons-electric-rockford-il's spark/breaker loops). */
+@media (prefers-reduced-motion: reduce) {
+  .hero-indicator {
+    animation: none;
+    opacity: 1;
+  }
+
+  .hero-bolt {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   §I — PROCESS INDEX, THE SPINE (brief §4.2 row 2, ref-011). Hairline rows,
+   a numeral, a name, a short line, one strict reading order. background:
+   var(--color-bg) on .index-list is LOAD-BEARING (brief binding flag 9) —
+   do not regress to unset or inherited.
+   ============================================================================ */
+
+.index__lead {
+  margin-block-end: var(--space-md);
+  color: var(--color-ink-muted);
+}
+
+.index-list {
+  background: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  border-block-start: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.index-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "num name"
+    "line line";
+  column-gap: var(--space-md);
+  padding-block: var(--space-md);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+@media (min-width: 48em) {
+  .index-row {
+    grid-template-columns: var(--col-index-num) 1fr 1fr;
+    grid-template-areas: "num name line";
+    align-items: baseline;
+  }
+}
+
+.index-row__num {
+  grid-area: num;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+}
+
+.index-row__name {
+  grid-area: name;
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+}
+
+@media (min-width: 48em) {
+  .index-row__name {
+    align-self: baseline;
+  }
+}
+
+.index-row__line {
+  grid-area: line;
+  margin-block-start: var(--space-2xs);
+  color: var(--color-ink-muted);
+}
+
+@media (min-width: 48em) {
+  .index-row__line {
+    margin-block-start: 0;
+  }
+}
+
+/* ============================================================================
+   §II — SERVICES (brief §4.2 row 3). Plain named list, no icons or cards, no
+   numeral device (design-rules §5 — the process index is the page's only
+   numbered system).
+   ============================================================================ */
+
+.service-list {
+  display: grid;
+  gap: var(--space-2xs);
+  margin-block: var(--space-md) var(--space-lg);
+  padding: 0;
+}
+
+@media (min-width: 48em) {
+  .service-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-xl);
+  }
+}
+
+.service-list li {
+  padding-block: var(--space-xs);
+  border-block-end: var(--border-hairline) var(--border-style) var(--color-border);
+}
+
+.service-list__soft {
+  margin-block-end: var(--space-lg);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.section-image {
+  width: 100%;
+  height: auto;
+  margin-block-start: var(--space-lg);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================================
+   §III — TRUST & REVIEWS (brief §4.2 row 4). Facts strip, three verbatim
+   review cards on --color-surface, one honestly-labelled financing line.
+   ============================================================================ */
+
+.trust__facts {
+  margin-block: var(--space-sm) var(--space-lg);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-body-strong);
+}
+
+.trust__facts-star {
+  color: var(--color-accent);
+}
+
+.review-grid {
+  display: grid;
+  gap: var(--space-md);
+  margin-block-end: var(--space-lg);
+}
+
+@media (min-width: 48em) {
+  .review-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.review-card {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-sm);
+}
+
+.review-card blockquote {
+  margin: 0 0 var(--space-2xs);
+}
+
+.review-card figcaption {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.trust__financing {
+  margin-block-end: var(--space-lg);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+/* ============================================================================
+   §IV — HOURS & LOCATION (brief §4.2 row 5, honestly thin).
+   ============================================================================ */
+
+.hours__address {
+  margin-block: var(--space-sm) var(--space-xs);
+  font-size: var(--text-lg);
+  font-style: normal;
+}
+
+.hours__line {
+  margin-block-end: var(--space-2xs);
+}
+
+.hours__area {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}

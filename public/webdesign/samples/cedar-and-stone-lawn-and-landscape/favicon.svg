@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cedar & Stone Lawn and Landscape mark: initials "GG" in the display face's
+     serif shape, on the brief's accent (#A1D55D) with ink (#4A2A1E) text —
+     brief §2.1 token values, echoed here as literals per this asset's own
+     convention (house-tech-spec §3 exempts favicon.svg, it is not site.css). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cedar &amp; Stone Lawn and Landscape">
+  <rect width="64" height="64" rx="8" fill="#A1D55D"/>
+  <text x="32" y="43" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700"
+        fill="#4A2A1E">GG</text>
+</svg>

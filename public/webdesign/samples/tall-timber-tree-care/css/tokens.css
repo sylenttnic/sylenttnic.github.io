@@ -1,0 +1,260 @@
+/* ==========================================================================
+   tokens.css — brief.md (approved C3, 2026-09-12), family `bold-industrial`,
+   archetype `poster-hero`, signature "the beacon holds". Every value below
+   cites brief.md by section; nothing here is improvised.
+   ========================================================================== */
+
+:root {
+
+  /* --- Colour (brief §2.1). Derivation: order 1 (real-world colour) is
+     confirmed EMPTY — dossier §4.5/§4.8 gap 5, no logo/wrap/signage sampled —
+     so no echo is invented. Order 2 (trade's own real material colour):
+     hazard-ember, the safety-orange of the crew's own hi-vis gear and
+     equipment, present in the trade and absent from all 16 surveyed
+     competitor sites (playbook §6.1). Order 3 (family norms) reinforces
+     rather than conflicts. Order 4 (competitor distance): all three surveyed
+     Eugene competitors run white-ground/green-accent registers; this palette
+     shares no hue family with any of them. */
+
+  --scheme: light;
+
+  --color-bg:               #F6F4F0;  /* page ground */
+  --color-surface:          #EAE5DC;  /* raised bands — services, reviews, about, FAQ */
+  --color-ink:              #1A1917;  /* body/heading text on bg/surface; fill for the two dark panels */
+  --color-ink-muted:        #57534C;  /* secondary/body copy */
+
+  --color-accent:           #B94510;  /* hazard-ember — CTA fill, eyebrow, index numerals */
+  --color-accent-ink:       #FFFFFF;  /* text sitting on accent fill */
+  --color-accent-on-dark:   #F4A57E;  /* accent restated as a light tint for text on the ink panels
+                                          (footer, capability index) — raw accent fails AA there */
+  --color-ink-inverse-muted: #C9C4B8; /* capability-index "sub" lines on ink — 10.10:1 */
+
+  --color-border:           #DCD5C6; /* hairlines (non-text; no ratio required) */
+  --color-focus:            var(--color-accent);          /* 4.88:1 / 4.27:1 on bg/surface, clears 3:1 UI floor */
+  --color-focus-on-band:    var(--color-accent-on-dark);  /* scoped to .index-block/footer — 8.81:1 on ink */
+
+  --color-selection-bg:  var(--color-accent);
+  --color-selection-ink: #FFFFFF;
+
+  /* Token-contract completeness (brief §2 states no radius/shadow beyond the
+     family's flat, no-nonsense register — bold-industrial's own norm, carried
+     unchanged from the family's two prior tree-service briefs
+     boulder-tree-care-boulder-co and kopp-fencing-cedar-rapids-ia, both
+     `shadow: none` / one flat 2px radius throughout). Reserved steps resolve
+     to the one argued radius/shadow so every required token name still
+     exists. */
+  --radius-md:   var(--radius-sm);
+  --radius-lg:   var(--radius-sm);
+  --radius-pill: var(--radius-sm);
+  --shadow-sm:   var(--shadow-none);
+  --shadow-md:   var(--shadow-none);
+  --shadow-lg:   var(--shadow-none);
+
+  /* Brief-specific layout constants (site.css component geometry — spec §3
+     bans raw size literals outside this file, so every fixed dimension a
+     component needs is named here once). */
+  --hero-h1-max:      22ch;    /* caps the H1 measure so it stacks at 2 lines, poster-hero */
+  --mark-size:        2.25rem; /* the settled log-ring/beacon corner mark, band-heads + footer */
+  --texture-size-sm:  7rem;    /* services band texture accent, <48rem */
+  --texture-size-lg:  10rem;   /* services band texture accent, >=48rem */
+  --index-mark-inset: 0.7em;   /* services list marker's vertical offset, em-relative to its own line */
+  --figure-size-sm:   14rem;   /* capability-index accent figure, max-width */
+
+  /* --- Typography (brief §3). Anton (display, 400 only — no bold instance,
+     synthetic-bold banned) + Barlow (body, 400/600/700). Both Google Fonts,
+     SIL OFL 1.1. Four static woff2 files, latin subset, house declared range
+     (house-tech-spec §8), font-display: swap. Anton preloaded only. */
+
+  --font-display: 'Anton', 'Anton Fallback', Impact, 'Arial Narrow', sans-serif;
+  --font-body:    'Barlow', 'Barlow Fallback', 'Helvetica Neue', Arial, sans-serif;
+
+  --font-weight-body:        400;  /* Barlow Regular */
+  --font-weight-body-strong: 600;  /* Barlow SemiBold — inline emphasis, review attributions */
+  --font-weight-label:       700;  /* Barlow Bold — eyebrow, CTA, index-row labels (brief-specific) */
+  --font-weight-display:     400;  /* Anton's only weight — never 700 */
+
+  /* --- Type scale — brief §3, computed across its full range. --- */
+
+  --text-hero:    clamp(2.6rem, 1.7rem + 4vw, 4.6rem);
+  --text-h2:      clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem);
+  --text-h3:      clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  --text-lead:    clamp(1.05rem, 0.95rem + 0.6vw, 1.2rem);
+  --text-body:    clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --text-eyebrow: clamp(0.75rem, 0.7rem + 0.2vw, 0.85rem);
+  --text-small:      0.85rem;  /* fixed */
+  --text-index-num:  1.6rem;   /* fixed — the 01/02/03 numerals only */
+
+  --leading-tight: 1.05;
+  --leading-snug:  1.25;
+  --leading-body:  1.6;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.08em;   /* eyebrows / small caps */
+
+  /* --- Space — house scale, unchanged (brief states no override). --- */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* Section rhythm — brief §4: 64px, fixed at every declared width. */
+  --section-gap: var(--space-xl);
+
+  /* --- Layout — house defaults, unchanged. --- */
+
+  --layout-container: 72rem;
+  --layout-measure:   62ch;
+  --layout-gutter:    clamp(1.25rem, 5vw, 3rem);
+  --layout-tap-min:   44px;
+
+  /* --- Radius / shadow / border — the family's one flat register. --- */
+
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --shadow-none: none;
+
+  --border-hairline: 1px;
+  --border-thick:    3px;
+  --border-style:    solid;
+
+  /* --- Motion — house defaults for reveal timing (brief §7 states these
+     exact values); the signature's three independent, non-synchronised
+     loops get their own tokens, no shared small common period. --- */
+
+  --duration-fast: 140ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift:   1.25rem;
+  --reveal-stagger: 90ms;
+
+  /* Signature motion — "the beacon holds" (brief §7): a steady ember-glow
+     beacon pulses on an independent loop while two canopy silhouettes sway on
+     two further independent, non-synchronised loops. Periods share no small
+     common factor. */
+  --duration-beacon:  4.6s;
+  --duration-canopy1: 6.8s;
+  --duration-canopy2: 8.5s;
+  --delay-canopy2:    -1.7s;
+
+  /* --- Z layers — house defaults, unchanged. --- */
+  --z-base: 0;
+  --z-header: 100;
+  --z-nav-panel: 200;
+  --z-skip-link: 300;
+}
+
+/* --------------------------------------------------------------------------
+   @font-face — self-hosted woff2, static instances, latin subset. Anton: SIL
+   OFL 1.1, The Anton Project Authors. Barlow: SIL OFL 1.1, The Barlow Project
+   Authors. Both fetched from Google Fonts' own served static files (not the
+   variable axis — Barlow ships static weights directly; Anton has one weight
+   only) and re-subset locally with fontTools/pyftsubset to the house declared
+   safe range (house-tech-spec §8), identical on all four faces. No remote
+   font request ships. See README.md.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('../assets/fonts/anton-latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF,
+    U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/barlow-latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF,
+    U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/barlow-latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF,
+    U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('../assets/fonts/barlow-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range:
+    U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7, U+00BF,
+    U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+/* --- Metrics-matched fallbacks (house-tech-spec §8). Donor: Liberation Sans
+   (Arial's metric-compatible open-source clone, installed locally on this
+   build machine) — the measurement proxy for both fallback families. No open
+   Impact/Arial Narrow clone is reachable in this build environment to measure
+   Anton's real first-choice fallbacks directly; the shipped stack still names
+   'Anton Fallback', Impact, 'Arial Narrow' first, which is what a real browser
+   carrying either face will actually resolve. Liberation Sans Bold is the
+   proxy for Anton (a heavy display face) and for Barlow's bold weights;
+   Liberation Sans Regular is the proxy for Barlow 400. Computed with
+   scripts/font-metrics.mjs (the fontaine algorithm), English-letter-frequency
+   weighted. See README.md. */
+
+@font-face {
+  font-family: 'Anton Fallback';
+  src: local('Impact'), local('Arial Narrow'), local('Liberation Sans Bold'), local('Liberation Sans');
+  size-adjust: 85.22%;
+  ascent-override: 138.03%;
+  descent-override: 38.62%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Barlow Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  font-weight: 400;
+  size-adjust: 96.96%;
+  ascent-override: 103.14%;
+  descent-override: 20.63%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Barlow Fallback';
+  src: local('Helvetica Neue Bold'), local('Arial Bold'), local('Liberation Sans Bold'), local('Liberation Sans');
+  font-weight: 600;
+  size-adjust: 91.42%;
+  ascent-override: 109.38%;
+  descent-override: 21.88%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Barlow Fallback';
+  src: local('Helvetica Neue Bold'), local('Arial Bold'), local('Liberation Sans Bold'), local('Liberation Sans');
+  font-weight: 700;
+  size-adjust: 92.39%;
+  ascent-override: 108.23%;
+  descent-override: 21.65%;
+  line-gap-override: 0%;
+}

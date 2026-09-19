@@ -1,0 +1,301 @@
+/* ==========================================================================
+   tokens.css — Cedar & Stone Lawn and Landscape (going-green-lawn-and-
+   landscaping-shreveport-la)
+
+   Compiled from the approved brief (runs/going-green-lawn-and-landscaping-
+   shreveport-la/brief.md §2-§7). family: warm-craft · archetype: border-course
+   · palette: cypress-brick/kraft-parchment, light. Every value below is the
+   brief's, translated into the house token names (house-tech-spec §3). No
+   value here is improvised.
+   ========================================================================== */
+
+:root {
+
+  /* --- Colour (brief §2, §2.1, §2.2) ---------------------------------------
+     Derivation order per design-rules §6: (1) the business's real logo hex,
+     #A1D55D, sampled directly (dossier §4.5) -> carried as ACCENT, never as
+     the dominant ground (it fails AA as text against every light ground here,
+     and flooding the dominant slot with it would collide with the vertical's
+     own §6.1a anchor routing) -> (2) local character: North Louisiana brick
+     homes and mature trees give the warm brick-brown ink / kraft-parchment
+     ground pairing -> (3) family norms: warm-craft's hand-built, textured
+     register. The §6.1 semantic anchor (green/growth) is carried by the hero
+     IMAGE and the accent fills (brief §6), never by the dominant ground
+     colour. Every text/bg pairing below is computed in brief §2.2's contrast
+     table (ratios 1-9, all AA or AAA, reproduced in that table, not here). */
+
+  --scheme: light;
+
+  --color-bg: #F6EEE1;                /* kraft-parchment — page ground */
+  --color-surface: #EDE1CE;           /* raised panels, hero atmosphere far stop */
+  --color-ink: #4A2A1E;               /* cypress-brick — body/heading ink */
+  --color-ink-muted: #7A5B47;         /* secondary copy, captions, footer fine print */
+  --color-accent: #A1D55D;            /* the sampled logo hex, verbatim — dossier §4.5 */
+  --color-accent-ink: #3E5A22;        /* same hue family, re-pitched dark — AA-safe green text/links */
+
+  /* House-required structural colours */
+  --color-border: #DCCBAE;            /* decorative hairlines only, no contrast floor */
+  --color-border-strong: #7A5B47;     /* = ink-muted — control boundaries, >=3:1 vs bg AND surface (brief §2.2 pair 8) */
+
+  --color-focus: #3E5A22;             /* = accent-ink — :focus-visible ring, AA vs bg AND surface (brief §2.2 pair 9) */
+  --color-selection-bg: #A1D55D;
+  --color-selection-ink: #4A2A1E;
+
+  /* No dark band anywhere on this site (brief §2.1) — --color-focus-on-band
+     is intentionally not declared. */
+
+  /* --- Typography (brief §3) ------------------------------------------------
+     Display: Vollkorn (SIL OFL 1.1). Body: Karla (SIL OFL 1.1). Four static
+     woff2 files, house cap 4 (brief §3.1):
+       vollkorn-700       -> h1/h2/h3, nav wordmark, primary CTA label
+       vollkorn-400italic -> the emphasis role ("Then Fill It In", any
+                              pull-quote-shaped emphasis inside body copy)
+       karla-400          -> all body copy, FAQ answers, footer
+       karla-700          -> eyebrow label, process step word-ordinals,
+                              button micro-labels (nav-toggle, secondary/
+                              outline buttons)
+     Unlike a design that folds emphasis into the display face, body carries
+     BOTH 400 and 700 as separate files (brief §3.1) — warm-craft's
+     plain-spoken register leans on bold body type for small trust labels. */
+
+  --font-display: 'Vollkorn', 'Vollkorn Fallback', Georgia, serif;
+  --font-body: 'Karla', 'Karla Fallback', Arial, sans-serif;
+
+  --font-weight-body: 400;
+  --font-weight-body-strong: 700;     /* Karla 700 — eyebrow, process ordinals, micro-labels */
+  --font-weight-display: 700;         /* Vollkorn 700 — h1/h2/h3, nav wordmark, primary CTA label */
+
+  /* --- Type scale (brief §3.2, fluid via clamp(), floor 375px / ceiling 1440px) */
+
+  --text-hero: clamp(2.2rem, 1.5rem + 3.2vw, 4.0rem);      /* 35.2 / 36.0@375 / 64.0@1440 */
+  --text-h2: clamp(1.5rem, 1.3rem + 1.1vw, 2.0rem);        /* 24.0 / 24.9@375 / 32.0@1440 */
+  --text-h3: clamp(1.15rem, 1.0rem + 0.55vw, 1.35rem);     /* 18.4 / 18.9@375 / 21.6@1440 */
+  --text-lead: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);     /* 16.0 / 16.1@375 / 18.4@1440 */
+  --text-body: clamp(0.97rem, 0.94rem + 0.12vw, 1.02rem);  /* 15.52 / 15.52@375 / 16.32@1440 */
+  --text-small: 0.8125rem;            /* fixed — footer fine print, small labels */
+  --text-eyebrow: 0.75rem;            /* fixed — not sale-carrying type (brief §3.2) */
+
+  /* h1's stated line-height (brief §4.4's arithmetic: 36.0px x 1.02 =
+     36.72px/line) is the one heading-leading value the brief computes
+     against, so it governs every heading via base.css's shared h1-h4 rule. */
+  --leading-tight: 1.02;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+
+  /* The hero lede's stated line-height (brief §4.4: 16.1px x 1.5 =
+     24.15px/line) is distinct from the house leading-snug value used
+     elsewhere (buttons, small print), so it is its own brief-added token. */
+  --leading-lede: 1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;            /* eyebrows */
+
+  /* --- Space (house default; brief §4.3 confirms --section-gap only) ------- */
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  --section-gap: var(--space-xl);     /* 64px, the ONLY inter-section token (brief §4.3) */
+
+  /* --- Layout (house default, brief §4.4) ----------------------------------- */
+
+  --layout-container: 72rem;
+  --layout-measure: 62ch;
+  --layout-gutter: clamp(1.25rem, 5vw, 3rem);
+  --layout-tap-min: 44px;
+
+  /* The living-hero field's own height (brief §4.4 rule 4: "Target field
+     total height: 240px"). Floor pinned to exactly 240px at 375px width via
+     the rem term alone; grows toward ~265px by 1280px, a brief-added
+     structural token, not a house one. */
+  --hero-field-height: clamp(15rem, 13.6rem + 3.7vw, 20rem);
+
+  /* --- Radius / shadow / border ---------------------------------------------
+     Brief is silent on radius/shadow (no §2/§4 line argues a whole-site
+     answer). House starting values kept unmodified rather than introducing
+     an uncited value — the same resolution geaux-cuts-landscaping-
+     shreveport-la's brief used for the same gap. */
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgb(74 42 30 / 0.06);
+  --shadow-md: 0 6px 24px rgb(74 42 30 / 0.09);
+  --shadow-lg: 0 24px 60px rgb(74 42 30 / 0.14);
+
+  --border-hairline: 1px;
+  --border-thick: 3px;
+  --border-style: solid;
+
+  /* --- Border-course frame (brief §4.5) --------------------------------------
+     Two flat, full-bleed repeating-linear-gradient bands — never a
+     border-image wrap around variable-height content (the tile's mockup-only
+     device-bezel trick, retired). One repeat unit, reused at two heights: a
+     10px band at the top of the hero, and a 4px band as the head-rule atop
+     every section below (brief §4.5's own stripe unit, reproduced exactly). */
+
+  --course-stripe: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 18px,
+    var(--color-accent-ink) 18px 20px
+  );
+  --course-band-height-hero: 10px;
+  --course-band-height-section: 4px;
+
+  /* --- Motion (brief §7) -----------------------------------------------------
+     House reveal timings, unmodified, plus the three unsynced signature sprig
+     loops — 6.8s, 8.4s, 7.5s, no common small-integer ratio, so the three
+     never visibly re-align (brief §7). The course-band and every section
+     head-rule are static, never animated (brief §7's own framing). */
+
+  --duration-fast: 140ms;
+  --duration-base: 320ms;
+  --duration-slow: 640ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --reveal-shift: 1.25rem;
+  --reveal-stagger: 90ms;
+
+  /* Signature-device tokens (brief §7) — brief-added, not house-required. */
+  --duration-sprig-1: 6.8s;
+  --duration-sprig-2: 8.4s;
+  --duration-sprig-3: 7.5s;
+  --sprig-sway-angle: 3deg;
+
+  /* --- Z layers ------------------------------------------------------------- */
+  --z-base: 0;
+  --z-header: 100;
+  --z-nav-panel: 200;
+  --z-skip-link: 300;
+}
+
+/* --------------------------------------------------------------------------
+   @font-face — self-hosted woff2, latin subset, font-display: swap.
+   Licences: assets/fonts/OFL-Vollkorn.txt, assets/fonts/OFL-Karla.txt (SIL
+   OFL 1.1, both). Sourced from fonts.gstatic.com 2026-09-14, re-subset
+   locally to the house declared safe range (house-tech-spec §8) with
+   pyftsubset — no remote font request ships on this site.
+
+   COVERAGE, disclosed per house-tech-spec §8 (the "found on first use"
+   paragraph): all four faces lack U+2010, U+2011, U+2012, U+2015 — the same
+   inherent gap already on record for the pilot site's two faces, confirmed
+   again here by direct cmap read. Karla (both weights) additionally lacks
+   U+2032/U+2033 (prime marks), which Vollkorn carries — a genuine
+   face-to-face MISMATCH per the spec's own distinction, but an inert one:
+   copy.md's only non-ASCII characters are the middle dot (U+00B7, present in
+   every face here) and the section-sign/em-dash confined to Builder-
+   instruction prose that never reaches the page (grep-verified against the
+   rendered HTML, not just copy.md). No hyphen-variant or prime character is
+   ever set in a Vollkorn or Karla context anywhere on the page, so the
+   census check reads clean. Recorded here so the next Builder inherits the
+   fact rather than rediscovering it — same resolution pattern as
+   geaux-cuts-landscaping-shreveport-la's tokens.css for this identical
+   metro/vertical pairing. -------- */
+
+@font-face {
+  font-family: 'Vollkorn';
+  src: url('../assets/fonts/vollkorn-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Vollkorn';
+  src: url('../assets/fonts/vollkorn-400italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('../assets/fonts/karla-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('../assets/fonts/karla-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007E, U+00A0, U+00A9, U+00AE, U+2122, U+00B0, U+00B7,
+    U+00BF, U+00C0-00FF, U+2010-2015, U+2018-201A, U+201C-201E, U+2026, U+2032-2033;
+}
+
+/* Metrics-matched fallbacks (house-tech-spec §7/§8). Measured with
+   scripts/font-metrics.mjs (the fontaine algorithm, English-letter-frequency
+   weighted) against the four shipped webfonts. Vollkorn's donor is Gelasio
+   (Georgia's own metric-compatible open-source stand-in, used as the
+   measurement proxy since no Georgia binary exists to read; the CSS still
+   names local('Georgia') first, matching every real system that has it —
+   same resolution as ajs-lawncare-and-landscaping-duluth-mn's tokens.css).
+   Karla's donor is Liberation Sans (Arial's metric-compatible open clone,
+   installed on this build machine), matched per weight. */
+
+@font-face {
+  font-family: 'Vollkorn Fallback';
+  src: local('Georgia'), local('Gelasio');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 91.68%;
+  ascent-override: 103.84%;
+  descent-override: 48.1%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Vollkorn Fallback';
+  src: local('Georgia'), local('Gelasio');
+  font-weight: 400;
+  font-style: italic;
+  size-adjust: 83.26%;
+  ascent-override: 114.35%;
+  descent-override: 52.97%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Karla Fallback';
+  src: local('Arial'), local('Liberation Sans');
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 103.53%;
+  ascent-override: 88.57%;
+  descent-override: 24.34%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Karla Fallback';
+  src: local('Arial'), local('Liberation Sans');
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 100.06%;
+  ascent-override: 91.64%;
+  descent-override: 25.18%;
+  line-gap-override: 0%;
+}

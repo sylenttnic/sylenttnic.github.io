@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ChevronDown, Check, ArrowUpRight } from 'lucide-react';
 import PreviewRequestForm from '@/components/webdesign/PreviewRequestForm';
+import SampleGallery from '@/components/webdesign/SampleGallery';
 
 const OFFER_SUMMARY =
   'A website designed and hand-built for one business: researched, written and coded from scratch. $9.99 a month, first 30 days free, and the site is yours after a year on the plan.';
@@ -89,8 +90,8 @@ const technicalPoints = [
     text: "Contrast tested against WCAG AA, keyboard navigation, visible focus, touch targets sized for a thumb, and motion that switches itself off for anyone who's asked their device to reduce it.",
   },
   {
-    title: 'No cookies, no trackers',
-    text: 'No analytics scripts, no pixels, no third-party embeds. Nothing to disclose, so no cookie banner covering your homepage.',
+    title: 'No cookies, no trackers on your site',
+    text: 'The site we build you carries no analytics scripts, no pixels and no third-party embeds. Nothing to disclose, so no cookie banner covering your homepage. (This page you are reading is ours, not a build, and it does run an advertising pixel; our privacy policy says so.)',
   },
   {
     title: 'Checked before you see it',
@@ -163,15 +164,19 @@ export default function WebDesignLandingPage() {
             Websites for local businesses
           </p>
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-ink mb-6 text-balance">
-            A website built for your business, not a template with your logo dropped in the corner.
+            See your new website before you pay anything.
           </h1>
           <p className="text-lg md:text-xl text-ink/80 max-w-2xl mx-auto mb-8 font-sans leading-relaxed text-pretty">
-            We research your trade and your city, design one site that exists only for you, write every word of it from your own material, then host it and keep it running for you.
+            Tell us the business and the town. We research your trade and your city, design and build a real website for it, and email you the link. Look at the finished site first, then decide.
           </p>
-          <div className="flex flex-col items-center justify-center gap-4 mb-6">
-            <a href="#tell-us" className="btn-cta px-8 py-4 text-lg inline-flex items-center gap-2 group">
-              Start a build
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
+            <a href="#tell-us" className="btn-cta px-8 py-4 text-lg inline-flex items-center gap-2 group w-full sm:w-auto justify-center">
+              Build my free preview
               <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+            <a href="#samples" className="px-8 py-4 text-lg rounded-xl font-bold text-ink bg-surface hover:bg-surface2 border border-ink/10 transition-colors inline-flex items-center gap-2 w-full sm:w-auto justify-center">
+              See six we built
+              <ChevronDown className="w-5 h-5" />
             </a>
           </div>
           <p className="text-xs md:text-sm text-ink/60 font-sans">
@@ -180,7 +185,12 @@ export default function WebDesignLandingPage() {
         </div>
       </section>
 
-      {/* Section 2: Why we're here */}
+      {/* Section 2: The samples. Deliberately the first thing after the hero:
+          the ads promise a look at a website, and everything below this is an
+          argument about how it gets made. */}
+      <SampleGallery />
+
+      {/* Section 3: Why we're here */}
       <section className="py-16 md:py-24 px-4 container mx-auto">
         <div className="max-w-2xl mx-auto text-ink/90 space-y-6 leading-relaxed text-lg">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-ink mb-6 text-balance">
@@ -270,11 +280,17 @@ export default function WebDesignLandingPage() {
             ))}
           </div>
 
-          {/* Budget Table */}
-          <div className="bg-paper p-8 rounded-xl border border-ink/10 shadow-soft">
-            <h3 className="font-display text-2xl font-bold text-ink mb-6">
-              The numbers every build is held to
-            </h3>
+          {/* Budget Table. Collapsed by default: these are pass-or-fail bars we
+              are glad to publish, but they answer a question most owners never
+              ask, and open they pushed the form another screen down. */}
+          <details className="group bg-paper p-6 md:p-8 rounded-xl border border-ink/10 shadow-soft">
+            <summary className="cursor-pointer list-none flex items-center justify-between gap-4 font-display text-xl md:text-2xl font-bold text-ink min-h-[44px]">
+              <span>The numbers every build is held to</span>
+              <ChevronDown className="w-5 h-5 text-ink/40 group-open:rotate-180 transition-transform shrink-0" />
+            </summary>
+            <p className="mt-4 mb-6 text-base text-ink/70 font-sans leading-relaxed">
+              Open this if you want the engineering. Short version: your site loads in about a second on a phone, works without JavaScript, and passes contrast checks for people who need them.
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left font-sans text-sm md:text-base border-collapse">
                 <thead>
@@ -296,7 +312,7 @@ export default function WebDesignLandingPage() {
             <p className="mt-6 text-xs md:text-sm text-ink/70 font-sans italic border-t border-ink/10 pt-4">
               These are pass-or-fail. A build that misses one doesn&apos;t ship until it doesn&apos;t.
             </p>
-          </div>
+          </details>
         </div>
       </section>
 
@@ -357,7 +373,7 @@ export default function WebDesignLandingPage() {
             </div>
             <div className="space-y-3">
               <a href="#tell-us" className="btn-cta w-full py-4 text-center text-lg inline-flex justify-center items-center gap-2 group">
-                Start a build
+                Build my free preview
                 <ChevronDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
               </a>
               <a
@@ -479,7 +495,7 @@ export default function WebDesignLandingPage() {
           </p>
           <div>
             <a href="#tell-us" className="btn-cta px-10 py-5 text-xl inline-flex items-center gap-2">
-              Start a build
+              Build my free preview
             </a>
           </div>
         </div>
