@@ -29,17 +29,20 @@
 .sample-flag__text { margin: 0; max-width: 60ch; }
 .sample-flag__text strong { color: #FFFFFF; }
 
-.sample-flag__link {
-  color: #F9F8F6;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+.sample-flag__btn {
+  background: #C84B31;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 700;
   white-space: nowrap;
   min-height: 44px;
+  padding: 0 1.1rem;
+  border-radius: 0.5rem;
   display: inline-flex;
   align-items: center;
 }
-.sample-flag__link:hover { color: #FFFFFF; }
-.sample-flag__link:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+.sample-flag__btn:hover { background: #A53C26; color: #FFFFFF; }
+.sample-flag__btn:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 
 /* The reviews slot. Deliberately quiet: it is a statement, not a testimonial. */
 .sample-note {
@@ -53,6 +56,121 @@
 .sample-note__lead { margin: 0 0 0.5rem; font-weight: 700; }
 .sample-note__body { margin: 0; }
 
+/* ---- The Sylentt conversion band -----------------------------------------
+   Deliberately OUR colours, not the sample's: a visitor must never mistake
+   this for the demo business's own contact form, which sits above it and is
+   inert. Sylentt ink and accent, system font, no sample token touched. */
+
+.sample-cta {
+  background: #1E2E3D;
+  color: #F9F8F6;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding: 3rem 1rem;
+  line-height: 1.5;
+}
+.sample-cta__inner { max-width: 44rem; margin: 0 auto; }
+.sample-cta__head { margin-bottom: 2rem; }
+.sample-cta__eyebrow {
+  margin: 0 0 0.5rem; font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: #E9856F;
+}
+.sample-cta__title {
+  margin: 0 0 0.75rem; font-size: 1.75rem; line-height: 1.2; color: #FFFFFF;
+  font-family: inherit; font-weight: 700; letter-spacing: -0.01em;
+}
+.sample-cta__lead { margin: 0; color: rgba(249, 248, 246, 0.82); }
+
+.sample-cta__form {
+  background: rgba(249, 248, 246, 0.06);
+  border: 1px solid rgba(249, 248, 246, 0.14);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+.sample-cta__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.sample-cta__field { margin: 0; display: flex; flex-direction: column; }
+.sample-cta__field--wide { grid-column: 1 / -1; }
+.sample-cta__field label {
+  font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;
+  color: rgba(249, 248, 246, 0.92);
+}
+.sample-cta__field label span { color: #E9856F; }
+.sample-cta__field input,
+.sample-cta__field select {
+  font: inherit; font-size: 1rem; min-height: 48px;
+  padding: 0 0.85rem; border-radius: 0.5rem;
+  border: 1px solid rgba(249, 248, 246, 0.24);
+  background: #F9F8F6; color: #1E2E3D; width: 100%;
+}
+.sample-cta__field input:focus-visible,
+.sample-cta__field select:focus-visible { outline: 2px solid #E9856F; outline-offset: 1px; }
+
+.sample-cta__trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.sample-cta__more { margin-top: 1rem; border-top: 1px solid rgba(249, 248, 246, 0.14); padding-top: 0.75rem; }
+.sample-cta__more summary {
+  cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 0.5rem;
+  font-weight: 600; color: rgba(249, 248, 246, 0.92);
+  list-style: none;
+}
+.sample-cta__more summary::-webkit-details-marker { display: none; }
+.sample-cta__more summary::before {
+  content: "\203A";
+  display: inline-block;
+  font-size: 1.2em;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+.sample-cta__more[open] summary::before { transform: rotate(90deg); }
+.sample-cta__more summary:focus-visible { outline: 2px solid #E9856F; outline-offset: 2px; }
+.sample-cta__more .sample-cta__grid { margin-top: 0.75rem; }
+
+.sample-cta__actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+.sample-cta__submit {
+  font: inherit; font-size: 1.05rem; font-weight: 700; cursor: pointer;
+  background: #C84B31; color: #FFFFFF; border: 0;
+  border-radius: 0.6rem; min-height: 52px; padding: 0 1.75rem;
+}
+.sample-cta__submit:hover { background: #A53C26; }
+.sample-cta__submit:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
+.sample-cta__fine { margin: 0; font-size: 0.8rem; color: rgba(249, 248, 246, 0.66); }
+
+.sample-cta__foot { margin: 1.5rem 0 0; font-size: 0.85rem; color: rgba(249, 248, 246, 0.7); }
+.sample-cta__foot strong { color: #F9F8F6; }
+.sample-cta__foot a { color: #F9F8F6; text-decoration: underline; text-underline-offset: 0.2em; }
+
+@media (max-width: 34rem) {
+  .sample-cta__grid { grid-template-columns: 1fr; }
+  .sample-cta__submit { width: 100%; }
+}
+
+/* ---- Back to top ---------------------------------------------------------
+   Vanilla port of components/ui/BackToTop.tsx. Ships with the hidden
+   attribute set, so with JavaScript off it never appears rather than sitting
+   there doing nothing. */
+
+.sample-totop {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9990;
+  width: 3.5rem; height: 3.5rem; padding: 0; border: 0; cursor: pointer;
+  background: transparent; color: #C84B31;
+  display: flex; align-items: center; justify-content: center;
+  animation: sample-totop-in 0.25s ease-out both;
+}
+.sample-totop[hidden] { display: none; }
+.sample-totop:hover { transform: scale(1.1); }
+.sample-totop:active { transform: scale(0.95); }
+.sample-totop:focus-visible { outline: 2px solid #C84B31; outline-offset: 4px; border-radius: 0.5rem; }
+
+.sample-totop__stack { display: flex; flex-direction: column; align-items: center; }
+.sample-totop__stack svg { width: 2.6rem; height: 2.6rem; display: block; margin-bottom: -1.55rem; }
+.sample-totop__stack svg:nth-child(1) { opacity: 1;   animation: sample-totop-nudge 7s ease-in-out infinite; }
+.sample-totop__stack svg:nth-child(2) { opacity: 0.6; animation: sample-totop-nudge 7s ease-in-out 0.2s infinite; }
+.sample-totop__stack svg:nth-child(3) { opacity: 0.3; animation: sample-totop-nudge 7s ease-in-out 0.4s infinite; margin-bottom: 0; }
+
+@keyframes sample-totop-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes sample-totop-nudge { 0%, 4% { transform: translateY(0); } 5% { transform: translateY(-8px); } 7%, 100% { transform: translateY(0); } }
+
 @media (prefers-reduced-motion: reduce) {
   .sample-flag, .sample-note { transition: none; }
+  .sample-totop, .sample-totop__stack svg { animation: none; }
+  .sample-totop:hover, .sample-totop:active { transform: none; }
 }

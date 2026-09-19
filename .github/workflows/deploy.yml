@@ -51,6 +51,40 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
         env:
           NEXT_PUBLIC_INTAKE_API_KEY: ${{ vars.NEXT_PUBLIC_INTAKE_API_KEY }}
+      # The sample sites under public/webdesign/samples are static files, so
+      # `next build` cannot substitute NEXT_PUBLIC_* into them the way it does
+      # for the app. They ship a __INTAKE_API_KEY__ placeholder and get the real
+      # value here, from the same repo variable the build above reads. That
+      # keeps a rotatable credential out of this public repo's git history.
+      #
+      # It fails the deploy rather than shipping a dead lead form: empty
+      # variable, no placeholder found, or any placeholder surviving are all
+      # errors. Absence is not a pass, so the last check proves none survived.
+      - name: Inject the intake key into the sample request forms
+        env:
+          INTAKE_KEY: ${{ vars.NEXT_PUBLIC_INTAKE_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, pathlib, sys
+          key = os.environ.get('INTAKE_KEY', '')
+          if not key:
+              sys.exit('::error::NEXT_PUBLIC_INTAKE_API_KEY is empty; sample request forms would post an empty key.')
+          n = 0
+          for f in pathlib.Path('out').rglob('*.html'):
+              t = f.read_text(encoding='utf-8')
+              if '__INTAKE_API_KEY__' in t:
+                  f.write_text(t.replace('__INTAKE_API_KEY__', key), encoding='utf-8')
+                  n += 1
+          if n == 0:
+              sys.exit('::error::no page carries the __INTAKE_API_KEY__ placeholder; the sample forms are not wired.')
+          print(f'intake key injected into {n} sample page(s)')
+          PY
+          if grep -rq '__INTAKE_API_KEY__' out; then
+            echo '::error::a __INTAKE_API_KEY__ placeholder survived substitution.' >&2
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:

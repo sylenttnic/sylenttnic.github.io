@@ -97,7 +97,7 @@
   <div class="sample-flag">
     <div class="sample-flag__inner">
       <p class="sample-flag__text"><strong>Sample site.</strong> Cedar & Stone Lawn and Landscape is not a real business. This is a site we designed and built, shown under an invented name so that no real company is represented here. The layout, the writing and the speed are exactly what we ship.</p>
-      <a class="sample-flag__link" href="https://sylentt.com/webdesign/#samples">More samples</a>
+      <a class="sample-flag__btn" href="https://sylentt.com/webdesign/">&#8592; Back to Sylentt</a>
     </div>
   </div>
   <!-- /@sample:flag -->
@@ -462,6 +462,138 @@
   </footer>
   
     <script type="module" src="./js/main.js"></script>
-    <script src="./js/sample.js" defer></script>
+    <!-- @sample:cta -->
+  <section class="sample-cta" aria-labelledby="sample-cta-title">
+    <div class="sample-cta__inner">
+      <div class="sample-cta__head">
+        <p class="sample-cta__eyebrow">Sylentt</p>
+        <h2 id="sample-cta-title" class="sample-cta__title">Want one of these for your business?</h2>
+        <p class="sample-cta__lead">Tell us the business and the town. We research your trade and your city, build the site, and email you the link. Looking is free. Keep it for $9.99 a month, first 30 days free, cancel any time, and it is yours after a year.</p>
+      </div>
+
+      <form class="sample-cta__form" method="post" action="https://intake.sylentt.com/webdesign">
+        <input type="hidden" name="website_api_key" value="__INTAKE_API_KEY__">
+        <input type="hidden" name="formStartedAt" value="" data-started-at readonly>
+
+        <div class="sample-cta__trap" aria-hidden="true">
+          <label for="sc-company_url">Leave this field empty</label>
+          <input type="text" id="sc-company_url" name="company_url" tabindex="-1" autocomplete="off" value="">
+        </div>
+
+        <div class="sample-cta__grid">
+          <p class="sample-cta__field sample-cta__field--wide">
+            <label for="sc-businessName">Business name <span aria-hidden="true">*</span></label>
+            <input id="sc-businessName" name="businessName" required maxlength="120" autocomplete="organization">
+          </p>
+          <p class="sample-cta__field">
+            <label for="sc-city">City <span aria-hidden="true">*</span></label>
+            <input id="sc-city" name="city" required maxlength="80" autocomplete="address-level2">
+          </p>
+          <p class="sample-cta__field">
+            <label for="sc-state">State <span aria-hidden="true">*</span></label>
+            <select id="sc-state" name="state" required autocomplete="address-level1">
+              <option value="" selected disabled>Choose a state</option>
+            <option value="AL">Alabama</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">District of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+            </select>
+          </p>
+          <p class="sample-cta__field sample-cta__field--wide">
+            <label for="sc-email">Email <span aria-hidden="true">*</span></label>
+            <input id="sc-email" name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email">
+          </p>
+        </div>
+
+        <details class="sample-cta__more">
+          <summary>Optional</summary>
+          <div class="sample-cta__grid">
+            <p class="sample-cta__field sample-cta__field--wide">
+              <label for="sc-website">Website</label>
+              <input id="sc-website" name="website" type="url" maxlength="200" inputmode="url" placeholder="https://">
+            </p>
+            <p class="sample-cta__field">
+              <label for="sc-requesterName">Your name</label>
+              <input id="sc-requesterName" name="requesterName" maxlength="80" autocomplete="name">
+            </p>
+            <p class="sample-cta__field">
+              <label for="sc-phone">Phone</label>
+              <input id="sc-phone" name="phone" type="tel" maxlength="40" autocomplete="tel" inputmode="tel">
+            </p>
+            <p class="sample-cta__field sample-cta__field--wide">
+              <label for="sc-trade">What the business does</label>
+              <input id="sc-trade" name="trade" maxlength="120" autocomplete="off">
+            </p>
+          </div>
+        </details>
+
+        <div class="sample-cta__actions">
+          <button type="submit" class="sample-cta__submit">Build my free preview</button>
+          <p class="sample-cta__fine">We use this only to research and build your preview and to email it to you. No calls, no newsletter.</p>
+        </div>
+      </form>
+
+      <p class="sample-cta__foot">
+        You are looking at <strong>Cedar & Stone Lawn and Landscape</strong>, a sample. The business is invented; the site is real work.
+        <a href="https://sylentt.com/webdesign/#samples">See the other samples</a>
+      </p>
+    </div>
+  </section>
+  <!-- /@sample:cta -->
+  <!-- @sample:totop -->
+  <button type="button" class="sample-totop" data-totop hidden aria-label="Back to top">
+    <span class="sample-totop__stack" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </span>
+  </button>
+  <!-- /@sample:totop -->
+  <script src="./js/sample.js" defer></script>
 </body>
 </html>

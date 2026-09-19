@@ -21,3 +21,27 @@
     }
   });
 })();
+
+/* Back to top. Same 400px threshold and same corner as
+   components/ui/BackToTop.tsx; the nudge and the fade are CSS. */
+(function () {
+  var btn = document.querySelector('[data-totop]');
+  if (!btn) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function sync() { btn.hidden = window.scrollY <= 400; }
+  window.addEventListener('scroll', sync, { passive: true });
+  sync();
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+
+/* The Sylentt band's anti-spam timing field. PreviewRequestForm sets this on
+   mount too, so a JS-off submission sends it empty there as well and the
+   endpoint already tolerates that. */
+(function () {
+  var f = document.querySelector('[data-started-at]');
+  if (f) f.value = String(Date.now());
+})();
