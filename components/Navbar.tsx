@@ -57,6 +57,12 @@ export default function Navbar() {
     { name: "About", href: "/#about" },
     { name: "Services", href: "/services" },
     { name: "Pricing", href: "/pricing" },
+    /* The reciprocal of "Integrations" in webDesignNavLinks below, in the same
+       slot: last before the CTA, so each side of the business offers a door to
+       the other instead of only one direction working. Internal Link, not
+       `external` — /webdesign is the same origin, so it takes the normal
+       in-tab navigation rather than the other entry's target="_blank". */
+    { name: "Web Design", href: "/webdesign" },
     { name: "Connect", href: "#tell-us", isCta: true },
   ];
 
