@@ -44,6 +44,90 @@
 .sample-flag__btn:hover { background: #A53C26; color: #FFFFFF; }
 .sample-flag__btn:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; }
 
+/* ---- The header, locked to the top ---------------------------------------
+   Nic, 2026-09-20: the top navigation stays on screen while the page scrolls,
+   on every sample. Before this, exactly one of the six did.
+
+   WHY THE RULE IS HERE AND NOT IN THE SOURCE BUILDS. Four different states
+   went into the duplication, and only one of them survived it:
+
+     - tall-timber-tree-care's brief made the header sticky and the rule sits
+       in site.css, which a sample copies. It worked. It was the only one.
+     - redbrick-auto-care's brief ALSO made it sticky -- but the offset reads
+       'var(--expiry-height)', and that token is DECLARED IN preview.css,
+       which a sample strips. The var goes undefined, the declaration is
+       invalid at computed-value time, inset-block-start falls back to 'auto',
+       and a sticky box with an auto offset never sticks. Measured on the
+       built page: position:sticky, inset-block-start:auto, header scrolling
+       away with the content.
+     - riverstone-landscape's brief made it sticky in preview.css itself, so
+       the whole rule left with the file.
+     - northfield-electric, rainhouse-gutter-co and cedar-and-stone were never
+       sticky; their briefs did not ask for it, and they ship 'relative'.
+
+   So two of the six are a DUPLICATION ARTEFACT and three are a DESIGN
+   DIFFERENCE. Restating the rule here settles all five the same way without
+   touching sites/: a real business's live preview is not ours to redesign on
+   the strength of a marketing-page request, and the two artefact cases must
+   not be "repaired" by editing a build that is already correct as built --
+   with preview.css loaded, both of them stick exactly as their briefs say.
+
+   inset-block-start is 0, never var(--expiry-height): a sample has no expiry
+   bar. The flag above the header stays static flow on purpose -- it is a
+   disclosure, read once, and pinning it would spend a permanent strip of
+   every first screen (preview.css argues the same for the bar it replaces).
+   And it is 'sticky', never 'fixed': sticky keeps the header's flow height
+   from first paint, so nothing below it jumps and the change costs no CLS.
+
+   z-index and an opaque background are NOT restated here. All six builds
+   already set 'z-index: var(--z-header)' and 'background-color:
+   var(--color-bg)' on this element, and this file reads no site token. */
+
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+}
+
+/* Anchor targets have to clear the locked header.
+
+   Every sample's nav is in-page links, and a fragment jump parks the target
+   at the very top of the viewport -- under a header that is now pinned there.
+
+   THE OFFSET IS MEASURED AT RUNTIME, NOT HARD-CODED, because the six headers
+   do not agree on a height and no single number serves them. Measured on the
+   served pages: 61px (cedar-and-stone at 375px) to 137px (riverstone at
+   375px, whose brand -- 'Riverstone Landscape and Supply' -- is 265px wide
+   and wraps the menu button onto a second row). A constant tall enough for
+   the 137px header would drop a 79px hole above every heading on the 61px
+   one; a constant sized for the 61px header hides headings on the other.
+   So sample.js writes --sample-header-h from the header's own box, on load,
+   after webfonts settle and on resize.
+
+   The 5.5rem fallback is what a visitor with JavaScript off gets. It is not
+   exact for them -- the noscript override in @shared:head-boilerplate opens
+   the nav list, so their header is TALLER, not shorter -- but a fragment jump
+   is one of several things that degrade with no JS here, and an offset that
+   is close beats an offset of zero.
+
+   scroll-padding on the scroll container, not scroll-margin on 'section[id]':
+   one rule covers every fragment target whatever element it lands on, and it
+   needs no per-build selector. 'node scripts/webdesign-samples.mjs
+   sticky-check' clicks every nav link on the served pages and fails if a
+   heading lands under the bar.
+
+   THIS WAS ALREADY BROKEN ON THE ONE SAMPLE THAT WAS STICKY. Measured before
+   any change here, all six of tall-timber-tree-care's nav links landed their
+   section heading under the bar -- heading at 64px against a header bottom of
+   77px (375px) and 81px (1280px). Its source build carries the same defect,
+   because the brief's sticky rule went into site.css without the
+   'scroll-margin-block-start' companion that preview.css's own comment
+   prescribes. That build is NOT changed here; it is a live preview for a real
+   business and a separate call. See DECISION.md "Sticky headers". */
+
+html {
+  scroll-padding-block-start: var(--sample-header-h, 5.5rem);
+}
+
 /* The reviews slot. Deliberately quiet: it is a statement, not a testimonial. */
 .sample-note {
   border: 1px dashed currentColor;
