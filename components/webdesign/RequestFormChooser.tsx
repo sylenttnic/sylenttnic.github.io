@@ -43,7 +43,7 @@ export default function RequestFormChooser() {
     <div>
       <fieldset className="max-w-2xl mx-auto mb-6 px-1">
         <legend className="font-sans text-base md:text-lg font-medium text-ink mb-3">
-          Can people find your business online today — a website, or a Google, Facebook or Yelp listing?
+          Can people find your business online today, on a website or a Google, Facebook or Yelp listing?
         </legend>
         <div className="flex flex-col sm:flex-row gap-3">
           <label className={optionClass}>
