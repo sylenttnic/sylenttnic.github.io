@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ChevronDown, Check } from 'lucide-react';
-import PreviewRequestForm from '@/components/webdesign/PreviewRequestForm';
+import RequestFormChooser from '@/components/webdesign/RequestFormChooser';
 import SampleGallery from '@/components/webdesign/SampleGallery';
 
 const OFFER_SUMMARY =
@@ -246,7 +246,7 @@ export default function WebDesignLandingPage() {
               Tell us the business and the town. We do the research and build a preview of your site at no charge, then email you the link. If you like it, it is $9.99 a month with the first 30 days free. If not, nothing happens.
             </p>
           </div>
-          <PreviewRequestForm />
+          <RequestFormChooser />
         </div>
       </section>
 
