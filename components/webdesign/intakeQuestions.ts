@@ -101,7 +101,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 300,
         "required": false,
-        "ghost": "Mon–Fri 8:00–17:00, Sat 9:00–14:00, Sun closed"
+        "ghost": "Mon-Fri 8:00-17:00, Sat 9:00-14:00, Sun closed"
       },
       {
         "key": "established_year",
@@ -118,7 +118,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 200,
         "required": false,
-        "ghost": "— leave blank if you travel to customers —",
+        "ghost": "Leave blank if you travel to customers",
         "showWhenPremisesNot": "i-travel"
       },
       {
@@ -186,7 +186,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 200,
         "required": false,
-        "ghost": "brightwatergrooming.com — bought it, never used it"
+        "ghost": "brightwatergrooming.com (bought it, never used it)"
       }
     ]
   },
@@ -356,7 +356,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 400,
         "required": false,
-        "ghost": "Yes — a dog silhouette inside a water drop, done by a friend"
+        "ghost": "Yes, a dog silhouette inside a water drop, done by a friend"
       },
       {
         "key": "local_character",
@@ -421,7 +421,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 400,
         "required": false,
-        "ghost": "e.g. 'National Dog Groomers Association certified, #NDG-12345' — leave blank if none"
+        "ghost": "e.g. 'National Dog Groomers Association certified, #NDG-12345'. Leave blank if none."
       },
       {
         "key": "insured",
@@ -429,7 +429,7 @@ export const SECTIONS: Section[] = [
         "control": "text",
         "max": 400,
         "required": false,
-        "ghost": "e.g. 'Yes — general liability through State Farm' — leave blank if none"
+        "ghost": "e.g. 'Yes, general liability through State Farm'. Leave blank if none."
       }
     ]
   }
