@@ -17,7 +17,19 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 const INTAKE_URL = "https://intake.sylentt.com/webdesign";
+
+/* A per-submission id so a future server-side Conversions API event can
+   dedupe against this browser pixel event (Meta requires the same eventID
+   on both sides). */
+const newEventID = () =>
+  typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
 /* The 48 contiguous states plus DC. Alaska, Hawaii and the territories are
    not offered. */
@@ -88,6 +100,8 @@ export default function PreviewRequestForm() {
       if (!response.ok) {
         setError("That did not go through. Try again, or email support@sylentt.com.");
       } else {
+        const eventID = newEventID();
+        window.fbq && window.fbq('track', 'Lead', {}, { eventID });
         setIsSuccess(true);
       }
     } catch {
