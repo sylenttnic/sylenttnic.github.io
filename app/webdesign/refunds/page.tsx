@@ -46,7 +46,7 @@ export default function BillingAndCancellation() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">How the plan works</h2>
           <p>
-            We build your website before you pay anything and put it on our monthly plan. The <strong>first 30 days are free</strong>. When the free period ends the plan renews automatically at <strong>$9.99 per month plus any applicable tax</strong>, and it keeps renewing each month until you cancel. You can cancel at any time, and you will not be charged again after you do.
+            We build your website before you pay anything and put it on our monthly plan. The <strong>first 30 days are free</strong>, and no card is required to start. If you add a card before day 30, the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. If you never add one, the trial simply ends at day 30: nothing is charged, and the site comes down. You can cancel at any time, and you will not be charged again after you do.
           </p>
         </section>
 

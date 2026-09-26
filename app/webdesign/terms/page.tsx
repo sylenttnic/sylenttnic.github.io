@@ -84,7 +84,7 @@ export default function TermsOfService() {
             <strong>Your site goes live immediately, and the first 30 days are free.</strong> From the moment you start, it is running, resolving at your address, and yours to use and show to customers. Nothing about it is held back or watermarked. If you cancel within those 30 days, you are charged nothing.
           </p>
           <p className="mt-3">
-            After the free month, the plan renews automatically at <strong>$9.99 per month plus any applicable tax</strong>, and it keeps renewing each month until you cancel. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
+            Starting the free 30 days does not require a card. Add one before day 30 and the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. Add none and the trial simply ends at day 30: nothing is charged, and the site comes down. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
           </p>
           <p className="mt-3">
             <strong>Stay on the plan for twelve months and the code becomes yours.</strong> At that point we transfer the site&apos;s code repository into your name, to keep and host anywhere, whether or not you continue with us afterwards. <strong>If you cancel before twelve months, the site comes down and the code is not transferred</strong> - the plan is what keeps the site live, and the twelve months is what earns the handover. We say this plainly here so it is never a surprise.
@@ -114,7 +114,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">6. The monthly plan</h2>
           <p>
-            The monthly plan is how your site stays live and looked after. After the free first month it bills at <strong>$9.99 per month plus any applicable tax</strong> and renews automatically each month until you cancel.
+            The monthly plan is how your site stays live and looked after. No card is needed for the free first month. Add one and it bills at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel; add none and the trial ends at day 30, nothing is charged, and the site comes down.
           </p>
           <p className="mt-2">It covers:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
@@ -171,7 +171,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">11. Payment</h2>
           <p>
-            Payments are processed by Stripe. We never see or store your card details. Prices are in US dollars, and the plan is a recurring monthly subscription: after the free first month it renews automatically at $9.99 per month plus any applicable tax until you cancel. You can cancel any time from your billing page, and you are responsible for any taxes that apply to you.
+            Payments are processed by Stripe. We never see or store your card details. Prices are in US dollars, and the plan is a recurring monthly subscription: no card is required to start the free first month. If you add one, the plan renews at $9.99 per month plus any applicable tax until you cancel; if you never add one, the trial ends at day 30, nothing is charged, and the site comes down. You can cancel any time from your billing page, and you are responsible for any taxes that apply to you.
           </p>
         </section>
 

@@ -114,7 +114,7 @@ const faqItems = [
   },
   {
     q: 'What happens if I cancel?',
-    a: 'Cancel inside the first 30 days and you pay nothing. Cancel later and billing stops at the end of the month you have paid for, and the site comes down. Stay on the plan for twelve months and the code becomes yours to keep and host anywhere, whether you continue with us or not.',
+    a: 'No card is required to start, so if you never add one the trial simply ends at day 30: nothing is charged and the site comes down, the same as cancelling within it. If you do add a card, cancel inside the first 30 days and you still pay nothing. Cancel later and billing stops at the end of the month you have paid for, and the site comes down. Stay on the plan for twelve months and the code becomes yours to keep and host anywhere, whether you continue with us or not.',
   },
 ];
 
@@ -205,7 +205,7 @@ export default function WebDesignLandingPage() {
               ))}
             </ul>
             <p className="text-xs text-ink/60 font-sans leading-relaxed mb-6">
-              When the free period ends the plan renews automatically at $9.99 a month until you cancel. Content changes do not roll over month to month. Redesigns, new pages and new functionality are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for. If you cancel before twelve months, the site comes down and the code is not transferred. Payments appear on card statements as SYLENTT PARTNERS.{' '}
+              No card is required to start the free 30 days. Add one before day 30 and the plan continues at $9.99 a month until you cancel; add none and the trial simply ends at day 30, nothing is charged, and the site comes down. Content changes do not roll over month to month. Redesigns, new pages and new functionality are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for. If you cancel before twelve months, the site comes down and the code is not transferred. Payments appear on card statements as SYLENTT PARTNERS.{' '}
               <a href="/webdesign/terms/" className="underline hover:text-ink">
                 Full terms
               </a>
