@@ -195,7 +195,7 @@ export default function WebDesignLandingPage() {
                 'Hosting, SSL, backups and uptime monitoring',
                 'Security patches',
                 'Up to two content changes a month: text, hours, contact details, an image swap, adding or removing a service',
-                'A domain registered in your name after your first month, or your existing one connected',
+                'A domain registered in your name after your first successful payment, or your existing one connected',
                 'The code repository, transferred into your name after twelve months on the plan',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">

@@ -98,7 +98,7 @@ Sylentt often researches and builds the site before the business has asked for i
 - Included every month: hosting, SSL, backups, uptime monitoring, security patches, and up to two content changes per calendar month (no rollover). Not included: redesigns, new pages or new functionality.
 - **After 12 continuous paid months, the site and the code behind it transfer to the customer.**
 - **Cancel before 12 continuous paid months and the site comes down, and nothing transfers.**
-- A domain is included if one is needed, registered in the customer's name after the first month, or an existing domain can be connected.
+- A domain is included if one is needed, registered in the customer's name after the first successful payment, or an existing domain can be connected.
 - Payments appear on card statements as SYLENTT PARTNERS.
 
 ### Artwork disclosure

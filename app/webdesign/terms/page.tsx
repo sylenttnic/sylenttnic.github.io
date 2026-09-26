@@ -107,7 +107,7 @@ export default function TermsOfService() {
             <li>More than two content changes in a calendar month. Unused changes do not carry over.</li>
           </ul>
           <p className="mt-3">
-            Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a month are included; see section 3. A domain, if you need one, is registered in your name after your first month, or we point one you already own.
+            Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a month are included; see section 3. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
           </p>
         </section>
 
