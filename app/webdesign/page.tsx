@@ -85,8 +85,8 @@ const howItIsMade = [
     text: 'Every site we build is logged: its typeface, its dominant colour, its layout structure, its aesthetic family. A new design is checked against that log before it is drawn, and two businesses in the same trade and the same city cannot share any of them. No two sites we have ever built repeat the same typeface, colour and layout combination. That is a file and a check that fails the build, not a promise in a sales page.',
   },
   {
-    title: 'Checked by someone who did not build it',
-    text: 'Every build is inspected against the research document and the standards below. Anything found gets fixed and re-checked. Nothing ships with an open finding.',
+    title: 'Checked before it ships',
+    text: 'Every build goes through an independent review step, separate from the one that built it, checked against the research document and the standards below. Anything found gets fixed and re-checked. Nothing ships with an open finding.',
   },
 ];
 
@@ -103,6 +103,10 @@ const faqItems = [
   {
     q: 'I already have a website. Is this for me?',
     a: 'Usually, yes. Most businesses we build for already have a site, it is just doing less for them than it should. Replacing a working-but-tired site is the normal case here, not the exception.',
+  },
+  {
+    q: 'Why is it just $9.99 a month?',
+    a: 'The research, the design and the page assembly all run through one automated pipeline, which is what keeps the price this low. Your code is still written fresh for your business, not from a shared template, and every site still gets a quality check before it ships.',
   },
   {
     q: 'Do I have to get on a call?',
