@@ -39,7 +39,10 @@ export default function PixelConsent({ pixelId }: { pixelId: string }) {
       role="region"
       aria-label="Cookie and pixel notice"
       data-testid="pixel-consent-bar"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-paper/98 backdrop-blur px-4 py-4 shadow-lift md:px-6"
+      // /95, not /90 or /98: Tailwind's opacity-modifier scale (0,5,10,20,25,30,
+      // 40,50,60,70,75,80,90,95,100) silently drops any value outside it — /98
+      // compiled to nothing, so this bar had a fully transparent background.
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-ink/10 bg-paper/95 backdrop-blur px-4 py-4 shadow-lift md:px-6"
     >
       <div className="mx-auto flex max-w-4xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p className="font-sans text-sm text-ink/90">
