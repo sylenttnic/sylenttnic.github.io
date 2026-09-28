@@ -120,6 +120,10 @@ const faqItems = [
     q: 'What happens if I cancel?',
     a: 'No card is required to start, so if you never add one the trial simply ends at day 30: nothing is charged and the site comes down, the same as cancelling within it. If you do add a card, cancel inside the first 30 days and you still pay nothing. Cancel later and billing stops at the end of the month you have paid for, and the site comes down. Stay on the plan for twelve months and the code becomes yours to keep and host anywhere, whether you continue with us or not.',
   },
+  {
+    q: 'What about my domain?',
+    a: "We handle the domain and every technical step. If you need a new one, we register it in your business's name and you click one confirmation email. Already have one? Keep it where it is: click invite in your registrar (GoDaddy, Namecheap, Squarespace Domains and Network Solutions all support this), we do the rest, and you never touch DNS. If your registrar doesn't offer that, we walk you through adding the two records together on a quick screen-share instead, taking the same care with your email either way so it keeps working.",
+  },
 ];
 
 export default function WebDesignLandingPage() {
