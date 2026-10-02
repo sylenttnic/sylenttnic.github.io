@@ -29,7 +29,7 @@ export default function PreviewRequestThanks() {
       <div className="mb-6">
         <Link
           href="/webdesign/"
-          className="text-sm font-sans text-accent hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="text-sm font-sans text-accent-link hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           &larr; Back to Web Design
         </Link>

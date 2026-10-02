@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
       <div className="mb-6">
         <Link
           href="/webdesign"
-          className="text-sm font-sans text-accent hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="text-sm font-sans text-accent-link hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           &larr; Back to Web Design
         </Link>
@@ -101,7 +101,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">7. Asking us to delete your information</h2>
           <p>
-            Email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a> and ask. We&apos;ll delete what we hold about your business and confirm when it&apos;s done. The one thing we keep is your email address on our suppression list, precisely so you are never contacted again - if you&apos;d rather we didn&apos;t keep even that, say so and we&apos;ll remove it.
+            Email <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a> and ask. We&apos;ll delete what we hold about your business and confirm when it&apos;s done. The one thing we keep is your email address on our suppression list, precisely so you are never contacted again - if you&apos;d rather we didn&apos;t keep even that, say so and we&apos;ll remove it.
           </p>
           <p className="mt-3">
             Depending on where you live you may have additional rights over your data. Ask and we&apos;ll honour them.
@@ -111,7 +111,7 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">8. Cookies</h2>
           <p>
-            The website previews we build do not use tracking or advertising cookies. Our own web design pages at sylentt.com/webdesign show a notice before the Meta Pixel runs anywhere on them. Nothing loads until you choose: click <strong>OK</strong> and the Meta Pixel sets an advertising cookie (_fbp) and reports activity such as page views and preview requests to Meta, so we can measure how our ads perform. Click <strong>No thanks</strong> instead and the Pixel never loads in that browser: your browser remembers the choice, so you are not asked again there. Either choice leaves your preview request untouched; declining the Pixel does not change how we handle it. You can also set your preferences directly with Meta at <a href="https://www.aboutads.info/choices" className="text-accent underline">aboutads.info/choices</a> and <a href="https://www.youronlinechoices.eu" className="text-accent underline">youronlinechoices.eu</a>. Stripe&apos;s checkout page sets cookies necessary to process a payment securely.
+            The website previews we build do not use tracking or advertising cookies. Our own web design pages at sylentt.com/webdesign show a notice before the Meta Pixel runs anywhere on them. Nothing loads until you choose: click <strong>OK</strong> and the Meta Pixel sets an advertising cookie (_fbp) and reports activity such as page views and preview requests to Meta, so we can measure how our ads perform. Click <strong>No thanks</strong> instead and the Pixel never loads in that browser: your browser remembers the choice, so you are not asked again there. Either choice leaves your preview request untouched; declining the Pixel does not change how we handle it. You can also set your preferences directly with Meta at <a href="https://www.aboutads.info/choices" className="text-accent-link underline">aboutads.info/choices</a> and <a href="https://www.youronlinechoices.eu" className="text-accent-link underline">youronlinechoices.eu</a>. Stripe&apos;s checkout page sets cookies necessary to process a payment securely.
           </p>
         </section>
 
@@ -131,7 +131,7 @@ export default function PrivacyPolicy() {
       </div>
 
       <footer className="mt-14 pt-6 border-t border-border text-sm text-ink/60">
-        Questions, or want your information removed? Email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>. A person reads it.<br />
+        Questions, or want your information removed? Email <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a>. A person reads it.<br />
         Sylentt Partners LLC &middot; 145 E 550 N Unit 75 Richmond, UT 84333 United States
       </footer>
     </div>

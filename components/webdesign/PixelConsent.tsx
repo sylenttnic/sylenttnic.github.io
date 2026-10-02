@@ -48,13 +48,13 @@ export default function PixelConsent({ pixelId }: { pixelId: string }) {
         <p className="font-sans text-sm text-ink/90">
           This page uses Meta pixels and cookies. If you click OK, they start collecting
           information about your visit to measure and target Meta ads.{' '}
-          <Link href="/webdesign/privacy/" className="text-accent underline">
+          <Link href="/webdesign/privacy/" className="text-accent-link underline">
             Privacy Policy
           </Link>{' '}
           &middot;{' '}
           <a
             href="https://www.aboutads.info/choices"
-            className="text-accent underline"
+            className="text-accent-link underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -63,7 +63,7 @@ export default function PixelConsent({ pixelId }: { pixelId: string }) {
           &middot;{' '}
           <a
             href="https://www.youronlinechoices.eu"
-            className="text-accent underline"
+            className="text-accent-link underline"
             target="_blank"
             rel="noopener noreferrer"
           >

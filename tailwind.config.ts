@@ -44,6 +44,8 @@ const config: Config = {
         accent3: "#C84B31",
         accent4: "#C84B31",
         accent5: "#C84B31",
+        // Link text on light backgrounds: accent measures 3.7-4.4:1 there; this reaches >=5.0:1.
+        "accent-link": "#A93A22",
       },
       fontFamily: {
         sans: ["var(--font-instrument-sans)", "sans-serif"],

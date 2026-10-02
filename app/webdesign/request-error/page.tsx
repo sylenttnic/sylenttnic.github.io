@@ -27,7 +27,7 @@ export default function PreviewRequestError() {
       <div className="mb-6">
         <Link
           href="/webdesign/"
-          className="text-sm font-sans text-accent hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="text-sm font-sans text-accent-link hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           &larr; Back to Web Design
         </Link>
@@ -35,7 +35,7 @@ export default function PreviewRequestError() {
       <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-ink mb-6">That did not go through.</h1>
       <p className="text-lg text-ink/90 font-sans leading-relaxed max-w-2xl">
         Try again, or email{' '}
-        <a href="mailto:support@sylentt.com" className="text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm">
+        <a href="mailto:support@sylentt.com" className="text-accent-link hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm">
           support@sylentt.com
         </a>
         .

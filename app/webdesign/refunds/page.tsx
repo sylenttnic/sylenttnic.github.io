@@ -26,7 +26,7 @@ export default function BillingAndCancellation() {
       <div className="mb-6">
         <Link
           href="/webdesign"
-          className="text-sm font-sans text-accent hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="text-sm font-sans text-accent-link hover:underline inline-flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           &larr; Back to Web Design
         </Link>
@@ -60,7 +60,7 @@ export default function BillingAndCancellation() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">How to cancel</h2>
           <p>
-            Cancel yourself, any time, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent underline">your billing page</a>. No notice period, no phone call, no reason needed. You can also email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a> and we will do it for you. Cancellation takes effect at the end of the month you have already paid for, and you keep the site until then.
+            Cancel yourself, any time, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>. No notice period, no phone call, no reason needed. You can also email <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a> and we will do it for you. Cancellation takes effect at the end of the month you have already paid for, and you keep the site until then.
           </p>
         </section>
 
@@ -81,13 +81,13 @@ export default function BillingAndCancellation() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">Charges you don&apos;t recognise</h2>
           <p>
-            Payments from us appear on card statements as <strong>SYLENTT PARTNERS</strong>. If you see that and can&apos;t place it, email <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a> before contacting your bank. We&apos;ll identify the charge straight away and refund it immediately if it isn&apos;t yours.
+            Payments from us appear on card statements as <strong>SYLENTT PARTNERS</strong>. If you see that and can&apos;t place it, email <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a> before contacting your bank. We&apos;ll identify the charge straight away and refund it immediately if it isn&apos;t yours.
           </p>
         </section>
       </div>
 
       <footer className="mt-14 pt-6 border-t border-border text-sm text-ink/60">
-        Sylentt Partners LLC &middot; 145 E 550 N Unit 75 Richmond, UT 84333 United States &middot; <a href="mailto:support@sylentt.com" className="text-accent underline">support@sylentt.com</a>
+        Sylentt Partners LLC &middot; 145 E 550 N Unit 75 Richmond, UT 84333 United States &middot; <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a>
       </footer>
     </div>
   );
