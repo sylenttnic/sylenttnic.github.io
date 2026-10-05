@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Receipt, Bot, UserMinus, ChevronDown, ShieldCheck, CalendarCheck, UserRound } from "lucide-react";
+import { ArrowRight, ArrowDown, Compass, Receipt, Bot, UserMinus, ChevronDown, ShieldCheck, CalendarCheck, UserRound } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
 import Link from "next/link";
@@ -350,10 +350,15 @@ export default function Home() {
       <header className="relative pt-28 pb-16 md:pt-40 md:pb-20 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-3 mb-8 rounded-full bg-surface border border-ink/10 py-1.5 pl-1.5 pr-5 shadow-soft">
+            {/* Who you'd be working with. Jumps to the About section. */}
+            <a
+              href="#about"
+              aria-label="About Nic Aslett"
+              className="group inline-flex items-center gap-3 mb-8 rounded-full bg-surface border border-ink/10 py-1.5 pl-1.5 pr-4 shadow-soft transition-all hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            >
               <Image
                 src="/about/nic.jpg"
-                alt="Nic Aslett"
+                alt=""
                 width={48}
                 height={48}
                 priority
@@ -363,7 +368,11 @@ export default function Home() {
                 <span className="block font-sans font-semibold text-ink">Nic Aslett</span>
                 <span className="block text-sm text-ink/70">Cache Valley, Utah</span>
               </span>
-            </div>
+              <ArrowDown
+                className="w-4 h-4 ml-1 text-ink/40 transition-all group-hover:text-accent group-hover:translate-y-0.5"
+                aria-hidden="true"
+              />
+            </a>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-balance">
               {heroHeadline}
             </h1>
