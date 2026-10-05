@@ -1,5 +1,5 @@
 /* ==========================================================================
-   tokens.css — the design brief, compiled.
+   tokens.css - the design brief, compiled.
    Riverstone Landscape and Supply, Mankato MN.
    Source: runs/mocks-landscaping-mankato-mn/brief.md v1 (APPROVED).
    Every value below is stated there. Nothing here was chosen here.
@@ -8,40 +8,40 @@
 
 :root {
 
-  /* --- Colour — brief §5. Step 1 (real-world brand colour) is EMPTY and
-     recorded as such in the dossier (brand_color: {hex:"", ...}) — nothing
+  /* --- Colour - brief §5. Step 1 (real-world brand colour) is EMPTY and
+     recorded as such in the dossier (brand_color: {hex:"", ...}) - nothing
      to echo, not a departure from one. Step 2 licenses earth/aggregate tone
      from the yard's own operational identity. The playbook's green-and-growth
-     anchor is carried by IMAGERY ONLY (brief §5.2) — no green hex is a token
+     anchor is carried by IMAGERY ONLY (brief §5.2) - no green hex is a token
      on this site. */
 
   --scheme: light;
 
-  /* required roles — brief §5.4 */
-  --color-bg:          #F0EDE7;   /* limestone-grey — page ground */
+  /* required roles - brief §5.4 */
+  --color-bg:          #F0EDE7;   /* limestone-grey - page ground */
   --color-surface:     #FFFFFF;   /* alternating band ground */
-  --color-ink:         #241D19;   /* warm charcoal — 14.21:1 on bg */
-  --color-ink-muted:   #5C5148;   /* warm grey-brown — 6.59:1 on bg */
-  --color-accent:      #8A3F24;   /* DOMINANT — quarry-rust, hsl(16,59%,34%) */
-  --color-accent-ink:  #F7F2EA;   /* text ON accent — the primary CTA's label */
+  --color-ink:         #241D19;   /* warm charcoal - 14.21:1 on bg */
+  --color-ink-muted:   #5C5148;   /* warm grey-brown - 6.59:1 on bg */
+  --color-accent:      #8A3F24;   /* DOMINANT - quarry-rust, hsl(16,59%,34%) */
+  --color-accent-ink:  #F7F2EA;   /* text ON accent - the primary CTA's label */
 
   /* house-required structural */
-  --color-border:      #5C5148;   /* alias of ink-muted — every hairline (brief §5.4) */
-  --color-focus:       #241D19;   /* alias of ink — :focus-visible everywhere */
+  --color-border:      #5C5148;   /* alias of ink-muted - every hairline (brief §5.4) */
+  --color-focus:       #241D19;   /* alias of ink - :focus-visible everywhere */
   --color-selection-bg:  #8A3F24;
   --color-selection-ink: #F7F2EA;
 
-  /* brief-specific — §5.4. The hero's one atmosphere gradient, and the
-     seam's baked hex (a data-URI asset, not a site.css literal — brief §4.1). */
+  /* brief-specific - §5.4. The hero's one atmosphere gradient, and the
+     seam's baked hex (a data-URI asset, not a site.css literal - brief §4.1). */
   --color-atmos-deep:  #2B140B;
   --color-atmos-mid:   #5A2D19;
   --color-seam:        #8A3F24;   /* same value as accent; named separately, baked into the SVG */
 
 
-  /* --- Typography — brief §2. Two families, three woff2, one weight each.
+  /* --- Typography - brief §2. Two families, three woff2, one weight each.
      No emphasis face: the one emphasised word in the h1 is carried by
      --color-accent, never a third face (brief §2.1). font-variation-settings
-     never appears — both faces are static instances (brief §2.6). */
+     never appears - both faces are static instances (brief §2.6). */
 
   --font-display: 'Barlow Condensed', 'Barlow Condensed Fallback', 'Arial Narrow', sans-serif;
   --font-body:    'Archivo', 'Archivo Fallback', 'Helvetica Neue', Arial, sans-serif;
@@ -50,7 +50,7 @@
   --font-weight-body: 400;
   --font-weight-body-strong: 700;
 
-  /* Scale, computed at every declared breakpoint — brief §2.6/§2.7 */
+  /* Scale, computed at every declared breakpoint - brief §2.6/§2.7 */
   --text-display: clamp(2.1rem, 1.35rem + 3.1vw, 4.4rem);      /* 33.60 -> 66.24 */
   --text-h2:      clamp(1.375rem, 1.10rem + 1.0vw, 2.0rem);    /* 22.00 -> 32.00 */
   --text-lead:    clamp(1.0625rem, 1.0rem + 0.25vw, 1.3125rem);/* 17.00 -> 19.60 */
@@ -74,7 +74,7 @@
   --tracking-normal: 0em;
 
 
-  /* --- Space — brief §3, the house scale, unchanged ---------------------- */
+  /* --- Space - brief §3, the house scale, unchanged ---------------------- */
 
   --space-3xs: 0.25rem;  /* 4px */
   --space-2xs: 0.5rem;   /* 8px */
@@ -86,12 +86,12 @@
   --space-2xl: 6rem;     /* 96px */
   --space-3xl: 9rem;
 
-  /* ONE token, two call sites — .section's padding-block and the hero's
+  /* ONE token, two call sites - .section's padding-block and the hero's
      padding-block-end. 64px at EVERY width (brief §3). */
   --section-gap: var(--space-xl);
 
 
-  /* --- Layout — brief §3 -------------------------------------------------- */
+  /* --- Layout - brief §3 -------------------------------------------------- */
 
   --layout-container: 72rem;   /* 1152px cap, centred, from 1248px viewport up */
   --layout-measure: 62ch;
@@ -107,7 +107,7 @@
   --seam-unit: 2.5rem;          /* 40px repeat unit, brief §4.1 */
 
 
-  /* --- Radius / shadow / border — brief §5.4 ------------------------------ */
+  /* --- Radius / shadow / border - brief §5.4 ------------------------------ */
 
   --radius-none: 0;
   --radius-sm:   2px;      /* the primary CTA only */
@@ -116,7 +116,7 @@
   --border-thick:    2px;  /* the seam's minimum-width fallback rule, §4.1 */
   --border-style: solid;
 
-  /* Contract tokens, ZERO call sites — brief §5.4: this site has no cards */
+  /* Contract tokens, ZERO call sites - brief §5.4: this site has no cards */
   --radius-md: 6px;
   --radius-lg: 16px;
   --radius-pill: 999px;
@@ -125,7 +125,7 @@
   --shadow-lg: 0 24px 60px rgb(36 29 25 / 0.14);
 
 
-  /* --- Motion — brief §7 -------------------------------------------------- */
+  /* --- Motion - brief §7 -------------------------------------------------- */
 
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-drift:  cubic-bezier(0.45, 0, 0.55, 1);
@@ -156,12 +156,12 @@
 }
 
 /* --------------------------------------------------------------------------
-   @font-face — brief §2.1-§2.6. Two families, three woff2, SIL OFL 1.1,
+   @font-face - brief §2.1-§2.6. Two families, three woff2, SIL OFL 1.1,
    self-hosted, no CDN. Every face ships font-display: swap and the ONE house
    declared safe range (spec §8), identical on every face. Fallback overrides
    are MEASURED (scripts/font-metrics.mjs, the fontaine algorithm) against
    Liberation Sans Narrow (Arial Narrow's open metric clone) and Liberation
-   Sans (Helvetica Neue/Arial's open metric clone) — see README.md for the
+   Sans (Helvetica Neue/Arial's open metric clone) - see README.md for the
    full derivation; neither Arial Narrow nor Helvetica Neue is installable on
    this Linux build host.
    -------------------------------------------------------------------------- */
@@ -188,7 +188,7 @@
    face. Coverage gap, recorded rather than silently shipped: U+2010, U+2011,
    U+2012 and U+2015 are in this range and absent from all three faces below
    (checked with a fontTools cmap read against the shipped woff2). The range
-   is not narrowed for this — both faces lack the SAME four codepoints, so a
+   is not narrowed for this - both faces lack the SAME four codepoints, so a
    page rendering either one falls to the metrics-matched fallback
    consistently, never mid-sentence in two faces (house-tech-spec §8). copy.md
    carries no em dash and no other dash form beyond the plain hyphen-minus

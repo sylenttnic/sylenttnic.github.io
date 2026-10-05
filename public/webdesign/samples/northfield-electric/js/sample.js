@@ -1,4 +1,4 @@
-/* sample.js — the sticky header's measurement, and a form that is
+/* sample.js - the sticky header's measurement, and a form that is
    visible and inert.
 
    ---- The sticky header's scroll offset ----------------------------------

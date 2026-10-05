@@ -11,6 +11,11 @@
 // JS chunks that only /webdesign/ pages load. /webdesign/ is a separate offer
 // that keeps its own copy.
 //
+// One rule has no exceptions and no scope limit: no em dash (U+2014) anywhere
+// the site serves, /webdesign/ and its demo sites included, in any text file
+// (HTML, RSC payloads, JS, CSS, SVG, JSON, XML, llms files), code comments
+// included. Nic's rule. Write a comma, a colon, a period or parentheses instead.
+//
 // Usage: node scripts/check-copy.mjs [outDir]    (default: out)
 // Exit code 1 on any hit, or if the build output looks incomplete.
 
@@ -185,6 +190,13 @@ for (const p of mainPages) {
   checkPatterns(file, "web-design outside footer", [WEB_DESIGN], wd);
 }
 
+// No em dashes, anywhere: every text file in out/, nothing skipped.
+const EM_DASH = /\u2014|&mdash;|&#8212;|&#x2014;|\\u2014/gi;
+const servedText = all.filter((p) => /\.(html?|txt|xml|json|js|mjs|css|svg|webmanifest|md)$/i.test(p));
+for (const p of servedText) {
+  checkPatterns(rel(p), "em dash", [EM_DASH], readFileSync(p, "utf8"));
+}
+
 for (const p of jsFiles) {
   const file = rel(p);
   const text = stripAllowed(readFileSync(p, "utf8"));
@@ -195,7 +207,8 @@ for (const p of jsFiles) {
 
 console.log(
   `check-copy: scanned ${mainPages.length} page/data files and ${jsFiles.length} JS chunks in ${OUT}/ ` +
-    `(skipped /webdesign/ and ${[...webDesignRefs].filter((r) => !mainRefs.has(r)).length} chunks only it loads).`
+    `(skipped /webdesign/ and ${[...webDesignRefs].filter((r) => !mainRefs.has(r)).length} chunks only it loads), ` +
+    `and ${servedText.length} served text files for em dashes (nothing skipped).`
 );
 if (hits.length) {
   console.error(`check-copy: ${hits.length} retired or banned term(s) found:\n`);

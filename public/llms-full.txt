@@ -1,6 +1,6 @@
 # Sylentt: Full Context
 
-> Sylentt Partners is Nic Aslett's fractional CIO practice: part-time IT and AI leadership for companies of about 30 to 300 employees.
+> Sylentt Partners is Nic Aslett's fractional CIO practice: part-time IT and AI leadership for companies of about 20 to 150 employees.
 > Based in Cache Valley, Utah. Works in person across Cache Valley and Northern Utah.
 
 ## About Sylentt
@@ -11,7 +11,7 @@ The name comes from "silent partner": Nic works in the background so the client 
 
 ## Who it is for
 
-Companies with roughly 30 to 300 employees, for example a manufacturer or a dental group, that have an IT company (a managed service provider, or MSP) for day-to-day support but no one steering IT.
+Companies with roughly 20 to 150 employees, for example a manufacturer or a dental group, that have an IT company (a managed service provider, or MSP) for day-to-day support but no one steering IT.
 
 What that usually looks like:
 
@@ -24,25 +24,26 @@ What that usually looks like:
 
 ### 1. IT & AI Assessment
 
-Two weeks, fixed price: $1,500. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month roadmap, presented in person.
+Two weeks, one fixed price: $1,500. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month plan, presented in person.
 
 Deliverables:
 
-- System and subscription inventory
-- Vendor and contract review
-- Security basics check
-- AI opportunity-and-risk map
-- 12-month roadmap
-- 60-minute in-person readout
+- Every system, subscription and vendor the client pays for, listed with its cost
+- Contract and renewal dates in one place
+- A security basics check
+- Where AI can help, and where it is a risk
+- A one-page AI policy for the team
+- A 12-month plan
+- A 1-hour walkthrough, in person
 
-The $1,500 is credited toward the first month if the client continues on a monthly plan. If the client does not continue, the roadmap is still theirs.
+If the client continues on a monthly plan, the $1,500 comes off the first month. If the client does not continue, the plan is still theirs.
 
 ### 2. Retainer
 
 Nic becomes the company's IT director for a set number of hours a month. He runs the roadmap, manages the IT company and other vendors, makes the decisions, and answers the questions.
 
-- **Advisor: $1,950 a month, up to 6 hours.** Monthly leadership meeting, roadmap kept current, vendor and MSP oversight, AI policy and tool vetting, and unlimited questions by email with next-business-day answers.
-- **Director: $3,500 a month, up to 12 hours.** Everything in Advisor, plus a weekly check-in, a seat in the client's leadership meetings, ownership of IT budget and renewals, and leading AI and technology projects end to end.
+- **Advisor: $1,500 a month, up to 8 hours.** A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
+- **Director: $2,500 a month, up to 16 hours.** Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
 
 ### 3. The client owns everything
 
@@ -53,7 +54,9 @@ Documentation, roadmap, policies, vendor relationships: all the client's, in the
 - Prices are fixed and published at https://sylentt.com/pricing/.
 - Month-to-month. 30 days' notice.
 - Everything Nic produces belongs to the client.
-- Hours are a cap, not a target.
+- Hours cover meetings, email, and work done for the client.
+- Extra hours are $150 each, only with the client's approval first.
+- Unused hours do not carry over.
 
 ### What Nic does not do
 
@@ -74,7 +77,7 @@ The IT company fixes things; Nic decides things. An IT company is paid to keep t
 Nic is an IT leader who also handles AI. AI is evaluated like any other tool: where it saves money, where it creates risk, and what the rules are, delivered as a written policy the team can follow.
 
 **How much of Nic's time does a client get?**
-Advisor includes up to 6 hours a month and Director up to 12. Hours are a cap, not a target: a month that needs less does not get invented work.
+Advisor includes up to 8 hours a month and Director up to 16. Hours cover meetings, email, and work done for the client. If a month needs more, Nic asks first, and extra hours are $150 each. A month that needs less does not get invented work.
 
 **What if it does not work out?**
 Every plan is month-to-month with 30 days' notice. The client keeps everything produced: documentation, roadmap, policies, and vendor relationships, already in the client's accounts.
@@ -84,13 +87,13 @@ In person across Cache Valley and Northern Utah. Remote work elsewhere is the ex
 
 ## Experience
 
-15+ years in IT, the last 10 leading teams, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid. Nic has taken over IT departments that were not working and turned them around.
+15+ years in IT, the last 10 leading teams of up to 40 people, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid. Nic has taken over IT departments that were not working and turned them around.
 
-Results from IT departments Nic has led:
+Past results from IT teams Nic has led (results, not a promise for any client):
 
-- 100% on-time project delivery, after introducing real project management to a 16-person IT department
-- 80% faster ticket resolution: 150 hours to 30
-- SLA adherence doubled: 40% to 80%
+- 100% on-time project delivery, as a rolling average, after he brought real project management to a 16-person IT department
+- 80% faster ticket resolution: from 150 hours to 30
+- SLA adherence doubled: from 40% to 80%
 
 ## Currently
 

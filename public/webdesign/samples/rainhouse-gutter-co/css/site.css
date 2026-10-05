@@ -1,5 +1,5 @@
 /* ==========================================================================
-   site.css — per-site layout & components, built FROM tokens.
+   site.css - per-site layout & components, built FROM tokens.
 
    HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
    font-name literals in this file. Tokens only. The Critic greps for it.
@@ -16,17 +16,17 @@
    testimonial block and NO section-heading pattern. Those come from the
    approved brief's layout archetype (design-rules §7) and are written per
    site. A skeleton that shipped them would hand every business the same page
-   with different colours — which is the exact failure the DNA registry
+   with different colours - which is the exact failure the DNA registry
    exists to prevent, and it would collide head-on with the banned-defaults
    list (design-rules §4: three-card grids, four-stat rows, centred hero with
    two pill buttons, every section the same padding with a centred heading).
 
    And when a brief's archetype numbers its sections, its sub-lists take a
-   visibly different mark — different numeral system, face and colour role —
+   visibly different mark - different numeral system, face and colour role -
    or no mark at all (design-rules §4, "two counters in one costume").
 
    Builder: extend this file with the brief's components. Do not "fill in" a
-   hero here from memory — the brief is law (spec §12).
+   hero here from memory - the brief is law (spec §12).
    ========================================================================== */
 
 /* --- Layout primitives ---------------------------------------------------- */
@@ -84,7 +84,7 @@
   gap: var(--space-2xs);
   padding: var(--space-2xs) var(--space-xs);
   /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
-     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+     (WCAG 1.4.11, >= 3:1), not a decorative one - use --color-border-strong. */
   border: var(--border-hairline) var(--border-style) var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: var(--text-small);
@@ -155,7 +155,7 @@
 
 /* --- Buttons --------------------------------------------------------------
    Two roles, no more. Radius, weight and colour all come from the brief via
-   tokens — including --radius-none, which is a legitimate answer.          */
+   tokens - including --radius-none, which is a legitimate answer.          */
 
 .btn {
   display: inline-flex;
@@ -227,7 +227,7 @@ textarea.field__control {
 }
 
 /* Honeypot: present in the DOM for bots, unreachable for humans and assistive
-   tech. Not display:none — some bots skip those. */
+   tech. Not display:none - some bots skip those. */
 .form__trap {
   position: absolute;
   /* @allow-literal: off-canvas parking position, not a design value */
@@ -263,7 +263,7 @@ textarea.field__control {
 }
 
 /* ==========================================================================
-   whatcom-gutter-co-lynden-wa — brief components (band-rhythm, warm-craft).
+   whatcom-gutter-co-lynden-wa - brief components (band-rhythm, warm-craft).
    Every component below is built from tokens only, per the brief's section
    plan (runs/whatcom-gutter-co-lynden-wa/brief.md §5).
    ========================================================================== */
@@ -285,7 +285,7 @@ textarea.field__control {
 /* --- Hero --------------------------------------------------------------------
    Brief §5.0/§5.1. DOM order is fixed (design-rules §7.2 rule 1): eyebrow →
    h1 → primary CTA → field → lead → facts. At >=64em the field moves beside
-   the text via grid-template-areas ONLY — the DOM order above never changes,
+   the text via grid-template-areas ONLY - the DOM order above never changes,
    so the same source order that satisfies the fold arithmetic is also the
    reading and tab order at every width. */
 
@@ -297,7 +297,7 @@ textarea.field__control {
 
 /* row-gap is deliberately 0: the brief's §5.0 cumulative-y arithmetic sets
    every gap explicitly as a margin on the element that owns it (eyebrow 8px,
-   h1 16px, CTA 24px, field 0 — field-bottom and lead-top land at the same y),
+   h1 16px, CTA 24px, field 0 - field-bottom and lead-top land at the same y),
    so a grid row-gap would double up on top of those margins. column-gap
    (desktop only, brief's stated 40px) is the one gap this grid itself owns. */
 .hero__grid {
@@ -325,21 +325,21 @@ textarea.field__control {
   margin-block-end: 0;
 }
 
-/* Field: fixed height at mobile (brief §5.0 — 260px, 100% of it above the
+/* Field: fixed height at mobile (brief §5.0 - 260px, 100% of it above the
    375x667 fold). Free-flowing (aspect-ratio driven) from >=64em, where the
    fold is no longer a binding constraint. */
 .hero__art-wrap {
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  /* 260px exactly — brief §5.0's fixed mobile field height, 100% of it above
+  /* 260px exactly - brief §5.0's fixed mobile field height, 100% of it above
      the 375x667 fold. */
   block-size: calc(var(--space-3xl) + var(--space-xl) + var(--space-lg) + var(--space-xs));
 }
 
 /* The photograph and its trace overlay share the exact same box, so the
    overlay's preserveAspectRatio="xMidYMid slice" crops identically to the
-   photo's object-fit: cover — the default (centered) crop on both, never
+   photo's object-fit: cover - the default (centered) crop on both, never
    customised on one without the other. */
 .hero__img {
   display: block;
@@ -376,7 +376,7 @@ textarea.field__control {
    stretches the crop far wider than the artwork was composed for (measured:
    the corner/downspout pushed almost entirely out of frame by 768px). An
    aspect-ratio step here is a delivery-mechanical fix to that stretch, not a
-   brief value — the brief states no tablet number to reproduce. */
+   brief value - the brief states no tablet number to reproduce. */
 @media (min-width: 48em) {
   .hero__art-wrap {
     block-size: auto;
@@ -402,7 +402,7 @@ textarea.field__control {
 
 /* --- Living-hero signature: the trough draws once, a glint settles, one
    droplet loops (brief §7). Durations are the brief's own tokens, deliberately
-   outside the house reveal trio — this is a one-shot device, not a reveal. */
+   outside the house reveal trio - this is a one-shot device, not a reveal. */
 
 .trough-line {
   stroke-dasharray: 460;
@@ -429,7 +429,7 @@ textarea.field__control {
 }
 
 /* cy is animated in the SVG's own viewBox units (not CSS pixels), so the fall
-   stays proportional to the artwork at every rendered size — a transform in
+   stays proportional to the artwork at every rendered size - a transform in
    CSS pixels would not. */
 @keyframes whatcom-fall-droplet {
   0% { cy: 600; opacity: 0; }
@@ -438,7 +438,7 @@ textarea.field__control {
   100% { cy: 900; opacity: 0; }
 }
 
-/* Reduced motion: the hero freezes to its finished state, never mid-motion —
+/* Reduced motion: the hero freezes to its finished state, never mid-motion -
    a frozen droplet would read as a rendering error, so it hides instead
    (brief §7's explicit reduced-motion statement). base.css's kill switch
    collapses the house reveal trio; these three are one-shot end-states with
@@ -517,7 +517,7 @@ textarea.field__control {
 }
 
 /* The one repeated ornament: the band numeral. Fixed at 2.4ch, italic serif,
-   accent colour — the numeral system distinction from the body sans
+   accent colour - the numeral system distinction from the body sans
    (design-rules §5's nested-counter rule), and the page's only enumerated
    list (brief §3). */
 .band__num {
@@ -587,7 +587,7 @@ textarea.field__control {
 }
 
 /* --- Reviews (brief §5.6) ---------------------------------------------------
-   No fixed heights, no equal-card grid, no truncation, no numbering — every
+   No fixed heights, no equal-card grid, no truncation, no numbering - every
    review is whole and verbatim. */
 
 .reviews__stat {

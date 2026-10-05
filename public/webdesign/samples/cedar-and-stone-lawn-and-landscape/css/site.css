@@ -1,5 +1,5 @@
 /* ==========================================================================
-   site.css — per-site layout & components, built FROM tokens.
+   site.css - per-site layout & components, built FROM tokens.
 
    HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
    font-name literals in this file. Tokens only. The Critic greps for it.
@@ -7,7 +7,7 @@
    `@allow-literal: reason` comment on the preceding line.
 
    The skeleton's own shell (header/nav, section rhythm, buttons, form,
-   footer) is below, extended with this brief's border-course components —
+   footer) is below, extended with this brief's border-course components -
    never a hero, card grid or heading pattern invented from memory (spec §12).
    ========================================================================== */
 
@@ -39,7 +39,7 @@
 .site-header {
   position: relative;
   z-index: var(--z-header);
-  /* Tightened from --space-sm toward brief §4.4's ~57px chrome target — the
+  /* Tightened from --space-sm toward brief §4.4's ~57px chrome target - the
      44px tap-target floor already sets the effective row height. */
   padding-block: var(--space-2xs);
   border-bottom: var(--border-hairline) var(--border-style) var(--color-border);
@@ -92,7 +92,7 @@
   gap: var(--space-2xs);
   padding: var(--space-2xs) var(--space-xs);
   /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
-     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+     (WCAG 1.4.11, >= 3:1), not a decorative one - use --color-border-strong. */
   border: var(--border-hairline) var(--border-style) var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: var(--text-small);
@@ -163,7 +163,7 @@
 
 /* --- Buttons --------------------------------------------------------------
    Two roles, no more. Radius, weight and colour all come from the brief via
-   tokens — including --radius-none, which is a legitimate answer.          */
+   tokens - including --radius-none, which is a legitimate answer.          */
 
 .btn {
   display: inline-flex;
@@ -239,7 +239,7 @@ textarea.field__control {
 }
 
 /* Honeypot: present in the DOM for bots, unreachable for humans and assistive
-   tech. Not display:none — some bots skip those. */
+   tech. Not display:none - some bots skip those. */
 .form__trap {
   position: absolute;
   /* @allow-literal: off-canvas parking position, not a design value */
@@ -275,13 +275,13 @@ textarea.field__control {
 }
 
 /* ==========================================================================
-   Cedar & Stone Lawn and Landscape — brief components (border-course archetype)
+   Cedar & Stone Lawn and Landscape - brief components (border-course archetype)
    Everything below reads from tokens.css only; the two escape hatches are
    the house breakpoints (48em/64em) and an explicit @allow-literal comment.
    ========================================================================== */
 
 /* Emphasis role (brief §3.1): Vollkorn 400italic, wherever a pull-quote-
-   shaped or headline emphasis needs it — the h1's "Then Fill It In." and
+   shaped or headline emphasis needs it - the h1's "Then Fill It In." and
    every quoted service excerpt in the "In Their Own Words" section. */
 em {
   font-family: var(--font-display);
@@ -352,7 +352,7 @@ em {
 
 /* --- Hero (brief §4.4, §6, §7). DOM order: course-band -> eyebrow -> h1 ->
    lede -> primary CTA (+ secondary link) -> field -> facts. Background is
-   two radial atmosphere layers over bg, per brief §2.2's gradient rule —
+   two radial atmosphere layers over bg, per brief §2.2's gradient rule -
    both provably lighter than --color-surface at their strongest stop, so
    grading hero text against --color-surface (brief §2.2 pairs 5-7) is the
    conservative, worst-case measurement. */
@@ -393,7 +393,7 @@ em {
   margin-block-start: var(--space-sm);
 }
 
-/* Living-hero field: fixed target height (brief §4.4 rule 4 — 240px at
+/* Living-hero field: fixed target height (brief §4.4 rule 4 - 240px at
    375px), full-bleed illustrated ground plate with three independent sprigs
    layered above it. Contained, never full-bleed-immersive. */
 .hero__field {
@@ -419,7 +419,7 @@ em {
 }
 
 /* Three botanical sprigs: inline SVG, +/- --sprig-sway-angle sway, three
-   independent, non-synced durations (brief §7) — 6.8s/8.4s/7.5s, rooted at
+   independent, non-synced durations (brief §7) - 6.8s/8.4s/7.5s, rooted at
    the mulch-bed edge in the lower third of the field. */
 .hero__sprig {
   position: absolute;
@@ -505,7 +505,7 @@ em {
 }
 
 /* Small solid-accent chip mark (brief §4.2, ref-008's list-with-chips move
-   adapted) — not a numeral system at all, distinct from the process
+   adapted) - not a numeral system at all, distinct from the process
    word-ordinals and the FAQ disclosure marker. */
 .services-row__chip {
   flex: none;
@@ -547,7 +547,7 @@ em {
     align-items: start;
   }
 
-  /* Roughly beside item 5 of 9 (Borders), per brief §6 slot 2 — not pinned
+  /* Roughly beside item 5 of 9 (Borders), per brief §6 slot 2 - not pinned
      to a pixel box. */
   .services__figure {
     margin-block-start: 20%;
@@ -619,7 +619,7 @@ em {
 }
 
 /* --- How It Works (brief §4.1 row 6): word-ordinals in Karla 700
-   accent-ink — two dimensions apart from the services chips (glyph system
+   accent-ink - two dimensions apart from the services chips (glyph system
    AND colour role, brief §4.2). --------------------------------------------- */
 
 .process-list {
@@ -646,7 +646,7 @@ em {
 }
 
 /* --- FAQ (brief §4.1 row 8): native details/summary, a +/- disclosure
-   marker — the page's third and last counter-like system, distinct from
+   marker - the page's third and last counter-like system, distinct from
    both the services chips and the process word-ordinals (brief §4.2). ----- */
 
 .faq-list {
@@ -682,7 +682,7 @@ em {
 }
 
 .faq-item[open] .faq-item__q::after {
-  /* Plain hyphen-minus (U+002D, in range) — not the Unicode minus, which no shipped face carries */
+  /* Plain hyphen-minus (U+002D, in range) - not the Unicode minus, which no shipped face carries */
   content: '-';
 }
 

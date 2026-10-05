@@ -1,19 +1,19 @@
-/* tokens.css — Redbrick Auto Care, Abilene TX. Source: brief.md §2, §3, §4.1.
+/* tokens.css - Redbrick Auto Care, Abilene TX. Source: brief.md §2, §3, §4.1.
    Archetype: full-bleed-immersive. Family: editorial-modern. Palette:
-   verdigris / bone-white / light (brief §2.1 — real-world colour
+   verdigris / bone-white / light (brief §2.1 - real-world colour
    UNAVAILABLE, dossier §4.5; derived from local character + family norms,
-   pushed for distinctiveness against the market's blue/navy — dossier §4.6,
+   pushed for distinctiveness against the market's blue/navy - dossier §4.6,
    playbook §7). Every value traces to brief §2.2-§2.3, §3-§3.1 or §4.1. */
 
 :root {
 
   /* --- Colour --------------------------------------------------------------
      brief §2.2. Full contrast table computed and re-verified independently
-     twice — brief §2.3. */
+     twice - brief §2.3. */
 
   --scheme: light;
 
-  --color-bg: #F3F4F0;                /* bone-white — page ground */
+  --color-bg: #F3F4F0;                /* bone-white - page ground */
   --color-surface: #FFFFFF;           /* the two review/trust panels only */
   --color-ink: #1F2624;               /* verdigris-tinted near-black */
   --color-ink-muted: #55605C;
@@ -21,33 +21,33 @@
   --color-accent-ink: #FFFFFF;
 
   /* House-required structural colours */
-  --color-border: #D6DAD2;            /* decorative hairlines only — no contrast floor */
+  --color-border: #D6DAD2;            /* decorative hairlines only - no contrast floor */
 
   /* Control boundary, WCAG 1.4.11: >=3:1 against bg AND surface. */
   --color-border-strong: #8C857A;
 
   --color-focus: #3F7267;             /* :focus-visible on bg/surface */
 
-  /* Dark-band-safe ring — REQUIRED, the hero's scrim is a dark band (brief
+  /* Dark-band-safe ring - REQUIRED, the hero's scrim is a dark band (brief
      §2.3, N3/N4). Scoped: .hero-content :focus-visible { outline-color:
      var(--color-focus-on-scrim); }, never global. N3: --color-focus on the
-     scrim is 2.89:1 and FAILS — this token is why it exists. */
+     scrim is 2.89:1 and FAILS - this token is why it exists. */
   --color-focus-on-scrim: #7FBFA9;    /* == --color-scrim-accent below, a control token not a content one */
 
   --color-selection-bg: #3F7267;
   --color-selection-ink: #FFFFFF;
 
-  /* Brief-specific colours (brief §2.2) — the hero's ink scrim (full-bleed
+  /* Brief-specific colours (brief §2.2) - the hero's ink scrim (full-bleed
      text ground). Declared separately from --color-ink though identical: a
      GROUND under light text here, not body ink on a light page, so a future
      recolour of one must not silently recolour the other. */
   --color-scrim: #1F2624;             /* == --color-ink */
   --color-scrim-text: #F6F7F4;
   --color-scrim-text-muted: #CDD6D0;
-  --color-scrim-accent: #7FBFA9;      /* h1 em, facts-strip star — same hex as --color-focus-on-scrim, a content token not a control one */
+  --color-scrim-accent: #7FBFA9;      /* h1 em, facts-strip star - same hex as --color-focus-on-scrim, a content token not a control one */
   --color-scrim-eyebrow: #A9D3C5;
 
-  /* Non-text, decorative only — the playbook §6.1 anchor's warm-metal/shop-
+  /* Non-text, decorative only - the playbook §6.1 anchor's warm-metal/shop-
      light carriers (brief §4.3). Never used as a `color` on a text node. */
   --color-shop-light: #FFBF8A;        /* the hero's warm glow ellipse */
   --color-tool-warm: #E2A06C;         /* indicator light + bolt accent */
@@ -64,7 +64,7 @@
 
   --font-weight-body: 400;
   --font-weight-body-strong: 600;
-  --font-weight-display: 500;         /* the ONLY display weight used anywhere — the emphasis
+  --font-weight-display: 500;         /* the ONLY display weight used anywhere - the emphasis
                                           device is the italic, not a heavier weight (brief §3) */
 
   /* --- Type scale ------------------------------------------------------------
@@ -81,7 +81,7 @@
   /* House role-name aliases: base.css/site.css/preview.css chrome reads
      --text-body/--text-h3/--text-small/--text-eyebrow directly. The brief's
      scale above uses step names instead, so these map role onto the step
-     brief §3.1 already assigns it — no new value. */
+     brief §3.1 already assigns it - no new value. */
   --text-body: var(--text-base);
   --text-h3: var(--text-lg);
   --text-small: var(--text-sm);
@@ -96,7 +96,7 @@
   --tracking-wide: 0.08em;
 
   /* --- Space -------------------------------------------------------------
-     House scale, unchanged — brief §4.1 argues no override. */
+     House scale, unchanged - brief §4.1 argues no override. */
 
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;
@@ -108,12 +108,12 @@
   --space-2xl: 6rem;
   --space-3xl: 9rem;
 
-  /* Inter-section rhythm — brief §4.1: 64px (--space-xl), fixed at every
+  /* Inter-section rhythm - brief §4.1: 64px (--space-xl), fixed at every
      breakpoint. Every intra-section gap stays strictly below 2x this. */
   --section-gap: var(--space-xl);
 
   /* --- Layout ------------------------------------------------------------
-     House defaults — the brief argues no override. */
+     House defaults - the brief argues no override. */
 
   --layout-container: 72rem;
   --layout-measure: 62ch;
@@ -122,7 +122,7 @@
 
   /* Hero + sticky-chrome numbers, brief §4.3/§4.4. Header is sticky (brief
      §4.2 row 0), so the preview expiry bar stacks sticky above it too
-     (preview.css's own contract) — site.css and css/preview.css carry the
+     (preview.css's own contract) - site.css and css/preview.css carry the
      override. Header height is set to the brief's target rather than left
      to fall out of padding, so the 101/117px sticky-chrome sum holds by
      construction; verified against the real render below. */
@@ -132,7 +132,7 @@
   --header-height-desktop: 4.5rem; /* 72px target, brief §4.4 */
 
   /* --- Radius / shadow / border -----------------------------------------
-     brief §2.2 — square by default, per editorial-modern restraint. */
+     brief §2.2 - square by default, per editorial-modern restraint. */
 
   --radius-none: 0;
   --radius-sm: 2px;
@@ -174,11 +174,11 @@
   --z-header: 100;
   --z-nav-panel: 200;
   --z-skip-link: 300;
-  --z-hero-field: 0;    /* the hero's art/atmosphere layer — behind */
-  --z-hero-content: 1;  /* the hero's text content — in front (design-rules §7.2 rule 1) */
+  --z-hero-field: 0;    /* the hero's art/atmosphere layer - behind */
+  --z-hero-content: 1;  /* the hero's text content - in front (design-rules §7.2 rule 1) */
 
   /* The process index's numeral column width at >=48em (brief §4.2 row 2,
-     ref-011's editorial index-list device) — a layout detail the section
+     ref-011's editorial index-list device) - a layout detail the section
      plan requires but does not itself number, same precedent as
      gibbons-electric-rockford-il's --col-proof-figure. */
   --col-index-num: 4rem;
@@ -195,7 +195,7 @@
   }
 }
 
-/* @font-face — brief §3. Two families, four woff2 files (§5 ≤4-file
+/* @font-face - brief §3. Two families, four woff2 files (§5 ≤4-file
    ceiling), self-hosted, OFL, subset to the house declared safe range
    (house-tech-spec §8), unicode-range identical on every face.
    Metrics-matched fallbacks measured with scripts/font-metrics.mjs against
@@ -208,7 +208,7 @@
    LITERATA GETS A SECOND FALLBACK TIER (precedent: hky-services-hickory-nc's
    Prata). `local('Georgia')` resolves on Windows/macOS/iOS but not this
    build environment's Linux stack (`fc-match Georgia` → DejaVu Serif), so
-   'Literata Fallback 2' is measured directly against DejaVu Serif — without
+   'Literata Fallback 2' is measured directly against DejaVu Serif - without
    it a Linux/Android swap falls past both tiers to the unmeasured generic
    `serif`, which is what produced this build's non-zero CLS before. */
 
@@ -278,11 +278,11 @@
   line-gap-override: 0%;
 }
 
-/* House declared safe range (house-tech-spec §8) — identical on every face
+/* House declared safe range (house-tech-spec §8) - identical on every face
    on this site, no exceptions, including the italic/emphasis-only face.
    U+2010, U+2011, U+2012 and U+2015 are in the declared range and absent
    from all four of this site's source faces (Literata and Work Sans alike),
-   the same documented coverage gap as the pilot site (house-tech-spec §8) —
+   the same documented coverage gap as the pilot site (house-tech-spec §8) -
    not narrowed for it, since every face here lacks the same four glyphs
    uniformly and no page can split mid-sentence across two faces. */
 @font-face {

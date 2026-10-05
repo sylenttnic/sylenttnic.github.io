@@ -1,5 +1,5 @@
 /* ==========================================================================
-   site.css — per-site layout & components, built FROM tokens.
+   site.css - per-site layout & components, built FROM tokens.
 
    HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
    font-name literals in this file. Tokens only. The Critic greps for it.
@@ -16,17 +16,17 @@
    testimonial block and NO section-heading pattern. Those come from the
    approved brief's layout archetype (design-rules §7) and are written per
    site. A skeleton that shipped them would hand every business the same page
-   with different colours — which is the exact failure the DNA registry
+   with different colours - which is the exact failure the DNA registry
    exists to prevent, and it would collide head-on with the banned-defaults
    list (design-rules §4: three-card grids, four-stat rows, centred hero with
    two pill buttons, every section the same padding with a centred heading).
 
    And when a brief's archetype numbers its sections, its sub-lists take a
-   visibly different mark — different numeral system, face and colour role —
+   visibly different mark - different numeral system, face and colour role -
    or no mark at all (design-rules §4, "two counters in one costume").
 
    Builder: extend this file with the brief's components. Do not "fill in" a
-   hero here from memory — the brief is law (spec §12).
+   hero here from memory - the brief is law (spec §12).
    ========================================================================== */
 
 /* --- Layout primitives ---------------------------------------------------- */
@@ -153,7 +153,7 @@
 
 /* --- Buttons --------------------------------------------------------------
    Two roles, no more. Radius, weight and colour all come from the brief via
-   tokens — including --radius-none, which is a legitimate answer.          */
+   tokens - including --radius-none, which is a legitimate answer.          */
 
 .btn {
   display: inline-flex;
@@ -228,7 +228,7 @@ textarea.field__control {
 }
 
 /* Honeypot: present in the DOM for bots, unreachable for humans and assistive
-   tech. Not display:none — some bots skip those. */
+   tech. Not display:none - some bots skip those. */
 .form__trap {
   position: absolute;
   /* @allow-literal: off-canvas parking position, not a design value */
@@ -264,7 +264,7 @@ textarea.field__control {
 }
 
 /* ==========================================================================
-   Riverstone Landscape and Supply — the brief's components (brief §2-§8).
+   Riverstone Landscape and Supply - the brief's components (brief §2-§8).
    band-rhythm archetype: alternating full-bleed bands, headed by the seam,
    no cards, no shadows, no border-radius except the primary CTA (brief §4).
    ========================================================================== */
@@ -294,7 +294,7 @@ textarea.field__control {
 
 /* --- The seam (brief §4.1): the site's one repeated ornament. A horizontal
    jagged aggregate-silhouette, authored as one inline SVG data URI, fill
-   baked in at #8A3F24 — the one permitted raw hex in this codebase, because
+   baked in at #8A3F24 - the one permitted raw hex in this codebase, because
    it is a data-URI asset, not a site.css literal (brief §4.1, §5.4). Fixed
    10px height at every width; only its horizontal repeat count changes. --- */
 
@@ -303,16 +303,16 @@ textarea.field__control {
   inline-size: 100%;
   block-size: var(--seam-height);
   /* @allow-literal: the seam's baked SVG fill is the one permitted raw hex
-     in this codebase (brief §4.1) — a data-URI asset, not a site.css literal */
+     in this codebase (brief §4.1) - a data-URI asset, not a site.css literal */
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2040%2010'%3E%3Cpath%20d%3D'M0%2C10%20L4%2C3%20L8%2C10%20L12%2C1%20L16%2C10%20L20%2C6%20L24%2C10%20L28%2C2%20L32%2C10%20L36%2C4%20L40%2C10%20Z'%20fill%3D'%238A3F24'%2F%3E%3C%2Fsvg%3E");
   background-repeat: repeat-x;
   background-size: var(--seam-unit) var(--seam-height);
 }
 
 /* Minimum and what yields (brief §4.1, design-rules §5): should the seam's
-   own container ever fall narrower than one 40px repeat unit — a condition
+   own container ever fall narrower than one 40px repeat unit - a condition
    that does not occur at any declared breakpoint 375-1440, since every
-   band's content column is >=335px — it yields to a flat 2px accent rule,
+   band's content column is >=335px - it yields to a flat 2px accent rule,
    never disappearing and never distorting into a squashed fraction of the
    jagged pattern. The trigger (viewport <5rem/80px) is far below any
    declared breakpoint and is defensive, not reachable in practice. */
@@ -324,17 +324,17 @@ textarea.field__control {
   }
 }
 
-/* In the hero only: the seam draws in sync with the pile's settle — opacity
+/* In the hero only: the seam draws in sync with the pile's settle - opacity
    0->1 and translateY(4px->0), completing at 1400ms alongside the pile
    reaching its resting shape (brief §4.1, §7.2). It never re-animates.
    Everywhere else the seam renders already settled: opacity 1, no
-   transform, fully static, painted at load — furniture, not a moment. */
+   transform, fully static, painted at load - furniture, not a moment. */
 .seam--hero {
   animation: seam-draw var(--duration-signature) var(--ease-settle) forwards;
 }
 
 /* -40% of the seam's own 10px block-size is the brief's literal 4px draw
-   distance (brief §4.1) — expressed as a percentage of the element's own
+   distance (brief §4.1) - expressed as a percentage of the element's own
    box, per house-tech-spec §3's tokens-only rule (percentages are not a
    raw size literal; a percentage of --seam-height IS the token). */
 @keyframes seam-draw {
@@ -342,7 +342,7 @@ textarea.field__control {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Eyebrow (hero only — brief §1: the only band-head label anywhere on
+/* --- Eyebrow (hero only - brief §1: the only band-head label anywhere on
    this site; bands below carry no kicker). Natural case authored in
    copy.md, uppercased here (house-tech-spec §8). ------------------------- */
 
@@ -383,10 +383,10 @@ textarea.field__control {
 }
 
 /* Two `.h1-line` block children give the h1 its hard 2-line-box structural
-   constraint (brief §4.4) at every width — never a wrap computed by luck. */
+   constraint (brief §4.4) at every width - never a wrap computed by luck. */
 .h1-line { display: block; }
 
-/* The one emphasised word — carried by --color-accent, never a third face
+/* The one emphasised word - carried by --color-accent, never a third face
    (brief §2.1, §1: "refused... every reference's mood, never its words"). */
 .accent-word { color: var(--color-accent); }
 
@@ -420,7 +420,7 @@ textarea.field__control {
 /* The signature move, re-expressed on the generated asset itself (brief
    §4.4: the field is a generated asset, not inline SVG or CSS shapes, so the
    truck bed's tip and the pile's pour are the artwork; what CSS animates is
-   the whole frame settling into its resting position once, on load) — ref-
+   the whole frame settling into its resting position once, on load) - ref-
    002's bobbing-central-object convention, re-pitched to a ONE-SHOT tip-
    and-settle (brief §1). Plays once; after 1400ms nothing about it moves
    again (brief §7.2). */
@@ -483,7 +483,7 @@ textarea.field__control {
 }
 
 /* Percentages resolve against each dot's own small box (--space-2xs square),
-   so 100%-200% reads as a few px of drift — small translate + rotate, per
+   so 100%-200% reads as a few px of drift - small translate + rotate, per
    brief §7.2, expressed with no literal outside tokens.css. */
 @keyframes stone-drift-1 {
   0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.7; }
@@ -506,7 +506,7 @@ textarea.field__control {
 }
 
 /* --- Bands (brief §4): every section a full-bleed band. Odd content bands
-   on --color-bg; even bands and the trust strip on --color-surface — a
+   on --color-bg; even bands and the trust strip on --color-surface - a
    visible alternating rhythm, no shadow, no border-radius anywhere. ----- */
 
 .band { background-color: var(--color-bg); }
@@ -539,7 +539,7 @@ textarea.field__control {
   color: var(--color-ink-muted);
 }
 
-/* --- thanks.html — the form-success page. No living-hero field (brief §0). */
+/* --- thanks.html - the form-success page. No living-hero field (brief §0). */
 
 .thanks__next { margin-block-start: var(--space-xs); }
 
@@ -551,7 +551,7 @@ textarea.field__control {
 }
 
 /* --- Rows (brief §1: ref-008's product-line list re-expressed as a plain
-   list, no icons, no chips — the material names carry the specificity). - */
+   list, no icons, no chips - the material names carry the specificity). - */
 
 .rows {
   margin-block-start: var(--space-xs);
@@ -578,7 +578,7 @@ textarea.field__control {
 
 .rows--towns .row { border-inline-end: var(--border-hairline) var(--border-style) var(--color-border); }
 
-/* --- Two-column bands (Band 2, Band 3 — brief §4 rule 2). Below 1024,
+/* --- Two-column bands (Band 2, Band 3 - brief §4 rule 2). Below 1024,
    single column, text first (DOM order, unchanged). At >=1024, two columns;
    Band 2 image-left/text-right via `order`, Band 3 text-left/image-right
    (the DOM's own order, untouched). The reading order never changes. --- */
@@ -600,7 +600,7 @@ textarea.field__control {
   block-size: auto;
 }
 
-/* --- §VII faq — native disclosure, keyboard-standard, no JS. The UA's own
+/* --- §VII faq - native disclosure, keyboard-standard, no JS. The UA's own
    marker is the site's only counter (design-rules §5); no numeral, no
    card. --------------------------------------------------------------- */
 
@@ -659,7 +659,7 @@ textarea.field__control {
 }
 
 /* --- Footer additions (brief §6.5's footer spec: NAP, hours, service-area
-   recap, phone, quote link, copyright — house skeleton gives the shell). - */
+   recap, phone, quote link, copyright - house skeleton gives the shell). - */
 
 .site-footer__name { color: var(--color-ink); font-weight: var(--font-weight-body-strong); }
 
@@ -676,7 +676,7 @@ textarea.field__control {
    the hero. base.css's own rule runs the transition at --duration-slow; this
    re-points it at the brief's own reveal duration (aliased through
    --duration-base, so the reduced-motion collapse in base.css still zeroes
-   it — see README.md's derivation). No stagger: --reveal-stagger is 0 by
+   it - see README.md's derivation). No stagger: --reveal-stagger is 0 by
    token, so every element in a group reveals together, never cascading. -- */
 
 [data-reveal-ready] [data-reveal] {
@@ -687,7 +687,7 @@ textarea.field__control {
 
 /* --- Reduced motion (brief §7.4): every loop and every reveal disabled,
    without exception. The hero's still frame reads as fully spectacular with
-   motion stopped — the artwork already depicts the truck fully tipped and
+   motion stopped - the artwork already depicts the truck fully tipped and
    the pile fully mounded; only the CSS entrance and the ambient loops stop.
    Nothing disappears; the whole composition survives. ------------------- */
 

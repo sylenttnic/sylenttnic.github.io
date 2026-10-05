@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     // nothing; those terms belong to /webdesign/ and its terms page, which is
     // why the sentence here points there instead of summarising them.
     "ai-content-description":
-      "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah. Nic is the part-time IT and AI leader for companies of about 30 to 300 employees that have an IT company for day-to-day support but no one steering IT. Work starts with a fixed-price, two-week IT and AI assessment ($1,500), then continues month to month as Advisor ($1,950 a month, up to 6 hours) or Director ($3,500 a month, up to 12 hours), with 30 days' notice, and the client keeps everything Nic produces. Separately, a web design plan for local service businesses is linked from the site footer at sylentt.com/webdesign/, under its own terms.",
+      "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah. Nic is the part-time IT and AI leader for companies of about 20 to 150 employees that have an IT company for day-to-day support but no one steering IT. Work starts with a two-week IT and AI assessment ($1,500, one time, taken off the first month if the client continues), then continues month to month as Advisor ($1,500 a month, up to 8 hours) or Director ($2,500 a month, up to 16 hours), with 30 days' notice. Extra hours are $150 each and only with the client's approval, and the client keeps everything Nic produces. Separately, a web design plan for local service businesses is linked from the site footer at sylentt.com/webdesign/, under its own terms.",
   },
 };
 

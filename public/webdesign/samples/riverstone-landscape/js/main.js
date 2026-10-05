@@ -1,5 +1,5 @@
 /* ==========================================================================
-   main.js — house behaviour. Vanilla ES module, zero dependencies.
+   main.js - house behaviour. Vanilla ES module, zero dependencies.
 
    Scope is fixed by house-tech-spec §9: mobile nav toggle, scroll reveals,
    form enhancement, and (per brief) one signature interaction. Anything
@@ -15,18 +15,18 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   CONFIGURATION — the Builder sets these two lines and nothing else.
+   CONFIGURATION - the Builder sets these two lines and nothing else.
    -------------------------------------------------------------------------- */
 
 /**
  * Where the contact form POSTs. Single source of truth (spec §6).
  *
- * The <form action> in the HTML MUST carry this same URL — that is the JS-off
+ * The <form action> in the HTML MUST carry this same URL - that is the JS-off
  * path, and scripts/qa/form-audit.mjs fails the build if the two disagree.
  *
  * EMPTY STRING = no endpoint configured. The form section then auto-hides and
  * the tel:/mailto: CTAs carry the page. When it is empty, the form section
- * must ALSO ship with the `hidden` attribute in the HTML — a visible dead
+ * must ALSO ship with the `hidden` attribute in the HTML - a visible dead
  * form is a QA BLOCKER, and JS-off users would otherwise see one.
  */
 const FORM_ENDPOINT = ''; // SAMPLE: no endpoint, ever. js/sample.js keeps the form visible and inert.
@@ -83,7 +83,7 @@ function initNav() {
 
 /* --- Scroll reveals -------------------------------------------------------
    Below-the-fold only. The hero is the LCP element and is never reveal-gated
-   (spec §7). Under prefers-reduced-motion we arm nothing at all — the CSS
+   (spec §7). Under prefers-reduced-motion we arm nothing at all - the CSS
    never hides anything, so there is nothing to un-hide (spec §8).          */
 
 function initReveals() {
@@ -159,7 +159,7 @@ function initForm() {
       return;
     }
 
-    // Submitted implausibly fast. Don't send, and don't lose the visitor —
+    // Submitted implausibly fast. Don't send, and don't lose the visitor -
     // they can press send again a moment later and it goes through.
     if (Date.now() - loadedAt < MIN_FILL_MS) {
       event.preventDefault();
@@ -208,7 +208,7 @@ function initYear() {
    README front-matter live_until); the COUNT is derived here; the WORDS are the
    copy doc's, read from data- attributes exactly like every other string in
    this file. If the result is not a whole number of days in the future we
-   change nothing, and the HTML's own sentence — which states the date — stands.
+   change nothing, and the HTML's own sentence - which states the date - stands.
    There is deliberately no "0 days" and no "expired" state.
 
    initYear() above is the precedent: a date is not a claim about the business,
