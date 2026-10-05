@@ -1,5 +1,5 @@
 /* ==========================================================================
-   site.css — per-site layout & components, built FROM tokens.
+   site.css - per-site layout & components, built FROM tokens.
 
    HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
    font-name literals in this file. Tokens only. The Critic greps for it.
@@ -16,17 +16,17 @@
    testimonial block and NO section-heading pattern. Those come from the
    approved brief's layout archetype (design-rules §7) and are written per
    site. A skeleton that shipped them would hand every business the same page
-   with different colours — which is the exact failure the DNA registry
+   with different colours - which is the exact failure the DNA registry
    exists to prevent, and it would collide head-on with the banned-defaults
    list (design-rules §4: three-card grids, four-stat rows, centred hero with
    two pill buttons, every section the same padding with a centred heading).
 
    And when a brief's archetype numbers its sections, its sub-lists take a
-   visibly different mark — different numeral system, face and colour role —
+   visibly different mark - different numeral system, face and colour role -
    or no mark at all (design-rules §4, "two counters in one costume").
 
    Builder: extend this file with the brief's components. Do not "fill in" a
-   hero here from memory — the brief is law (spec §12).
+   hero here from memory - the brief is law (spec §12).
    ========================================================================== */
 
 /* --- Layout primitives ---------------------------------------------------- */
@@ -54,7 +54,7 @@
    main.js reveals it). With JS on, narrow viewports collapse the list behind
    the toggle. Nothing about navigation depends on JavaScript.              */
 
-/* Sticky — brief §4.2 row 0, §4.4. Stacked below the also-sticky preview
+/* Sticky - brief §4.2 row 0, §4.4. Stacked below the also-sticky preview
    expiry bar (--expiry-height, preview.css). min-height is the brief's §4.4
    target (56/72px) rather than left to fall out of padding, so the
    sticky-chrome sum the fold arithmetic assumes holds by construction. */
@@ -110,7 +110,7 @@ section[id] {
   gap: var(--space-2xs);
   padding: var(--space-2xs) var(--space-xs);
   /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
-     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+     (WCAG 1.4.11, >= 3:1), not a decorative one - use --color-border-strong. */
   border: var(--border-hairline) var(--border-style) var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: var(--text-small);
@@ -181,7 +181,7 @@ section[id] {
 
 /* --- Buttons --------------------------------------------------------------
    Two roles, no more. Radius, weight and colour all come from the brief via
-   tokens — including --radius-none, which is a legitimate answer.          */
+   tokens - including --radius-none, which is a legitimate answer.          */
 
 .btn {
   display: inline-flex;
@@ -253,7 +253,7 @@ textarea.field__control {
 }
 
 /* Honeypot: present in the DOM for bots, unreachable for humans and assistive
-   tech. Not display:none — some bots skip those. */
+   tech. Not display:none - some bots skip those. */
 .form__trap {
   position: absolute;
   /* @allow-literal: off-canvas parking position, not a design value */
@@ -300,10 +300,10 @@ textarea.field__control {
   letter-spacing: var(--tracking-wide);
 }
 
-/* §0 HERO — "the diagnosis, out loud" (brief §4.3, full-bleed-immersive).
+/* §0 HERO - "the diagnosis, out loud" (brief §4.3, full-bleed-immersive).
    DOM order (design-rules §7.2 rule 1): .hero-content is FIRST in source,
    painted IN FRONT (z-index 1); .hero-field is SECOND, absolutely
-   positioned, painted BEHIND (z-index 0) — full-bleed while the primary
+   positioned, painted BEHIND (z-index 0) - full-bleed while the primary
    control precedes the field in reading/AT order. */
 
 .hero {
@@ -406,7 +406,7 @@ textarea.field__control {
 
 /* --- The art/atmosphere layer ----------------------------------------------
    The whole hero box, behind the content. No text ever sits on this layer
-   directly (brief §2.3) — legibility is the scrim's job, below. */
+   directly (brief §2.3) - legibility is the scrim's job, below. */
 
 .hero-field {
   position: absolute;
@@ -428,7 +428,7 @@ textarea.field__control {
   object-position: 62% 30%;
 }
 
-/* Soft radial atmosphere (ref-001's move) — additional depth over the baked
+/* Soft radial atmosphere (ref-001's move) - additional depth over the baked
    image, not the anchor's only carrier (the anchor is already in the frame
    per the imagery style recipe). */
 .hero-field__atmosphere {
@@ -438,7 +438,7 @@ textarea.field__control {
   opacity: 0.35;
 }
 
-/* Bottom-anchored ink scrim — what makes the hero-content text pairs (F5-F8)
+/* Bottom-anchored ink scrim - what makes the hero-content text pairs (F5-F8)
    the ones that actually render. Text sits on the solid portion only. */
 .hero-field__scrim {
   position: absolute;
@@ -484,7 +484,7 @@ textarea.field__control {
 }
 
 /* An `infinite` animation never finishes, so collapsing its duration token
-   alone does not stop it (spec §8) — cancelled here, settled frame fixed
+   alone does not stop it (spec §8) - cancelled here, settled frame fixed
    (precedent: gibbons-electric-rockford-il's spark/breaker loops). */
 @media (prefers-reduced-motion: reduce) {
   .hero-indicator {
@@ -499,9 +499,9 @@ textarea.field__control {
 }
 
 /* ============================================================================
-   §I — PROCESS INDEX, THE SPINE (brief §4.2 row 2, ref-011). Hairline rows,
+   §I - PROCESS INDEX, THE SPINE (brief §4.2 row 2, ref-011). Hairline rows,
    a numeral, a name, a short line, one strict reading order. background:
-   var(--color-bg) on .index-list is LOAD-BEARING (brief binding flag 9) —
+   var(--color-bg) on .index-list is LOAD-BEARING (brief binding flag 9) -
    do not regress to unset or inherited.
    ============================================================================ */
 
@@ -570,8 +570,8 @@ textarea.field__control {
 }
 
 /* ============================================================================
-   §II — SERVICES (brief §4.2 row 3). Plain named list, no icons or cards, no
-   numeral device (design-rules §5 — the process index is the page's only
+   §II - SERVICES (brief §4.2 row 3). Plain named list, no icons or cards, no
+   numeral device (design-rules §5 - the process index is the page's only
    numbered system).
    ============================================================================ */
 
@@ -608,7 +608,7 @@ textarea.field__control {
 }
 
 /* ============================================================================
-   §III — TRUST & REVIEWS (brief §4.2 row 4). Facts strip, three verbatim
+   §III - TRUST & REVIEWS (brief §4.2 row 4). Facts strip, three verbatim
    review cards on --color-surface, one honestly-labelled financing line.
    ============================================================================ */
 
@@ -656,7 +656,7 @@ textarea.field__control {
 }
 
 /* ============================================================================
-   §IV — HOURS & LOCATION (brief §4.2 row 5, honestly thin).
+   §IV - HOURS & LOCATION (brief §4.2 row 5, honestly thin).
    ============================================================================ */
 
 .hours__address {

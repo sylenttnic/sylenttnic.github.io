@@ -1,8 +1,8 @@
 /* ==========================================================================
-   site.css — tokens only, no raw literals (spec §3). ARCHETYPE poster-hero
+   site.css - tokens only, no raw literals (spec §3). ARCHETYPE poster-hero
    (brief §4): the huge Anton wordmark set against the generated crane/canopy
    scene, stacked below the text at 375px, splitting into a text-left/
-   scene-right layout at the house's wider breakpoint (64rem) — the brief's
+   scene-right layout at the house's wider breakpoint (64rem) - the brief's
    own "desktop split" language (§2.3). ONE GRADIENT, the hero atmosphere
    (brief §2.3's corrected, corner-confined geometry). Breakpoints: 48rem +
    64rem, both house-declared (base.css).
@@ -26,7 +26,7 @@
   background-color: var(--color-surface);
 }
 
-/* The two dark, reversed panels — capability index and footer (brief §4's
+/* The two dark, reversed panels - capability index and footer (brief §4's
    ground alternation: the only two `--color-ink` grounds on the site). */
 .section--ink {
   background-color: var(--color-ink);
@@ -43,7 +43,7 @@
   line-height: var(--leading-body);
 }
 
-/* Dark-band-safe focus ring (brief §2.1's own named selector) — the two ink
+/* Dark-band-safe focus ring (brief §2.1's own named selector) - the two ink
    panels only. base.css's default ring is a dark ink and invisible there. */
 .index-block :focus-visible,
 footer :focus-visible {
@@ -52,7 +52,7 @@ footer :focus-visible {
 
 /* --- Type roles ------------------------------------------------------------
    base.css already routes h1-h4 through --font-display/--font-weight-display
-   (Anton, 400 — its only weight); this file adds size per level only. */
+   (Anton, 400 - its only weight); this file adds size per level only. */
 
 h1 {
   font-size: var(--text-hero);
@@ -140,7 +140,7 @@ h3 {
 }
 
 /* House pattern: closed by plain CSS default below the breakpoint (no JS
-   gate), open by default at and above it — see index.html's head comment. */
+   gate), open by default at and above it - see index.html's head comment. */
 .site-nav {
   display: none;
 }
@@ -191,7 +191,7 @@ h3 {
   color: var(--color-ink);
 }
 
-/* --- Hero — poster-hero (brief §2.3, §4). Single column below 64rem (text,
+/* --- Hero - poster-hero (brief §2.3, §4). Single column below 64rem (text,
    then the scene, stacked); a text-left/scene-right split at 64rem+, the
    text column carrying materially more of the width. The corrected
    atmosphere gradient is corner-confined at x=90%, verbatim from brief §2.3,
@@ -268,10 +268,10 @@ h3 {
   height: auto;
 }
 
-/* --- The signature — "the beacon holds" (brief §7): a decorative,
+/* --- The signature - "the beacon holds" (brief §7): a decorative,
    aria-hidden inline SVG overlay on the hero scene. Two canopy-lobe
    silhouettes sway on independently-timed loops; a settled log-ring device
-   anchors a steady ember-glow beacon that pulses on its own, separate loop —
+   anchors a steady ember-glow beacon that pulses on its own, separate loop -
    never active flame, never synced to the canopy sway. The same settled
    log-ring mark (unanimated) is reused at the head of the two ink panels
    below (.band-head__mark). --- */
@@ -336,7 +336,7 @@ h3 {
 }
 
 /* Reduced motion: the still frame is the composed picture (brief §7's
-   reduced-motion statement) — beacon rests at mid-intensity, canopy
+   reduced-motion statement) - beacon rests at mid-intensity, canopy
    silhouettes rest at their drawn angle. Full palette and the atmosphere
    gradient are untouched. */
 @media (prefers-reduced-motion: reduce) {
@@ -352,7 +352,7 @@ h3 {
   }
 }
 
-/* --- The band-head mark — the settled log-ring device, reused static and
+/* --- The band-head mark - the settled log-ring device, reused static and
    unanimated at the head of the two ink panels (brief §7). --- */
 
 .band-head {
@@ -387,7 +387,7 @@ h3 {
   margin-block-end: 0;
 }
 
-/* --- §3 Services — three grouped columns, ground surface. The log-rings
+/* --- §3 Services - three grouped columns, ground surface. The log-rings
    texture (image slot 2, decorative) sits as a corner accent behind the
    intro line. --- */
 
@@ -475,7 +475,7 @@ h3 {
   background-color: var(--color-accent);
 }
 
-/* --- §4 Honest Capability Index — dark ink panel, three numbered facts. The
+/* --- §4 Honest Capability Index - dark ink panel, three numbered facts. The
    `01/02/03` numerals are the page's only numeral system (brief §3's own
    nested-counter check); the process section's steps below carry their
    number as plain heading text, a visually distinct system (no shared
@@ -530,8 +530,8 @@ h3 {
   height: auto;
 }
 
-/* --- §5 Process — three-step walkthrough, ground bg. Step numbers live in
-   the heading text itself, never a separate numeral glyph — the distinct
+/* --- §5 Process - three-step walkthrough, ground bg. Step numbers live in
+   the heading text itself, never a separate numeral glyph - the distinct
    system from the capability index's own numerals. --- */
 
 .process {
@@ -550,7 +550,7 @@ h3 {
   line-height: var(--leading-body);
 }
 
-/* --- §6 Request a Quote — secondary CTA band, ground surface, the house
+/* --- §6 Request a Quote - secondary CTA band, ground surface, the house
    form. --- */
 
 .form {
@@ -605,7 +605,7 @@ textarea.field__control {
   font-weight: var(--font-weight-body-strong);
 }
 
-/* --- §7 Reviews — two verbatim quotes, ground bg, no rating anywhere. --- */
+/* --- §7 Reviews - two verbatim quotes, ground bg, no rating anywhere. --- */
 
 .voices {
   list-style: none;
@@ -640,7 +640,7 @@ textarea.field__control {
   color: var(--color-ink-muted);
 }
 
-/* --- §8 About — founder pull-quote (no italic — brief §3's "No emphasis
+/* --- §8 About - founder pull-quote (no italic - brief §3's "No emphasis
    face": distinguished by size, colour and a left rule instead), mission
    line, service area, ground surface. --- */
 
@@ -680,7 +680,7 @@ textarea.field__control {
   border-radius: var(--radius-sm);
 }
 
-/* --- §9 FAQ — three questions, ground bg. --- */
+/* --- §9 FAQ - three questions, ground bg. --- */
 
 .faq {
   margin-block-start: var(--space-lg);
@@ -707,7 +707,7 @@ textarea.field__control {
   color: var(--color-ink-muted);
 }
 
-/* --- Footer — the second ink panel, NAP + availability note, no license or
+/* --- Footer - the second ink panel, NAP + availability note, no license or
    rating anywhere (brief §8). --- */
 
 .site-footer {

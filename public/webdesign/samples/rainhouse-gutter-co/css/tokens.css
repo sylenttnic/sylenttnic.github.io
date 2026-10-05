@@ -1,7 +1,7 @@
 /* ==========================================================================
-   tokens.css — the design brief, compiled.
+   tokens.css - the design brief, compiled.
 
-   whatcom-gutter-co-lynden-wa — warm-craft (Tile C, C2-DECISION.md 86/100).
+   whatcom-gutter-co-lynden-wa - warm-craft (Tile C, C2-DECISION.md 86/100).
    Every value below is copied from runs/whatcom-gutter-co-lynden-wa/brief.md
    §2–§4. Nothing here was improvised.
    ========================================================================== */
@@ -24,19 +24,19 @@
   --color-accent-ink: #ffffff;        /* 5.87:1 on accent */
 
   --color-border: #ddceac;            /* decorative hairline only, no contrast floor */
-  --color-border-strong: #6b5d49;     /* reuses ink-muted — control boundaries, >=3:1 both grounds */
+  --color-border-strong: #6b5d49;     /* reuses ink-muted - control boundaries, >=3:1 both grounds */
 
-  --color-focus: #9c5019;             /* reuses accent — >=3:1 both grounds */
+  --color-focus: #9c5019;             /* reuses accent - >=3:1 both grounds */
 
   /* No dark band in this brief (hero text sits on the flat --color-bg panel
-     above/below the gradient field, never on the gradient itself — brief §2
+     above/below the gradient field, never on the gradient itself - brief §2
      note below the contrast table). --color-focus-on-band is not needed. */
   /* --color-focus-on-band: …; */
 
   --color-selection-bg: #9c5019;
   --color-selection-ink: #ffffff;
 
-  /* Brief-specific colours — brief §2, hero-only atmosphere/decoration.
+  /* Brief-specific colours - brief §2, hero-only atmosphere/decoration.
      No text ever sits on these; none is subject to a contrast floor. */
   --color-atmos-warm: #f2e2c9;
   --color-atmos-deep: #4a2a14;
@@ -48,7 +48,7 @@
   /* --- Typography ------------------------------------------------------------
      Brief §3. Display: Source Serif 4 (variable, opsz 8..60, latin subset,
      SIL OFL 1.1). Body: Karla (two static weights, latin subset, SIL OFL 1.1).
-     Both families ship a metrics-matched fallback (font-face block below) —
+     Both families ship a metrics-matched fallback (font-face block below) -
      size-adjust/ascent/descent/line-gap measured with scripts/font-metrics.mjs
      against Gelasio (Georgia's metric-compatible open clone) and Arimo
      (Arial's), never guessed. Fallback family is named ahead of the system
@@ -60,21 +60,21 @@
   --font-weight-body: 400;
   --font-weight-body-strong: 700;
   --font-weight-display: 600;          /* H1, H2, band header, numerals */
-  --font-weight-display-emphasis: 600; /* italic style of the same weight — the
+  --font-weight-display-emphasis: 600; /* italic style of the same weight - the
                                            accent word inside the H1 */
 
   /* --- Type scale ----------------------------------------------------------
      Brief §3's fluid scale, floor stated at 375px and ceiling at 1440px
-     exactly — the clamp() middle term is the derived slope, not approached
+     exactly - the clamp() middle term is the derived slope, not approached
      asymptotically. */
 
-  --text-hero: clamp(2.75rem, 2.134rem + 2.63vw, 4.5rem);   /* 44px @375 → 72px @1440 — H1 */
-  --text-h2: clamp(1.9rem, 1.601rem + 1.277vw, 2.75rem);    /* 30.4px → 44px — band-header, section titles */
-  --text-h3: clamp(1.25rem, 1.118rem + 0.563vw, 1.625rem);  /* 20px → 26px — band service names */
-  --text-lead: clamp(1.125rem, 1.037rem + 0.376vw, 1.375rem); /* 18px → 22px — hero lead line */
-  --text-body: clamp(1rem, 0.978rem + 0.094vw, 1.0625rem);  /* 16px → 17px — running copy */
-  --text-small: 0.9375rem;             /* 15px, fixed — review attributions, footer fine print */
-  --text-eyebrow: 0.8125rem;           /* 13px, fixed — "Gutters · Lynden, WA" */
+  --text-hero: clamp(2.75rem, 2.134rem + 2.63vw, 4.5rem);   /* 44px @375 → 72px @1440 - H1 */
+  --text-h2: clamp(1.9rem, 1.601rem + 1.277vw, 2.75rem);    /* 30.4px → 44px - band-header, section titles */
+  --text-h3: clamp(1.25rem, 1.118rem + 0.563vw, 1.625rem);  /* 20px → 26px - band service names */
+  --text-lead: clamp(1.125rem, 1.037rem + 0.376vw, 1.375rem); /* 18px → 22px - hero lead line */
+  --text-body: clamp(1rem, 0.978rem + 0.094vw, 1.0625rem);  /* 16px → 17px - running copy */
+  --text-small: 0.9375rem;             /* 15px, fixed - review attributions, footer fine print */
+  --text-eyebrow: 0.8125rem;           /* 13px, fixed - "Gutters · Lynden, WA" */
 
   --leading-tight: 1.05;               /* H1 */
   --leading-snug: 1.25;                /* H2/H3 */
@@ -85,7 +85,7 @@
   --tracking-wide: 0.08em;             /* eyebrow only, authored lower-case, uppercased via text-transform */
 
   /* --- Space -----------------------------------------------------------------
-     House scale, unchanged — brief §4 introduces no new step. */
+     House scale, unchanged - brief §4 introduces no new step. */
 
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;
@@ -98,24 +98,24 @@
   --space-3xl: 9rem;
 
   /* Brief §4: --section-gap = --space-xl = 4rem/64px, fixed (not fluid) at
-     375 and 1440 alike — the page's one largest vertical gap. */
+     375 and 1440 alike - the page's one largest vertical gap. */
   --section-gap: var(--space-xl);
 
   /* --- Layout ----------------------------------------------------------------
-     House defaults, unchanged — brief §5.0's first-screen arithmetic is
+     House defaults, unchanged - brief §5.0's first-screen arithmetic is
      measured against these exact values (375px gutter floor = 1.25rem/20px). */
 
   --layout-container: 72rem;
   --layout-measure: 62ch;
   --layout-gutter: clamp(1.25rem, 5vw, 3rem);
   --layout-tap-min: 44px;
-  --layout-band-num: 2.4ch;            /* brief §3 — the one repeated ornament's fixed minimum */
+  --layout-band-num: 2.4ch;            /* brief §3 - the one repeated ornament's fixed minimum */
 
   /* --- Radius / shadow / border -----------------------------------------------
-     Values follow the winning tile's own treatment (tiles/tile-c.html — the
+     Values follow the winning tile's own treatment (tiles/tile-c.html - the
      Builder's reference implementation): a quiet 6px on controls, 8px on the
      band-rhythm content containers, no shadow anywhere (warm-craft is flat,
-     hand-inked — a drop shadow on every card is a design-rules §4 banned
+     hand-inked - a drop shadow on every card is a design-rules §4 banned
      default and this family earns its warmth from material and line, not
      elevation). */
 
@@ -148,9 +148,9 @@
   --reveal-shift: 1.25rem;
   --reveal-stagger: 90ms;
 
-  /* Brief §4 / §7 — the living-hero signature move only. Deliberately outside
+  /* Brief §4 / §7 - the living-hero signature move only. Deliberately outside
      the house --duration-* trio: the trough-draw is a slower, one-shot device,
-     not a reveal. Frozen (not merely slowed) under prefers-reduced-motion —
+     not a reveal. Frozen (not merely slowed) under prefers-reduced-motion -
      see the explicit rules in site.css, since these are one-shot end-states
      rather than token-collapsible transitions. */
   --duration-hero-draw: 2000ms;        /* trough draws once */
@@ -168,21 +168,21 @@
 }
 
 /* --------------------------------------------------------------------------
-   @font-face — self-hosted woff2, latin subset (house declared safe range,
+   @font-face - self-hosted woff2, latin subset (house declared safe range,
    house-tech-spec §8), font-display: swap. SIL Open Font License 1.1 for
    both families (assets/fonts/OFL-SourceSerif4.txt, OFL-Karla.txt).
 
    Source Serif 4 ships as two axis-restricted, weight-pinned static
-   instances (wght 600 only — the single weight this brief's token set ever
+   instances (wght 600 only - the single weight this brief's token set ever
    requests, --font-weight-display and --font-weight-display-emphasis are
    both 600) rather than the brief table's full wght 500–700/500–600 range:
    a ranged variable subset of this face measured 71–72 KB PER FILE even
    after latin-range subsetting (144 KB for the pair alone), which fails
    house-tech-spec §7's ≤60 KB single-face / ≤100 KB total font budget before
-   Karla is even added. Pinning wght (opsz stays variable — "opsz auto",
+   Karla is even added. Pinning wght (opsz stays variable - "opsz auto",
    matching the brief's own file-table note) renders byte-identical output to
    a ranged file at every call site this brief specifies, because no other
-   weight is ever selected — this is a delivery-mechanical encoding choice
+   weight is ever selected - this is a delivery-mechanical encoding choice
    (house-tech-spec §7.1: "the font chain in scope as delivery-mechanical
    work... changing the faces themselves is design," and the face and its
    only used weight are both unchanged), not a design substitution. Recorded
@@ -190,15 +190,15 @@
 
    All four real faces cover an identical 175-codepoint set (declared range
    minus U+2010/2011/2012/2015, absent from both source families, and
-   U+2032/2033, present in Source Serif 4 but absent from Karla — dropped
+   U+2032/2033, present in Source Serif 4 but absent from Karla - dropped
    from every subset to equalise the glyph sets, house-tech-spec §8's
    equalisation rule, the same case already recorded there for this exact
    pair of families). Measured 2026-09-16, see README.md.
    -------------------------------------------------------------------------- */
 
-/* ---- Source Serif 4 — fallback faces (declared first; measured against
+/* ---- Source Serif 4 - fallback faces (declared first; measured against
    Gelasio, Google's explicitly metrics-compatible open clone of Georgia,
-   via scripts/font-metrics.mjs — never guessed) ---- */
+   via scripts/font-metrics.mjs - never guessed) ---- */
 
 @font-face {
   font-family: 'Source Serif 4 Fallback';
@@ -244,7 +244,7 @@
     U+2032-2033;
 }
 
-/* ---- Karla — fallback faces (measured against Arimo, Arial's open clone) ---- */
+/* ---- Karla - fallback faces (measured against Arimo, Arial's open clone) ---- */
 
 @font-face {
   font-family: 'Karla Fallback';

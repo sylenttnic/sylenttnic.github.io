@@ -1,5 +1,5 @@
 /* ==========================================================================
-   site.css — per-site layout & components, built FROM tokens.
+   site.css - per-site layout & components, built FROM tokens.
 
    HARD RULE (house-tech-spec §3): no raw hex, no px/rem size literals, no
    font-name literals in this file. Tokens only. The Critic greps for it.
@@ -16,17 +16,17 @@
    testimonial block and NO section-heading pattern. Those come from the
    approved brief's layout archetype (design-rules §7) and are written per
    site. A skeleton that shipped them would hand every business the same page
-   with different colours — which is the exact failure the DNA registry
+   with different colours - which is the exact failure the DNA registry
    exists to prevent, and it would collide head-on with the banned-defaults
    list (design-rules §4: three-card grids, four-stat rows, centred hero with
    two pill buttons, every section the same padding with a centred heading).
 
    And when a brief's archetype numbers its sections, its sub-lists take a
-   visibly different mark — different numeral system, face and colour role —
+   visibly different mark - different numeral system, face and colour role -
    or no mark at all (design-rules §4, "two counters in one costume").
 
    Builder: extend this file with the brief's components. Do not "fill in" a
-   hero here from memory — the brief is law (spec §12).
+   hero here from memory - the brief is law (spec §12).
    ========================================================================== */
 
 /* --- Layout primitives ---------------------------------------------------- */
@@ -48,7 +48,7 @@
   max-width: var(--layout-measure);
 }
 
-/* Prose rhythm for thanks.html/buy.html's bare heading+paragraph shape —
+/* Prose rhythm for thanks.html/buy.html's bare heading+paragraph shape -
    base.css zeroes block margins. Scoped to `.measure` as a WRAPPER; index.html
    only puts `.measure` on a lone <p>, which has no matching children. */
 .measure > * + * {
@@ -91,7 +91,7 @@
   gap: var(--space-2xs);
   padding: var(--space-2xs) var(--space-xs);
   /* The nav-toggle's only shape is this hairline, so it is a CONTROL boundary
-     (WCAG 1.4.11, >= 3:1), not a decorative one — use --color-border-strong. */
+     (WCAG 1.4.11, >= 3:1), not a decorative one - use --color-border-strong. */
   border: var(--border-hairline) var(--border-style) var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: var(--text-small);
@@ -162,7 +162,7 @@
 
 /* --- Buttons --------------------------------------------------------------
    Two roles, no more. Radius, weight and colour all come from the brief via
-   tokens — including --radius-none, which is a legitimate answer.          */
+   tokens - including --radius-none, which is a legitimate answer.          */
 
 .btn {
   display: inline-flex;
@@ -234,7 +234,7 @@ textarea.field__control {
 }
 
 /* Honeypot: present in the DOM for bots, unreachable for humans and assistive
-   tech. Not display:none — some bots skip those. */
+   tech. Not display:none - some bots skip those. */
 .form__trap {
   position: absolute;
   /* @allow-literal: off-canvas parking position, not a design value */
@@ -295,7 +295,7 @@ textarea.field__control {
   background-color: var(--color-surface);
 }
 
-/* Low-emphasis inline text link — the services section's forward link to the
+/* Low-emphasis inline text link - the services section's forward link to the
    estimate form (brief §3.3: a text link, never a second pill button). */
 .text-link {
   color: var(--color-ink);
@@ -320,7 +320,7 @@ textarea.field__control {
 }
 
 /* Dark-band-safe focus ring (house-tech-spec §8, tokens.css). Scoped to the
-   panel only — every other control on the page uses --color-focus. */
+   panel only - every other control on the page uses --color-focus. */
 .panel :focus-visible {
   outline-color: var(--color-focus-on-band);
 }
@@ -339,7 +339,7 @@ textarea.field__control {
 
 /* The ONE place amber is literal text colour (brief §2.3's forbidden row):
    inside .panel, on the flat panel ground, 6.40:1. The border-bottom is the
-   brief's own em-relative ornament (§2.5) — fixed px via --border-thick, not
+   brief's own em-relative ornament (§2.5) - fixed px via --border-thick, not
    em, so it needs no face-metrics computation. */
 .hero__title em {
   font-style: italic;
@@ -382,7 +382,7 @@ textarea.field__control {
   object-position: 62% 42%;
 }
 
-/* Motion overlay — decorative, aria-hidden. Colours derive from the brief's
+/* Motion overlay - decorative, aria-hidden. Colours derive from the brief's
    own panel/accent hexes via color-mix() (tokens.css), never a new literal. */
 .hero__overlay {
   position: absolute;
@@ -390,7 +390,7 @@ textarea.field__control {
   pointer-events: none;
 }
 
-/* 1. Conduit line — draws once across the field's foot strip, 2.4s. */
+/* 1. Conduit line - draws once across the field's foot strip, 2.4s. */
 .hero__conduit {
   position: absolute;
   inset-inline: 8%;
@@ -413,10 +413,10 @@ textarea.field__control {
   to { width: 100%; }
 }
 
-/* 2. Breaker — toggles ready to engaged on an independent 5.6s loop; the one
+/* 2. Breaker - toggles ready to engaged on an independent 5.6s loop; the one
    animation here that repeats rather than settles (brief §5: a mechanical
    idle, not a one-shot event). */
-/* Blended into the photograph, not sat on top of it — a flat opaque shape
+/* Blended into the photograph, not sat on top of it - a flat opaque shape
    here reads as a UI glitch, not a mechanical toggle. */
 .hero__breaker {
   position: absolute;
@@ -446,7 +446,7 @@ textarea.field__control {
   75% { transform: rotate(18deg); }
 }
 
-/* 3. Filament — flickers twice, settles to a steady glow, one-shot, 3.2s,
+/* 3. Filament - flickers twice, settles to a steady glow, one-shot, 3.2s,
    overlapping the conduit draw. */
 .hero__filament {
   position: absolute;
@@ -469,7 +469,7 @@ textarea.field__control {
 }
 
 /* 4. Two spark marks, image slot 2 reused: one asset, two independent,
-   non-synced loops (7s/9s) — ref-001's physics-not-subject caution. Screen
+   non-synced loops (7s/9s) - ref-001's physics-not-subject caution. Screen
    blend drops the asset's flat-black ground, leaving only the glow (the
    tool has no true alpha channel to composite with instead). */
 .hero__spark {
@@ -502,7 +502,7 @@ textarea.field__control {
   50% { transform: translate(calc(var(--drift-sm) * -1), var(--drift-sm)); opacity: 0.85; }
 }
 
-/* Reduced motion: every loop stops at its settled end-state (spec §8) —
+/* Reduced motion: every loop stops at its settled end-state (spec §8) -
    conduit drawn, breaker engaged, filament at full glow, sparks present.
    Fixes the final frame; the durations themselves collapse in tokens.css. */
 @media (prefers-reduced-motion: reduce) {
@@ -563,7 +563,7 @@ textarea.field__control {
 
 /* --- Proof index: rule-separated editorial list, NOT a card grid -----------
    design-rules §4's banned "four-stat counter row." No ordinal marks (brief
-   §3.1's nested-counters check) — the bold lead figure is its own anchor. */
+   §3.1's nested-counters check) - the bold lead figure is its own anchor. */
 
 .proof-list {
   margin-block-start: var(--space-md);
@@ -642,7 +642,7 @@ textarea.field__control {
 }
 
 /* --- Process: the numbered walkthrough (ref-011's index-list vocabulary) ---
-   Carries an explicit textual ordinal PLUS an amber mark — visually distinct
+   Carries an explicit textual ordinal PLUS an amber mark - visually distinct
    from the proof index's un-marked rows (brief §3.1's nested-counters check). */
 
 .process-list {
@@ -670,7 +670,7 @@ textarea.field__control {
   background: radial-gradient(circle at 45% 40%, var(--color-panel-ink) 0%, var(--color-accent) 60%, var(--color-panel) 100%);
 }
 
-/* The explicit textual ordinal (brief §3.1's nested-counters check) — a
+/* The explicit textual ordinal (brief §3.1's nested-counters check) - a
    distinct visual system from the proof index's un-ordinaled rows: numeral
    system (spelled-out "01"), face (display, not body) and colour role
    (muted ink, not the accent) all differ from that list's bold ink figure. */

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   tokens.css — Northfield Electric, Rockford IL. Source: brief.md §2, §5.
+   tokens.css - Northfield Electric, Rockford IL. Source: brief.md §2, §5.
    Archetype: editorial-stack. Family: editorial-modern. Palette:
    filament-amber / bone-ivory / light, hero-panel-only dark ground (brief
    §2.1, playbooks/electrical.md §6.1's "genuinely open move"). Every value
@@ -9,30 +9,30 @@
 :root {
 
   /* --- Colour --------------------------------------------------------------
-     brief §2.2. Step 1 (real-world colour) is VOID — no brand_color, no
-     reachable logo/truck/signage (dossier §4.5) — a provenance ground for
+     brief §2.2. Step 1 (real-world colour) is VOID - no brand_color, no
+     reachable logo/truck/signage (dossier §4.5) - a provenance ground for
      skipping it, not a silent skip. Step 2: suburban/small-city Midwest,
      plain, tenure-forward (dossier §4.4). Step 3: editorial-modern restraint
      + the playbook's recorded open move (a dark hero panel, hero-scoped only
-     — the page stays light, matching the registry's 50 /light rows). */
+     - the page stays light, matching the registry's 50 /light rows). */
 
   --scheme: light;
 
-  --color-bg: #F4F1EA;                /* page ground — bone-ivory */
+  --color-bg: #F4F1EA;                /* page ground - bone-ivory */
   --color-surface: #FFFFFF;           /* cards, raised panels, form fields */
   --color-ink: #1F2023;               /* body + heading text on bg/surface */
-  --color-ink-muted: #5B584F;         /* secondary text — 6.30:1 on bg */
-  --color-accent: #E0912B;            /* filament-amber — the one colour that means "act" */
-  --color-accent-ink: #1F2023;        /* dark ink on accent — 6.40:1, the accent is mid-to-high luminance */
+  --color-ink-muted: #5B584F;         /* secondary text - 6.30:1 on bg */
+  --color-accent: #E0912B;            /* filament-amber - the one colour that means "act" */
+  --color-accent-ink: #1F2023;        /* dark ink on accent - 6.40:1, the accent is mid-to-high luminance */
 
   /* House-required structural colours */
-  --color-border: #DCD6C8;            /* decorative hairlines only — no contrast floor */
+  --color-border: #DCD6C8;            /* decorative hairlines only - no contrast floor */
 
   /* Control boundary, WCAG 1.4.11: >=3:1 against bg AND surface (brief §2.2
      reuses --color-ink-muted deliberately rather than a fifth hex). */
   --color-border-strong: #5B584F;
 
-  --color-focus: #1F2023;             /* :focus-visible on light grounds — 14.44:1 / 16.29:1 */
+  --color-focus: #1F2023;             /* :focus-visible on light grounds - 14.44:1 / 16.29:1 */
 
   /* Dark-band-safe focus ring, REQUIRED: the hero panel is a full dark band.
      A light tint of the accent is already >=3:1 against the panel's own
@@ -44,18 +44,18 @@
   --color-selection-bg: #1F2023;
   --color-selection-ink: #F4F1EA;
 
-  /* Brief-specific colours (brief §2.2) — the hero-panel-only dark ground.
+  /* Brief-specific colours (brief §2.2) - the hero-panel-only dark ground.
      Reuses the page's own ink/bg hexes AS a ground/ink pair rather than
      inventing a second dark/light relationship: one light/dark pair, read in
      both directions (brief §2.2's own rationale). */
   --color-panel: #1F2023;             /* identical hex to --color-ink */
   --color-panel-ink: #F4F1EA;         /* identical hex to --color-bg */
 
-  /* Hero eyebrow on the panel — brief §2.3's contrast row, 8.92:1 on panel. */
+  /* Hero eyebrow on the panel - brief §2.3's contrast row, 8.92:1 on panel. */
   --color-panel-eyebrow: #C7BFAE;
 
   /* Hero motion-layer marks (brief §5). Every stop is DERIVED from the two
-     hexes above via color-mix() — no new literal (house precedent:
+     hexes above via color-mix() - no new literal (house precedent:
      sites/boulder-tree-care-boulder-co/css/site.css). No contrast floor
      needed: the field carries no text (brief §2.3). */
   --color-field-track: color-mix(in srgb, var(--color-panel-ink) 20%, var(--color-panel) 80%);
@@ -75,7 +75,7 @@
 
   --font-weight-body: 400;
   --font-weight-body-strong: 700;
-  --font-weight-display: 500;         /* the ONLY display weight used anywhere — the emphasis
+  --font-weight-display: 500;         /* the ONLY display weight used anywhere - the emphasis
                                           device is the italic, not a heavier weight (brief §2.4) */
 
   /* --- Type scale ------------------------------------------------------------
@@ -85,7 +85,7 @@
   --text-h2: clamp(1.6rem, 4vw, 2.25rem);
   --text-h3: clamp(1.25rem, 2.5vw, 1.5rem);
   --text-lead: clamp(1.0625rem, 2vw, 1.1875rem);
-  --text-body: 1rem;                  /* fixed — states the same number at every width and means it */
+  --text-body: 1rem;                  /* fixed - states the same number at every width and means it */
   --text-small: 0.875rem;
   --text-eyebrow: 0.8125rem;
 
@@ -98,7 +98,7 @@
   --tracking-wide: 0.08em;
 
   /* --- Space -------------------------------------------------------------
-     House scale, unchanged — brief §2.5 argues no override. */
+     House scale, unchanged - brief §2.5 argues no override. */
 
   --space-3xs: 0.25rem;
   --space-2xs: 0.5rem;
@@ -110,11 +110,11 @@
   --space-2xl: 6rem;
   --space-3xl: 9rem;
 
-  /* Inter-section rhythm — brief §3: 64px, fixed at every breakpoint. */
+  /* Inter-section rhythm - brief §3: 64px, fixed at every breakpoint. */
   --section-gap: var(--space-xl);
 
   /* --- Layout ------------------------------------------------------------
-     House defaults — the brief argues no override. */
+     House defaults - the brief argues no override. */
 
   --layout-container: 72rem;
   --layout-measure: 62ch;
@@ -123,7 +123,7 @@
 
   /* --- Radius / shadow / border -----------------------------------------
      House defaults, matching the C2-winning tile's own mock values
-     (tiles/tile-c.html) — editorial-stack reads on rules and hairlines, not
+     (tiles/tile-c.html) - editorial-stack reads on rules and hairlines, not
      shadow or heavy rounding; the brief argues no override. */
 
   --radius-none: 0;
@@ -156,7 +156,7 @@
   --reveal-shift: 1.25rem;
   --reveal-stagger: 90ms;
 
-  /* "The filament holds" — brief §5's four independent hero timings. No two
+  /* "The filament holds" - brief §5's four independent hero timings. No two
      share a timing origin or a duration. Collapsed to a settled end-state
      under reduced motion, in base.css and site.css below. */
   --duration-conduit-draw: 2.4s;
@@ -165,20 +165,20 @@
   --duration-spark-1: 7s;
   --duration-spark-2: 9s;
 
-  /* Spark drift amplitude — the loop oscillates around its rest position, so
+  /* Spark drift amplitude - the loop oscillates around its rest position, so
      stopping it leaves the composed frame intact (same shape as
      auto-evolution-north-logan-ut's --drift-sm/--drift-md precedent). */
   --drift-sm: var(--space-3xs);
   --drift-md: var(--space-2xs);
 
-  /* Filament glow radius — the two box-shadow layers behind the filament
+  /* Filament glow radius - the two box-shadow layers behind the filament
      mark, sized off the house space scale rather than a new literal. */
   --glow-inner: var(--space-md);
   --glow-inner-spread: var(--space-2xs);
   --glow-outer: var(--space-lg);
   --glow-outer-spread: var(--space-sm);
 
-  /* Proof index figure column — the bold lead-figure's fixed width at >=48em
+  /* Proof index figure column - the bold lead-figure's fixed width at >=48em
      (brief §3.1's editorial-list shape; below 48em the row stacks, site.css). */
   --col-proof-figure: 8rem;
 
@@ -204,12 +204,12 @@
 }
 
 /* --------------------------------------------------------------------------
-   @font-face — brief §2.4. Two families, four woff2 files (§5 budget, exactly
+   @font-face - brief §2.4. Two families, four woff2 files (§5 budget, exactly
    met), self-hosted, OFL, subset to the house safe range (spec §8).
 
    METRICS-MATCHED FALLBACKS FIRST, so swap costs no CLS (spec §7/§8).
    Overrides measured with scripts/font-metrics.mjs against the real webfont
-   files and a metric-compatible stand-in for each named fallback — Gelasio
+   files and a metric-compatible stand-in for each named fallback - Gelasio
    for Georgia (Georgia itself ships no distributable file), Liberation Sans
    for Arial. Each `local()` still names the REAL font that renders.
    -------------------------------------------------------------------------- */
@@ -258,7 +258,7 @@
   line-gap-override: 0%;
 }
 
-/* House declared safe range (house-tech-spec §8) — identical on every face
+/* House declared safe range (house-tech-spec §8) - identical on every face
    on this site, no exceptions, including the italic/emphasis-only face. */
 @font-face {
   font-family: 'Literata';

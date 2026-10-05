@@ -1,5 +1,5 @@
 /* ==========================================================================
-   base.css — skeleton reset + primitives.
+   base.css - skeleton reset + primitives.
 
    House-level, not per-site. Edit rarely; NEVER edit per site (house-tech-spec
    §2). Everything visual here reads from tokens.css, so a brief re-themes this
@@ -7,12 +7,12 @@
 
    Contains: reset, document defaults, accessibility primitives (skip link,
    focus ring, visually-hidden), the reduced-motion kill switch, and the
-   reveal system's base states. Contains NO layout and NO components — those
+   reveal system's base states. Contains NO layout and NO components - those
    are site.css, and their composition is the brief's call.
 
    TWO HOUSE ESCAPE HATCHES, both grep-enforced:
 
-   1. BREAKPOINTS are the one unavoidable literal — CSS custom properties do
+   1. BREAKPOINTS are the one unavoidable literal - CSS custom properties do
       not work inside media query conditions. The house set:
         48em  ( 768px )  tablet and up
         64em  (1024px )  desktop and up
@@ -91,7 +91,7 @@ table {
    load-bearing: the nav toggle and the no-endpoint form section both ship
    hidden from the HTML, and a component rule like `.nav-toggle { display:
    inline-flex }` would otherwise out-order it and render a dead control.
-   Doubling the attribute lifts specificity to (0,2,0) — which is how we win
+   Doubling the attribute lifts specificity to (0,2,0) - which is how we win
    this without `!important` (spec §12). House rule that follows from it:
    never set `display` on a hideable element from a selector of specificity
    (0,2,0) or higher. */
@@ -147,7 +147,7 @@ hr {
 /* Visible, token-styled focus ring on every interactive element (spec §8).
    Never remove this without replacing it with something equally visible.
 
-   ON A DARK BAND this ring is usually invisible — --color-focus is chosen
+   ON A DARK BAND this ring is usually invisible - --color-focus is chosen
    against the light page ground and is typically a dark ink. Every dark band
    must re-point the outline colour at --color-focus-on-band (tokens.css), or
    it fails WCAG 1.4.11 while looking fine on the rest of the page. Both of
@@ -205,7 +205,7 @@ input[type='button'],
 /* --- Reveal system (base states) ------------------------------------------
    Progressive-enhancement contract: with JS off, nothing is hidden. main.js
    sets data-reveal-ready on <html>, which is the ONLY thing that arms the
-   hidden state. Reveals are for BELOW-THE-FOLD content only — never the hero,
+   hidden state. Reveals are for BELOW-THE-FOLD content only - never the hero,
    which is the LCP element (spec §7).                                       */
 
 [data-reveal-ready] [data-reveal] {
@@ -224,7 +224,7 @@ input[type='button'],
 
 /* --- Reduced motion: the kill switch --------------------------------------
    spec §8: prefers-reduced-motion disables all reveals, parallax and animated
-   heroes — no exceptions. Collapsing the duration tokens kills every
+   heroes - no exceptions. Collapsing the duration tokens kills every
    token-driven animation at the source; the explicit rules below handle the
    two things that aren't timing values. main.js also reads this query and
    skips the IntersectionObserver entirely.                                  */
