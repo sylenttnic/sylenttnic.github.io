@@ -176,7 +176,7 @@ export default function ChatAgent() {
             >
               {messages.length === 0 && (
                 <div className="h-full flex items-center justify-center text-ink/60 text-center px-12 font-sans italic">
-                  Start the conversation by describing your workflow challenges.
+                  Ask a question about IT at your company.
                 </div>
               )}
 
@@ -222,7 +222,7 @@ export default function ChatAgent() {
 
               {isLimitReached && (
                 <div className="text-center p-6 text-ink/60 text-sm italic">
-                  We&apos;ve covered a lot! Book a free discovery call to continue the conversation: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
+                  Let&apos;s pick this up on a 30-minute call: {leadInfo.link || "https://calendly.com/nic-sylentt/30min"}
                 </div>
               )}
 
@@ -244,7 +244,7 @@ export default function ChatAgent() {
                     className="flex items-center justify-center gap-3 p-4 rounded-xl bg-accent text-white font-bold transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                   >
                     <Calendar className="w-5 h-5" />
-                    Book your free discovery call
+                    Book a 30-minute call
                   </a>
                 </motion.div>
               )}

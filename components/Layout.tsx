@@ -14,10 +14,14 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
-  // The floating chat bubble is Sylentt's integration-sales assistant. The
-  // /webdesign preview pages have their own request flow and should not offer
-  // it, so suppress it there only — it stays on every other page of the site.
-  const hideChat = pathname?.startsWith('/webdesign') ?? false;
+  // The floating chat is OFF everywhere. Its replies come from the bot on
+  // intake.sylentt.com/chat, whose script lives on that server, not in this
+  // repo, and it was written to sell business-app integration. Leave this
+  // false until that script describes the fractional CIO offer; then set it
+  // to true. The /webdesign pages never show the chat either way: they have
+  // their own request flow.
+  const CHAT_ENABLED = false;
+  const hideChat = !CHAT_ENABLED || (pathname?.startsWith('/webdesign') ?? false);
 
   return (
     <div className="flex flex-col min-h-screen">

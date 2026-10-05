@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
 
+const pageTitle = "Fractional CIO Pricing | Sylentt Partners";
+const pageDescription =
+  "Published, fixed prices: a $1,500 IT and AI assessment, then Advisor at $1,950/month or Director at $3,500/month. Month-to-month, 30 days' notice.";
+
 export const metadata: Metadata = {
-  title: "Simple Pricing for Business Automation | Sylentt Partners",
-  description:
-    "Explore Sylentt Partners integration packages, from discovery strategy sessions to custom implementation and operational retainers. Clear pricing, client code ownership.",
+  title: pageTitle,
+  description: pageDescription,
   openGraph: {
-    title: "Simple Pricing for Business Automation | Sylentt Partners",
-    description:
-      "Explore Sylentt Partners integration packages, from discovery strategy sessions to custom implementation and operational retainers. Clear pricing, client code ownership.",
+    title: pageTitle,
+    description: pageDescription,
     url: "https://sylentt.com/pricing/",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Simple Pricing for Business Automation | Sylentt Partners",
-    description:
-      "Explore Sylentt Partners integration packages, from discovery strategy sessions to custom implementation and operational retainers. Clear pricing, client code ownership.",
+    title: pageTitle,
+    description: pageDescription,
     images: ["/logo_full.png"],
   },
   alternates: {

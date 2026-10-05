@@ -1,34 +1,34 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  RefreshCw,
-  AlertTriangle,
-  RotateCcw,
-  Plug,
-  Eye,
+  ClipboardList,
+  CalendarCheck,
+  KeyRound,
+  Check,
+  X,
 } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
-import IntegrationFlow from "@/components/IntegrationFlow";
-import CostCalculator from "@/components/CostCalculator";
 import type { Metadata } from "next";
+import { CALENDLY_URL, plans, planOfferJsonLd, assessmentDeliverables } from "@/lib/offer";
+
+const pageTitle = "Fractional CIO Services in Cache Valley | Sylentt Partners";
+const pageDescription =
+  "A fixed-price IT and AI assessment, then a part-time IT director on a monthly plan. What's included, and what I don't do.";
 
 export const metadata: Metadata = {
-  title: "Custom Business App Integration | Sylentt Partners",
-  description:
-    "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+  title: pageTitle,
+  description: pageDescription,
   openGraph: {
-    title: "Custom Business App Integration | Sylentt Partners",
-    description:
-      "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    title: pageTitle,
+    description: pageDescription,
     url: "https://sylentt.com/services/",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Business App Integration | Sylentt Partners",
-    description:
-      "Sylentt Partners builds automated connections between your business tools. Shopify, QuickBooks, Stripe, HubSpot, and more. You own everything we build.",
+    title: pageTitle,
+    description: pageDescription,
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -36,51 +36,84 @@ export const metadata: Metadata = {
   },
 };
 
-const services = [
+const plan = (id: string) => plans.find((p) => p.id === id)!;
+const assessment = plan("assessment");
+const advisor = plan("advisor");
+const director = plan("director");
+
+type OfferCard = {
+  label: string;
+  text?: string;
+  items?: string[];
+  extraLabel?: string;
+  extraItems?: string[];
+  link?: { href: string; label: string };
+};
+
+const offers: {
+  icon: typeof ClipboardList;
+  eyebrow?: string;
+  title: string;
+  detail: string;
+  cards: OfferCard[];
+}[] = [
   {
-    icon: RefreshCw,
-    color: "blue",
-    pain: "Your team copies the same data into multiple systems.",
+    icon: ClipboardList,
+    eyebrow: `2 weeks · ${assessment.price}, fixed`,
+    title: "IT & AI Assessment",
     detail:
-      "Every time an order comes in, a payment clears, or a customer signs up, someone on your team has to update two or three apps by hand. It takes hours every week, and mistakes pile up.",
-    outcome:
-      "After we build the connection, data moves between your apps instantly. No copying, no double-checking, no lag. Your team gets those hours back.",
-    deliverable:
-      "An automated connection between your systems that runs on your account. You get full documentation of how it works and what it does. If we part ways, it keeps running.",
+      "I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; and deliver a 12-month roadmap, presented to you in person.",
+    cards: [
+      { label: "What's included", items: assessmentDeliverables },
+      {
+        label: "What it costs",
+        text: `${assessment.price}, fixed. Two weeks. If you continue on a monthly plan, it's credited toward your first month. If you don't, the roadmap is still yours.`,
+      },
+    ],
   },
   {
-    icon: AlertTriangle,
-    color: "amber",
-    pain: "You find out something broke days after it happened.",
+    icon: CalendarCheck,
+    eyebrow: "Advisor or Director",
+    title: "Monthly retainer",
     detail:
-      "A subscription did not get created. An invoice did not sync. A fulfillment was missed. Nobody knew until a customer emailed asking what happened.",
-    outcome:
-      "Every connection we build includes monitoring. When something fails, the system catches it immediately and sends an alert. Failed events are captured and retried automatically, not lost.",
-    deliverable:
-      "Built-in alerting and retry logic for every connection. A dashboard showing what ran, what succeeded, and what needs attention.",
+      "I become your IT director for a set number of hours a month. I run the roadmap, manage your MSP and vendors, make the decisions, and answer the questions.",
+    cards: [
+      {
+        label: "What's included",
+        items: advisor.features,
+        extraLabel: "Director adds",
+        extraItems: director.features.slice(1),
+      },
+      {
+        label: "Plans",
+        text: `Advisor ${advisor.price}/month, up to 6 hours. Director ${director.price}/month, up to 12 hours. Month-to-month, 30 days' notice.`,
+        link: { href: "/pricing/", label: "See pricing" },
+      },
+    ],
   },
   {
-    icon: RotateCcw,
-    color: "purple",
-    pain: "You are paying for Zapier or Make and things still break.",
+    icon: KeyRound,
+    title: "You own everything",
     detail:
-      "Rented tools charge you more the busier you get. When a Zap fails at midnight, nobody finds out until Monday. And because you are renting, if you stop paying, everything disappears.",
-    outcome:
-      "What we build, you own. It runs on your own cloud account, it retries failed events automatically, and it does not silently lose data.",
-    deliverable:
-      "A self-hosted integration that replaces your current Zapier or Make setup, running on your own cloud account. Instead of renting a platform, you pay your cloud provider directly for the usage you consume, with no markup on top. The code is yours to keep.",
+      "Documentation, roadmap, policies, vendor relationships: all yours, in your accounts, from day one.",
+    cards: [
+      {
+        label: "What that means",
+        text: "Nothing lives in my accounts. If you end the engagement, nothing needs to be handed back or untangled. You already have it.",
+      },
+      {
+        label: "Why it matters",
+        text: "When the person who knows the systems leaves, the knowledge stays. That includes me.",
+      },
+    ],
   },
-  {
-    icon: Plug,
-    color: "cyan",
-    pain: "You added a new tool and now nothing connects.",
-    detail:
-      "Every new app your team adopts creates a new island. It does not talk to anything else. So someone becomes the human bridge, manually moving data between the old systems and the new one.",
-    outcome:
-      "We connect the new tool with everything it needs to talk to. Instead of creating more manual work, the new app fits into your existing workflow from day one.",
-    deliverable:
-      "A documented integration between your new tool and your existing systems, with monitoring and alerting included.",
-  },
+];
+
+const notDone = [
+  "Helpdesk. Your IT company keeps handling tickets.",
+  "Hardware repair.",
+  "After-hours support.",
+  "Building software. If you need something built, I'll choose who does it and manage them.",
 ];
 
 const jsonLdBreadcrumb = {
@@ -106,56 +139,22 @@ const jsonLdService = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": "https://sylentt.com/services/#service",
-  name: "Custom Business App Integration & Workflow Automation",
+  name: "Fractional CIO and IT leadership",
+  serviceType: "Fractional CIO",
   provider: {
     "@type": "ProfessionalService",
+    "@id": "https://sylentt.com/#organization",
     name: "Sylentt Partners",
     url: "https://sylentt.com",
     logo: "https://sylentt.com/logo-symbol.png",
   },
-  serviceType: "Software Integration & API Development",
-  areaServed: {
-    "@type": "Country",
-    name: "United States",
-  },
-  description:
-    "Automated connections between business software applications including Shopify, QuickBooks, Stripe, HubSpot, and Xero. Self-hosted custom integrations with real-time error alerts and zero platform lock-in.",
-  offers: [
-    {
-      "@type": "Offer",
-      name: "Discovery Call & Integration Audit",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    {
-      "@type": "Offer",
-      name: "Custom Integration Implementation",
-      price: "2500",
-      priceCurrency: "USD",
-      priceValidUntil: "2026-12-31",
-    },
+  areaServed: [
+    { "@type": "Place", name: "Cache Valley, Utah" },
+    { "@type": "Place", name: "Northern Utah" },
   ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Business Integration Services",
-    itemListElement: [
-      {
-        "@type": "OfferCatalog",
-        name: "Automated Data Sync",
-        description: "Eliminate manual copy-paste between CRM, ERP, accounting, and e-commerce apps.",
-      },
-      {
-        "@type": "OfferCatalog",
-        name: "Proactive Monitoring & Alerting",
-        description: "Built-in error detection and automatic retries for critical business workflows.",
-      },
-      {
-        "@type": "OfferCatalog",
-        name: "Zapier & Make Migration",
-        description: "Replace rented automation platforms with client-owned infrastructure.",
-      },
-    ],
-  },
+  description:
+    "Part-time IT and AI leadership from Nic Aslett: a fixed-price, two-week IT and AI assessment, then a monthly retainer as the company's IT director. Month-to-month with 30 days' notice; the client keeps everything produced. Not included: helpdesk, hardware repair, after-hours support, or building software.",
+  offers: plans.map(planOfferJsonLd),
 };
 
 export default function ServicesPage() {
@@ -173,106 +172,65 @@ export default function ServicesPage() {
       <header className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden border-b border-ink/5">
         <div className="relative z-10 container mx-auto px-4 animate-fade-in-up text-center">
           <h1 className="font-display text-4xl md:text-6xl lg:text-7xl mb-8 text-balance">
-            Get your team&apos;s hours back.
+            Two ways to work with me.
           </h1>
           <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto font-sans leading-relaxed mb-12 text-pretty">
-            We connect your business apps so data flows between them automatically, saving your team hours every week.
+            Start with a two-week assessment. If it&apos;s useful, I stay on as your part-time IT director.
           </p>
 
-          {/* Live integration flow: an event in one app updates the others automatically */}
-          <div className="mb-16">
-            <IntegrationFlow />
-          </div>
-
-          <div className="flex flex-col items-center gap-8">
-            <Link
-              href="#tell-us"
-              className="btn-cta px-10 py-4 text-lg group"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-cta w-full sm:w-auto px-10 py-4 text-lg group"
             >
-              Find ways to save time
+              Book a 30-minute call
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
 
             <Link
-              href="#calculator"
-              className="inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-3 font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              href="/pricing/"
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-3 font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
-              Calculate your time savings
+              See pricing
             </Link>
           </div>
         </div>
       </header>
 
-      {/* Conversational AEO Overview Section */}
+      {/* Overview */}
       <section className="py-16 md:py-24 bg-surface border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="max-w-4xl mx-auto space-y-12">
-              <div>
-                <h2 className="font-display text-3xl md:text-5xl text-ink mb-6">
-                  How Custom Business App Integration Works
-                </h2>
-                <p className="text-lg text-ink/90 leading-relaxed mb-6">
-                  Custom business app integration connects separate software applications—such as your CRM, e-commerce platform, accounting tool, and inventory manager—via their Application Programming Interfaces (APIs). Instead of team members copying data manually, custom integration automates data flows in real time across systems.
-                </p>
-                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
-                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
-                    Key Advantages of Custom Integration
-                  </h3>
-                  <ul className="list-disc list-inside space-y-3 text-ink/90 text-lg">
-                    <li><strong className="text-ink">Zero Manual Data Entry:</strong> Orders, customer updates, and payments sync instantly without human intervention.</li>
-                    <li><strong className="text-ink">Client Ownership:</strong> Integrations run on your cloud account; you own the code with no per-transaction fees or platform markup.</li>
-                    <li><strong className="text-ink">Proactive Error Detection:</strong> Real-time monitoring and automatic retries prevent dropped orders or silent failures.</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
-                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
-                    Platforms We Connect
-                  </h3>
-                  <p className="text-ink/90 leading-relaxed mb-4 text-base">
-                    If a software tool has an accessible API, Sylentt can connect it. Commonly integrated business tools include:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2 text-ink/90 text-base">
-                    <li>E-Commerce: Shopify, Square, Stripe</li>
-                    <li>Accounting: QuickBooks Online, Xero, FreshBooks</li>
-                    <li>CRM & Sales: HubSpot, Salesforce</li>
-                    <li>Operations: Jobber, ServiceTitan, ShipStation</li>
-                  </ul>
-                </div>
-
-                <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
-                  <h3 className="font-serif text-xl font-bold text-ink mb-4">
-                    Difference from Zapier or Make
-                  </h3>
-                  <p className="text-ink/90 leading-relaxed mb-4 text-base">
-                    While platforms like Zapier charge monthly subscriptions that increase with task volume and often fail silently, Sylentt builds custom, self-hosted integrations:
-                  </p>
-                  <ul className="list-disc list-inside space-y-2 text-ink/90 text-base">
-                    <li>No recurring monthly task or platform fees</li>
-                    <li>Immediate notification when a sync error occurs</li>
-                    <li>Complete code ownership without vendor lock-in</li>
-                  </ul>
-                </div>
+            <div className="max-w-4xl mx-auto">
+              <h2 className="font-display text-3xl md:text-5xl text-ink mb-6">
+                What a fractional CIO does
+              </h2>
+              <p className="text-lg text-ink/90 leading-relaxed mb-6">
+                A fractional CIO does the job of a full-time IT director for a few hours a month. I make the technology decisions, keep the plan, and manage the people who do the work. Your IT company keeps fixing things.
+              </p>
+              <div className="bg-paper p-8 rounded-2xl border border-ink/10 shadow-soft">
+                <ul className="list-disc list-inside space-y-3 text-ink/90 text-lg">
+                  <li><strong className="text-ink">Decisions:</strong> one person owns the technology and AI calls, so they stop defaulting to whoever is closest.</li>
+                  <li><strong className="text-ink">Oversight:</strong> your IT company and vendors are managed and held to what you pay for.</li>
+                  <li><strong className="text-ink">Ownership:</strong> every document, policy, and account stays yours.</li>
+                </ul>
               </div>
             </div>
           </SectionFade>
         </div>
       </section>
 
-      {/* Service Sections */}
-      {services.map((service, index) => {
-        const Icon = service.icon;
+      {/* Offers */}
+      {offers.map((offer, index) => {
+        const Icon = offer.icon;
+        const isDark = index === offers.length - 1;
         const isEven = index % 2 === 0;
-
-        // Apply dark background to "Zapier/Make" section for rhythm
-        const isDark = index === 2;
 
         return (
           <section
-            key={service.pain}
+            key={offer.title}
             className={`py-24 md:py-32 ${
               isDark ? "bg-ink text-paper" : (isEven ? "bg-paper" : "bg-surface border-y border-ink/5")
             }`}
@@ -280,51 +238,72 @@ export default function ServicesPage() {
             <div className="container mx-auto px-4">
               <SectionFade>
                 <div className="max-w-4xl mx-auto">
-                  {/* The Pain */}
                   <div className="mb-12">
                     <div className={`mb-6 w-12 h-12 rounded-full flex items-center justify-center ${isDark ? "bg-paper/10" : "bg-ink/5 border border-ink/10"}`}>
                       <Icon className="w-6 h-6 text-accent" />
                     </div>
+                    {offer.eyebrow && (
+                      <p className={`eyebrow mb-4 ${isDark ? "text-paper/70" : "text-accent"}`}>
+                        {offer.eyebrow}
+                      </p>
+                    )}
                     <h2 className={`font-display text-3xl md:text-5xl mb-6 text-balance ${isDark ? "text-paper" : "text-ink"}`}>
-                      {service.pain}
+                      {offer.title}
                     </h2>
                     <p className={`text-lg leading-relaxed max-w-3xl ${isDark ? "text-paper/80" : "text-ink/90"}`}>
-                      {service.detail}
+                      {offer.detail}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* The Outcome */}
-                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/15 shadow-soft"} border p-8 rounded-2xl`}>
-                      <h3 className={`eyebrow mb-4 ${isDark ? "text-paper/80" : "text-accent"}`}>
-                        What changes
-                      </h3>
-                      <p className={isDark ? "text-paper/80" : "text-ink/90 leading-relaxed"}>
-                        {service.outcome}
-                      </p>
-                    </div>
-
-                    {/* The Deliverable */}
-                    <div className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/15 shadow-soft"} border p-8 rounded-2xl`}>
-                      <h3 className={`eyebrow mb-4 ${isDark ? "text-paper/80" : "text-accent"}`}>
-                        What you own
-                      </h3>
-                      <p className={isDark ? "text-paper/80" : "text-ink/90 leading-relaxed"}>
-                        {service.deliverable}
-                      </p>
-                    </div>
-                  </div>
-
-                  {isDark && (
-                    <div className="mt-12 text-center">
-                      <Link
-                        href="#calculator"
-                        className="inline-flex items-center justify-center rounded-lg bg-white text-accent px-8 py-3 font-bold shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    {offer.cards.map((card) => (
+                      <div
+                        key={card.label}
+                        className={`${isDark ? "bg-white/5 border-white/10" : "bg-paper border-ink/15 shadow-soft"} border p-8 rounded-2xl`}
                       >
-                        Calculate your cost savings
-                      </Link>
-                    </div>
-                  )}
+                        <h3 className={`eyebrow mb-4 ${isDark ? "text-paper/80" : "text-accent"}`}>
+                          {card.label}
+                        </h3>
+                        {card.text && (
+                          <p className={isDark ? "text-paper/80 leading-relaxed" : "text-ink/90 leading-relaxed"}>
+                            {card.text}
+                          </p>
+                        )}
+                        {card.items && (
+                          <ul className="space-y-3">
+                            {card.items.map((item) => (
+                              <li key={item} className="flex items-start">
+                                <Check className="w-5 h-5 text-accent mr-3 shrink-0 mt-0.5" />
+                                <span className="text-ink/90 leading-relaxed">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {card.extraItems && (
+                          <>
+                            <p className="eyebrow text-ink/60 mt-6 mb-3">{card.extraLabel}</p>
+                            <ul className="space-y-3">
+                              {card.extraItems.map((item) => (
+                                <li key={item} className="flex items-start">
+                                  <Check className="w-5 h-5 text-accent mr-3 shrink-0 mt-0.5" />
+                                  <span className="text-ink/90 leading-relaxed">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                        {card.link && (
+                          <Link
+                            href={card.link.href}
+                            className="mt-6 inline-flex items-center text-accent-link font-bold rounded-sm underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                          >
+                            {card.link.label}
+                            <ArrowRight className="ml-2 w-4 h-4" />
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </SectionFade>
             </div>
@@ -332,62 +311,53 @@ export default function ServicesPage() {
         );
       })}
 
-      {/* Relocated Savings Calculator */}
-      <section className="py-24 md:py-32 bg-ink">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <CostCalculator heading="What is the manual work costing you?" />
-          </SectionFade>
-        </div>
-      </section>
-
-      {/* Build Process Card */}
+      {/* What I don't do */}
       <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-4xl mx-auto">
-              <Link
-                href="/services/agents"
-                className="group block bg-surface border border-ink/10 p-10 md:p-16 rounded-2xl shadow-soft transition-all hover:border-accent/30 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-              >
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-paper border border-ink/10 flex items-center justify-center group-hover:border-accent/20 transition-colors">
-                    <Eye className="w-8 h-8 text-accent" />
-                  </div>
-                  <h2 className="font-display text-3xl md:text-4xl text-ink">
-                    How we build it
-                  </h2>
-                </div>
-                <p className="text-ink text-xl mb-8 leading-relaxed font-medium">
-                  Every integration follows the same structured process. Six
-                  phases, multiple quality checkpoints, and nothing goes live
-                  without your approval.
-                </p>
-                <div className="flex items-center text-accent font-bold text-lg group-hover:translate-x-2 transition-transform">
-                  See the build process{" "}
-                  <ArrowRight className="ml-2 w-6 h-6" />
-                </div>
-              </Link>
+              <h2 className="font-display text-3xl md:text-5xl text-ink mb-6">
+                What I don&apos;t do
+              </h2>
+              <p className="text-lg text-ink/90 leading-relaxed mb-8">
+                I decide and manage. These stay with someone else:
+              </p>
+              <ul className="bg-surface p-8 rounded-2xl border border-ink/10 shadow-soft space-y-4">
+                {notDone.map((item) => (
+                  <li key={item} className="flex items-start text-lg">
+                    <X className="w-5 h-5 text-ink/50 mr-4 shrink-0 mt-1" aria-hidden="true" />
+                    <span className="text-ink/90 leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </SectionFade>
         </div>
       </section>
 
-      {/* Assessment Form */}
+      {/* Closing: book a call or take the IT check */}
       <section
-        id="tell-us"
+        id="it-check"
         className="py-24 md:py-32 bg-paper scroll-mt-24"
       >
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="text-center mb-16 max-w-3xl mx-auto">
               <h2 className="font-display text-4xl md:text-6xl mb-6 text-ink text-balance">
-                Tell us what&apos;s broken
+                Not sure where you stand?
               </h2>
-              <p className="text-ink/90 text-xl">
-                Answer a few quick questions so we can see where your time is
-                going.
+              <p className="text-ink/90 text-xl mb-10">
+                Take the 2-minute IT check, or book a 30-minute call.
               </p>
+              <a
+                href={CALENDLY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cta px-10 py-4 text-lg group"
+              >
+                Book a 30-minute call
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
             <div className="max-w-2xl mx-auto">
               <FitAssessment />

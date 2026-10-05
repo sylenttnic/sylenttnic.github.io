@@ -55,6 +55,14 @@ jobs:
           # builds the page exactly as it was, with no branch at all. Going live
           # also needs the intake Lambda's SSM webdesign-no-presence-enabled.
           NEXT_PUBLIC_NO_PRESENCE_ENABLED: ${{ vars.NEXT_PUBLIC_NO_PRESENCE_ENABLED }}
+      # Fails the deploy if retired copy is back on the main site: the
+      # integration-era terms, the words the fractional CIO repositioning brief
+      # bans, and "web design" anywhere but the footer. /webdesign/ is out of
+      # scope. See scripts/check-copy.mjs for the rules and the short list of
+      # exact phrases it allows.
+      - name: Check the built site for retired copy
+        run: node scripts/check-copy.mjs
+
       # The sample sites under public/webdesign/samples are static files, so
       # `next build` cannot substitute NEXT_PUBLIC_* into them the way it does
       # for the app. They ship a __INTAKE_API_KEY__ placeholder and get the real

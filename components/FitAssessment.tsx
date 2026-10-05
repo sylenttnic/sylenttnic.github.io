@@ -1,26 +1,63 @@
 "use client";
 
 /**
- * FitAssessment Component
+ * FitAssessment Component: the "2-minute IT check".
  *
- * Updated for Light Theme Migration:
- * - Replaced dark slate classes with paper/ink semantic tokens.
- * - Removed glows and glass effects.
- * - Standardized on accent color (#B5512F).
+ * Four single-choice questions, then a result. There is no lead form and no
+ * submission to the intake server: the result is worked out in the browser and
+ * shown straight away, followed by the Calendly link. Completing the check sends
+ * one anonymous GA4 event (it_check_complete) with the result and the answers,
+ * nothing that identifies the visitor.
+ *
+ * Light theme: paper/ink semantic tokens, accent color (#B5512F).
  */
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
+import { CALENDLY_URL } from "@/lib/offer";
+
+// Each answer adds points toward one or more result patterns. The pattern with
+// the most points is the result. Ties go to the earlier pattern in PATTERN_ORDER,
+// which runs from the most urgent situation to the least.
+type PatternId = "noOwner" | "itCompany" | "owner" | "spend" | "inControl";
+
+const PATTERN_ORDER: PatternId[] = ["noOwner", "itCompany", "owner", "spend", "inControl"];
+
+const patterns: Record<PatternId, { heading: string; paragraph: string }> = {
+  noOwner: {
+    heading: "Nobody owns IT.",
+    paragraph:
+      "Right now, technology decisions get made by whoever is closest, or by nobody. That holds until a system goes down, a contract renews itself, or someone asks what your AI policy is. You don't need a full-time hire to fix it. You need one person who owns the decisions, a few hours a month.",
+  },
+  itCompany: {
+    heading: "Your IT company is making your decisions.",
+    paragraph:
+      "Your IT company is probably good at fixing things. But it is also making calls that should be yours: what you buy, when you upgrade, who decides in an outage. You need someone on your side of the table who manages them for you.",
+  },
+  owner: {
+    heading: "You're the IT director, on top of your real job.",
+    paragraph:
+      "You're making the technology calls, and probably the AI calls too. That's normal at your size, and it costs you hours you should spend running the company. I can take that off your plate for a few hours a month. You keep the final say.",
+  },
+  spend: {
+    heading: "You don't know what IT really costs.",
+    paragraph:
+      "Most companies your size pay for software nobody uses and miss tools they need, and nobody has the full list. The assessment starts there: every system, subscription, and contract in one place, with what to keep, cut, or add.",
+  },
+  inControl: {
+    heading: "You're ahead of most companies your size.",
+    paragraph:
+      "Someone owns the decisions and you know what you spend. The open question is whether you have a written 12-month plan and a clear position on AI. If not, the two-week assessment gives you both.",
+  },
+};
 
 // Types
 type Option = {
   text: string;
   value: string;
-  numericValue?: number;
-  score?: number;
+  points?: Partial<Record<PatternId, number>>;
 };
 
 type Question = {
@@ -31,79 +68,92 @@ type Question = {
 };
 
 type QuizAnswers = Record<string, string | string[]>;
-type QuizValues = Record<string, number>;
-
-type LeadData = {
-  leadName: string;
-  leadEmail: string;
-  leadJobTitle: string;
-  leadCompany: string;
-};
 
 const questions: Question[] = [
   {
-    id: "tools",
-    question: "What tools does your business run on?",
-    type: "multi",
-    options: [
-      { text: "Shopify", value: "SHOPIFY" },
-      { text: "Recharge, Bold, or another subscription platform", value: "SUBSCRIPTION" },
-      { text: "ShipStation, ShipBob, or another fulfillment tool", value: "FULFILLMENT" },
-      { text: "QuickBooks, Xero, or FreshBooks", value: "ACCOUNTING" },
-      { text: "Stripe or Square", value: "PAYMENTS" },
-      { text: "HubSpot, Salesforce, or another CRM", value: "CRM" },
-      { text: "ServiceTitan, Jobber, or another field service tool", value: "FIELD_SERVICE" },
-      { text: "Other", value: "OTHER" },
-    ],
-  },
-  {
-    id: "automationHistory",
-    question: "Have you tried automating this before?",
+    id: "whoDecides",
+    question: "Who makes technology decisions at your company?",
     type: "single",
     options: [
-      { text: "Yes, with Zapier, Make, or a similar tool", value: "ZAPIER", score: 4 },
-      { text: "Yes, we hired a developer but it didn't work out", value: "DEVELOPER", score: 3 },
-      { text: "No, we've just been doing it manually", value: "MANUAL", score: 2 },
-      { text: "We're not sure where to start", value: "UNSURE", score: 1 },
+      { text: "Owner", value: "OWNER", points: { owner: 2 } },
+      { text: "Office manager", value: "OFFICE_MANAGER", points: { noOwner: 2 } },
+      { text: "Our IT company", value: "IT_COMPANY", points: { itCompany: 2 } },
+      { text: "Nobody, really", value: "NOBODY", points: { noOwner: 3 } },
     ],
   },
   {
-    id: "failureResponse",
-    question: "What happens when something goes wrong between your systems?",
+    id: "spendKnown",
+    question: "Do you know what you spend on software and IT each month?",
     type: "single",
     options: [
-      { text: "We usually find out when a customer complains", value: "CUSTOMER_COMPLAINT", score: 4 },
-      { text: "Someone on the team checks manually every day", value: "MANUAL_CHECK", score: 3 },
-      { text: "We have alerts but still fix things by hand", value: "ALERTS_MANUAL_FIX", score: 2 },
-      { text: "It doesn't go wrong often enough to worry about", value: "NOT_OFTEN", score: 0 },
+      { text: "To the dollar", value: "TO_THE_DOLLAR", points: { inControl: 2 } },
+      { text: "Roughly", value: "ROUGHLY", points: { spend: 1 } },
+      { text: "No idea", value: "NO_IDEA", points: { spend: 3 } },
     ],
   },
   {
-    id: "manualTask",
-    question: "In one sentence, what's the thing your team does manually that should be automatic?",
-    type: "text",
-    options: [],
+    id: "outageOwner",
+    question: "If your main system went down tomorrow, who decides what happens next?",
+    type: "single",
+    options: [
+      { text: "Our IT company", value: "IT_COMPANY", points: { itCompany: 2 } },
+      { text: "Someone on staff", value: "STAFF", points: { inControl: 1 } },
+      { text: "Not sure", value: "NOT_SURE", points: { noOwner: 2 } },
+    ],
+  },
+  {
+    id: "aiOwner",
+    question: "Has anyone been put in charge of figuring out AI?",
+    type: "single",
+    options: [
+      { text: "Yes, me", value: "ME", points: { owner: 2 } },
+      { text: "Yes, someone else", value: "SOMEONE_ELSE", points: { inControl: 1 } },
+      { text: "No one", value: "NO_ONE", points: { noOwner: 1 } },
+      { text: "We've decided not to use it", value: "DECIDED_NOT", points: { inControl: 1 } },
+    ],
   },
 ];
+
+function dominantPattern(answers: QuizAnswers): PatternId {
+  const totals: Record<PatternId, number> = {
+    noOwner: 0,
+    itCompany: 0,
+    owner: 0,
+    spend: 0,
+    inControl: 0,
+  };
+  for (const q of questions) {
+    const chosen = answers[q.id];
+    const values = Array.isArray(chosen) ? chosen : [chosen];
+    for (const option of q.options) {
+      if (!values.includes(option.value) || !option.points) continue;
+      for (const [id, n] of Object.entries(option.points) as [PatternId, number][]) {
+        totals[id] += n;
+      }
+    }
+  }
+  return PATTERN_ORDER.reduce((best, id) => (totals[id] > totals[best] ? id : best));
+}
 
 export default function FitAssessment() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [textInput, setTextInput] = useState("");
-
-  const [leadData, setLeadData] = useState<LeadData>({
-    leadName: "",
-    leadEmail: "",
-    leadJobTitle: "",
-    leadCompany: "",
-  });
-  const [honeyPot, setHoneyPot] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [calculatedScore, setCalculatedScore] = useState(0);
-  const [error, setError] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const reportedRef = useRef(false);
+
+  const isComplete = currentStep >= questions.length;
+  const result = isComplete ? dominantPattern(answers) : null;
+
+  // One anonymous analytics event per completed check, through the gtag already
+  // loaded by the root layout. No name, email or other identifying data.
+  useEffect(() => {
+    if (!result || reportedRef.current) return;
+    reportedRef.current = true;
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    gtag?.("event", "it_check_complete", { result, ...answers });
+  }, [result, answers]);
 
   const handleOptionSelect = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
@@ -134,275 +184,55 @@ export default function FitAssessment() {
     setTextInput(value);
   };
 
-  const handleLeadSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (honeyPot) {
-      console.warn("Honeypot triggered, blocking submission.");
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(leadData.leadEmail)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-
-    if (leadData.leadName.length < 2) {
-      setError("Please enter a valid name.");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    // Calculate Scoring
-    let totalScore = 0;
-
-    // Q1: Multi-select
-    const q1Selections = (answers["tools"] as string[]) || [];
-    const selectionCount = q1Selections.length;
-    if (selectionCount >= 4) {
-      totalScore += 6;
-    } else if (selectionCount === 3) {
-      totalScore += 4;
-    } else if (selectionCount === 2) {
-      totalScore += 2;
-    } else if (selectionCount === 1) {
-      totalScore += 1;
-    }
-
-    // Q2 & Q3: Single-select
-    const q2Value = answers["automationHistory"] as string;
-    const q2Score = questions.find(q => q.id === "automationHistory")?.options.find(o => o.value === q2Value)?.score || 0;
-    totalScore += q2Score;
-
-    const q3Value = answers["failureResponse"] as string;
-    const q3Score = questions.find(q => q.id === "failureResponse")?.options.find(o => o.value === q3Value)?.score || 0;
-    totalScore += q3Score;
-
-    setCalculatedScore(totalScore);
-
-    let resultTier = "";
-
-    if (totalScore >= 10) {
-      resultTier = "Strong fit";
-    } else if (totalScore >= 6) {
-      resultTier = "Good fit";
-    } else if (totalScore >= 1) {
-      resultTier = "Worth a conversation";
-    } else {
-      resultTier = "Might not be the right fit";
-    }
-
-    const payload = {
-      ...answers,
-      ...leadData,
-      calculatedScore: totalScore,
-      resultTier: resultTier,
-      summary: `Fit Assessment: ${resultTier} (${totalScore} pts). Manual Task: ${answers["manualTask"]}`,
-    };
-
-    try {
-      const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
-
-      if (!apiKey) {
-        console.error("Form configuration error: NEXT_PUBLIC_INTAKE_API_KEY is missing.");
-        setError("Form configuration error. Please try again later.");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const response = await fetch("https://intake.sylentt.com/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "website-api-key": apiKey,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        console.error(`Submission error: ${response.status} ${response.statusText}`);
-        setError("Something went wrong. Please try again later.");
-      } else {
-        console.log("Submission successful");
-        setIsSuccess(true);
-      }
-    } catch (error) {
-      console.error("Submission failed:", error);
-      setError("Network error. Please try again later.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleRestart = () => {
+    setAnswers({});
+    setSelectedOptions([]);
+    setTextInput("");
+    setCurrentStep(0);
+    reportedRef.current = false;
   };
 
   const progress = (currentStep / questions.length) * 100;
 
-  if (isSuccess) {
-    let resultTier = "";
-    let summaryMessage = "";
-    let colorClass = "";
-
-    if (calculatedScore >= 10) {
-      resultTier = "Strong fit";
-      summaryMessage = "Your setup is exactly the kind of problem we built Sylentt Partners to solve.";
-      colorClass = "text-accent";
-    } else if (calculatedScore >= 6) {
-      resultTier = "Good fit";
-      summaryMessage = "Based on your answers, there's a good chance we can help. Let's talk through the details.";
-      colorClass = "text-accent";
-    } else if (calculatedScore >= 1) {
-      resultTier = "Worth a conversation";
-      summaryMessage = "We'd want to learn more about your setup before saying for sure, but it's worth a quick conversation.";
-      colorClass = "text-accent";
-    } else {
-      resultTier = "Might not be the right fit";
-      summaryMessage = "Based on your answers, Sylentt Partners might not be what you need right now, but if you think we're wrong, reach out anyway.";
-      colorClass = "text-ink/40";
-    }
+  if (result) {
+    const { heading, paragraph } = patterns[result];
 
     return (
-      <div className="lane-body p-8 max-w-2xl mx-auto text-center border-ink/10">
+      <div className="lane-body p-8 md:p-10 max-w-2xl mx-auto text-center border-ink/10">
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+          aria-live="polite"
         >
-          <div className="eyebrow text-ink/60 mb-3">Fit Assessment Result</div>
-          <div className={cn("font-display text-5xl md:text-6xl mb-6", colorClass)}>
-            {resultTier}
-          </div>
-          <p className="text-ink/90 mb-8 text-lg font-sans">
-            {summaryMessage}
+          <div className="eyebrow text-ink/60 mb-3">Your result</div>
+          <h3 className="font-display text-3xl md:text-4xl mb-6 text-accent text-balance">
+            {heading}
+          </h3>
+          <p className="text-ink/90 mb-10 text-lg font-sans leading-relaxed text-left md:text-center">
+            {paragraph}
           </p>
 
-          <div className="w-full h-px bg-ink/10 my-8" />
-
-          <h4 className="font-display text-2xl mb-2 text-ink">Let&apos;s build your roadmap</h4>
-          <p className="mb-6 text-ink/80 font-sans">Schedule a session to see how we can eliminate the friction in your workflows.</p>
-
           <a
-            href="https://calendly.com/nic-sylentt/30min"
+            href={CALENDLY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-cta px-8 py-4 text-lg"
+            className="btn-cta px-8 py-4 text-lg group"
           >
-            Book your discovery call
+            Book a 30-minute call
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
-        </motion.div>
-      </div>
-    );
-  }
 
-  if (currentStep >= questions.length) {
-    return (
-      <div className="lane-body p-8 max-w-2xl mx-auto border-ink/10">
-        <div className="mb-6">
-          <div
-            role="progressbar"
-            aria-valuenow={100}
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-label="Progress: Complete"
-            className="h-2 w-full bg-surface2 rounded-full overflow-hidden"
-          >
-            <div className="h-full bg-accent w-full transition-all duration-500" />
-          </div>
-        </div>
-
-        <h3 className="font-display text-2xl md:text-3xl text-center mb-2 text-ink">Your Fit Assessment is ready</h3>
-        <p className="text-center text-ink/80 mb-8 font-sans italic">Enter your details to reveal your score and get your customized report.</p>
-
-        <form onSubmit={handleLeadSubmit} className="space-y-4">
-          <div className="hidden">
-            <label htmlFor="hp_field">Verification</label>
-            <input
-              type="text"
-              id="hp_field"
-              name="hp_field"
-              value={honeyPot}
-              onChange={(e) => setHoneyPot(e.target.value)}
-              tabIndex={-1}
-              autoComplete="off"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label htmlFor="leadName" className="text-sm font-medium text-ink/90">Name <span className="text-accent">*</span></label>
-              <Input
-                id="leadName"
-                name="leadName"
-                required
-                value={leadData.leadName}
-                onChange={(e) => setLeadData({ ...leadData, leadName: e.target.value })}
-                className="bg-paper text-ink"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="leadEmail" className="text-sm font-medium text-ink/90">Work Email <span className="text-accent">*</span></label>
-              <Input
-                id="leadEmail"
-                name="leadEmail"
-                type="email"
-                required
-                value={leadData.leadEmail}
-                onChange={(e) => setLeadData({ ...leadData, leadEmail: e.target.value })}
-                className="bg-paper text-ink"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="leadJobTitle" className="text-sm font-medium text-ink/90">Job Title <span className="text-accent">*</span></label>
-              <Input
-                id="leadJobTitle"
-                name="leadJobTitle"
-                required
-                value={leadData.leadJobTitle}
-                onChange={(e) => setLeadData({ ...leadData, leadJobTitle: e.target.value })}
-                className="bg-paper text-ink"
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="leadCompany" className="text-sm font-medium text-ink/90">Company Name <span className="text-accent">*</span></label>
-              <Input
-                id="leadCompany"
-                name="leadCompany"
-                required
-                value={leadData.leadCompany}
-                onChange={(e) => setLeadData({ ...leadData, leadCompany: e.target.value })}
-                className="bg-paper text-ink"
-              />
-            </div>
-          </div>
-
-          <div className="text-xs text-ink/40 mt-2 font-sans italic">
-            We do not sell your information to third parties, and you are not signing up for spam.
-          </div>
-
-          {error && (
-            <div className="text-red-700 text-sm text-center font-medium bg-red-50 p-2 rounded-lg border border-red-100">
-              {error}
-            </div>
-          )}
-
-          <div className="pt-4 flex justify-center">
-            <Button
-              type="submit"
-              size="xl"
-              disabled={isSubmitting}
-              className="w-full md:w-auto"
+          <div className="mt-6">
+            <button
+              type="button"
+              onClick={handleRestart}
+              className="text-sm font-sans text-ink/60 underline-offset-4 rounded-sm transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Calculating...
-                </>
-              ) : (
-                "Reveal My Score"
-              )}
-            </Button>
+              Start over
+            </button>
           </div>
-        </form>
+        </motion.div>
       </div>
     );
   }
@@ -453,7 +283,7 @@ export default function FitAssessment() {
                 <textarea
                   autoFocus
                   className="w-full bg-paper border border-ink/15 rounded-lg p-6 text-ink text-lg transition-colors font-sans placeholder:text-ink/30 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 min-h-[120px]"
-                  placeholder="e.g. We manually copy tracking numbers from ShipStation to a Google Sheet for our weekly report."
+                  placeholder="Type your answer here."
                   value={textInput}
                   onChange={(e) => handleTextChange(e.target.value)}
                 />

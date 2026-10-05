@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CALENDLY_URL } from "@/lib/offer";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,17 +54,13 @@ export default function Navbar() {
     external?: boolean;
   }
 
+  /* Web design is deliberately absent: on the main site it is linked from the
+     footer only (components/Footer.tsx). */
   const mainNavLinks: NavItem[] = [
     { name: "About", href: "/#about" },
     { name: "Services", href: "/services" },
     { name: "Pricing", href: "/pricing" },
-    /* The reciprocal of "Integrations" in webDesignNavLinks below, in the same
-       slot: last before the CTA, so each side of the business offers a door to
-       the other instead of only one direction working. Internal Link, not
-       `external` — /webdesign is the same origin, so it takes the normal
-       in-tab navigation rather than the other entry's target="_blank". */
-    { name: "Web Design", href: "/webdesign" },
-    { name: "Connect", href: "#tell-us", isCta: true },
+    { name: "Book a call", href: CALENDLY_URL, isCta: true, external: true },
   ];
 
   const webDesignNavLinks: NavItem[] = [
@@ -72,7 +69,7 @@ export default function Navbar() {
     { name: "Terms", href: "/webdesign/terms" },
     { name: "Privacy", href: "/webdesign/privacy" },
     { name: "Refunds", href: "/webdesign/refunds" },
-    { name: "Integrations", href: "https://sylentt.com", external: true },
+    { name: "Main site", href: "https://sylentt.com", external: true },
     { name: "Connect", href: "#tell-us", isCta: true },
   ];
 
@@ -97,13 +94,25 @@ export default function Navbar() {
         <div className={cn("hidden md:flex items-center", isWebDesign ? "space-x-5 lg:space-x-8" : "space-x-10 lg:space-x-12")}>
           {navLinks.map((link) =>
             link.isCta ? (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="btn-cta px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
-              >
-                {link.name}
-              </Link>
+              link.external ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cta px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="btn-cta px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
+                >
+                  {link.name}
+                </Link>
+              )
             ) : link.external ? (
               <a
                 key={link.name}
