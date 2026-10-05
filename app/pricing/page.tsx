@@ -1,19 +1,19 @@
 import { Check, ArrowRight, CalendarCheck, ClipboardList, SlidersHorizontal } from "lucide-react";
 import SectionFade from "@/components/ui/SectionFade";
-import { CALENDLY_URL, PLAN_TERMS, HOURS_RULES, PRICING_SUMMARY, plans, planById, planOfferJsonLd } from "@/lib/offer";
+import { CALENDLY_URL, CALL_CTA, CALL_PROMISE, PHONE, PLAN_TERMS, HOURS_RULES, PRICING_SUMMARY, plans, planById, planOfferJsonLd } from "@/lib/offer";
 
 const assessmentPrice = planById("assessment").price;
 
 const howItWorks = [
   {
     icon: CalendarCheck,
-    title: "Book a 30-minute call",
-    description: "Tell me how IT works at your company today. I'll tell you honestly whether I can help.",
+    title: "Book a free 30-minute call",
+    description: "Tell me how IT works at your company today. You'll leave knowing what I'd fix first, whether or not you hire me.",
   },
   {
     icon: ClipboardList,
-    title: "Start with the assessment",
-    description: `Two weeks, ${assessmentPrice}. You get a 12-month plan whether or not you continue.`,
+    title: "Start with the assessment, if you want",
+    description: `Optional. Two weeks, ${assessmentPrice}. You get a 12-month plan whether or not you continue.`,
   },
   {
     icon: SlidersHorizontal,
@@ -73,7 +73,7 @@ export default function PricingPage() {
             What it costs.
           </h1>
           <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto leading-relaxed font-sans text-pretty">
-            Three options, fixed and published. Most companies start with the assessment.
+            Three options, fixed and published. The assessment is optional; most companies start there. Independent advice: I take no commissions and have nothing to sell you.
           </p>
         </SectionFade>
       </section>
@@ -91,7 +91,7 @@ export default function PricingPage() {
                   emphasized ? "border-accent/40 ring-1 ring-accent/15" : ""
                 }`}
               >
-                {emphasized && <p className="eyebrow text-accent mb-4">Start here</p>}
+                {emphasized && <p className="eyebrow text-accent mb-4">Optional first step</p>}
                 <h3 className="font-display text-2xl md:text-3xl mb-2">{plan.name}</h3>
                 <div className="font-display text-4xl mb-6 text-accent">
                   {plan.price}
@@ -99,8 +99,11 @@ export default function PricingPage() {
                     {plan.monthly ? plan.priceUnit : `, ${plan.priceUnit}`}
                   </span>
                 </div>
-                <p className="text-ink/90 mb-10 leading-relaxed text-lg">
+                <p className="text-ink/90 mb-2 leading-relaxed text-lg">
                   {plan.term}
+                </p>
+                <p className="text-ink/70 mb-10 leading-relaxed">
+                  {plan.bestFor}
                 </p>
 
                 <div className="space-y-6 mb-12 flex-grow">
@@ -120,7 +123,7 @@ export default function PricingPage() {
                     rel="noopener noreferrer"
                     className={`${emphasized ? "btn-cta" : "btn-quiet"} w-full py-5 text-lg group`}
                   >
-                    Book a 30-minute call
+                    {CALL_CTA}
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                   {plan.footnote && (
@@ -184,7 +187,17 @@ export default function PricingPage() {
               >
                 contact@sylentt.com
               </a>
-              , or book a 30-minute call.
+              {PHONE ? (
+                <>
+                  , call{" "}
+                  <a href={`tel:${PHONE.tel}`} className="text-accent-link font-semibold underline underline-offset-4">
+                    {PHONE.display}
+                  </a>
+                  , or book a free 30-minute call.
+                </>
+              ) : (
+                ", or book a free 30-minute call."
+              )}
             </p>
             <a
               href={CALENDLY_URL}
@@ -192,9 +205,10 @@ export default function PricingPage() {
               rel="noopener noreferrer"
               className="btn-cta px-10 py-4 text-lg group"
             >
-              Book a 30-minute call
+              {CALL_CTA}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
+            <p className="mt-5 text-ink/70">{CALL_PROMISE}</p>
           </div>
         </SectionFade>
       </section>

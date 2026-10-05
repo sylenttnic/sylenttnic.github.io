@@ -75,7 +75,6 @@ const FOOTER_LABEL = '"Web design"'; // the footer link's text, as it sits in JS
 const ALLOWED_PHRASES = [
   "Release Train Engineer", // Experience line: a job title, not an identity
   "thoughtfully integrate AI", // Ladan Rostami's testimonial, verbatim
-  "Shopify Plus education company", // Currently: edZOOcation
   "he transformed how we delivered", // Chris Gregoire's testimonial, verbatim
 ];
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CALENDLY_URL } from "@/lib/offer";
+import { CALENDLY_URL, CALL_CTA_SHORT } from "@/lib/offer";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function Navbar() {
     { name: "About", href: "/#about" },
     { name: "Services", href: "/services" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Book a call", href: CALENDLY_URL, isCta: true, external: true },
+    { name: CALL_CTA_SHORT, href: CALENDLY_URL, isCta: true, external: true },
   ];
 
   const webDesignNavLinks: NavItem[] = [

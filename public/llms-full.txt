@@ -9,22 +9,30 @@ Sylentt Partners LLC trades as Sylentt. It is Nic Aslett's practice, and clients
 
 The name comes from "silent partner": Nic works in the background so the client can run the business.
 
+## Independent
+
+Nic sells no hardware, software or support, and takes no commissions or referral fees from vendors or IT companies. The only party paying him is the client, so his recommendations are not tied to a sale.
+
 ## Who it is for
 
-Companies with roughly 20 to 150 employees, for example a manufacturer or a dental group, that have an IT company (a managed service provider, or MSP) for day-to-day support but no one steering IT.
+Companies with roughly 20 to 150 employees, for example a manufacturer or a dental group, that have an IT company for day-to-day support but no one steering IT.
 
 What that usually looks like:
 
-- **The IT company fixes things, but nobody decides things.** Projects stall, renewals auto-renew, and the roadmap lives in someone's head.
+- **The IT company fixes things, but nobody decides things.** Projects stall, renewals auto-renew, and the plan lives in someone's head.
 - **The company pays for software nobody uses and misses software it needs.** Nobody has the full list of what it pays for, who uses it, or when it renews.
 - **Everyone says "use AI."** Nobody at the company owns figuring out where it actually helps and where it is a liability.
 - **When the person who "knows the systems" leaves, so does the knowledge.** The passwords, the vendor contacts, and the reasons things are set up the way they are leave with them.
 
 ## How it works
 
-### 1. IT & AI Assessment
+### 0. A free 30-minute call
 
-Two weeks, one fixed price: $1,500. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month plan, presented in person.
+The client describes how IT works today and leaves knowing what Nic would fix first, whether or not they hire him. No pitch deck, no obligation.
+
+### 1. IT & AI Assessment (optional)
+
+Optional: a client can skip it and start on a monthly plan. Two weeks, one fixed price: $1,500. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month plan, presented in person.
 
 Deliverables:
 
@@ -40,14 +48,14 @@ If the client continues on a monthly plan, the $1,500 comes off the first month.
 
 ### 2. Retainer
 
-Nic becomes the company's IT director for a set number of hours a month. He runs the roadmap, manages the IT company and other vendors, makes the decisions, and answers the questions.
+Nic becomes the company's IT director for a set number of hours a month. He keeps the plan current, manages the IT company and other vendors, makes the decisions, and answers the questions.
 
-- **Advisor: $1,500 a month, up to 8 hours.** A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
-- **Director: $2,500 a month, up to 16 hours.** Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
+- **Advisor: $1,500 a month, up to 8 hours.** Best for most companies under 50 people. A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
+- **Director: $2,500 a month, up to 16 hours.** Best for 50 to 150 people, or a big project on the way. Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
 
 ### 3. The client owns everything
 
-Documentation, roadmap, policies, vendor relationships: all the client's, in the client's accounts, from day one. Nothing lives in Nic's accounts, so ending the engagement needs no handover.
+Documentation, plans, policies, vendor relationships: all the client's, in the client's accounts, from day one. Nothing lives in Nic's accounts, so ending the engagement needs no handover.
 
 ### Terms
 
@@ -68,10 +76,19 @@ Documentation, roadmap, policies, vendor relationships: all the client's, in the
 ## Frequently asked questions
 
 **What does a fractional CIO actually do?**
-The job a full-time IT director would do, for a few hours a month: making the technology decisions, planning the year, managing the IT company and other vendors, and owning the roadmap and the IT budget. Not the helpdesk. The IT company keeps fixing things; Nic makes sure the right things get fixed.
+The job a full-time IT director would do, for a few hours a month: making the technology decisions, planning the year, managing the IT company and other vendors, and owning the plan and the IT budget. Not the helpdesk. The IT company keeps fixing things; Nic makes sure the right things get fixed.
 
 **We already have an IT company. Why would we need Nic?**
 The IT company fixes things; Nic decides things. An IT company is paid to keep things running, not to decide where the company's technology should go. Nic manages it on the client's behalf and makes sure the client gets what it pays for.
+
+**Does Nic sell anything or take commissions?**
+No. He sells no hardware, software or support and takes no commissions or referral fees. When he recommends a tool, a vendor or an IT company, it is because it is right for the client.
+
+**What happens on the free call?**
+Thirty minutes on how IT works at the company today. The client leaves knowing what Nic would fix first, whether or not they hire him. No pitch deck, no obligation.
+
+**Does a client have to start with the assessment?**
+No, it is optional. It is the quickest way to see exactly what Nic would change before committing to a monthly plan, and if the client continues, the $1,500 comes off the first month.
 
 **How is this different from an AI consultant?**
 Nic is an IT leader who also handles AI. AI is evaluated like any other tool: where it saves money, where it creates risk, and what the rules are, delivered as a written policy the team can follow.
@@ -80,7 +97,7 @@ Nic is an IT leader who also handles AI. AI is evaluated like any other tool: wh
 Advisor includes up to 8 hours a month and Director up to 16. Hours cover meetings, email, and work done for the client. If a month needs more, Nic asks first, and extra hours are $150 each. A month that needs less does not get invented work.
 
 **What if it does not work out?**
-Every plan is month-to-month with 30 days' notice. The client keeps everything produced: documentation, roadmap, policies, and vendor relationships, already in the client's accounts.
+Every plan is month-to-month with 30 days' notice. The client keeps everything produced: documentation, plans, policies, and vendor relationships, already in the client's accounts.
 
 **Does Nic work outside Cache Valley?**
 In person across Cache Valley and Northern Utah. Remote work elsewhere is the exception, not the rule.
@@ -91,13 +108,13 @@ In person across Cache Valley and Northern Utah. Remote work elsewhere is the ex
 
 Past results from IT teams Nic has led (results, not a promise for any client):
 
-- 100% on-time project delivery, as a rolling average, after he brought real project management to a 16-person IT department
-- 80% faster ticket resolution: from 150 hours to 30
-- SLA adherence doubled: from 40% to 80%
+- Projects finished on time: 100% (rolling average) after he brought real project management to a 16-person IT department
+- Employees' IT problems fixed 5 times faster: 30 hours instead of 150
+- Promised response times met twice as often: 80% of the time, up from 40%
 
 ## Currently
 
-Fractional CTO for edZOOcation (https://edzoocation.com/), a Shopify Plus education company. Nic designed and built their order-to-subscription automation, then handed the platform to their team and stepped into the leadership seat. About 8 hours a week of manual work was eliminated, and the team now runs its own systems.
+Part-time technology lead (fractional CTO) for edZOOcation (https://edzoocation.com/), an online education company. Their team was losing about 8 hours a week to manual order work. Nic fixed the process, handed it to their team, and now leads their technology part-time.
 
 ## What people who have worked with Nic say
 
@@ -115,7 +132,7 @@ Based in Cache Valley, Utah. Works in person across Cache Valley and Northern Ut
 - Website: https://sylentt.com
 - Services: https://sylentt.com/services/
 - Pricing: https://sylentt.com/pricing/
-- Book a 30-minute call: https://calendly.com/nic-sylentt/30min
+- Book a free 30-minute call: https://calendly.com/nic-sylentt/30min
 - Email: contact@sylentt.com
 - LinkedIn: https://www.linkedin.com/in/nic-aslett/
 

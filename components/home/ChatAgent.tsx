@@ -244,7 +244,7 @@ export default function ChatAgent() {
                     className="flex items-center justify-center gap-3 p-4 rounded-xl bg-accent text-white font-bold transition-all hover:opacity-90 hover:-translate-y-0.5 shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                   >
                     <Calendar className="w-5 h-5" />
-                    Book a 30-minute call
+                    Book a free 30-minute call
                   </a>
                 </motion.div>
               )}

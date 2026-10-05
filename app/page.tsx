@@ -1,21 +1,33 @@
-import { ArrowRight, Compass, Receipt, Bot, UserMinus, ChevronDown } from "lucide-react";
+import { ArrowRight, Compass, Receipt, Bot, UserMinus, ChevronDown, ShieldCheck, CalendarCheck, UserRound } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
-import { CALENDLY_URL, AUDIENCE, EXTRA_HOUR_PRICE, plans, planById, planOfferJsonLd } from "@/lib/offer";
+import {
+  CALENDLY_URL,
+  CALL_CTA,
+  CALL_PROMISE,
+  EXTRA_HOUR_PRICE,
+  INDEPENDENCE,
+  PHONE,
+  plans,
+  planById,
+  planOfferJsonLd,
+} from "@/lib/offer";
 
 const pageTitle = "Sylentt Partners | Fractional CIO for Cache Valley Companies";
+const assessment = planById("assessment");
 const advisor = planById("advisor");
 const director = planById("director");
 
+// Written for a business owner, not an IT person. Say "IT company", not "MSP".
 const heroHeadline = "An IT director, without the salary.";
 // Non-breaking spaces keep "From $1,500 a month." on one line on phones.
-const heroSubhead = `Part-time IT and AI leadership for Cache Valley companies. From\u00A0${advisor.price}\u00A0a\u00A0month.`;
+const heroSubhead = `Someone on your side who makes the IT calls, keeps your IT company accountable, and tells you what to do about AI. From ${advisor.price} a month.`;
 
 const socialTitle = `${heroHeadline} | Sylentt Partners`;
-const pageDescription =
-  "Fractional CIO for Cache Valley companies. Work directly with Nic Aslett, a part-time IT director with a full-time track record. Fixed, published prices.";
+const pageDescription = `A part-time IT director for Cache Valley companies. Independent advice from Nic Aslett: no commissions, nothing to sell. From ${advisor.price} a month.`;
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -37,31 +49,31 @@ export const metadata: Metadata = {
   },
 };
 
-// Past results, written as past results. Each one says what was measured and
-// where it came from, and the line under them says plainly that they are not a
-// promise. Do not reword these into anything that reads as a guarantee.
-const proofPoints = [
+// The three reasons to trust a stranger with your IT, right under the hero.
+const trustPoints = [
   {
-    figure: "100%",
-    caption:
-      "On-time project delivery, as a rolling average, after I brought real project management to a 16-person IT department.",
+    icon: ShieldCheck,
+    title: "On your side",
+    text: INDEPENDENCE,
   },
   {
-    figure: "80%",
-    caption: "Faster ticket resolution: from 150 hours to 30.",
+    icon: CalendarCheck,
+    title: "Month-to-month",
+    text: "Cancel with 30 days' notice. Everything I produce is yours, in your accounts.",
   },
   {
-    figure: "2×",
-    caption: "SLA adherence doubled: from 40% to 80%.",
+    icon: UserRound,
+    title: "You get me",
+    text: "No account managers and no handoffs. The person on the call is the person doing the work.",
   },
 ];
 
 const problemCards = [
   {
     icon: Compass,
-    title: "Your MSP fixes things but nobody decides things.",
+    title: "Your IT company fixes things, but nobody decides things.",
     description:
-      "Projects stall, renewals auto-renew, and the roadmap lives in someone's head.",
+      "Projects stall, renewals auto-renew, and the plan lives in someone's head.",
   },
   {
     icon: Receipt,
@@ -85,16 +97,35 @@ const problemCards = [
 
 const steps = [
   {
-    title: "Assessment",
-    text: "2 weeks, fixed price. I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; deliver a 12-month roadmap and present it to you in person.",
+    title: "A free 30-minute call",
+    text: "Tell me how IT works at your company today. You'll leave knowing what I'd fix first, whether or not you hire me.",
   },
   {
-    title: "Retainer",
-    text: "I become your IT director for a set number of hours a month: I run the roadmap, manage your MSP and vendors, make the decisions, and answer the questions.",
+    title: "An assessment, if you want one",
+    text: `Optional. Two weeks, ${assessment.price}: everything you pay for in one place, what to fix first, and a 12-month plan, walked through in person.`,
   },
   {
-    title: "You own everything",
-    text: "Documentation, roadmap, policies, vendor relationships: all yours, in your accounts, from day one.",
+    title: "Your part-time IT director",
+    text: "For a set number of hours a month, I make the IT calls, manage your IT company and vendors, keep the plan current, and answer your questions.",
+  },
+];
+
+// Past results, written as past results and in an owner's terms. Each one says
+// what was measured and where it came from, and the line under them says
+// plainly that they are not a promise. Never word them as a guarantee.
+const proofPoints = [
+  {
+    figure: "100%",
+    caption:
+      "Projects finished on time (rolling average) after I brought real project management to a 16-person IT department.",
+  },
+  {
+    figure: "5×",
+    caption: "Faster fixes for employees' IT problems: 30 hours instead of 150.",
+  },
+  {
+    figure: "2×",
+    caption: "Promised response times met twice as often: 80% of the time, up from 40%.",
   },
 ];
 
@@ -148,7 +179,7 @@ const faqItems: {
   {
     question: "What does a fractional CIO actually do?",
     answer:
-      "I do the job a full-time IT director would do, for a few hours a month. I make the technology decisions, plan the year, manage your IT company and other vendors, and own the roadmap and the IT budget. I don't run the helpdesk. Your IT company keeps fixing things; I make sure the right things get fixed.",
+      "I do the job a full-time IT director would do, for a few hours a month. I make the technology decisions, plan the year, manage your IT company and other vendors, and own the plan and the IT budget. I don't run the helpdesk. Your IT company keeps fixing things; I make sure the right things get fixed.",
   },
   {
     question: "We already have an IT company. Why would we need you?",
@@ -156,9 +187,17 @@ const faqItems: {
       "Your IT company fixes things. I decide things. They're paid to keep things running, not to decide where your technology should go. I manage them on your behalf and make sure you're getting what you pay for.",
   },
   {
-    question: "How is this different from an AI consultant?",
+    question: "Do you sell anything or take commissions?",
+    answer: `No. ${INDEPENDENCE} When I recommend a tool, a vendor or an IT company, it's because it's right for you.`,
+  },
+  {
+    question: "What happens on the free call?",
     answer:
-      "I'm an IT leader who also handles AI. AI gets evaluated like any other tool: where it saves money, where it creates risk, and what the rules are. You get that as a written policy your team can follow. No hype.",
+      "We spend 30 minutes on how IT works at your company today. You'll leave knowing what I'd fix first, whether or not you hire me. No pitch deck, no obligation.",
+  },
+  {
+    question: "Do I have to start with the assessment?",
+    answer: `No, it's optional. It's the quickest way to see exactly what I'd change before you commit to a monthly plan. If you continue, the ${assessment.price} comes off your first month.`,
   },
   {
     question: "How much of your time do I get?",
@@ -167,9 +206,14 @@ const faqItems: {
     link: { href: "/pricing/", label: "See the plans" },
   },
   {
+    question: "How is this different from an AI consultant?",
+    answer:
+      "I'm an IT leader who also handles AI. AI gets evaluated like any other tool: where it saves money, where it creates risk, and what the rules are. You get that as a written policy your team can follow. No hype.",
+  },
+  {
     question: "What if it doesn't work out?",
     answer:
-      "Every plan is month-to-month. Give 30 days' notice and it ends. You keep everything I produced: documentation, roadmap, policies, and vendor relationships, already in your accounts.",
+      "Every plan is month-to-month. Give 30 days' notice and it ends. You keep everything I produced: documentation, plans, policies, and vendor relationships, already in your accounts.",
   },
   {
     question: "Do you work outside Cache Valley?",
@@ -208,11 +252,12 @@ const jsonLdOrg = {
   // /webdesign/ plan still attaches to this entity: app/webdesign/layout.tsx
   // emits its own Service node whose provider is this @id.
   description:
-    "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 20 to 150 employees that have an IT company for support but no one steering IT.",
+    "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 20 to 150 employees that have an IT company for support but no one steering IT. Independent: Nic sells no hardware, software or support and takes no commissions or referral fees.",
   url: "https://sylentt.com",
   logo: "https://sylentt.com/logo-symbol.png",
   image: "https://sylentt.com/logo_full.png",
   email: "contact@sylentt.com",
+  ...(PHONE ? { telephone: PHONE.tel } : {}),
   priceRange: "$$",
   founder: {
     "@type": "Person",
@@ -248,7 +293,7 @@ const jsonLdOrg = {
     "Vendor management",
     "Managed service provider oversight",
     "AI policy",
-    "Technology roadmaps",
+    "Technology planning",
     "Project management",
   ],
   hasOfferCatalog: {
@@ -271,6 +316,20 @@ const jsonLdFaq = {
   })),
 };
 
+function CallButton({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={CALENDLY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn-cta group ${className}`}
+    >
+      {CALL_CTA}
+      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+    </a>
+  );
+}
+
 export default function Home() {
   return (
     <div className="bg-paper text-ink selection:bg-accent/20">
@@ -287,27 +346,33 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
 
-      {/* Hero */}
-      <header className="relative pt-32 pb-16 md:pt-44 md:pb-24 overflow-hidden">
+      {/* Hero: who you get, what you get, what it costs, and the free call */}
+      <header className="relative pt-28 pb-16 md:pt-40 md:pb-20 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-3 mb-8 rounded-full bg-surface border border-ink/10 py-1.5 pl-1.5 pr-5 shadow-soft">
+              <Image
+                src="/about/nic.jpg"
+                alt="Nic Aslett"
+                width={48}
+                height={48}
+                priority
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <span className="text-left leading-tight">
+                <span className="block font-sans font-semibold text-ink">Nic Aslett</span>
+                <span className="block text-sm text-ink/70">Cache Valley, Utah</span>
+              </span>
+            </div>
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-balance">
               {heroHeadline}
             </h1>
-            <p className="text-xl md:text-2xl text-ink/80 max-w-2xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
+            <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto mb-10 font-sans leading-relaxed text-pretty">
               {heroSubhead}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-cta w-full sm:w-auto px-10 py-5 text-xl group"
-              >
-                Book a 30-minute call
-                <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </a>
+              <CallButton className="w-full sm:w-auto px-10 py-5 text-xl" />
               <Link
                 href="#it-check"
                 className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-4 text-lg font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
@@ -315,33 +380,40 @@ export default function Home() {
                 Take the 2-minute IT check
               </Link>
             </div>
+            <p className="mt-5 text-base text-ink/70">
+              {CALL_PROMISE}
+              {PHONE && (
+                <>
+                  {" "}Or call{" "}
+                  <a href={`tel:${PHONE.tel}`} className="font-semibold text-accent-link underline underline-offset-4">
+                    {PHONE.display}
+                  </a>
+                  .
+                </>
+              )}
+            </p>
           </div>
         </div>
       </header>
 
-      {/* Proof */}
-      <section className="pb-20 md:pb-28 bg-paper text-ink">
+      {/* Why trust me */}
+      <section className="pb-20 md:pb-24 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <div className="max-w-6xl mx-auto border-t border-ink/10 pt-12 md:pt-16">
-              <h2 className="eyebrow text-ink/60 mb-10 text-center md:text-left">
-                Results from IT teams I&apos;ve led
-              </h2>
-              <dl className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-                {proofPoints.map((point) => (
-                  <div key={point.figure} className="text-center md:text-left">
-                    <dt className="font-display text-6xl md:text-7xl text-accent mb-4">
-                      {point.figure}
-                    </dt>
-                    <dd className="text-lg text-ink/80 leading-relaxed text-pretty">
-                      {point.caption}
-                    </dd>
+            <h2 className="sr-only">Why work with me</h2>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+              {trustPoints.map((point) => {
+                const Icon = point.icon;
+                return (
+                  <div key={point.title} className="bg-surface border border-ink/10 rounded-2xl p-8 shadow-soft">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Icon className="w-6 h-6 text-accent" aria-hidden="true" />
+                      <h3 className="text-xl font-serif text-ink">{point.title}</h3>
+                    </div>
+                    <p className="text-lg text-ink/80 leading-relaxed">{point.text}</p>
                   </div>
-                ))}
-              </dl>
-              <p className="mt-10 text-sm text-ink/60 text-center md:text-left">
-                Past results from teams I led, not a promise. Every company starts from a different place.
-              </p>
+                );
+              })}
             </div>
           </SectionFade>
         </div>
@@ -394,7 +466,7 @@ export default function Home() {
                 <div className="space-y-16">
                   {steps.map((step, i) => (
                     <div key={step.title} className="flex gap-8 group">
-                      <span className="font-display text-5xl text-accent">
+                      <span className="font-display text-5xl text-accent w-14 shrink-0">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div>
@@ -406,15 +478,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-16">
-                  <a
-                    href={CALENDLY_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-cta px-10 py-4 text-lg group"
-                  >
-                    Book a 30-minute call
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  <CallButton className="px-10 py-4 text-lg" />
                 </div>
               </div>
               <div className="hidden lg:block relative">
@@ -450,25 +514,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Currently */}
-      <section className="py-20 md:py-28 bg-paper text-ink">
+      {/* Track record */}
+      <section className="py-24 md:py-32 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-6xl mx-auto">
-              <p className="eyebrow text-accent mb-6">Currently</p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <div className="space-y-8">
-                  <h2 className="font-display text-4xl md:text-5xl text-ink text-balance">
-                    Fractional CTO for edZOOcation, a Shopify Plus education company.
-                  </h2>
+              <h2 className="font-display text-4xl md:text-6xl mb-12 text-ink text-balance">
+                Results from IT teams I&apos;ve led
+              </h2>
+              <dl className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+                {proofPoints.map((point) => (
+                  <div key={point.figure}>
+                    <dt className="font-display text-6xl md:text-7xl text-accent mb-4">
+                      {point.figure}
+                    </dt>
+                    <dd className="text-lg text-ink/80 leading-relaxed text-pretty">
+                      {point.caption}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-10 text-sm text-ink/60">
+                Past results from teams I led, not a promise. Every company starts from a different place.
+              </p>
+
+              <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="bg-surface p-8 md:p-10 rounded-2xl border border-ink/10 shadow-soft">
+                  <p className="eyebrow text-accent mb-4">Right now</p>
                   <p className="text-lg text-ink/90 leading-relaxed">
-                    I designed and built their order-to-subscription automation. Then I handed the platform to their team and stepped into the leadership seat.
+                    I&apos;m the part-time technology lead for edZOOcation, an online education company. Their team was losing about 8 hours a week to manual order work. I fixed the process, handed it to their team, and now lead their technology part-time.
                   </p>
                 </div>
-                <div className="bg-surface p-10 md:p-12 rounded-2xl border border-ink/10 shadow-soft">
-                  <p className="font-display text-5xl md:text-6xl text-accent mb-4">~8 hours/week</p>
-                  <p className="text-xl md:text-2xl text-ink leading-relaxed">
-                    of manual work eliminated. The team now runs its own systems.
+                <div className="bg-surface p-8 md:p-10 rounded-2xl border border-ink/10 shadow-soft">
+                  <p className="eyebrow text-accent mb-4">Before Cache Valley</p>
+                  <p className="text-lg text-ink/90 leading-relaxed">
+                    15+ years in IT: VP of IT at Fortidia, IT Manager at Charter Communications over a 40-person testing team, and leading multi-team technology projects at Liqid.
                   </p>
                 </div>
               </div>
@@ -477,22 +557,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Experience */}
-      <section className="py-16 md:py-20 bg-paper border-y border-ink/5">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="eyebrow text-ink/60 mb-6">Experience</h2>
-              <p className="font-display text-2xl md:text-3xl text-ink leading-snug text-balance">
-                15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid.
-              </p>
-            </div>
-          </SectionFade>
-        </div>
-      </section>
-
       {/* About */}
-      <section id="about" className="py-24 md:py-32 bg-surface border-b border-ink/5 scroll-mt-24">
+      <section id="about" className="py-24 md:py-32 bg-surface border-y border-ink/5 scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
@@ -512,18 +578,10 @@ export default function Home() {
                     I&apos;ve spent 15 years in IT, the last 10 leading teams of up to 40 people. I&apos;ve taken over IT departments that weren&apos;t working and turned them around.
                   </p>
                   <p>
-                    When I moved to Cache Valley, I chose to do this for local companies instead of one employer. When you hire Sylentt, you get me, and you get the same approach I used to turn around departments of 16 people, scaled to fit yours.
+                    When I moved to Cache Valley, I chose to do this for local companies instead of one employer. When you hire Sylentt, you get me, and the same approach I used to turn around departments of 16 people, scaled to fit yours.
                   </p>
                   <p>
                     The name comes from &ldquo;silent partner&rdquo;: I work in the background so you can run your business.
-                  </p>
-                </div>
-                <div className="mt-8 bg-paper p-6 rounded-xl border border-ink/10 shadow-soft">
-                  <h3 className="font-serif text-lg font-bold text-ink mb-2">
-                    What is Sylentt Partners?
-                  </h3>
-                  <p className="text-base text-ink/90 leading-relaxed font-sans">
-                    Sylentt Partners is my fractional CIO practice in Cache Valley, Utah. I lead IT and AI decisions, part-time, for {AUDIENCE} that have an IT company for support but no one steering. You work with me directly. That&apos;s the point.
                   </p>
                 </div>
               </div>
@@ -617,21 +675,21 @@ export default function Home() {
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="font-display text-4xl md:text-6xl mb-6 text-paper text-balance">
-                Book a 30-minute call
+                {CALL_CTA}
               </h2>
               <p className="text-xl text-paper/70 mb-12 text-pretty">
-                Tell me how IT works at your company today. I&apos;ll tell you honestly whether I can help.
+                Tell me how IT works at your company today. You&apos;ll leave knowing what I&apos;d fix first, whether or not you hire me.
               </p>
-              <div className="flex flex-col items-center gap-8 mb-16">
-                <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-cta px-10 py-5 text-xl group"
-                >
-                  Book a 30-minute call
-                  <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                </a>
+              <div className="flex flex-col items-center gap-6 mb-16">
+                <CallButton className="px-10 py-5 text-xl" />
+                {PHONE && (
+                  <p className="text-paper/70">
+                    Or call{" "}
+                    <a href={`tel:${PHONE.tel}`} className="font-semibold text-paper underline underline-offset-4">
+                      {PHONE.display}
+                    </a>
+                  </p>
+                )}
               </div>
 
               <div className="w-full h-px bg-paper/10 mb-20" />
