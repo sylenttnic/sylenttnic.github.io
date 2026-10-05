@@ -4,7 +4,7 @@ This is the brief the main site was rewritten from on 2026-10-05. It replaces th
 
 ## Positioning
 
-Fractional IT & AI leadership for Cache Valley companies with roughly 30–300 employees that have an MSP for helpdesk but no one steering IT. Nic Aslett (owner) was VP of IT at Fortidia, IT Manager at Charter Communications, Release Train Engineer at Liqid, and is currently fractional CTO for edZOOcation. Sell the leader, not the engineer.
+Fractional IT & AI leadership for Cache Valley companies with roughly 20 to 150 employees that have an MSP for helpdesk but no one steering IT. Nic Aslett (owner) was VP of IT at Fortidia, IT Manager at Charter Communications (leading a 40-person QA team), Release Train Engineer at Liqid, and is currently fractional CTO for edZOOcation. Sell the leader, not the engineer.
 
 ## Preserve
 
@@ -18,9 +18,15 @@ Fractional IT & AI leadership for Cache Valley companies with roughly 30–300 e
 
 First person ("I"), not "we". Sylentt Partners remains the business name; the site makes clear the client works with Nic directly and that this is the point. Plain English an owner of a 60-person manufacturer or dental group reads in 90 seconds on a phone. Confident, specific, no hype. Short sentences.
 
+**No em dashes (—), ever, anywhere the site serves.** That covers page copy, meta tags, JSON-LD, llms files, sitemap comments, and the `/webdesign/` demo sites including their code comments. Use a comma, a colon, a period or parentheses. `npm run check:copy` fails the build on any em dash. Nic's rule.
+
+## Hero
+
+"An IT director, without the salary." / "Part-time IT and AI leadership for Cache Valley companies. From $1,500 a month." The hero answers why the visitor is here: this is what you get, and this is what it costs. Keep it that short.
+
 ## Offer
 
-1. **Assessment** (2 weeks, fixed price). Inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; deliver a 12-month roadmap and present it in person. Deliverables: system and subscription inventory, vendor and contract review, security basics check, AI opportunity-and-risk map, 12-month roadmap, 60-minute in-person readout.
+1. **Assessment** (2 weeks, one fixed price). Inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; deliver a 12-month plan and present it in person. Deliverables are listed in `lib/offer.ts` and include a one-page AI policy.
 2. **Retainer.** Nic becomes the client's IT director for a set number of hours a month: runs the roadmap, manages the MSP and vendors, makes the decisions, answers the questions.
 3. **You own everything.** Documentation, roadmap, policies, vendor relationships: all the client's, in their accounts, from day one.
 
@@ -30,16 +36,23 @@ What Nic doesn't do: helpdesk, hardware repair, after-hours support, building so
 
 Fixed and published, no "contact for quote". Source of truth: `lib/offer.ts`.
 
-- IT & AI Assessment: $1,500, fixed. 2 weeks. Credited toward the first month if the client continues.
-- Advisor: $1,950/month. Up to 6 hours. Monthly leadership meeting, roadmap kept current, vendor and MSP oversight, AI policy and tool vetting, unlimited questions by email with next-business-day answers.
-- Director: $3,500/month. Up to 12 hours. Everything in Advisor, plus weekly check-in, a seat in leadership meetings, ownership of IT budget and renewals, and leading AI and technology projects end to end.
-- "Month-to-month. 30 days' notice. Everything I produce is yours." Hours are a cap, not a target.
+**Make it as plain as a drive-through menu.** A visitor should understand every option without contacting Nic. Few options, each one price and a short list of what you get, and every question about hours answered on the page. Do not add tiers, add-ons or conditions that need explaining.
+
+How the prices were set (2026-10-05): from published averages for fractional CIO and MSP vCIO work (fractional CIO roughly $150 to $300 an hour; small-business retainers roughly $1,500 to $5,000 a month; small-business IT assessments roughly $2,000 to $5,000), weighted down for a small community and for clients that are not tech companies. The assessment is priced low on purpose, as the way in for a new client.
+
+- IT & AI Assessment: $1,500, one time. 2 weeks. If the client continues, the $1,500 comes off the first month.
+- Advisor: $1,500 a month. Up to 8 hours.
+- Director: $2,500 a month. Up to 16 hours.
+- "Month-to-month. 30 days' notice. Everything I produce is yours."
+- Hours cover meetings, email, and work done for the client. Extra hours are $150 each, only if the client says yes first. Unused hours don't carry over.
 
 ## Proof
 
-- 100% on-time project delivery, after introducing real project management to a 16-person IT org
-- 80% faster ticket resolution: 150 hours to 30
-- SLA adherence doubled: 40% to 80%
+Shown under the label "Results from IT teams I've led", written as past results, with "Past results from teams I led, not a promise" underneath. Never word them as something a client will get.
+
+- 100% on-time project delivery, as a rolling average, after introducing real project management to a 16-person IT department
+- 80% faster ticket resolution: from 150 hours to 30
+- SLA adherence doubled: from 40% to 80%
 
 ## Testimonials
 
@@ -73,3 +86,12 @@ The check allows four exact phrases from the approved copy that contain a listed
 - The quiz has no lead form. Completion sends one anonymous GA4 event, `it_check_complete`, with the result pattern and answers.
 - The `/pricing/` inquiry form was removed; every plan books a 30-minute call on Calendly.
 - On `/webdesign/` pages, the nav link back to sylentt.com reads "Main site".
+
+## Changes approved by Nic (2026-10-05, second round)
+
+- Hero rewritten to "An IT director, without the salary."
+- Proof numbers labeled and worded as past results; the 100% figure is a rolling average.
+- Charter: "leading a 40-person QA team".
+- Audience narrowed to about 20 to 150 people.
+- Pricing simplified and lowered (see Pricing). Hours rules published under the plans.
+- Em dashes removed from everything the site serves, and the check enforces it. The `/webdesign/` demo sites are generated in Nic's separate pipeline repo, which needs the same rule or the next sample update will fail this deploy check.
