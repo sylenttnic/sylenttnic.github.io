@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   RotateCcw,
   Plug,
-  Eye,
 } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
@@ -337,38 +336,6 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4">
           <SectionFade>
             <CostCalculator heading="What is the manual work costing you?" />
-          </SectionFade>
-        </div>
-      </section>
-
-      {/* Build Process Card */}
-      <section className="py-24 md:py-32 bg-paper border-b border-ink/5">
-        <div className="container mx-auto px-4">
-          <SectionFade>
-            <div className="max-w-4xl mx-auto">
-              <Link
-                href="/services/agents"
-                className="group block bg-surface border border-ink/10 p-10 md:p-16 rounded-2xl shadow-soft transition-all hover:border-accent/30 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-              >
-                <div className="flex items-center gap-6 mb-8">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full bg-paper border border-ink/10 flex items-center justify-center group-hover:border-accent/20 transition-colors">
-                    <Eye className="w-8 h-8 text-accent" />
-                  </div>
-                  <h2 className="font-display text-3xl md:text-4xl text-ink">
-                    How we build it
-                  </h2>
-                </div>
-                <p className="text-ink text-xl mb-8 leading-relaxed font-medium">
-                  Every integration follows the same structured process. Six
-                  phases, multiple quality checkpoints, and nothing goes live
-                  without your approval.
-                </p>
-                <div className="flex items-center text-accent font-bold text-lg group-hover:translate-x-2 transition-transform">
-                  See the build process{" "}
-                  <ArrowRight className="ml-2 w-6 h-6" />
-                </div>
-              </Link>
-            </div>
           </SectionFade>
         </div>
       </section>

@@ -33,12 +33,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://sylentt.com/services/agents/</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
   <!-- lastmod IS A CLAIM ABOUT THE FILE, AND A STALE ONE SUPPRESSES RECRAWL.
        Every URL below carried 2026-03-14 while /webdesign/ was rewritten
        repeatedly through August and September, so the one signal that tells a
