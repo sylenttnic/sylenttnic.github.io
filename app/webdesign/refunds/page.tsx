@@ -33,7 +33,7 @@ export default function BillingAndCancellation() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Billing &amp; Cancellation</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC &middot; Effective 13 September 2026
+        Sylentt Partners LLC &middot; Effective 5 October 2026
       </p>
 
       <div className="border-l-4 border-accent pl-4 py-2 my-6 bg-surface/50 text-ink/90 rounded-r">
@@ -74,7 +74,7 @@ export default function BillingAndCancellation() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">What happens to the site when you cancel</h2>
           <p>
-            If you cancel, we take the site offline at the end of your paid period. There is nothing for you to return and no account to close. If you have been on the plan for <strong>twelve months</strong>, the site&apos;s code repository has been transferred into your name and is yours to keep and host anywhere, whether or not you continue with us. If you cancel before twelve months, the code is not transferred.
+            If you cancel, we take the site offline at the end of your paid period. There is nothing for you to return and no account to close.
           </p>
         </section>
 

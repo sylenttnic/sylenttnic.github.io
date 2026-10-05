@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 13 September 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 5 October 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -68,15 +68,12 @@ export default function TermsOfService() {
             <li>
               Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong>.
             </li>
-            <li>
-              <strong>Your own code repository</strong> containing everything the site is made of, transferred into your name after twelve months on the plan (see section 4). You can then hand it to any developer you like, at any time, without asking us.
-            </li>
             <li>Reasonable help getting it live and pointed at your domain.</li>
           </ul>
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-ink mt-8 mb-3">4. The free month, the monthly plan, and when the code becomes yours</h2>
+          <h2 className="text-xl font-bold text-ink mt-8 mb-3">4. The free month and the monthly plan</h2>
           <p>
             We want to be completely straightforward about this, because it is the part that matters most.
           </p>
@@ -85,15 +82,6 @@ export default function TermsOfService() {
           </p>
           <p className="mt-3">
             Starting the free 30 days does not require a card. Add one before day 30 and the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. Add none and the trial simply ends at day 30: nothing is charged, and the site comes down. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
-          </p>
-          <p className="mt-3">
-            <strong>Stay on the plan for twelve months and the code becomes yours.</strong> At that point we transfer the site&apos;s code repository into your name, to keep and host anywhere, whether or not you continue with us afterwards. <strong>If you cancel before twelve months, the site comes down and the code is not transferred</strong> - the plan is what keeps the site live, and the twelve months is what earns the handover. We say this plainly here so it is never a surprise.
-          </p>
-          <p className="mt-3">
-            Transferring a repository needs a free account with our code host, and we&apos;ll walk you through it. It takes a couple of minutes and you only ever do it once.
-          </p>
-          <p className="mt-3">
-            While you are on the plan we host the site for you and the code can stay private. If you take the code after the twelve months and want to host it yourself, our code host offers free hosting for public repositories; keeping it private then needs a paid plan with them. Either way, that only affects who can read the code behind the site, never the website your customers see.
           </p>
         </section>
 
@@ -127,14 +115,14 @@ export default function TermsOfService() {
             It does not cover redesigns, new pages, or new functionality. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
           </p>
           <p className="mt-3">
-            <strong>You can cancel at any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then. If you have completed twelve months on the plan, the code repository is already yours to keep (section 4).
+            <strong>You can cancel at any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then.
           </p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">7. Ownership</h2>
           <p>
-            While you are on the plan, the website is yours to use, show to customers and rely on as your own. The design, layout and copy were made for you and for no one else. The code itself transfers into your name after twelve months on the plan (section 4); until then we host and maintain it for you. Once transferred, you may modify, host, sell or discard it as you see fit, and we keep no claim over it. We may reference the work as an example of what we do, unless you ask us not to.
+            While you are on the plan, the website is yours to use, show to customers and rely on as your own. The design, layout and copy were made for you and for no one else. We host and maintain it for you. We may reference the work as an example of what we do, unless you ask us not to.
           </p>
           <p className="mt-3">
             Your business name, logo, trademarks, photographs and customer reviews remain yours and always were.
