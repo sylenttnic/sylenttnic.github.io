@@ -12,17 +12,17 @@ interface SectionFadeProps {
 export default function SectionFade({ children, className = "", delay = 0 }: SectionFadeProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  // Reduced motion: render content immediately with no transform/opacity animation.
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
+  // Always render the same motion.div, on the server and in the browser.
+  // Returning a plain <div> for reduced motion made the browser's first render
+  // differ from the static HTML, React kept the HTML's inline opacity:0, and
+  // every section stayed invisible for visitors with "reduce motion" turned on.
+  // Reduced motion now makes the reveal instant instead.
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay, ease: "easeOut" }}
       className={className}
     >
       {children}
