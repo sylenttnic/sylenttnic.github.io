@@ -10,11 +10,11 @@ import {
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
-import { CALENDLY_URL, EXTRA_HOUR_PRICE, plans, planById, planOfferJsonLd, assessmentDeliverables } from "@/lib/offer";
+import { CALENDLY_URL, CALL_CTA, CALL_PROMISE, EXTRA_HOUR_PRICE, INDEPENDENCE, plans, planById, planOfferJsonLd, assessmentDeliverables } from "@/lib/offer";
 
 const pageTitle = "Fractional CIO Services in Cache Valley | Sylentt Partners";
 const pageDescription =
-  "A fixed-price IT and AI assessment, then a part-time IT director on a monthly plan. What's included, and what I don't do.";
+  "A part-time IT director on a monthly plan, with an optional fixed-price IT and AI assessment first. Independent: no commissions, nothing to sell.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -58,10 +58,10 @@ const offers: {
 }[] = [
   {
     icon: ClipboardList,
-    eyebrow: `2 weeks · ${assessment.price}, one time`,
+    eyebrow: `Optional · 2 weeks · ${assessment.price}, one time`,
     title: "IT & AI Assessment",
     detail:
-      "I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; and deliver a 12-month roadmap, presented to you in person.",
+      "I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; and deliver a 12-month plan, walked through with you in person.",
     cards: [
       { label: "What's included", items: assessmentDeliverables },
       {
@@ -75,7 +75,7 @@ const offers: {
     eyebrow: "Advisor or Director",
     title: "Monthly retainer",
     detail:
-      "I become your IT director for a set number of hours a month. I run the roadmap, manage your MSP and vendors, make the decisions, and answer the questions.",
+      "I become your IT director for a set number of hours a month. I keep the plan current, manage your IT company and vendors, make the decisions, and answer the questions.",
     cards: [
       {
         label: "What's included",
@@ -94,7 +94,7 @@ const offers: {
     icon: KeyRound,
     title: "You own everything",
     detail:
-      "Documentation, roadmap, policies, vendor relationships: all yours, in your accounts, from day one.",
+      "Documentation, plans, policies, vendor relationships: all yours, in your accounts, from day one.",
     cards: [
       {
         label: "What that means",
@@ -152,7 +152,7 @@ const jsonLdService = {
     { "@type": "Place", name: "Northern Utah" },
   ],
   description:
-    "Part-time IT and AI leadership from Nic Aslett: a fixed-price, two-week IT and AI assessment, then a monthly retainer as the company's IT director. Month-to-month with 30 days' notice; the client keeps everything produced. Not included: helpdesk, hardware repair, after-hours support, or building software.",
+    "Part-time IT and AI leadership from Nic Aslett: an optional fixed-price, two-week IT and AI assessment, and a monthly retainer as the company's IT director. Independent: no hardware, software or support sales, and no commissions or referral fees. Month-to-month with 30 days' notice; the client keeps everything produced. Not included: helpdesk, hardware repair, after-hours support, or building software.",
   offers: plans.map(planOfferJsonLd),
 };
 
@@ -174,7 +174,7 @@ export default function ServicesPage() {
             Two ways to work with me.
           </h1>
           <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto font-sans leading-relaxed mb-12 text-pretty">
-            Start with a two-week assessment. If it&apos;s useful, I stay on as your part-time IT director.
+            Start with an optional two-week assessment, or go straight to a monthly plan. Either way, you work with me directly.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -184,7 +184,7 @@ export default function ServicesPage() {
               rel="noopener noreferrer"
               className="btn-cta w-full sm:w-auto px-10 py-4 text-lg group"
             >
-              Book a 30-minute call
+              {CALL_CTA}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
 
@@ -214,6 +214,7 @@ export default function ServicesPage() {
                   <li><strong className="text-ink">Decisions:</strong> one person owns the technology and AI calls, so they stop defaulting to whoever is closest.</li>
                   <li><strong className="text-ink">Oversight:</strong> your IT company and vendors are managed and held to what you pay for.</li>
                   <li><strong className="text-ink">Ownership:</strong> every document, policy, and account stays yours.</li>
+                  <li><strong className="text-ink">Independence:</strong> {INDEPENDENCE}</li>
                 </ul>
               </div>
             </div>
@@ -346,7 +347,7 @@ export default function ServicesPage() {
                 Not sure where you stand?
               </h2>
               <p className="text-ink/90 text-xl mb-10">
-                Take the 2-minute IT check, or book a 30-minute call.
+                Take the 2-minute IT check, or book a free 30-minute call. {CALL_PROMISE}
               </p>
               <a
                 href={CALENDLY_URL}
@@ -354,7 +355,7 @@ export default function ServicesPage() {
                 rel="noopener noreferrer"
                 className="btn-cta px-10 py-4 text-lg group"
               >
-                Book a 30-minute call
+                {CALL_CTA}
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>

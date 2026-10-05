@@ -4,23 +4,29 @@
 
 Sylentt Partners LLC trades as Sylentt. Clients work with Nic Aslett directly. There is no team behind him, and that is the point: a client gets the same person who has run IT departments for organizations their size.
 
+## Independent
+
+Nic sells no hardware, software or support, and takes no commissions or referral fees from vendors or IT companies. The only party paying him is the client, so his recommendations are not tied to a sale.
+
 ## Who it is for
 
-Cache Valley and Northern Utah companies with roughly 20 to 150 employees that have an IT company (a managed service provider) for day-to-day support but no one steering IT. Typical signs: nobody owns technology decisions, software renews without anyone choosing it, nobody owns the company's approach to AI, and the knowledge of how the systems work lives with one person.
+Cache Valley and Northern Utah companies with roughly 20 to 150 employees that have an IT company for day-to-day support but no one steering IT. Typical signs: nobody owns technology decisions, software renews without anyone choosing it, nobody owns the company's approach to AI, and the knowledge of how the systems work lives with one person.
 
 ## How it works
 
-1. **IT & AI Assessment.** Two weeks, one fixed price. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month roadmap, presented in person.
-2. **Retainer.** Nic becomes the company's IT director for a set number of hours a month. He runs the roadmap, manages the IT company and other vendors, makes the decisions, and answers the questions.
-3. **The client owns everything.** Documentation, roadmap, policies, vendor relationships: all the client's, in the client's accounts, from day one.
+1. **A free 30-minute call.** The client describes how IT works today and leaves knowing what Nic would fix first, whether or not they hire him.
+2. **IT & AI Assessment (optional).** Two weeks, one fixed price. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month plan, walked through in person. Clients can skip it and start on a monthly plan.
+3. **Retainer.** Nic becomes the company's IT director for a set number of hours a month. He keeps the plan current, manages the IT company and other vendors, makes the decisions, and answers the questions.
+
+The client owns everything: documentation, plans, policies, vendor relationships, all in the client's accounts from day one.
 
 ## Pricing
 
 Fixed and published at https://sylentt.com/pricing/.
 
-- **IT & AI Assessment: $1,500, one time.** Two weeks. If the client continues on a monthly plan, the $1,500 comes off the first month. Includes every system, subscription and vendor the client pays for, listed with its cost; contract and renewal dates in one place; a security basics check; where AI can help and where it is a risk; a one-page AI policy for the team; a 12-month plan; and a 1-hour walkthrough in person.
-- **Advisor: $1,500 a month.** Up to 8 hours a month. A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
-- **Director: $2,500 a month.** Up to 16 hours a month. Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
+- **IT & AI Assessment: $1,500, one time, optional.** Two weeks. If the client continues on a monthly plan, the $1,500 comes off the first month. Includes every system, subscription and vendor the client pays for, listed with its cost; contract and renewal dates in one place; a security basics check; where AI can help and where it is a risk; a one-page AI policy for the team; a 12-month plan; and a 1-hour walkthrough in person.
+- **Advisor: $1,500 a month.** Up to 8 hours a month. Best for most companies under 50 people. A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
+- **Director: $2,500 a month.** Up to 16 hours a month. Best for 50 to 150 people, or a big project on the way. Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
 
 Month-to-month. 30 days' notice. Everything Nic produces belongs to the client. Hours cover meetings, email, and work done for the client. Extra hours are $150 each, only with the client's approval first. Unused hours do not carry over.
 
@@ -34,13 +40,13 @@ Helpdesk, hardware repair, after-hours support, or building software. When somet
 
 Past results from IT teams Nic has led (results, not a promise for any client):
 
-- 100% on-time project delivery, as a rolling average, after he brought real project management to a 16-person IT department
-- 80% faster ticket resolution: from 150 hours to 30
-- SLA adherence doubled: from 40% to 80%
+- Projects finished on time: 100% (rolling average) after he brought real project management to a 16-person IT department
+- Employees' IT problems fixed 5 times faster: 30 hours instead of 150
+- Promised response times met twice as often: 80% of the time, up from 40%
 
 ## Currently
 
-Fractional CTO for edZOOcation (https://edzoocation.com/), a Shopify Plus education company. Nic designed and built their order-to-subscription automation, then handed the platform to their team and stepped into the leadership seat. About 8 hours a week of manual work was eliminated, and the team now runs its own systems.
+Part-time technology lead (fractional CTO) for edZOOcation (https://edzoocation.com/), an online education company. Their team was losing about 8 hours a week to manual order work. Nic fixed the process, handed it to their team, and now leads their technology part-time.
 
 ## Service area
 
@@ -51,7 +57,7 @@ In person across Cache Valley and Northern Utah. Remote work elsewhere is the ex
 - Website: https://sylentt.com
 - Services: https://sylentt.com/services/
 - Pricing: https://sylentt.com/pricing/
-- Book a 30-minute call: https://calendly.com/nic-sylentt/30min
+- Book a free 30-minute call: https://calendly.com/nic-sylentt/30min
 - Email: contact@sylentt.com
 - LinkedIn: https://www.linkedin.com/in/nic-aslett/
 - Location: Cache Valley, Utah, United States

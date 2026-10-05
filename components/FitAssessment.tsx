@@ -16,7 +16,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { CALENDLY_URL } from "@/lib/offer";
+import { CALENDLY_URL, CALL_CTA } from "@/lib/offer";
 
 // Each answer adds points toward one or more result patterns. The pattern with
 // the most points is the result. Ties go to the earlier pattern in PATTERN_ORDER,
@@ -219,7 +219,7 @@ export default function FitAssessment() {
             rel="noopener noreferrer"
             className="btn-cta px-8 py-4 text-lg group"
           >
-            Book a 30-minute call
+            {CALL_CTA}
             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
 

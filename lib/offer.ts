@@ -10,6 +10,22 @@
 
 export const CALENDLY_URL = "https://calendly.com/nic-sylentt/30min";
 
+// Every "book a call" button says the call is free. Use these, not new wording.
+export const CALL_CTA = "Book a free 30-minute call";
+export const CALL_CTA_SHORT = "Book a free call";
+export const CALL_PROMISE = "Free, no obligation. You'll leave knowing what I'd fix first.";
+
+// Nic's phone. Leave null until there is a number; every place that shows a
+// phone checks this first, so setting it here turns them all on.
+// Example: { display: "(720) 555-0100", tel: "+17205550100" }
+export const PHONE: { display: string; tel: string } | null = null;
+
+// The independence line. True as of 2026-10-05 (Nic): no resale, no
+// commissions, no referral deals. If that ever changes, change this sentence
+// and every place that uses it the same day.
+export const INDEPENDENCE =
+  "I don't sell hardware, software or support, and I take no commissions or referral fees. The only person paying me is you.";
+
 // Who this is for, in one phrase, used wherever the site names the audience.
 export const AUDIENCE = "companies of about 20 to 150 people";
 
@@ -28,6 +44,7 @@ export const HOURS_RULES = [
 export type Plan = {
   id: "assessment" | "advisor" | "director";
   name: string;
+  bestFor: string;
   price: string;
   priceUnit: string;
   priceValue: string;
@@ -52,6 +69,7 @@ export const plans: Plan[] = [
   {
     id: "assessment",
     name: "IT & AI Assessment",
+    bestFor: "Best for seeing exactly what you have and what to fix first, before you commit.",
     price: "$1,500",
     priceUnit: "one time",
     priceValue: "1500",
@@ -63,6 +81,7 @@ export const plans: Plan[] = [
   {
     id: "advisor",
     name: "Advisor",
+    bestFor: "Best for most companies under 50 people.",
     price: "$1,500",
     priceUnit: "/month",
     priceValue: "1500",
@@ -80,6 +99,7 @@ export const plans: Plan[] = [
   {
     id: "director",
     name: "Director",
+    bestFor: "Best for 50 to 150 people, or a big project on the way.",
     price: "$2,500",
     priceUnit: "/month",
     priceValue: "2500",
