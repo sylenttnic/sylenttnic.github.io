@@ -1,16 +1,16 @@
 # Sylentt
 
-> Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 30 to 300 employees.
+> Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 20 to 150 employees.
 
 Sylentt Partners LLC trades as Sylentt. Clients work with Nic Aslett directly. There is no team behind him, and that is the point: a client gets the same person who has run IT departments for organizations their size.
 
 ## Who it is for
 
-Cache Valley and Northern Utah companies with roughly 30 to 300 employees that have an IT company (a managed service provider) for day-to-day support but no one steering IT. Typical signs: nobody owns technology decisions, software renews without anyone choosing it, nobody owns the company's approach to AI, and the knowledge of how the systems work lives with one person.
+Cache Valley and Northern Utah companies with roughly 20 to 150 employees that have an IT company (a managed service provider) for day-to-day support but no one steering IT. Typical signs: nobody owns technology decisions, software renews without anyone choosing it, nobody owns the company's approach to AI, and the knowledge of how the systems work lives with one person.
 
 ## How it works
 
-1. **IT & AI Assessment.** Two weeks, fixed price. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month roadmap, presented in person.
+1. **IT & AI Assessment.** Two weeks, one fixed price. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month roadmap, presented in person.
 2. **Retainer.** Nic becomes the company's IT director for a set number of hours a month. He runs the roadmap, manages the IT company and other vendors, makes the decisions, and answers the questions.
 3. **The client owns everything.** Documentation, roadmap, policies, vendor relationships: all the client's, in the client's accounts, from day one.
 
@@ -18,11 +18,11 @@ Cache Valley and Northern Utah companies with roughly 30 to 300 employees that h
 
 Fixed and published at https://sylentt.com/pricing/.
 
-- **IT & AI Assessment: $1,500, fixed.** Two weeks. Credited toward the first month if the client continues. Includes a system and subscription inventory, vendor and contract review, security basics check, AI opportunity-and-risk map, 12-month roadmap, and a 60-minute in-person readout.
-- **Advisor: $1,950 a month.** Up to 6 hours a month. Monthly leadership meeting, roadmap kept current, vendor and MSP oversight, AI policy and tool vetting, and unlimited questions by email with next-business-day answers.
-- **Director: $3,500 a month.** Up to 12 hours a month. Everything in Advisor, plus a weekly check-in, a seat in the client's leadership meetings, ownership of IT budget and renewals, and leading AI and technology projects end to end.
+- **IT & AI Assessment: $1,500, one time.** Two weeks. If the client continues on a monthly plan, the $1,500 comes off the first month. Includes every system, subscription and vendor the client pays for, listed with its cost; contract and renewal dates in one place; a security basics check; where AI can help and where it is a risk; a one-page AI policy for the team; a 12-month plan; and a 1-hour walkthrough in person.
+- **Advisor: $1,500 a month.** Up to 8 hours a month. A leadership meeting every month, management of the IT company and other vendors, the 12-month plan kept current, new software and AI tools checked before purchase, and email answers by the next business day.
+- **Director: $2,500 a month.** Up to 16 hours a month. Everything in Advisor, plus a check-in every week, ownership of the IT budget and renewals, and running one technology or AI project at a time.
 
-Month-to-month. 30 days' notice. Everything Nic produces belongs to the client. Hours are a cap, not a target.
+Month-to-month. 30 days' notice. Everything Nic produces belongs to the client. Hours cover meetings, email, and work done for the client. Extra hours are $150 each, only with the client's approval first. Unused hours do not carry over.
 
 ## What Nic does not do
 
@@ -30,13 +30,13 @@ Helpdesk, hardware repair, after-hours support, or building software. When somet
 
 ## Experience
 
-15+ years in IT, the last 10 leading teams, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.
+15+ years in IT, the last 10 leading teams of up to 40 people, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid.
 
-Results from IT departments Nic has led:
+Past results from IT teams Nic has led (results, not a promise for any client):
 
-- 100% on-time project delivery, after introducing real project management to a 16-person IT department
-- 80% faster ticket resolution: 150 hours to 30
-- SLA adherence doubled: 40% to 80%
+- 100% on-time project delivery, as a rolling average, after he brought real project management to a 16-person IT department
+- 80% faster ticket resolution: from 150 hours to 30
+- SLA adherence doubled: from 40% to 80%
 
 ## Currently
 

@@ -10,7 +10,7 @@ import {
 import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
 import type { Metadata } from "next";
-import { CALENDLY_URL, plans, planOfferJsonLd, assessmentDeliverables } from "@/lib/offer";
+import { CALENDLY_URL, EXTRA_HOUR_PRICE, plans, planById, planOfferJsonLd, assessmentDeliverables } from "@/lib/offer";
 
 const pageTitle = "Fractional CIO Services in Cache Valley | Sylentt Partners";
 const pageDescription =
@@ -36,10 +36,9 @@ export const metadata: Metadata = {
   },
 };
 
-const plan = (id: string) => plans.find((p) => p.id === id)!;
-const assessment = plan("assessment");
-const advisor = plan("advisor");
-const director = plan("director");
+const assessment = planById("assessment");
+const advisor = planById("advisor");
+const director = planById("director");
 
 type OfferCard = {
   label: string;
@@ -59,7 +58,7 @@ const offers: {
 }[] = [
   {
     icon: ClipboardList,
-    eyebrow: `2 weeks · ${assessment.price}, fixed`,
+    eyebrow: `2 weeks · ${assessment.price}, one time`,
     title: "IT & AI Assessment",
     detail:
       "I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; and deliver a 12-month roadmap, presented to you in person.",
@@ -67,7 +66,7 @@ const offers: {
       { label: "What's included", items: assessmentDeliverables },
       {
         label: "What it costs",
-        text: `${assessment.price}, fixed. Two weeks. If you continue on a monthly plan, it's credited toward your first month. If you don't, the roadmap is still yours.`,
+        text: `${assessment.price}, one time. Two weeks. Continue on a monthly plan and the ${assessment.price} comes off your first month. If you don't continue, the plan is still yours.`,
       },
     ],
   },
@@ -86,7 +85,7 @@ const offers: {
       },
       {
         label: "Plans",
-        text: `Advisor ${advisor.price}/month, up to 6 hours. Director ${director.price}/month, up to 12 hours. Month-to-month, 30 days' notice.`,
+        text: `Advisor: ${advisor.price} a month, up to ${advisor.hours} hours. Director: ${director.price} a month, up to ${director.hours} hours. Month-to-month, 30 days' notice. Extra hours are ${EXTRA_HOUR_PRICE} each, only if you say yes first.`,
         link: { href: "/pricing/", label: "See pricing" },
       },
     ],

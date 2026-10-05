@@ -3,10 +3,17 @@ import FitAssessment from "@/components/FitAssessment";
 import SectionFade from "@/components/ui/SectionFade";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { CALENDLY_URL, plans, planOfferJsonLd } from "@/lib/offer";
+import { CALENDLY_URL, AUDIENCE, EXTRA_HOUR_PRICE, plans, planById, planOfferJsonLd } from "@/lib/offer";
 
 const pageTitle = "Sylentt Partners | Fractional CIO for Cache Valley Companies";
-const socialTitle = "Run your business, not your IT. | Sylentt Partners";
+const advisor = planById("advisor");
+const director = planById("director");
+
+const heroHeadline = "An IT director, without the salary.";
+// Non-breaking spaces keep "From $1,500 a month." on one line on phones.
+const heroSubhead = `Part-time IT and AI leadership for Cache Valley companies. From\u00A0${advisor.price}\u00A0a\u00A0month.`;
+
+const socialTitle = `${heroHeadline} | Sylentt Partners`;
 const pageDescription =
   "Fractional CIO for Cache Valley companies. Work directly with Nic Aslett, a part-time IT director with a full-time track record. Fixed, published prices.";
 
@@ -30,19 +37,22 @@ export const metadata: Metadata = {
   },
 };
 
+// Past results, written as past results. Each one says what was measured and
+// where it came from, and the line under them says plainly that they are not a
+// promise. Do not reword these into anything that reads as a guarantee.
 const proofPoints = [
   {
     figure: "100%",
     caption:
-      "On-time project delivery, after introducing real project management to a 16-person IT department.",
+      "On-time project delivery, as a rolling average, after I brought real project management to a 16-person IT department.",
   },
   {
     figure: "80%",
-    caption: "Faster ticket resolution: 150 hours to 30.",
+    caption: "Faster ticket resolution: from 150 hours to 30.",
   },
   {
     figure: "2×",
-    caption: "SLA adherence doubled: 40% to 80%.",
+    caption: "SLA adherence doubled: from 40% to 80%.",
   },
 ];
 
@@ -153,7 +163,7 @@ const faqItems: {
   {
     question: "How much of your time do I get?",
     answer:
-      "It depends on the plan: Advisor includes up to 6 hours a month, Director up to 12. Hours are a cap, not a target. If a month needs less, I don't invent work to fill it.",
+      `Advisor includes up to ${advisor.hours} hours a month and Director up to ${director.hours}. Hours cover meetings, email, and work I do for you. If a month needs more, I ask first, and extra hours are ${EXTRA_HOUR_PRICE} each. If a month needs less, I don't invent work to fill it.`,
     link: { href: "/pricing/", label: "See the plans" },
   },
   {
@@ -180,7 +190,7 @@ const jsonLdPerson = {
   },
   image: "https://sylentt.com/about/nic.jpg",
   description:
-    "Fractional CIO for Cache Valley companies. 15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.",
+    "Fractional CIO for Cache Valley companies. 15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid.",
   sameAs: [
     "https://www.linkedin.com/in/nic-aslett/"
   ]
@@ -198,7 +208,7 @@ const jsonLdOrg = {
   // /webdesign/ plan still attaches to this entity: app/webdesign/layout.tsx
   // emits its own Service node whose provider is this @id.
   description:
-    "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 30 to 300 employees that have an IT company for support but no one steering IT.",
+    "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 20 to 150 employees that have an IT company for support but no one steering IT.",
   url: "https://sylentt.com",
   logo: "https://sylentt.com/logo-symbol.png",
   image: "https://sylentt.com/logo_full.png",
@@ -282,10 +292,10 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-balance">
-              Run your business, not your IT.
+              {heroHeadline}
             </h1>
-            <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
-              Fractional CIO for Cache Valley companies. I&apos;ve run IT departments for organizations your size. Now I do it for a few companies at a time&nbsp;— a part-time IT director with a full-time track record, and no six-figure salary.
+            <p className="text-xl md:text-2xl text-ink/80 max-w-2xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
+              {heroSubhead}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -313,19 +323,26 @@ export default function Home() {
       <section className="pb-20 md:pb-28 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
-            <h2 className="sr-only">Results from IT departments I&apos;ve led</h2>
-            <dl className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 border-t border-ink/10 pt-12 md:pt-16">
-              {proofPoints.map((point) => (
-                <div key={point.figure} className="text-center md:text-left">
-                  <dt className="font-display text-6xl md:text-7xl text-accent mb-4">
-                    {point.figure}
-                  </dt>
-                  <dd className="text-lg text-ink/80 leading-relaxed text-pretty">
-                    {point.caption}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <div className="max-w-6xl mx-auto border-t border-ink/10 pt-12 md:pt-16">
+              <h2 className="eyebrow text-ink/60 mb-10 text-center md:text-left">
+                Results from IT teams I&apos;ve led
+              </h2>
+              <dl className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
+                {proofPoints.map((point) => (
+                  <div key={point.figure} className="text-center md:text-left">
+                    <dt className="font-display text-6xl md:text-7xl text-accent mb-4">
+                      {point.figure}
+                    </dt>
+                    <dd className="text-lg text-ink/80 leading-relaxed text-pretty">
+                      {point.caption}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-10 text-sm text-ink/60 text-center md:text-left">
+                Past results from teams I led, not a promise. Every company starts from a different place.
+              </p>
+            </div>
           </SectionFade>
         </div>
       </section>
@@ -467,7 +484,7 @@ export default function Home() {
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="eyebrow text-ink/60 mb-6">Experience</h2>
               <p className="font-display text-2xl md:text-3xl text-ink leading-snug text-balance">
-                15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.
+                15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid.
               </p>
             </div>
           </SectionFade>
@@ -492,7 +509,7 @@ export default function Home() {
                 <h2 className="font-display text-4xl md:text-6xl mb-6">Hi, I&apos;m Nic.</h2>
                 <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
                   <p>
-                    I&apos;ve spent 15 years in IT, the last 10 leading teams. I&apos;ve taken over IT departments that weren&apos;t working and turned them around.
+                    I&apos;ve spent 15 years in IT, the last 10 leading teams of up to 40 people. I&apos;ve taken over IT departments that weren&apos;t working and turned them around.
                   </p>
                   <p>
                     When I moved to Cache Valley, I chose to do this for local companies instead of one employer. When you hire Sylentt, you get me, and you get the same approach I used to turn around departments of 16 people, scaled to fit yours.
@@ -506,7 +523,7 @@ export default function Home() {
                     What is Sylentt Partners?
                   </h3>
                   <p className="text-base text-ink/90 leading-relaxed font-sans">
-                    Sylentt Partners is my fractional CIO practice in Cache Valley, Utah. I lead IT and AI decisions, part-time, for companies of about 30 to 300 people that have an IT company for support but no one steering. You work with me directly. That&apos;s the point.
+                    Sylentt Partners is my fractional CIO practice in Cache Valley, Utah. I lead IT and AI decisions, part-time, for {AUDIENCE} that have an IT company for support but no one steering. You work with me directly. That&apos;s the point.
                   </p>
                 </div>
               </div>

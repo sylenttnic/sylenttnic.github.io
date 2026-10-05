@@ -1,8 +1,8 @@
 import { Check, ArrowRight, CalendarCheck, ClipboardList, SlidersHorizontal } from "lucide-react";
 import SectionFade from "@/components/ui/SectionFade";
-import { CALENDLY_URL, PLAN_TERMS, plans, planOfferJsonLd } from "@/lib/offer";
+import { CALENDLY_URL, PLAN_TERMS, HOURS_RULES, PRICING_SUMMARY, plans, planById, planOfferJsonLd } from "@/lib/offer";
 
-const assessmentPrice = plans.find((p) => p.id === "assessment")!.price;
+const assessmentPrice = planById("assessment").price;
 
 const howItWorks = [
   {
@@ -13,12 +13,12 @@ const howItWorks = [
   {
     icon: ClipboardList,
     title: "Start with the assessment",
-    description: `Two weeks, ${assessmentPrice}. You get a 12-month roadmap whether or not you continue.`,
+    description: `Two weeks, ${assessmentPrice}. You get a 12-month plan whether or not you continue.`,
   },
   {
     icon: SlidersHorizontal,
     title: "Pick a plan, or don't",
-    description: `Continue on Advisor or Director and the ${assessmentPrice} is credited toward your first month.`,
+    description: `Continue on Advisor or Director and the ${assessmentPrice} comes off your first month.`,
   },
 ];
 
@@ -47,8 +47,7 @@ const jsonLdPricing = {
   "@id": "https://sylentt.com/pricing/#webpage",
   url: "https://sylentt.com/pricing/",
   name: "Fractional CIO Pricing | Sylentt Partners",
-  description:
-    "Published, fixed prices: a $1,500 IT and AI assessment, then Advisor at $1,950/month or Director at $3,500/month. Month-to-month, 30 days' notice.",
+  description: PRICING_SUMMARY,
   mainEntity: {
     "@type": "OfferCatalog",
     name: "Sylentt Partners plans",
@@ -137,6 +136,11 @@ export default function PricingPage() {
         <p className="mt-12 text-center font-display text-2xl md:text-3xl text-ink text-balance">
           {PLAN_TERMS}
         </p>
+        <ul className="mt-6 max-w-2xl mx-auto space-y-2 text-center text-lg text-ink/80">
+          {HOURS_RULES.map((rule) => (
+            <li key={rule}>{rule}</li>
+          ))}
+        </ul>
       </section>
 
       {/* How It Works Section */}

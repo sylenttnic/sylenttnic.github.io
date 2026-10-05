@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import { PRICING_SUMMARY } from "@/lib/offer";
 
 const pageTitle = "Fractional CIO Pricing | Sylentt Partners";
-const pageDescription =
-  "Published, fixed prices: a $1,500 IT and AI assessment, then Advisor at $1,950/month or Director at $3,500/month. Month-to-month, 30 days' notice.";
+const pageDescription = PRICING_SUMMARY;
 
 export const metadata: Metadata = {
   title: pageTitle,
