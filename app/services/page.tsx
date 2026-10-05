@@ -183,7 +183,7 @@ export default function ServicesPage() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-cta px-10 py-4 text-lg group"
+              className="btn-cta w-full sm:w-auto px-10 py-4 text-lg group"
             >
               Book a 30-minute call
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -191,7 +191,7 @@ export default function ServicesPage() {
 
             <Link
               href="/pricing/"
-              className="inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-3 font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-3 font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               See pricing
             </Link>

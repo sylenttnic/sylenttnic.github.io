@@ -285,7 +285,7 @@ export default function Home() {
               Run your business, not your IT.
             </h1>
             <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
-              Fractional CIO for Cache Valley companies. I&apos;ve run IT departments for organizations your size. Now I do it for a few companies at a time — a part-time IT director with a full-time track record, and no six-figure salary.
+              Fractional CIO for Cache Valley companies. I&apos;ve run IT departments for organizations your size. Now I do it for a few companies at a time&nbsp;— a part-time IT director with a full-time track record, and no six-figure salary.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
@@ -293,14 +293,14 @@ export default function Home() {
                 href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-cta px-10 py-5 text-xl group"
+                className="btn-cta w-full sm:w-auto px-10 py-5 text-xl group"
               >
                 Book a 30-minute call
                 <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </a>
               <Link
                 href="#it-check"
-                className="inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-4 text-lg font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-4 text-lg font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
               >
                 Take the 2-minute IT check
               </Link>
@@ -619,7 +619,7 @@ export default function Home() {
 
               <div className="w-full h-px bg-paper/10 mb-20" />
 
-              <h3 id="it-check" className="font-display text-2xl md:text-3xl mb-6 scroll-mt-28">
+              <h3 id="it-check" className="font-display text-2xl md:text-3xl mb-6 text-paper scroll-mt-28">
                 Take the 2-minute IT check
               </h3>
               <p className="text-xl text-paper/60 mb-12">
