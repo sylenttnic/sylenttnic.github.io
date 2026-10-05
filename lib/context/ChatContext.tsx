@@ -58,7 +58,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     try {
       const apiKey = process.env.NEXT_PUBLIC_INTAKE_API_KEY;
       if (!apiKey) {
-        throw new Error("API key missing");
+        throw new Error("Intake key missing");
       }
 
       const response = await fetch("https://intake.sylentt.com/chat", {

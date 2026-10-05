@@ -85,6 +85,17 @@ export default function Footer() {
                 >
                   contact@sylentt.com
                 </a>
+                {/* The main site's only link to the web design plan. Keep it
+                    here: the repositioning brief allows web design in the
+                    footer and nowhere else on the main site, and
+                    scripts/check-copy.mjs enforces that. */}
+                {" "}&middot;{" "}
+                <Link
+                  href="/webdesign/"
+                  className="rounded-sm underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  Web design
+                </Link>
               </>
             )}
           </p>
