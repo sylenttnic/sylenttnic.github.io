@@ -44,7 +44,7 @@ const jsonLdWebDesignService = {
   serviceType: 'Web design',
   url: 'https://sylentt.com/webdesign/',
   description:
-    'A website researched, designed, written and hand-coded for one local business, not assembled from a template. Sold as a managed monthly plan: $9.99 a month plus tax, first 30 days free, cancel any time. Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a calendar month are included. After 12 continuous paid months on the plan the site and the code behind it transfer to the customer; cancel before then and the site comes down and nothing transfers.',
+    'A website researched, designed, written and hand-coded for one local business, not assembled from a template. Sold as a managed monthly plan: $9.99 a month plus tax, first 30 days free, cancel any time. Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a calendar month are included.',
   provider: {
     '@id': 'https://sylentt.com/#organization',
   },

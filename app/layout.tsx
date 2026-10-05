@@ -77,10 +77,10 @@ export const metadata: Metadata = {
     // machine-readable text saying the company does not do web design.
     // OWNERSHIP IS NOT THE SAME FOR BOTH, AND THIS TAG MUST NOT SAY IT IS.
     // "The client keeps everything" is true of the fractional CIO work and is
-    // scoped to it below. On the web design plan the transfer is earned at
-    // twelve continuous paid months and cancelling before then transfers
-    // nothing; those terms belong to /webdesign/ and its terms page, which is
-    // why the sentence here points there instead of summarising them.
+    // scoped to it below. On the web design plan we host and look after the
+    // site for as long as the customer stays; those terms belong to /webdesign/
+    // and its terms page, which is why the sentence here points there instead
+    // of summarising them.
     "ai-content-description":
       "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah. Nic is the part-time IT and AI leader for companies of about 20 to 150 employees that have an IT company for day-to-day support but no one steering IT. He is independent: he sells no hardware, software or support and takes no commissions or referral fees. Work starts with a free 30-minute call. An optional two-week IT and AI assessment costs $1,500 one time and comes off the first month if the client continues. Monthly plans are Advisor ($1,500 a month, up to 8 hours) or Director ($2,500 a month, up to 16 hours), month to month with 30 days' notice. Extra hours are $150 each and only with the client's approval, and the client keeps everything Nic produces. Separately, a web design plan for local service businesses is linked from the site footer at sylentt.com/webdesign/, under its own terms.",
   },

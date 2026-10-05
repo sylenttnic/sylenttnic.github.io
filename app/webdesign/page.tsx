@@ -5,7 +5,7 @@ import RequestFormChooser from '@/components/webdesign/RequestFormChooser';
 import SampleGallery from '@/components/webdesign/SampleGallery';
 
 const OFFER_SUMMARY =
-  'A website designed and hand-built for one business: researched, written and coded from scratch. $9.99 a month, first 30 days free, and the site is yours after a year on the plan.';
+  'A website designed and hand-built for one business: researched, written and coded from scratch. $9.99 a month, first 30 days free, cancel any time.';
 
 export const metadata: Metadata = {
   title: 'Custom websites for local businesses | Sylentt',
@@ -38,8 +38,7 @@ export const metadata: Metadata = {
  * here, first find what it replaces.
  *
  * What may not be cut, whatever the word count: the plan terms in the pricing
- * card (price, free trial, cancellation, the twelve-month transfer AND what
- * happens if you cancel before it), the statement descriptor, and the line
+ * card (price, free trial, cancellation), the statement descriptor, and the line
  * saying our artwork is illustrative. Those are the terms of the offer and an
  * honesty disclosure, not sales copy.
  */
@@ -118,7 +117,7 @@ const faqItems = [
   },
   {
     q: 'What happens if I cancel?',
-    a: 'No card is required to start, so if you never add one the trial simply ends at day 30: nothing is charged and the site comes down, the same as cancelling within it. If you do add a card, cancel inside the first 30 days and you still pay nothing. Cancel later and billing stops at the end of the month you have paid for, and the site comes down. Stay on the plan for twelve months and the code becomes yours to keep and host anywhere, whether you continue with us or not.',
+    a: 'No card is required to start, so if you never add one the trial simply ends at day 30: nothing is charged and the site comes down, the same as cancelling within it. If you do add a card, cancel inside the first 30 days and you still pay nothing. Cancel later and billing stops at the end of the month you have paid for, and the site comes down.',
   },
   {
     q: 'What about my domain?',
@@ -152,7 +151,7 @@ export default function WebDesignLandingPage() {
             </a>
           </div>
           <p className="text-xs md:text-sm text-ink/60 font-sans">
-            $9.99 a month. First 30 days free. Cancel any time. Yours after a year.
+            $9.99 a month. First 30 days free. Cancel any time.
           </p>
         </div>
       </section>
@@ -183,8 +182,7 @@ export default function WebDesignLandingPage() {
 
       {/* 4. Pricing, directly after what you get.
           THE PLAN TERMS LIVE HERE AND ONLY HERE. Price, free trial, what is
-          included, cancellation, the twelve-month transfer and what happens if
-          you cancel before it. Anything that qualifies a benefit travels with
+          included and cancellation. Anything that qualifies a benefit travels with
           the benefit; the terms page carries the long form. */}
       <section id="pricing" className="py-16 md:py-24 px-4 container mx-auto scroll-mt-24">
         <div className="max-w-2xl mx-auto">
@@ -196,7 +194,7 @@ export default function WebDesignLandingPage() {
             </div>
             <p className="text-sm font-sans text-accent font-semibold mb-4">First 30 days free</p>
             <p className="text-base text-ink/80 font-sans mb-6 leading-relaxed">
-              Nothing to buy up front. We build the site, host it, and keep it running. Stay on the plan for twelve months and the code is yours to keep.
+              Nothing to buy up front. We build the site, host it, and keep it running.
             </p>
             <ul className="space-y-3 mb-6 font-sans text-sm md:text-base text-ink/90">
               {[
@@ -204,7 +202,6 @@ export default function WebDesignLandingPage() {
                 'Security patches',
                 'Up to two content changes a month: text, hours, contact details, an image swap, adding or removing a service',
                 'A domain registered in your name after your first successful payment, or your existing one connected',
-                'The code repository, transferred into your name after twelve months on the plan',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-accent shrink-0 mt-0.5" />
@@ -213,7 +210,7 @@ export default function WebDesignLandingPage() {
               ))}
             </ul>
             <p className="text-xs text-ink/60 font-sans leading-relaxed mb-6">
-              No card is required to start the free 30 days. Add one before day 30 and the plan continues at $9.99 a month until you cancel; add none and the trial simply ends at day 30, nothing is charged, and the site comes down. Content changes do not roll over month to month. Redesigns, new pages and new functionality are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for. If you cancel before twelve months, the site comes down and the code is not transferred. Payments appear on card statements as SYLENTT PARTNERS.{' '}
+              No card is required to start the free 30 days. Add one before day 30 and the plan continues at $9.99 a month until you cancel; add none and the trial simply ends at day 30, nothing is charged, and the site comes down. Content changes do not roll over month to month. Redesigns, new pages and new functionality are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for, and the site comes down then. Payments appear on card statements as SYLENTT PARTNERS.{' '}
               <a href="/webdesign/terms/" className="underline hover:text-ink">
                 Full terms
               </a>
@@ -234,7 +231,7 @@ export default function WebDesignLandingPage() {
             >
               Start the plan for it here
             </a>
-            . Prefer to own the site outright instead of on the plan? Reply and ask; we will walk you through it.
+            .
           </p>
         </div>
       </section>
