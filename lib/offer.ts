@@ -18,7 +18,10 @@ export const CALL_PROMISE = "Free, no obligation. You'll leave knowing what I'd 
 // Nic's phone. Leave null until there is a number; every place that shows a
 // phone checks this first, so setting it here turns them all on.
 // Example: { display: "(720) 555-0100", tel: "+17205550100" }
-export const PHONE: { display: string; tel: string } | null = null;
+export const PHONE: { display: string; tel: string } | null = {
+  display: "(720) 679-4750",
+  tel: "+17206794750",
+};
 
 // The independence line. True as of 2026-10-05 (Nic): no resale, no
 // commissions, no referral deals. If that ever changes, change this sentence
