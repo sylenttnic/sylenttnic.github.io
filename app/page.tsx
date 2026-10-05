@@ -1,27 +1,28 @@
-import { ArrowRight, RefreshCw, AlertTriangle, Plug, RotateCcw, ChevronDown } from "lucide-react";
+import { ArrowRight, Compass, Receipt, Bot, UserMinus, ChevronDown } from "lucide-react";
 import FitAssessment from "@/components/FitAssessment";
-import HeroChatInput from "@/components/home/HeroChatInput";
 import SectionFade from "@/components/ui/SectionFade";
-import ClientLogos from "@/components/home/ClientLogos";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { CALENDLY_URL, plans, planOfferJsonLd } from "@/lib/offer";
+
+const pageTitle = "Sylentt Partners | Fractional CIO for Cache Valley Companies";
+const socialTitle = "Run your business, not your IT. | Sylentt Partners";
+const pageDescription =
+  "Fractional CIO for Cache Valley companies. Work directly with Nic Aslett, a part-time IT director with a full-time track record. Fixed, published prices.";
 
 export const metadata: Metadata = {
-  title: "Sylentt Partners | Business App Integration for Small Businesses",
-  description:
-    "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+  title: pageTitle,
+  description: pageDescription,
   openGraph: {
-    title: "Sylentt Partners | Run your business, not your software.",
-    description:
-      "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+    title: socialTitle,
+    description: pageDescription,
     url: "https://sylentt.com/",
     images: [{ url: "/logo_full.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylentt Partners | Run your business, not your software.",
-    description:
-      "Sylentt Partners connects your business apps so your team stops copying data between them. Custom integrations you own. Based in Cache Valley, Utah.",
+    title: socialTitle,
+    description: pageDescription,
     images: ["/logo_full.png"],
   },
   alternates: {
@@ -29,57 +30,141 @@ export const metadata: Metadata = {
   },
 };
 
-const testimonials = [
+const proofPoints = [
   {
-    text: "I worked with Nic on highly complex configurations... and found him to be logical, clear thinking, hard working, and pleasant.",
-    name: "J. Scott Cannata",
-    role: "Co-Founder, Liqid",
-    avatar: "/avatars/cannata.png",
+    figure: "100%",
+    caption:
+      "On-time project delivery, after introducing real project management to a 16-person IT department.",
   },
   {
-    text: "Nic is a dedicated and hard-working system integration specialist. Time and time again I saw him do whatever it took to get our products loaded, integrated, tested and working.",
-    name: "Scott Hopkins",
-    role: "Senior Systems Engineer & Program Manager (ret.)",
-    avatar: "/avatars/hopkins.png",
+    figure: "80%",
+    caption: "Faster ticket resolution: 150 hours to 30.",
   },
   {
-    text: "Nic is a visionary that can quickly identify shortcomings in processes, procedures, and functions in the technical space.",
+    figure: "2×",
+    caption: "SLA adherence doubled: 40% to 80%.",
+  },
+];
+
+const problemCards = [
+  {
+    icon: Compass,
+    title: "Your MSP fixes things but nobody decides things.",
+    description:
+      "Projects stall, renewals auto-renew, and the roadmap lives in someone's head.",
+  },
+  {
+    icon: Receipt,
+    title: "You're paying for software nobody uses and missing software you need.",
+    description:
+      "Nobody has the full list of what you pay for, who uses it, or when it renews.",
+  },
+  {
+    icon: Bot,
+    title: "Everyone says “use AI.”",
+    description:
+      "Nobody at your company owns figuring out where it actually helps and where it's a liability.",
+  },
+  {
+    icon: UserMinus,
+    title: "When the person who “knows the systems” leaves, so does the knowledge.",
+    description:
+      "The passwords, the vendor contacts, and the reasons things are set up the way they are walk out the door with them.",
+  },
+];
+
+const steps = [
+  {
+    title: "Assessment",
+    text: "2 weeks, fixed price. I inventory every system, subscription, vendor and risk; find where AI fits and where it doesn't; deliver a 12-month roadmap and present it to you in person.",
+  },
+  {
+    title: "Retainer",
+    text: "I become your IT director for a set number of hours a month: I run the roadmap, manage your MSP and vendors, make the decisions, and answer the questions.",
+  },
+  {
+    title: "You own everything",
+    text: "Documentation, roadmap, policies, vendor relationships: all yours, in your accounts, from day one.",
+  },
+];
+
+// Quotes are the reviewers' exact words, trimmed only with ellipses. Never
+// reword them. `avatar` is optional: without one, the card shows initials.
+const testimonials: {
+  text: string;
+  name: string;
+  role: string;
+  avatar?: string;
+}[] = [
+  {
+    text: "Nic is a visionary and deeply thoughtful leader with a rare combination of strategic perspective and servant leadership… He would be a strong asset to any technology organization seeking to modernize operations, improve and automate processes, thoughtfully integrate AI, and build a high-functioning IT organization.",
+    name: "Ladan Rostami",
+    role: "Senior Program/Project Manager, Fortidia (reported to Nic)",
+    avatar: "/avatars/rostami.jpg",
+  },
+  {
+    text: "Nic instantly impressed me with his ability to relate to senior level executives, owners of individual franchise locations, as well as his team… It is rare when an executive seems to genuinely care about all of his people.",
+    name: "Michael Kingsolver",
+    role: "IT Specialist, US Navy Veteran, Fortidia",
+    avatar: "/avatars/kingsolver.jpg",
+  },
+  {
+    text: "Nic is a visionary that can quickly identify shortcomings in processes, procedures, and functions in the technical space… he transformed how we delivered a product to a customer.",
     name: "Chris Gregoire",
     role: "Solutions Architect, Liqid",
     avatar: "/avatars/gregoire.png",
   },
   {
-    text: "Nic's unique blend of technical talent, optimism, charisma and no-nonsense approach to problem solving will benefit any team, department, organization or company he joins.",
+    text: "He has an indescribable ability to project an air of leadership and to motivate those around him.",
     name: "Randall Syfert",
     role: "Project Control Analyst, By Light Professional IT Services",
     avatar: "/avatars/syfert.png",
   },
 ];
 
-const problemCards = [
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+const faqItems: {
+  question: string;
+  answer: string;
+  link?: { href: string; label: string };
+}[] = [
   {
-    icon: RefreshCw,
-    title: "Your team re-enters the same data into multiple systems.",
-    description:
-      "An order comes in, someone retypes it into the shipping app. A payment clears, someone updates the books. We make your tools talk to each other, so these updates happen automatically.",
+    question: "What does a fractional CIO actually do?",
+    answer:
+      "I do the job a full-time IT director would do, for a few hours a month. I make the technology decisions, plan the year, manage your IT company and other vendors, and own the roadmap and the IT budget. I don't run the helpdesk. Your IT company keeps fixing things; I make sure the right things get fixed.",
   },
   {
-    icon: AlertTriangle,
-    title: "You find out something broke days after it happened.",
-    description:
-      "A subscription fails, an invoice never syncs, and nobody notices until a customer complains. We build monitoring that catches it in real time and alerts you first.",
+    question: "We already have an IT company. Why would we need you?",
+    answer:
+      "Your IT company fixes things. I decide things. They're paid to keep things running, not to decide where your technology should go. I manage them on your behalf and make sure you're getting what you pay for.",
   },
   {
-    icon: RotateCcw,
-    title: "You are paying for automation tools and things still break.",
-    description:
-      "Rented tools charge you more as you grow and can fail without ever alerting you that there's a problem. What we build, you own. It runs on your account, and it automatically resolves errors when they occur.",
+    question: "How is this different from an AI consultant?",
+    answer:
+      "I'm an IT leader who also handles AI. AI gets evaluated like any other tool: where it saves money, where it creates risk, and what the rules are. You get that as a written policy your team can follow. No hype.",
   },
   {
-    icon: Plug,
-    title: "You added a new tool and now nothing connects.",
-    description:
-      "Every new app becomes another island your team bridges by hand. We connect it to all your other tools so it fits in from day one.",
+    question: "How much of your time do I get?",
+    answer:
+      "It depends on the plan: Advisor includes up to 6 hours a month, Director up to 12. Hours are a cap, not a target. If a month needs less, I don't invent work to fill it.",
+    link: { href: "/pricing/", label: "See the plans" },
+  },
+  {
+    question: "What if it doesn't work out?",
+    answer:
+      "Every plan is month-to-month. Give 30 days' notice and it ends. You keep everything I produced: documentation, roadmap, policies, and vendor relationships, already in your accounts.",
+  },
+  {
+    question: "Do you work outside Cache Valley?",
+    answer:
+      "I work in person across Cache Valley and Northern Utah. Remote work elsewhere is the exception, not the rule.",
   },
 ];
 
@@ -88,13 +173,14 @@ const jsonLdPerson = {
   "@type": "Person",
   "@id": "https://sylentt.com/#nic-aslett",
   name: "Nic Aslett",
-  jobTitle: "Founder & Lead Integration Engineer",
+  jobTitle: "Fractional CIO",
   worksFor: {
     "@type": "Organization",
     "@id": "https://sylentt.com/#organization"
   },
   image: "https://sylentt.com/about/nic.jpg",
-  description: "Systems integration engineer with 15 years of experience building automation scripts, resilient infrastructure, and custom business app connections.",
+  description:
+    "Fractional CIO for Cache Valley companies. 15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.",
   sameAs: [
     "https://www.linkedin.com/in/nic-aslett/"
   ]
@@ -108,17 +194,11 @@ const jsonLdOrg = {
   // "Sylentt LLC" was never the legal name. The entity is Sylentt Partners LLC
   // (Utah), as published in the /webdesign/ terms and policy pages.
   alternateName: ["Sylentt", "Sylentt Partners LLC"],
-  // BOTH service lines, because this node is the definition of the entity. An
-  // AI asked "what does Sylentt Partners do" answers from here and from
-  // /llms.txt, and while both named only integration, both answered that the
-  // company does not do web design, while /webdesign/ was selling it.
-  //
-  // NOTE WHAT THIS DESCRIPTION DOES NOT SAY. It does not say clients own what
-  // we build, because that is true without qualification on ONE of the two
-  // lines. See the ownership FAQ below, which had to be scoped in the same
-  // change for the same reason.
+  // This node defines the entity, so it describes the main offer only. The
+  // /webdesign/ plan still attaches to this entity: app/webdesign/layout.tsx
+  // emits its own Service node whose provider is this @id.
   description:
-    "Sylentt Partners is a small business consultancy in Cache Valley, Utah with two service lines. Business app integration: custom connections between the tools a business already uses, so the team stops being the copy-paste layer. Web design: websites researched, written and hand-built for one local service business, on a managed monthly plan.",
+    "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 30 to 300 employees that have an IT company for support but no one steering IT.",
   url: "https://sylentt.com",
   logo: "https://sylentt.com/logo-symbol.png",
   image: "https://sylentt.com/logo_full.png",
@@ -128,7 +208,7 @@ const jsonLdOrg = {
     "@type": "Person",
     "@id": "https://sylentt.com/#nic-aslett",
     name: "Nic Aslett",
-    jobTitle: "Founder & Lead Integration Engineer",
+    jobTitle: "Fractional CIO",
     sameAs: "https://www.linkedin.com/in/nic-aslett/"
   },
   geo: {
@@ -138,7 +218,7 @@ const jsonLdOrg = {
   },
   areaServed: [
     { "@type": "Place", name: "Cache Valley, Utah" },
-    { "@type": "Country", name: "United States" },
+    { "@type": "Place", name: "Northern Utah" },
   ],
   sameAs: [
     "https://www.google.com/maps?cid=10860538682886367500",
@@ -146,125 +226,40 @@ const jsonLdOrg = {
     "https://www.instagram.com/sylenttpartners/",
     "https://www.facebook.com/sylenttpartners/"
   ],
+  // edZOOcation only. By Light was an employer of people Nic worked with, never
+  // a client, so it must not be listed here.
   customer: [
-    { "@type": "Organization", name: "By Light", url: "https://bylight.com/" },
     { "@type": "Organization", name: "edZOOcation", url: "https://edzoocation.com/" }
   ],
   knowsAbout: [
-    "Software Integration",
-    "API Development",
-    "Workflow Automation",
-    "Shopify Integration",
-    "QuickBooks Automation",
-    "Stripe Sync",
-    "HubSpot Integration",
-    "Zapier Alternatives",
-    "Web Design",
-    "Web Development",
-    "Small Business Websites",
-    "Local Service Business Websites",
-    "Website Hosting and Maintenance"
+    "IT leadership",
+    "IT strategy",
+    "IT budgeting",
+    "Vendor management",
+    "Managed service provider oversight",
+    "AI policy",
+    "Technology roadmaps",
+    "Project management",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Sylentt Partners services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          "@id": "https://sylentt.com/#integration-service",
-          name: "Business app integration and workflow automation",
-          serviceType: "Business app integration",
-          url: "https://sylentt.com/services/",
-          provider: { "@id": "https://sylentt.com/#organization" },
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          // Resolves to the Service node emitted by app/webdesign/layout.tsx.
-          "@id": "https://sylentt.com/webdesign/#service",
-        },
-      },
-    ],
+    name: "Sylentt Partners plans",
+    itemListElement: plans.map(planOfferJsonLd),
   },
 };
 
 const jsonLdFaq = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What exactly do you do?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We connect the software tools your business already uses. This includes your CRM, accounting software, and project management tools. We make them talk to each other automatically. This means your team stops copying and pasting data between apps. It eliminates manual errors and saves hours of work every week.",
-      },
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
     },
-    {
-      "@type": "Question",
-      name: "How is this different from tools like Zapier?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "What apps can you connect?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "If your business runs on it and it has an API, we can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Jobber, ShipStation, and more. If your app is not on that list, just ask. We have probably connected something like it before.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do I own everything you build?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes, and on the integration side there is no catch: the integrations run on your cloud account, the code is yours, and if we part ways everything keeps running. There is no lock-in and no proprietary platform you lose access to. Our web design plan works differently, because the site is included in the monthly price rather than bought: the site and its code become yours after twelve continuous paid months on the plan, and if you cancel before then the site comes down and nothing transfers.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How long does a typical integration take?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Most initial integrations are live in 2 to 4 weeks. We start with the single most painful manual process in your business so you see immediate relief while we build out the rest of your integration map.",
-      },
-    },
-  ],
+  })),
 };
-
-const faqItems = [
-  {
-    question: "What exactly do you do?",
-    answer:
-      "We connect the software tools your business already uses. This includes your CRM, accounting software, and project management tools. We make them talk to each other automatically. This means your team stops copying and pasting data between apps. It eliminates manual errors and saves hours of work every week.",
-  },
-  {
-    question: "How is this different from tools like Zapier?",
-    answer:
-      "Most automation tools are rentals. You pay monthly, the price goes up as volume grows, and if something breaks at midnight nobody knows until a customer complains. What we build, you own. It runs on your own account. You pay your cloud provider directly for usage with no platform markup, and failures trigger real-time alerts instead of sitting in a log nobody checks.",
-  },
-  {
-    question: "What apps can you connect?",
-    answer:
-      "If your business runs on it and it has an API, we can connect it. Common systems include Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Jobber, ShipStation, and more. If your app is not on that list, just ask. We have probably connected something like it before.",
-  },
-  {
-    question: "Do I own everything you build?",
-    answer:
-      "Yes, and on the integration side there is no catch: the integrations run on your cloud account, the code is yours, and if we part ways everything keeps running. There is no lock-in and no proprietary platform you lose access to. Our web design plan works differently, because the site is included in the monthly price rather than bought: the site and its code become yours after twelve continuous paid months on the plan, and if you cancel before then the site comes down and nothing transfers.",
-  },
-  {
-    question: "How long does a typical integration take?",
-    answer:
-      "Most initial integrations are live in 2 to 4 weeks. We start with the single most painful manual process in your business so you see immediate relief while we build out the rest of your integration map.",
-  },
-];
 
 export default function Home() {
   return (
@@ -282,55 +277,77 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }}
       />
 
-      {/* Hero + Diagram */}
+      {/* Hero */}
       <header className="relative pt-32 pb-16 md:pt-44 md:pb-24 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16">
+          <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] mb-8 text-balance">
-              Run your business, not your software.
+              Run your business, not your IT.
             </h1>
-            <p className="text-xl md:text-2xl text-ink/80 max-w-2xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
-              We connect the tools you already use, so your team stops copying and pasting data between them.
+            <p className="text-xl md:text-2xl text-ink/80 max-w-3xl mx-auto mb-12 font-sans leading-relaxed text-pretty">
+              Fractional CIO for Cache Valley companies. I&apos;ve run IT departments for organizations your size. Now I do it for a few companies at a time — a part-time IT director with a full-time track record, and no six-figure salary.
             </p>
 
-            {/* Moved CTAs above hero graphic */}
-            <div className="flex flex-col items-center justify-center gap-12 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
               <a
-                href="https://calendly.com/nic-sylentt/30min"
+                href={CALENDLY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-cta px-10 py-5 text-xl group"
               >
-                Book a free discovery call
+                Book a 30-minute call
                 <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
               </a>
-              <div className="w-full max-w-xl opacity-90 hover:opacity-100 transition-opacity">
-                <p className="eyebrow text-center text-ink/60 mb-4">Or ask a quick question</p>
-                <HeroChatInput />
-              </div>
+              <Link
+                href="#it-check"
+                className="inline-flex items-center justify-center rounded-lg bg-paper text-accent border border-accent/25 px-8 py-4 text-lg font-bold transition-all hover:-translate-y-0.5 hover:border-accent/50 hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              >
+                Take the 2-minute IT check
+              </Link>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Problem Statements */}
+      {/* Proof */}
+      <section className="pb-20 md:pb-28 bg-paper text-ink">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <h2 className="sr-only">Results from IT departments I&apos;ve led</h2>
+            <dl className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 border-t border-ink/10 pt-12 md:pt-16">
+              {proofPoints.map((point) => (
+                <div key={point.figure} className="text-center md:text-left">
+                  <dt className="font-display text-6xl md:text-7xl text-accent mb-4">
+                    {point.figure}
+                  </dt>
+                  <dd className="text-lg text-ink/80 leading-relaxed text-pretty">
+                    {point.caption}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </SectionFade>
+        </div>
+      </section>
+
+      {/* Sound familiar? */}
       <section className="py-24 md:py-32 bg-ink text-paper">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="mb-16">
               <h2 className="font-display text-4xl md:text-6xl mb-6 text-paper text-balance">
-                Here is where your team&apos;s hours go.
+                Sound familiar?
               </h2>
               <p className="text-xl text-paper/70 max-w-2xl leading-relaxed text-pretty">
-                Most small businesses use different software tools for scheduling, billing, and tracking customers, but those tools don&apos;t connect. This forces your staff to spend hours manually typing the same information into multiple systems.
+                Most companies your size have an IT company for support and no one steering. Here&apos;s what that looks like.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {problemCards.map((card, i) => {
+              {problemCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <div key={i} className="group">
+                  <div key={card.title} className="group">
                     <div className="mb-6 w-12 h-12 rounded-full bg-paper/5 border border-paper/10 flex items-center justify-center">
                       <Icon className="w-6 h-6 text-accent" />
                     </div>
@@ -358,82 +375,83 @@ export default function Home() {
                   How it works
                 </h2>
                 <div className="space-y-16">
-                  <div className="flex gap-8 group">
-                    <span className="font-display text-5xl text-accent">01</span>
-                    <div>
-                      <h3 className="text-2xl font-serif mb-4 text-ink">Tell us what&apos;s broken</h3>
-                      <p className="text-lg text-ink/90 leading-relaxed">
-                        Which apps does your business use? Where is the manual work? This conversation is the basis for us to build a detailed blueprint for the integration.
-                      </p>
+                  {steps.map((step, i) => (
+                    <div key={step.title} className="flex gap-8 group">
+                      <span className="font-display text-5xl text-accent">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="text-2xl font-serif mb-4 text-ink">{step.title}</h3>
+                        <p className="text-lg text-ink/90 leading-relaxed">{step.text}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex gap-8 group">
-                    <span className="font-display text-5xl text-accent">02</span>
-                    <div>
-                      <h3 className="text-2xl font-serif mb-4 text-ink">Sylentt Partners builds the connections</h3>
-                      <p className="text-lg text-ink/90 leading-relaxed">
-                        Sylentt Partners writes the code, puts it through a rigorous testing process, and then deploys it. Now when something happens in one app, the other tools update automatically.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-8 group">
-                    <span className="font-display text-5xl text-accent">03</span>
-                    <div>
-                      <h3 className="text-2xl font-serif mb-4 text-ink">You own everything</h3>
-                      <p className="text-lg text-ink/90 leading-relaxed">
-                        Your integration is self-hosted and runs on your own cloud account. If we part ways, you keep all of it.
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
-                {/* New CTA button */}
                 <div className="mt-16">
-                  <Link
-                    href="#tell-us"
+                  <a
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn-cta px-10 py-4 text-lg group"
                   >
-                    Tell us what&apos;s broken
+                    Book a 30-minute call
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </div>
+              <div className="hidden lg:block relative">
+                <div className="bg-paper border border-ink/10 rounded-2xl p-12 shadow-soft">
+                  <p className="font-display text-4xl text-ink mb-10">Published prices.</p>
+                  <dl className="space-y-6">
+                    {plans.map((plan) => (
+                      <div
+                        key={plan.id}
+                        className="flex items-baseline justify-between gap-6 border-b border-ink/10 pb-6"
+                      >
+                        <dt className="text-xl font-serif text-ink">{plan.name}</dt>
+                        <dd className="font-display text-3xl text-accent whitespace-nowrap">
+                          {plan.price}
+                          <span className="text-lg text-ink/60 font-sans">
+                            {plan.monthly ? plan.priceUnit : `, ${plan.priceUnit}`}
+                          </span>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <Link
+                    href="/pricing/"
+                    className="mt-10 inline-flex items-center text-accent font-bold text-lg group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  >
+                    See pricing
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
-              <div className="hidden lg:block relative">
-                <div className="aspect-square bg-surface border border-ink/10 rounded-2xl flex items-center justify-center p-12 shadow-soft">
-                   <p className="font-display text-4xl md:text-5xl text-center text-ink leading-[1.2] text-balance">
-                     &ldquo;The goal is to stop thinking about data entry and start thinking about your business.&rdquo;
-                   </p>
-                </div>
-              </div>
             </div>
           </SectionFade>
         </div>
       </section>
 
-      {/* Real Example */}
-      <section className="py-12 md:py-20 bg-paper text-ink">
+      {/* Currently */}
+      <section className="py-20 md:py-28 bg-paper text-ink">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-6xl mx-auto">
-              <h2 className="font-display text-4xl md:text-6xl mb-12 text-ink text-balance">
-                What this looks like in practice
-              </h2>
+              <p className="eyebrow text-accent mb-6">Currently</p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <div className="text-lg text-ink/90 space-y-8 leading-relaxed">
-                  <div className="space-y-4">
-                    <p className="eyebrow text-accent">Real Results</p>
-                  </div>
-                  <p>
-                    An education company was manually creating customer subscriptions every time an order came in. A team member spent hours every week copying data between three different platforms.
-                  </p>
-                  <p>
-                    We built an automated pipeline that handles the entire workflow: when an order comes in, the subscription is created, the fulfillment system is notified, and the accounting records update.
+                <div className="space-y-8">
+                  <h2 className="font-display text-4xl md:text-5xl text-ink text-balance">
+                    Fractional CTO for edZOOcation, a Shopify Plus education company.
+                  </h2>
+                  <p className="text-lg text-ink/90 leading-relaxed">
+                    I designed and built their order-to-subscription automation. Then I handed the platform to their team and stepped into the leadership seat.
                   </p>
                 </div>
                 <div className="bg-surface p-10 md:p-12 rounded-2xl border border-ink/10 shadow-soft">
-                  <p className="text-2xl font-sans font-bold text-accent mb-6">The result: Getting back nearly 8 hours per week</p>
-                  <p className="font-display text-xl md:text-2xl text-ink leading-relaxed">
-                    &ldquo;The team member who used to do that work now spends those hours on things that actually grow the business. Mistakes stopped happening, and I stopped worrying if orders were being missed.&rdquo;
+                  <p className="font-display text-5xl md:text-6xl text-accent mb-4">~8 hours/week</p>
+                  <p className="text-xl md:text-2xl text-ink leading-relaxed">
+                    of manual work eliminated. The team now runs its own systems.
                   </p>
                 </div>
               </div>
@@ -442,11 +460,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Cost Calculator removed from homepage */}
+      {/* Experience */}
+      <section className="py-16 md:py-20 bg-paper border-y border-ink/5">
+        <div className="container mx-auto px-4">
+          <SectionFade>
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="eyebrow text-ink/60 mb-6">Experience</h2>
+              <p className="font-display text-2xl md:text-3xl text-ink leading-snug text-balance">
+                15+ years in IT, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.
+              </p>
+            </div>
+          </SectionFade>
+        </div>
+      </section>
 
-      <ClientLogos />
-
-      <section id="about" className="py-24 md:py-32 bg-surface border-y border-ink/5 scroll-mt-24">
+      {/* About */}
+      <section id="about" className="py-24 md:py-32 bg-surface border-b border-ink/5 scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-12 md:gap-16 items-center">
@@ -463,13 +492,13 @@ export default function Home() {
                 <h2 className="font-display text-4xl md:text-6xl mb-6">Hi, I&apos;m Nic.</h2>
                 <div className="space-y-5 text-lg text-ink/90 leading-relaxed">
                   <p>
-                    For 15 years, I&apos;ve worked as an engineer building systems behind the scenes: automation scripts, resilient infrastructure, and the connections that keep everything talking. I didn&apos;t manage tools from a distance. I built them, so I know exactly what breaks and why.
+                    I&apos;ve spent 15 years in IT, the last 10 leading teams. I&apos;ve taken over IT departments that weren&apos;t working and turned them around.
                   </p>
                   <p>
-                    Somewhere along the way I became the person who untangles messy processes and gets disconnected apps working together. I saw a need for this in the small business world, and that&apos;s why I decided to launch my own business, Sylentt Partners. We work behind the scenes to make things easier for your business (like a silent partner). When you work with us, you work directly with me: a real engineer who has done this for years.
+                    When I moved to Cache Valley, I chose to do this for local companies instead of one employer. When you hire Sylentt, you get me, and you get the same approach I used to turn around departments of 16 people, scaled to fit yours.
                   </p>
                   <p>
-                    I run Sylentt Partners from Cache Valley, Utah. If you are local, I&apos;d love to learn more about your business and how I can save your team time!
+                    The name comes from &ldquo;silent partner&rdquo;: I work in the background so you can run your business.
                   </p>
                 </div>
                 <div className="mt-8 bg-paper p-6 rounded-xl border border-ink/10 shadow-soft">
@@ -477,7 +506,7 @@ export default function Home() {
                     What is Sylentt Partners?
                   </h3>
                   <p className="text-base text-ink/90 leading-relaxed font-sans">
-                    Sylentt Partners is a custom business app integration consultancy based in Cache Valley, Utah. Founded by engineer Nic Aslett, Sylentt connects software tools like Shopify, QuickBooks, Stripe, and HubSpot so small business teams stop manually re-entering data. All custom integrations are client-owned with zero platform markup.
+                    Sylentt Partners is my fractional CIO practice in Cache Valley, Utah. I lead IT and AI decisions, part-time, for companies of about 30 to 300 people that have an IT company for support but no one steering. You work with me directly. That&apos;s the point.
                   </p>
                 </div>
               </div>
@@ -496,27 +525,36 @@ export default function Home() {
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {testimonials.map((t, i) => (
-                <div key={i} className="flex flex-col">
-                  <p className="font-display text-xl md:text-2xl mb-8 leading-relaxed">
+              {testimonials.map((t) => (
+                <figure key={t.name} className="flex flex-col">
+                  <blockquote className="font-display text-xl md:text-2xl mb-8 leading-relaxed">
                     &ldquo;{t.text}&rdquo;
-                  </p>
-                  <div className="mt-auto flex items-center gap-4">
-                    <img
-                      src={t.avatar}
-                      alt={t.name}
-                      width={48}
-                      height={48}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-12 h-12 rounded-full object-cover border border-paper/10"
-                    />
+                  </blockquote>
+                  <figcaption className="mt-auto flex items-center gap-4">
+                    {t.avatar ? (
+                      <img
+                        src={t.avatar}
+                        alt={t.name}
+                        width={48}
+                        height={48}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-12 h-12 rounded-full object-cover border border-paper/10"
+                      />
+                    ) : (
+                      <span
+                        aria-hidden="true"
+                        className="w-12 h-12 shrink-0 rounded-full border border-paper/10 bg-paper/10 flex items-center justify-center font-sans font-semibold text-paper"
+                      >
+                        {initials(t.name)}
+                      </span>
+                    )}
                     <div className="leading-tight">
                       <p className="font-sans font-semibold text-paper">{t.name}</p>
                       <p className="text-sm font-sans text-paper/50">{t.role}</p>
                     </div>
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </SectionFade>
@@ -531,14 +569,23 @@ export default function Home() {
               Common questions
             </h2>
             <div className="max-w-3xl mx-auto space-y-8">
-              {faqItems.map((item, i) => (
-                <details key={i} className="group border-b border-ink/10 pb-8 cursor-pointer">
-                  <summary className="flex items-center justify-between list-none text-2xl font-serif text-ink">
+              {faqItems.map((item) => (
+                <details key={item.question} className="group border-b border-ink/10 pb-8 cursor-pointer">
+                  <summary className="flex items-center justify-between gap-4 list-none text-2xl font-serif text-ink">
                     <h3 className="inline text-2xl font-serif text-ink">{item.question}</h3>
-                    <ChevronDown className="w-5 h-5 opacity-40 group-open:rotate-180 transition-transform" />
+                    <ChevronDown className="w-5 h-5 shrink-0 opacity-40 group-open:rotate-180 transition-transform" />
                   </summary>
                   <div className="mt-6 text-lg text-ink/90 leading-relaxed max-w-2xl">
                     <p>{item.answer}</p>
+                    {item.link && (
+                      <Link
+                        href={item.link.href}
+                        className="mt-4 inline-flex items-center text-accent-link font-bold rounded-sm underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                      >
+                        {item.link.label}
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Link>
+                    )}
                   </div>
                 </details>
               ))}
@@ -547,33 +594,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Form */}
-      <section id="tell-us" className="py-24 md:py-32 bg-ink text-paper scroll-mt-24">
+      {/* Book a call + IT check */}
+      <section id="book" className="py-24 md:py-32 bg-ink text-paper scroll-mt-24">
         <div className="container mx-auto px-4">
           <SectionFade>
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2 className="font-display text-4xl md:text-6xl mb-12 text-paper text-balance">
-                Ready to stop the copy-paste?
+              <h2 className="font-display text-4xl md:text-6xl mb-6 text-paper text-balance">
+                Book a 30-minute call
               </h2>
+              <p className="text-xl text-paper/70 mb-12 text-pretty">
+                Tell me how IT works at your company today. I&apos;ll tell you honestly whether I can help.
+              </p>
               <div className="flex flex-col items-center gap-8 mb-16">
                 <a
-                  href="https://calendly.com/nic-sylentt/30min"
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-cta px-10 py-5 text-xl group"
                 >
-                  Book a free discovery call
+                  Book a 30-minute call
                   <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
 
-              <div className="w-full h-px bg-ink/5 mb-20" />
+              <div className="w-full h-px bg-paper/10 mb-20" />
 
-              <h3 className="font-display text-2xl md:text-3xl mb-6">
-                Not ready to talk?
+              <h3 id="it-check" className="font-display text-2xl md:text-3xl mb-6 scroll-mt-28">
+                Take the 2-minute IT check
               </h3>
               <p className="text-xl text-paper/60 mb-12">
-                Answer 4 questions to see where your time is going.
+                Four questions. No email required.
               </p>
             </div>
             <div className="max-w-2xl mx-auto">
