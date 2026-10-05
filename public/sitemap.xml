@@ -17,36 +17,35 @@
        a noindex tag is the combination that actually keeps them out. -->
   <url>
     <loc>https://sylentt.com/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://sylentt.com/services/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sylentt.com/pricing/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-10-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- lastmod IS A CLAIM ABOUT THE FILE, AND A STALE ONE SUPPRESSES RECRAWL.
-       Every URL below carried 2026-03-14 while /webdesign/ was rewritten
-       repeatedly through August and September, so the one signal that tells a
-       crawler "this changed, read it again" was saying the opposite. When you
-       change a page, change its lastmod in the same commit; AGENTS.md already
-       requires this file to match the site, and a date is part of matching.
+       When you change a page, change its lastmod in the same commit; AGENTS.md
+       already requires this file to match the site, and a date is part of
+       matching. The three URLs above were rewritten on 2026-10-05 (the
+       fractional CIO repositioning).
 
        Dates below are sourced, not guessed: the offer page from the site repo
        commit that changed it (21d9c51, 2026-09-19), the three policy pages from
        the entity and mailing-address amendments of 2026-09-13.
 
-       /webdesign/ is raised from 0.5 to 0.8, equal with /services/. It is not a
-       minor page under the integration line; it is the front door of the second
-       service line and the destination of every cold email and ad we run. -->
+       /webdesign/ keeps 0.8, equal with /services/. The main site links to it
+       from the footer only, but it is the landing page for every cold email
+       and ad for that plan, so it is not a minor page. -->
   <url>
     <loc>https://sylentt.com/webdesign/</loc>
     <lastmod>2026-09-19</lastmod>

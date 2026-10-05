@@ -32,18 +32,21 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
+const siteTitle = "Sylentt Partners | Fractional CIO for Cache Valley Companies";
+const socialTitle = "Run your business, not your IT. | Sylentt Partners";
+const siteDescription =
+  "Fractional CIO for Cache Valley companies. Work directly with Nic Aslett, a part-time IT director with a full-time track record. Fixed, published prices.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://sylentt.com"),
-  title: "Sylentt Partners | Business App Integration for Small Businesses",
-  description:
-    "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+  title: siteTitle,
+  description: siteDescription,
   keywords: [
-    "business app integration",
-    "connect QuickBooks to Jobber",
-    "automate Shopify to ShipStation",
-    "stop manually entering data",
-    "small business automation",
-    "Cache Valley Utah",
+    "fractional CIO Cache Valley",
+    "fractional IT director Logan Utah",
+    "part-time IT director",
+    "AI consultant Logan Utah",
+    "IT leadership Utah",
   ],
   authors: [{ name: "Sylentt Partners" }],
   robots: { index: true, follow: true },
@@ -51,9 +54,8 @@ export const metadata: Metadata = {
     icon: "/logo-symbol.png",
   },
   openGraph: {
-    title: "Sylentt Partners | Run your business, not your software.",
-    description:
-      "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    title: socialTitle,
+    description: siteDescription,
     type: "website",
     url: "https://sylentt.com",
     siteName: "Sylentt Partners",
@@ -61,29 +63,26 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylentt Partners | Run your business, not your software.",
-    description:
-      "Sylentt Partners connects your business apps so your team stops being the copy-paste layer. Custom integrations you own. Based in Cache Valley, Utah.",
+    title: socialTitle,
+    description: siteDescription,
     images: ["/logo_full.png"],
   },
   alternates: {
     canonical: "https://sylentt.com/",
   },
   other: {
-    // NOTE: this tag ships on EVERY page, /webdesign/ included, so it must
-    // describe the whole company and not one service line. When it named only
-    // the integration line, the web design page served machine-readable text
-    // saying the company does not do web design.
-    // OWNERSHIP IS NOT THE SAME ON BOTH LINES, AND THIS TAG MUST NOT SAY IT IS.
-    // The old copy ended "Clients own everything we build", which was true while
-    // this string described integrations only. Naming the web design plan in the
-    // same sentence makes it false: on that plan the transfer is earned at twelve
-    // continuous paid months, and cancelling before then transfers nothing. The
-    // offer page names that pair as terms that may never be cut (page.tsx, the
-    // header comment). Dropping half of it on the surface written for machines is
-    // the same cut, made where nobody would see it.
+    // NOTE: this tag ships on EVERY page, /webdesign/ included, so it names the
+    // web design plan in one sentence, the same footer-level mention the main
+    // site gives it. Dropping it entirely would make /webdesign/ serve
+    // machine-readable text saying the company does not do web design.
+    // OWNERSHIP IS NOT THE SAME FOR BOTH, AND THIS TAG MUST NOT SAY IT IS.
+    // "The client keeps everything" is true of the fractional CIO work and is
+    // scoped to it below. On the web design plan the transfer is earned at
+    // twelve continuous paid months and cancelling before then transfers
+    // nothing; those terms belong to /webdesign/ and its terms page, which is
+    // why the sentence here points there instead of summarising them.
     "ai-content-description":
-      "Sylentt Partners is a small business consultancy in Cache Valley, Utah with two service lines. First, business app integration: custom connections between tools like Shopify, QuickBooks, Stripe, and HubSpot, which clients own outright. Second, web design for local service businesses at sylentt.com/webdesign/: a website researched, written and hand-built for one business, on a $9.99 a month managed plan with the first 30 days free, where the site and its code transfer to the customer after twelve continuous paid months and nothing transfers if they cancel before then.",
+      "Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah. Nic is the part-time IT and AI leader for companies of about 30 to 300 employees that have an IT company for day-to-day support but no one steering IT. Work starts with a fixed-price, two-week IT and AI assessment ($1,500), then continues month to month as Advisor ($1,950 a month, up to 6 hours) or Director ($3,500 a month, up to 12 hours), with 30 days' notice, and the client keeps everything Nic produces. Separately, a web design plan for local service businesses is linked from the site footer at sylentt.com/webdesign/, under its own terms.",
   },
 };
 
@@ -100,11 +99,11 @@ const jsonLdWebSite = {
   "@id": "https://sylentt.com/#website",
   url: "https://sylentt.com/",
   name: "Sylentt Partners",
-  // Same reason as the ai-content-description above: this block is emitted by
-  // the ROOT layout, so it is the only structured data on pages that have none
-  // of their own. It has to cover both service lines.
+  // Emitted by the ROOT layout, so it also ships on /webdesign/. It describes
+  // the main offer only; the web design plan is described by the Service node
+  // in app/webdesign/layout.tsx, whose provider is this publisher's @id.
   description:
-    "Small business consultancy in Cache Valley, Utah. Two lines: business app integration and workflow automation, and hand-built websites for local service businesses.",
+    "Fractional CIO and IT leadership for Cache Valley companies, from Nic Aslett.",
   publisher: {
     "@type": "Organization",
     "@id": "https://sylentt.com/#organization",

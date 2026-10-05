@@ -1,72 +1,61 @@
 # Sylentt
 
-> Sylentt Partners LLC runs two lines of work for small businesses: custom business app integration, and hand-built websites for local service businesses. Based in Cache Valley, Utah.
+> Sylentt Partners is Nic Aslett's fractional CIO practice in Cache Valley, Utah: part-time IT and AI leadership for companies of about 30 to 300 employees.
 
-Sylentt Partners LLC trades as Sylentt. It is one company with two service lines, both run by its founder, Nic Aslett. What a client ends up owning differs by line, and each line says so below.
+Sylentt Partners LLC trades as Sylentt. Clients work with Nic Aslett directly. There is no team behind him, and that is the point: a client gets the same person who has run IT departments for organizations their size.
 
-1. **Business app integration.** Custom connections between the software tools a business already uses, so data moves between them without anyone retyping it.
-2. **Web design for local businesses.** Complete websites for local trade and service businesses, researched, written and hand-built for one business, sold as a managed monthly plan at https://sylentt.com/webdesign/.
+## Who it is for
 
-## Business App Integration
+Cache Valley and Northern Utah companies with roughly 30 to 300 employees that have an IT company (a managed service provider) for day-to-day support but no one steering IT. Typical signs: nobody owns technology decisions, software renews without anyone choosing it, nobody owns the company's approach to AI, and the knowledge of how the systems work lives with one person.
 
-Sylentt builds custom integrations between business applications. We connect tools like Shopify, QuickBooks, Stripe, HubSpot, Xero, and others so data flows automatically between them. What we build runs on the client's own infrastructure. Clients pay their cloud provider directly for usage, with no platform markup and no lock-in.
+## How it works
 
-When a business uses multiple software tools that do not share data automatically, someone on the team becomes the copy-paste layer. They re-enter orders, manually sync customer records, update spreadsheets, and check that one system matches another. Sylentt eliminates that manual work by building direct connections between the apps.
+1. **IT & AI Assessment.** Two weeks, fixed price. Nic inventories every system, subscription, vendor and risk; finds where AI fits and where it does not; and delivers a 12-month roadmap, presented in person.
+2. **Retainer.** Nic becomes the company's IT director for a set number of hours a month. He runs the roadmap, manages the IT company and other vendors, makes the decisions, and answers the questions.
+3. **The client owns everything.** Documentation, roadmap, policies, vendor relationships: all the client's, in the client's accounts, from day one.
 
-Every integration includes monitoring and real-time failure alerts. If something breaks, the system catches it and alerts before a customer notices. This is the core difference from platforms like Zapier or Make, which fail silently and charge recurring fees.
+## Pricing
 
-### Integration services
+Fixed and published at https://sylentt.com/pricing/.
 
-- Custom API integrations between business applications
-- Workflow automation replacing manual data entry between systems
-- Monitoring and alerting for integration failures
-- Migration from Zapier or Make to client-owned infrastructure
-- Ongoing support and retainer options
+- **IT & AI Assessment: $1,500, fixed.** Two weeks. Credited toward the first month if the client continues. Includes a system and subscription inventory, vendor and contract review, security basics check, AI opportunity-and-risk map, 12-month roadmap, and a 60-minute in-person readout.
+- **Advisor: $1,950 a month.** Up to 6 hours a month. Monthly leadership meeting, roadmap kept current, vendor and MSP oversight, AI policy and tool vetting, and unlimited questions by email with next-business-day answers.
+- **Director: $3,500 a month.** Up to 12 hours a month. Everything in Advisor, plus a weekly check-in, a seat in the client's leadership meetings, ownership of IT budget and renewals, and leading AI and technology projects end to end.
 
-### Systems commonly connected
+Month-to-month. 30 days' notice. Everything Nic produces belongs to the client. Hours are a cap, not a target.
 
-Shopify, QuickBooks, Stripe, Square, HubSpot, Xero, Salesforce, Calendly, ServiceTitan, Jobber, ShipStation, Recharge, FreshBooks, and others. If the app has an API, Sylentt can connect it.
+## What Nic does not do
 
-## Web Design for Local Businesses
+Helpdesk, hardware repair, after-hours support, or building software. When something needs to be built, Nic chooses who builds it and manages them.
 
-Sylentt designs and builds websites for local trade and service businesses. The offer and the request form are at https://sylentt.com/webdesign/.
+## Experience
 
-Each site is built for one business rather than assembled from a template. Sylentt researches the business first, writes every word from that business's own material and its own customer reviews, chooses the design for that trade and market, and hand-codes the result as a fast static site.
+15+ years in IT, the last 10 leading teams, including VP of IT at Fortidia, IT Manager at Charter Communications, and Release Train Engineer at Liqid.
 
-### How it works
+Results from IT departments Nic has led:
 
-Sylentt often builds the site before the business has asked for it, and then shows it, so there is something real to look at instead of a pitch. A business can also request one directly at https://sylentt.com/webdesign/. Either way the finished site is live and viewable before anything is paid.
+- 100% on-time project delivery, after introducing real project management to a 16-person IT department
+- 80% faster ticket resolution: 150 hours to 30
+- SLA adherence doubled: 40% to 80%
 
-### Plan and terms
+## Currently
 
-- $9.99 a month plus tax
-- First 30 days free
-- Cancel any time
-- Includes hosting, SSL, backups, uptime monitoring, security patches, and up to two content changes per calendar month
-- After 12 continuous paid months, the site and the code behind it transfer to the customer
-- **Cancel before 12 continuous paid months and the site comes down, and nothing transfers.** The transfer is earned by staying on the plan for a year, not by paying for a month
-- A domain is included if one is needed, registered in the customer's name after the first successful payment, or an existing domain can be connected
-- Terms: https://sylentt.com/webdesign/terms/
-- Refunds: https://sylentt.com/webdesign/refunds/
-- Privacy: https://sylentt.com/webdesign/privacy/
+Fractional CTO for edZOOcation (https://edzoocation.com/), a Shopify Plus education company. Nic designed and built their order-to-subscription automation, then handed the platform to their team and stepped into the leadership seat. About 8 hours a week of manual work was eliminated, and the team now runs its own systems.
 
-### Artwork disclosure
+## Service area
 
-Artwork on these sites is AI-generated and illustrative. It is never presented as photographs of the business's own people, premises or work.
-
-## Notable Clients
-
-Sylentt has delivered integration and automation solutions for companies including **By Light Professional IT Services** (https://bylight.com/) and **edZOOcation** (https://edzoocation.com/).
-
-## Ownership Model
-
-**Integration clients own everything Sylentt builds.** Integrations run on the client's own cloud account, clients pay their cloud provider directly for usage with no platform markup, and if the engagement ends the client keeps all code and infrastructure.
-
-**Web design is different, and the difference is the deal.** The site and its code transfer to the customer after 12 continuous paid months on the plan. Cancel before then and the site comes down and nothing transfers.
+In person across Cache Valley and Northern Utah. Remote work elsewhere is the exception, not the rule.
 
 ## Contact
 
 - Website: https://sylentt.com
-- Web design: https://sylentt.com/webdesign/
+- Services: https://sylentt.com/services/
+- Pricing: https://sylentt.com/pricing/
+- Book a 30-minute call: https://calendly.com/nic-sylentt/30min
 - Email: contact@sylentt.com
+- LinkedIn: https://www.linkedin.com/in/nic-aslett/
 - Location: Cache Valley, Utah, United States
+
+## Elsewhere on this site
+
+A separate web design plan for local service businesses is at https://sylentt.com/webdesign/, linked from the site footer only. It has its own terms (https://sylentt.com/webdesign/terms/), refund policy (https://sylentt.com/webdesign/refunds/) and privacy policy (https://sylentt.com/webdesign/privacy/). Its ownership terms are different from the fractional CIO work above: on that plan the site transfers to the customer only after 12 continuous paid months, and nothing transfers on cancellation before then. Use that page for its details; nothing above applies to it.
