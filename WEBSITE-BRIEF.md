@@ -4,7 +4,7 @@ This is the brief the main site was rewritten from on 2026-10-05. It replaces th
 
 ## Positioning
 
-Fractional IT & AI leadership for Cache Valley companies with roughly 20 to 150 employees that have an MSP for helpdesk but no one steering IT. Nic Aslett (owner) was VP of IT at Fortidia, IT Manager at Charter Communications (leading a 40-person QA team), Release Train Engineer at Liqid, and is currently fractional CTO for edZOOcation. Sell the leader, not the engineer.
+Fractional IT & AI leadership for Cache Valley companies with roughly 20 to 150 employees that have an IT company (an MSP) for helpdesk but no one steering IT. Nic Aslett (owner) was VP of IT at Fortidia, IT Manager at Charter Communications (leading a 40-person QA team), Release Train Engineer at Liqid, and is currently fractional CTO for edZOOcation. Sell the leader, not the engineer.
 
 ## Preserve
 
@@ -22,7 +22,16 @@ First person ("I"), not "we". Sylentt Partners remains the business name; the si
 
 ## Hero
 
-"An IT director, without the salary." / "Part-time IT and AI leadership for Cache Valley companies. From $1,500 a month." The hero answers why the visitor is here: this is what you get, and this is what it costs. Keep it that short.
+"An IT director, without the salary." / "Someone on your side who makes the IT calls, keeps your IT company accountable, and tells you what to do about AI. From $1,500 a month." Nic's photo and name sit above the headline. The hero answers why the visitor is here: what you get, from whom, and what it costs.
+
+## Conversion rules (2026-10-05)
+
+- **The call is free, and every button says so.** Use `CALL_CTA` from `lib/offer.ts`. Say what they get from it: "You'll leave knowing what I'd fix first."
+- **Independence is the headline differentiator.** Nic sells no hardware, software or support and takes no commissions or referral fees (`INDEPENDENCE` in `lib/offer.ts`). If that ever changes, the copy changes the same day.
+- **Write for a business owner, not an IT person.** "IT company", never "MSP". "Plan", not "roadmap". Proof in owner terms (problems fixed faster, promises kept), not internal IT metrics.
+- **The assessment is optional.** Most start there; nobody has to.
+- **Home page order:** hero, trust points, their problems, how it works (with prices), track record, about, testimonials, FAQ, free call and IT check. Say each thing once.
+- **Phone:** set `PHONE` in `lib/offer.ts` and every phone link turns on.
 
 ## Offer
 
@@ -77,7 +86,7 @@ Title: "Sylentt Partners | Fractional CIO for Cache Valley Companies". Keywords:
 - Certifications (SAFe) anywhere above the footer
 - The anonymized "education company" case study (now named edZOOcation)
 
-The check allows four exact phrases from the approved copy that contain a listed word: "Release Train Engineer", "thoughtfully integrate AI", "Shopify Plus education company" and "he transformed how we delivered". Do not add to that list without Nic's approval.
+The check allows three exact phrases from the approved copy that contain a listed word: "Release Train Engineer" (machine-readable job title only), "thoughtfully integrate AI" and "he transformed how we delivered" (testimonials, verbatim). Do not add to that list without Nic's approval.
 
 ## Implementation decisions (2026-10-05, approved by Nic)
 
