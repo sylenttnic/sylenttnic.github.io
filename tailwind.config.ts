@@ -72,7 +72,7 @@ const config: Config = {
       },
       backgroundImage: {
         // 135deg band runs "/" so it sweeps top-left to bottom-right as it slides right.
-        sheen: "linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.9) 50%, transparent 65%)",
+        sheen: "linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.7) 50%, transparent 65%)",
       },
       keyframes: {
         sheen: {
