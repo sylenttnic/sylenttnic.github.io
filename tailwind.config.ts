@@ -69,6 +69,8 @@ const config: Config = {
         "line-grow": "lineGrow 1s ease-out both",
         // One pass, 1.3s after load; `both` keeps the band off the pill before and after.
         sheen: "sheen 1s ease-in-out 1.3s both",
+        // Nav "Book" button: picks the gloss up as it leaves the hero pill.
+        "sheen-cta": "sheen 0.8s ease-in-out 2s both",
       },
       backgroundImage: {
         // 135deg band runs "/" so it sweeps top-left to bottom-right as it slides right.
