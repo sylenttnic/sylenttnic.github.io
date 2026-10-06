@@ -100,9 +100,14 @@ export default function Navbar() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-cta px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
+                  className="btn-cta relative isolate overflow-hidden px-6 py-2.5 text-xs uppercase tracking-[0.18em]"
                 >
                   {link.name}
+                  {/* One gloss pass, right after the hero pill's (see tailwind.config.ts). */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-sheen animate-sheen-cta motion-reduce:hidden"
+                  />
                 </a>
               ) : (
                 <Link
