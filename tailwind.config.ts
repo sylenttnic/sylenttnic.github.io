@@ -67,8 +67,18 @@ const config: Config = {
         "flow-down": "flowDown 1.8s ease-in-out infinite",
         "flow-right": "flowRight 1.4s ease-in-out infinite",
         "line-grow": "lineGrow 1s ease-out both",
+        // One pass, 1.3s after load; `both` keeps the band off the pill before and after.
+        sheen: "sheen 1s ease-in-out 1.3s both",
+      },
+      backgroundImage: {
+        // 135deg band runs "/" so it sweeps top-left to bottom-right as it slides right.
+        sheen: "linear-gradient(135deg, transparent 35%, rgba(255,255,255,0.9) 50%, transparent 65%)",
       },
       keyframes: {
+        sheen: {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(100%)" },
+        },
         lineGrow: {
           from: { transform: "scaleX(0)" },
           to: { transform: "scaleX(1)" },
