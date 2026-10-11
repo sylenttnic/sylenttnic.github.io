@@ -93,7 +93,7 @@ const budgetRows = [
   { what: 'Lighthouse, mobile', bar: '95 or better in all four categories' },
   { what: 'Largest content paint', bar: 'Under 2 seconds on a throttled mobile connection' },
   { what: 'Whole page', bar: 'Under 900 KB, images included' },
-  { what: 'JavaScript', bar: 'Under 20 KB' },
+  { what: 'JavaScript', bar: 'Under 64 KB' },
   { what: 'Contrast', bar: 'WCAG AA, 4.5:1 body text, 3:1 large text' },
   { what: 'Works without JavaScript', bar: 'Yes: navigation, content and contact' },
 ];

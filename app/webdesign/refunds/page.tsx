@@ -33,7 +33,7 @@ export default function BillingAndCancellation() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Billing &amp; Cancellation</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC &middot; Effective 5 October 2026
+        Sylentt Partners LLC &middot; Effective 12 October 2026
       </p>
 
       <div className="border-l-4 border-accent pl-4 py-2 my-6 bg-surface/50 text-ink/90 rounded-r">
