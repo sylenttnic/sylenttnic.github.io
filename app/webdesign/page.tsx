@@ -38,9 +38,10 @@ export const metadata: Metadata = {
  * here, first find what it replaces.
  *
  * What may not be cut, whatever the word count: the plan terms in the pricing
- * card (price, free trial, cancellation), the statement descriptor, and the line
- * saying our artwork is illustrative. Those are the terms of the offer and an
- * honesty disclosure, not sales copy.
+ * card (price, free trial, cancellation), the statement descriptor, and the
+ * sentence in "Where the pictures come from" saying the artwork is illustrative and
+ * that neither stock nor artwork is passed off as the customer's crew, premises or
+ * work. Those are the terms of the offer and an honesty disclosure, not sales copy.
  */
 
 const whatYouGetCards = [
@@ -53,8 +54,8 @@ const whatYouGetCards = [
     text: 'Headlines, service descriptions, buttons, page titles, the text behind your images. Written from your own material and your own reviews.',
   },
   {
-    title: 'Artwork made for your page',
-    text: 'Not a stock photo three competitors are also using. It is illustrative and the site says so; we never pass artwork off as photographs of your crew or your work.',
+    title: 'Where the pictures come from',
+    text: 'Photos of your business come from your own website or the photos you posted to your Google listing. Where a page needs more, we add free-licence stock photos or artwork for mood. The artwork is illustrative, and neither is ever passed off as your crew, your premises or your work.',
   },
   {
     title: 'Set up to be found',
