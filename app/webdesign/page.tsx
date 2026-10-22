@@ -5,7 +5,7 @@ import RequestFormChooser from '@/components/webdesign/RequestFormChooser';
 import SampleGallery from '@/components/webdesign/SampleGallery';
 
 const OFFER_SUMMARY =
-  'A website designed and hand-built for one business: researched, written and coded from scratch. $9.99 a month, first 30 days free, cancel any time.';
+  'A website designed, written and coded from scratch for one business, from its own material and reviews. $9.99 a month, first 30 days free, cancel any time.';
 
 export const metadata: Metadata = {
   title: 'Custom websites for local businesses | Sylentt',
@@ -63,7 +63,7 @@ const whatYouGetCards = [
   },
   {
     title: 'Fast on a real phone',
-    text: 'Built by hand from HTML and CSS. It loads in about a second on a phone, and the content and your phone number still work with JavaScript switched off.',
+    text: 'Plain HTML and CSS. Its largest element is on screen in under 4 seconds on a throttled phone test, and the content and your phone number still work with JavaScript switched off.',
   },
   {
     title: 'We host it and keep it running',
@@ -73,27 +73,28 @@ const whatYouGetCards = [
 
 const howItIsMade = [
   {
-    title: 'We read your market before we draw anything',
-    text: 'The businesses ranking above you in your own city, your reviews and theirs, everything you already publish, and the language that already wins for your trade in your town. Every fact that reaches your page traces to that research document with a source beside it. Not a statistic, not a credential, not a service you do not offer.',
+    title: 'We read your business before we draw anything',
+    text: 'Your Google listing, the photos you posted to it, your reviews and your own site, read into one record of your business with a source beside every fact. The look starts from a study of well-designed sites in trades like yours. Every fact that reaches your page traces to that record. Not a statistic, not a credential, not a service you do not offer.',
   },
   {
-    title: 'Built by hand, which is why it is fast',
-    text: 'HTML, CSS and a small amount of JavaScript, written for your site. No theme to conflict, no page builder to upgrade, no plugins and no database. That is where the speed comes from, and it is why there is nothing to keep patched and no admin login to break into.',
+    title: 'No page builder, which is why it is fast',
+    text: 'HTML and CSS written for your site, plus a small amount of JavaScript. No theme to conflict, no page builder to upgrade, no plugins and no database. That is where the speed comes from, and it is why there is nothing to keep patched and no admin login to break into.',
   },
   {
-    title: 'Checked against every site we have built',
-    text: 'Every site we build is logged: its typeface, its dominant colour, its layout structure, its aesthetic family. A new design is checked against that log before it is drawn, and two businesses in the same trade and the same city cannot share any of them. No two sites we have ever built repeat the same typeface, colour and layout combination. That is a file and a check that fails the build, not a promise in a sales page.',
+    title: 'Three designs, three different ideas',
+    text: 'You get three designs, not one, each from a different researched direction for your trade and each drawn from your own photos and words. The directions you get are the ones fewest other businesses have had. A check refuses two designs that share a hero photo or a headline. You see all three on the preview and keep the one you want.',
   },
   {
     title: 'Checked before it ships',
-    text: 'Every build goes through an independent review step, separate from the one that built it, checked against the research document and the standards below. Anything found gets fixed and re-checked. Nothing ships with an open finding.',
+    text: 'Every visible line is read against your record by a reader that did not write it. A separate reviewer, which never sees how the site was made, passes or fails it against the standards below. Anything found gets fixed and re-checked. Nothing is sent to you with an open finding.',
   },
 ];
 
 const budgetRows = [
-  { what: 'Lighthouse, mobile', bar: '95 or better in all four categories' },
-  { what: 'Largest content paint', bar: 'Under 2 seconds on a throttled mobile connection' },
-  { what: 'Whole page', bar: 'Under 900 KB, images included' },
+  { what: 'Lighthouse, phone', bar: 'Performance 90 or better; accessibility and best practices 95 or better' },
+  { what: 'Lighthouse, desktop', bar: 'Performance 95 or better; accessibility and best practices 95 or better' },
+  { what: 'Largest content paint', bar: "Under 4 seconds on Lighthouse's throttled phone test" },
+  { what: 'Whole page', bar: 'Under 1 MB transferred, images included' },
   { what: 'JavaScript', bar: 'Under 64 KB' },
   { what: 'Contrast', bar: 'WCAG AA, 4.5:1 body text, 3:1 large text' },
   { what: 'Works without JavaScript', bar: 'Yes: navigation, content and contact' },
@@ -139,7 +140,7 @@ export default function WebDesignLandingPage() {
             See your new website before you pay anything.
           </h1>
           <p className="text-lg md:text-xl text-ink/80 max-w-2xl mx-auto mb-8 font-sans leading-relaxed text-pretty">
-            Tell us the business and the town. We research your trade and your city, design and build a real website for it, and email you the link. Look at the finished site first, then decide.
+            Tell us the business and the town. We read your Google listing, your reviews and any site you have, build a real website in designs researched for your trade, and email you the link. Look at the finished site first, then decide.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6">
             <a href="#tell-us" className="btn-cta px-8 py-4 text-lg inline-flex items-center gap-2 group w-full sm:w-auto justify-center">
@@ -344,7 +345,7 @@ export default function WebDesignLandingPage() {
             </h2>
             <div className="space-y-4 text-base md:text-lg text-ink/90 leading-relaxed font-sans">
               <p>
-                Fifteen years an engineer, building infrastructure and software behind the scenes. When you work with Sylentt Partners on a web build, you work directly with me: your site is built by hand, from scratch.
+                Fifteen years an engineer, building infrastructure and software behind the scenes. When you work with Sylentt Partners on a web build, you deal directly with me: your site is written from scratch for your business, checked before it reaches you, and I am the one who answers when you need anything.
               </p>
               <p>
                 I run Sylentt Partners from Cache Valley, Utah, and build for businesses anywhere in the country.
