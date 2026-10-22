@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 const whatYouGetCards = [
   {
     title: 'A design made for you',
-    text: 'Layout, type and colour chosen for your trade, your market and the impression you need to make in the first three seconds.',
+    text: 'Layout, type and colour chosen for your trade and the impression you need to make in the first three seconds.',
   },
   {
     title: 'Every word written for you',
@@ -82,11 +82,11 @@ const howItIsMade = [
   },
   {
     title: 'Three designs, three different ideas',
-    text: 'You get three designs, not one, each from a different researched direction for your trade and each drawn from your own photos and words. The directions you get are the ones fewest other businesses have had. A check refuses two designs that share a hero photo or a headline. You see all three on the preview and keep the one you want.',
+    text: 'You get three designs, not one, each from a different researched direction for your trade and each drawn from your own photos and words. The directions you get are among the ones fewest other businesses have had. A check refuses two designs that share a hero photo or a headline. You see all three on the preview and keep the one you want.',
   },
   {
     title: 'Checked before it ships',
-    text: 'Every visible line is read against your record by a reader that did not write it. A separate reviewer, which never sees how the site was made, passes or fails it against the standards below. Anything found gets fixed and re-checked. Nothing is sent to you with an open finding.',
+    text: 'Every visible line is read against your record by a reader that did not write it. A separate reviewer, which never sees how the site was made, passes or fails it against the standards below. Anything found gets fixed and re-checked. Nothing is sent to you with an open must-fix finding.',
   },
 ];
 
@@ -94,7 +94,7 @@ const budgetRows = [
   { what: 'Lighthouse, phone', bar: 'Performance 90 or better; accessibility and best practices 95 or better' },
   { what: 'Lighthouse, desktop', bar: 'Performance 95 or better; accessibility and best practices 95 or better' },
   { what: 'Largest content paint', bar: "Under 4 seconds on Lighthouse's throttled phone test" },
-  { what: 'Whole page', bar: 'Under 1 MB transferred, images included' },
+  { what: 'First load on a phone', bar: "Under 1 MB on Lighthouse's throttled phone test, before you scroll" },
   { what: 'JavaScript', bar: 'Under 64 KB' },
   { what: 'Contrast', bar: 'WCAG AA, 4.5:1 body text, 3:1 large text' },
   { what: 'Works without JavaScript', bar: 'Yes: navigation, content and contact' },
@@ -290,7 +290,7 @@ export default function WebDesignLandingPage() {
               <ChevronDown className="w-5 h-5 text-ink/40 group-open:rotate-180 transition-transform shrink-0" />
             </summary>
             <p className="mt-4 mb-6 text-base text-ink/70 font-sans leading-relaxed">
-              Open this if you want the engineering. These are pass-or-fail: a build that misses one does not ship until it does not.
+              Open this if you want the engineering. These are pass-or-fail: a build that misses one is not sent to you until it does not.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left font-sans text-sm md:text-base border-collapse">
