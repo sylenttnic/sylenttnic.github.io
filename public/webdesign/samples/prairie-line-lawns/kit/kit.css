@@ -1,0 +1,54 @@
+/* Studio kit - the states motion.js animates between, hidden only under html.kit-anim (assemble
+   sets it). A root motion.js has not marked .kit-ready by 3 s (JS off, blocked, broken) shows every
+   [data-reveal] and split word; design CSS that waits for .is-in is not covered (reveal-audit finds it). */
+
+[data-reveal] { --kit-delay: 0ms; }
+.kit-anim [data-reveal]:not(.is-in) { opacity: 0; }
+.kit-anim [data-reveal="up"]:not(.is-in), .kit-anim [data-reveal=""]:not(.is-in) { transform: translate3d(0, 28px, 0); }
+.kit-anim [data-reveal="scale"]:not(.is-in) { transform: scale(.94); }
+.kit-anim [data-reveal="clip"]:not(.is-in) { opacity: 1; clip-path: inset(100% 0 0 0); }
+[data-reveal].is-in {
+  opacity: 1; transform: none; clip-path: inset(0 0 0 0);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1) var(--kit-delay), transform .9s cubic-bezier(.2,.7,.2,1) var(--kit-delay), clip-path 1.1s cubic-bezier(.7,0,.2,1) var(--kit-delay);
+}
+
+.kit-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.kit-wi { display: inline-block; }
+.kit-anim [data-split]:not(.is-in) .kit-wi { transform: translate3d(0, 105%, 0); }
+[data-split].is-in .kit-wi { transform: none; transition: transform .9s cubic-bezier(.2,.75,.2,1) calc(var(--kit-i, 0) * 45ms); }
+
+/* The 3 s fallback lives in CSS because the CSP blocks any inline script. motion.js starting within
+   3 s adds .kit-ready and cancels it unseen; a later start hides again what is not yet scrolled to. */
+.kit-anim:not(.kit-ready) [data-reveal]:not(.is-in), .kit-anim:not(.kit-ready) [data-split]:not(.is-in) .kit-wi { animation: kit-shown 0s 3s forwards; }
+@keyframes kit-shown { to { opacity: 1; transform: none; clip-path: none; } }
+
+[data-marquee] { display: flex; overflow: hidden; gap: var(--kit-gap, 2rem); }
+[data-marquee] > * { flex: none; display: flex; gap: var(--kit-gap, 2rem); }
+/* Until motion.js moves it (JS off, blocked) the row scrolls instead of clipping, so every item can be read. */
+[data-marquee]:not(.is-moving) { overflow-x: auto; scrollbar-width: none; }
+[data-marquee]:not(.is-moving)::-webkit-scrollbar { display: none; }
+[data-marquee].is-moving > * { animation: kit-marquee var(--kit-speed, 30s) linear infinite; }
+[data-marquee].is-moving:hover > * { animation-play-state: paused; }
+@keyframes kit-marquee { to { transform: translate3d(calc(-100% - var(--kit-gap, 2rem)), 0, 0); } }
+
+[data-tilt], [data-magnetic] { transition: transform .35s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+
+/* The host isolates, so the canvas (z -1) paints over the host's background and under its
+   content. Overlay effects (grain, liquid) raise their own canvas inline. */
+[data-fx] { position: relative; isolation: isolate; }
+.kit-fx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; z-index: -1; }
+.fx-on > .kit-fx-canvas { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kit-anim [data-reveal]:not(.is-in), .kit-anim [data-split]:not(.is-in) .kit-wi { opacity: 1; transform: none; clip-path: none; }
+  [data-marquee] { flex-wrap: wrap; }
+  [data-marquee] > * { animation: none !important; flex-wrap: wrap; }
+}
+
+/* Defaults that keep the touch and desktop audits clean unless a design says otherwise. :where()
+   gives them no specificity, so any rule a designer writes wins. min-height and min-width have no
+   effect on an inline text link, which is exactly what render-audit exempts (a11y/touch measures
+   a[class], buttons, summaries, selects that are not display:inline). An image is capped at 80% of
+   the screen's height, the desktop audit's image-tall line, and crops rather than squashes. */
+:where(a[class], button, summary, [role="button"], select) { min-height: 44px; min-width: 44px; }
+:where(img) { max-height: 80vh; object-fit: cover; }
