@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 15 October 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 23 October 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -54,7 +54,7 @@ export default function TermsOfService() {
             We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us - the preview comes down on its own.
           </p>
           <p className="mt-3">
-            Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody keeps it, we take it offline and delete it within six months. Nothing is billed unless you start the plan, and the first 30 days of the plan are free.
+            Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody keeps it, we take it offline within a day or so after the two weeks end, and the address then sends visitors to our offer page. We keep the site&apos;s files in our records and release the address six months later. Nothing is billed unless you start the plan, and the first 30 days of the plan are free.
           </p>
         </section>
 
@@ -148,7 +148,7 @@ export default function TermsOfService() {
             We assembled the details on your site - services, service area, hours, contact information - from sources your business controls or that are publicly published. We take care, but we are working from the outside. <strong>You are responsible for checking that everything on the site is accurate before you rely on it</strong>, and we will correct anything you tell us is wrong.
           </p>
           <p className="mt-3">
-            Any customer reviews shown are real, were published publicly by the people who wrote them, and are quoted without alteration. If you would rather they were not displayed, tell us and we will remove them.
+            Any customer reviews shown are real, were published publicly by the people who wrote them, and appear in the reviewer&apos;s own words, shortened only where an ellipsis (…) shows a cut. If you would rather they were not displayed, tell us and we will remove them.
           </p>
         </section>
 
