@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 23 October 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 8 November 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
