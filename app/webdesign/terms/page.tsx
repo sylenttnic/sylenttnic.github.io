@@ -60,15 +60,15 @@ export default function TermsOfService() {
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">3. What the plan gives you</h2>
-          <p>The monthly plan gives you the finished website shown in your preview, live and looked after:</p>
+          <p>The monthly plan gives you the finished website shown in your preview, hosted and looked after:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>
-              <strong>The site live and working straight away</strong>, at your own web address, hosted and run by us.
+              <strong>The site working at your own web address once it is public</strong>, hosted and run by us.
             </li>
             <li>
               Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong>.
             </li>
-            <li>Reasonable help getting it live and pointed at your domain.</li>
+            <li>Reasonable help getting it public and pointed at your domain.</li>
           </ul>
         </section>
 
@@ -78,7 +78,10 @@ export default function TermsOfService() {
             We want to be completely straightforward about this, because it is the part that matters most.
           </p>
           <p className="mt-3">
-            <strong>Your site goes live immediately, and the first 30 days are free.</strong> From the moment you start, it is running, resolving at your address, and yours to use and show to customers. Nothing about it is held back or watermarked. If you cancel within those 30 days, you are charged nothing.
+            <strong>The first 30 days are free.</strong> They start when you start the plan, and no card is needed. If you cancel within those 30 days, you are charged nothing.
+          </p>
+          <p className="mt-3">
+            <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, you choose which of the designs becomes your site, and it goes public within minutes. If nobody confirms, the free trial ends on its own and nothing is charged. Each of these emails also carries a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
           </p>
           <p className="mt-3">
             Starting the free 30 days does not require a card. Add one before day 30 and the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. Add none and the trial simply ends at day 30: nothing is charged, and the site comes down. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
@@ -102,7 +105,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">6. The monthly plan</h2>
           <p>
-            The monthly plan is how your site stays live and looked after. No card is needed for the free first month. Add one and it bills at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel; add none and the trial ends at day 30, nothing is charged, and the site comes down.
+            The monthly plan is how your site stays hosted and looked after once it is public. No card is needed for the free first month. Add one and it bills at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel; add none and the trial ends at day 30, nothing is charged, and the site comes down.
           </p>
           <p className="mt-2">It covers:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
