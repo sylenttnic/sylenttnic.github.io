@@ -81,7 +81,7 @@ export default function TermsOfService() {
             <strong>The first 30 days are free.</strong> They start when you start the plan, and no card is needed. If you cancel within those 30 days, you are charged nothing.
           </p>
           <p className="mt-3">
-            <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, you choose which of the designs becomes your site, and it goes public within minutes. If nobody confirms, the free trial ends on its own and nothing is charged. Each of these emails also carries a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
+            <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, the site goes public in the design you choose (if the preview has more than one). If nobody confirms, the free trial ends on its own and nothing is charged. The confirmation emails each carry a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
           </p>
           <p className="mt-3">
             Starting the free 30 days does not require a card. Add one before day 30 and the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. Add none and the trial simply ends at day 30: nothing is charged, and the site comes down. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
@@ -125,7 +125,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">7. Ownership</h2>
           <p>
-            While you are on the plan, the website is yours to use, show to customers and rely on as your own. The design, layout and copy were made for you and for no one else. We host and maintain it for you. We may reference the work as an example of what we do, unless you ask us not to.
+            Once it is public, and while you are on the plan, the website is yours to use, show to customers and rely on as your own. The design, layout and copy were made for you and for no one else. We host and maintain it for you. We may reference the work as an example of what we do, unless you ask us not to.
           </p>
           <p className="mt-3">
             Your business name, logo, trademarks, photographs and customer reviews remain yours and always were.
