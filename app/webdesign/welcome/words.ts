@@ -42,7 +42,7 @@ export const WORDS = {
       },
       {
         "label": "First fixes and photos",
-        "body": "Wording, hours, services, and photos of your work or premises (no people in them). Send as many as you like in your first 30 days after launch. After that, the plan covers up to two changes a calendar month."
+        "body": "Wording, hours, services, photos of your work or premises (no people in them), colours, fonts, layout, or another of your designs. Send as many as you like during your free 30 days; most are live within 2 business days. After that, the plan covers up to two changes a calendar month."
       }
     ],
     "outro": "Our follow-up email links to your account page, where you answer each one."

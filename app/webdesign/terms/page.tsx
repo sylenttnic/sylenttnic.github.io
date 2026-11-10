@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 8 November 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 10 November 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -66,7 +66,10 @@ export default function TermsOfService() {
               <strong>The site working at your own web address once it is public</strong>, hosted and run by us.
             </li>
             <li>
-              Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong>.
+              <strong>As many tweaks as you like during your free 30 days</strong>, so the site is right before you pay anything: the wording and details, your own photos, colours and fonts, the layout, or a switch to another of the designs we built for you. Most changes are live within 2 business days.
+            </li>
+            <li>
+              Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong> once the free 30 days end.
             </li>
             <li>Reasonable help getting it public and pointed at your domain.</li>
           </ul>
@@ -78,7 +81,7 @@ export default function TermsOfService() {
             We want to be completely straightforward about this, because it is the part that matters most.
           </p>
           <p className="mt-3">
-            <strong>The first 30 days are free.</strong> They start when you start the plan, and no card is needed. If you cancel within those 30 days, you are charged nothing.
+            <strong>The first 30 days are free.</strong> They start when you start the plan, and no card is needed. If you cancel within those 30 days, you are charged nothing. Use them to get the site right: during the free 30 days there is no limit on tweaks (see section 6).
           </p>
           <p className="mt-3">
             <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, the site goes public in the design you choose (if the preview has more than one). If nobody confirms, the free trial ends on its own and nothing is charged. The confirmation emails each carry a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
@@ -92,13 +95,13 @@ export default function TermsOfService() {
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">5. What is not included</h2>
           <p>So there is no confusion later, the plan does <strong>not</strong> include:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li>Redesigns, new pages, or new functionality. These are quoted separately.</li>
+            <li>New pages, new functionality, or a new design beyond the ones we built for you. These are quoted separately.</li>
             <li>Email hosting.</li>
             <li>Search engine optimisation services, advertising, or marketing work.</li>
-            <li>More than two content changes in a calendar month. Unused changes do not carry over.</li>
+            <li>After the free 30 days, more than two content changes in a calendar month. Unused changes do not carry over.</li>
           </ul>
           <p className="mt-3">
-            Hosting, SSL, backups, uptime monitoring, security patches and up to two content changes a month are included; see section 3. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
+            Hosting, SSL, backups, uptime monitoring, security patches, unlimited tweaks during the free 30 days and up to two content changes a month after that are included; see sections 3 and 6. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
           </p>
         </section>
 
@@ -111,11 +114,17 @@ export default function TermsOfService() {
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>Hosting, SSL certificate, backups, uptime monitoring and security updates.</li>
             <li>
-              <strong>Up to two content changes per calendar month</strong>: editing text, updating your hours or contact details, swapping an image, adding or removing a service.
+              <strong>During the free 30 days, as many tweaks as you like</strong>: the wording and your business details, photos of your own work or premises (with no people in them), colours and fonts, reordering or hiding sections, or switching to another of the designs we built for you. Ask from your account page or by email to <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a>. Most changes are live within 2 business days.
+            </li>
+            <li>
+              <strong>After that, up to two content changes per calendar month</strong>: editing text, updating your hours or contact details, swapping an image, adding or removing a service.
             </li>
           </ul>
           <p className="mt-3">
-            It does not cover redesigns, new pages, or new functionality. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
+            What your site says still has to be true: we will not add claims we cannot check (for example licensed, insured, award-winning or best in town), reviews or testimonials, or anything about another business.
+          </p>
+          <p className="mt-3">
+            It does not cover new pages, new functionality, or a new design beyond the ones we built for you. Those are quoted separately, and we will always tell you the price before doing any of it. Unused changes do not carry over to the following month.
           </p>
           <p className="mt-3">
             <strong>You can cancel at any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline then.

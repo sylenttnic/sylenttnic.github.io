@@ -67,7 +67,7 @@ const whatYouGetCards = [
   },
   {
     title: 'We host it and keep it running',
-    text: 'Hosting, SSL, backups and security patches handled for you, plus up to two small content changes a month. Nothing to log into, nothing to keep patched.',
+    text: 'Hosting, SSL, backups and security patches handled for you. Tweak it as much as you like during your free 30 days, then up to two small content changes a month. Nothing to keep patched.',
   },
 ];
 
@@ -202,7 +202,8 @@ export default function WebDesignLandingPage() {
               {[
                 'Hosting, SSL, backups and uptime monitoring',
                 'Security patches',
-                'Up to two content changes a month: text, hours, contact details, an image swap, adding or removing a service',
+                'Unlimited tweaks during your free 30 days: wording, your own photos, colours, fonts, layout, or another of your designs. Most live within 2 business days',
+                'After that, up to two content changes a month: text, hours, contact details, an image swap, adding or removing a service',
                 'A domain registered in your name after your first successful payment, or your existing one connected',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
@@ -212,7 +213,7 @@ export default function WebDesignLandingPage() {
               ))}
             </ul>
             <p className="text-xs text-ink/60 font-sans leading-relaxed mb-6">
-              No card is required to start the free 30 days. Add one before day 30 and the plan continues at $9.99 a month until you cancel; add none and the trial simply ends at day 30, nothing is charged, and the site comes down. Content changes do not roll over month to month. Redesigns, new pages and new functionality are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for, and the site comes down then. Payments appear on card statements as SYLENTT PARTNERS.{' '}
+              No card is required to start the free 30 days. Add one before day 30 and the plan continues at $9.99 a month until you cancel; add none and the trial simply ends at day 30, nothing is charged, and the site comes down. Content changes do not roll over month to month. New pages, new functionality and a new design beyond the ones we built are quoted separately. Cancel any time from your billing page, no phone call; billing stops at the end of the month you have paid for, and the site comes down then. Payments appear on card statements as SYLENTT PARTNERS.{' '}
               <a href="/webdesign/terms/" className="underline hover:text-ink">
                 Full terms
               </a>
