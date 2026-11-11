@@ -8,7 +8,7 @@ export const WORDS = {
   },
   "not_signed_in": {
     "title": "Sign in first",
-    "body": "This page only works for the business owner, signed in. Use the link in our follow-up email, or write to nic@sylentt.com and say which business it is, and we will send you a sign-in link."
+    "body": "This page only works for the business owner, signed in. Open the confirmation link we emailed to your business again, then come back to this page in the same window. If that link no longer works, write to nic@sylentt.com and say which business it is."
   },
   "form": {
     "field_label": "Your domain",
@@ -21,15 +21,15 @@ export const WORDS = {
     "not-connectable": "That is one of our own addresses, so it cannot be connected. Type the domain your business owns."
   },
   "registrar": {
-    "found": "Your domain is registered with {registrar}. Make the two changes below there.",
-    "not_found": "The public record does not tell us who your domain is registered with. Make the two changes below wherever you pay to renew it."
+    "found": "Your domain is registered with {registrar}. Make the two changes below there, or wherever your domain's settings are managed if that is somewhere else.",
+    "not_found": "The public record does not tell us who your domain is registered with. Make the two changes below wherever you pay to renew it, or wherever your domain's settings are managed if that is somewhere else."
   },
   "steps": {
     "waiting_for_site": "Your two steps will appear here shortly, once your site's address is ready.",
-    "intro": "Set these two things at your registrar. Nothing else needs changing.",
+    "intro": "Set these two things at your registrar, or wherever your domain's settings are managed. Nothing else needs changing.",
     "step1": {
       "title": "Step 1: point www to your new site",
-      "body": "Add a new record with these details. If a www record is already there, change it to match.",
+      "body": "Add a new record with these details. If a www record is already there, delete it and add this one.",
       "type_label": "Type",
       "type_value": "CNAME",
       "host_label": "Host or Name",
@@ -50,7 +50,7 @@ export const WORDS = {
       "copied": "Copied"
     }
   },
-  "never_touch": "We never touch your email settings (MX, SPF, DKIM, DMARC) or your nameservers, and we never log in to your registrar. Leave those as they are and your email keeps working.",
+  "never_touch": "We never touch your email settings (MX, SPF, DKIM, DMARC) or your nameservers, and you never need to give us your registrar login. Leave those as they are and your email keeps working.",
   "old_site": "Whatever {domain} shows today, an old website or a parked page, is replaced by your new site once both steps are set.",
   "status": {
     "title": "Where things stand",
@@ -60,11 +60,11 @@ export const WORDS = {
     "half": {
       "intro": "One of the two is set. Still to do:",
       "www_wrong": "www points to {found}, not {target}.",
-      "www_missing": "www does not point anywhere yet. It should point to {target}.",
+      "www_missing": "www does not point to {target} yet.",
       "forward_wrong": "{domain} goes to {found}, not https://www.{domain}.",
       "forward_missing": "{domain} does not forward to https://www.{domain} yet."
     },
-    "right": "Both are set. We are connecting your domain and setting up HTTPS (the padlock) for it. There is nothing more for you to do."
+    "right": "Both are set. We are now connecting www.{domain} to your site and setting up HTTPS (the padlock) for it. There is nothing more for you to do."
   },
   "rather_not": "Would rather not do this yourself? Write to nic@sylentt.com and say which business it is."
 } as const;

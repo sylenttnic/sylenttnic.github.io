@@ -44,9 +44,10 @@ export default function DomainClient() {
       const r = await fetch(`${API}/owner/domain`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${session}` }, body: JSON.stringify({ domain: input }) });
       const j = await r.json().catch(() => ({}));
       if (r.status === 401) setSession(null);
-      else if (!r.ok) setErr(j.error === 'not-connectable' ? WORDS.errors['not-connectable'] : WORDS.errors['not-a-domain']);
+      else if (r.status === 400) setErr(j.error === 'not-connectable' ? WORDS.errors['not-connectable'] : WORDS.errors['not-a-domain']);
+      // any other failure (a server error) shows no words: the not-a-domain line would be false (decision-critic W35)
       else setD(j as Domain);
-    } catch { setErr(WORDS.errors['not-a-domain']); } finally { setBusy(false); }
+    } catch { /* a network failure: the form stays as it was, nothing false said */ } finally { setBusy(false); }
   }
 
   async function copy(text: string) {
@@ -118,7 +119,7 @@ export default function DomainClient() {
                     {!d.apex && <li>{d.found?.apex ? fill(half.forward_wrong, { ...v, found: d.found.apex }) : fill(half.forward_missing, v)}</li>}
                   </ul>
                 </>
-              ) : <P>{d.state === 'right' ? WORDS.status.right : d.state === 'wrong' ? WORDS.status.wrong : WORDS.status.unchecked}</P>}
+              ) : <P>{d.state === 'right' ? fill(WORDS.status.right, v) : d.state === 'wrong' ? WORDS.status.wrong : WORDS.status.unchecked}</P>}
             </>
           )}
         </section>
