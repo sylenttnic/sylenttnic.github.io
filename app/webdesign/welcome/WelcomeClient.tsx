@@ -54,7 +54,7 @@ export default function WelcomeClient() {
         } else if (m?.[1] === 'signin') {
           setView('signing-in');
           const r = await fetch(`${API}/owner/signin`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: m[2] }) });
-          if (!r.ok) { setView('signin-failed'); return; }
+          if (!r.ok) { setView(r.status >= 500 ? 'error' : 'signin-failed'); return; }
           const j = await r.json();
           store.set(j.session); setSession(j.session); setSignedIn(true);
           const i = await readInfo(j.session); setInfo(i); setPicked(i?.picked ?? null); setView('verified');

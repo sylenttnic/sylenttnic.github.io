@@ -1,4 +1,4 @@
-// The page's words (copywriter, row 58 (d); decision-critic checked). Edit through the copywriter, never inline.
+// The page's words (copywriter, row 58 (d); decision-critic checked); W296 sign-in words: runs/client-launch/copy/W296-signin-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline.
 export const WORDS = {
   "arrived": {
     "title": "One click left, in your business's own inbox",
@@ -64,5 +64,25 @@ export const WORDS = {
   "error_generic": {
     "title": "Something went wrong on our side",
     "body": "Try again in a minute. If it keeps happening, write to nic@sylentt.com and say which business it is."
+  },
+  "signing_in": {
+    "title": "Signing you in",
+    "body": "One moment while we check your link."
+  },
+  "signin_failed": {
+    "title": "That sign-in link did not work",
+    "body": "It may be more than an hour old, been used already, or not be valid. You can ask for a new link on this page (we send at most one in 24 hours), or write to nic@sylentt.com and say which business it is."
+  },
+  "signin_ask": {
+    "title": "Already clicked the confirmation link? Sign back in",
+    "body": "Enter the email address your business confirmed with, and we will send a sign-in link to that address.",
+    "field_label": "Email address your business confirmed with",
+    "button": "Email me a sign-in link",
+    "sent": "If that address is the one your business confirmed with, a sign-in link is on its way. It works once, for one hour. Check your spam folder too. We send at most one link in 24 hours, so if you asked in the last 24 hours, look for that email. Stuck? Write to nic@sylentt.com and say which business it is.",
+    "invalid_email": "Enter a full email address, like name@example.com."
+  },
+  "signed_in": {
+    "title": "You are signed in",
+    "body": "You stay signed in on this tab for up to 24 hours, or until you close it."
   }
 } as const;
