@@ -7,7 +7,7 @@ import { WORDS as WELCOME } from '../welcome/words';
 // The account page (W296, rows 118 and 58). Signed in only: the session the welcome page stored in this tab's
 // sessionStorage (the confirm link or a sign-in link). Its one read is the Worker's GET /owner/account, which answers
 // only a valid session and only for that session's own business. No session, an expired one, or a refusal: nothing
-// about any business is shown, only the way to sign in.
+// about any business is shown, only the way to sign in. With no account record yet (`ready: false`) it shows no site line.
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Item = { kind: string | null; target: string | null; wanted: string | null };
@@ -50,15 +50,15 @@ export default function AccountClient() {
   return (
     <div>
       <H>{acct.name ? fill(WORDS.header.title, 'name', acct.name) : WORDS.header.title_no_name}</H>
-      <section aria-labelledby="acct-site" className="mb-10">
+      {acct.ready && <section aria-labelledby="acct-site" className="mb-10">
         <H2 id="acct-site">{WORDS.site.heading}</H2>
         {acct.site_url ? (
           <P><a href={acct.site_url} target="_blank" rel="noopener noreferrer" className="text-accent-link hover:underline">{WORDS.site.link_label}</a>{acct.design != null && <> ({fill(WORDS.site.design_label, 'n', acct.design)})</>}</P>
         ) : <P>{WORDS.site.not_yet}</P>}
-      </section>
+      </section>}
       <section aria-labelledby="acct-plan" className="mb-10">
         <H2 id="acct-plan">{WORDS.plan.heading}</H2>
-        <P>{acct.plan === 'trial' && acct.trial_ends ? fill(WORDS.plan.trial, 'date', date(acct.trial_ends)) : acct.plan === 'paying' ? WORDS.plan.paying : WORDS.plan.unknown}</P>
+        <P>{!acct.ready ? WORDS.plan.unknown : acct.plan === 'trial' && acct.trial_ends ? fill(WORDS.plan.trial, 'date', date(acct.trial_ends)) : acct.plan === 'paying' ? WORDS.plan.paying : WORDS.plan.unknown}</P>
       </section>
       <section aria-labelledby="acct-changes" className="mb-10">
         <H2 id="acct-changes">{WORDS.changes.heading}</H2>

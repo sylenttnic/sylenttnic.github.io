@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic checked): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline.
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline.
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -30,21 +30,21 @@ export const WORDS = {
   },
   "changes": {
     "heading": "Your changes",
-    "empty": "You have not asked for any changes yet.",
+    "empty": "No changes to show yet.",
     "asked_on": "Asked {date}",
     "states": {
-      "confirmed": "Received, being prepared",
-      "ready": "Made and checked, going live",
+      "confirmed": "Received, not made yet",
+      "ready": "Made and checked, not live yet",
       "done": "Live",
       "undone": "Put back as it was",
-      "stuck": "We could not make this one. Nic has been told, and it does not use up a change.",
-      "over-limit": "Over this month's two changes. We kept it and will offer it again when the next month starts.",
-      "quoted": "Outside the plan. Nic will reply with a price before doing any of it."
+      "stuck": "Not made yet. It does not use up a change.",
+      "over-limit": "Over that month's two changes, so not made. We kept it, and it does not use up a change.",
+      "quoted": "Outside the plan, so not made. Email support@sylentt.com if you want a price."
     }
   },
   "ask": {
     "heading": "Ask for a change",
-    "body": "Asking from this page is coming. Until then, email support@sylentt.com and say which business it is."
+    "body": "Email support@sylentt.com and say which business it is."
   },
-  "lag": "A new change, or a change to one above, may take a few minutes to show here."
+  "lag": "This page is not always up to date. Changes asked for by email are not listed here."
 } as const;
