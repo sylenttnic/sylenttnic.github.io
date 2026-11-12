@@ -33,7 +33,8 @@ export function chatOutcome(status: number, body: unknown): ChatOutcome {
   if (status === 423) return { kind: 'error', key: 'paused', conversation };
   if (status === 429) return { kind: 'error', key: 'daily_limit', conversation };
   if (status === 503) return { kind: 'error', key: 'not_available', conversation };
-  if (status === 422) return { kind: 'error', key: 'not_understood', conversation };
+  // decision-critic F4: the third refusal in a day pauses the chat (422 with paused: true): say so, not "try another way"
+  if (status === 422) return { kind: 'error', key: (b as { paused?: unknown }).paused === true ? 'paused' : 'not_understood', conversation };
   if (status === 200 && b.ok === false && b.reason === 'refused') return { kind: 'error', key: 'refused', conversation };
   if (status === 200 && b.ok === true && conversation) {
     const p = b.proposal == null ? null : asProposal(b.proposal);

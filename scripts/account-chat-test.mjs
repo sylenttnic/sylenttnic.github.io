@@ -23,6 +23,7 @@ say(L.chatOutcome(200, { ok: true, conversation: conv, reply: 'Which day?', prop
 for (const [st, b, key] of [[400, { error: 'at most 2000 characters a message' }, 'too_long'], [423, { paused: true }, 'paused'], [429, {}, 'daily_limit'], [503, { conversation: conv, reason: 'not-available' }, 'not_available'], [422, { reason: 'not-understood' }, 'not_understood'], [200, { ok: false, reason: 'refused', conversation: conv }, 'refused'], [500, {}, 'failed'], [200, { ok: true, conversation: 'BAD ID', proposal: prop }, 'failed']]) {
   const o = L.chatOutcome(st, b); say(o.kind === 'error' && o.key === key, `HTTP ${st} ${JSON.stringify(b).slice(0, 40)} reads ${key}`);
 }
+say(L.chatOutcome(422, { reason: 'not-understood', paused: true }).key === 'paused', 'F4: the refusal that pauses the chat reads paused');
 say(L.chatOutcome(503, { conversation: conv }).conversation === conv, 'a kept message keeps its conversation');
 say(L.confirmOutcome(200, { ok: true, confirmed_at: 'x' }).kind === 'confirmed' && L.confirmOutcome(200, { ok: true, already: true }).kind === 'confirmed', 'a confirm, and a repeated one, read confirmed (one request)');
 say(L.confirmOutcome(404, { error: 'nothing to send: ask in the chat first' }).key === 'nothing_to_send' && L.confirmOutcome(500, {}).key === 'confirm_failed' && L.confirmOutcome(401, {}).kind === 'signed-out', 'confirm refusals map');
