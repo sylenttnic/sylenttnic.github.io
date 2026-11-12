@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { WORDS } from './words';
 import { WORDS as WELCOME } from '../welcome/words';
+import ChatPanel from './ChatPanel';
 
 // The account page (W296, rows 118 and 58). Signed in only: the session the welcome page stored in this tab's
 // sessionStorage (the confirm link or a sign-in link). Its one read is the Worker's GET /owner/account, which answers
@@ -108,7 +109,9 @@ export default function AccountClient() {
       </section>
       <section aria-labelledby="acct-ask">
         <H2 id="acct-ask">{WORDS.ask.heading}</H2>
-        <P>{WORDS.ask.body}</P>
+        <P>{WORDS.chat.intro}</P>
+        {/* W311: the chat panel, signed in only (this branch renders only with an account read by a valid session) */}
+        <ChatPanel onSignedOut={() => setView('signed-out')} />
       </section>
     </div>
   );
