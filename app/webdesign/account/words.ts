@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken.
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md).
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -56,5 +56,30 @@ export const WORDS = {
     "login_link_label": "Stripe's billing sign-in page",
     "failed": "Your billing page did not open. Please try again, or email support@sylentt.com."
   },
-  "lag": "This page is not always up to date. Changes asked for by email are not listed here."
+  "lag": "This page is not always up to date. Changes asked for by email are not listed here.",
+  "chat": {
+    "intro": "Tell us what you want changed on your site. Our system lists the changes it understood, and nothing is asked for until you press Send these changes. You can also email support@sylentt.com and say which business it is.",
+    "input_label": "What do you want changed?",
+    "placeholder": "Change our Saturday hours to 8 till noon, and add drain cleaning to our services.",
+    "send_label": "Send message",
+    "sending": "Reading your message.",
+    "reply_label": "A reply to your message",
+    "proposal_heading": "Changes we understood",
+    "out_of_scope_heading": "We cannot do these here",
+    "questions_heading": "Questions for you",
+    "proposal_note": "Nothing is asked for until you press Send these changes. To change this list, write again below.",
+    "confirm_label": "Send these changes",
+    "confirming": "Sending your changes.",
+    "confirmed": "Received. It shows under Your changes once our system has recorded it. If it does not, email support@sylentt.com.",
+    "new_label": "Start a new request",
+    "too_long": "That message is over 2,000 characters. Please make it shorter, or email support@sylentt.com.",
+    "paused": "Asking here is paused for your site. Please email support@sylentt.com with what you want changed.",
+    "daily_limit": "You have reached today's message limit for your site. Please try again tomorrow, or email support@sylentt.com.",
+    "not_available": "We cannot answer right now. Please try again later, or email support@sylentt.com.",
+    "not_understood": "We could not turn that message into a change. Please try saying it another way, or email support@sylentt.com.",
+    "refused": "We will not act on that message. If it is a real change to your site, please email support@sylentt.com.",
+    "confirm_failed": "That did not go through. Please press Send these changes again, or email support@sylentt.com.",
+    "nothing_to_send": "There is nothing to send yet. Write what you want changed first.",
+    "failed": "That did not go through. Please try again, or email support@sylentt.com."
+  }
 } as const;
