@@ -14,6 +14,8 @@ type Item = { kind: string | null; target: string | null; wanted: string | null 
 type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[] };
 type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[] };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
+type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
+const LOGIN_LINK = 'https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00'; // the billing page link the terms carry (sections 4, 6)
 
 const DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Denver' });
 const date = (iso: string | null) => { const t = Date.parse(iso ?? ''); return Number.isFinite(t) ? DATE.format(new Date(t)) : ''; };
@@ -23,6 +25,25 @@ const STATE_LABELS = WORDS.changes.states as Record<string, string>;
 export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
   const [acct, setAcct] = useState<Account | null>(null);
+  const [bill, setBill] = useState<Bill>('idle');
+
+  // W307 (row 119): open a Stripe billing page for this session's own business. The Worker reads nothing from the request
+  // but the session; it answers a billing.stripe.com URL, and only that is followed.
+  async function openBilling() {
+    let s: string | null = null;
+    try { s = sessionStorage.getItem(SKEY); } catch { /* no storage */ }
+    if (!s) { setView('signed-out'); return; }
+    setBill('opening');
+    try {
+      const r = await fetch(`${API}/owner/billing`, { method: 'POST', headers: { authorization: `Bearer ${s}` } });
+      if (r.status === 401) { try { sessionStorage.removeItem(SKEY); } catch { /* ignore */ } setView('signed-out'); return; }
+      if (r.status === 409) { setBill('not_ready'); return; }
+      if (r.status === 503) { setBill('not_available'); return; }
+      const j = (await r.json().catch(() => null)) as { url?: unknown } | null;
+      if (r.ok && typeof j?.url === 'string' && /^https:\/\/billing\.stripe\.com\//.test(j.url)) { window.location.assign(j.url); return; }
+      setBill('failed');
+    } catch { setBill('failed'); }
+  }
 
   useEffect(() => {
     let s: string | null = null;
@@ -60,6 +81,17 @@ export default function AccountClient() {
         <H2 id="acct-plan">{WORDS.plan.heading}</H2>
         <P>{!acct.ready ? WORDS.plan.unknown : acct.plan === 'trial' && acct.trial_ends ? fill(WORDS.plan.trial, 'date', date(acct.trial_ends)) : acct.plan === 'paying' ? WORDS.plan.paying : WORDS.plan.unknown}</P>
       </section>
+      {acct.ready && <section aria-labelledby="acct-billing" className="mb-10">
+        <H2 id="acct-billing">{WORDS.billing.heading}</H2>
+        <P>{WORDS.billing.body}</P>
+        <p className="mb-4"><button type="button" onClick={openBilling} disabled={bill === 'opening'} className="rounded bg-accent px-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60">{WORDS.billing.button_label}</button></p>
+        <div aria-live="polite">
+          {bill === 'opening' && <P>{WORDS.billing.opening}</P>}
+          {bill === 'not_ready' && <P>{WORDS.billing.not_ready}</P>}
+          {bill === 'not_available' && (() => { const [a, b] = WORDS.billing.not_available.split('{login_link}'); return <P>{a}<a href={LOGIN_LINK} className="text-accent-link hover:underline">{WORDS.billing.login_link_label}</a>{b}</P>; })()}
+          {bill === 'failed' && <P>{WORDS.billing.failed}</P>}
+        </div>
+      </section>}
       <section aria-labelledby="acct-changes" className="mb-10">
         <H2 id="acct-changes">{WORDS.changes.heading}</H2>
         {requests.length === 0 ? <P>{WORDS.changes.empty}</P> : (

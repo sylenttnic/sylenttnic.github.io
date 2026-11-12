@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline.
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken.
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -45,6 +45,16 @@ export const WORDS = {
   "ask": {
     "heading": "Ask for a change",
     "body": "Email support@sylentt.com and say which business it is."
+  },
+  "billing": {
+    "heading": "Your billing",
+    "body": "Add or change your card, or cancel your plan, on your billing page. Stripe runs that page, and it has a link back here.",
+    "button_label": "Open your billing page",
+    "opening": "Opening your billing page.",
+    "not_ready": "Your billing details are not showing here yet. Please try again later, or email support@sylentt.com.",
+    "not_available": "This button is not switched on yet. You can still reach your billing page from {login_link} with the email address you started the plan with, or email support@sylentt.com.",
+    "login_link_label": "Stripe's billing sign-in page",
+    "failed": "Your billing page did not open. Please try again, or email support@sylentt.com."
   },
   "lag": "This page is not always up to date. Changes asked for by email are not listed here."
 } as const;
