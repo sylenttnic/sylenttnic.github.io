@@ -34,7 +34,7 @@ export const WORDS = {
     "items": [
       {
         "label": "Your domain",
-        "body": "Tell us if you already have one, or pick a new one. If you have one, we show you the two records to add at your registrar. If you need one, we register it in your business's name after your first successful payment, or today if you choose to start paying now (that ends the free days and charges $9.99 plus any applicable tax today)."
+        "body": "Tell us if you already have one, or pick a new one. If you have one, we show you the two records to add at your registrar. If you need one, we register it in your business's name after your first successful payment."
       },
       {
         "label": "Where form messages go",
