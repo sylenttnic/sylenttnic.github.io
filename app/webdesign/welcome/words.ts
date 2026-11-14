@@ -1,4 +1,4 @@
-// The page's words (copywriter, row 58 (d); decision-critic checked); W296 sign-in words: runs/client-launch/copy/W296-signin-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline.
+// The page's words (copywriter, row 58 (d); decision-critic checked); W296 sign-in words: runs/client-launch/copy/W296-signin-words.md in sylentt-smb-site-generation; W333 redirect link: runs/client-launch/copy/W333-signin-redirect-words.md. Edit through the copywriter, never inline.
 export const WORDS = {
   "arrived": {
     "title": "One click left, in your business's own inbox",
@@ -80,6 +80,9 @@ export const WORDS = {
     "button": "Email me a sign-in link",
     "sent": "If that address is the one your business confirmed with, a sign-in link is on its way. It works once, for one hour. Check your spam folder too. We send at most one link in 24 hours, so if you asked in the last 24 hours, look for that email. Stuck? Write to nic@sylentt.com and say which business it is.",
     "invalid_email": "Enter a full email address, like name@example.com."
+  },
+  "signin_redirect": {
+    "link_label": "Go to your account"
   },
   "signed_in": {
     "title": "You are signed in",

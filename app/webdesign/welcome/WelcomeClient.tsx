@@ -7,12 +7,13 @@ import { WORDS } from './words';
 // never reaches a server log or a Referer. A GET decides nothing: the click is a POST, made here, because
 // mail scanners open links. The session the click returns lives in sessionStorage only and is the one thing
 // that may pick a design; the Worker refuses a pick from anywhere else. W296: #signin= (a single-use link the
-// sign-in email carries) signs a verified owner back in the same way; the ask for one (POST /owner/signin-ask) is
+// sign-in email carries) signs a verified owner back in the same way, and (W333) goes straight on to the account page; the ask for one (POST /owner/signin-ask) is
 // answered identically for every address, and only the business's own confirmed address is ever mailed.
 const API = 'https://clients.sylentt.com';
+const ACCOUNT = '/webdesign/account/';
 type Design = { n: number; url: string };
 type Info = { name: string | null; designs: Design[]; picked: number | null };
-type View = 'arrived' | 'confirming' | 'failed' | 'verified' | 'notme' | 'notme-failed' | 'error' | 'signing-in' | 'signin-failed';
+type View = 'arrived' | 'confirming' | 'failed' | 'verified' | 'notme' | 'notme-failed' | 'error' | 'signing-in' | 'signin-failed' | 'to-account';
 type Ask = 'idle' | 'busy' | 'sent' | 'invalid';
 const ADDRESS = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SKEY = 'sylentt-owner-session';
@@ -20,7 +21,7 @@ const fill = (s: string, n: number) => s.replace('{n}', String(n));
 
 const store = {
   get: () => { try { return sessionStorage.getItem(SKEY); } catch { return null; } },
-  set: (v: string) => { try { sessionStorage.setItem(SKEY, v); } catch { /* the session then lasts this page view only */ } },
+  set: (v: string) => { try { sessionStorage.setItem(SKEY, v); return true; } catch { return false; /* the session then lasts this page view only */ } },
 };
 
 async function readInfo(session: string): Promise<Info | null> {
@@ -56,7 +57,11 @@ export default function WelcomeClient() {
           const r = await fetch(`${API}/owner/signin`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: m[2] }) });
           if (!r.ok) { setView(r.status >= 500 ? 'error' : 'signin-failed'); return; }
           const j = await r.json();
-          store.set(j.session); setSession(j.session); setSignedIn(true);
+          // W333: a sign-in goes straight to the account page, no timed wait. The session is in this tab's
+          // sessionStorage, which AccountClient reads. If the browser refuses storage, the account page could not read
+          // it, so the owner stays here on the signed-in view (this page view only) rather than being sent on signed out.
+          if (store.set(j.session)) { setView('to-account'); window.location.replace(ACCOUNT); return; }
+          setSession(j.session); setSignedIn(true);
           const i = await readInfo(j.session); setInfo(i); setPicked(i?.picked ?? null); setView('verified');
         } else if (m?.[1] === 'notme') {
           const r = await fetch(`${API}/owner/not-me`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: m[2] }) });
@@ -109,6 +114,7 @@ export default function WelcomeClient() {
     </section>
   );
 
+  if (view === 'to-account') return <div role="status"><H>{WORDS.signing_in.title}</H><p><a href={ACCOUNT} className="text-lg text-accent-link hover:underline">{WORDS.signin_redirect.link_label}</a></p></div>;
   if (view === 'signing-in') return <div role="status"><H>{WORDS.signing_in.title}</H><P>{WORDS.signing_in.body}</P></div>;
   if (view === 'signin-failed') return <div><H>{WORDS.signin_failed.title}</H><P>{WORDS.signin_failed.body}</P>{askForm}</div>;
   if (view === 'confirming') return <div role="status"><H>{WORDS.confirming.title}</H><P>{WORDS.confirming.body}</P></div>;
