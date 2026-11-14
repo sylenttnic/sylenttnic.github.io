@@ -10,7 +10,7 @@ export type ChatOutcome =
   | { kind: 'proposal'; conversation: string; proposal: Proposal }
   | { kind: 'reply'; conversation: string; text: string }
   | { kind: 'error'; key: ChatErrorKey; conversation: string | null };
-export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' };
+export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' };
 
 export const MAX_CHARS = 2000;
 const CONV = /^[a-z0-9-]{8,64}$/;
@@ -51,6 +51,8 @@ export function confirmOutcome(status: number, body: unknown): ConfirmOutcome {
   if (status === 401) return { kind: 'signed-out' };
   if (status === 200 && b.ok === true) return { kind: 'confirmed' };
   if ((status === 404 || status === 422) && /nothing to send/.test(String(b.error ?? ''))) return { kind: 'error', key: 'nothing_to_send' };
+  // W317: the plan is neither in its trial nor paying, so the Worker took no request (it is not worth pressing again)
+  if (status === 409 && (b as { reason?: unknown }).reason === 'not-taken') return { kind: 'error', key: 'not_taken' };
   return { kind: 'error', key: 'confirm_failed' };
 }
 

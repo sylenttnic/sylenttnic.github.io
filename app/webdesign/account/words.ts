@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md).
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md.
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -81,6 +81,7 @@ export const WORDS = {
     "refused": "We will not act on that message. If it is a real change to your site, please email support@sylentt.com.",
     "confirm_failed": "That did not go through. Please press Send these changes again, or email support@sylentt.com.",
     "nothing_to_send": "There is nothing to send yet. Write what you want changed first.",
+    "not_taken": "We did not take this request, so nothing will be changed from it: our records do not show your plan as in its free 30 days or paid. If that is wrong, or you have just paid, please email support@sylentt.com and say which business it is.",
     "failed": "That did not go through. Please try again, or email support@sylentt.com."
   }
 } as const;

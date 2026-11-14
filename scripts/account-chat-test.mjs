@@ -27,6 +27,7 @@ say(L.chatOutcome(422, { reason: 'not-understood', paused: true }).key === 'paus
 say(L.chatOutcome(503, { conversation: conv }).conversation === conv, 'a kept message keeps its conversation');
 say(L.confirmOutcome(200, { ok: true, confirmed_at: 'x' }).kind === 'confirmed' && L.confirmOutcome(200, { ok: true, already: true }).kind === 'confirmed', 'a confirm, and a repeated one, read confirmed (one request)');
 say(L.confirmOutcome(404, { error: 'nothing to send: ask in the chat first' }).key === 'nothing_to_send' && L.confirmOutcome(500, {}).key === 'confirm_failed' && L.confirmOutcome(401, {}).kind === 'signed-out', 'confirm refusals map');
+say(L.confirmOutcome(409, { ok: false, reason: 'not-taken' }).key === 'not_taken' && L.confirmOutcome(409, {}).key === 'confirm_failed', 'W317: an inactive plan\'s refusal reads not_taken (not "press again"); any other 409 is confirm_failed');
 say(L.canConfirm(prop, conv) && !L.canConfirm({ ...prop, items: [] }, conv) && !L.canConfirm(prop, null) && !L.canConfirm(null, conv), 'only a list with a change in it, in a conversation, can be sent');
 say(L.asProposal({ items: [{ kind: 'words', wanted: 1 }], out_of_scope: [3, 'x'] })?.items.length === 0 && L.asProposal('x') === null, 'a malformed proposal shows nothing the Worker did not validate');
 

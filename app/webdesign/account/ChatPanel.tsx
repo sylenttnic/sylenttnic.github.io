@@ -11,7 +11,7 @@ import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, type ChatE
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 const W = WORDS.chat;
-type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send';
+type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken';
 
 export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) {
   const [message, setMessage] = useState('');
