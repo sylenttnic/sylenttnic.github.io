@@ -61,3 +61,50 @@ export const hasSwap = (p: Proposal | null) => !!p && p.items.some((i) => i.kind
 
 /* The send button may confirm only a list that has at least one change in it. */
 export const canConfirm = (p: Proposal | null, conversation: string | null) => !!p && p.items.length > 0 && !!conversation && CONV.test(conversation);
+
+/* W318 (rows 118 (a), 58): the owner's own photos, attached to a list that includes a photo change. Nothing is uploaded
+   until "Send these changes": ChatPanel's sendChanges uploads each photo (POST /change/photo) and only then confirms with
+   their ids. The Worker's limits, mirrored here so the owner hears them before anything leaves the page. */
+export const MAX_PHOTOS = 20;           // confirm.js: at most 20 photo ids a request
+export const MAX_PHOTO_BYTES = 25 * 1000 * 1000; // confirm.js MAX_PHOTO_BYTES
+export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+export type Place = 'hero' | 'gallery';
+export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
+export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number } };
+export type PhotoOutcome = { kind: 'signed-out' } | { kind: 'stored'; photo: string } | { kind: 'error'; error: PhotoError };
+
+export const needsPhoto = (p: Proposal | null) => !!p && p.items.some((i) => i.kind === 'photo');
+
+/* Before anything uploads: the owner's choices against the Worker's rules. null = go. */
+export function photoPreflight(p: Proposal | null, photos: { size: number; type: string }[], mine: boolean): PhotoError | null {
+  if (!photos.length) return needsPhoto(p) ? { key: 'photo_needed' } : null;
+  if (photos.length > MAX_PHOTOS) return { key: 'too_many' };
+  if (photos.some((f) => !PHOTO_TYPES.includes(f.type))) return { key: 'wrong_type' };
+  if (photos.some((f) => f.size > MAX_PHOTO_BYTES)) return { key: 'too_big' };
+  if (!mine) return { key: 'mine_needed' };
+  return null;
+}
+
+/* POST /change/photo's answer -> what the panel shows (confirm.js handlePhoto; W313's 422 too-small carries place and min). */
+export function photoOutcome(status: number, body: unknown): PhotoOutcome {
+  const b = (body ?? {}) as { ok?: unknown; photo?: unknown; code?: unknown; place?: unknown; min?: unknown };
+  if (status === 401) return { kind: 'signed-out' };
+  if (status === 200 && b.ok === true && typeof b.photo === 'string' && /^[0-9a-f]{64}$/.test(b.photo)) return { kind: 'stored', photo: b.photo };
+  if (status === 422 && b.code === 'too-small') {
+    const m = b.min as { width?: unknown; height?: unknown } | undefined;
+    const place: Place = b.place === 'hero' ? 'hero' : 'gallery';
+    if (m && Number.isInteger(m.width) && Number.isInteger(m.height)) return { kind: 'error', error: { key: 'too_small', place, min: { width: m.width as number, height: m.height as number } } };
+    return { kind: 'error', error: { key: 'unreadable' } };
+  }
+  if (status === 422) return { kind: 'error', error: { key: 'unreadable' } };
+  if (status === 415) return { kind: 'error', error: { key: 'wrong_type' } };
+  if (status === 413) return { kind: 'error', error: { key: 'too_big' } };
+  if (status === 429) return { kind: 'error', error: { key: 'daily_limit' } };
+  if (status === 400 && /yours/.test(String((b as { error?: unknown }).error ?? ''))) return { kind: 'error', error: { key: 'mine_needed' } };
+  return { kind: 'error', error: { key: 'failed' } };
+}
+
+/* A refusal's words with its numbers filled in: {place}, {width}, {height}. */
+export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string>): string {
+  return s.replace('{place}', e.place ? places[e.place] : '').replace('{width}', String(e.min?.width ?? '')).replace('{height}', String(e.min?.height ?? ''));
+}

@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 import { WORDS } from './words';
-import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, type ChatErrorKey, type Proposal } from './chat-logic';
+import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, needsPhoto, photoPreflight, photoOutcome, fillPhoto, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
 
 // The chat panel (W311, rows 118 and 58; PLAN.md 9b steps 2 to 4). Rendered only inside the signed-in account page.
 // A message goes to the Worker's POST /change/chat with this tab's session; the Worker answers a list of the changes it
 // understood (or a question). NOTHING is asked for until the owner presses "Send these changes": the confirm is posted only
-// from that button's handler, never from an effect or on its own (scripts/account-chat-test.mjs holds this).
+// from that button's handler, never from an effect or on its own (scripts/account-chat-test.mjs holds this). W318: the
+// owner's photos are chosen here but uploaded only from that same handler, each with their "these are mine" (x-photo-mine).
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 const W = WORDS.chat;
+const WP = WORDS.chat.photos;
 type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken';
 
 export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) {
@@ -18,9 +20,12 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
   const [conversation, setConversation] = useState<string | null>(null);
   const [proposal, setProposal] = useState<Proposal | null>(null);
   const [reply, setReply] = useState<string | null>(null);
-  const [busy, setBusy] = useState<'idle' | 'sending' | 'confirming'>('idle');
+  const [busy, setBusy] = useState<'idle' | 'sending' | 'uploading' | 'confirming'>('idle');
   const [err, setErr] = useState<ErrKey | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [photos, setPhotos] = useState<{ file: File; place: Place }[]>([]);
+  const [mine, setMine] = useState(false);
+  const [photoErr, setPhotoErr] = useState<PhotoError | null>(null);
 
   const session = () => { try { return sessionStorage.getItem(SKEY); } catch { return null; } };
   const signedOut = () => { try { sessionStorage.removeItem(SKEY); } catch { /* ignore */ } onSignedOut(); };
@@ -43,14 +48,28 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
     } catch { setErr('failed'); } finally { setBusy('idle'); }
   }
 
-  // The ONLY place a request is made: the owner's press of "Send these changes".
+  // The ONLY place a request is made, and the only place a photo is uploaded: the owner's press of "Send these changes".
   async function sendChanges() {
     if (!canConfirm(proposal, conversation)) { setErr('nothing_to_send'); return; }
+    // critic F4: photos count only while the list has a photo change (the picker is hidden otherwise, so are they)
+    const attached = needsPhoto(proposal) ? photos : [];
+    const pre = photoPreflight(proposal, attached.map((x) => x.file), mine);
+    if (pre) { setPhotoErr(pre); return; }
     const s = session();
     if (!s) { onSignedOut(); return; }
-    setBusy('confirming'); setErr(null);
+    setErr(null); setPhotoErr(null);
     try {
-      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify({ conversation }) });
+      const ids: string[] = [];
+      if (attached.length) setBusy('uploading');
+      for (const x of attached) {
+        const up = await fetch(`${API}/change/photo`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': x.file.type, 'x-photo-mine': 'yes', 'x-photo-place': x.place }, body: x.file });
+        const o = photoOutcome(up.status, await up.json().catch(() => null));
+        if (o.kind === 'signed-out') { signedOut(); return; }
+        if (o.kind === 'error') { setPhotoErr(o.error); return; }
+        ids.push(o.photo);
+      }
+      setBusy('confirming');
+      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify(ids.length ? { conversation, photos: Array.from(new Set(ids)) } : { conversation }) });
       const o = confirmOutcome(r.status, await r.json().catch(() => null));
       if (o.kind === 'signed-out') { signedOut(); return; }
       if (o.kind === 'error') { setErr(o.key); return; }
@@ -58,7 +77,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
     } catch { setErr('confirm_failed'); } finally { setBusy('idle'); }
   }
 
-  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); }
+  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); setPhotos([]); setMine(false); setPhotoErr(null); }
 
   const P = ({ children }: { children: React.ReactNode }) => <p className="text-lg text-ink/90 font-sans leading-relaxed max-w-2xl mb-4">{children}</p>;
   const List = ({ heading, items }: { heading: string; items: string[] }) => items.length ? (
@@ -84,6 +103,26 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
           {proposal.items.length > 0 && <>
             <p className="text-sm text-ink/80 font-sans mb-3">{W.proposal_note}</p>
             {hasSwap(proposal) && <p className="text-sm text-ink/90 font-sans font-semibold mb-3" data-swap-note>{W.design_swap_note}</p>}
+            {needsPhoto(proposal) && (
+              <fieldset className="mb-4 border border-ink/15 rounded-lg p-4" data-chat-photos>
+                <legend className="font-semibold text-ink font-sans px-1">{WP.heading}</legend>
+                <p className="text-sm text-ink/80 font-sans mb-3">{WP.intro}</p>
+                <label htmlFor="chat-photos" className="block font-sans text-ink mb-1">{WP.file_label}</label>
+                <input id="chat-photos" type="file" multiple accept={PHOTO_TYPES.join(',')} disabled={busy !== 'idle'} onChange={(e) => { const f = Array.from(e.target.files ?? []); setPhotos((cur) => [...cur, ...f.map((file) => ({ file, place: 'gallery' as Place }))]); setPhotoErr(null); e.target.value = ''; }} className="mb-3 font-sans text-ink" />
+                {photos.length > 0 && <ul className="mb-3 space-y-2">{photos.map((x, k) => (
+                  <li key={k} className="flex flex-wrap items-center gap-3 font-sans text-ink/90">
+                    <span className="break-all">{x.file.name}</span>
+                    <label className="text-sm">{WP.place_label}{' '}
+                      <select value={x.place} onChange={(e) => setPhotos((cur) => cur.map((y, j) => (j === k ? { ...y, place: e.target.value as Place } : y)))} className="rounded border border-ink/25 bg-transparent p-1">
+                        <option value="hero">{WP.place_hero}</option>
+                        <option value="gallery">{WP.place_gallery}</option>
+                      </select>
+                    </label>
+                    <button type="button" onClick={() => setPhotos((cur) => cur.filter((_, j) => j !== k))} className="text-sm text-accent-link hover:underline">{WP.remove_label}</button>
+                  </li>))}</ul>}
+                <label className="flex items-start gap-2 font-sans text-ink"><input type="checkbox" checked={mine} onChange={(e) => { setMine(e.target.checked); setPhotoErr(null); }} className="mt-1" /><span>{WP.mine_label}</span></label>
+              </fieldset>
+            )}
             <p><button type="button" onClick={sendChanges} disabled={busy !== 'idle'} className={btn}>{W.confirm_label}</button></p>
           </>}
         </div>
@@ -98,7 +137,9 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
       </form>
       <div aria-live="polite">
         {busy === 'sending' && <P>{W.sending}</P>}
+        {busy === 'uploading' && <P>{WP.uploading}</P>}
         {busy === 'confirming' && <P>{W.confirming}</P>}
+        {photoErr && <P>{fillPhoto(WP.errors[photoErr.key], photoErr, { hero: WP.place_hero, gallery: WP.place_gallery })}</P>}
         {err && <P>{W[err]}</P>}
       </div>
     </div>

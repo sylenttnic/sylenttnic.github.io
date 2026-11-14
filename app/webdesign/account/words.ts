@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md.
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md.
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -58,6 +58,28 @@ export const WORDS = {
   },
   "lag": "This page is not always up to date. Changes asked for by email are not listed here.",
   "chat": {
+    "photos": {
+      "heading": "Your photos",
+      "intro": "Attach photos of your own work or premises and say what each one is for. No photo is uploaded until you press Send these changes.",
+      "file_label": "Choose photos (JPEG, PNG or WebP, up to 25 MB each)",
+      "place_label": "What this photo is for (we check it is large enough)",
+      "place_hero": "The main picture at the top",
+      "place_gallery": "The gallery",
+      "remove_label": "Remove this photo",
+      "mine_label": "These are my own photos of my business's work or premises, and there are no people in them.",
+      "uploading": "Uploading your photos.",
+      "errors": {
+        "mine_needed": "Please tick the box to confirm these are your own photos with no people in them, then press Send these changes again.",
+        "photo_needed": "The list above includes a photo change, but no photo is attached. Please attach the photo, or write again below to take the photo change off the list.",
+        "too_many": "You can attach up to 20 photos to one request. Please remove some, then press Send these changes again. You can send the rest in a new request.",
+        "too_small": "One of your photos is too small for where you chose ({place}): it needs at least {width} x {height} pixels. Your changes were not sent. Please attach a larger copy of it, or remove it.",
+        "unreadable": "We could not read the size of one of your photos, so your changes were not sent. Please save it again as a JPEG, PNG or WebP and attach it again, or email it to support@sylentt.com.",
+        "wrong_type": "One of your photos could not be read as a JPEG, PNG or WebP file, so your changes were not sent. Please save it in one of those formats and attach it again, or email it to support@sylentt.com.",
+        "too_big": "One of your photos is over 25 MB, so your changes were not sent. Please attach a smaller copy of it, or remove it.",
+        "daily_limit": "Your site has reached today's limit of 30 photo uploads, so your changes were not sent. Please try again tomorrow, or email support@sylentt.com.",
+        "failed": "One of your photos did not go through, so your changes were not sent. Please press Send these changes again, or email support@sylentt.com."
+      }
+    },
     "intro": "Tell us what you want changed on your site. Our system lists the changes it understood, and nothing is asked for until you press Send these changes. You can also email support@sylentt.com and say which business it is.",
     "input_label": "What do you want changed?",
     "placeholder": "Change our Saturday hours to 8 till noon, and add drain cleaning to our services.",
