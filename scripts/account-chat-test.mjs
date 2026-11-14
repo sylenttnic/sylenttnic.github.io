@@ -42,6 +42,14 @@ say(pressOnly(panel), 'the confirm is posted only from sendChanges, called only 
 const mutant = panel.replace("import { useState } from 'react';", "import { useEffect, useState } from 'react';").replace('  function startNew()', '  useEffect(() => { if (proposal) sendChanges(); }, [proposal]);\n  function startNew()');
 say(mutant !== panel && !pressOnly(mutant), 'MUTANT: a panel that auto-sends a proposal from an effect is caught');
 
+/* Critic F6 (PLAN.md 9c): a list that switches designs shows what carries over, above the button that sends it. */
+const swapProp = { items: [{ kind: 'design-swap', target: 'v2', wanted: 'Switch to design 2' }], out_of_scope: [], questions: [] };
+say(L.hasSwap(swapProp) && !L.hasSwap(prop) && !L.hasSwap(null), 'F6: a list with a design-swap item is recognised as a swap, a words list is not');
+const swapShown = (src) => { const note = src.indexOf('{hasSwap(proposal) && <p'), button = src.indexOf('onClick={sendChanges}'); return note > 0 && button > note && /\{hasSwap\(proposal\) && <p[^>]*>\{W\.design_swap_note\}<\/p>\}/.test(src); };
+say(swapShown(panel), 'F6: the swap note renders with the list, above Send these changes, whenever the list switches designs');
+const noNote = panel.replace(/\s*\{hasSwap\(proposal\) && <p[^\n]*\n/, '\n');
+say(noNote !== panel && !swapShown(noNote), 'MUTANT: a panel that offers a swap for sending without the note is caught');
+
 const acct = fs.readFileSync(path.join(DIR, 'AccountClient.tsx'), 'utf8');
 const at = acct.indexOf('<ChatPanel'), signedOutReturn = acct.indexOf("if (view === 'signed-out') return"), errReturn = acct.indexOf("if (view === 'error' || !acct) return");
 say(at > 0 && signedOutReturn > 0 && errReturn > 0 && at > signedOutReturn && at > errReturn && (acct.match(/<ChatPanel/g) ?? []).length === 1, 'the panel renders only after the signed-out and error returns (signed in, with an account read)');

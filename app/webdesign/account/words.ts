@@ -68,6 +68,7 @@ export const WORDS = {
     "out_of_scope_heading": "We cannot do these here",
     "questions_heading": "Questions for you",
     "proposal_note": "Nothing is asked for until you press Send these changes. To change this list, write again below.",
+    "design_swap_note": "Switching designs: the corrections we have recorded to your words and details, such as hours, services and descriptions, are applied to the new design, so nothing you corrected comes back. Any changes to your current design's colours, fonts or section order do not carry over.",
     "confirm_label": "Send these changes",
     "confirming": "Sending your changes.",
     "confirmed": "Received. It shows under Your changes once our system has recorded it. If it does not, email support@sylentt.com.",

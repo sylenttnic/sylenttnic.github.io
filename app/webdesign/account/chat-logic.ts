@@ -54,5 +54,8 @@ export function confirmOutcome(status: number, body: unknown): ConfirmOutcome {
   return { kind: 'error', key: 'confirm_failed' };
 }
 
+/* Critic F6 (PLAN.md 9c): a list that switches designs says what carries over before it can be sent. */
+export const hasSwap = (p: Proposal | null) => !!p && p.items.some((i) => i.kind === 'design-swap');
+
 /* The send button may confirm only a list that has at least one change in it. */
 export const canConfirm = (p: Proposal | null, conversation: string | null) => !!p && p.items.length > 0 && !!conversation && CONV.test(conversation);

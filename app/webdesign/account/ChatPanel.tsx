@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { WORDS } from './words';
-import { MAX_CHARS, canConfirm, chatOutcome, confirmOutcome, type ChatErrorKey, type Proposal } from './chat-logic';
+import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, type ChatErrorKey, type Proposal } from './chat-logic';
 
 // The chat panel (W311, rows 118 and 58; PLAN.md 9b steps 2 to 4). Rendered only inside the signed-in account page.
 // A message goes to the Worker's POST /change/chat with this tab's session; the Worker answers a list of the changes it
@@ -83,6 +83,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
           <List heading={W.questions_heading} items={proposal.questions} />
           {proposal.items.length > 0 && <>
             <p className="text-sm text-ink/80 font-sans mb-3">{W.proposal_note}</p>
+            {hasSwap(proposal) && <p className="text-sm text-ink/90 font-sans font-semibold mb-3" data-swap-note>{W.design_swap_note}</p>}
             <p><button type="button" onClick={sendChanges} disabled={busy !== 'idle'} className={btn}>{W.confirm_label}</button></p>
           </>}
         </div>
