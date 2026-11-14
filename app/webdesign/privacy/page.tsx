@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Privacy Policy</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC &middot; Effective 15 September 2026
+        Sylentt Partners LLC &middot; Effective 14 November 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -70,12 +70,15 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">4. Who else touches your information</h2>
           <p>We use a small number of service providers to run the business, and they see only what they need to:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li><strong>Stripe</strong> - payment processing</li>
-            <li><strong>Cloudflare</strong> - hosting and delivery of website previews</li>
-            <li><strong>Web3Forms</strong> - delivery of contact form submissions</li>
-            <li><strong>Instantly</strong> and <strong>Google Workspace</strong> - sending and receiving email</li>
-            <li><strong>HubSpot</strong> - keeping track of conversations</li>
-            <li><strong>Meta</strong> (Facebook) - measuring and improving our own ads on our web design pages, only once you click OK on the notice described in section 8</li>
+            <li><strong>Stripe</strong>: payment processing</li>
+            <li><strong>Cloudflare</strong>: hosting and delivery of website previews and of the sites we look after, and holding what you write in the change chat on your account page, and the changes you send from it, for up to 30 days</li>
+            <li><strong>Anthropic</strong> (maker of the Claude AI models): our build and change work runs on Claude. It reads the information in section 1 to build your site, the change requests you send and any photos you send with them, and what you write in the change chat on your account page, so our system can turn it into a list of changes for you to check. Each chat message is sent with your earlier messages in the same conversation, the chat&apos;s replies, and a short summary of your account (your business name, your design and your plan).</li>
+            <li><strong>GitHub</strong>: storing our own records, including the information in section 1, your site&apos;s files, and the change requests and photos you send us</li>
+            <li><strong>Resend</strong>: sending our emails about your account and site (sign-in links, the email that confirms you control your business&apos;s address, and account notices), our replies to a business that asked for a preview on our page, and forwarding messages sent through your site&apos;s contact form to you</li>
+            <li><strong>Web3Forms</strong>: delivery of contact form submissions</li>
+            <li><strong>Instantly</strong> and <strong>Google Workspace</strong>: sending and receiving email</li>
+            <li><strong>HubSpot</strong>: keeping track of conversations</li>
+            <li><strong>Meta</strong> (Facebook): measuring and improving our own ads on our web design pages, only once you click OK on the notice described in section 8</li>
           </ul>
           <p className="mt-3">
             <strong>We do not sell your information.</strong> On our web design pages at sylentt.com/webdesign we use the Meta Pixel (see section 8): once you click OK on the notice shown there, it reports activity such as page views and preview requests to Meta so we can measure our own ads and reach similar people. Click No thanks instead and the Pixel never loads on that browser. That is the only advertising sharing we do, and you can limit it through the controls in section 8, whichever way you choose.
@@ -92,7 +95,9 @@ export default function PrivacyPolicy() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">6. How long we keep things</h2>
           <ul className="list-disc pl-6 space-y-2 mt-2">
-            <li><strong>Unsold previews:</strong> taken offline after about two weeks and deleted within six months.</li>
+            <li><strong>Unsold previews:</strong> a preview we email you about stays online for about two weeks after that email. If nobody keeps it, we take it offline within a day or so after, and its address then sends visitors to our offer page; we release the address six months later. A preview we have not emailed anyone about is not taken offline on that schedule. Either way, we keep the site&apos;s files in our records.</li>
+            <li><strong>Change chat conversations</strong>, including the lists of changes the chat suggested: deleted automatically 30 days after the last message in them.</li>
+            <li><strong>Change requests you send:</strong> once you press Send these changes, what you asked for is kept in your site&apos;s records, with no set end date, and listed under Your changes on your account page.</li>
             <li><strong>Unsubscribe records:</strong> kept indefinitely - this is the only way we can be sure we never contact you again.</li>
             <li><strong>Purchase records:</strong> kept as long as tax and accounting law requires.</li>
           </ul>
