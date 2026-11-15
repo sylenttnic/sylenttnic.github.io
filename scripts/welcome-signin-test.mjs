@@ -73,6 +73,8 @@ try {
     const stored = await page.evaluate(() => sessionStorage.getItem('sylentt-owner-session')).catch(() => null);
     say(new URL(page.url()).pathname === '/webdesign/account/' && !new URL(page.url()).hash, `a good sign-in lands on /webdesign/account/ with no token in the address (at ${new URL(page.url()).pathname})`);
     say(h1 === `${NAME}: your account` && stored === 'sess-good' && calls.includes('GET /owner/account'), `...signed in: the account page read the session and shows the business ("${h1}")`);
+    const body = await page.locator('main').innerText().catch(() => '');
+    say(body.includes('You stay signed in on this tab for up to 24 hours, or until you close it.'), 'W344: the account page carries the 24-hour sign-in line');
     await page.close();
   }
   { // 2

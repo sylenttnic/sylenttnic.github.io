@@ -30,7 +30,7 @@ export const WORDS = {
   },
   "next_steps": {
     "title": "What comes next",
-    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things to sort out, each with its own page:",
+    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things to sort out:",
     "items": [
       {
         "label": "Your domain",
@@ -45,7 +45,7 @@ export const WORDS = {
         "body": "Wording, hours, services, photos of your work or premises (no people in them), colours, fonts, layout, or another of your designs. Send as many as you like during your free 30 days; most are live within 2 business days. After that, the plan covers up to ten changes a calendar month."
       }
     ],
-    "outro": "Our follow-up email links to your account page, where you answer each one."
+    "outro": "Our follow-up email links to your account page, where you ask for fixes and photos. For your domain and where form messages go, reply to that email."
   },
   "notme_done": {
     "title": "Cancelled",

@@ -72,6 +72,7 @@ export default function AccountClient() {
   return (
     <div>
       <H>{acct.name ? fill(WORDS.header.title, 'name', acct.name) : WORDS.header.title_no_name}</H>
+      <P>{WORDS.signed_in.body}</P>
       {acct.ready && <section aria-labelledby="acct-site" className="mb-10">
         <H2 id="acct-site">{WORDS.site.heading}</H2>
         {acct.site_url ? (

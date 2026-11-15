@@ -16,6 +16,9 @@ export const WORDS = {
     "title": "{name}: your account",
     "title_no_name": "Your account"
   },
+  "signed_in": {
+    "body": "You stay signed in on this tab for up to 24 hours, or until you close it."
+  },
   "site": {
     "heading": "Your site",
     "design_label": "Design {n}",
