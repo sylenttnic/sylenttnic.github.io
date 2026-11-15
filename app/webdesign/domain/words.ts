@@ -22,14 +22,17 @@ export const WORDS = {
   },
   "registrar": {
     "found": "Your domain is registered with {registrar}. Make the two changes below there, or wherever your domain's settings are managed if that is somewhere else.",
-    "not_found": "The public record does not tell us who your domain is registered with. Make the two changes below wherever you pay to renew it, or wherever your domain's settings are managed if that is somewhere else."
+    "not_found": "We could not find who your domain is registered with. Make the two changes below wherever you pay to renew it, or wherever your domain's settings are managed if that is somewhere else."
+  },
+  "dns_host": {
+    "found": "Your domain's settings are managed at {dns_host}, so make the two changes below at {dns_host}."
   },
   "steps": {
     "waiting_for_site": "Your two steps will appear here shortly, once your site's address is ready.",
     "intro": "Set these two things at your registrar, or wherever your domain's settings are managed. Nothing else needs changing.",
     "step1": {
       "title": "Step 1: point www to your new site",
-      "body": "Add a new record with these details. If a www record is already there, delete it and add this one.",
+      "body": "Add a new record with these details. If a www record is already there, delete it and add this one. If the record has a proxy setting (Cloudflare calls it Proxy status), set it to DNS only.",
       "type_label": "Type",
       "type_value": "CNAME",
       "host_label": "Host or Name",
@@ -51,7 +54,7 @@ export const WORDS = {
     }
   },
   "never_touch": "We never touch your email settings (MX, SPF, DKIM, DMARC) or your nameservers, and you never need to give us your registrar login. Leave those as they are and your email keeps working.",
-  "old_site": "Whatever {domain} shows today, an old website or a parked page, is replaced by your new site once both steps are set.",
+  "old_site": "Your old website or parked page at www.{domain} stops showing as soon as step 1 takes effect, and your new site appears in its place once we have connected it. Make both steps at the same sitting so the gap is as short as possible.",
   "status": {
     "title": "Where things stand",
     "checking_note": "We check your domain every 15 minutes or so. Changes at a registrar can take a while to show up, so a change you just made may not appear here at once.",
@@ -64,7 +67,9 @@ export const WORDS = {
       "forward_wrong": "{domain} goes to {found}, not https://www.{domain}.",
       "forward_missing": "{domain} does not forward to https://www.{domain} yet."
     },
-    "right": "Both are set. We are now connecting www.{domain} to your site and setting up HTTPS (the padlock) for it. There is nothing more for you to do."
+    "right": "Both are set. We are now connecting www.{domain} to your site and setting up HTTPS (the padlock) for it. There is nothing more for you to do.",
+    "connected": "Your site is connected. www.{domain} now shows your new site, with HTTPS (the padlock). {domain} on its own reaches your site only through the forward you set in step 2, so leave that forward in place.",
+    "not_connected": "We tried to connect www.{domain} to your site, and it did not work. It may not fix itself, so write to nic@sylentt.com, say which business it is, and say that your domain did not connect."
   },
   "rather_not": "Would rather not do this yourself? Write to nic@sylentt.com and say which business it is."
 } as const;

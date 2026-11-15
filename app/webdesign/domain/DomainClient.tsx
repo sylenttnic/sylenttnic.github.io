@@ -11,7 +11,7 @@ const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Rec = { kind: 'record'; type: string; host: string; value: string } | { kind: 'forward'; from: string; to: string };
 type State = 'waiting-for-site' | 'unchecked' | 'wrong' | 'half' | 'right';
-type Domain = { domain: string | null; business_id?: string | null; registrar?: { name: string } | null; dns_host?: string | null; attach?: 'connected' | 'not-connected' | null; records?: Rec[] | null; state?: State; www?: boolean | null; apex?: boolean | null; found?: { www: string | null; apex: string | null } | null };
+type Domain = { domain: string | null; registrar?: { name: string } | null; dns_host?: string | null; attach?: 'connected' | 'not-connected' | null; records?: Rec[] | null; state?: State; www?: boolean | null; apex?: boolean | null; found?: { www: string | null; apex: string | null } | null };
 
 const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m);
 const readSession = () => { try { return sessionStorage.getItem(SKEY); } catch { return null; } };
@@ -69,7 +69,7 @@ export default function DomainClient() {
   if (!session) return <div><H>{WORDS.not_signed_in.title}</H><P>{WORDS.not_signed_in.body}</P></div>;
 
   const domain = d?.domain ?? null;
-  const v = { domain: domain ?? '', id: d?.business_id ?? '', dns_host: d?.dns_host ?? '', registrar: d?.registrar?.name ?? '', target: (d?.records?.find((r) => r.kind === 'record') as { value?: string } | undefined)?.value ?? '' };
+  const v = { domain: domain ?? '', dns_host: d?.dns_host ?? '', registrar: d?.registrar?.name ?? '', target: (d?.records?.find((r) => r.kind === 'record') as { value?: string } | undefined)?.value ?? '' };
   const half = WORDS.status.half;
 
   return (
