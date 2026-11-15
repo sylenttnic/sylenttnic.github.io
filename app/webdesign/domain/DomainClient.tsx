@@ -90,7 +90,7 @@ export default function DomainClient() {
 
       {domain && (
         <section aria-live="polite">
-          <P>{d?.registrar?.name ? fill(d?.dns_host ? WORDS.registrar.found_with_dns_host : WORDS.registrar.found, v) : WORDS.registrar.not_found}</P>
+          <P>{d?.registrar?.name ? fill(d?.dns_host ? WORDS.registrar.found_with_dns_host : WORDS.registrar.found, v) : d?.dns_host ? WORDS.registrar.not_found.split('. ')[0] + '.' : WORDS.registrar.not_found}</P>
           {d?.dns_host && <P>{fill(WORDS.dns_host.found, v)}</P>}
           {!d?.records ? <P>{WORDS.steps.waiting_for_site}</P> : (
             <>
@@ -106,7 +106,7 @@ export default function DomainClient() {
               <Field label={WORDS.steps.step2.value_label} value={fill(WORDS.steps.step2.value_value, v)} />
             </>
           )}
-          <div className="mt-8"><P>{WORDS.never_touch}</P><P>{fill(WORDS.old_site, v)}</P></div>
+          <div className="mt-8"><P>{WORDS.never_touch}</P>{d?.attach !== 'connected' && <P>{fill(WORDS.old_site, v)}</P>}</div>
 
           {d?.records && (
             <>

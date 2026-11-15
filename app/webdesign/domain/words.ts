@@ -3,12 +3,12 @@
 export const WORDS = {
   "page": {
     "title": "Use the domain you already have",
-    "intro": "Type your domain and we show you the two changes to make where it is registered. We check them for you and connect your site once both are set.",
+    "intro": "Type your domain and we show you the two changes to make in your domain's settings. We check them for you and connect your site once both are set.",
     "free_note": "This costs nothing extra, and you can do it during your free 30 days."
   },
   "not_signed_in": {
     "title": "Sign in first",
-    "body": "This page only works for the business owner, signed in. Open the confirmation link we emailed to your business again, then come back to this page in the same window. If that link no longer works, write to nic@sylentt.com and say which business it is."
+    "body": "This page only works for the business owner, signed in. Open the confirmation link we emailed to your business again, or ask for a sign-in link at sylentt.com/webdesign/welcome/, then come back to this page in the tab that link opens. If neither works, write to nic@sylentt.com and say which business it is."
   },
   "form": {
     "field_label": "Your domain",
@@ -30,7 +30,7 @@ export const WORDS = {
   },
   "steps": {
     "waiting_for_site": "Your two steps will appear here shortly, once your site's address is ready.",
-    "intro": "Set these two things at your registrar, or wherever your domain's settings are managed. Nothing else needs changing.",
+    "intro": "Set these two things wherever your domain's settings are managed. Nothing else needs changing.",
     "step1": {
       "title": "Step 1: forward {domain} to www",
       "body": "Find the setting called forwarding or redirect, and send {domain} to the address below. If it asks what kind, choose permanent (301). If you cannot find a setting like that, write to nic@sylentt.com and say which business it is.",
