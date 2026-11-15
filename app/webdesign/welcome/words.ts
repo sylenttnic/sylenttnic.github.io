@@ -45,7 +45,7 @@ export const WORDS = {
         "body": "Wording, hours, services, photos of your work or premises (no people in them), colours, fonts, layout, or another of your designs. Send as many as you like during your free 30 days; most are live within 2 business days. After that, the plan covers up to ten changes a calendar month."
       }
     ],
-    "outro": "Our follow-up email links to your account page, where you ask for fixes and photos. For your domain and where form messages go, reply to that email."
+    "outro": "Our follow-up email links to your account page, where you ask for fixes and photos."
   },
   "notme_done": {
     "title": "Cancelled",
