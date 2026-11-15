@@ -69,7 +69,7 @@ export const MAX_PHOTOS = 20;           // confirm.js: at most 20 photo ids a re
 export const MAX_PHOTO_BYTES = 25 * 1000 * 1000; // confirm.js MAX_PHOTO_BYTES
 export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 export type Place = 'hero' | 'gallery';
-export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
+export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'empty' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
 export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number } };
 export type PhotoOutcome = { kind: 'signed-out' } | { kind: 'stored'; photo: string } | { kind: 'error'; error: PhotoError };
 
@@ -79,6 +79,8 @@ export const needsPhoto = (p: Proposal | null) => !!p && p.items.some((i) => i.k
 export function photoPreflight(p: Proposal | null, photos: { size: number; type: string }[], mine: boolean): PhotoError | null {
   if (!photos.length) return needsPhoto(p) ? { key: 'photo_needed' } : null;
   if (photos.length > MAX_PHOTOS) return { key: 'too_many' };
+  // W347 (3): an empty (zero-byte) file is refused here, before any upload; pressing again would only send it again
+  if (photos.some((f) => f.size === 0)) return { key: 'empty' };
   if (photos.some((f) => !PHOTO_TYPES.includes(f.type))) return { key: 'wrong_type' };
   if (photos.some((f) => f.size > MAX_PHOTO_BYTES)) return { key: 'too_big' };
   if (!mine) return { key: 'mine_needed' };
@@ -100,6 +102,7 @@ export function photoOutcome(status: number, body: unknown): PhotoOutcome {
   if (status === 415) return { kind: 'error', error: { key: 'wrong_type' } };
   if (status === 413) return { kind: 'error', error: { key: 'too_big' } };
   if (status === 429) return { kind: 'error', error: { key: 'daily_limit' } };
+  if (status === 400 && /no photo/.test(String((b as { error?: unknown }).error ?? ''))) return { kind: 'error', error: { key: 'empty' } }; // confirm.js: a zero-byte upload
   if (status === 400 && /yours/.test(String((b as { error?: unknown }).error ?? ''))) return { kind: 'error', error: { key: 'mine_needed' } };
   return { kind: 'error', error: { key: 'failed' } };
 }

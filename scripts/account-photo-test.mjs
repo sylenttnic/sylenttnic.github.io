@@ -9,6 +9,7 @@
      3. pressing Send with the box unticked shows the checked words and uploads nothing;
      4. a photo the Worker refuses as too small shows the checked words with its numbers, and nothing is confirmed;
      5. a good photo is uploaded on the press with "these are mine" and its place, then the request is confirmed with its id;
+     8. (W347) an empty file is refused before any upload with its own words;
      6. every shown line equals the checked words (runs/client-launch/copy/W318-photo-words.md, read from words.ts). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -137,6 +138,15 @@ try {
     const body = conf[0] ? JSON.parse(conf[0].body.toString()) : {};
     say(first === 2 && ups.length === 3 && ups[2].headers['x-photo-place'] === 'gallery', `W347: the retry re-sends only the photo that failed (${first} then ${ups.length - first})`);
     say(conf.length === 1 && JSON.stringify([...(body.photos ?? [])].sort()) === JSON.stringify([HASH, H2].sort()), 'W347: ...and the request is confirmed with both photos');
+    await page.close();
+  }
+  { // 8 (W347 (3)): an empty file is refused on the page with the checked words; nothing is uploaded or confirmed
+    const { page, calls } = await open(browser, base);
+    await toList(page);
+    await page.locator('#chat-photos').setInputFiles({ name: 'empty.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(0) });
+    await page.locator('[data-chat-photos] input[type=checkbox]').check();
+    await press(page);
+    say(await shows(page, WP.errors.empty ?? '(no empty line)') && calls.filter((c) => c.path === '/change/photo' || c.path === '/change/confirm').length === 0, 'W347: an empty file shows the checked words; nothing uploaded or confirmed');
     await page.close();
   }
   { // 6: the served words are the checked words

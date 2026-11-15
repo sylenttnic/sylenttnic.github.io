@@ -76,6 +76,7 @@ export const WORDS = {
         "photo_needed": "The list above includes a photo change, but no photo is attached. Please attach the photo, or write again below to take the photo change off the list.",
         "too_many": "You can attach up to 20 photos to one request. Please remove some, then press Send these changes again. You can send the rest in a new request.",
         "too_small": "One of your photos is too small for where you chose ({place}): it needs at least {width} x {height} pixels. Your changes were not sent. Please attach a larger copy of it, or remove it.",
+        "empty": "One of your photos is an empty file, so your changes were not sent. Please check it has finished saving or downloading, then attach it again, or remove it.",
         "unreadable": "We could not read the size of one of your photos, so your changes were not sent. Please save it again as a JPEG, PNG or WebP and attach it again, or email it to support@sylentt.com.",
         "wrong_type": "One of your photos could not be read as a JPEG, PNG or WebP file, so your changes were not sent. Please save it in one of those formats and attach it again, or email it to support@sylentt.com.",
         "too_big": "One of your photos is over 25 MB, so your changes were not sent. Please attach a smaller copy of it, or remove it.",
