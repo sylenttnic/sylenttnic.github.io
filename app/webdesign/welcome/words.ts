@@ -18,7 +18,7 @@ export const WORDS = {
   },
   "verified_multi": {
     "title": "Thanks for confirming. Which design is your site?",
-    "body": "Your preview has several designs. Pick the ONE that becomes your site. Once you pick, the other designs and the preview bar go, and the site goes public within minutes. A later design change is a change request.",
+    "body": "Your preview has several designs. Pick the ONE that becomes your site. Once you pick, the other designs and the preview bar go, and the site goes public within minutes, unless the design you pick holds a section marked as a sample: that waits for your own details, or for you to ask us to take it out. A later design change is a change request.",
     "design_label": "Design {n}",
     "look_again": "Look again",
     "use_button": "Use this design",
@@ -26,11 +26,11 @@ export const WORDS = {
   },
   "verified_single": {
     "title": "Thanks for confirming",
-    "body": "Your preview has one design, so there is nothing to pick. It becomes your site."
+    "body": "Your preview has one design, so there is nothing to pick. It becomes your site. If it holds a section marked as a sample, it goes public once you send your own details for that section or ask us to take it out."
   },
   "next_steps": {
     "title": "What comes next",
-    "intro": "Your site goes public after the pick. We will email you three short things to sort out, each with its own page:",
+    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things to sort out, each with its own page:",
     "items": [
       {
         "label": "Your domain",

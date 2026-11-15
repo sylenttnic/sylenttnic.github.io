@@ -33,7 +33,7 @@ export default function TermsOfService() {
       </div>
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-2">Terms of Service</h1>
       <p className="text-sm text-ink/60 pb-6 mb-8 border-b border-border">
-        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 10 November 2026
+        Sylentt Partners LLC, doing business as Sylentt &middot; Effective 15 November 2026
       </p>
 
       <p className="text-lg text-ink/90 mb-8">
@@ -51,7 +51,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">2. How this works, and why you&apos;re seeing a site you didn&apos;t ask for</h2>
           <p>
-            We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us - the preview comes down on its own.
+            We build websites for small businesses on speculation. That means we researched your business using publicly available information, designed and built a complete website for it, and then contacted you to ask whether you want it. Where that information left part of the site empty, such as a restaurant&apos;s menu, the preview may hold a placeholder there, marked on the page as a sample. <strong>You did not commission this work and you are under no obligation of any kind.</strong> If you are not interested, ignore us - the preview comes down on its own.
           </p>
           <p className="mt-3">
             Each preview is published at a temporary address, hidden from search engines, and stays online for approximately two weeks. If nobody keeps it, we take it offline within a day or so after the two weeks end, and the address then sends visitors to our offer page. We keep the site&apos;s files in our records and release the address six months later. Nothing is billed unless you start the plan, and the first 30 days of the plan are free.
@@ -60,7 +60,7 @@ export default function TermsOfService() {
 
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">3. What the plan gives you</h2>
-          <p>The monthly plan gives you the finished website shown in your preview, hosted and looked after:</p>
+          <p>The monthly plan gives you the finished website shown in your preview, with any section marked as a sample replaced by your own details or removed, hosted and looked after:</p>
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li>
               <strong>The site working at your own web address once it is public</strong>, hosted and run by us.
@@ -84,7 +84,7 @@ export default function TermsOfService() {
             <strong>The first 30 days are free.</strong> They start when you start the plan, and no card is needed. If you cancel within those 30 days, you are charged nothing. Use them to get the site right: during the free 30 days there is no limit on tweaks (see section 6).
           </p>
           <p className="mt-3">
-            <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, the site goes public in the design you choose (if the preview has more than one). If nobody confirms, the free trial ends on its own and nothing is charged. The confirmation emails each carry a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
+            <strong>Before a site goes public, we confirm the business is the customer&apos;s with one click from the email address the business itself lists publicly.</strong> That is the address on the business&apos;s own website or listing, not the address typed at checkout. Until that click, your site stays an unlisted preview, hidden from search engines. Once the business confirms, the site goes public in the design you choose (if the preview has more than one). If that design holds a section marked as a sample, it goes public once you have sent your own details for that section or asked us to remove it. If nobody confirms, the free trial ends on its own and nothing is charged. The confirmation emails each carry a &quot;this wasn&apos;t me&quot; link, and using it cancels the plan at once.
           </p>
           <p className="mt-3">
             Starting the free 30 days does not require a card. Add one before day 30 and the plan continues at <strong>$9.99 per month plus any applicable tax</strong>, renewing each month until you cancel. Add none and the trial simply ends at day 30: nothing is charged, and the site comes down. <strong>You can cancel any time</strong>, yourself, from <a href="https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00" className="text-accent-link underline">your billing page</a>, with no notice period and no phone call. Cancellation takes effect at the end of the month you have already paid for, and the site is taken offline at that point.
@@ -157,7 +157,7 @@ export default function TermsOfService() {
         <section>
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">9. Your business information, and reviews</h2>
           <p>
-            We assembled the details on your site - services, service area, hours, contact information - from sources your business controls or that are publicly published. We take care, but we are working from the outside. <strong>You are responsible for checking that everything on the site is accurate before you rely on it</strong>, and we will correct anything you tell us is wrong.
+            We assembled the details on your site - services, a restaurant&apos;s menu, service area, hours, contact information - from sources your business controls or that are publicly published. We take care, but we are working from the outside. <strong>You are responsible for checking that everything on the site is accurate before you rely on it</strong>, and we will correct anything you tell us is wrong. A section marked on the page as a sample is not drawn from those sources: it is a placeholder written for your kind of business, and any dishes, descriptions or prices in it are placeholders, not yours. It never goes public; you replace it with your own details, or we remove it, first. A restaurant&apos;s menu taken from its reviews lists only dishes the reviewers named, each in its standard spelling with a short description we wrote of what the dish is, and no prices; a dish may since have changed, so check it like everything else.
           </p>
           <p className="mt-3">
             Any customer reviews shown are real, were published publicly by the people who wrote them, and appear in the reviewer&apos;s own words, shortened only where an ellipsis (…) shows a cut. If you would rather they were not displayed, tell us and we will remove them.
