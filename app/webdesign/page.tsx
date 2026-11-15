@@ -51,7 +51,7 @@ const whatYouGetCards = [
   },
   {
     title: 'Every word written for you',
-    text: 'Headlines, service descriptions, buttons, page titles, the text behind your images. Written from your own material and your own reviews.',
+    text: 'Headlines, service descriptions, buttons, page titles, the text behind your images, and for a restaurant, a menu of the dishes your reviews name. Written from your own material and your own reviews.',
   },
   {
     title: 'Where the pictures come from',
@@ -74,7 +74,7 @@ const whatYouGetCards = [
 const howItIsMade = [
   {
     title: 'We read your business before we draw anything',
-    text: 'Your Google listing, the photos you posted to it, your reviews and your own site, read into one record of your business with a source beside every fact. The look starts from a study of well-designed sites in trades like yours. Every fact that reaches your page traces to that record. Not a statistic, not a credential, not a service you do not offer.',
+    text: "Your Google listing, the photos you posted to it, your reviews and your own site, read into one record of your business with a source beside every fact. The look starts from a study of well-designed sites in trades like yours. Every fact that reaches your page traces to that record. Not a statistic, not a credential, not a service you do not offer. Where the record leaves part of your page empty, such as a restaurant's menu, the preview may hold a placeholder there, marked on the page as a sample, with any prices in it placeholders too. You replace it, or we take it out, before the site goes public.",
   },
   {
     title: 'No page builder, which is why it is fast',
@@ -86,7 +86,7 @@ const howItIsMade = [
   },
   {
     title: 'Checked before it ships',
-    text: 'Every visible line is read against your record by a reader that did not write it. A separate reviewer, which never sees how the site was made, passes or fails it against the standards below. Anything found gets fixed and re-checked. Nothing is sent to you with an open must-fix finding.',
+    text: 'Every visible line is read against your record by a reader that did not write it, and only a section marked as a sample may hold a line the record does not back. A separate reviewer, which never sees how the site was made, passes or fails it against the standards below. Anything found gets fixed and re-checked. Nothing is sent to you with an open must-fix finding.',
   },
 ];
 

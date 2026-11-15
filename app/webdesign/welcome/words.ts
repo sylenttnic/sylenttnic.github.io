@@ -1,4 +1,4 @@
-// The page's words (copywriter, row 58 (d); decision-critic checked). Edit through the copywriter, never inline.
+// The page's words (copywriter, row 58 (d); decision-critic checked); W296 sign-in words: runs/client-launch/copy/W296-signin-words.md in sylentt-smb-site-generation; W333 redirect link: runs/client-launch/copy/W333-signin-redirect-words.md. Edit through the copywriter, never inline.
 export const WORDS = {
   "arrived": {
     "title": "One click left, in your business's own inbox",
@@ -18,7 +18,7 @@ export const WORDS = {
   },
   "verified_multi": {
     "title": "Thanks for confirming. Which design is your site?",
-    "body": "Your preview has several designs. Pick the ONE that becomes your site. Once you pick, the other designs and the preview bar go, and the site goes public within minutes. A later design change is a change request.",
+    "body": "Your preview has several designs. Pick the ONE that becomes your site. Once you pick, the other designs and the preview bar go, and the site goes public within minutes, unless the design you pick holds a section marked as a sample: that waits for your own details, or for you to ask us to take it out. A later design change is a change request.",
     "design_label": "Design {n}",
     "look_again": "Look again",
     "use_button": "Use this design",
@@ -26,15 +26,15 @@ export const WORDS = {
   },
   "verified_single": {
     "title": "Thanks for confirming",
-    "body": "Your preview has one design, so there is nothing to pick. It becomes your site."
+    "body": "Your preview has one design, so there is nothing to pick. It becomes your site. If it holds a section marked as a sample, it goes public once you send your own details for that section or ask us to take it out."
   },
   "next_steps": {
     "title": "What comes next",
-    "intro": "Your site goes public after the pick. We will email you three short things to sort out, each with its own page:",
+    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things to sort out, each with its own page:",
     "items": [
       {
         "label": "Your domain",
-        "body": "Tell us if you already have one, or pick a new one. If you have one, we show you the two records to add at your registrar. If you need one, we register it in your business's name after your first successful payment, or today if you choose to start paying now (that ends the free days and charges $9.99 plus any applicable tax today)."
+        "body": "Tell us if you already have one, or pick a new one. If you have one, we show you the two records to add at your registrar. If you need one, we register it in your business's name after your first successful payment."
       },
       {
         "label": "Where form messages go",
@@ -64,5 +64,28 @@ export const WORDS = {
   "error_generic": {
     "title": "Something went wrong on our side",
     "body": "Try again in a minute. If it keeps happening, write to nic@sylentt.com and say which business it is."
+  },
+  "signing_in": {
+    "title": "Signing you in",
+    "body": "One moment while we check your link."
+  },
+  "signin_failed": {
+    "title": "That sign-in link did not work",
+    "body": "It may be more than an hour old, been used already, or not be valid. You can ask for a new link on this page (we send at most one in 24 hours), or write to nic@sylentt.com and say which business it is."
+  },
+  "signin_ask": {
+    "title": "Already clicked the confirmation link? Sign back in",
+    "body": "Enter the email address your business confirmed with, and we will send a sign-in link to that address.",
+    "field_label": "Email address your business confirmed with",
+    "button": "Email me a sign-in link",
+    "sent": "If that address is the one your business confirmed with, a sign-in link is on its way. It works once, for one hour. Check your spam folder too. We send at most one link in 24 hours, so if you asked in the last 24 hours, look for that email. Stuck? Write to nic@sylentt.com and say which business it is.",
+    "invalid_email": "Enter a full email address, like name@example.com."
+  },
+  "signin_redirect": {
+    "link_label": "Go to your account"
+  },
+  "signed_in": {
+    "title": "You are signed in",
+    "body": "You stay signed in on this tab for up to 24 hours, or until you close it."
   }
 } as const;
