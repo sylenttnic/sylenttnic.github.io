@@ -11,7 +11,7 @@ const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Rec = { kind: 'record'; type: string; host: string; value: string } | { kind: 'forward'; from: string; to: string };
 type State = 'waiting-for-site' | 'unchecked' | 'wrong' | 'half' | 'right';
-type Domain = { domain: string | null; registrar?: { name: string } | null; records?: Rec[] | null; state?: State; www?: boolean | null; apex?: boolean | null; found?: { www: string | null; apex: string | null } | null };
+type Domain = { domain: string | null; business_id?: string | null; registrar?: { name: string } | null; dns_host?: string | null; attach?: 'connected' | 'not-connected' | null; records?: Rec[] | null; state?: State; www?: boolean | null; apex?: boolean | null; found?: { www: string | null; apex: string | null } | null };
 
 const fill = (s: string, v: Record<string, string>) => s.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m);
 const readSession = () => { try { return sessionStorage.getItem(SKEY); } catch { return null; } };
@@ -69,7 +69,7 @@ export default function DomainClient() {
   if (!session) return <div><H>{WORDS.not_signed_in.title}</H><P>{WORDS.not_signed_in.body}</P></div>;
 
   const domain = d?.domain ?? null;
-  const v = { domain: domain ?? '', registrar: d?.registrar?.name ?? '', target: (d?.records?.find((r) => r.kind === 'record') as { value?: string } | undefined)?.value ?? '' };
+  const v = { domain: domain ?? '', id: d?.business_id ?? '', dns_host: d?.dns_host ?? '', registrar: d?.registrar?.name ?? '', target: (d?.records?.find((r) => r.kind === 'record') as { value?: string } | undefined)?.value ?? '' };
   const half = WORDS.status.half;
 
   return (
@@ -91,6 +91,7 @@ export default function DomainClient() {
       {domain && (
         <section aria-live="polite">
           <P>{d?.registrar?.name ? fill(WORDS.registrar.found, v) : WORDS.registrar.not_found}</P>
+          {d?.dns_host && <P>{fill(WORDS.dns_host.found, v)}</P>}
           {!d?.records ? <P>{WORDS.steps.waiting_for_site}</P> : (
             <>
               <P>{WORDS.steps.intro}</P>
@@ -111,7 +112,8 @@ export default function DomainClient() {
             <>
               <H2>{WORDS.status.title}</H2>
               <P>{WORDS.status.checking_note}</P>
-              {d.state === 'half' ? (
+              {/* the runner's attach result (account:<id> from trunk's domain.json) outranks the DNS read once it exists */}
+              {d.attach === 'connected' ? <P>{fill(WORDS.status.connected, v)}</P> : d.attach === 'not-connected' ? <P>{fill(WORDS.status.not_connected, v)}</P> : d.state === 'half' ? (
                 <>
                   <P>{half.intro}</P>
                   <ul className="list-disc pl-6 max-w-2xl mb-4 text-ink/90">
