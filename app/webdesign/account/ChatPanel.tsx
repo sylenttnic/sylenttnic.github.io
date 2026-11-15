@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { WORDS } from './words';
 import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, needsPhoto, photoPreflight, photoOutcome, fillPhoto, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
 
@@ -24,6 +24,8 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
   const [err, setErr] = useState<ErrKey | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [photos, setPhotos] = useState<{ file: File; place: Place }[]>([]);
+  // W347 (2): a photo the Worker already took, by file and place, is not sent again on a retry (each upload counts toward the day's limit)
+  const taken = useRef(new Map<File, { place: Place; photo: string }>());
   const [mine, setMine] = useState(false);
   const [photoErr, setPhotoErr] = useState<PhotoError | null>(null);
 
@@ -62,10 +64,13 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
       const ids: string[] = [];
       if (attached.length) setBusy('uploading');
       for (const x of attached) {
+        const had = taken.current.get(x.file);
+        if (had && had.place === x.place) { ids.push(had.photo); continue; }
         const up = await fetch(`${API}/change/photo`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': x.file.type, 'x-photo-mine': 'yes', 'x-photo-place': x.place }, body: x.file });
         const o = photoOutcome(up.status, await up.json().catch(() => null));
         if (o.kind === 'signed-out') { signedOut(); return; }
         if (o.kind === 'error') { setPhotoErr(o.error); return; }
+        taken.current.set(x.file, { place: x.place, photo: o.photo });
         ids.push(o.photo);
       }
       setBusy('confirming');
@@ -77,7 +82,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
     } catch { setErr('confirm_failed'); } finally { setBusy('idle'); }
   }
 
-  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); setPhotos([]); setMine(false); setPhotoErr(null); }
+  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); setPhotos([]); taken.current.clear(); setMine(false); setPhotoErr(null); }
 
   const P = ({ children }: { children: React.ReactNode }) => <p className="text-lg text-ink/90 font-sans leading-relaxed max-w-2xl mb-4">{children}</p>;
   const List = ({ heading, items }: { heading: string; items: string[] }) => items.length ? (

@@ -59,7 +59,7 @@ async function open(browser, base, { signedIn = true, photoAnswer = { status: 20
     if (!authed) return json(401, { error: 'not signed in' });
     if (u.pathname === '/owner/account') return json(200, ACCOUNT);
     if (u.pathname === '/change/chat') return json(200, { ok: true, conversation: CONV, proposal: PROPOSAL });
-    if (u.pathname === '/change/photo') return json(photoAnswer.status, photoAnswer.body);
+    if (u.pathname === '/change/photo') { const pa = typeof photoAnswer === 'function' ? photoAnswer(calls.filter((c) => c.path === '/change/photo').length) : photoAnswer; return json(pa.status, pa.body); }
     if (u.pathname === '/change/confirm') return json(200, { ok: true, confirmed_at: '2026-11-14T23:00:00Z' });
     return json(404, {});
   });
@@ -119,6 +119,24 @@ try {
     say(up.length === 1 && up[0].headers['x-photo-mine'] === 'yes' && up[0].headers['x-photo-place'] === 'hero' && up[0].headers['content-type'] === 'image/jpeg' && Buffer.compare(up[0].body, JPG) === 0, 'on the press the photo is uploaded once, with "these are mine", its place and its bytes');
     say(conf.length === 1 && body.conversation === CONV && JSON.stringify(body.photos) === JSON.stringify([HASH]) && calls.indexOf(up[0]) < calls.indexOf(conf[0]), 'then the request is confirmed once, with the photo\'s id');
     say(await shows(page, WORDS.chat.confirmed), 'the owner sees the confirmed words');
+    await page.close();
+  }
+  { // 7 (W347 (2)): two photos, the second refused once: the retry sends only the one that failed, then confirms both
+    const H2 = 'c'.repeat(64);
+    const answers = { 1: { status: 200, body: { ok: true, photo: HASH } }, 2: { status: 422, body: { error: 'x', code: 'too-small', place: 'gallery', min: { width: 800, height: 600 }, got: { width: 48, height: 32 } } }, 3: { status: 200, body: { ok: true, photo: H2 } } };
+    const { page, calls } = await open(browser, base, { photoAnswer: (n) => answers[n] ?? answers[3] });
+    await toList(page);
+    await page.locator('#chat-photos').setInputFiles([{ name: 'one.jpg', mimeType: 'image/jpeg', buffer: JPG }, { name: 'two.jpg', mimeType: 'image/jpeg', buffer: Buffer.concat([JPG, Buffer.from([0])]) }]);
+    const sel = page.locator('[data-chat-photos] select');
+    await sel.nth(0).selectOption('hero'); await sel.nth(1).selectOption('gallery');
+    await page.locator('[data-chat-photos] input[type=checkbox]').check();
+    await press(page);
+    const first = calls.filter((c) => c.path === '/change/photo').length;
+    await press(page);
+    const ups = calls.filter((c) => c.path === '/change/photo'), conf = calls.filter((c) => c.path === '/change/confirm');
+    const body = conf[0] ? JSON.parse(conf[0].body.toString()) : {};
+    say(first === 2 && ups.length === 3 && ups[2].headers['x-photo-place'] === 'gallery', `W347: the retry re-sends only the photo that failed (${first} then ${ups.length - first})`);
+    say(conf.length === 1 && JSON.stringify([...(body.photos ?? [])].sort()) === JSON.stringify([HASH, H2].sort()), 'W347: ...and the request is confirmed with both photos');
     await page.close();
   }
   { // 6: the served words are the checked words
