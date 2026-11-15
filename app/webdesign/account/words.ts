@@ -38,7 +38,7 @@ export const WORDS = {
       "done": "Live",
       "undone": "Put back as it was",
       "stuck": "Not made yet. It does not use up a change.",
-      "over-limit": "Over that month's two changes, so not made. We kept it, and it does not use up a change.",
+      "over-limit": "Over that month's ten changes, so not made. We kept it, and it does not use up a change.",
       "quoted": "Outside the plan, so not made. Email support@sylentt.com if you want a price."
     }
   },

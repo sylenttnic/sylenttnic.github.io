@@ -67,7 +67,7 @@ const whatYouGetCards = [
   },
   {
     title: 'We host it and keep it running',
-    text: 'Hosting, SSL, backups and security patches handled for you. Tweak it as much as you like during your free 30 days, then up to two small content changes a month. Nothing to keep patched.',
+    text: 'Hosting, SSL, backups and security patches handled for you. Tweak it as much as you like during your free 30 days, then up to ten small content changes a month. Nothing to keep patched.',
   },
 ];
 
@@ -203,7 +203,7 @@ export default function WebDesignLandingPage() {
                 'Hosting, SSL, backups and uptime monitoring',
                 'Security patches',
                 'Unlimited tweaks during your free 30 days: wording, your own photos, colours, fonts, layout, or another of your designs. Most live within 2 business days',
-                'After that, up to two content changes a month: text, hours, contact details, an image swap, adding or removing a service',
+                'After that, up to ten content changes a month: text, hours, contact details, an image swap, adding or removing a service',
                 'A domain registered in your name after your first successful payment, or your existing one connected',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">

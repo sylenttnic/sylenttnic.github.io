@@ -69,7 +69,7 @@ export default function TermsOfService() {
               <strong>As many tweaks as you like during your free 30 days</strong>, so the site is right before you pay anything: the wording and details, your own photos, colours and fonts, the layout, or a switch to another of the designs we built for you. Most changes are live within 2 business days.
             </li>
             <li>
-              Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to two small content changes a calendar month</strong> once the free 30 days end.
+              Hosting, SSL, backups, uptime monitoring and security patches, plus <strong>up to ten small content changes a calendar month</strong> once the free 30 days end.
             </li>
             <li>Reasonable help getting it public and pointed at your domain.</li>
           </ul>
@@ -98,10 +98,10 @@ export default function TermsOfService() {
             <li>New pages, new functionality, or a new design beyond the ones we built for you. These are quoted separately.</li>
             <li>Email hosting.</li>
             <li>Search engine optimisation services, advertising, or marketing work.</li>
-            <li>After the free 30 days, more than two content changes in a calendar month. Unused changes do not carry over.</li>
+            <li>After the free 30 days, more than ten content changes in a calendar month. Unused changes do not carry over.</li>
           </ul>
           <p className="mt-3">
-            Hosting, SSL, backups, uptime monitoring, security patches, unlimited tweaks during the free 30 days and up to two content changes a month after that are included; see sections 3 and 6. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
+            Hosting, SSL, backups, uptime monitoring, security patches, unlimited tweaks during the free 30 days and up to ten content changes a month after that are included; see sections 3 and 6. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
           </p>
         </section>
 
@@ -117,7 +117,7 @@ export default function TermsOfService() {
               <strong>During the free 30 days, as many tweaks as you like</strong>: the wording and your business details, photos of your own work or premises (with no people in them), colours and fonts, reordering or hiding sections, or switching to another of the designs we built for you. Ask from your account page or by email to <a href="mailto:support@sylentt.com" className="text-accent-link underline">support@sylentt.com</a>. Most changes are live within 2 business days.
             </li>
             <li>
-              <strong>After that, up to two content changes per calendar month</strong>: editing text, updating your hours or contact details, swapping an image, adding or removing a service.
+              <strong>After that, up to ten content changes per calendar month</strong>: editing text, updating your hours or contact details, swapping an image, adding or removing a service.
             </li>
           </ul>
           <p className="mt-3">
