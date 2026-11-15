@@ -61,7 +61,7 @@ export default function DomainClient() {
     <div className="flex flex-wrap items-center gap-3 py-2 border-b border-ink/10">
       <span className="w-40 text-sm text-ink/70">{label}</span>
       <code className="font-mono text-base text-ink break-all">{value}</code>
-      <button type="button" onClick={() => copy(value)} className="ml-auto rounded border border-ink/20 px-3 py-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">{copied === value ? WORDS.steps.step1.copied : WORDS.steps.step1.copy_button}</button>
+      <button type="button" onClick={() => copy(value)} className="ml-auto rounded border border-ink/20 px-3 py-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">{copied === value ? WORDS.steps.step2.copied : WORDS.steps.step2.copy_button}</button>
     </div>
   );
 
@@ -90,20 +90,20 @@ export default function DomainClient() {
 
       {domain && (
         <section aria-live="polite">
-          <P>{d?.registrar?.name ? fill(WORDS.registrar.found, v) : WORDS.registrar.not_found}</P>
+          <P>{d?.registrar?.name ? fill(d?.dns_host ? WORDS.registrar.found_with_dns_host : WORDS.registrar.found, v) : WORDS.registrar.not_found}</P>
           {d?.dns_host && <P>{fill(WORDS.dns_host.found, v)}</P>}
           {!d?.records ? <P>{WORDS.steps.waiting_for_site}</P> : (
             <>
               <P>{WORDS.steps.intro}</P>
-              <H2>{WORDS.steps.step1.title}</H2>
-              <P>{WORDS.steps.step1.body}</P>
-              <Field label={WORDS.steps.step1.type_label} value={WORDS.steps.step1.type_value} />
-              <Field label={WORDS.steps.step1.host_label} value={WORDS.steps.step1.host_value} />
-              <Field label={WORDS.steps.step1.value_label} value={fill(WORDS.steps.step1.value_value, v)} />
-              <H2>{fill(WORDS.steps.step2.title, v)}</H2>
-              <P>{fill(WORDS.steps.step2.body, v)}</P>
-              <Field label={WORDS.steps.step2.from_label} value={fill(WORDS.steps.step2.from_value, v)} />
-              <Field label={WORDS.steps.step2.to_label} value={fill(WORDS.steps.step2.to_value, v)} />
+              <H2>{fill(WORDS.steps.step1.title, v)}</H2>
+              <P>{fill(WORDS.steps.step1.body, v)}</P>
+              <Field label={WORDS.steps.step1.from_label} value={fill(WORDS.steps.step1.from_value, v)} />
+              <Field label={WORDS.steps.step1.to_label} value={fill(WORDS.steps.step1.to_value, v)} />
+              <H2>{WORDS.steps.step2.title}</H2>
+              <P>{WORDS.steps.step2.body}</P>
+              <Field label={WORDS.steps.step2.type_label} value={WORDS.steps.step2.type_value} />
+              <Field label={WORDS.steps.step2.host_label} value={WORDS.steps.step2.host_value} />
+              <Field label={WORDS.steps.step2.value_label} value={fill(WORDS.steps.step2.value_value, v)} />
             </>
           )}
           <div className="mt-8"><P>{WORDS.never_touch}</P><P>{fill(WORDS.old_site, v)}</P></div>
