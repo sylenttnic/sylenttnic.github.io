@@ -43,6 +43,31 @@ export const WORDS = {
       "stuck": "Not made yet. It does not use up a change.",
       "over-limit": "Over that month's ten changes, so not made. We kept it, and it does not use up a change.",
       "quoted": "Outside the plan, so not made. Email support@sylentt.com if you want a price."
+    },
+    "states_part": {
+      "ready": "Made and checked, not live yet, apart from the photos marked not used below",
+      "done": "Live, apart from the photos marked not used below"
+    },
+    "not_used": {
+      "place": "Not used: {photo_ref}, for {place}. {reason}",
+      "no_place": "Not used: {photo_ref}. {reason}",
+      "photo_ref_one": "the photo you sent",
+      "photo_ref_many": "photo {n} of the {count} you sent",
+      "places": {
+        "hero": "the main picture at the top",
+        "gallery": "the gallery"
+      },
+      "reasons": {
+        "person": "It has a person in it, and we can only use photos you send us that have no people in them. Please send one of your work or premises with nobody in it.",
+        "other_business": "It shows another business's name or logo. Please send one where the only name or logo is your own, or none at all.",
+        "stock_like": "It looks like a stock photo, so on your site it could pass for someone else's work. Please send a different photo of your own work or premises, such as one taken on the job.",
+        "printed_text": "It has words, a price or a phone number showing in it. Please send one where none show.",
+        "watermark": "It has a watermark on it. Please send one with no watermark.",
+        "too_small": "It is too small for {place}: it needs at least {width} x {height} pixels. Please send a larger copy, such as the original from your phone or camera.",
+        "too_small_no_numbers": "It is too small for {place}. Please send a larger copy, such as the original from your phone or camera.",
+        "too_small_no_place": "It is too small to use on your site. Please send a larger copy, such as the original from your phone or camera.",
+        "other": "We could not use it on your site. If you would like to know more, email support@sylentt.com."
+      }
     }
   },
   "ask": {
@@ -71,17 +96,20 @@ export const WORDS = {
       "remove_label": "Remove this photo",
       "mine_label": "These are my own photos of my business's work or premises, and there are no people in them.",
       "uploading": "Uploading your photos.",
+      "row_mark": "Please check this photo.",
+      "also": "Photos {list} in your list have the same problem.",
+      "also_one": "Photo {list} in your list has the same problem.",
       "errors": {
         "mine_needed": "Please tick the box to confirm these are your own photos with no people in them, then press Send these changes again.",
         "photo_needed": "The list above includes a photo change, but no photo is attached. Please attach the photo, or write again below to take the photo change off the list.",
         "too_many": "You can attach up to 20 photos to one request. Please remove some, then press Send these changes again. You can send the rest in a new request.",
-        "too_small": "One of your photos is too small for where you chose ({place}): it needs at least {width} x {height} pixels. Your changes were not sent. Please attach a larger copy of it, or remove it.",
-        "empty": "One of your photos is an empty file, so your changes were not sent. Please check it has finished saving or downloading, then attach it again, or remove it.",
-        "unreadable": "We could not read the size of one of your photos, so your changes were not sent. Please save it again as a JPEG, PNG or WebP and attach it again, or email it to support@sylentt.com.",
-        "wrong_type": "One of your photos could not be read as a JPEG, PNG or WebP file, so your changes were not sent. Please save it in one of those formats and attach it again, or email it to support@sylentt.com.",
-        "too_big": "One of your photos is over 25 MB, so your changes were not sent. Please attach a smaller copy of it, or remove it.",
+        "too_small": "Photo {n} in your list ({file}) is too small for where you chose ({place}): it needs at least {width} x {height} pixels. Your changes were not sent. Please attach a larger copy of it, or remove it.",
+        "empty": "Photo {n} in your list ({file}) is an empty file, so your changes were not sent. Please check it has finished saving or downloading, then attach it again, or remove it.",
+        "unreadable": "We could not read the size of photo {n} in your list ({file}), so your changes were not sent. Please save it again as a JPEG, PNG or WebP and attach it again, or email it to support@sylentt.com.",
+        "wrong_type": "Photo {n} in your list ({file}) could not be read as a JPEG, PNG or WebP file, so your changes were not sent. Please save it in one of those formats and attach it again, or email it to support@sylentt.com.",
+        "too_big": "Photo {n} in your list ({file}) is over 25 MB, so your changes were not sent. Please attach a smaller copy of it, or remove it.",
         "daily_limit": "Your site has reached today's limit of 30 photo uploads, so your changes were not sent. Please try again tomorrow, or email support@sylentt.com.",
-        "failed": "One of your photos did not go through, so your changes were not sent. Please press Send these changes again, or email support@sylentt.com."
+        "failed": "Photo {n} in your list ({file}) did not go through, so your changes were not sent. Please press Send these changes again, or email support@sylentt.com."
       }
     },
     "intro": "Tell us what you want changed on your site. Our system lists the changes it understood, and nothing is asked for until you press Send these changes. You can also email support@sylentt.com and say which business it is.",

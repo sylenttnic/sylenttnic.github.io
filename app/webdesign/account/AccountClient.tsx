@@ -12,7 +12,9 @@ import ChatPanel from './ChatPanel';
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Item = { kind: string | null; target: string | null; wanted: string | null };
-type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[] };
+// W370 (critic F6, P4): a photo of the request that was not used, as the Worker passes it (a reason class, never the vetter's words)
+type NotUsed = { position: number; count: number; place: 'hero' | 'gallery' | null; reason: string; min?: { width: number; height: number } };
+type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number };
 type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[] };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
 type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
@@ -22,6 +24,19 @@ const DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', y
 const date = (iso: string | null) => { const t = Date.parse(iso ?? ''); return Number.isFinite(t) ? DATE.format(new Date(t)) : ''; };
 const fill = (s: string, k: string, v: string | number) => s.replace(`{${k}}`, String(v));
 const STATE_LABELS = WORDS.changes.states as Record<string, string>;
+const PART_LABELS = WORDS.changes.states_part as Record<string, string>;
+const NU = WORDS.changes.not_used;
+/* W370: one "Not used:" line (runs/client-launch/copy/W370-not-made-words.md section 3, Revision 3, critic APPROVE). */
+export function notUsedLine(m: NotUsed): string {
+  const place = m.place ? NU.places[m.place] : null;
+  const ref = m.count === 1 ? NU.photo_ref_one : NU.photo_ref_many.replace('{n}', String(m.position)).replace('{count}', String(m.count));
+  const R = NU.reasons as Record<string, string>;
+  const reason = m.reason === 'too_small'
+    ? (!place ? R.too_small_no_place : m.min ? R.too_small.replace('{width}', String(m.min.width)).replace('{height}', String(m.min.height)) : R.too_small_no_numbers)
+    : (R[m.reason] ?? R.other);
+  return (place ? NU.place : NU.no_place).replace('{photo_ref}', () => ref).replace('{place}', () => place ?? '').replace('{reason}', () => reason.replace('{place}', () => place ?? ''));
+}
+const label = (r: Req) => (r.not_used?.length && r.state && PART_LABELS[r.state]) || (r.state && STATE_LABELS[r.state]) || r.state;
 
 export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
@@ -100,8 +115,17 @@ export default function AccountClient() {
           <ul className="max-w-2xl space-y-4 mb-4">
             {requests.map((r) => (
               <li key={r.n} className="border border-ink/15 rounded-lg p-4 font-sans text-ink/90">
-                <p className="text-sm mb-2"><span className="font-semibold text-ink">{(r.state && STATE_LABELS[r.state]) || r.state}</span>{r.confirmed_at && <> · {fill(WORDS.changes.asked_on, 'date', date(r.confirmed_at))}</>}</p>
-                <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => <li key={k}>{i.wanted}</li>)}</ul>
+                <p className="text-sm mb-2"><span className="font-semibold text-ink">{label(r)}</span>{r.confirmed_at && <> · {fill(WORDS.changes.asked_on, 'date', date(r.confirmed_at))}</>}</p>
+                {(() => {
+                  // with exactly one photo item the lines sit under it; otherwise after the items (no record says which item a photo is for)
+                  const nu = r.not_used ?? [];
+                  const under = r.photo_items === 1 ? r.items.findIndex((i) => i.kind === 'photo') : -1;
+                  const lines = nu.map((m, j) => <p key={j} className="text-sm mt-1" data-not-used>{notUsedLine(m)}</p>);
+                  return <>
+                    <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => <li key={k}>{i.wanted}{k === under && lines}</li>)}</ul>
+                    {under < 0 && lines}
+                  </>;
+                })()}
               </li>
             ))}
           </ul>

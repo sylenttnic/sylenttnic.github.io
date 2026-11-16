@@ -9,7 +9,8 @@
      3. pressing Send with the box unticked shows the checked words and uploads nothing;
      4. a photo the Worker refuses as too small shows the checked words with its numbers, and nothing is confirmed;
      5. a good photo is uploaded on the press with "these are mine" and its place, then the request is confirmed with its id;
-     8. (W347) an empty file is refused before any upload with its own words;
+     8. (W347) an empty file is refused before any upload with its own words, naming its row (W370);
+     9. (W370) the account page names a photo that was not used, with its reason; an all-made request reads as today;
      6. every shown line equals the checked words (runs/client-launch/copy/W318-photo-words.md, read from words.ts). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -46,7 +47,7 @@ function serve(dir) {
   return new Promise((ok) => srv.listen(0, '127.0.0.1', () => ok(srv)));
 }
 /* photoAnswer: what POST /change/photo answers */
-async function open(browser, base, { signedIn = true, photoAnswer = { status: 200, body: { ok: true, photo: HASH } } } = {}) {
+async function open(browser, base, { signedIn = true, account = ACCOUNT, photoAnswer = { status: 200, body: { ok: true, photo: HASH } } } = {}) {
   const page = await browser.newPage();
   const calls = [];
   if (signedIn) await page.addInitScript(() => { try { sessionStorage.setItem('sylentt-owner-session', 'sess-good'); } catch { /* none */ } });
@@ -58,7 +59,7 @@ async function open(browser, base, { signedIn = true, photoAnswer = { status: 20
     const json = (status, body) => route.fulfill({ status, contentType: 'application/json', headers: cors, body: JSON.stringify(body) });
     const authed = rq.headers().authorization === 'Bearer sess-good';
     if (!authed) return json(401, { error: 'not signed in' });
-    if (u.pathname === '/owner/account') return json(200, ACCOUNT);
+    if (u.pathname === '/owner/account') return json(200, account);
     if (u.pathname === '/change/chat') return json(200, { ok: true, conversation: CONV, proposal: PROPOSAL });
     if (u.pathname === '/change/photo') { const pa = typeof photoAnswer === 'function' ? photoAnswer(calls.filter((c) => c.path === '/change/photo').length) : photoAnswer; return json(pa.status, pa.body); }
     if (u.pathname === '/change/confirm') return json(200, { ok: true, confirmed_at: '2026-11-14T23:00:00Z' });
@@ -104,7 +105,7 @@ try {
     await page.locator('[data-chat-photos] select').selectOption('hero');
     await page.locator('[data-chat-photos] input[type=checkbox]').check();
     await press(page);
-    const want = WP.errors.too_small.replace('{place}', WP.place_hero).replace('{width}', '1440').replace('{height}', '480');
+    const want = WP.errors.too_small.replace('{n}', '1').replace('{file}', 'my-shop.jpg').replace('{place}', WP.place_hero).replace('{width}', '1440').replace('{height}', '480');
     say(await shows(page, want) && calls.filter((c) => c.path === '/change/confirm').length === 0, `a too-small photo shows the checked words with its numbers, and nothing is confirmed ("${want.slice(0, 60)}...")`);
     say(!(await shows(page, 'too-small')), '...and never the raw code');
     await page.close();
@@ -146,7 +147,25 @@ try {
     await page.locator('#chat-photos').setInputFiles({ name: 'empty.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(0) });
     await page.locator('[data-chat-photos] input[type=checkbox]').check();
     await press(page);
-    say(await shows(page, WP.errors.empty ?? '(no empty line)') && calls.filter((c) => c.path === '/change/photo' || c.path === '/change/confirm').length === 0, 'W347: an empty file shows the checked words; nothing uploaded or confirmed');
+    say(await shows(page, (WP.errors.empty ?? '(no empty line)').replace('{n}', '1').replace('{file}', 'empty.jpg')) && await shows(page, WP.row_mark) && calls.filter((c) => c.path === '/change/photo' || c.path === '/change/confirm').length === 0, 'W347, W370: an empty file shows the checked words naming its row, the row is marked; nothing uploaded or confirmed');
+    await page.close();
+  }
+  { // 9 (W370): the account page names a photo that was not used, with its reason; an all-made request reads as today
+    const NU = WORDS.changes.not_used;
+    const acct = { ...ACCOUNT, requests: [
+      { n: 7, state: 'stuck', confirmed_at: '2026-11-14T23:13:54Z', trial: true, items: [{ kind: 'photo', target: 'main picture at the top of the page', wanted: 'use my photo as the main picture at the top of the page' }], not_used: [{ position: 1, count: 1, place: null, reason: 'stock_like' }], photo_items: 1 },
+      { n: 8, state: 'done', confirmed_at: '2026-11-15T10:00:00Z', trial: true, items: [{ kind: 'photo', target: 'top', wanted: 'Use one at the top' }, { kind: 'photo', target: 'gallery', wanted: 'Add the others to the gallery' }], not_used: [{ position: 1, count: 3, place: 'hero', reason: 'other_business' }], photo_items: 2 },
+      { n: 9, state: 'done', confirmed_at: '2026-11-15T11:00:00Z', trial: true, items: [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }] }] };
+    const { page } = await open(browser, base, { account: acct });
+    const lines = await page.locator('[data-not-used]').allInnerTexts();
+    const r7 = NU.no_place.replace('{photo_ref}', NU.photo_ref_one).replace('{reason}', NU.reasons.stock_like);
+    const r8 = NU.place.replace('{photo_ref}', 'photo 1 of the 3 you sent').replace('{place}', NU.places.hero).replace('{reason}', NU.reasons.other_business);
+    say(lines.length === 2 && lines.includes(r7) && lines.includes(r8), `W370: request 7 reads "${r7.slice(0, 70)}...", and a two-item request names photo 1 of 3 and its place`);
+    const item7 = page.locator('li', { hasText: 'use my photo as the main picture' }).last();
+    say((await item7.locator('[data-not-used]').count()) === 1, 'W370: with one photo item the line sits under that item');
+    say(await shows(page, WORDS.changes.states_part.done) && await shows(page, WORDS.changes.states.stuck), 'W370: a part-made done request says "Live, apart from...", a stuck one keeps its label');
+    const live = await page.locator('li.border', { hasText: 'Saturday 8 to noon' }).first().innerText();
+    say(/^Live/.test(live.trim()) && !/apart from|Not used/.test(live), 'W370: an all-made request reads exactly "Live", as today (NEG)');
     await page.close();
   }
   { // 6: the served words are the checked words

@@ -70,7 +70,10 @@ export const MAX_PHOTO_BYTES = 25 * 1000 * 1000; // confirm.js MAX_PHOTO_BYTES
 export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 export type Place = 'hero' | 'gallery';
 export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'empty' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
-export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number } };
+// W370 (critic F4, P3): a refusal about one file carries that file's row (0-based, the list as shown) and, from the pre-send
+// checks, the other rows with the same fault, so the words can name the row and the panel can mark each one.
+export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number }; index?: number; also?: number[] };
+export const PER_FILE: PhotoErrorKey[] = ['too_small', 'empty', 'unreadable', 'wrong_type', 'too_big', 'failed'];
 export type PhotoOutcome = { kind: 'signed-out' } | { kind: 'stored'; photo: string } | { kind: 'error'; error: PhotoError };
 
 export const needsPhoto = (p: Proposal | null) => !!p && p.items.some((i) => i.kind === 'photo');
@@ -80,9 +83,11 @@ export function photoPreflight(p: Proposal | null, photos: { size: number; type:
   if (!photos.length) return needsPhoto(p) ? { key: 'photo_needed' } : null;
   if (photos.length > MAX_PHOTOS) return { key: 'too_many' };
   // W347 (3): an empty (zero-byte) file is refused here, before any upload; pressing again would only send it again
-  if (photos.some((f) => f.size === 0)) return { key: 'empty' };
-  if (photos.some((f) => !PHOTO_TYPES.includes(f.type))) return { key: 'wrong_type' };
-  if (photos.some((f) => f.size > MAX_PHOTO_BYTES)) return { key: 'too_big' };
+  const rows = (bad: (f: { size: number; type: string }) => boolean) => photos.map((f, i) => (bad(f) ? i : -1)).filter((i) => i >= 0);
+  for (const [key, bad] of [['empty', (f) => f.size === 0], ['wrong_type', (f) => !PHOTO_TYPES.includes(f.type)], ['too_big', (f) => f.size > MAX_PHOTO_BYTES]] as [PhotoErrorKey, (f: { size: number; type: string }) => boolean][]) {
+    const r = rows(bad);
+    if (r.length) return { key, index: r[0], also: r.slice(1) };
+  }
   if (!mine) return { key: 'mine_needed' };
   return null;
 }
@@ -107,7 +112,17 @@ export function photoOutcome(status: number, body: unknown): PhotoOutcome {
   return { kind: 'error', error: { key: 'failed' } };
 }
 
-/* A refusal's words with its numbers filled in: {place}, {width}, {height}. */
-export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string>): string {
-  return s.replace('{place}', e.place ? places[e.place] : '').replace('{width}', String(e.min?.width ?? '')).replace('{height}', String(e.min?.height ?? ''));
+/* A refusal's words with its numbers filled in: {place}, {width}, {height}, and (W370) the row: {n} (1 is the top row) and
+   {file} (the name the row shows). With other rows at the same fault, the `also` sentence follows, naming the others only. */
+export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string>, names: string[] = [], also: { also: string; also_one: string } | null = null): string {
+  const n = e.index === undefined ? '' : String(e.index + 1);
+  const file = e.index === undefined ? '' : (names[e.index] ?? '');
+  const out = s.replace('{n}', () => n).replace('{file}', () => file).replace('{place}', () => (e.place ? places[e.place] : '')).replace('{width}', String(e.min?.width ?? '')).replace('{height}', String(e.min?.height ?? ''));
+  const others = (e.also ?? []).map((i) => String(i + 1));
+  if (!others.length || !also) return out;
+  const list = others.length === 1 ? others[0] : `${others.slice(0, -1).join(', ')} and ${others[others.length - 1]}`;
+  return `${out} ${(others.length === 1 ? also.also_one : also.also).replace('{list}', () => list)}`;
 }
+
+/* The rows a refusal is about (each gets the "Please check this photo." mark). */
+export const markedRows = (e: PhotoError | null): number[] => (e && e.index !== undefined && PER_FILE.includes(e.key) ? [e.index, ...(e.also ?? [])] : []);
