@@ -40,8 +40,8 @@ export const WORDS = {
       "ready": "Made and checked, not live yet",
       "done": "Live",
       "undone": "Put back as it was",
-      "stuck": "Not made yet. It does not use up a change.",
-      "over-limit": "Over that month's ten changes, so not made. We kept it, and it does not use up a change.",
+      "stuck": "Not made yet.",
+      "over-limit": "Not made, because the plan had a monthly limit when you sent it. We kept it. To have it made now, ask for it again.",
       "quoted": "Outside the plan, so not made. Email support@sylentt.com if you want a price."
     },
     "states_part": {
