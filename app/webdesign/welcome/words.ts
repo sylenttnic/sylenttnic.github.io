@@ -6,7 +6,7 @@ export const WORDS = {
     "preview_note": "Until that click, your site stays an unlisted preview, hidden from search engines.",
     "free_note": "Your first 30 days are free. If nobody confirms, nothing is charged.",
     "no_email_title": "No email yet?",
-    "no_email": "Check the inbox of your business's public address, and its spam folder. Still nothing? Write to nic@sylentt.com and say which business it is."
+    "no_email": "Check the inbox of your business's public address, and its spam folder. Still nothing? Write to support@sylentt.com and say which business it is."
   },
   "confirming": {
     "title": "Confirming",
@@ -14,7 +14,7 @@ export const WORDS = {
   },
   "confirm_failed": {
     "title": "That link did not work",
-    "body": "It may have expired, been used already, or not be valid. If nobody has confirmed, a reminder goes to the business's public address on day 7. You can also write to nic@sylentt.com with the business name."
+    "body": "It may have expired, been used already, or not be valid. If nobody has confirmed, a reminder goes to the business's public address on day 7. You can also write to support@sylentt.com with the business name."
   },
   "verified_multi": {
     "title": "Thanks for confirming. Which design is your site?",
@@ -30,15 +30,15 @@ export const WORDS = {
   },
   "next_steps": {
     "title": "What comes next",
-    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things to sort out:",
+    "intro": "Your site goes public after the pick, or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out. We will email you three short things:",
     "items": [
       {
         "label": "Your domain",
-        "body": "Tell us if you already have one, or pick a new one. If you have one, we show you the two records to add at your registrar. If you need one, we register it in your business's name after your first successful payment."
+        "body": "When that email arrives, reply to it and tell us if you already have one or want a new one. We will set it up with you. If you need one, we register it in your business's name after your first successful payment."
       },
       {
         "label": "Where form messages go",
-        "body": "We send what visitors write on your site to the address you choose, after that address confirms with one click."
+        "body": "What visitors write in your site's form comes to the address that confirmed your business."
       },
       {
         "label": "First fixes and photos",
@@ -53,7 +53,7 @@ export const WORDS = {
   },
   "notme_failed": {
     "title": "We could not cancel from this link",
-    "body": "The link may have expired or been used already. To cancel, write to nic@sylentt.com and say which business it is."
+    "body": "The link may have expired or been used already. To cancel, write to support@sylentt.com and say which business it is."
   },
   "no_preview": {
     "title": "Which business is this for?",
@@ -63,7 +63,7 @@ export const WORDS = {
   },
   "error_generic": {
     "title": "Something went wrong on our side",
-    "body": "Try again in a minute. If it keeps happening, write to nic@sylentt.com and say which business it is."
+    "body": "Try again in a minute. If it keeps happening, write to support@sylentt.com and say which business it is."
   },
   "signing_in": {
     "title": "Signing you in",
@@ -71,14 +71,14 @@ export const WORDS = {
   },
   "signin_failed": {
     "title": "That sign-in link did not work",
-    "body": "It may be more than an hour old, been used already, or not be valid. You can ask for a new link on this page (we send at most one in 24 hours), or write to nic@sylentt.com and say which business it is."
+    "body": "It may be more than an hour old, been used already, or not be valid. You can ask for a new link on this page (we send at most one in 24 hours), or write to support@sylentt.com and say which business it is."
   },
   "signin_ask": {
     "title": "Already clicked the confirmation link? Sign back in",
     "body": "Enter the email address your business confirmed with, and we will send a sign-in link to that address.",
     "field_label": "Email address your business confirmed with",
     "button": "Email me a sign-in link",
-    "sent": "If that address is the one your business confirmed with, a sign-in link is on its way. It works once, for one hour. Check your spam folder too. We send at most one link in 24 hours, so if you asked in the last 24 hours, look for that email. Stuck? Write to nic@sylentt.com and say which business it is.",
+    "sent": "If that address is the one your business confirmed with, a sign-in link is on its way. It works once, for one hour. Check your spam folder too. We send at most one link in 24 hours, so if you asked in the last 24 hours, look for that email. Stuck? Write to support@sylentt.com and say which business it is.",
     "invalid_email": "Enter a full email address, like name@example.com."
   },
   "signin_redirect": {
