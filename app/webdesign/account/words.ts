@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md.
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md).
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -47,6 +47,95 @@ export const WORDS = {
     "states_part": {
       "ready": "Made and checked, not live yet, apart from the photos marked not used below",
       "done": "Live, apart from the photos marked not used below"
+    },
+    "states_part_items": {
+      "ready": "Made and checked, not live yet, apart from the parts marked not made below",
+      "done": "Live, apart from the parts marked not made below"
+    },
+    "states_part_both": {
+      "ready": "Made and checked, not live yet, apart from the parts marked not made and the photos marked not used below",
+      "done": "Live, apart from the parts marked not made and the photos marked not used below"
+    },
+    "refused": {
+      "mark": "Not made. {reason}",
+      "ask": "If you would like to know more, email support@sylentt.com.",
+      "join": {
+        "one": "We do not add that to your site from a change request.",
+        "many": "We do not add these to your site from a change request."
+      },
+      "reasons": {
+        "licensed": {
+          "saw": "It mentions a license or being licensed, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions a license or being licensed."
+        },
+        "certified": {
+          "saw": "It mentions a certification or being certified, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions a certification or being certified."
+        },
+        "insured": {
+          "saw": "It mentions insurance or being insured, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions insurance or being insured."
+        },
+        "bonded": {
+          "saw": "It mentions being bonded, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions being bonded."
+        },
+        "accredited": {
+          "saw": "It mentions an accreditation or being accredited, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions an accreditation or being accredited."
+        },
+        "award": {
+          "saw": "It mentions an award, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions an award."
+        },
+        "rating": {
+          "saw": "It mentions a rating or stars, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions a rating or stars."
+        },
+        "review_count": {
+          "saw": "It mentions reviews on Google, Yelp or Facebook, or a number of reviews, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions reviews on Google, Yelp or Facebook, or a number of reviews."
+        },
+        "superlative": {
+          "saw": "It uses a word such as best, number one or leading, which we do not add to your site from a change request.",
+          "next": "Please send it again without that word.",
+          "saw_short": "It uses a word such as best, number one or leading."
+        },
+        "guarantee": {
+          "saw": "It mentions a guarantee or a warranty, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "It mentions a guarantee or a warranty."
+        },
+        "testimonial": {
+          "saw": "It mentions a testimonial, a review or what customers say, or quotes someone. The only reviews we put on your site are real ones, posted publicly by the people who wrote them, in their own words.",
+          "next": null
+        },
+        "other_business": {
+          "saw": "Some of its words read as a mention of another business, or a comparison with one, which we do not add to your site from a change request.",
+          "next": null,
+          "saw_short": "Some of its words read as a mention of another business, or a comparison with one."
+        },
+        "instruction": {
+          "saw": "Some of its words read as an instruction to our system, or as code, rather than as words for your site.",
+          "next": null
+        },
+        "new_feature": {
+          "saw": "It mentions a new page, or a feature such as booking, payments, a shop or a blog. A change request does not add those.",
+          "next": null
+        },
+        "other": {
+          "saw": "We could not make it from this request.",
+          "next": null
+        }
+      }
     },
     "not_used": {
       "place": "Not used: {photo_ref}, for {place}. {reason}",

@@ -14,7 +14,9 @@ const SKEY = 'sylentt-owner-session';
 type Item = { kind: string | null; target: string | null; wanted: string | null };
 // W370 (critic F6, P4): a photo of the request that was not used, as the Worker passes it (a reason class, never the vetter's words)
 type NotUsed = { position: number; count: number; place: 'hero' | 'gallery' | null; reason: string; min?: { width: number; height: number } };
-type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number };
+// W370 (3): an item the change guard refused, as the Worker passes it (the item's index and reason classes, never the guard's words)
+type Refused = { item: number; classes: string[] };
+type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number; refused?: Refused[] };
 type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[] };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
 type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
@@ -36,7 +38,31 @@ export function notUsedLine(m: NotUsed): string {
     : (R[m.reason] ?? R.other);
   return (place ? NU.place : NU.no_place).replace('{photo_ref}', () => ref).replace('{place}', () => place ?? '').replace('{reason}', () => reason.replace('{place}', () => place ?? ''));
 }
-const label = (r: Req) => (r.not_used?.length && r.state && PART_LABELS[r.state]) || (r.state && STATE_LABELS[r.state]) || r.state;
+/* W370 (3): one refused item's reason (runs/client-launch/copy/W370-words-refused-draft.md section 3, Revision 5): one class is
+   its saw and its next (or the ask); two or more are the short saws, the join, the full saws of testimonial, instruction and
+   new_feature, then the ask once; any `other` is `other` alone. */
+const RF = WORDS.changes.refused;
+type RW = { saw: string; next: string | null; saw_short?: string };
+const SHORT = ['licensed', 'certified', 'insured', 'bonded', 'accredited', 'award', 'rating', 'review_count', 'superlative', 'guarantee', 'other_business'];
+const FULL = ['testimonial', 'instruction', 'new_feature'];
+export function refusedReason(classes: string[]): string {
+  const R = RF.reasons as Record<string, RW>;
+  const cs = classes.length && classes.every((c) => R[c]) ? classes : ['other'];
+  if (cs.length === 1 || cs.includes('other')) { const w = R[cs.includes('other') ? 'other' : cs[0]]; return `${w.saw} ${w.next ?? RF.ask}`; }
+  const shorts = cs.filter((c) => SHORT.includes(c)).map((c) => R[c].saw_short as string);
+  const parts = [...shorts];
+  if (shorts.length) parts.push(shorts.length >= 2 ? RF.join.many : RF.join.one);
+  for (const c of FULL) if (cs.includes(c)) parts.push(R[c].saw);
+  parts.push(RF.ask);
+  return parts.join(' ');
+}
+export const refusedMark = (classes: string[]) => RF.mark.replace('{reason}', () => refusedReason(classes));
+const ITEMS_LABELS = WORDS.changes.states_part_items as Record<string, string>;
+const BOTH_LABELS = WORDS.changes.states_part_both as Record<string, string>;
+export const label = (r: Req) => {
+  const items = Boolean(r.refused?.length), photos = Boolean(r.not_used?.length);
+  return (r.state && ((items && photos && BOTH_LABELS[r.state]) || (items && ITEMS_LABELS[r.state]) || (photos && PART_LABELS[r.state]) || STATE_LABELS[r.state])) || r.state;
+};
 
 export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
@@ -122,7 +148,7 @@ export default function AccountClient() {
                   const under = r.photo_items === 1 ? r.items.findIndex((i) => i.kind === 'photo') : -1;
                   const lines = nu.map((m, j) => <p key={j} className="text-sm mt-1" data-not-used>{notUsedLine(m)}</p>);
                   return <>
-                    <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => <li key={k}>{i.wanted}{k === under && lines}</li>)}</ul>
+                    <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => { const x = r.refused?.find((f) => f.item === k); return <li key={k}>{i.wanted}{x && <p className="text-sm mt-1" data-refused>{refusedMark(x.classes)}</p>}{k === under && lines}</li>; })}</ul>
                     {under < 0 && lines}
                   </>;
                 })()}

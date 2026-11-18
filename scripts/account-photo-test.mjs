@@ -11,6 +11,7 @@
      5. a good photo is uploaded on the press with "these are mine" and its place, then the request is confirmed with its id;
      8. (W347) an empty file is refused before any upload with its own words, naming its row (W370);
      9. (W370) the account page names a photo that was not used, with its reason; an all-made request reads as today;
+    10. (W370 (3)) a guard-refused item is marked "Not made." under its own item, with its reason, and the label says so;
      6. every shown line equals the checked words (runs/client-launch/copy/W318-photo-words.md, read from words.ts). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -166,6 +167,23 @@ try {
     say(await shows(page, WORDS.changes.states_part.done) && await shows(page, WORDS.changes.states.stuck), 'W370: a part-made done request says "Live, apart from...", a stuck one keeps its label');
     const live = await page.locator('li.border', { hasText: 'Saturday 8 to noon' }).first().innerText();
     say(/^Live/.test(live.trim()) && !/apart from|Not used/.test(live), 'W370: an all-made request reads exactly "Live", as today (NEG)');
+    await page.close();
+  }
+  { // 10 (W370 (3)): a guard-refused item is marked "Not made." under its own item, with its reason; the labels say so
+    const draft = fs.readFileSync(path.join(ROOT, '..', 'sylentt-smb-site-generation', 'runs/client-launch/copy/W370-words-refused-draft.md'), 'utf8');
+    const two = (w) => [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }, { kind: 'words', target: 'about', wanted: w }];
+    const acct = { ...ACCOUNT, requests: [
+      { n: 11, state: 'done', confirmed_at: '2026-11-18T00:00:00Z', trial: true, items: two('add that we are fully insured and bonded'), refused: [{ item: 1, classes: ['insured', 'bonded'] }] },
+      { n: 12, state: 'ready', confirmed_at: '2026-11-18T01:00:00Z', trial: true, items: [...two('say we are better than the other landscapers in town'), { kind: 'photo', target: 'gallery', wanted: 'Add these photos to the gallery' }], refused: [{ item: 1, classes: ['other_business'] }], not_used: [{ position: 2, count: 3, place: 'gallery', reason: 'person' }], photo_items: 1 }] };
+    const { page } = await open(browser, base, { account: acct });
+    const marks = await page.locator('[data-refused]').allInnerTexts();
+    const m11 = 'Not made. It mentions insurance or being insured. It mentions being bonded. We do not add these to your site from a change request. If you would like to know more, email support@sylentt.com.';
+    const m12 = 'Not made. Some of its words read as a mention of another business, or a comparison with one, which we do not add to your site from a change request. If you would like to know more, email support@sylentt.com.';
+    say(draft.includes(m11) && draft.includes(m12) && marks.length === 2 && marks.includes(m11) && marks.includes(m12), 'W370 (3): each refused item reads the draft\'s own "Not made." line (insured and bonded; another business)');
+    const it11 = page.locator('li', { hasText: 'add that we are fully insured and bonded' }).last();
+    say((await it11.locator('[data-refused]').count()) === 1 && (await page.locator('li', { hasText: /^Saturday 8 to noon$/ }).locator('[data-refused]').count()) === 0, 'W370 (3): the mark sits under the refused item, never under the made one');
+    say(await shows(page, WORDS.changes.states_part_items.done) && await shows(page, WORDS.changes.states_part_both.ready), 'W370 (3): done with a refused item says "Live, apart from the parts marked not made below"; both kinds name both');
+    say((await page.locator('[data-not-used]').count()) === 1, 'W370 (3): the photo mark still shows beside the item marks');
     await page.close();
   }
   { // 6: the served words are the checked words
