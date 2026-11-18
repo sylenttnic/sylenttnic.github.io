@@ -134,6 +134,14 @@ export const WORDS = {
         "other": {
           "saw": "We could not make it from this request.",
           "next": null
+        },
+        "post_trial": {
+          "saw": "It is a change to the colours, fonts or layout, or a switch to another of the designs we built for you. After the free 30 days, your plan covers changes to the wording, details and photos, not these, so we did not make it and nothing was charged for it. These are quoted separately.",
+          "next": null
+        },
+        "fact_wall": {
+          "saw": "We could not make it in a way that keeps your site to what you have told us or what your business's own listing or website shows, so we left it out rather than put something on your site that might not be true.",
+          "next": null
         }
       }
     },

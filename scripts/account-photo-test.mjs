@@ -36,6 +36,17 @@ const PROPOSAL = { items: [{ kind: 'photo', target: 'main picture at the top', w
 const JPG = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x04, 0, 0, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x04, 0x38, 0x07, 0x80, 3, 1, 0x22, 0, 2, 0x11, 1, 3, 0x11, 1, 0xff, 0xd9]);
 
 let bad = 0; const say = (ok, what) => { if (!ok) bad++; console.log(`${ok ? '  ok  ' : '  FAIL'} ${what}`); };
+
+{ // W394 (3): every not-made class the pipeline can write has its words here, byte-equal to the email's saw and next (the ask differs)
+  const SMB = path.join(ROOT, '..', 'sylentt-smb-site-generation');
+  const { ITEM_CLASSES } = await import(pathToFileURL(path.join(SMB, 'scripts/lib/change-request.mjs')).href);
+  const mail = JSON.parse(fs.readFileSync(path.join(SMB, 'runs/clients/email-templates.json'), 'utf8')).change_done_part.item_reasons;
+  const gaps = (page) => ITEM_CLASSES.filter((c) => !page[c] || page[c].saw !== mail[c]?.saw || page[c].next !== mail[c]?.next || page[c].saw_short !== mail[c]?.saw_short);
+  const R = WORDS.changes.refused.reasons;
+  say(gaps(R).length === 0 && R.fact_wall && R.post_trial, `W394 (3): every class (${ITEM_CLASSES.length}, fact_wall and post_trial among them) has page words equal to the email's${gaps(R).length ? `; off: ${gaps(R).join(', ')}` : ''}`);
+  const less = { ...R }; delete less.fact_wall;
+  say(gaps(less).includes('fact_wall'), 'W394 (3): a class missing from the page is caught (negative)');
+}
 function serve(dir) {
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
   const srv = http.createServer((req, res) => {
@@ -184,6 +195,16 @@ try {
     say((await it11.locator('[data-refused]').count()) === 1 && (await page.locator('li', { hasText: /^Saturday 8 to noon$/ }).locator('[data-refused]').count()) === 0, 'W370 (3): the mark sits under the refused item, never under the made one');
     say(await shows(page, WORDS.changes.states_part_items.done) && await shows(page, WORDS.changes.states_part_both.ready), 'W370 (3): done with a refused item says "Live, apart from the parts marked not made below"; both kinds name both');
     say((await page.locator('[data-not-used]').count()) === 1, 'W370 (3): the photo mark still shows beside the item marks');
+    await page.close();
+  }
+  { // W394 (3): a fact-wall item and a post-trial item each read their own "Not made." line
+    const acct = { ...ACCOUNT, plan: 'paying', requests: [
+      { n: 13, state: 'done', confirmed_at: '2026-11-18T02:00:00Z', trial: false, items: [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }, { kind: 'words', target: 'about', wanted: 'add a paragraph about our history' }, { kind: 'colours', target: 'theme', wanted: 'change the colours to green' }], refused: [{ item: 1, classes: ['fact_wall'] }, { item: 2, classes: ['post_trial'] }] }] };
+    const { page } = await open(browser, base, { account: acct });
+    const marks = await page.locator('[data-refused]').allInnerTexts();
+    const R = WORDS.changes.refused;
+    const fw = `Not made. ${R.reasons.fact_wall.saw} ${R.ask}`, pt = `Not made. ${R.reasons.post_trial.saw} ${R.ask}`;
+    say(marks.length === 2 && marks[0] === fw && marks[1] === pt, 'W394 (3): the fact-wall and post-trial items are marked with their own reasons, in item order');
     await page.close();
   }
   { // 6: the served words are the checked words
