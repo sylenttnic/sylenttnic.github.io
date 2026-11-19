@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "@/assets/img/logo.webp";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
-import { PHONE } from "@/lib/offer";
+import { PHONE, SECOND_OPINION_PATH } from "@/lib/offer";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -97,6 +97,13 @@ export default function Footer() {
                     </a>
                   </>
                 )}
+                {" "}&middot;{" "}
+                <Link
+                  href={SECOND_OPINION_PATH}
+                  className="rounded-sm underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                >
+                  A second opinion
+                </Link>
                 {/* The main site's only link to the web design plan. Keep it
                     here: the repositioning brief allows web design in the
                     footer and nowhere else on the main site, and
