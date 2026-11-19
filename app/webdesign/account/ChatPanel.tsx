@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { WORDS } from './words';
-import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, needsPhoto, photoPreflight, photoOutcome, fillPhoto, markedRows, PER_FILE, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
+import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, kindOf, kindsOf, needsPhoto, photoPreflight, photoOutcome, fillPhoto, markedRows, PER_FILE, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
 
 // The chat panel (W311, rows 118 and 58; PLAN.md 9b steps 2 to 4). Rendered only inside the signed-in account page.
 // A message goes to the Worker's POST /change/chat with this tab's session; the Worker answers a list of the changes it
@@ -75,7 +75,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
         ids.push(o.photo);
       }
       setBusy('confirming');
-      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify(ids.length ? { conversation, photos: Array.from(new Set(ids)) } : { conversation }) });
+      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify(ids.length ? { conversation, kinds: kindsOf(proposal), photos: Array.from(new Set(ids)) } : { conversation, kinds: kindsOf(proposal) }) });
       const o = confirmOutcome(r.status, await r.json().catch(() => null));
       if (o.kind === 'signed-out') { signedOut(); return; }
       if (o.kind === 'error') { setErr(o.key); return; }
@@ -103,7 +103,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
       {reply && <div className="mb-4 border border-ink/15 rounded-lg p-4"><p className="font-semibold text-ink font-sans mb-1">{W.reply_label}</p><p className="font-sans text-ink/90 whitespace-pre-line">{reply}</p></div>}
       {proposal && (
         <div className="mb-4 border border-ink/15 rounded-lg p-4" data-chat-proposal>
-          <List heading={W.proposal_heading} items={proposal.items.map((i) => i.wanted)} />
+          <List heading={W.proposal_heading} items={proposal.items.map((i) => `${W.kinds[kindOf(i)]}: ${i.wanted}`)} />
           <List heading={W.out_of_scope_heading} items={proposal.out_of_scope} />
           <List heading={W.questions_heading} items={proposal.questions} />
           {proposal.items.length > 0 && <>

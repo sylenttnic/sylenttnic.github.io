@@ -10,7 +10,7 @@ export type ChatOutcome =
   | { kind: 'proposal'; conversation: string; proposal: Proposal }
   | { kind: 'reply'; conversation: string; text: string }
   | { kind: 'error'; key: ChatErrorKey; conversation: string | null };
-export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' };
+export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' | 'kinds_changed' };
 
 export const MAX_CHARS = 2000;
 const CONV = /^[a-z0-9-]{8,64}$/;
@@ -53,6 +53,8 @@ export function confirmOutcome(status: number, body: unknown): ConfirmOutcome {
   if ((status === 404 || status === 422) && /nothing to send/.test(String(b.error ?? ''))) return { kind: 'error', key: 'nothing_to_send' };
   // W317: the plan is neither in its trial nor paying, so the Worker took no request (it is not worth pressing again)
   if (status === 409 && (b as { reason?: unknown }).reason === 'not-taken') return { kind: 'error', key: 'not_taken' };
+  // W401 (4): the kinds the owner was shown are not the stored proposal's, so nothing was recorded
+  if (status === 409 && (b as { reason?: unknown }).reason === 'kinds-changed') return { kind: 'error', key: 'kinds_changed' };
   return { kind: 'error', key: 'confirm_failed' };
 }
 
@@ -126,3 +128,13 @@ export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string
 
 /* The rows a refusal is about (each gets the "Please check this photo." mark). */
 export const markedRows = (e: PhotoError | null): number[] => (e && e.index !== undefined && PER_FILE.includes(e.key) ? [e.index, ...(e.also ?? [])] : []);
+
+/* W401 (4) (triage 2026-11-19 T5): each item is shown with its kind in plain words, and the confirm sends the kinds shown, in
+   order; the Worker records nothing whose kinds differ. A removal (wanted begins Remove: "...", the change guard's
+   QUOTED_REMOVAL shape) is shown as one whatever its kind field, so the owner sees it is taking words off. */
+export type KindKey = 'words' | 'removal' | 'photo' | 'colours' | 'fonts' | 'layout' | 'design-swap';
+export function kindOf(i: Item): KindKey {
+  if (['words', 'layout', 'photo'].includes(i.kind) && /^\s*(?:please\s+)?(?:remove|delete|take\s+(?:down|off|out)|get\s+rid\s+of)\b\s*(?:the\s+(?:words?|line|sentence|text)\s*)?:?\s*["\u201c]/i.test(i.wanted)) return 'removal';
+  return (['words', 'photo', 'colours', 'fonts', 'layout', 'design-swap'] as const).includes(i.kind as KindKey) ? (i.kind as KindKey) : 'words';
+}
+export const kindsOf = (p: Proposal) => p.items.map((i) => i.kind);

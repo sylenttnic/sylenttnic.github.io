@@ -108,7 +108,7 @@ say(at > 0 && signedOutReturn > 0 && errReturn > 0 && at > signedOutReturn && at
 
 const words = fs.readFileSync(path.join(DIR, 'words.ts'), 'utf8');
 const used = new Set([...panel.matchAll(/\bW\.([a-z_]+)/g)].map((m) => m[1]));
-for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken']) used.add(k);
+for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken', 'kinds_changed']) used.add(k);
 const photoWords = words.slice(words.indexOf('"photos"'));
 const pUsed = new Set([...panel.matchAll(/\bWP\.([a-z_]+)/g)].map((m) => m[1]));
 const pErr = ['mine_needed', 'photo_needed', 'too_many', 'too_small', 'unreadable', 'wrong_type', 'too_big', 'daily_limit', 'failed'];
@@ -117,5 +117,20 @@ say(words.includes('"photos"') && pMissing.length === 0 && /\{width\}/.test(phot
 const missing = [...used].filter((k) => !new RegExp(`"${k}":`).test(words.slice(words.indexOf('"chat"'))));
 say(words.includes('"chat"') && missing.length === 0, `every word the panel shows is in WORDS.chat${missing.length ? ` (missing: ${missing.join(', ')})` : ''}`);
 say(!/[–—]/.test(panel + words) && /[—]/.test('a — b'), 'no em or en dash in the panel or its words (and the grep sees one when there is one)');
+/* W401 (4): each item shows its kind in plain words, and the confirm sends the kinds shown; a mismatch reads kinds_changed */
+{
+  const K = WORDS.chat.kinds ?? {};
+  const keys = ['words', 'removal', 'photo', 'colours', 'fonts', 'layout', 'design-swap'];
+  say(keys.every((k) => typeof K[k] === 'string' && K[k].length > 0), 'W401 (4): WORDS.chat.kinds has a label for every kind and for a removal');
+  const it = (kind, wanted) => ({ kind, target: 't', wanted });
+  say(L.kindOf(it('words', 'Remove: "We are licensed."')) === 'removal' && L.kindOf(it('layout', 'remove: \u201cOur team\u201d')) === 'removal' && L.kindOf(it('words', 'Saturday 8 to noon')) === 'words' && L.kindOf(it('layout', 'hide the gallery')) === 'layout' && L.kindOf(it('colours', 'Remove: "x"')) === 'colours', 'W401 (4): a quoted removal of words, layout or photo shows as a removal; anything else shows its own kind');
+  say(JSON.stringify(L.kindsOf({ items: [it('words', 'a'), it('layout', 'b')], out_of_scope: [], questions: [] })) === '["words","layout"]', 'W401 (4): the kinds sent are the items\' kinds, in order');
+  say(L.confirmOutcome(409, { ok: false, reason: 'kinds-changed' }).key === 'kinds_changed', 'W401 (4): the Worker\'s kinds-changed refusal reads kinds_changed');
+  const shows = (src) => /items=\{proposal\.items\.map\(\(i\) => `\$\{W\.kinds\[kindOf\(i\)\]\}: \$\{i\.wanted\}`\)\}/.test(src);
+  const sends = (src) => (src.match(/kinds: kindsOf\(proposal\)/g) ?? []).length === 2;
+  say(shows(panel) && sends(panel), 'W401 (4): the list shows "<kind>: <owner\'s words>", and both confirm bodies carry the kinds shown');
+  const m1 = panel.replace('`${W.kinds[kindOf(i)]}: ${i.wanted}`', 'i.wanted'), m2 = panel.replace(/, kinds: kindsOf\(proposal\)/g, '');
+  say(m1 !== panel && !shows(m1) && m2 !== panel && !sends(m2), 'MUTANT: a list without kinds, or a confirm without them, is caught');
+}
 console.log(bad ? `account-chat-test: ${bad} FAILED` : 'account-chat-test: every arm holds');
 process.exit(bad ? 1 : 0);
