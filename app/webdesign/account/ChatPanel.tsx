@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { WORDS } from './words';
-import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, kindOf, kindsOf, needsPhoto, photoPreflight, photoOutcome, fillPhoto, markedRows, PER_FILE, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
+import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, kindOf, kindsOf, shownWanted, needsPhoto, photoPreflight, photoOutcome, fillPhoto, markedRows, PER_FILE, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
 
 // The chat panel (W311, rows 118 and 58; PLAN.md 9b steps 2 to 4). Rendered only inside the signed-in account page.
 // A message goes to the Worker's POST /change/chat with this tab's session; the Worker answers a list of the changes it
@@ -13,7 +13,7 @@ const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 const W = WORDS.chat;
 const WP = WORDS.chat.photos;
-type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken';
+type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken' | 'kinds_changed';
 
 export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) {
   const [message, setMessage] = useState('');
@@ -103,7 +103,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
       {reply && <div className="mb-4 border border-ink/15 rounded-lg p-4"><p className="font-semibold text-ink font-sans mb-1">{W.reply_label}</p><p className="font-sans text-ink/90 whitespace-pre-line">{reply}</p></div>}
       {proposal && (
         <div className="mb-4 border border-ink/15 rounded-lg p-4" data-chat-proposal>
-          <List heading={W.proposal_heading} items={proposal.items.map((i) => `${W.kinds[kindOf(i)]}: ${i.wanted}`)} />
+          <List heading={W.proposal_heading} items={proposal.items.map((i) => `${W.kinds[kindOf(i)]}: ${shownWanted(i)}`)} />
           <List heading={W.out_of_scope_heading} items={proposal.out_of_scope} />
           <List heading={W.questions_heading} items={proposal.questions} />
           {proposal.items.length > 0 && <>

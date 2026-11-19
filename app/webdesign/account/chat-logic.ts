@@ -133,8 +133,14 @@ export const markedRows = (e: PhotoError | null): number[] => (e && e.index !== 
    order; the Worker records nothing whose kinds differ. A removal (wanted begins Remove: "...", the change guard's
    QUOTED_REMOVAL shape) is shown as one whatever its kind field, so the owner sees it is taking words off. */
 export type KindKey = 'words' | 'removal' | 'photo' | 'colours' | 'fonts' | 'layout' | 'design-swap';
+/* decision-critic condition 1 (W401-kind-words-critic): the removal label only for a WORDS item; a layout or photo item keeps its
+   own kind's label (its wanted still begins Remove:), and the kinds the page sends are always the items' real kinds */
+const REMOVAL_SHAPE = /^\s*(?:please\s+)?(?:remove|delete|take\s+(?:down|off|out)|get\s+rid\s+of)\b\s*(?:the\s+(?:words?|line|sentence|text)\s*)?:?\s*["\u201c]/i;
 export function kindOf(i: Item): KindKey {
-  if (['words', 'layout', 'photo'].includes(i.kind) && /^\s*(?:please\s+)?(?:remove|delete|take\s+(?:down|off|out)|get\s+rid\s+of)\b\s*(?:the\s+(?:words?|line|sentence|text)\s*)?:?\s*["\u201c]/i.test(i.wanted)) return 'removal';
-  return (['words', 'photo', 'colours', 'fonts', 'layout', 'design-swap'] as const).includes(i.kind as KindKey) ? (i.kind as KindKey) : 'words';
+  if (i.kind === 'words' && REMOVAL_SHAPE.test(i.wanted)) return 'removal';
+  const own: readonly string[] = ['words', 'photo', 'colours', 'fonts', 'layout', 'design-swap'];
+  return own.includes(i.kind) ? (i.kind as KindKey) : 'words';
 }
-export const kindsOf = (p: Proposal) => p.items.map((i) => i.kind);
+export const kindsOf = (p: Proposal | null) => (p ? p.items.map((i) => i.kind) : []);
+/* critic follow-up F3: a words removal reads "<label>: <the quoted words>", its Remove: prefix dropped; any other item as written */
+export const shownWanted = (i: Item) => (kindOf(i) === 'removal' ? i.wanted.replace(REMOVAL_SHAPE, '\u201c').replace(/["\u201d]\s*[.!]?\s*$/, '\u201d') : i.wanted);
