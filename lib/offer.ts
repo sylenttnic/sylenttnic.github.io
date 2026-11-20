@@ -11,12 +11,11 @@
 export const CALENDLY_URL = "https://calendly.com/nic-sylentt/30min";
 
 // The second opinion (/second-opinion/): one no-charge working session for a
-// Cache Valley business, 60 to 90 minutes, no pitch. Its booking link points at
-// the 30-minute call until a dedicated 90-minute Calendly event exists; swap
-// the URL here and the page's button label follows SECOND_OPINION_BOOK_LABEL.
+// Cache Valley business, 60 to 90 minutes, no pitch. It books its own Calendly
+// event, never the 30-minute call above.
 export const SECOND_OPINION_PATH = "/second-opinion/";
-export const SECOND_OPINION_CALENDLY_URL = CALENDLY_URL;
-export const SECOND_OPINION_BOOK_LABEL = "Pick a time to talk it through";
+export const SECOND_OPINION_CALENDLY_URL = "https://calendly.com/nic-sylentt/second-opinion";
+export const SECOND_OPINION_BOOK_LABEL = "Book a time on my calendar";
 export const SECOND_OPINION_EMAIL = "contact@sylentt.com";
 export const SECOND_OPINION_MAILTO = `mailto:${SECOND_OPINION_EMAIL}?subject=${encodeURIComponent("Second opinion")}`;
 

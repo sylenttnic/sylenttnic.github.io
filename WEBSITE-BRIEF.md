@@ -111,7 +111,7 @@ The check allows three exact phrases from the approved copy that contain a liste
 
 - **It is not a sales page.** No prices, no plans, no "book a free call" CTA on it. The only route to paid work is the quiet line at the bottom. Paid help is raised only if the owner asks.
 - **Boundaries are on the page** (no support, no building, no audits, no vendor shopping) and stay there. They are what keeps free sessions from becoming unpaid projects.
-- **Contact:** email (`SECOND_OPINION_MAILTO`), phone, and Calendly (`SECOND_OPINION_CALENDLY_URL`, the 30-minute link until a dedicated 90-minute event exists). Never wire it to the intake form: that starts the automated email drip, which breaks the no-pitch promise.
+- **Contact:** email (`SECOND_OPINION_MAILTO`), phone, and Calendly (`SECOND_OPINION_CALENDLY_URL`, its own 60 to 90 minute event, calendly.com/nic-sylentt/second-opinion). Never wire it to the intake form: that starts the automated email drip, which breaks the no-pitch promise.
 - **Linked from** the About section on the home page and the footer. Not in the nav or hero.
 - **Seasonal lines** ("Before the new year") are the `SEASONAL` constant in the page; set it to `null` after January 2027.
 - **Copy is expected to change** as the pilot teaches what works. Nic is fine with that; keep `sitemap.xml` lastmod and the llms files in step.
