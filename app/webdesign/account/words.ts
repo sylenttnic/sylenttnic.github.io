@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md).
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md). The sample notice (W417, owner-decisions row 129 (k)): studio/sample-menu-words-draft.md C5, approved as drafted, the sample-needed email's words less what a page has no use for (see sample._source).
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -180,6 +180,15 @@ export const WORDS = {
     "not_available": "This button is not switched on yet. You can still reach your billing page from {login_link} with the email address you started the plan with, or email support@sylentt.com.",
     "login_link_label": "Stripe's billing sign-in page",
     "failed": "Your billing page did not open. Please try again, or email support@sylentt.com."
+  },
+  "sample": {
+    "_source": "W417 (owner-decisions row 129 (k)): the sample-needed notice, studio/sample-menu-words-draft.md C5 in sylentt-smb-site-generation, approved as drafted; the same words as the email (runs/clients/email-templates.json sample-needed), less its greeting, its thanks, its 'reply to this email' clause and its sign-off, which a page has no use for",
+    "body": "The design you chose holds a section marked as a sample: {sample_words}. It holds placeholders, not your details, so the site waits for you before it goes public.",
+    "next": "Send us your own on your account page, or tell us to take the section out. Most changes are live within 2 business days.",
+    "words": {
+      "menu": "your menu, with placeholder dishes and prices",
+      "other": "placeholder words for your kind of business"
+    }
   },
   "lag": "This page is not always up to date. Changes asked for by email are not listed here.",
   "chat": {

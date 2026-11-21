@@ -17,7 +17,7 @@ type NotUsed = { position: number; count: number; place: 'hero' | 'gallery' | nu
 // W370 (3): an item the change guard refused, as the Worker passes it (the item's index and reason classes, never the guard's words)
 type Refused = { item: number; classes: string[] };
 type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number; refused?: Refused[] };
-type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[] };
+type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[]; sample_needed?: 'menu' | 'other' | null };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
 type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
 const LOGIN_LINK = 'https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00'; // the billing page link the terms carry (sections 4, 6)
@@ -119,6 +119,11 @@ export default function AccountClient() {
         {acct.site_url ? (
           <P><a href={acct.site_url} target="_blank" rel="noopener noreferrer" className="text-accent-link hover:underline">{WORDS.site.link_label}</a>{acct.design != null && <> ({fill(WORDS.site.design_label, 'n', acct.design)})</>}</P>
         ) : <P>{WORDS.site.not_yet}</P>}
+        {/* W417 (row 129 (k)): the chosen design holds a sample, so the launch waits on the owner; the sample-needed email's words */}
+        {(acct.sample_needed === 'menu' || acct.sample_needed === 'other') && <div data-sample-needed>
+          <P>{fill(WORDS.sample.body, 'sample_words', WORDS.sample.words[acct.sample_needed])}</P>
+          <P>{WORDS.sample.next}</P>
+        </div>}
       </section>}
       <section aria-labelledby="acct-plan" className="mb-10">
         <H2 id="acct-plan">{WORDS.plan.heading}</H2>
