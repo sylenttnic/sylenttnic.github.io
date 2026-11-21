@@ -10,7 +10,7 @@ import { WORDS } from './words';
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Rec = { kind: 'record'; type: string; host: string; value: string } | { kind: 'forward'; from: string; to: string };
-type State = 'waiting-for-site' | 'unchecked' | 'wrong' | 'half' | 'right';
+type State = 'waiting-for-launch' | 'waiting-for-site' | 'unchecked' | 'wrong' | 'half' | 'right';
 type Domain = { domain: string | null; registrar?: { name: string } | null; dns_host?: string | null; attach?: 'connected' | 'not-connected' | null; records?: Rec[] | null; state?: State; www?: boolean | null; apex?: boolean | null; found?: { www: string | null; apex: string | null } | null;
   // W341: the Worker's read of the domain's mail records. checked_at is the time of the last WRITE, never shown as "last checked".
   mail?: { mx: string[]; forwarding: string | null; changed: boolean; checked_at: string | null } | null };
@@ -94,7 +94,8 @@ export default function DomainClient() {
         <section aria-live="polite">
           <P>{d?.registrar?.name ? fill(d?.dns_host ? WORDS.registrar.found_with_dns_host : WORDS.registrar.found, v) : d?.dns_host ? WORDS.registrar.not_found.split('. ')[0] + '.' : WORDS.registrar.not_found}</P>
           {d?.dns_host && <P>{fill(WORDS.dns_host.found, v)}</P>}
-          {!d?.records ? <P>{WORDS.steps.waiting_for_site}</P> : (
+          {/* before launch the Worker shows no steps (critic W35 go-live follow-up 2): nothing would connect yet */}
+          {!d?.records ? <P>{d?.state === 'waiting-for-launch' ? WORDS.steps.waiting_for_launch : WORDS.steps.waiting_for_site}</P> : (
             <>
               <P>{WORDS.steps.intro}</P>
               {/* W341 (3): a registrar's own email forwarding, named before the owner makes the changes */}
