@@ -123,7 +123,7 @@ const faqItems = [
   },
   {
     q: 'What about my domain?',
-    a: "We handle the domain and every technical step. If you need a new one, we register it in your business's name and you click one confirmation email. Already have one? Keep it where it is: click invite in your registrar (GoDaddy, Namecheap, Squarespace Domains and Network Solutions all support this), we do the rest, and you never touch DNS. If your registrar doesn't offer that, we walk you through adding the two records together on a quick screen-share instead, taking the same care with your email either way so it keeps working.",
+    a: "Already have one? Keep it where it is. We show you the two changes to make wherever your domain's settings are managed, check them for you, and connect your site once both are set. We never change your email settings. If you would rather not do it yourself, write to nic@sylentt.com. Need a new one? We register it in your business's name after your first successful payment (standard endings only, such as .com), and you may need to click one confirmation email from the registrar.",
   },
 ];
 

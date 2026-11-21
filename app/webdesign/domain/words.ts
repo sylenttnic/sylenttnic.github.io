@@ -54,7 +54,11 @@ export const WORDS = {
       "copied": "Copied"
     }
   },
-  "never_touch": "We never touch your email settings (MX, SPF, DKIM, DMARC) or your nameservers, and you never need to give us your registrar login. Leave those as they are and your email keeps working.",
+  "never_touch": "We never change your email settings (MX, SPF, DKIM, DMARC) or your nameservers, and you never need to give us your registrar login.",
+  "mail": {
+    "forwarding_caution": "Your domain's mail records point to {forwarding}. The forward in step 1 is a different setting, for your web address only, so leave your email settings at {forwarding} as they are; we do not change your mail records. Afterwards, send an email to your address at {domain} and check that it still reaches you. If it does not, check your email settings at {forwarding}.",
+    "changed": "We noticed your domain's mail records (MX) changed after you entered your domain on this page. We do not change mail records, and Nic has been told. If you did not mean to change them, check with whoever manages your domain's settings."
+  },
   "old_site": "Your old website or parked page at www.{domain} stops showing as soon as step 2 takes effect, and your new site appears in its place once we have connected it. Make both steps at the same sitting so the gap is as short as possible.",
   "status": {
     "title": "Where things stand",
