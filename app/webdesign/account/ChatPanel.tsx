@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { WORDS } from './words';
-import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, needsPhoto, photoPreflight, photoOutcome, fillPhoto, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
+import { MAX_CHARS, canConfirm, chatOutcome, hasSwap, confirmOutcome, kindOf, kindsOf, shownWanted, needsPhoto, photoPreflight, photoOutcome, fillPhoto, markedRows, PER_FILE, PHOTO_TYPES, type ChatErrorKey, type Proposal, type Place, type PhotoError } from './chat-logic';
 
 // The chat panel (W311, rows 118 and 58; PLAN.md 9b steps 2 to 4). Rendered only inside the signed-in account page.
 // A message goes to the Worker's POST /change/chat with this tab's session; the Worker answers a list of the changes it
@@ -13,7 +13,7 @@ const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 const W = WORDS.chat;
 const WP = WORDS.chat.photos;
-type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken';
+type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken' | 'kinds_changed';
 
 export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) {
   const [message, setMessage] = useState('');
@@ -24,6 +24,8 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
   const [err, setErr] = useState<ErrKey | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [photos, setPhotos] = useState<{ file: File; place: Place }[]>([]);
+  // W347 (2): a photo the Worker already took, by file and place, is not sent again on a retry (each upload counts toward the day's limit)
+  const taken = useRef(new Map<File, { place: Place; photo: string }>());
   const [mine, setMine] = useState(false);
   const [photoErr, setPhotoErr] = useState<PhotoError | null>(null);
 
@@ -61,15 +63,19 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
     try {
       const ids: string[] = [];
       if (attached.length) setBusy('uploading');
-      for (const x of attached) {
+      for (let k = 0; k < attached.length; k++) { const x = attached[k];
+        const had = taken.current.get(x.file);
+        if (had && had.place === x.place) { ids.push(had.photo); continue; }
         const up = await fetch(`${API}/change/photo`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': x.file.type, 'x-photo-mine': 'yes', 'x-photo-place': x.place }, body: x.file });
         const o = photoOutcome(up.status, await up.json().catch(() => null));
         if (o.kind === 'signed-out') { signedOut(); return; }
-        if (o.kind === 'error') { setPhotoErr(o.error); return; }
+        // W370 (P3): a refusal about this upload carries its row (attached is the list as shown, in order)
+        if (o.kind === 'error') { setPhotoErr(PER_FILE.includes(o.error.key) ? { ...o.error, index: k } : o.error); return; }
+        taken.current.set(x.file, { place: x.place, photo: o.photo });
         ids.push(o.photo);
       }
       setBusy('confirming');
-      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify(ids.length ? { conversation, photos: Array.from(new Set(ids)) } : { conversation }) });
+      const r = await fetch(`${API}/change/confirm`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify(ids.length ? { conversation, kinds: kindsOf(proposal), photos: Array.from(new Set(ids)) } : { conversation, kinds: kindsOf(proposal) }) });
       const o = confirmOutcome(r.status, await r.json().catch(() => null));
       if (o.kind === 'signed-out') { signedOut(); return; }
       if (o.kind === 'error') { setErr(o.key); return; }
@@ -77,7 +83,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
     } catch { setErr('confirm_failed'); } finally { setBusy('idle'); }
   }
 
-  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); setPhotos([]); setMine(false); setPhotoErr(null); }
+  function startNew() { setConversation(null); setProposal(null); setReply(null); setErr(null); setConfirmed(false); setMessage(''); setPhotos([]); taken.current.clear(); setMine(false); setPhotoErr(null); }
 
   const P = ({ children }: { children: React.ReactNode }) => <p className="text-lg text-ink/90 font-sans leading-relaxed max-w-2xl mb-4">{children}</p>;
   const List = ({ heading, items }: { heading: string; items: string[] }) => items.length ? (
@@ -97,7 +103,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
       {reply && <div className="mb-4 border border-ink/15 rounded-lg p-4"><p className="font-semibold text-ink font-sans mb-1">{W.reply_label}</p><p className="font-sans text-ink/90 whitespace-pre-line">{reply}</p></div>}
       {proposal && (
         <div className="mb-4 border border-ink/15 rounded-lg p-4" data-chat-proposal>
-          <List heading={W.proposal_heading} items={proposal.items.map((i) => i.wanted)} />
+          <List heading={W.proposal_heading} items={proposal.items.map((i) => `${W.kinds[kindOf(i)]}: ${shownWanted(i)}`)} />
           <List heading={W.out_of_scope_heading} items={proposal.out_of_scope} />
           <List heading={W.questions_heading} items={proposal.questions} />
           {proposal.items.length > 0 && <>
@@ -112,13 +118,14 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
                 {photos.length > 0 && <ul className="mb-3 space-y-2">{photos.map((x, k) => (
                   <li key={k} className="flex flex-wrap items-center gap-3 font-sans text-ink/90">
                     <span className="break-all">{x.file.name}</span>
+                    {markedRows(photoErr).includes(k) && <span className="text-sm font-semibold text-ink" data-photo-mark>{WP.row_mark}</span>}
                     <label className="text-sm">{WP.place_label}{' '}
                       <select value={x.place} onChange={(e) => setPhotos((cur) => cur.map((y, j) => (j === k ? { ...y, place: e.target.value as Place } : y)))} className="rounded border border-ink/25 bg-transparent p-1">
                         <option value="hero">{WP.place_hero}</option>
                         <option value="gallery">{WP.place_gallery}</option>
                       </select>
                     </label>
-                    <button type="button" onClick={() => setPhotos((cur) => cur.filter((_, j) => j !== k))} className="text-sm text-accent-link hover:underline">{WP.remove_label}</button>
+                    <button type="button" onClick={() => { setPhotos((cur) => cur.filter((_, j) => j !== k)); setPhotoErr(null); }} className="text-sm text-accent-link hover:underline">{WP.remove_label}</button>
                   </li>))}</ul>}
                 <label className="flex items-start gap-2 font-sans text-ink"><input type="checkbox" checked={mine} onChange={(e) => { setMine(e.target.checked); setPhotoErr(null); }} className="mt-1" /><span>{WP.mine_label}</span></label>
               </fieldset>
@@ -139,7 +146,7 @@ export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) 
         {busy === 'sending' && <P>{W.sending}</P>}
         {busy === 'uploading' && <P>{WP.uploading}</P>}
         {busy === 'confirming' && <P>{W.confirming}</P>}
-        {photoErr && <P>{fillPhoto(WP.errors[photoErr.key], photoErr, { hero: WP.place_hero, gallery: WP.place_gallery })}</P>}
+        {photoErr && <P>{fillPhoto(WP.errors[photoErr.key], photoErr, { hero: WP.place_hero, gallery: WP.place_gallery }, photos.map((x) => x.file.name), { also: WP.also, also_one: WP.also_one })}</P>}
         {err && <P>{W[err]}</P>}
       </div>
     </div>

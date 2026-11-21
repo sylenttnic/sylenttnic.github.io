@@ -60,11 +60,35 @@ say(small.error?.key === 'too_small' && small.error.place === 'hero' && small.er
 say(L.fillPhoto('needs {width} x {height} for {place}', small.error, { hero: 'the top', gallery: 'the gallery' }) === 'needs 1440 x 480 for the top', 'W318: a too-small refusal\'s words carry its numbers and place');
 const jpg = { size: 1000, type: 'image/jpeg' };
 say(L.photoPreflight(photoProp, [], false).key === 'photo_needed' && L.photoPreflight(prop, [], false) === null && L.photoPreflight(photoProp, Array(21).fill(jpg), true).key === 'too_many' && L.photoPreflight(photoProp, [{ size: 1, type: 'image/gif' }], true).key === 'wrong_type' && L.photoPreflight(photoProp, [{ size: 26e6, type: 'image/png' }], true).key === 'too_big' && L.photoPreflight(photoProp, [jpg], false).key === 'mine_needed' && L.photoPreflight(photoProp, [jpg], true) === null, 'W318: before any upload: a photo list needs a photo, at most 20, JPEG/PNG/WebP, 25 MB, and the "these are mine" box');
+// W370 (critic F4, P3): a refusal about one file names its row, and the other rows with the same fault; the panel marks each
+const { WORDS } = await import(pathToFileURL(path.join(DIR, "words.ts")).href);
+{
+  const WW = WORDS.chat.photos;
+  const empty = { size: 0, type: 'image/jpeg' };
+  const two = L.photoPreflight(photoProp, [jpg, empty, jpg, empty], true);
+  say(two.key === 'empty' && two.index === 1 && JSON.stringify(two.also) === '[3]', 'W370: two empty files: the refusal names the first (row 2) and keeps the other (row 4)');
+  const names = ['a.jpg', 'IMG_2041.jpg', 'c.jpg', 'IMG_2041.jpg'];
+  const shown = L.fillPhoto(WW.errors.empty, two, { hero: WW.place_hero, gallery: WW.place_gallery }, names, { also: WW.also, also_one: WW.also_one });
+  say(shown === 'Photo 2 in your list (IMG_2041.jpg) is an empty file, so your changes were not sent. Please check it has finished saving or downloading, then attach it again, or remove it. Photo 4 in your list has the same problem.', 'W370: the words as the copy file reads them, with two bad files at rows 2 and 4');
+  say(JSON.stringify(L.markedRows(two)) === '[1,3]', 'W370: rows 2 and 4 get "Please check this photo." (the right row of two)');
+  const wrongRow = { ...two, index: 0 };
+  say(L.fillPhoto(WW.errors.empty, wrongRow, { hero: '', gallery: '' }, names) !== shown.split(' Photo 4')[0], 'MUTANT: a refusal pointing at the wrong row reads differently (caught)');
+  const many = L.photoPreflight(photoProp, [jpg, jpg, { size: 1, type: 'image/gif' }, jpg, { size: 1, type: 'image/gif' }, { size: 1, type: 'image/gif' }, { size: 1, type: 'image/gif' }], true);
+  say(L.fillPhoto('X', many, { hero: '', gallery: '' }, [], { also: WW.also, also_one: WW.also_one }) === 'X Photos 5, 6 and 7 in your list have the same problem.', 'W370: three others read "5, 6 and 7", never the row the refusal names');
+  say(L.markedRows({ key: 'mine_needed' }).length === 0 && L.markedRows(null).length === 0, 'W370: a refusal not about one file marks no row (NEG)');
+  const fixed = WORDS.chat.photos.errors;
+  say(['too_small', 'empty', 'unreadable', 'wrong_type', 'too_big', 'failed'].every((k) => /\{n\}/.test(fixed[k]) && /\(\{file\}\)/.test(fixed[k])) && !Object.values(fixed).some((v) => /One of your photos|one of your photos/.test(v)), 'W370: every per-file refusal names the row and file; none says "one of your photos"');
+  const removeClears = (src) => /onClick=\{\(\) => \{ setPhotos\(\(cur\) => cur\.filter\(\(_, j\) => j !== k\)\); setPhotoErr\(null\); \}\}/.test(src);
+  say(removeClears(panel), 'W370 F4: Remove clears the refusal (its row number would go stale)');
+  const stale = panel.replace('setPhotos((cur) => cur.filter((_, j) => j !== k)); setPhotoErr(null);', 'setPhotos((cur) => cur.filter((_, j) => j !== k));');
+  say(stale !== panel && !removeClears(stale), 'MUTANT: a Remove that keeps the stale refusal is caught');
+  say(/setPhotoErr\(PER_FILE\.includes\(o\.error\.key\) \? \{ \.\.\.o\.error, index: k \} : o\.error\)/.test(panel) && /markedRows\(photoErr\)\.includes\(k\) && <span[^>]*>\{WP\.row_mark\}/.test(panel), 'W370 P3: an upload refusal carries its row, and the row shows the mark');
+}
 export function uploadOnPress(src) {
   const fn = /async function sendChanges\(\)[\s\S]*?\n  \}\n/.exec(src)?.[0] ?? '';
   return src.split('/change/photo').length - 1 === 1 && fn.includes('/change/photo') && fn.indexOf('/change/photo') < fn.indexOf('/change/confirm') && fn.indexOf('photoPreflight(') < fn.indexOf('/change/photo') && /'x-photo-mine': 'yes'/.test(fn) && !/useEffect/.test(src);
 }
-const hiddenSafe = (src) => /const attached = needsPhoto\(proposal\) \? photos : \[\];/.test(src) && /for \(const x of attached\)/.test(src) && /photoPreflight\(proposal, attached\./.test(src);
+const hiddenSafe = (src) => /const attached = needsPhoto\(proposal\) \? photos : \[\];/.test(src) && /for \(let k = 0; k < attached\.length; k\+\+\) \{ const x = attached\[k\];/.test(src) && /photoPreflight\(proposal, attached\./.test(src);
 say(hiddenSafe(panel), 'W318 critic F4: photos are checked and uploaded only while the list has a photo change (a hidden photo is never sent)');
 const leaky = panel.replace('const attached = needsPhoto(proposal) ? photos : [];', 'const attached = photos;');
 say(leaky !== panel && !hiddenSafe(leaky), 'MUTANT: a panel that uploads photos after the photo change left the list is caught');
@@ -84,7 +108,7 @@ say(at > 0 && signedOutReturn > 0 && errReturn > 0 && at > signedOutReturn && at
 
 const words = fs.readFileSync(path.join(DIR, 'words.ts'), 'utf8');
 const used = new Set([...panel.matchAll(/\bW\.([a-z_]+)/g)].map((m) => m[1]));
-for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken']) used.add(k);
+for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken', 'kinds_changed']) used.add(k);
 const photoWords = words.slice(words.indexOf('"photos"'));
 const pUsed = new Set([...panel.matchAll(/\bWP\.([a-z_]+)/g)].map((m) => m[1]));
 const pErr = ['mine_needed', 'photo_needed', 'too_many', 'too_small', 'unreadable', 'wrong_type', 'too_big', 'daily_limit', 'failed'];
@@ -93,5 +117,22 @@ say(words.includes('"photos"') && pMissing.length === 0 && /\{width\}/.test(phot
 const missing = [...used].filter((k) => !new RegExp(`"${k}":`).test(words.slice(words.indexOf('"chat"'))));
 say(words.includes('"chat"') && missing.length === 0, `every word the panel shows is in WORDS.chat${missing.length ? ` (missing: ${missing.join(', ')})` : ''}`);
 say(!/[–—]/.test(panel + words) && /[—]/.test('a — b'), 'no em or en dash in the panel or its words (and the grep sees one when there is one)');
+/* W401 (4): each item shows its kind in plain words, and the confirm sends the kinds shown; a mismatch reads kinds_changed */
+{
+  const K = WORDS.chat.kinds ?? {};
+  const keys = ['words', 'removal', 'photo', 'colours', 'fonts', 'layout', 'design-swap'];
+  say(keys.every((k) => typeof K[k] === 'string' && K[k].length > 0), 'W401 (4): WORDS.chat.kinds has a label for every kind and for a removal');
+  const it = (kind, wanted) => ({ kind, target: 't', wanted });
+  say(L.kindOf(it('words', 'Remove: "We are licensed."')) === 'removal' && L.kindOf(it('words', 'remove: \u201cOur team\u201d')) === 'removal' && L.kindOf(it('layout', 'Remove: "Our gallery"')) === 'layout' && L.kindOf(it('photo', 'Remove: "x"')) === 'photo' && L.kindOf(it('words', 'Saturday 8 to noon')) === 'words' && L.kindOf(it('layout', 'hide the gallery')) === 'layout' && L.kindOf(it('colours', 'Remove: "x"')) === 'colours', 'W401 (4): a quoted removal on a WORDS item shows as a removal (critic condition 1: a layout or photo removal keeps its own label)');
+  say(JSON.stringify(L.kindsOf({ items: [it('words', 'a'), it('layout', 'b')], out_of_scope: [], questions: [] })) === '["words","layout"]', 'W401 (4): the kinds sent are the items\' kinds, in order');
+  say(L.confirmOutcome(409, { ok: false, reason: 'kinds-changed' }).key === 'kinds_changed', 'W401 (4): the Worker\'s kinds-changed refusal reads kinds_changed');
+  const shows = (src) => /items=\{proposal\.items\.map\(\(i\) => `\$\{W\.kinds\[kindOf\(i\)\]\}: \$\{shownWanted\(i\)\}`\)\}/.test(src);
+  say(L.shownWanted(it('words', 'Remove: "We are licensed."')) === '\u201cWe are licensed.\u201d' && L.shownWanted(it('layout', 'Remove: "Our gallery"')) === 'Remove: "Our gallery"', 'W401 (4) F3: a words removal shows its quoted words without the Remove: prefix; a layout removal keeps it');
+  say(!/press Send these changes again/i.test(WORDS.chat.kinds_changed) && /write again below/.test(WORDS.chat.kinds_changed), 'W401 (4) critic condition 2: kinds_changed never tells the owner to press Send again (it would loop)');
+  const sends = (src) => (src.match(/kinds: kindsOf\(proposal\)/g) ?? []).length === 2;
+  say(shows(panel) && sends(panel), 'W401 (4): the list shows "<kind>: <owner\'s words>", and both confirm bodies carry the kinds shown');
+  const m1 = panel.replace('`${W.kinds[kindOf(i)]}: ${shownWanted(i)}`', 'i.wanted'), m2 = panel.replace(/, kinds: kindsOf\(proposal\)/g, '');
+  say(m1 !== panel && !shows(m1) && m2 !== panel && !sends(m2), 'MUTANT: a list without kinds, or a confirm without them, is caught');
+}
 console.log(bad ? `account-chat-test: ${bad} FAILED` : 'account-chat-test: every arm holds');
 process.exit(bad ? 1 : 0);

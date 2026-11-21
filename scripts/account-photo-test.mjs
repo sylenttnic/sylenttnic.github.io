@@ -9,6 +9,9 @@
      3. pressing Send with the box unticked shows the checked words and uploads nothing;
      4. a photo the Worker refuses as too small shows the checked words with its numbers, and nothing is confirmed;
      5. a good photo is uploaded on the press with "these are mine" and its place, then the request is confirmed with its id;
+     8. (W347) an empty file is refused before any upload with its own words, naming its row (W370);
+     9. (W370) the account page names a photo that was not used, with its reason; an all-made request reads as today;
+    10. (W370 (3)) a guard-refused item is marked "Not made." under its own item, with its reason, and the label says so;
      6. every shown line equals the checked words (runs/client-launch/copy/W318-photo-words.md, read from words.ts). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -33,6 +36,17 @@ const PROPOSAL = { items: [{ kind: 'photo', target: 'main picture at the top', w
 const JPG = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x04, 0, 0, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x04, 0x38, 0x07, 0x80, 3, 1, 0x22, 0, 2, 0x11, 1, 3, 0x11, 1, 0xff, 0xd9]);
 
 let bad = 0; const say = (ok, what) => { if (!ok) bad++; console.log(`${ok ? '  ok  ' : '  FAIL'} ${what}`); };
+
+{ // W394 (3): every not-made class the pipeline can write has its words here, byte-equal to the email's saw and next (the ask differs)
+  const SMB = path.join(ROOT, '..', 'sylentt-smb-site-generation');
+  const { ITEM_CLASSES } = await import(pathToFileURL(path.join(SMB, 'scripts/lib/change-request.mjs')).href);
+  const mail = JSON.parse(fs.readFileSync(path.join(SMB, 'runs/clients/email-templates.json'), 'utf8')).change_done_part.item_reasons;
+  const gaps = (page) => ITEM_CLASSES.filter((c) => !page[c] || page[c].saw !== mail[c]?.saw || page[c].next !== mail[c]?.next || page[c].saw_short !== mail[c]?.saw_short);
+  const R = WORDS.changes.refused.reasons;
+  say(gaps(R).length === 0 && R.fact_wall && R.post_trial, `W394 (3): every class (${ITEM_CLASSES.length}, fact_wall and post_trial among them) has page words equal to the email's${gaps(R).length ? `; off: ${gaps(R).join(', ')}` : ''}`);
+  const less = { ...R }; delete less.fact_wall;
+  say(gaps(less).includes('fact_wall'), 'W394 (3): a class missing from the page is caught (negative)');
+}
 function serve(dir) {
   const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
   const srv = http.createServer((req, res) => {
@@ -45,7 +59,7 @@ function serve(dir) {
   return new Promise((ok) => srv.listen(0, '127.0.0.1', () => ok(srv)));
 }
 /* photoAnswer: what POST /change/photo answers */
-async function open(browser, base, { signedIn = true, photoAnswer = { status: 200, body: { ok: true, photo: HASH } } } = {}) {
+async function open(browser, base, { signedIn = true, account = ACCOUNT, photoAnswer = { status: 200, body: { ok: true, photo: HASH } } } = {}) {
   const page = await browser.newPage();
   const calls = [];
   if (signedIn) await page.addInitScript(() => { try { sessionStorage.setItem('sylentt-owner-session', 'sess-good'); } catch { /* none */ } });
@@ -57,9 +71,9 @@ async function open(browser, base, { signedIn = true, photoAnswer = { status: 20
     const json = (status, body) => route.fulfill({ status, contentType: 'application/json', headers: cors, body: JSON.stringify(body) });
     const authed = rq.headers().authorization === 'Bearer sess-good';
     if (!authed) return json(401, { error: 'not signed in' });
-    if (u.pathname === '/owner/account') return json(200, ACCOUNT);
+    if (u.pathname === '/owner/account') return json(200, account);
     if (u.pathname === '/change/chat') return json(200, { ok: true, conversation: CONV, proposal: PROPOSAL });
-    if (u.pathname === '/change/photo') return json(photoAnswer.status, photoAnswer.body);
+    if (u.pathname === '/change/photo') { const pa = typeof photoAnswer === 'function' ? photoAnswer(calls.filter((c) => c.path === '/change/photo').length) : photoAnswer; return json(pa.status, pa.body); }
     if (u.pathname === '/change/confirm') return json(200, { ok: true, confirmed_at: '2026-11-14T23:00:00Z' });
     return json(404, {});
   });
@@ -103,7 +117,7 @@ try {
     await page.locator('[data-chat-photos] select').selectOption('hero');
     await page.locator('[data-chat-photos] input[type=checkbox]').check();
     await press(page);
-    const want = WP.errors.too_small.replace('{place}', WP.place_hero).replace('{width}', '1440').replace('{height}', '480');
+    const want = WP.errors.too_small.replace('{n}', '1').replace('{file}', 'my-shop.jpg').replace('{place}', WP.place_hero).replace('{width}', '1440').replace('{height}', '480');
     say(await shows(page, want) && calls.filter((c) => c.path === '/change/confirm').length === 0, `a too-small photo shows the checked words with its numbers, and nothing is confirmed ("${want.slice(0, 60)}...")`);
     say(!(await shows(page, 'too-small')), '...and never the raw code');
     await page.close();
@@ -119,6 +133,78 @@ try {
     say(up.length === 1 && up[0].headers['x-photo-mine'] === 'yes' && up[0].headers['x-photo-place'] === 'hero' && up[0].headers['content-type'] === 'image/jpeg' && Buffer.compare(up[0].body, JPG) === 0, 'on the press the photo is uploaded once, with "these are mine", its place and its bytes');
     say(conf.length === 1 && body.conversation === CONV && JSON.stringify(body.photos) === JSON.stringify([HASH]) && calls.indexOf(up[0]) < calls.indexOf(conf[0]), 'then the request is confirmed once, with the photo\'s id');
     say(await shows(page, WORDS.chat.confirmed), 'the owner sees the confirmed words');
+    await page.close();
+  }
+  { // 7 (W347 (2)): two photos, the second refused once: the retry sends only the one that failed, then confirms both
+    const H2 = 'c'.repeat(64);
+    const answers = { 1: { status: 200, body: { ok: true, photo: HASH } }, 2: { status: 422, body: { error: 'x', code: 'too-small', place: 'gallery', min: { width: 800, height: 600 }, got: { width: 48, height: 32 } } }, 3: { status: 200, body: { ok: true, photo: H2 } } };
+    const { page, calls } = await open(browser, base, { photoAnswer: (n) => answers[n] ?? answers[3] });
+    await toList(page);
+    await page.locator('#chat-photos').setInputFiles([{ name: 'one.jpg', mimeType: 'image/jpeg', buffer: JPG }, { name: 'two.jpg', mimeType: 'image/jpeg', buffer: Buffer.concat([JPG, Buffer.from([0])]) }]);
+    const sel = page.locator('[data-chat-photos] select');
+    await sel.nth(0).selectOption('hero'); await sel.nth(1).selectOption('gallery');
+    await page.locator('[data-chat-photos] input[type=checkbox]').check();
+    await press(page);
+    const first = calls.filter((c) => c.path === '/change/photo').length;
+    await press(page);
+    const ups = calls.filter((c) => c.path === '/change/photo'), conf = calls.filter((c) => c.path === '/change/confirm');
+    const body = conf[0] ? JSON.parse(conf[0].body.toString()) : {};
+    say(first === 2 && ups.length === 3 && ups[2].headers['x-photo-place'] === 'gallery', `W347: the retry re-sends only the photo that failed (${first} then ${ups.length - first})`);
+    say(conf.length === 1 && JSON.stringify([...(body.photos ?? [])].sort()) === JSON.stringify([HASH, H2].sort()), 'W347: ...and the request is confirmed with both photos');
+    await page.close();
+  }
+  { // 8 (W347 (3)): an empty file is refused on the page with the checked words; nothing is uploaded or confirmed
+    const { page, calls } = await open(browser, base);
+    await toList(page);
+    await page.locator('#chat-photos').setInputFiles({ name: 'empty.jpg', mimeType: 'image/jpeg', buffer: Buffer.alloc(0) });
+    await page.locator('[data-chat-photos] input[type=checkbox]').check();
+    await press(page);
+    say(await shows(page, (WP.errors.empty ?? '(no empty line)').replace('{n}', '1').replace('{file}', 'empty.jpg')) && await shows(page, WP.row_mark) && calls.filter((c) => c.path === '/change/photo' || c.path === '/change/confirm').length === 0, 'W347, W370: an empty file shows the checked words naming its row, the row is marked; nothing uploaded or confirmed');
+    await page.close();
+  }
+  { // 9 (W370): the account page names a photo that was not used, with its reason; an all-made request reads as today
+    const NU = WORDS.changes.not_used;
+    const acct = { ...ACCOUNT, requests: [
+      { n: 7, state: 'stuck', confirmed_at: '2026-11-14T23:13:54Z', trial: true, items: [{ kind: 'photo', target: 'main picture at the top of the page', wanted: 'use my photo as the main picture at the top of the page' }], not_used: [{ position: 1, count: 1, place: null, reason: 'stock_like' }], photo_items: 1 },
+      { n: 8, state: 'done', confirmed_at: '2026-11-15T10:00:00Z', trial: true, items: [{ kind: 'photo', target: 'top', wanted: 'Use one at the top' }, { kind: 'photo', target: 'gallery', wanted: 'Add the others to the gallery' }], not_used: [{ position: 1, count: 3, place: 'hero', reason: 'other_business' }], photo_items: 2 },
+      { n: 9, state: 'done', confirmed_at: '2026-11-15T11:00:00Z', trial: true, items: [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }] }] };
+    const { page } = await open(browser, base, { account: acct });
+    const lines = await page.locator('[data-not-used]').allInnerTexts();
+    const r7 = NU.no_place.replace('{photo_ref}', NU.photo_ref_one).replace('{reason}', NU.reasons.stock_like);
+    const r8 = NU.place.replace('{photo_ref}', 'photo 1 of the 3 you sent').replace('{place}', NU.places.hero).replace('{reason}', NU.reasons.other_business);
+    say(lines.length === 2 && lines.includes(r7) && lines.includes(r8), `W370: request 7 reads "${r7.slice(0, 70)}...", and a two-item request names photo 1 of 3 and its place`);
+    const item7 = page.locator('li', { hasText: 'use my photo as the main picture' }).last();
+    say((await item7.locator('[data-not-used]').count()) === 1, 'W370: with one photo item the line sits under that item');
+    say(await shows(page, WORDS.changes.states_part.done) && await shows(page, WORDS.changes.states.stuck), 'W370: a part-made done request says "Live, apart from...", a stuck one keeps its label');
+    const live = await page.locator('li.border', { hasText: 'Saturday 8 to noon' }).first().innerText();
+    say(/^Live/.test(live.trim()) && !/apart from|Not used/.test(live), 'W370: an all-made request reads exactly "Live", as today (NEG)');
+    await page.close();
+  }
+  { // 10 (W370 (3)): a guard-refused item is marked "Not made." under its own item, with its reason; the labels say so
+    const draft = fs.readFileSync(path.join(ROOT, '..', 'sylentt-smb-site-generation', 'runs/client-launch/copy/W370-words-refused-draft.md'), 'utf8');
+    const two = (w) => [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }, { kind: 'words', target: 'about', wanted: w }];
+    const acct = { ...ACCOUNT, requests: [
+      { n: 11, state: 'done', confirmed_at: '2026-11-18T00:00:00Z', trial: true, items: two('add that we are fully insured and bonded'), refused: [{ item: 1, classes: ['insured', 'bonded'] }] },
+      { n: 12, state: 'ready', confirmed_at: '2026-11-18T01:00:00Z', trial: true, items: [...two('say we are better than the other landscapers in town'), { kind: 'photo', target: 'gallery', wanted: 'Add these photos to the gallery' }], refused: [{ item: 1, classes: ['other_business'] }], not_used: [{ position: 2, count: 3, place: 'gallery', reason: 'person' }], photo_items: 1 }] };
+    const { page } = await open(browser, base, { account: acct });
+    const marks = await page.locator('[data-refused]').allInnerTexts();
+    const m11 = 'Not made. It mentions insurance or being insured. It mentions being bonded. We do not add these to your site from a change request. If you would like to know more, email support@sylentt.com.';
+    const m12 = 'Not made. Some of its words read as a mention of another business, or a comparison with one, which we do not add to your site from a change request. If you would like to know more, email support@sylentt.com.';
+    say(draft.includes(m11) && draft.includes(m12) && marks.length === 2 && marks.includes(m11) && marks.includes(m12), 'W370 (3): each refused item reads the draft\'s own "Not made." line (insured and bonded; another business)');
+    const it11 = page.locator('li', { hasText: 'add that we are fully insured and bonded' }).last();
+    say((await it11.locator('[data-refused]').count()) === 1 && (await page.locator('li', { hasText: /^Saturday 8 to noon$/ }).locator('[data-refused]').count()) === 0, 'W370 (3): the mark sits under the refused item, never under the made one');
+    say(await shows(page, WORDS.changes.states_part_items.done) && await shows(page, WORDS.changes.states_part_both.ready), 'W370 (3): done with a refused item says "Live, apart from the parts marked not made below"; both kinds name both');
+    say((await page.locator('[data-not-used]').count()) === 1, 'W370 (3): the photo mark still shows beside the item marks');
+    await page.close();
+  }
+  { // W394 (3): a fact-wall item and a post-trial item each read their own "Not made." line
+    const acct = { ...ACCOUNT, plan: 'paying', requests: [
+      { n: 13, state: 'done', confirmed_at: '2026-11-18T02:00:00Z', trial: false, items: [{ kind: 'words', target: 'hours', wanted: 'Saturday 8 to noon' }, { kind: 'words', target: 'about', wanted: 'add a paragraph about our history' }, { kind: 'colours', target: 'theme', wanted: 'change the colours to green' }], refused: [{ item: 1, classes: ['fact_wall'] }, { item: 2, classes: ['post_trial'] }] }] };
+    const { page } = await open(browser, base, { account: acct });
+    const marks = await page.locator('[data-refused]').allInnerTexts();
+    const R = WORDS.changes.refused;
+    const fw = `Not made. ${R.reasons.fact_wall.saw} ${R.ask}`, pt = `Not made. ${R.reasons.post_trial.saw} ${R.ask}`;
+    say(marks.length === 2 && marks[0] === fw && marks[1] === pt, 'W394 (3): the fact-wall and post-trial items are marked with their own reasons, in item order');
     await page.close();
   }
   { // 6: the served words are the checked words

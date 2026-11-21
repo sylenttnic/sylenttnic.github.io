@@ -34,6 +34,12 @@ Month-to-month. 30 days' notice. Everything Nic produces belongs to the client. 
 
 Helpdesk, hardware repair, after-hours support, or building software. When something needs to be built, Nic chooses who builds it and manages them.
 
+## A second opinion (no charge)
+
+Nic also offers Cache Valley business owners one working session at no charge, at https://sylentt.com/second-opinion/. It is a community offer, not a sales step: 60 to 90 minutes on a technology question the owner chooses (software spending, an IT company relationship, an upcoming system decision, manual work, reporting, where AI fits, or simply something that is not working), at the business, over coffee or by video. Nic gives an outside view and practical recommendations, and sends a one-page summary afterward when it is useful. It does not include fixing computers or ongoing support, building or setting anything up, a full review of systems or security, or shopping for vendors. Nic raises paid work only if the owner asks. Ask by email (contact@sylentt.com), phone ((720) 679-4750) or booking at https://calendly.com/nic-sylentt/second-opinion.
+
+Nic is a member of the Cache Valley Chamber of Commerce and part of the Chamber's current Leadership Institute class.
+
 ## Experience
 
 15+ years in IT, the last 10 leading teams of up to 40 people, including VP of IT at Fortidia, IT Manager at Charter Communications leading a 40-person QA team, and Release Train Engineer at Liqid.
@@ -57,6 +63,7 @@ In person across Cache Valley and Northern Utah. Remote work elsewhere is the ex
 - Website: https://sylentt.com
 - Services: https://sylentt.com/services/
 - Pricing: https://sylentt.com/pricing/
+- A second opinion (no charge): https://sylentt.com/second-opinion/
 - Book a free 30-minute call: https://calendly.com/nic-sylentt/30min
 - Email: contact@sylentt.com
 - Phone: (720) 679-4750

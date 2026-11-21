@@ -104,3 +104,14 @@ The check allows three exact phrases from the approved copy that contain a liste
 - Audience narrowed to about 20 to 150 people.
 - Pricing simplified and lowered (see Pricing). Hours rules published under the plans.
 - Em dashes removed from everything the site serves, and the check enforces it. The `/webdesign/` demo sites are generated in Nic's separate pipeline repo, which needs the same rule or the next sample update will fail this deploy check.
+
+## A second opinion (added 2026-11-19, approved direction by Nic)
+
+`/second-opinion/` is Nic's community offer: one working session, 60 to 90 minutes, no charge, no pitch, on a technology question the owner picks, with a one-page summary afterward when useful. It exists to build relationships in Cache Valley, not as a funnel step.
+
+- **It is not a sales page.** No prices, no plans, no "book a free call" CTA on it. The only route to paid work is the quiet line at the bottom. Paid help is raised only if the owner asks.
+- **Boundaries are on the page** (no support, no building, no audits, no vendor shopping) and stay there. They are what keeps free sessions from becoming unpaid projects.
+- **Contact:** email (`SECOND_OPINION_MAILTO`), phone, and Calendly (`SECOND_OPINION_CALENDLY_URL`, its own 60 to 90 minute event, calendly.com/nic-sylentt/second-opinion). Never wire it to the intake form: that starts the automated email drip, which breaks the no-pitch promise.
+- **Linked from** the About section on the home page and the footer. Not in the nav or hero.
+- **Seasonal lines** ("Before the new year") are the `SEASONAL` constant in the page; set it to `null` after January 2027.
+- **Copy is expected to change** as the pilot teaches what works. Nic is fine with that; keep `sitemap.xml` lastmod and the llms files in step.

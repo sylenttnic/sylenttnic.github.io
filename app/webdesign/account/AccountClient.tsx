@@ -12,8 +12,12 @@ import ChatPanel from './ChatPanel';
 const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 type Item = { kind: string | null; target: string | null; wanted: string | null };
-type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[] };
-type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[] };
+// W370 (critic F6, P4): a photo of the request that was not used, as the Worker passes it (a reason class, never the vetter's words)
+type NotUsed = { position: number; count: number; place: 'hero' | 'gallery' | null; reason: string; min?: { width: number; height: number } };
+// W370 (3): an item the change guard refused, as the Worker passes it (the item's index and reason classes, never the guard's words)
+type Refused = { item: number; classes: string[] };
+type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number; refused?: Refused[] };
+type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[]; sample_needed?: 'menu' | 'other' | null };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
 type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
 const LOGIN_LINK = 'https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00'; // the billing page link the terms carry (sections 4, 6)
@@ -22,6 +26,43 @@ const DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', y
 const date = (iso: string | null) => { const t = Date.parse(iso ?? ''); return Number.isFinite(t) ? DATE.format(new Date(t)) : ''; };
 const fill = (s: string, k: string, v: string | number) => s.replace(`{${k}}`, String(v));
 const STATE_LABELS = WORDS.changes.states as Record<string, string>;
+const PART_LABELS = WORDS.changes.states_part as Record<string, string>;
+const NU = WORDS.changes.not_used;
+/* W370: one "Not used:" line (runs/client-launch/copy/W370-not-made-words.md section 3, Revision 3, critic APPROVE). */
+export function notUsedLine(m: NotUsed): string {
+  const place = m.place ? NU.places[m.place] : null;
+  const ref = m.count === 1 ? NU.photo_ref_one : NU.photo_ref_many.replace('{n}', String(m.position)).replace('{count}', String(m.count));
+  const R = NU.reasons as Record<string, string>;
+  const reason = m.reason === 'too_small'
+    ? (!place ? R.too_small_no_place : m.min ? R.too_small.replace('{width}', String(m.min.width)).replace('{height}', String(m.min.height)) : R.too_small_no_numbers)
+    : (R[m.reason] ?? R.other);
+  return (place ? NU.place : NU.no_place).replace('{photo_ref}', () => ref).replace('{place}', () => place ?? '').replace('{reason}', () => reason.replace('{place}', () => place ?? ''));
+}
+/* W370 (3): one refused item's reason (runs/client-launch/copy/W370-words-refused-draft.md section 3, Revision 5): one class is
+   its saw and its next (or the ask); two or more are the short saws, the join, the full saws of testimonial, instruction and
+   new_feature, then the ask once; any `other` is `other` alone. */
+const RF = WORDS.changes.refused;
+type RW = { saw: string; next: string | null; saw_short?: string };
+const SHORT = ['licensed', 'certified', 'insured', 'bonded', 'accredited', 'award', 'rating', 'review_count', 'superlative', 'guarantee', 'other_business'];
+const FULL = ['testimonial', 'instruction', 'new_feature'];
+export function refusedReason(classes: string[]): string {
+  const R = RF.reasons as Record<string, RW>;
+  const cs = classes.length && classes.every((c) => R[c]) ? classes : ['other'];
+  if (cs.length === 1 || cs.includes('other')) { const w = R[cs.includes('other') ? 'other' : cs[0]]; return `${w.saw} ${w.next ?? RF.ask}`; }
+  const shorts = cs.filter((c) => SHORT.includes(c)).map((c) => R[c].saw_short as string);
+  const parts = [...shorts];
+  if (shorts.length) parts.push(shorts.length >= 2 ? RF.join.many : RF.join.one);
+  for (const c of FULL) if (cs.includes(c)) parts.push(R[c].saw);
+  parts.push(RF.ask);
+  return parts.join(' ');
+}
+export const refusedMark = (classes: string[]) => RF.mark.replace('{reason}', () => refusedReason(classes));
+const ITEMS_LABELS = WORDS.changes.states_part_items as Record<string, string>;
+const BOTH_LABELS = WORDS.changes.states_part_both as Record<string, string>;
+export const label = (r: Req) => {
+  const items = Boolean(r.refused?.length), photos = Boolean(r.not_used?.length);
+  return (r.state && ((items && photos && BOTH_LABELS[r.state]) || (items && ITEMS_LABELS[r.state]) || (photos && PART_LABELS[r.state]) || STATE_LABELS[r.state])) || r.state;
+};
 
 export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
@@ -72,11 +113,17 @@ export default function AccountClient() {
   return (
     <div>
       <H>{acct.name ? fill(WORDS.header.title, 'name', acct.name) : WORDS.header.title_no_name}</H>
+      <P>{WORDS.signed_in.body}</P>
       {acct.ready && <section aria-labelledby="acct-site" className="mb-10">
         <H2 id="acct-site">{WORDS.site.heading}</H2>
         {acct.site_url ? (
           <P><a href={acct.site_url} target="_blank" rel="noopener noreferrer" className="text-accent-link hover:underline">{WORDS.site.link_label}</a>{acct.design != null && <> ({fill(WORDS.site.design_label, 'n', acct.design)})</>}</P>
         ) : <P>{WORDS.site.not_yet}</P>}
+        {/* W417 (row 129 (k)): the chosen design holds a sample, so the launch waits on the owner; the sample-needed email's words */}
+        {(acct.sample_needed === 'menu' || acct.sample_needed === 'other') && <div data-sample-needed>
+          <P>{fill(WORDS.sample.body, 'sample_words', WORDS.sample.words[acct.sample_needed])}</P>
+          <P>{WORDS.sample.next}</P>
+        </div>}
       </section>}
       <section aria-labelledby="acct-plan" className="mb-10">
         <H2 id="acct-plan">{WORDS.plan.heading}</H2>
@@ -99,8 +146,17 @@ export default function AccountClient() {
           <ul className="max-w-2xl space-y-4 mb-4">
             {requests.map((r) => (
               <li key={r.n} className="border border-ink/15 rounded-lg p-4 font-sans text-ink/90">
-                <p className="text-sm mb-2"><span className="font-semibold text-ink">{(r.state && STATE_LABELS[r.state]) || r.state}</span>{r.confirmed_at && <> · {fill(WORDS.changes.asked_on, 'date', date(r.confirmed_at))}</>}</p>
-                <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => <li key={k}>{i.wanted}</li>)}</ul>
+                <p className="text-sm mb-2"><span className="font-semibold text-ink">{label(r)}</span>{r.confirmed_at && <> · {fill(WORDS.changes.asked_on, 'date', date(r.confirmed_at))}</>}</p>
+                {(() => {
+                  // with exactly one photo item the lines sit under it; otherwise after the items (no record says which item a photo is for)
+                  const nu = r.not_used ?? [];
+                  const under = r.photo_items === 1 ? r.items.findIndex((i) => i.kind === 'photo') : -1;
+                  const lines = nu.map((m, j) => <p key={j} className="text-sm mt-1" data-not-used>{notUsedLine(m)}</p>);
+                  return <>
+                    <ul className="list-disc pl-5 space-y-1">{r.items.map((i, k) => { const x = r.refused?.find((f) => f.item === k); return <li key={k}>{i.wanted}{x && <p className="text-sm mt-1" data-refused>{refusedMark(x.classes)}</p>}{k === under && lines}</li>; })}</ul>
+                    {under < 0 && lines}
+                  </>;
+                })()}
               </li>
             ))}
           </ul>

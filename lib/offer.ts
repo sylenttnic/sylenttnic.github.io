@@ -10,6 +10,15 @@
 
 export const CALENDLY_URL = "https://calendly.com/nic-sylentt/30min";
 
+// The second opinion (/second-opinion/): one no-charge working session for a
+// Cache Valley business, 60 to 90 minutes, no pitch. It books its own Calendly
+// event, never the 30-minute call above.
+export const SECOND_OPINION_PATH = "/second-opinion/";
+export const SECOND_OPINION_CALENDLY_URL = "https://calendly.com/nic-sylentt/second-opinion";
+export const SECOND_OPINION_BOOK_LABEL = "Book a time on my calendar";
+export const SECOND_OPINION_EMAIL = "contact@sylentt.com";
+export const SECOND_OPINION_MAILTO = `mailto:${SECOND_OPINION_EMAIL}?subject=${encodeURIComponent("Second opinion")}`;
+
 // Every "book a call" button says the call is free. Use these, not new wording.
 export const CALL_CTA = "Book a free 30-minute call";
 export const CALL_CTA_SHORT = "Book a free call";

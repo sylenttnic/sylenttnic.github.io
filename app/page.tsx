@@ -14,6 +14,7 @@ import {
   plans,
   planById,
   planOfferJsonLd,
+  SECOND_OPINION_PATH,
 } from "@/lib/offer";
 
 const pageTitle = "Sylentt Partners | Fractional CIO for Cache Valley Companies";
@@ -596,6 +597,13 @@ export default function Home() {
                   </p>
                   <p>
                     The name comes from &ldquo;silent partner&rdquo;: I work in the background so you can run your business.
+                  </p>
+                  <p>
+                    I&apos;m a member of the Cache Valley Chamber of Commerce and part of its current Leadership Institute class. If there&apos;s a technology question you&apos;ve been sitting on, I also set aside time each month for a{" "}
+                    <Link href={SECOND_OPINION_PATH} className="text-accent-link font-semibold underline underline-offset-4">
+                      second opinion
+                    </Link>
+                    , at no charge.
                   </p>
                 </div>
               </div>

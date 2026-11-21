@@ -10,7 +10,7 @@ export type ChatOutcome =
   | { kind: 'proposal'; conversation: string; proposal: Proposal }
   | { kind: 'reply'; conversation: string; text: string }
   | { kind: 'error'; key: ChatErrorKey; conversation: string | null };
-export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' };
+export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' | 'kinds_changed' };
 
 export const MAX_CHARS = 2000;
 const CONV = /^[a-z0-9-]{8,64}$/;
@@ -53,6 +53,8 @@ export function confirmOutcome(status: number, body: unknown): ConfirmOutcome {
   if ((status === 404 || status === 422) && /nothing to send/.test(String(b.error ?? ''))) return { kind: 'error', key: 'nothing_to_send' };
   // W317: the plan is neither in its trial nor paying, so the Worker took no request (it is not worth pressing again)
   if (status === 409 && (b as { reason?: unknown }).reason === 'not-taken') return { kind: 'error', key: 'not_taken' };
+  // W401 (4): the kinds the owner was shown are not the stored proposal's, so nothing was recorded
+  if (status === 409 && (b as { reason?: unknown }).reason === 'kinds-changed') return { kind: 'error', key: 'kinds_changed' };
   return { kind: 'error', key: 'confirm_failed' };
 }
 
@@ -69,8 +71,11 @@ export const MAX_PHOTOS = 20;           // confirm.js: at most 20 photo ids a re
 export const MAX_PHOTO_BYTES = 25 * 1000 * 1000; // confirm.js MAX_PHOTO_BYTES
 export const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 export type Place = 'hero' | 'gallery';
-export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
-export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number } };
+export type PhotoErrorKey = 'mine_needed' | 'photo_needed' | 'too_many' | 'empty' | 'too_small' | 'unreadable' | 'wrong_type' | 'too_big' | 'daily_limit' | 'failed';
+// W370 (critic F4, P3): a refusal about one file carries that file's row (0-based, the list as shown) and, from the pre-send
+// checks, the other rows with the same fault, so the words can name the row and the panel can mark each one.
+export type PhotoError = { key: PhotoErrorKey; place?: Place; min?: { width: number; height: number }; index?: number; also?: number[] };
+export const PER_FILE: PhotoErrorKey[] = ['too_small', 'empty', 'unreadable', 'wrong_type', 'too_big', 'failed'];
 export type PhotoOutcome = { kind: 'signed-out' } | { kind: 'stored'; photo: string } | { kind: 'error'; error: PhotoError };
 
 export const needsPhoto = (p: Proposal | null) => !!p && p.items.some((i) => i.kind === 'photo');
@@ -79,8 +84,12 @@ export const needsPhoto = (p: Proposal | null) => !!p && p.items.some((i) => i.k
 export function photoPreflight(p: Proposal | null, photos: { size: number; type: string }[], mine: boolean): PhotoError | null {
   if (!photos.length) return needsPhoto(p) ? { key: 'photo_needed' } : null;
   if (photos.length > MAX_PHOTOS) return { key: 'too_many' };
-  if (photos.some((f) => !PHOTO_TYPES.includes(f.type))) return { key: 'wrong_type' };
-  if (photos.some((f) => f.size > MAX_PHOTO_BYTES)) return { key: 'too_big' };
+  // W347 (3): an empty (zero-byte) file is refused here, before any upload; pressing again would only send it again
+  const rows = (bad: (f: { size: number; type: string }) => boolean) => photos.map((f, i) => (bad(f) ? i : -1)).filter((i) => i >= 0);
+  for (const [key, bad] of [['empty', (f) => f.size === 0], ['wrong_type', (f) => !PHOTO_TYPES.includes(f.type)], ['too_big', (f) => f.size > MAX_PHOTO_BYTES]] as [PhotoErrorKey, (f: { size: number; type: string }) => boolean][]) {
+    const r = rows(bad);
+    if (r.length) return { key, index: r[0], also: r.slice(1) };
+  }
   if (!mine) return { key: 'mine_needed' };
   return null;
 }
@@ -100,11 +109,38 @@ export function photoOutcome(status: number, body: unknown): PhotoOutcome {
   if (status === 415) return { kind: 'error', error: { key: 'wrong_type' } };
   if (status === 413) return { kind: 'error', error: { key: 'too_big' } };
   if (status === 429) return { kind: 'error', error: { key: 'daily_limit' } };
+  if (status === 400 && /no photo/.test(String((b as { error?: unknown }).error ?? ''))) return { kind: 'error', error: { key: 'empty' } }; // confirm.js: a zero-byte upload
   if (status === 400 && /yours/.test(String((b as { error?: unknown }).error ?? ''))) return { kind: 'error', error: { key: 'mine_needed' } };
   return { kind: 'error', error: { key: 'failed' } };
 }
 
-/* A refusal's words with its numbers filled in: {place}, {width}, {height}. */
-export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string>): string {
-  return s.replace('{place}', e.place ? places[e.place] : '').replace('{width}', String(e.min?.width ?? '')).replace('{height}', String(e.min?.height ?? ''));
+/* A refusal's words with its numbers filled in: {place}, {width}, {height}, and (W370) the row: {n} (1 is the top row) and
+   {file} (the name the row shows). With other rows at the same fault, the `also` sentence follows, naming the others only. */
+export function fillPhoto(s: string, e: PhotoError, places: Record<Place, string>, names: string[] = [], also: { also: string; also_one: string } | null = null): string {
+  const n = e.index === undefined ? '' : String(e.index + 1);
+  const file = e.index === undefined ? '' : (names[e.index] ?? '');
+  const out = s.replace('{n}', () => n).replace('{file}', () => file).replace('{place}', () => (e.place ? places[e.place] : '')).replace('{width}', String(e.min?.width ?? '')).replace('{height}', String(e.min?.height ?? ''));
+  const others = (e.also ?? []).map((i) => String(i + 1));
+  if (!others.length || !also) return out;
+  const list = others.length === 1 ? others[0] : `${others.slice(0, -1).join(', ')} and ${others[others.length - 1]}`;
+  return `${out} ${(others.length === 1 ? also.also_one : also.also).replace('{list}', () => list)}`;
 }
+
+/* The rows a refusal is about (each gets the "Please check this photo." mark). */
+export const markedRows = (e: PhotoError | null): number[] => (e && e.index !== undefined && PER_FILE.includes(e.key) ? [e.index, ...(e.also ?? [])] : []);
+
+/* W401 (4) (triage 2026-11-19 T5): each item is shown with its kind in plain words, and the confirm sends the kinds shown, in
+   order; the Worker records nothing whose kinds differ. A removal (wanted begins Remove: "...", the change guard's
+   QUOTED_REMOVAL shape) is shown as one whatever its kind field, so the owner sees it is taking words off. */
+export type KindKey = 'words' | 'removal' | 'photo' | 'colours' | 'fonts' | 'layout' | 'design-swap';
+/* decision-critic condition 1 (W401-kind-words-critic): the removal label only for a WORDS item; a layout or photo item keeps its
+   own kind's label (its wanted still begins Remove:), and the kinds the page sends are always the items' real kinds */
+const REMOVAL_SHAPE = /^\s*(?:please\s+)?(?:remove|delete|take\s+(?:down|off|out)|get\s+rid\s+of)\b\s*(?:the\s+(?:words?|line|sentence|text)\s*)?:?\s*["\u201c]/i;
+export function kindOf(i: Item): KindKey {
+  if (i.kind === 'words' && REMOVAL_SHAPE.test(i.wanted)) return 'removal';
+  const own: readonly string[] = ['words', 'photo', 'colours', 'fonts', 'layout', 'design-swap'];
+  return own.includes(i.kind) ? (i.kind as KindKey) : 'words';
+}
+export const kindsOf = (p: Proposal | null) => (p ? p.items.map((i) => i.kind) : []);
+/* critic follow-up F3: a words removal reads "<label>: <the quoted words>", its Remove: prefix dropped; any other item as written */
+export const shownWanted = (i: Item) => (kindOf(i) === 'removal' ? i.wanted.replace(REMOVAL_SHAPE, '\u201c').replace(/["\u201d]\s*[.!]?\s*$/, '\u201d') : i.wanted);

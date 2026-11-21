@@ -33,6 +33,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- The second opinion: Nic's no-charge community session, added 2026-11-19.
+       Its copy is expected to change as the pilot teaches what works, so
+       changefreq is weekly; keep lastmod current with each edit. -->
+  <url>
+    <loc>https://sylentt.com/second-opinion/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- lastmod IS A CLAIM ABOUT THE FILE, AND A STALE ONE SUPPRESSES RECRAWL.
        When you change a page, change its lastmod in the same commit; AGENTS.md
        already requires this file to match the site, and a date is part of
