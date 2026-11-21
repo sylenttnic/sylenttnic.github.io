@@ -34,7 +34,7 @@ export const WORDS = {
     "items": [
       {
         "label": "Your domain",
-        "body": "When that email arrives, reply to it and tell us if you already have one or want a new one. We will set it up with you. If you need one, we register it in your business's name after your first successful payment."
+        "body": "Already have one? Once your site is public, type it at sylentt.com/webdesign/domain/ to see the two changes to make. That page shows you how to sign in, if needed. Need a new one? Reply to that email when it arrives. We register it in your business's name after your first successful payment."
       },
       {
         "label": "Where form messages go",

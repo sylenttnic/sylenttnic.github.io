@@ -101,7 +101,7 @@ export default function TermsOfService() {
             <li>After the free 30 days, changes to colours, fonts or layout, or a switch to another of the designs we built for you. These are quoted separately.</li>
           </ul>
           <p className="mt-3">
-            Hosting, SSL, backups, uptime monitoring, security patches, unlimited tweaks during the free 30 days and unlimited content changes after that are included; see sections 3 and 6. A domain, if you need one, is registered in your name after your first successful payment, or we point one you already own.
+            Hosting, SSL, backups, uptime monitoring, security patches, unlimited tweaks during the free 30 days and unlimited content changes after that are included; see sections 3 and 6. A domain, if you need one, is registered in your name after your first successful payment; if you already own one, you make two changes to its settings and we connect your site to its www address.
           </p>
         </section>
 

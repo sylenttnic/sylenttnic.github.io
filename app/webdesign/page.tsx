@@ -123,7 +123,7 @@ const faqItems = [
   },
   {
     q: 'What about my domain?',
-    a: "Already have one? Keep it where it is. We show you the two changes to make wherever your domain's settings are managed, check them for you, and connect your site once both are set. We never change your email settings. If you would rather not do it yourself, write to nic@sylentt.com. Need a new one? We register it in your business's name after your first successful payment (standard endings only, such as .com), and you may need to click one confirmation email from the registrar.",
+    a: "Already have one? Keep it where it is. We show you the two changes to make wherever your domain's settings are managed, check them for you, and connect your site once both are set. We never change your email settings. If you would rather not do it yourself, write to support@sylentt.com. Need a new one? We register it in your business's name after your first successful payment (standard endings only, such as .com), and you may need to click one confirmation email from the registrar.",
   },
 ];
 

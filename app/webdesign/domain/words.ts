@@ -8,7 +8,7 @@ export const WORDS = {
   },
   "not_signed_in": {
     "title": "Sign in first",
-    "body": "This page only works for the business owner, signed in. Open the confirmation link we emailed to your business again, or ask for a sign-in link at sylentt.com/webdesign/welcome/, then come back to this page in the tab that link opens. If neither works, write to nic@sylentt.com and say which business it is."
+    "body": "This page only works for the business owner, signed in. Open the confirmation link we emailed to your business again, or ask for a sign-in link at sylentt.com/webdesign/welcome/, then come back to this page in the tab that link opens. If neither works, write to support@sylentt.com and say which business it is."
   },
   "form": {
     "field_label": "Your domain",
@@ -33,7 +33,7 @@ export const WORDS = {
     "intro": "Set these two things wherever your domain's settings are managed. Nothing else needs changing.",
     "step1": {
       "title": "Step 1: forward {domain} to www",
-      "body": "Find the setting called forwarding or redirect, and send {domain} to the address below. If it asks what kind, choose permanent (301). If you cannot find a setting like that, write to nic@sylentt.com and say which business it is.",
+      "body": "Find the setting called forwarding or redirect, and send {domain} to the address below. If it asks what kind, choose permanent (301). If you cannot find a setting like that, write to support@sylentt.com and say which business it is.",
       "from_label": "Forward",
       "from_value": "{domain}",
       "to_label": "To",
@@ -74,7 +74,7 @@ export const WORDS = {
     },
     "right": "Both are set. We are now connecting www.{domain} to your site and setting up HTTPS (the padlock) for it. There is nothing more for you to do.",
     "connected": "Your site is connected. www.{domain} now shows your new site, with HTTPS (the padlock). {domain} on its own reaches your site only through the forward you set in step 1, so leave that forward in place.",
-    "not_connected": "We tried to connect www.{domain} to your site, and it did not work. It may not fix itself, so write to nic@sylentt.com, say which business it is, and say that your domain did not connect."
+    "not_connected": "We tried to connect www.{domain} to your site, and it did not work. It may not fix itself, so write to support@sylentt.com, say which business it is, and say that your domain did not connect."
   },
-  "rather_not": "Would rather not do this yourself? Write to nic@sylentt.com and say which business it is."
+  "rather_not": "Would rather not do this yourself? Write to support@sylentt.com and say which business it is."
 } as const;
