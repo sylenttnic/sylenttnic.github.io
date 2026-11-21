@@ -30,7 +30,7 @@ export const WORDS = {
   },
   "steps": {
     "waiting_for_site": "Your two steps will appear here shortly, once your site's address is ready.",
-    "waiting_for_launch": "Your two steps will appear here once your site is public. It goes public after you pick your design, or, if the design you picked holds a section marked as a sample, once you have replaced that section or asked us to take it out.",
+    "waiting_for_launch": "Your two steps will appear here once your site is public. Your site goes public after you pick your design (with one design, there is nothing to pick), or, if it holds a section marked as a sample, once you have replaced that section or asked us to take it out.",
     "intro": "Set these two things wherever your domain's settings are managed. Nothing else needs changing.",
     "step1": {
       "title": "Step 1: forward {domain} to www",
