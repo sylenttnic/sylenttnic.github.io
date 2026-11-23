@@ -51,7 +51,7 @@ const whatYouGetCards = [
   },
   {
     title: 'Every word written for you',
-    text: 'Headlines, service descriptions, buttons, page titles, the text behind your images, and for a restaurant, a menu of the dishes your reviews name. Written from your own material and your own reviews.',
+    text: 'Headlines, service descriptions, buttons, page titles, the text behind your images, and for a restaurant, a menu of the dishes your reviews name. Written from your own material and your own reviews. Where we can match your Google listing, your site can carry a small "Leave us a review" link that opens the page where customers leave you a Google review.',
   },
   {
     title: 'Where the pictures come from',
