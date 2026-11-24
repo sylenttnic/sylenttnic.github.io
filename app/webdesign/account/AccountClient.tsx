@@ -17,9 +17,24 @@ type NotUsed = { position: number; count: number; place: 'hero' | 'gallery' | nu
 // W370 (3): an item the change guard refused, as the Worker passes it (the item's index and reason classes, never the guard's words)
 type Refused = { item: number; classes: string[] };
 type Req = { n: number; state: string | null; confirmed_at: string | null; trial: boolean; items: Item[]; not_used?: NotUsed[]; photo_items?: number; refused?: Refused[] };
-type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[]; sample_needed?: 'menu' | 'other' | null };
+type Account = { name: string | null; ready: boolean; plan: 'trial' | 'paying' | null; trial_ends: string | null; design: number | null; site_url: string | null; requests: Req[]; sample_needed?: 'menu' | 'other' | null; start_paid?: { at: number; result: string } | null; start_paid_pending?: boolean };
 type View = 'loading' | 'signed-out' | 'error' | 'ok';
 type Bill = 'idle' | 'opening' | 'not_ready' | 'not_available' | 'failed';
+// W34 "start paid now": the press's own states (the outcome itself is the account record's start_paid, written by client-sync)
+type Sp = 'idle' | 'confirm' | 'sending' | 'pending' | 'not_ready' | 'not_available' | 'not_in_trial' | 'failed';
+const SP = WORDS.start_paid;
+const SP_RESULTS = SP.results as Record<string, string>;
+/* decision-critic 2026-11-24 C3: which start-paid block shows. `ended` only while the plan reads trial or paying; every other
+   result, the offer and the button only while the plan is trial with a trial end ({date} is never shown blank). */
+export function startPaidView(a: Pick<Account, 'ready' | 'plan' | 'trial_ends' | 'start_paid' | 'start_paid_pending'>): { show: boolean; ended: boolean; pending: boolean; result: string | null; offer: boolean } {
+  const none = { show: false, ended: false, pending: false, result: null, offer: false };
+  if (!a.ready) return none;
+  const r = a.start_paid?.result ?? null;
+  if (r === 'ended') return (a.plan === 'trial' || a.plan === 'paying') ? { ...none, show: true, ended: true } : none;
+  if (a.plan !== 'trial' || !a.trial_ends) return none;
+  if (a.start_paid_pending) return { ...none, show: true, pending: true };
+  return { show: true, ended: false, pending: false, result: r && SP_RESULTS[r] ? r : null, offer: true };
+}
 const LOGIN_LINK = 'https://billing.stripe.com/p/login/aFaeVcbBo1MIdZe8Ik1Jm00'; // the billing page link the terms carry (sections 4, 6)
 
 const DATE = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Denver' });
@@ -68,6 +83,26 @@ export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
   const [acct, setAcct] = useState<Account | null>(null);
   const [bill, setBill] = useState<Bill>('idle');
+  const [sp, setSp] = useState<Sp>('idle');
+
+  // W34 (row 58 (e)): "start paid now", at the owner's click only, after the confirm step. The Worker reads nothing but the
+  // session; it records the ask and client-sync answers it (end-trial; on a decline the open invoice is voided, row 131).
+  async function startPaid() {
+    let s: string | null = null;
+    try { s = sessionStorage.getItem(SKEY); } catch { /* no storage */ }
+    if (!s) { setView('signed-out'); return; }
+    setSp('sending');
+    try {
+      const r = await fetch(`${API}/owner/start-paid`, { method: 'POST', headers: { authorization: `Bearer ${s}` } });
+      if (r.status === 401) { try { sessionStorage.removeItem(SKEY); } catch { /* ignore */ } setView('signed-out'); return; }
+      const j = (await r.json().catch(() => null)) as { ok?: unknown; reason?: unknown; recorded?: unknown } | null;
+      if (r.ok && j?.recorded === 'pending-sync') { setSp('pending'); return; }
+      if (r.status === 404 && j?.reason === 'not-available') { setSp('not_available'); return; }
+      if (r.status === 409 && j?.reason === 'not-in-trial') { setSp('not_in_trial'); return; }
+      if (r.status === 409) { setSp('not_ready'); return; }
+      setSp('failed');
+    } catch { setSp('failed'); }
+  }
 
   // W307 (row 119): open a Stripe billing page for this session's own business. The Worker reads nothing from the request
   // but the session; it answers a billing.stripe.com URL, and only that is followed.
@@ -129,6 +164,40 @@ export default function AccountClient() {
         <H2 id="acct-plan">{WORDS.plan.heading}</H2>
         <P>{!acct.ready ? WORDS.plan.unknown : acct.plan === 'trial' && acct.trial_ends ? fill(WORDS.plan.trial, 'date', date(acct.trial_ends)) : acct.plan === 'paying' ? WORDS.plan.paying : WORDS.plan.unknown}</P>
       </section>
+      {(() => {
+        const v = startPaidView(acct);
+        if (!v.show) return null;
+        const d = date(acct.trial_ends);
+        const btn = 'rounded bg-accent px-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60';
+        return <section aria-labelledby="acct-start-paid" className="mb-10" data-start-paid>
+          <H2 id="acct-start-paid">{SP.heading}</H2>
+          {v.ended && <P>{SP.results.ended}</P>}
+          {(v.pending || sp === 'pending') && !v.ended && <P>{SP.pending}</P>}
+          {v.offer && sp !== 'pending' && <>
+            {v.result && <P>{fill(SP_RESULTS[v.result], 'date', d)}</P>}
+            <P>{fill(SP.offer, 'date', d)}</P>
+            {sp !== 'confirm' && sp !== 'sending' && <p className="mb-4"><button type="button" onClick={() => setSp('confirm')} className={btn}>{SP.button_label}</button></p>}
+            {(sp === 'confirm' || sp === 'sending') && <div role="group" aria-labelledby="acct-start-paid-confirm" className="border border-ink/15 rounded-lg p-4 max-w-2xl mb-4">
+              <p id="acct-start-paid-confirm" className="font-display text-xl font-bold text-ink mb-3">{SP.confirm.title}</p>
+              <P>{SP.confirm.charge}</P>
+              <P>{fill(SP.confirm.ends, 'date', d)}</P>
+              <P>{SP.confirm.tweaks}</P>
+              <P>{SP.confirm.not_through}</P>
+              <P>{SP.confirm.card}</P>
+              <P>{SP.confirm.cancel}</P>
+              <p className="flex flex-wrap gap-3"><button type="button" onClick={startPaid} disabled={sp === 'sending'} className={btn}>{SP.confirm.confirm_button}</button>
+                <button type="button" onClick={() => setSp('idle')} disabled={sp === 'sending'} className="rounded border border-ink/30 px-4 py-2 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60">{SP.confirm.back_button}</button></p>
+            </div>}
+            <div aria-live="polite">
+              {sp === 'sending' && <P>{SP.sending}</P>}
+              {sp === 'not_ready' && <P>{SP.press.not_ready}</P>}
+              {sp === 'not_available' && <P>{fill(SP.press.not_available, 'date', d)}</P>}
+              {sp === 'not_in_trial' && <P>{SP_RESULTS['not-in-trial']}</P>}
+              {sp === 'failed' && <P>{SP.press.failed}</P>}
+            </div>
+          </>}
+        </section>;
+      })()}
       {acct.ready && <section aria-labelledby="acct-billing" className="mb-10">
         <H2 id="acct-billing">{WORDS.billing.heading}</H2>
         <P>{WORDS.billing.body}</P>

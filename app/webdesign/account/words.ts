@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md). The sample notice (W417, owner-decisions row 129 (k)): studio/sample-menu-words-draft.md C5, approved as drafted, the sample-needed email's words less what a page has no use for (see sample._source).
+// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md). The sample notice (W417, owner-decisions row 129 (k)): studio/sample-menu-words-draft.md C5, approved as drafted, the sample-needed email's words less what a page has no use for (see sample._source). Start paying now (W34, row 58 (e), row 131): runs/client-launch/copy/W34-start-paid-words.md, decision-critic APPROVE WITH CHANGES 2026-11-24 (runs/client-launch/checks/W34-start-paid-words-critic.md), its rewordings taken; ships only with the N171 terms lines in one act (C4).
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -170,6 +170,41 @@ export const WORDS = {
   "ask": {
     "heading": "Ask for a change",
     "body": "Email support@sylentt.com and say which business it is."
+  },
+  "start_paid": {
+    "heading": "Start paying now",
+    "offer": "Your free trial runs to {date}. If you would rather start paying now, you can end your free days early.",
+    "button_label": "End my free days and pay now",
+  
+    "confirm": {
+      "title": "End your free days now?",
+      "charge": "We charge the first $9.99 plus any applicable tax as soon as your request reaches Stripe.",
+      "ends": "Once that payment goes through, your free days end then instead of on {date}, and the plan renews each month until you cancel.",
+      "tweaks": "Your unlimited tweaks end with your free days. From then on, the plan covers unlimited content changes: the wording and details, and your own photos. Changes to colours, fonts or layout, or a switch to another of the designs we built for you, are then quoted separately.",
+      "not_through": "If the payment does not go through, nothing changes.",
+      "card": "The payment needs a card on your billing page. If you have not added one, add it there first with the button under Your billing.",
+      "cancel": "You can still cancel any time from your billing page. Cancelling then takes effect at the end of the month you have paid for, and monthly payments are not refunded as a matter of course.",
+      "confirm_button": "Yes, end my free days and pay now",
+      "back_button": "Keep my free days"
+    },
+  
+    "sending": "Sending your request.",
+    "pending": "We have your request. It goes to Stripe next, and the answer shows here once our system has recorded it. Pressing the button again does not ask twice. If no answer shows here by tomorrow, email support@sylentt.com and say which business it is.",
+  
+    "results": {
+      "ended": "You are on the paid monthly plan. Your first payment went through, and your free days have ended.",
+      "processing": "We asked Stripe to start your paid plan, but its answer did not show whether your first payment went through. To find out where it stands, email support@sylentt.com and say which business it is.",
+      "declined": "Your payment did not go through, so nothing changed: nothing was charged, and your free trial still runs to {date}. To try again, check your card or add another on your billing page, then press End my free days and pay now. Or keep your free days: you do not need to do anything.",
+      "no-card": "There is no card on your billing page yet, so nothing changed: nothing was charged, and your free trial still runs to {date}. To start paying now, add a card with the button under Your billing, then come back and press End my free days and pay now again. Adding a card does not end your free days on its own.",
+      "not-in-trial": "Our records show your plan is no longer in its free 30 days, so this request changed nothing and charged nothing. Your plan above shows where it stands.",
+      "refused": "Your request did not go through, and we have been told. Nothing was charged for it, and your plan has not changed. Please try again later, or email support@sylentt.com."
+    },
+  
+    "press": {
+      "not_ready": "Your plan details are not showing here yet, so this cannot start. Please try again later, or email support@sylentt.com.",
+      "not_available": "This button is not switched on yet. Your free trial runs to {date} as before.",
+      "failed": "That did not go through. Please try again, or email support@sylentt.com."
+    }
   },
   "billing": {
     "heading": "Your billing",
