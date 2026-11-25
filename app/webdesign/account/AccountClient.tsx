@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { WORDS } from './words';
 import { WORDS as WELCOME } from '../welcome/words';
 import ChatPanel from './ChatPanel';
+import RegistrantSection from './RegistrantSection';
 
 // The account page (W296, rows 118 and 58). Signed in only: the session the welcome page stored in this tab's
 // sessionStorage (the confirm link or a sign-in link). Its one read is the Worker's GET /owner/account, which answers
@@ -198,6 +199,8 @@ export default function AccountClient() {
           </>}
         </section>;
       })()}
+      {/* W34 (row 58 (e)): the registrant details, shown only once a new domain is picked and until it is bought */}
+      {acct.ready && <RegistrantSection onSignedOut={() => setView('signed-out')} />}
       {acct.ready && <section aria-labelledby="acct-billing" className="mb-10">
         <H2 id="acct-billing">{WORDS.billing.heading}</H2>
         <P>{WORDS.billing.body}</P>

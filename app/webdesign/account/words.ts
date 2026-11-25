@@ -288,5 +288,68 @@ export const WORDS = {
     "kinds_changed": "The list above is not the latest one our system holds, so your changes were not sent. Please write again below and we will show you the up-to-date list, or email support@sylentt.com.",
     "not_taken": "We did not take this request, so nothing will be changed from it: our records do not show your plan as in its free 30 days or paid. If that is wrong, or you have just paid, please email support@sylentt.com and say which business it is.",
     "failed": "That did not go through. Please try again, or email support@sylentt.com."
+  },
+  "registrant": {
+    "heading": "Who your domain is registered to",
+    "why": "We register {name} in your business's name, so the registration needs your business's details. Fill these in once; we use them when we register {name} after your first successful payment, if it can still be registered then.",
+    "where_it_goes": "We give these details to Cloudflare, the registrar, to register your domain.",
+    "fields": {
+      "organization": {
+        "label": "Business legal name",
+        "hint": "The name your business is legally registered under. It can differ from the name on your sign."
+      },
+      "name": {
+        "label": "Your name",
+        "hint": "The owner's name, first and last."
+      },
+      "email": {
+        "label": "Email address",
+        "hint": "Use an address you check. The registrar may send a confirmation email to it, and you need to click the link in it. If it is not clicked in time, the registrar puts the domain on hold and your site stops showing at it until it is."
+      },
+      "phone": {
+        "label": "Phone number",
+        "hint": "A US number with its area code."
+      },
+      "street": {
+        "label": "Street address",
+        "hint": "Your business's address."
+      },
+      "city": {
+        "label": "City"
+      },
+      "state": {
+        "label": "State",
+        "hint": "Two letters, such as UT."
+      },
+      "postal_code": {
+        "label": "ZIP code"
+      }
+    },
+    "public_us": "Names ending in .us are listed publicly: the .us registry publishes the registrant's name, address, phone number and email address for anyone to look up.",
+    "save_button": "Save these details",
+    "sending": "Saving your details.",
+    "saved": {
+      "title": "Your details are saved",
+      "body": "They are on file for {name}. You can change them until the domain is registered: fill in the form again and save, and the new details replace the old ones.",
+      "change_button": "Change these details"
+    },
+    "bought": {
+      "title": "{name} is registered",
+      "body": "Your domain is registered in your business's name, so the details you gave can no longer be changed on this page. If something in them is wrong, email support@sylentt.com and say which business it is."
+    },
+    "errors": {
+      "registrant-organization": "Enter your business's legal name: up to 100 characters, with no < or >.",
+      "registrant-name": "Enter your name: up to 100 characters, with no < or >.",
+      "registrant-email": "Enter a full email address, such as you@yourbusiness.com.",
+      "registrant-phone": "Enter a US phone number with its area code: 10 digits, with or without a 1 in front.",
+      "registrant-address": "Enter both the street address and the city: up to 200 characters for the street and 80 for the city, with no < or >.",
+      "registrant-state": "Enter the state as its two-letter code, such as UT. DC and PR (Puerto Rico) work too.",
+      "registrant-postal-code": "Enter a 5-digit ZIP code, or a ZIP+4 such as 84333-1234.",
+      "registrant-country": "We can only register a domain to a business with a US address.",
+      "no-pick": "Pick a name for your domain first, then fill in these details.",
+      "already-registered": "Your domain is already registered, so these details can no longer be changed here. If something in them is wrong, email support@sylentt.com and say which business it is.",
+      "signed-out": "You are signed out, so your details were not saved. Ask for a sign-in link on the welcome page, then fill in the form again.",
+      "failed": "That did not go through, so your details were not saved. Please try again, or email support@sylentt.com."
+    }
   }
 } as const;
