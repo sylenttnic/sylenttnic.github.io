@@ -96,7 +96,6 @@ export default function RegistrantSection({ onSignedOut }: { onSignedOut: () => 
                 className="w-full rounded border border-ink/30 px-3 py-2 font-sans text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" />
             </div>
           ))}
-          {/\.us$/.test(name) && <p className="text-lg text-ink/90 font-sans leading-relaxed max-w-2xl" data-public-us>{R.public_us}</p>}
           <p><button type="submit" disabled={st === 'sending'} className={btn}>{R.save_button}</button></p>
         </form>
       </>}

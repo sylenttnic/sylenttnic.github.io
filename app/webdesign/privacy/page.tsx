@@ -55,6 +55,7 @@ export default function PrivacyPolicy() {
           <h2 className="text-xl font-bold text-ink mt-8 mb-3">2. Information you give us</h2>
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li><strong>If you start the plan:</strong> your name, business name, email address and billing address, collected through Stripe.</li>
+            <li><strong>If you need a new domain:</strong> your business&apos;s legal name and street address, your name, and the phone number and email address you give for the registration, which you give us on your account page so we can register the domain.</li>
             <li><strong>If you contact us:</strong> whatever you put in a form or an email.</li>
           </ul>
         </section>
@@ -72,6 +73,7 @@ export default function PrivacyPolicy() {
           <ul className="list-disc pl-6 space-y-2 mt-2">
             <li><strong>Stripe</strong>: payment processing</li>
             <li><strong>Cloudflare</strong>: hosting and delivery of website previews and of the sites we look after, and holding what you write in the change chat on your account page until 30 days after the last message in it, and the changes you send from it for up to 30 days, and photos you upload</li>
+            <li><strong>Cloudflare Registrar</strong>: registering a new domain in your business&apos;s name, if you need one, with the details you give for it on your account page. The domain&apos;s public record (WHOIS) hides your name, email address and street address where the registry allows it. Your state and country stay visible, and the phone number you give may be visible too.</li>
             <li><strong>Anthropic</strong> (maker of the Claude AI models): our build and change work runs on Claude. It reads the information in section 1 to build your site, the change requests you send and any photos you send with them, and what you write in the change chat on your account page, so our system can turn it into a list of changes for you to check. Each chat message is sent with your earlier messages in the same conversation, the chat&apos;s replies, and a short summary of your account (your business name, your design and your plan).</li>
             <li><strong>GitHub</strong>: storing our own records, including the information in section 1, your site&apos;s files, and the change requests and photos you send us</li>
             <li><strong>Resend</strong>: sending our emails about your account and site (sign-in links, the email that confirms you control your business&apos;s address, and account notices), our replies to a business that asked for a preview on our page, and forwarding messages sent through your site&apos;s contact form to you</li>
@@ -99,6 +101,7 @@ export default function PrivacyPolicy() {
             <li><strong>Change chat conversations</strong>, including the lists of changes the chat suggested: deleted automatically 30 days after the last message in them.</li>
             <li><strong>Change requests you send:</strong> once you press Send these changes and our system records the request, what you asked for is kept in your site&apos;s records, with no set end date, and listed under Your changes on your account page while your plan runs. That includes a request we cannot make because it is outside the plan. A request our system does not record is not kept there, and is deleted automatically within 30 days of your pressing Send, apart from the change chat it came from (above).</li>
             <li><strong>Photos you upload from your account page:</strong> the photo as you uploaded it is held in our account system at Cloudflare for up to 30 days, whether or not you send it, and is then deleted automatically. If you send it with a change request and our system records that request, we keep a copy of it in your site&apos;s records, with no set end date. That copy has the photo&apos;s location and its other hidden photo data removed.</li>
+            <li><strong>Details you give for a new domain:</strong> kept in our account system at Cloudflare with no set end date, until you ask us to delete them (section 7). Once the domain is registered, Cloudflare also holds them as its registered details; deleting our copy does not change the registration.</li>
             <li><strong>Unsubscribe records:</strong> kept indefinitely - this is the only way we can be sure we never contact you again.</li>
             <li><strong>Purchase records:</strong> kept as long as tax and accounting law requires.</li>
           </ul>

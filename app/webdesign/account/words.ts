@@ -308,7 +308,7 @@ export const WORDS = {
       },
       "phone": {
         "label": "Phone number",
-        "hint": "A US number with its area code."
+        "hint": "A US number with its area code. It may be shown in the domain's public record, so give your business's number."
       },
       "street": {
         "label": "Street address",
@@ -325,7 +325,6 @@ export const WORDS = {
         "label": "ZIP code"
       }
     },
-    "public_us": "Names ending in .us are listed publicly: the .us registry publishes the registrant's name, address, phone number and email address for anyone to look up.",
     "save_button": "Save these details",
     "sending": "Saving your details.",
     "saved": {

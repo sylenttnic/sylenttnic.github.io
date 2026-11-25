@@ -13,7 +13,8 @@
      6. each Worker refusal code shows its own line (a 400 per field code, 409 no-pick, a 500 as failed, an unknown code as failed);
         409 already-registered shows the bought block and no form; a 401 signs the page out;
      7. bought: the bought block with the name, no form and no button;
-     8. critic change 5: a .us pick shows the public-record line; a .com pick does not. */
+     8. the privacy page carries the three checked lines (runs/client-launch/copy/W34-registrant-privacy-words.md, critic
+        APPROVE WITH CHANGES, Revision 1), and no .us public-record line shows on any pick (held with .us, privacy critic change 6). */
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -94,7 +95,6 @@ try {
     const t = await text(sec);
     const labels = FIELDS.every((f) => t.includes(R.fields[f].label));
     say(t.includes(R.heading) && t.includes(withName(R.why)) && t.includes(R.where_it_goes) && labels && !t.includes('{name}'), 'a pick with nothing on file: the heading, the why line with the name (both places), where the details go, all eight labels');
-    say(!t.includes(R.public_us), 'a .com pick shows no .us public-record line (negative)');
     say(posts(calls).length === 0, 'nothing is sent on load');
     await fillAll(sec);
     await sec.getByRole('button', { name: R.save_button }).click();
@@ -113,7 +113,17 @@ try {
   { const US = 'regtestplumbing.us';
     const { page, sec } = await open(browser, base, { nd: { ...ND, pick: { ...ND.pick, name: US } } });
     const t = await text(sec);
-    say(t.includes(R.public_us) && t.includes(withName(R.why, US)), 'a .us pick shows the public-record line above the save button');
+    say(R.public_us === undefined && !/registry publishes/.test(t) && t.includes(withName(R.why, US)), 'a .us pick shows no public-record line (held with .us)');
+    await page.close(); }
+  { // 8: the privacy lines that ship in the same act
+    const rec = fs.readFileSync(path.join(ROOT, '..', 'sylentt-smb-site-generation', 'runs/client-launch/copy/W34-registrant-privacy-words.md'), 'utf8');
+    const plain = (h) => h.replace(/<[^>]+>/g, '').replace(/&apos;/g, "'").replace(/\s+/g, ' ').trim();
+    const want = [...rec.matchAll(/```tsx\n([\s\S]*?)\n```/g)].map((m) => m[1]).filter((b) => /new domain|Cloudflare Registrar/.test(b)).map(plain);
+    const page = await browser.newPage();
+    await page.goto(`${base}/webdesign/privacy/`);
+    const body = (await page.locator('body').innerText()).replace(/\s+/g, ' ');
+    say(want.length === 3 && want.every((w) => body.includes(w)), 'the privacy page carries the three checked lines (what, who, how long)');
+    say(!body.includes('hides your name, email, phone'), 'the privacy page never says the phone is hidden (negative; privacy critic change 1)');
     await page.close(); }
   { const { page, sec } = await open(browser, base, { nd: { ...ND, registrant_on_file: true } });
     say((await text(sec)).includes(R.saved.title) && (await sec.locator('form').count()) === 0, 'details already on file: the saved block, no form');
