@@ -130,7 +130,7 @@ try {
     await page.close(); }
   const cases = [
     ...['registrant-organization', 'registrant-name', 'registrant-email', 'registrant-phone', 'registrant-address', 'registrant-state', 'registrant-postal-code', 'registrant-country'].map((c) => [400, c, R.errors[c]]),
-    [409, 'no-pick', R.errors['no-pick']], [500, null, R.errors.failed], [400, 'something-new', R.errors.failed],
+    [409, 'no-pick', R.errors['no-pick']], [409, 'registration-in-progress', R.errors['registration-in-progress']], [500, null, R.errors.failed], [400, 'something-new', R.errors.failed],
   ];
   for (const [status, code, line] of cases) { // 6
     const { page, sec } = await open(browser, base, { post: { status, body: code ? { error: code } : {} } });

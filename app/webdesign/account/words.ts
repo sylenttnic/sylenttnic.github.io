@@ -329,7 +329,7 @@ export const WORDS = {
     "sending": "Saving your details.",
     "saved": {
       "title": "Your details are saved",
-      "body": "They are on file for {name}. You can change them until the domain is registered: fill in the form again and save, and the new details replace the old ones.",
+      "body": "They are on file for {name}. You can change them until we start registering {name}: fill in the form again and save, and the new details replace the old ones.",
       "change_button": "Change these details"
     },
     "bought": {
@@ -347,6 +347,7 @@ export const WORDS = {
       "registrant-country": "We can only register a domain to a business with a US address.",
       "no-pick": "Pick a name for your domain first, then fill in these details.",
       "already-registered": "Your domain is already registered, so these details can no longer be changed here. If something in them is wrong, email support@sylentt.com and say which business it is.",
+      "registration-in-progress": "These details were not saved, because we have started registering your domain with the details already on file, and those can no longer be changed here. If something in them is wrong, email support@sylentt.com and say which business it is.",
       "signed-out": "You are signed out, so your details were not saved. Ask for a sign-in link on the welcome page, then fill in the form again.",
       "failed": "That did not go through, so your details were not saved. Please try again, or email support@sylentt.com."
     }
