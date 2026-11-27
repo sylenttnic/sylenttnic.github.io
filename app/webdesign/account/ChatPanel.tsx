@@ -13,7 +13,7 @@ const API = 'https://clients.sylentt.com';
 const SKEY = 'sylentt-owner-session';
 const W = WORDS.chat;
 const WP = WORDS.chat.photos;
-type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken' | 'kinds_changed';
+type ErrKey = ChatErrorKey | 'confirm_failed' | 'nothing_to_send' | 'not_taken' | 'kinds_changed' | 'undo_pending';
 
 export default function ChatPanel({ onSignedOut }: { onSignedOut: () => void }) {
   const [message, setMessage] = useState('');

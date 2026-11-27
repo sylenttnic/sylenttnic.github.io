@@ -1,4 +1,4 @@
-// The account page's words (copywriter, rows 58 (d) and 118; decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md). The sample notice (W417, owner-decisions row 129 (k)): studio/sample-menu-words-draft.md C5, approved as drafted, the sample-needed email's words less what a page has no use for (see sample._source).
+// The account page's words (copywriter, rows 58 (d) and 118; the Undo words (W300): runs/client-launch/copy/W300-undo-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-27, C1 to C3 and F4 taken verbatim (runs/client-launch/checks/W300-undo-words-critic.md); decision-critic REJECT B1 to B4 replacements taken, 2026-11-11): runs/client-launch/copy/W296-account-words.md in sylentt-smb-site-generation. Edit through the copywriter, never inline. The billing section (W307, row 119): runs/client-launch/copy/W307-billing-words.md, decision-critic APPROVE 2026-11-12 with its two replacements taken. The chat panel (W311, row 118): runs/client-launch/copy/W311-chat-words.md, decision-critic APPROVE WITH FINDINGS 2026-11-12, B1 to B4 and F1 to F3 taken (runs/client-launch/checks/W311-chat-critic.md). The photo words (W318, row 118): runs/client-launch/copy/W318-photo-words.md. The not-taken line (W317, row 118): runs/client-launch/copy/W317-not-taken-words.md. The kind labels and kinds_changed (W401 (4)): runs/client-launch/copy/W401-kind-words.md, decision-critic APPROVE WITH CONDITIONS 2026-11-19 (runs/client-launch/checks/W401-kind-words-critic.md), condition 2's replacement taken verbatim, condition 1 in chat-logic.ts kindOf. The guard-refused item marks (W370 (3)): runs/client-launch/copy/W370-words-refused-draft.md Revision 5, after decision-critic APPROVE WITH CONDITIONS on Revision 4 (runs/client-launch/checks/W370-words-refused-critic.md). The sample notice (W417, owner-decisions row 129 (k)): studio/sample-menu-words-draft.md C5, approved as drafted, the sample-needed email's words less what a page has no use for (see sample._source).
 export const WORDS = {
   "meta": {
     "title": "Your account | Sylentt",
@@ -191,6 +191,18 @@ export const WORDS = {
     }
   },
   "lag": "This page is not always up to date. Changes asked for by email are not listed here.",
+  "undo": {
+    "button": "Undo this change",
+    "confirm_question": "Undo this change and put that part of your site back as it was before it?",
+    "confirm_yes": "Yes, undo it",
+    "confirm_no": "No, keep it",
+    "asked": "Undo asked for, and on its way. It is made and checked like any change before it goes live. No email is sent for an undo; once it is live, this change shows as Put back as it was. Please wait until then before you ask for another change.",
+    "not_latest": "Only your latest change can be undone, and this is not your latest one. You can ask for a new change, or email support@sylentt.com.",
+    "not_live": "This change cannot be undone now: it is not live, or it has already been put back as it was.",
+    "ended": "Your plan has ended, so this change cannot be undone. If you think that is wrong, email support@sylentt.com and say which business it is.",
+    "nothing": "There is no change to undo. If you think that is wrong, email support@sylentt.com and say which business it is.",
+    "failed": "We could not confirm your undo was asked for. Please try again later, or email support@sylentt.com."
+  },
   "chat": {
     "photos": {
       "heading": "Your photos",

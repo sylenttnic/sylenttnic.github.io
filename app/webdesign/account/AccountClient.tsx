@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { WORDS } from './words';
 import { WORDS as WELCOME } from '../welcome/words';
 import ChatPanel from './ChatPanel';
+import { undoOffered, undoOutcome, type UndoKey } from './undo-logic';
 
 // The account page (W296, rows 118 and 58). Signed in only: the session the welcome page stored in this tab's
 // sessionStorage (the confirm link or a sign-in link). Its one read is the Worker's GET /owner/account, which answers
@@ -68,6 +69,25 @@ export default function AccountClient() {
   const [view, setView] = useState<View>('loading');
   const [acct, setAcct] = useState<Account | null>(null);
   const [bill, setBill] = useState<Bill>('idle');
+  // W300: the undo of the latest live change: which row asked to confirm, and each row's answer (this visit only)
+  const [undoAsk, setUndoAsk] = useState<number | null>(null);
+  const [undoBusy, setUndoBusy] = useState(false);
+  const [undoSaid, setUndoSaid] = useState<Record<number, UndoKey>>({});
+
+  // W300: sent only from the confirm button ("Yes, undo it"); the Worker reads the session and n, nothing else
+  async function sendUndo(n: number) {
+    let s: string | null = null;
+    try { s = sessionStorage.getItem(SKEY); } catch { /* no storage */ }
+    if (!s) { setView('signed-out'); return; }
+    setUndoBusy(true);
+    try {
+      const r = await fetch(`${API}/change/undo`, { method: 'POST', headers: { authorization: `Bearer ${s}`, 'content-type': 'application/json' }, body: JSON.stringify({ n }) });
+      const o = undoOutcome(r.status, await r.json().catch(() => null));
+      if (o.kind === 'signed-out') { try { sessionStorage.removeItem(SKEY); } catch { /* ignore */ } setView('signed-out'); return; }
+      setUndoSaid((m) => ({ ...m, [n]: o.key }));
+    } catch { setUndoSaid((m) => ({ ...m, [n]: 'failed' })); }
+    finally { setUndoBusy(false); setUndoAsk(null); }
+  }
 
   // W307 (row 119): open a Stripe billing page for this session's own business. The Worker reads nothing from the request
   // but the session; it answers a billing.stripe.com URL, and only that is followed.
@@ -157,6 +177,13 @@ export default function AccountClient() {
                     {under < 0 && lines}
                   </>;
                 })()}
+                {/* W300: Undo, on the newest request only and only while it is live; asked first, sent only on the confirm */}
+                {undoSaid[r.n] ? <p className="text-sm mt-3" aria-live="polite" data-undo-said>{WORDS.undo[undoSaid[r.n]]}</p>
+                  : undoOffered(acct.requests, r.n) && (undoAsk === r.n ? <div className="mt-3" data-undo-confirm>
+                    <p className="text-sm mb-2">{WORDS.undo.confirm_question}</p>
+                    <button type="button" onClick={() => sendUndo(r.n)} disabled={undoBusy} className="rounded bg-accent px-3 py-1.5 text-sm font-semibold mr-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60">{WORDS.undo.confirm_yes}</button>
+                    <button type="button" onClick={() => setUndoAsk(null)} disabled={undoBusy} className="rounded border border-ink/30 px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">{WORDS.undo.confirm_no}</button>
+                  </div> : <p className="mt-3"><button type="button" onClick={() => setUndoAsk(r.n)} className="rounded border border-ink/30 px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-undo>{WORDS.undo.button}</button></p>)}
               </li>
             ))}
           </ul>

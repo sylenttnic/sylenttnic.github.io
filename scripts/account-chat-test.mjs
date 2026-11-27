@@ -108,7 +108,7 @@ say(at > 0 && signedOutReturn > 0 && errReturn > 0 && at > signedOutReturn && at
 
 const words = fs.readFileSync(path.join(DIR, 'words.ts'), 'utf8');
 const used = new Set([...panel.matchAll(/\bW\.([a-z_]+)/g)].map((m) => m[1]));
-for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken', 'kinds_changed']) used.add(k);
+for (const k of ['too_long', 'paused', 'daily_limit', 'not_available', 'not_understood', 'refused', 'failed', 'confirm_failed', 'nothing_to_send', 'not_taken', 'kinds_changed', 'undo_pending']) used.add(k);
 const photoWords = words.slice(words.indexOf('"photos"'));
 const pUsed = new Set([...panel.matchAll(/\bWP\.([a-z_]+)/g)].map((m) => m[1]));
 const pErr = ['mine_needed', 'photo_needed', 'too_many', 'too_small', 'unreadable', 'wrong_type', 'too_big', 'daily_limit', 'failed'];
@@ -126,6 +126,7 @@ say(!/[–—]/.test(panel + words) && /[—]/.test('a — b'), 'no em or en das
   say(L.kindOf(it('words', 'Remove: "We are licensed."')) === 'removal' && L.kindOf(it('words', 'remove: \u201cOur team\u201d')) === 'removal' && L.kindOf(it('layout', 'Remove: "Our gallery"')) === 'layout' && L.kindOf(it('photo', 'Remove: "x"')) === 'photo' && L.kindOf(it('words', 'Saturday 8 to noon')) === 'words' && L.kindOf(it('layout', 'hide the gallery')) === 'layout' && L.kindOf(it('colours', 'Remove: "x"')) === 'colours', 'W401 (4): a quoted removal on a WORDS item shows as a removal (critic condition 1: a layout or photo removal keeps its own label)');
   say(JSON.stringify(L.kindsOf({ items: [it('words', 'a'), it('layout', 'b')], out_of_scope: [], questions: [] })) === '["words","layout"]', 'W401 (4): the kinds sent are the items\' kinds, in order');
   say(L.confirmOutcome(409, { ok: false, reason: 'kinds-changed' }).key === 'kinds_changed', 'W401 (4): the Worker\'s kinds-changed refusal reads kinds_changed');
+  say(L.confirmOutcome(409, { ok: false, reason: 'undo-pending' }).key === 'undo_pending', 'W300: the Worker\'s undo-pending refusal reads undo_pending (never "press again")');
   const shows = (src) => /items=\{proposal\.items\.map\(\(i\) => `\$\{W\.kinds\[kindOf\(i\)\]\}: \$\{shownWanted\(i\)\}`\)\}/.test(src);
   say(L.shownWanted(it('words', 'Remove: "We are licensed."')) === '\u201cWe are licensed.\u201d' && L.shownWanted(it('layout', 'Remove: "Our gallery"')) === 'Remove: "Our gallery"', 'W401 (4) F3: a words removal shows its quoted words without the Remove: prefix; a layout removal keeps it');
   say(!/press Send these changes again/i.test(WORDS.chat.kinds_changed) && /write again below/.test(WORDS.chat.kinds_changed), 'W401 (4) critic condition 2: kinds_changed never tells the owner to press Send again (it would loop)');

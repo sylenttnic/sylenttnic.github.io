@@ -10,7 +10,7 @@ export type ChatOutcome =
   | { kind: 'proposal'; conversation: string; proposal: Proposal }
   | { kind: 'reply'; conversation: string; text: string }
   | { kind: 'error'; key: ChatErrorKey; conversation: string | null };
-export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' | 'kinds_changed' };
+export type ConfirmOutcome = { kind: 'signed-out' } | { kind: 'confirmed' } | { kind: 'error'; key: 'nothing_to_send' | 'confirm_failed' | 'not_taken' | 'kinds_changed' | 'undo_pending' };
 
 export const MAX_CHARS = 2000;
 const CONV = /^[a-z0-9-]{8,64}$/;
@@ -55,6 +55,8 @@ export function confirmOutcome(status: number, body: unknown): ConfirmOutcome {
   if (status === 409 && (b as { reason?: unknown }).reason === 'not-taken') return { kind: 'error', key: 'not_taken' };
   // W401 (4): the kinds the owner was shown are not the stored proposal's, so nothing was recorded
   if (status === 409 && (b as { reason?: unknown }).reason === 'kinds-changed') return { kind: 'error', key: 'kinds_changed' };
+  // W300 (decision-critic F1): the owner's undo of their latest change is still on its way, so no new request is taken
+  if (status === 409 && (b as { reason?: unknown }).reason === 'undo-pending') return { kind: 'error', key: 'undo_pending' };
   return { kind: 'error', key: 'confirm_failed' };
 }
 
